@@ -55,16 +55,17 @@
 
   <main>
     <section id="market-section">
-      <h2>Live Market Snapshot</h2>
-      <div id="market-snapshot">
-        <div>Nifty 50: <span id="nifty">Loading...</span></div>
-        <div>Sensex: <span id="sensex">Loading...</span></div>
-      </div>
-      <button onclick="fetchMarketData()">Refresh Data</button>
-      <p style="font-size: 0.9em; color: #666; margin-top:10px;">
-        *Data simulated; integrate with real APIs for live updates.
-      </p>
-    </section>
+  <h2>Live Market Snapshot</h2>
+  <div id="market-snapshot">
+    <div>Nifty 50: <span id="nifty">Loading...</span></div>
+    <div>Sensex: <span id="sensex">Loading...</span></div>
+    <div><button onclick="fetchMarketData()" class="btn" style="margin-left:12px;">Refresh Data</button></div>
+  </div>
+  <p style="font-size: 0.9em; color: #666; margin-top:10px;">
+    *Data via Yahoo Finance. Values may be delayed by a few minutes.
+  </p>
+</section>
+
 
     <section>
       <h2>About Stocks</h2>
@@ -198,6 +199,53 @@ document.getElementById('darkmode-toggle').addEventListener("change", function()
     (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
   setMode(darkPref);
 })();
+</script>
+
+<script>
+async function fetchMarketData() {
+  // Yahoo Finance API endpoints for Nifty and Sensex
+  const url = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols=^NSEI,^BSESN';
+  try {
+    document.getElementById('nifty').textContent = "Loading...";
+    document.getElementById('sensex').textContent = "Loading...";
+    const res = await fetch(url);
+    const data = await res.json();
+    const nifty = data.quoteResponse.result.find(x => x.symbol === '^NSEI');
+    const sensex = data.quoteResponse.result.find(x => x.symbol === '^BSESN');
+    if (nifty) {
+      document.getElementById('nifty').textContent =
+        nifty.regularMarketPrice.toLocaleString('en-IN') +
+        " (" +
+        (nifty.regularMarketChange >= 0 ? "+" : "") +
+        nifty.regularMarketChange.toFixed(2) +
+        ", " +
+        (nifty.regularMarketChangePercent >= 0 ? "+" : "") +
+        nifty.regularMarketChangePercent.toFixed(2) +
+        "%)";
+    } else {
+      document.getElementById('nifty').textContent = "Not available";
+    }
+    if (sensex) {
+      document.getElementById('sensex').textContent =
+        sensex.regularMarketPrice.toLocaleString('en-IN') +
+        " (" +
+        (sensex.regularMarketChange >= 0 ? "+" : "") +
+        sensex.regularMarketChange.toFixed(2) +
+        ", " +
+        (sensex.regularMarketChangePercent >= 0 ? "+" : "") +
+        sensex.regularMarketChangePercent.toFixed(2) +
+        "%)";
+    } else {
+      document.getElementById('sensex').textContent = "Not available";
+    }
+  } catch (err) {
+    document.getElementById('nifty').textContent = "Error";
+    document.getElementById('sensex').textContent = "Error";
+  }
+}
+fetchMarketData();
+setInterval(fetchMarketData, 60 * 1000); // auto-refresh every 60 seconds
+
 </script>
 
 
