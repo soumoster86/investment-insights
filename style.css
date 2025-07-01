@@ -170,3 +170,47 @@ footer {
 ::-webkit-scrollbar-thumb {
   background: #b8cee6; border-radius: 8px;
 }
+
+body.dark-mode {
+  background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
+  color: #e7ecfa !important;
+}
+body.dark-mode header,
+body.dark-mode nav,
+body.dark-mode footer {
+  background: #12203a !important;
+  color: #e7ecfa !important;
+}
+body.dark-mode main,
+body.dark-mode section,
+body.dark-mode #fd-calculator {
+  background: #191c23 !important;
+  color: #e7ecfa !important;
+  box-shadow: 0 2px 12px #0004;
+  border-color: #2d3752 !important;
+}
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #23273b !important;
+  color: #e7ecfa !important;
+  border-color: #39588a !important;
+}
+body.dark-mode a,
+body.dark-mode nav a {
+  color: #8abaff !important;
+}
+body.dark-mode nav a.active,
+body.dark-mode nav a:hover {
+  background: #274272 !important;
+}
+body.dark-mode .btn,
+body.dark-mode button,
+body.dark-mode a.learn-more {
+  background: #304d7c !important;
+  color: #fff !important;
+}
+body.dark-mode #dm-label {
+  color: #fff !important;
+}
+

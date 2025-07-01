@@ -12,15 +12,45 @@
   <div>
     <h1 style="margin: 0; font-weight: normal;">Investment Insights</h1>
     <nav style="margin-top: 5px;">
-      <a href="index.html" style="color: white; text-decoration: none; margin-right: 15px;">Home</a>
-      <a href="stocks.html" style="color: white; text-decoration: none; margin-right: 15px;">Stocks</a>
-      <a href="mutualfunds.html" style="color: white; text-decoration: none; margin-right: 15px;" class="active">Mutual Funds</a>
-      <a href="fixeddeposit.html" style="color: white; text-decoration: none; margin-right: 15px;">Fixed Deposits</a>
-      <a href="cryptocurrencies.html" style="color: white; text-decoration: none; margin-right: 15px;">Cryptocurrencies</a>
-      <a href="investmentgoal.html" style="color: white; text-decoration: none; margin-right: 15px;">Investment Goal</a>
-      <a href="contact.html" style="color: white; text-decoration: none;">Contact</a>
-    </nav>
-  </div>
+  <a href="index.html" class="active">
+    <span style="vertical-align:middle; margin-right:7px;">🏠</span> Home
+  </a>
+  <a href="stocks.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M4 21v-9h4v9H4zm6 0V10h4v11h-4zm6 0v-6h4v6h-4z"/></svg>
+    Stocks
+  </a>
+  <a href="mutualfunds.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M4 19v-2c0-1.1.9-2 2-2h2v-2c0-1.1.9-2 2-2s2 .9 2 2v2h2c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2z"/></svg>
+    Mutual Funds
+  </a>
+  <a href="fixeddeposit.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M17 18H7v-2h10v2zm1-4.5a4.5 4.5 0 1 0-9 0v1H5v6h14v-6h-2v-1zm-2 1v-1a2.5 2.5 0 1 1 5 0v1h-5z"/></svg>
+    Fixed Deposits
+  </a>
+  <a href="cryptocurrencies.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 5.5 4.5 10 10 10s10-4.5 10-10C22 6.5 17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8zm0-7h3c.6 0 1-.4 1-1s-.4-1-1-1h-3c-.6 0-1 .4-1 1s.4 1 1 1zm-1-4h2v2h-2V9zm0 4h2v2h-2v-2z"/></svg>
+    Cryptocurrencies
+  </a>
+  <a href="investmentgoal.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M13 2.05v3.02c3.95.49 7 3.85 7 7.93 0 4.08-3.05 7.44-7 7.93v3.02C18.05 22.47 22 17.91 22 12S18.05 1.53 13 2.05zM2 12c0 5.91 4.95 10.47 11 10.95v-3.02c-3.95-.49-7-3.85-7-7.93 0-4.08 3.05-7.44 7-7.93V1.05C6.95 1.53 2 6.09 2 12z"/></svg>
+    Investment Goal
+  </a>
+  <a href="contact.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 20V8.99l8 7 8-7V20H4z"/></svg>
+    Contact
+  </a>
+</nav>
+
+    </div>
+
+   <div style="margin-top:10px;">
+  <label style="display: flex; align-items: center; gap: 8px; cursor:pointer;">
+    <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
+    <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
+  </label>
+</div>
+
+
 </header>
 
   <main>
@@ -146,6 +176,7 @@
         <li>Use SIPs for disciplined investing and rupee cost averaging.</li>
       </ul>
     </section>
+
   </main>
 
   <footer>
@@ -161,3 +192,33 @@
 
       for (let i = 0; i < li.length; i++) {
         const text = li[i].textContent || li[i].innerText;
+  </script>
+
+<script>
+function setMode(dark) {
+  if (dark) {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+    document.getElementById('dm-label').textContent = "☀️ Light Mode";
+    document.getElementById('darkmode-toggle').checked = true;
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+    document.getElementById('dm-label').textContent = "🌙 Dark Mode";
+    document.getElementById('darkmode-toggle').checked = false;
+  }
+}
+document.getElementById('darkmode-toggle').addEventListener("change", function() {
+  setMode(this.checked);
+});
+// Auto detect or load user preference
+(function() {
+  const userPref = localStorage.getItem("theme");
+  const darkPref = userPref === "dark" ||
+    (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  setMode(darkPref);
+})();
+</script>
+
+</body>
+</html>
