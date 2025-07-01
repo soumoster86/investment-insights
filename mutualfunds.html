@@ -147,23 +147,136 @@
 
 
     <section>
-      <h3>Top Mutual Fund Recommendations</h3>
-      <input
-        type="text"
-        id="mf-search"
-        placeholder="Search mutual funds..."
-        onkeyup="filterFunds()"
-      />
-      <ul id="mf-list">
-        <li><strong>Parag Parikh Long Term Equity Fund</strong> – Multi-cap fund focused on long-term growth.</li>
-        <li><strong>Axis Bluechip Fund</strong> – Large-cap fund with strong track record.</li>
-        <li><strong>DSP Midcap Fund</strong> – Mid-cap fund for higher growth potential.</li>
-        <li><strong>HDFC Balanced Advantage Fund</strong> – Hybrid fund balancing equity and debt.</li>
-        <li><strong>ICICI Prudential Equity & Debt Fund</strong> – Balanced fund with risk management focus.</li>
-        <li><strong>Mirae Asset Large Cap Fund</strong> – Large-cap fund with consistent performance.</li>
-        <li><strong>SBI Small Cap Fund</strong> – Small-cap fund with high growth potential and higher risk.</li>
-      </ul>
-    </section>
+  <h3>Top Mutual Fund Recommendations</h3>
+  <input
+    type="text"
+    id="mf-search"
+    placeholder="Search fund or category..."
+    onkeyup="filterFunds()"
+    style="margin-bottom:16px;"
+  />
+  <div id="mf-list" style="display: flex; flex-wrap: wrap; gap: 16px;">
+    <!-- Multi-cap -->
+    <div class="mf-card" data-type="Multi-cap" data-risk="Moderate">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/ppfas.com" alt="Parag Parikh" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Parag Parikh Flexi Cap</strong>
+        <span class="mf-type-chip">Multi-cap</span>
+        <span class="mf-risk-chip">Moderate</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Long-term, value-focused, global exposure</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️⭐️</div>
+      <a href="https://www.ppfas.com/mutual-fund/schemes/parag-parikh-flexi-cap-fund/" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <!-- Large-cap -->
+    <div class="mf-card" data-type="Large-cap" data-risk="Low">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/axismf.com" alt="Axis MF" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Axis Bluechip Fund</strong>
+        <span class="mf-type-chip">Large-cap</span>
+        <span class="mf-risk-chip">Low</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Consistent performer in top large caps</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.axismf.com/" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <!-- Mid-cap -->
+    <div class="mf-card" data-type="Mid-cap" data-risk="Moderate">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/dspim.com" alt="DSP MF" style="width:34px; height:34px; border-radius:7px;">
+        <strong>DSP Midcap Fund</strong>
+        <span class="mf-type-chip">Mid-cap</span>
+        <span class="mf-risk-chip">Moderate</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Growth-focused, seasoned fund management</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.dspim.com/our-funds/dsp-midcap-fund-direct-plan-growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <!-- Hybrid -->
+    <div class="mf-card" data-type="Hybrid" data-risk="Low">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/hdfcfund.com" alt="HDFC MF" style="width:34px; height:34px; border-radius:7px;">
+        <strong>HDFC Balanced Advantage</strong>
+        <span class="mf-type-chip">Hybrid</span>
+        <span class="mf-risk-chip">Low</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Balances growth & stability, dynamic asset allocation</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.hdfcfund.com/products/mutual-fund/hdfc-balanced-advantage-fund/regular-plan/growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <!-- Large & Mid-cap -->
+    <div class="mf-card" data-type="Large & Mid-cap" data-risk="Moderate">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/icicipruamc.com" alt="ICICI Prudential" style="width:34px; height:34px; border-radius:7px;">
+        <strong>ICICI Pru Equity & Debt</strong>
+        <span class="mf-type-chip">Large & Mid-cap</span>
+        <span class="mf-risk-chip">Moderate</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Equity/debt mix, good for balanced growth</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.icicipruamc.com/mutual-fund-scheme/icici-prudential-equity-and-debt-fund" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <!-- Large-cap -->
+    <div class="mf-card" data-type="Large-cap" data-risk="Low">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/miraeassetmf.co.in" alt="Mirae Asset" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Mirae Asset Large Cap</strong>
+        <span class="mf-type-chip">Large-cap</span>
+        <span class="mf-risk-chip">Low</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Strong large cap focus, consistent performance</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.miraeassetmf.co.in/mutual-fund-schemes/equity/mirae-asset-large-cap-fund" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <!-- Small-cap -->
+    <div class="mf-card" data-type="Small-cap" data-risk="High">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/sbimf.com" alt="SBI MF" style="width:34px; height:34px; border-radius:7px;">
+        <strong>SBI Small Cap Fund</strong>
+        <span class="mf-type-chip">Small-cap</span>
+        <span class="mf-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">High growth potential, suitable for aggressive investors</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.sbimf.com/en-us/schemes/equity/sbi-small-cap-fund/regular-plan/growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.mf-card {
+  background: #f8faff;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px #a4b1cf18;
+  border: 1.3px solid #e4eaf2;
+  padding: 15px 13px 14px 13px;
+  min-width: 230px;
+  max-width: 255px;
+  flex: 1 0 210px;
+  transition: box-shadow 0.15s, border-color 0.16s;
+}
+.mf-card:hover {
+  box-shadow: 0 2px 14px #3070c41e;
+  border-color: #96b6f6;
+}
+.mf-type-chip {
+  background: #eaf2ff;
+  color: #2766be;
+  border-radius: 5px;
+  padding: 1px 7px;
+  font-size: 0.85em;
+  margin-left: 7px;
+}
+.mf-risk-chip {
+  background: #f7f3dc;
+  color: #b18b12;
+  border-radius: 5px;
+  padding: 1px 7px;
+  font-size: 0.85em;
+  margin-left: 7px;
+}
+</style>
+
 
 
     <section>
