@@ -17,6 +17,7 @@
       <a href="mutualfunds.html" style="color: white; text-decoration: none; margin-right: 15px;" class="active">Mutual Funds</a>
       <a href="fixeddeposit.html" style="color: white; text-decoration: none; margin-right: 15px;">Fixed Deposits</a>
       <a href="cryptocurrencies.html" style="color: white; text-decoration: none; margin-right: 15px;">Cryptocurrencies</a>
+      <a href="investmentgoal.html" style="color: white; text-decoration: none; margin-right: 15px;">Investment Goal</a>
       <a href="contact.html" style="color: white; text-decoration: none;">Contact</a>
     </nav>
   </div>
@@ -70,6 +71,51 @@
       </p>
     </section>
 
+<section id="sip-calculator">
+  <h3>SIP Calculator</h3>
+  <label for="sip-amount">Monthly Investment (₹):</label>
+  <input type="number" id="sip-amount" min="0" placeholder="e.g. 5000" />
+
+  <label for="sip-rate">Expected Annual Return (%):</label>
+  <input type="number" id="sip-rate" min="0" step="0.01" placeholder="e.g. 12" />
+
+  <label for="sip-years">Investment Period (years):</label>
+  <input type="number" id="sip-years" min="1" placeholder="e.g. 10" />
+
+  <button type="button" onclick="calculateSIP()" class="btn">Calculate Maturity Value</button>
+  <p id="sip-result"></p>
+</section>
+
+<script>
+  function calculateSIP() {
+    const P = parseFloat(document.getElementById('sip-amount').value);
+    const r = parseFloat(document.getElementById('sip-rate').value) / 100 / 12; // monthly rate
+    const n = parseInt(document.getElementById('sip-years').value) * 12;
+
+    if (isNaN(P) || P <= 0) {
+      alert('Please enter a valid monthly investment amount.');
+      return;
+    }
+    if (isNaN(r) || r < 0) {
+      alert('Please enter a valid expected annual return.');
+      return;
+    }
+    if (isNaN(n) || n <= 0) {
+      alert('Please enter a valid investment period.');
+      return;
+    }
+
+    // SIP formula: M = P × [(1 + r)^n – 1] / r × (1 + r)
+    const maturity = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
+    const invested = P * n;
+    const result = `Maturity Value: ₹${maturity.toLocaleString(undefined, {maximumFractionDigits: 0})}
+      <br>Total Invested: ₹${invested.toLocaleString(undefined, {maximumFractionDigits: 0})}
+      <br>Estimated Gain: ₹${(maturity - invested).toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+    document.getElementById('sip-result').innerHTML = result;
+  }
+</script>
+
+
     <section>
       <h3>Top Mutual Fund Recommendations</h3>
       <input
@@ -88,6 +134,7 @@
         <li><strong>SBI Small Cap Fund</strong> – Small-cap fund with high growth potential and higher risk.</li>
       </ul>
     </section>
+
 
     <section>
       <h3>Investment Tips</h3>

@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Investment Insights - Investment Goal</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header style="display: flex; align-items: center; padding: 15px 20px; background-color: #004080; color: white;">
+    <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
+    <div>
+      <h1 style="margin: 0; font-weight: normal;">Investment Insights</h1>
+      <nav style="margin-top: 5px;">
+        <a href="index.html">Home</a>
+        <a href="stocks.html">Stocks</a>
+        <a href="mutualfunds.html">Mutual Funds</a>
+        <a href="fixeddeposit.html">Fixed Deposits</a>
+        <a href="cryptocurrencies.html">Cryptocurrencies</a>
+        <a href="investmentgoal.html" class="active">Investment Goal</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section>
+      <h2>Set Your Investment Goal</h2>
+      <form id="goal-form" onsubmit="calculateGoal(event)">
+        <label for="monthly-amount">Monthly Investment (₹):</label>
+        <input type="number" id="monthly-amount" min="0" required placeholder="Enter amount per month">
+
+        <label for="routes">Investment Routes:</label>
+        <select id="routes" multiple required style="height: 110px;">
+          <option value="Stocks">Stocks</option>
+          <option value="Mutual Funds">Mutual Funds</option>
+          <option value="Fixed Deposits">Fixed Deposits</option>
+          <option value="Cryptocurrencies">Cryptocurrencies</option>
+        </select>
+        <small style="color:#555;display:block;margin-bottom:12px;">(Hold Ctrl/Cmd to select multiple options)</small>
+
+        <label for="rate">Expected Rate of Return (% per year):</label>
+        <input type="number" id="rate" step="0.01" min="0" required placeholder="e.g. 11">
+
+        <label for="inflation">Expected Inflation Rate (% per year):</label>
+        <input type="number" id="inflation" step="0.01" min="0" required placeholder="e.g. 6">
+
+        <label for="duration">Investment Duration (years):</label>
+        <input type="number" id="duration" min="1" required placeholder="e.g. 15">
+
+        <button type="submit" class="btn">Calculate Future Corpus</button>
+      </form>
+      <div id="goal-result" style="margin-top:18px;font-size:1.13em;color:#004080;font-weight:500;"></div>
+
+      <!-- Chart Container -->
+      <div style="margin:24px 0 0 0; background:#fff; border-radius:12px; padding:12px 6px;">
+        <canvas id="corpusChart" style="max-width:100%;"></canvas>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Investment Insights. All rights reserved.
+  </footer>
+
+  <script>
+    let chart; // Global chart variable
+
+    function calculateGoal(event) {
+      event.preventDefault();
+      const P = parseFloat(document.getElementById('monthly-amount').value);
+      const rate = parseFloat(document.getElementById('rate').value);
+      const inflation = parseFloat(document.getElementById('inflation').value);
+      const n = parseInt(document.getElementById('duration').value);
+
+      // Get selected routes (array)
+      const routes = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
+
+      if (isNaN(P) || P <= 0 || isNaN(rate) || rate < 0 || isNaN(inflation) || inflation < 0 || isNaN(n) || n <= 0 || routes.length === 0) {
+        alert('Please fill all fields correctly.');
+        return;
+      }
+
+      // Prepare yearly corpus data for chart
+      const yearlyCorpus = [];
+      const yearlyCorpusReal = [];
+      const labels = [];
+
+      // Monthly rate of return (decimal)
+      const r = rate / 100 / 12;
+
+      for (let year = 1; year <= n; year++) {
+        const months = year * 12;
+        const FV = P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
+        const inflationFactor = Math.pow(1 + inflation / 100, year);
+        const realFV = FV / inflationFactor;
+
+        yearlyCorpus.push(FV);
+        yearlyCorpusReal.push(realFV);
+        labels.push('Year ' + year);
+      }
+
+      // Final corpus (last year)
+      const FV = yearlyCorpus[yearlyCorpus.length - 1];
+      const realFV = yearlyCorpusReal[yearlyCorpusReal.length - 1];
+      const totalInvested = P * n * 12;
+
+      document.getElementById('goal-result').innerHTML = `
+        <strong>Future Corpus (Nominal):</strong> ₹${FV.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
+        <strong>Future Corpus (Inflation-Adjusted):</strong> ₹${realFV.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
+        <strong>Total Invested:</strong> ₹${totalInvested.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
+        <strong>Selected Routes:</strong> ${routes.join(', ')}
+      `;
+
+      // Draw/Update Chart
+      drawChart(labels, yearlyCorpus, yearlyCorpusReal);
+    }
+
+    function drawChart(labels, corpus, corpusReal) {
+      const ctx = document.getElementById('corpusChart').getContext('2d');
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Corpus (Nominal ₹)',
+              data: corpus,
+              borderWidth: 2.5,
+              borderColor: '#004080',
+              backgroundColor: 'rgba(0,64,128,0.08)',
+              tension: 0.13,
+              pointRadius: 2,
+              fill: false,
+            },
+            {
+              label: 'Corpus (Inflation-Adjusted ₹)',
+              data: corpusReal,
+              borderWidth: 2.2,
+              borderColor: '#6c93db',
+              backgroundColor: 'rgba(108,147,219,0.09)',
+              tension: 0.18,
+              pointRadius: 2,
+              fill: false,
+              borderDash: [6,4]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true, position: 'bottom' },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  return ctx.dataset.label + ': ₹' + Math.round(ctx.raw).toLocaleString();
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(val) {
+                  return '₹' + (val / 100000 >= 1 ? (val / 100000).toFixed(1) + 'L' : val.toLocaleString());
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
