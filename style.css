@@ -1,84 +1,172 @@
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
-  background-color: #f4f6f8;
-  color: #333;
+  background: linear-gradient(120deg, #e9f0fd 0%, #f4f6f8 100%);
+  color: #222;
+  min-height: 100vh;
 }
 header {
-  background-color: #004080;
+  background: #004080;
   color: white;
-  padding: 20px 15px;
-  text-align: center;
+  padding: 16px 0;
+  box-shadow: 0 2px 10px 0 rgb(0 0 0 / 8%);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+header img {
+  height: 50px;
+  margin-right: 12px;
+  border-radius: 10px;
+  background: #fff;
+  padding: 3px;
+  box-shadow: 0 2px 6px #0001;
 }
 header h1 {
   margin: 0;
-  font-weight: normal;
+  font-weight: 500;
+  font-size: 1.9em;
+  letter-spacing: 1px;
 }
 nav {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 nav a {
   color: white;
   text-decoration: none;
-  margin: 0 12px;
-  font-weight: bold;
+  margin: 0 14px;
+  font-weight: 500;
+  font-size: 1.08em;
+  padding: 7px 10px;
+  border-radius: 7px;
+  transition: background .22s;
 }
+nav a.active,
 nav a:hover {
+  background: #012b54;
   text-decoration: underline;
 }
 main {
   max-width: 900px;
-  margin: 30px auto;
-  padding: 0 15px;
-  background-color: white;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-  border-radius: 8px;
+  margin: 36px auto 24px auto;
+  padding: 0 15px 30px 15px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgb(0 64 128 / 8%);
+  border-radius: 18px;
+  min-height: 75vh;
+  animation: fadeIn 0.8s;
 }
-section {
-  margin-bottom: 30px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+section, #fd-calculator {
+  margin-bottom: 34px;
+  padding: 20px 22px;
+  border: 1.5px solid #e1e6f2;
+  border-radius: 12px;
+  background: #f9faff;
+  box-shadow: 0 1px 10px #00408009;
+  transition: box-shadow 0.18s, border-color 0.2s;
+}
+section:hover, #fd-calculator:hover {
+  box-shadow: 0 2px 22px #00408017;
+  border-color: #00408055;
 }
 h2 {
   border-bottom: 2px solid #004080;
-  padding-bottom: 6px;
+  padding-bottom: 8px;
   color: #004080;
+  margin-top: 0;
+  font-size: 1.5em;
 }
 h3 {
   color: #004080;
+  font-size: 1.17em;
+  margin-bottom: 12px;
+  margin-top: 20px;
 }
 ul {
   list-style-type: disc;
-  padding-left: 20px;
+  padding-left: 22px;
+  font-size: 1.07em;
 }
 li {
   margin-bottom: 8px;
 }
+a.learn-more, button, .btn {
+  background: #004080;
+  color: white !important;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 1.02em;
+  font-weight: 500;
+  box-shadow: 0 1px 4px #00408012;
+  text-decoration: none;
+  margin-top: 7px;
+  display: inline-block;
+  transition: background .22s, transform 0.17s;
+  border-bottom: none;
+}
+a.learn-more:hover, button:hover, .btn:hover {
+  background: #002d59;
+  color: #e0eefa !important;
+  transform: translateY(-2px) scale(1.04);
+}
+input[type="text"], input[type="number"], input[type="email"], textarea, select {
+  width: 100%;
+  padding: 10px 9px;
+  font-size: 1em;
+  border: 1.4px solid #b5c7e3;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  background: #fcfcfe;
+  transition: border-color .21s, box-shadow .22s;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #004080;
+  box-shadow: 0 0 0 2px #d1e7fa;
+}
 footer {
   text-align: center;
-  padding: 15px;
-  font-size: 0.9em;
+  padding: 18px 0 13px 0;
+  font-size: 0.97em;
   color: #666;
-  border-top: 1px solid #ddd;
-  margin-top: 40px;
+  border-top: 1px solid #e0e5f0;
+  margin-top: 24px;
+  background: #fafbfc;
+  position: relative;
+  left: 0;
+  right: 0;
 }
-input[type="text"],
-input[type="email"],
-textarea {
-  width: 100%;
-  padding: 8px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+@media (max-width: 700px) {
+  main, section, #fd-calculator {
+    padding: 8px 3vw !important;
+    border-radius: 9px;
+  }
+  header, nav {
+    flex-direction: column !important;
+    gap: 3px !important;
+    text-align: left;
+    align-items: flex-start !important;
+  }
+  header h1 { font-size: 1.3em;}
 }
-button {
-  background-color: #004080;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1em;
+::-webkit-scrollbar {
+  width: 10px; background: #e8eff8;
 }
-button:hover {
-  background-color: #002d59;
+::-webkit-scrollbar-thumb {
+  background: #b8cee6; border-radius: 8px;
 }
