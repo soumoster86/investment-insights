@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Investment Insights - Stocks</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #market-snapshot {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 15px;
+      font-weight: bold;
+      font-size: 1.1em;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 6px;
+      background-color: #f9faff;
+    }
+    #market-section button {
+      background-color: #004080;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-bottom: 15px;
+    }
+    #market-section button:hover {
+      background-color: #002d59;
+    }
+  </style>
+</head>
+<body>
+  <header style="display: flex; align-items: center; padding: 15px 20px; background-color: #004080; color: white;">
+  <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
+  <div>
+    <h1 style="margin: 0; font-weight: normal;">Investment Insights</h1>
+    <nav style="margin-top: 5px;">
+      <a href="index.html" style="color: white; text-decoration: none; margin-right: 15px;">Home</a>
+      <a href="stocks.html" style="color: white; text-decoration: none; margin-right: 15px;">Stocks</a>
+      <a href="mutualfunds.html" style="color: white; text-decoration: none; margin-right: 15px;">Mutual Funds</a>
+      <a href="fixeddeposit.html" style="color: white; text-decoration: none; margin-right: 15px;">Fixed Deposits</a>
+      <a href="cryptocurrencies.html" style="color: white; text-decoration: none; margin-right: 15px;">Cryptocurrencies</a>
+      <a href="contact.html" style="color: white; text-decoration: none;">Contact</a>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <section id="market-section">
+      <h2>Live Market Snapshot</h2>
+      <div id="market-snapshot">
+        <div>Nifty 50: <span id="nifty">Loading...</span></div>
+        <div>Sensex: <span id="sensex">Loading...</span></div>
+      </div>
+      <button onclick="fetchMarketData()">Refresh Data</button>
+      <p style="font-size: 0.9em; color: #666; margin-top:10px;">
+        *Data simulated; integrate with real APIs for live updates.
+      </p>
+    </section>
+
+    <section>
+      <h2>About Stocks</h2>
+      <p>
+        Stocks represent ownership in a company. When you buy shares, you become a part-owner and
+        can benefit from the company's profits through dividends and price appreciation.
+      </p>
+    </section>
+
+    <section>
+      <h3>Benefits of Investing in Stocks</h3>
+      <ul>
+        <li>Potential for high returns over the long term</li>
+        <li>Dividend income in addition to capital gains</li>
+        <li>Liquidity: Stocks can be bought and sold easily</li>
+        <li>Ownership in businesses you believe in</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Risks of Investing in Stocks</h3>
+      <ul>
+        <li>Market volatility can cause price fluctuations</li>
+        <li>Company-specific risks, including poor management or performance</li>
+        <li>Economic downturns can impact overall market performance</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>How to Invest in Stocks</h3>
+      <p>
+        To invest in stocks, you need a Demat and trading account with a brokerage. You can choose
+        between online brokers like Zerodha, Upstox, or Angel One. Research companies, track their
+        performance, and invest gradually.
+      </p>
+      <p>
+        Consider diversification and avoid putting all your money into one stock. Use tools like SIPs
+        (Systematic Investment Plans) or set alerts to manage investments better.
+      </p>
+    </section>
+
+    <section>
+      <h3>Top Stock Recommendations</h3>
+      <input
+        type="text"
+        id="stock-search"
+        placeholder="Search stocks..."
+        onkeyup="filterStocks()"
+      />
+      <ul id="stock-list">
+        <li><strong>TCS</strong> – Leading IT company with steady growth.</li>
+        <li><strong>HDFC Bank</strong> – Large private sector bank with strong fundamentals.</li>
+        <li><strong>Reliance Industries</strong> – Diversified conglomerate with energy and retail businesses.</li>
+        <li><strong>Infosys</strong> – Global IT services provider with robust business model.</li>
+        <li><strong>Larsen & Toubro</strong> – Major infrastructure and engineering firm.</li>
+        <li><strong>Asian Paints</strong> – Market leader in decorative paints.</li>
+        <li><strong>ICICI Bank</strong> – Large private sector bank with good growth prospects.</li>
+        <li><strong>Hindustan Unilever</strong> – Leading FMCG company.</li>
+        <li><strong>Maruti Suzuki</strong> – Largest automobile manufacturer in India.</li>
+        <li><strong>Bharti Airtel</strong> – Major telecom operator with growing subscriber base.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Investment Tips</h3>
+      <ul>
+        <li>Invest for the long term to ride out volatility.</li>
+        <li>Diversify across sectors and company sizes.</li>
+        <li>Regularly review your portfolio and rebalance as needed.</li>
+        <li>Stay informed about market news and company performance.</li>
+        <li>Avoid emotional decisions based on short-term market movements.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Investment Insights. All rights reserved.
+  </footer>
+
+  <script>
+    function fetchMarketData() {
+      const niftyBase = 18230;
+      const sensexBase = 61450;
+
+      const niftyChange = (Math.random() * 2 - 1).toFixed(2);
+      const sensexChange = (Math.random() * 2 - 1).toFixed(2);
+
+      const niftyValue = (niftyBase * (1 + niftyChange / 100)).toFixed(2);
+      const sensexValue = (sensexBase * (1 + sensexChange / 100)).toFixed(2);
+
+      document.getElementById('nifty').textContent = `${niftyValue} (${niftyChange}%)`;
+      document.getElementById('sensex').textContent = `${sensexValue} (${sensexChange}%)`;
+    }
+
+    function filterStocks() {
+      const input = document.getElementById("stock-search");
+      const filter = input.value.toLowerCase();
+      const ul = document.getElementById("stock-list");
+      const li = ul.getElementsByTagName("li");
+
+      for (let i = 0; i < li.length; i++) {
+        const text = li[i].textContent || li[i].innerText;
+        li[i].style.display = text.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+      }
+    }
+
+    fetchMarketData(); // Load initial market data on page load
+  </script>
+</body>
+</html>

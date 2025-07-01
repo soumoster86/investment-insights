@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Investment Insights - Mutual Funds</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header style="display: flex; align-items: center; padding: 15px 20px; background-color: #004080; color: white;">
+  <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
+  <div>
+    <h1 style="margin: 0; font-weight: normal;">Investment Insights</h1>
+    <nav style="margin-top: 5px;">
+      <a href="index.html" style="color: white; text-decoration: none; margin-right: 15px;">Home</a>
+      <a href="stocks.html" style="color: white; text-decoration: none; margin-right: 15px;">Stocks</a>
+      <a href="mutualfunds.html" style="color: white; text-decoration: none; margin-right: 15px;">Mutual Funds</a>
+      <a href="fixeddeposit.html" style="color: white; text-decoration: none; margin-right: 15px;">Fixed Deposits</a>
+      <a href="cryptocurrencies.html" style="color: white; text-decoration: none; margin-right: 15px;">Cryptocurrencies</a>
+      <a href="contact.html" style="color: white; text-decoration: none;">Contact</a>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <h2>About Mutual Funds</h2>
+    <p>
+      Mutual funds pool money from many investors to invest in diversified portfolios of stocks, bonds, or other securities.
+      Managed by professional fund managers, they allow investors to access a wide range of investments without needing to pick individual stocks or bonds.
+    </p>
+
+    <section>
+      <h3>Types of Mutual Funds</h3>
+      <ul>
+        <li><strong>Equity Funds:</strong> Invest primarily in stocks, aiming for capital growth.</li>
+        <li><strong>Debt Funds:</strong> Invest in fixed income securities like bonds, suitable for lower risk tolerance.</li>
+        <li><strong>Hybrid Funds:</strong> Combine equity and debt to balance risk and return.</li>
+        <li><strong>Index Funds:</strong> Track a market index like Nifty 50, offering low-cost passive investing.</li>
+        <li><strong>Sectoral Funds:</strong> Invest in specific sectors such as technology, healthcare, or infrastructure.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Benefits of Mutual Funds</h3>
+      <ul>
+        <li>Diversification reduces risk compared to investing in single stocks.</li>
+        <li>Professional management by experienced fund managers.</li>
+        <li>Liquidity – easy to buy and sell units.</li>
+        <li>Accessible with relatively low minimum investments.</li>
+        <li>Systematic Investment Plans (SIPs) allow disciplined investing.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Risks of Mutual Funds</h3>
+      <ul>
+        <li>Market risk – value of investments can fluctuate.</li>
+        <li>Manager risk – performance depends on fund manager's decisions.</li>
+        <li>Expense ratios and fees may reduce returns.</li>
+        <li>Some funds may carry sector or credit risks depending on holdings.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>How to Invest in Mutual Funds</h3>
+      <p>
+        To invest, you can open an account with mutual fund platforms like Groww, Zerodha Coin, or directly with fund houses.
+        You can invest lump sums or set up SIPs for regular contributions.
+        It's important to assess your risk profile and investment goals before choosing funds.
+      </p>
+    </section>
+
+    <section>
+      <h3>Top Mutual Fund Recommendations</h3>
+      <input
+        type="text"
+        id="mf-search"
+        placeholder="Search mutual funds..."
+        onkeyup="filterFunds()"
+      />
+      <ul id="mf-list">
+        <li><strong>Parag Parikh Long Term Equity Fund</strong> – Multi-cap fund focused on long-term growth.</li>
+        <li><strong>Axis Bluechip Fund</strong> – Large-cap fund with strong track record.</li>
+        <li><strong>DSP Midcap Fund</strong> – Mid-cap fund for higher growth potential.</li>
+        <li><strong>HDFC Balanced Advantage Fund</strong> – Hybrid fund balancing equity and debt.</li>
+        <li><strong>ICICI Prudential Equity & Debt Fund</strong> – Balanced fund with risk management focus.</li>
+        <li><strong>Mirae Asset Large Cap Fund</strong> – Large-cap fund with consistent performance.</li>
+        <li><strong>SBI Small Cap Fund</strong> – Small-cap fund with high growth potential and higher risk.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Investment Tips</h3>
+      <ul>
+        <li>Start investing early to benefit from compounding.</li>
+        <li>Diversify across fund types and market caps.</li>
+        <li>Consider your risk appetite and investment horizon.</li>
+        <li>Review and rebalance your portfolio periodically.</li>
+        <li>Use SIPs for disciplined investing and rupee cost averaging.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Investment Insights. All rights reserved.
+  </footer>
+
+  <script>
+    function filterFunds() {
+      const input = document.getElementById("mf-search");
+      const filter = input.value.toLowerCase();
+      const ul = document.getElementById("mf-list");
+      const li = ul.getElementsByTagName("li");
+
+      for (let i = 0; i < li.length; i++) {
+        const text = li[i].textContent || li[i].innerText;
