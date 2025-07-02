@@ -325,37 +325,37 @@ document.getElementById('darkmode-toggle').addEventListener("change", function()
 
 
 <script>
-    
 async function fetchMarketData() {
-  const API_KEY = "26dfb074a0ba42f4805544c9bb7f89f4"; // Replace with your Twelve Data API key
-  const url = `https://api.twelvedata.com/quote?symbol=NSE:NIFTY_50,BSE:SENSEX&apikey=${API_KEY}`;
+  const url = "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/^NSEI,^BSESN";
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'de33a659f0msh2216102c8047599p189763jsnd638524cdc75',
+      'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com',
+	  
+    }
+  };
+
   try {
-    document.getElementById('nifty').textContent = "Loading...";
-    document.getElementById('sensex').textContent = "Loading...";
-    const res = await fetch(url);
-    const data = await res.json();
-    const nifty = data["NSE:NIFTY_50"];
-    const sensex = data["BSE:SENSEX"];
-    if (nifty) {
-      document.getElementById('nifty').textContent =
-        nifty.close + " (" + nifty.percent_change + "%)";
-    } else {
-      document.getElementById('nifty').textContent = "Not available";
-    }
-    if (sensex) {
-      document.getElementById('sensex').textContent =
-        sensex.close + " (" + sensex.percent_change + "%)";
-    } else {
-      document.getElementById('sensex').textContent = "Not available";
-    }
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    const nifty = data.find(x => x.symbol === '^NSEI');
+    const sensex = data.find(x => x.symbol === '^BSESN');
+
+    document.getElementById('nifty').textContent =
+      nifty ? `${nifty.regularMarketPrice} (${nifty.regularMarketChangePercent.toFixed(2)}%)` : 'Unavailable';
+
+    document.getElementById('sensex').textContent =
+      sensex ? `${sensex.regularMarketPrice} (${sensex.regularMarketChangePercent.toFixed(2)}%)` : 'Unavailable';
   } catch (err) {
+    console.error(err);
     document.getElementById('nifty').textContent = "Error";
     document.getElementById('sensex').textContent = "Error";
   }
 }
 fetchMarketData();
 setInterval(fetchMarketData, 60000);
- // auto-refresh every 60 seconds
 </script>
 
 
