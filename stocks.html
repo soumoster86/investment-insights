@@ -17,6 +17,20 @@
       <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
       <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
     </label>
+	
+	<nav class="floating-toc" id="floating-toc">
+   <div class="toc-title" style="text-decoration: underline;">On this page</div>
+   <ul>
+    <li><a href="#about-stocks" style="font-style: italic;">About Stocks</a></li>
+    <li><a href="#benefits-stocks" style="font-style: italic;">Benefits</a></li>
+    <li><a href="#risks-stocks" style="font-style: italic;">Risks</a></li>
+    <li><a href="#invest-stocks" style="font-style: italic;">How to Invest</a></li>
+    <li><a href="#top-stocks" style="font-style: italic;">Top Picks</a></li>
+    <li><a href="#tips-stocks" style="font-style: italic;">Investment Tips</a></li>
+   </ul>
+   </nav>
+	
+	
     <nav style="width: 100%; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
       <a href="index.html" class="active">🏠 Home</a>
       <a href="stocks.html">📊 Stocks</a>
@@ -27,11 +41,11 @@
       <a href="investmentgoal.html">🎯 Investment Goal</a>
       <a href="contact.html">✉️ Contact</a>
     </nav>
-  </header>
+	</header>
 
   <main>
        
-    <section>
+    <section id="about-stocks">
       <h2>About Stocks</h2>
       <p>
         Stocks represent ownership in a company. When you buy shares, you become a part-owner and
@@ -39,7 +53,7 @@
       </p>
     </section>
 
-    <section>
+   <section id="benefits-stocks">
       <h3>Benefits of Investing in Stocks</h3>
       <ul>
         <li>Potential for high returns over the long term</li>
@@ -49,7 +63,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="risks-stocks">
       <h3>Risks of Investing in Stocks</h3>
       <ul>
         <li>Market volatility can cause price fluctuations</li>
@@ -58,7 +72,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="invest-stocks">
       <h3>How to Invest in Stocks</h3>
       <p>
         To invest in stocks, you need a Demat and trading account with a brokerage. You can choose
@@ -71,7 +85,7 @@
       </p>
     </section>
 
-  <section>
+  <section id="top-stocks">
   <h3>Top Stock Recommendations</h3>
   <input
     type="text"
@@ -234,7 +248,7 @@
 </style>
 
 
-    <section>
+    <section id="tips-stocks">
       <h3>Investment Tips</h3>
       <ul>
         <li>Invest for the long term to ride out volatility.</li>
@@ -342,6 +356,36 @@ async function fetchMarketData() {
 }
 fetchMarketData();
 setInterval(fetchMarketData, 60000);
+</script>
+
+<script>
+document.querySelectorAll('.floating-toc a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({top: target.offsetTop - 65, behavior: 'smooth'});
+    }
+  });
+});
+window.addEventListener('scroll', () => {
+  const sections = [
+    'about-stocks',
+    'benefits-stocks',
+    'risks-stocks',
+    'invest-stocks',
+    'top-stocks',
+    'tips-stocks'
+  ];
+  let current = '';
+  for (const id of sections) {
+    const sec = document.getElementById(id);
+    if (sec && window.scrollY + 120 >= sec.offsetTop) current = id;
+  }
+  document.querySelectorAll('.floating-toc a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
 </script>
 
 
