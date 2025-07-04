@@ -215,6 +215,11 @@
 
       document.getElementById('fd-result').textContent =
         `Maturity Amount: ₹${maturityAmount.toFixed(2)} (Interest Earned: ₹${interestEarned.toFixed(2)})`;
+      localStorage.setItem("lastCalculator", JSON.stringify({
+  name: "FD Calculator",
+  url: "fixeddeposit.html",
+  date: new Date().toLocaleDateString()
+}));
     }
   </script>
 
