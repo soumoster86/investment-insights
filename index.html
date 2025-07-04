@@ -257,6 +257,21 @@
   </style>
 </head>
 <body>
+
+    <nav class="floating-toc" id="floating-toc">
+  <div class="toc-title" style="text-decoration: underline;">Quick Navigation</div>
+  <ul>
+    <li><a href="#intro" style="font-style: italic;">Introduction</a></li>
+    <li><a href="#stocks" style="font-style: italic;">Stocks</a></li>
+    <li><a href="#mutualfunds" style="font-style: italic;">Mutual Funds</a></li>
+    <li><a href="#fixeddeposits" style="font-style: italic;">Fixed Deposits</a></li>
+    <li><a href="#cryptocurrencies" style="font-style: italic;">Cryptocurrencies</a></li>
+    <li><a href="#bonds" style="font-style: italic;">Bonds</a></li>
+  </ul>
+</nav>
+
+
+
   <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
     <div style="display: flex; align-items: center;">
       <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
@@ -284,12 +299,37 @@
     </section>
 
     <div class="dashboard-section">
-      <div class="card">
-        <h3>📈 Live Market Index</h3>
-        <p>Nifty 50: <span id="nifty">Loading...</span></p>
-        <p>Sensex: <span id="sensex">Loading...</span></p>
-        <button onclick="fetchMarketData()" class="btn" style="margin-top:10px;">Refresh</button>
-      </div>
+      <div class="card" style="min-width:330px;">
+  <h3>📈 NSE & BSE Live Ticker</h3>
+  <div style="min-height:60px;">
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div id="tradingview_ticker"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          { "proName": "BSE:SENSEX",   "title": "Sensex" },
+          { "proName": "NSE:NIFTY50",  "title": "Nifty 50" },
+          { "proName": "BSE:BANK",     "title": "Bankex" },
+          { "proName": "NSE:NIFTYBANK","title": "Nifty Bank" },
+          { "proName": "BSE:500325",   "title": "Reliance" },
+          { "proName": "NSE:TCS",      "title": "TCS" }
+        ],
+        "colorTheme": "light",
+        "isTransparent": false,
+        "displayMode": "adaptive",
+        "locale": "en"
+      }
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+  </div>
+  <p style="font-size:0.93em; color:#888; margin-top:6px;">
+    Data: TradingView (15-min delay for some symbols)
+  </p>
+</div>
+
+
 
       <div class="card">
         <h3>🎯 Your Investment Goal</h3>
@@ -314,7 +354,67 @@
         </ul>
         <a href="stocks.html" class="btn">Explore More</a>
       </div>
+	  
+	  <div class="card" id="currency-card">
+  <h3>💱 Currency Converter</h3>
+  <div style="margin-bottom:10px;">
+    <input type="number" id="amount" placeholder="Amount" style="width:90px; display:inline-block;">
+    <select id="from-currency" style="width:80px;">
+      <option value="USD">USD</option>
+      <option value="INR">INR</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+	  <option value="SGD">SGD</option>
+	  <option value="CHF">CHF</option>
+	  
+    </select>
+    to
+    <select id="to-currency" style="width:80px;">
+      <option value="INR">INR</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+	  <option value="SGD">SGD</option>
+	  <option value="CHF">CHF</option>
+    </select>
+  </div>
+  <button onclick="convertCurrency()" class="btn" style="margin-top:5px;">Convert</button>
+  <div id="currency-result" style="margin-top:10px;font-size:1.18em;color:#004080;"></div>
+</div>
+
+
+    <div class="card" id="gold-silver-card">
+  <h3>🪙 Gold & Silver Price</h3>
+  <div id="metal-rate-content">
+    <table style="width:100%;font-size:1em;">
+      <tr>
+        <th></th>
+        <th>1g</th>
+        <th>10g</th>
+      </tr>
+      <tr>
+        <td><b>Gold (24K)</b></td>
+        <td id="gold1g">--</td>
+        <td id="gold10g">--</td>
+      </tr>
+      <tr>
+        <td><b>Silver</b></td>
+        <td id="silver1g">--</td>
+        <td id="silver10g">--</td>
+      </tr>
+    </table>
+    <p id="metal-rate-update" style="font-size:0.96em; color:#666; margin-top:8px;"></p>
+    <button class="btn" onclick="fetchMetalRates()" style="margin-top:5px;">Refresh</button>
+  </div>
+</div>
+
+
+	   
     </div>
+	
+	  
 
     <section id="intro">
       <h2>Introduction to Investments</h2>
@@ -500,6 +600,153 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove all 'active' classes first
+  document.querySelectorAll('nav a').forEach(function(link) {
+    link.classList.remove('active');
+    // Compare only the filename part to handle different hosting/path situations
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+
+<script>
+  // Floating TOC scroll spy for active section highlighting
+  document.querySelectorAll('.floating-toc a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({top: target.offsetTop - 65, behavior: 'smooth'});
+      }
+    });
+  });
+  window.addEventListener('scroll', () => {
+    const sections = [
+      'intro',
+      'stocks',
+      'mutualfunds',
+      'fixeddeposits',
+      'cryptocurrencies',
+      'bonds'
+    ];
+    let current = '';
+    for (const id of sections) {
+      const sec = document.getElementById(id);
+      if (sec && window.scrollY + 120 >= sec.offsetTop) current = id;
+    }
+    document.querySelectorAll('.floating-toc a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+<script>
+// You can use "https://api.exchangerate-api.com/v4/latest/" or "https://open.er-api.com/v6/latest/"
+// We'll use a free, no-auth API (no key needed):
+const currencyApiBase = "https://open.er-api.com/v6/latest/";
+
+async function convertCurrency() {
+  const amount = parseFloat(document.getElementById('amount').value);
+  const from = document.getElementById('from-currency').value;
+  const to = document.getElementById('to-currency').value;
+  const resultDiv = document.getElementById('currency-result');
+  
+  if (isNaN(amount) || amount <= 0) {
+    resultDiv.textContent = "Please enter a valid amount.";
+    return;
+  }
+  if (from === to) {
+    resultDiv.textContent = `Result: ${amount.toLocaleString()} ${to}`;
+    return;
+  }
+
+  resultDiv.textContent = "Fetching live rates...";
+
+  try {
+    // Fetch the latest rates for the 'from' currency
+    const res = await fetch(currencyApiBase + from);
+    const data = await res.json();
+
+    if (data.result !== "success" || !data.rates[to]) {
+      resultDiv.textContent = "Failed to fetch rates.";
+      return;
+    }
+    const rate = data.rates[to];
+    const converted = amount * rate;
+
+    resultDiv.innerHTML = `
+      <b>${amount.toLocaleString()} ${from}</b> = <b>${converted.toLocaleString(undefined, {maximumFractionDigits: 2})} ${to}</b>
+      <br>
+      <span style="font-size:0.96em;color:#444;">Rate: 1 ${from} = ${rate.toLocaleString(undefined, {maximumFractionDigits: 4})} ${to}</span>
+    `;
+  } catch (e) {
+    resultDiv.textContent = "Error fetching conversion rate.";
+  }
+}
+</script>
+
+<script>
+async function fetchMetalRates() {
+  const gold1gEl = document.getElementById('gold1g');
+  const gold10gEl = document.getElementById('gold10g');
+  const silver1gEl = document.getElementById('silver1g');
+  const silver10gEl = document.getElementById('silver10g');
+  const updateEl = document.getElementById('metal-rate-update');
+
+  gold1gEl.textContent = silver1gEl.textContent = gold10gEl.textContent = silver10gEl.textContent = "Loading...";
+
+  // GoldAPI endpoint for INR
+  const GOLD_API_URL = 'https://www.goldapi.io/api/XAU/INR'; // Gold
+  const SILVER_API_URL = 'https://www.goldapi.io/api/XAG/INR'; // Silver
+  const API_KEY = 'goldapi-famx3smcpa8upb-io'; // <-- Insert your key here
+
+  try {
+    // Fetch gold and silver rates in parallel
+    const [goldRes, silverRes] = await Promise.all([
+      fetch(GOLD_API_URL, { headers: { 'x-access-token': API_KEY, 'Content-Type': 'application/json' } }),
+      fetch(SILVER_API_URL, { headers: { 'x-access-token': API_KEY, 'Content-Type': 'application/json' } })
+    ]);
+    if (!goldRes.ok || !silverRes.ok) throw new Error("API error");
+
+    const goldData = await goldRes.json();
+    const silverData = await silverRes.json();
+
+    // Prices per troy ounce
+    const goldPerOunce = goldData.price;   // in INR per ounce
+    const silverPerOunce = silverData.price; // in INR per ounce
+
+    // Convert ounce (oz t) to grams: 1 troy ounce = 31.1035 grams
+    const gram = 31.1035;
+    const goldPerGram = goldPerOunce / gram;
+    const silverPerGram = silverPerOunce / gram;
+
+    gold1gEl.textContent = '₹' + Math.round(goldPerGram).toLocaleString();
+    gold10gEl.textContent = '₹' + Math.round(goldPerGram * 10).toLocaleString();
+    silver1gEl.textContent = '₹' + silverPerGram.toFixed(2);
+    silver10gEl.textContent = '₹' + (silverPerGram * 10).toFixed(2);
+
+    const now = new Date();
+    updateEl.textContent = "Updated: " + now.toLocaleString();
+  } catch (e) {
+    gold1gEl.textContent = '₹9,133.76';
+    gold10gEl.textContent = '₹91,337.60';
+    silver1gEl.textContent = '₹100.54';
+    silver10gEl.textContent = '₹1005.40';
+    updateEl.textContent = "API error / demo rates shown.";
+  }
+}
+fetchMetalRates();
+</script>
+
+
+  
+
+
   
 </body>
 </html>
