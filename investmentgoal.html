@@ -105,160 +105,63 @@
       margin-bottom: 12px;
       margin-top: 20px;
     }
-    .stock-card {
-      background: #f8faff;
-      border-radius: 10px;
-      box-shadow: 0 1px 8px #a4b1cf18;
-      border: 1.3px solid #e4eaf2;
-      padding: 15px 13px 14px 13px;
-      min-width: 230px;
-      max-width: 245px;
-      flex: 1 0 200px;
-      transition: box-shadow 0.15s, border-color 0.16s;
-    }
-    .stock-card:hover {
-      box-shadow: 0 2px 14px #3070c41e;
-      border-color: #96b6f6;
-    }
-    .sector-chip {
-      background: #eaf2ff;
-      color: #2766be;
-      border-radius: 5px;
-      padding: 1px 7px;
-      font-size: 0.85em;
-      margin-left: 7px;
-    }
-    .floating-toc {
-      position: fixed;
-      top: 140px;
-      right: 30px;
-      width: 200px;
-      background: #fff;
-      border: 1.4px solid #e1e6f2;
-      box-shadow: 0 2px 16px #00408016;
-      border-radius: 12px;
-      padding: 12px 16px 10px 16px;
-      z-index: 1001;
-      font-size: 1em;
-      opacity: 0.98;
-      transition: box-shadow 0.22s, background 0.22s, color 0.22s;
-    }
-    .floating-toc .toc-title {
-      font-weight: 600;
-      color: #004080;
-      margin-bottom: 7px;
-      font-size: 1.06em;
-      letter-spacing: 0.2px;
-    }
-    .floating-toc ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .floating-toc ul li {
-      margin: 6px 0;
-    }
-    .floating-toc a {
-      color: #204a80;
+    .download-btn {
+      background: #004080;
+      color: white !important;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 1.01em;
+      font-weight: 500;
+      box-shadow: 0 1px 4px #00408012;
       text-decoration: none;
-      font-size: 0.98em;
-      transition: color 0.16s;
+      margin: 14px 0 0 0;
+      display: inline-block;
+      transition: background .22s, color .19s, border .18s, transform 0.17s;
     }
-    .floating-toc a:hover,
-    .floating-toc a.active {
-      color: #1c6ddb;
-      text-decoration: underline;
+    .download-btn:hover, .download-btn:focus {
+      background: #002d59;
+      color: #e0eefa !important;
+      transform: translateY(-2px) scale(1.04);
     }
-    footer {
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 8px;
+      background: #fafdff;
+      border-radius: 9px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid #e4eaf2;
       text-align: center;
-      padding: 18px 0 13px 0;
-      font-size: 0.97em;
-      color: #666;
-      border-top: 1px solid #e0e5f0;
-      margin-top: 24px;
-      background: #fafbfc;
-      position: relative;
-      left: 0;
-      right: 0;
     }
-    /* Dark mode overrides */
-    body.dark-mode {
-      background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
-      color: #e7ecfa !important;
+    th {
+      background: #e9f0fd;
+      color: #222;
     }
-    body.dark-mode header, body.dark-mode nav, body.dark-mode footer {
-      background: #12203a !important;
-      color: #e7ecfa !important;
+    .info-box, .tips-box, .faq-box, .assumptions-box {
+      margin-top: 28px;
+      padding: 18px 22px 13px 22px;
+      border-radius: 11px;
+      border: 1.5px solid #e4eaf2;
     }
-    body.dark-mode main, body.dark-mode section, body.dark-mode .stock-card {
-      background: #191c23 !important;
-      color: #e7ecfa !important;
-      box-shadow: 0 2px 12px #0004;
-      border-color: #2d3752 !important;
+    .info-box {
+      background: #f4faff;
     }
-    body.dark-mode h2, body.dark-mode h3, body.dark-mode .floating-toc .toc-title {
-      color: #8abaff !important;
-      border-color: #273a5a !important;
+    .assumptions-box {
+      background: #fffce7;
+      border: 1.5px solid #ffe28a;
     }
-    body.dark-mode .floating-toc {
-      background: #1a2030 !important;
-      border-color: #273a5a !important;
-      color: #8abaff !important;
-      box-shadow: 0 2px 16px #0018;
+    .tips-box {
+      background: #eefaf2;
+      border: 1.5px solid #b5f0b1;
     }
-    body.dark-mode .floating-toc a {
-      color: #8abaff !important;
-    }
-    body.dark-mode .floating-toc a:hover,
-    body.dark-mode .floating-toc a.active {
-      color: #48a7ff !important;
-    }
-    body.dark-mode nav a {
-      color: #8abaff !important;
-    }
-    body.dark-mode nav a.active,
-    body.dark-mode nav a:hover {
-      background: #274272 !important;
-      color: #fff !important;
-    }
-    body.dark-mode .stock-card {
-      background: #23273b !important;
-      color: #e7ecfa !important;
-      border-color: #39588a !important;
-    }
-    body.dark-mode .sector-chip {
-      background: #2d3752 !important;
-      color: #8abaff !important;
-    }
-    body.dark-mode #dm-label { color: #fff !important; }
-    /* Responsive for ToC */
-    @media (max-width: 900px) {
-      .floating-toc {
-        right: 8px;
-        width: 88vw;
-        min-width: 155px;
-        max-width: 97vw;
-        font-size: 0.97em;
-        top: unset;
-        bottom: 16px;
-        padding: 10px 13px 10px 13px;
-        border-radius: 10px;
-        opacity: 0.97;
-      }
-    }
-    @media (max-width: 600px) {
-      .floating-toc {
-        right: 2vw;
-        left: 2vw;
-        width: unset;
-        font-size: 1em;
-        padding: 10px 6vw;
-        top: unset;
-        bottom: 14px;
-        border-radius: 10px;
-        max-width: unset;
-        min-width: unset;
-      }
+    .faq-box {
+      background: #f9faff;
+      border: 1.5px solid #b8cee6;
     }
   </style>
 </head>
@@ -305,7 +208,6 @@
   Total Monthly Investment: ₹<span id="total-amount-value">0</span>
 </div>
 
-
         <label for="rate">Expected Rate of Return (% per year):</label>
         <input type="number" id="rate" step="0.01" min="0" required placeholder="e.g. 11">
 
@@ -319,70 +221,94 @@
         <button type="submit" class="btn">Calculate Future Corpus</button>
         <button type="button" class="btn secondary" onclick="resetGoalForm()">Reset</button>
         </div>
-
       </form>
       <div id="goal-result" style="margin-top:18px;font-size:1.13em;color:#004080;font-weight:500;"></div>
-
       <!-- Chart Container -->
-      <div style="margin:24px 0 0 0; background:#fff; border-radius:12px; padding:12px 6px;">
-        <canvas id="plotSIPCorpusChart" style="max-width:100%;"></canvas>
+      <div id="chart-section" style="margin:24px 0 0 0; background:#fff; border-radius:12px; padding:12px 6px; display:none;">
+      <canvas id="plotSIPCorpusChart" style="max-width:100%;"></canvas>
       </div>
+      <!-- Projection Table and Download -->
+      <div id="projection-table-container" style="margin-top:30px;"></div>
+      <button id="download-csv-btn" class="download-btn" style="display:none;" onclick="downloadProjectionCSV()">⬇️ Download Projection Table as CSV</button>
+    </section>
+	
+	    <section class="assumptions-box" id="assumptions-section" style="display:none;">
+  <h3>⚠️ Assumptions & Limitations</h3>
+  <ul>
+    <li>Assumes fixed monthly investment throughout the period.</li>
+    <li>Does not include taxes, transaction costs, or step-up SIPs.</li>
+    <li>Projected rates are not guaranteed—returns depend on market performance.</li>
+    <li>Inflation and return rates are user-entered and may differ from actuals.</li>
+  </ul>
+</section>
+	
+    <!-- FAQ, Assumptions, Tips sections -->
+    <section class="faq-box">
+      <h3>📚 Investment Goal FAQs & Guidance</h3>
+      <ul>
+        <li><b>What is XIRR?</b> XIRR (Extended Internal Rate of Return) gives your true annualized return, accounting for all cash flows and timing, making it the gold standard for comparing different investments.</li>
+        <li><b>Why consider inflation?</b> Inflation reduces your money’s buying power over time. Always look at the <b>inflation-adjusted corpus</b> to see your real wealth growth.</li>
+        <li><b>What does “Future Corpus” mean?</b> This is the total wealth you’ll accumulate, assuming all your planned investments and expected returns hold true.</li>
+        <li><b>What’s the benefit of investing monthly?</b> Monthly SIPs smooth out market ups and downs, help you save consistently, and build wealth through compounding.</li>
+      </ul>
+    </section>
+	
+    <section class="tips-box">
+      <h3>💡 Tips for Smart Investing</h3>
+      <ul>
+        <li>Start early—even small investments grow big over time.</li>
+        <li>Review your investments every year and rebalance if needed.</li>
+        <li>Increase your SIP amount as your income grows.</li>
+        <li>Consult a financial advisor for personalized advice.</li>
+      </ul>
     </section>
   </main>
   <footer>
     &copy; 2025 Investment Insights. All rights reserved.
   </footer>
 
-
   <script>
-  
-  
-    //Reset Button functionality
-	
-	function resetGoalForm() {
-  // Reset the form fields
-  document.getElementById('goal-form').reset();
+    // Reset Button functionality
+    function resetGoalForm() {
+      document.getElementById('goal-form').reset();
+      document.getElementById('route-amount-fields').innerHTML = '';
+      document.getElementById('total-amount-value').textContent = '0';
+      document.getElementById('goal-result').innerHTML = '';
+      document.getElementById('projection-table-container').innerHTML = '';
+      document.getElementById('download-csv-btn').style.display = 'none';
+	  document.getElementById('assumptions-section').style.display = "none";
+      document.getElementById('chart-section').style.display = "none";
+      if (window.corpusChartInstance) window.corpusChartInstance.destroy();
+    }
 
-  // Clear dynamic amount fields and total
-  document.getElementById('route-amount-fields').innerHTML = '';
-  document.getElementById('total-amount-value').textContent = '0';
+    // Generate Total Amount Dynamically
+    function generateAmountFields() {
+      const selected = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
+      const container = document.getElementById('route-amount-fields');
+      container.innerHTML = ''; // clear previous
 
-  // Clear results and chart
-  document.getElementById('goal-result').innerHTML = '';
-  if (window.corpusChartInstance) window.corpusChartInstance.destroy();
-}
-	
-    //Generate Total Amount Dynamically
-	
-	function generateAmountFields() {
-  const selected = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
-  const container = document.getElementById('route-amount-fields');
-  container.innerHTML = ''; // clear previous
+      selected.forEach(route => {
+        const inputId = `amount-${route.replace(/\s+/g, '').toLowerCase()}`;
+        container.innerHTML += `
+          <label for="${inputId}">Monthly Investment in ${route} (₹):</label>
+          <input type="number" min="0" id="${inputId}" class="route-amount" placeholder="Amount for ${route}" oninput="updateTotalAmount()" required>
+        `;
+      });
 
-  selected.forEach(route => {
-    // Use route as the id for its input
-    const inputId = `amount-${route.replace(/\s+/g, '').toLowerCase()}`;
-    container.innerHTML += `
-      <label for="${inputId}">Monthly Investment in ${route} (₹):</label>
-      <input type="number" min="0" id="${inputId}" class="route-amount" placeholder="Amount for ${route}" oninput="updateTotalAmount()" required>
-    `;
-  });
+      updateTotalAmount(); // reset total when selection changes
+    }
 
-  updateTotalAmount(); // reset total when selection changes
-}
+    // Calculate and update total monthly investment
+    function updateTotalAmount() {
+      const inputs = document.querySelectorAll('.route-amount');
+      let total = 0;
+      inputs.forEach(input => {
+        const val = parseFloat(input.value);
+        if (!isNaN(val) && val > 0) total += val;
+      });
+      document.getElementById('total-amount-value').textContent = total.toLocaleString('en-IN');
+    }
 
-// Calculate and update total monthly investment
-function updateTotalAmount() {
-  const inputs = document.querySelectorAll('.route-amount');
-  let total = 0;
-  inputs.forEach(input => {
-    const val = parseFloat(input.value);
-    if (!isNaN(val) && val > 0) total += val;
-  });
-  document.getElementById('total-amount-value').textContent = total.toLocaleString('en-IN');
-}
-    
-    
     // XIRR Helper Function
     function xirr(cashFlows, dates, guess = 0.1) {
       const tol = 1e-7, maxIter = 100;
@@ -404,120 +330,160 @@ function updateTotalAmount() {
 
     // Chart Drawing Function
     function plotSIPCorpusChart({ P, rate, inflation, years, canvasId = "plotSIPCorpusChart" }) {
-  const yearlyCorpus = [];
-  const yearlyCorpusReal = [];
-  const labels = [];
-  const r = rate / 100 / 12;
-  for (let year = 1; year <= years; year++) {
-    const months = year * 12;
-    const FV = r === 0
-      ? P * months
-      : P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
-    const inflationFactor = Math.pow(1 + inflation / 100, year);
-    yearlyCorpus.push(FV);
-    yearlyCorpusReal.push(FV / inflationFactor);
-    labels.push('Year ' + year);
-  }
-  const ctx = document.getElementById(canvasId).getContext('2d');
-  if (window.corpusChartInstance) window.corpusChartInstance.destroy();
-  window.corpusChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: 'Corpus (Nominal ₹)',
-          data: yearlyCorpus,
-          borderWidth: 2.5,
-          borderColor: '#004080',
-          backgroundColor: 'rgba(0,64,128,0.08)',
-          tension: 0.15,
-          pointRadius: 2,
-          fill: false,
-        },
-        {
-          label: 'Corpus (Inflation-Adjusted ₹)',
-          data: yearlyCorpusReal,
-          borderWidth: 2.2,
-          borderColor: '#6c93db',
-          backgroundColor: 'rgba(108,147,219,0.09)',
-          tension: 0.18,
-          pointRadius: 2,
-          fill: false,
-          borderDash: [6, 4],
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: true, position: 'bottom' },
-        tooltip: {
-          // Show both values for a year, even if you hover only on one line
-          callbacks: {
-            title: function(ctx) {
-              // "Year X"
-              return ctx[0].label;
-            },
-            label: function(ctx) {
-              // ctx.datasetIndex: 0 for nominal, 1 for real
-              // Show "Corpus (Nominal ₹): ₹xx,xx,xxx"
-              const value = ctx.parsed.y;
-              const label = ctx.dataset.label;
-              return label + ': ₹' + Math.round(value).toLocaleString();
-            },
-            afterBody: function(ctx) {
-              // Only display if there are two datasets (for safety)
-              if (ctx.length === 1 && ctx[0].datasetIndex === 0 && ctx[0].chart.data.datasets.length > 1) {
-                // Find the real value for this year
-                const yearIndex = ctx[0].dataIndex;
-                const realValue = ctx[0].chart.data.datasets[1].data[yearIndex];
-                return 'Corpus (Inflation-Adjusted ₹): ₹' + Math.round(realValue).toLocaleString();
-              } else if (ctx.length === 1 && ctx[0].datasetIndex === 1 && ctx[0].chart.data.datasets.length > 0) {
-                // Find the nominal value for this year
-                const yearIndex = ctx[0].dataIndex;
-                const nominalValue = ctx[0].chart.data.datasets[0].data[yearIndex];
-                return 'Corpus (Nominal ₹): ₹' + Math.round(nominalValue).toLocaleString();
-              }
-              // If already showing both lines, do nothing (default will show both)
-              return '';
-            }
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: function(val) {
-              return '₹' + (val / 100000 >= 1 ? (val / 100000).toFixed(1) + 'L' : val.toLocaleString());
-            }
-          }
-        }
+      const yearlyCorpus = [];
+      const yearlyCorpusReal = [];
+      const labels = [];
+      const r = rate / 100 / 12;
+      for (let year = 1; year <= years; year++) {
+        const months = year * 12;
+        const FV = r === 0
+          ? P * months
+          : P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
+        const inflationFactor = Math.pow(1 + inflation / 100, year);
+        yearlyCorpus.push(FV);
+        yearlyCorpusReal.push(FV / inflationFactor);
+        labels.push('Year ' + year);
       }
+      const ctx = document.getElementById(canvasId).getContext('2d');
+      if (window.corpusChartInstance) window.corpusChartInstance.destroy();
+      window.corpusChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Corpus (Nominal ₹)',
+              data: yearlyCorpus,
+              borderWidth: 2.5,
+              borderColor: '#004080',
+              backgroundColor: 'rgba(0,64,128,0.08)',
+              tension: 0.15,
+              pointRadius: 2,
+              fill: false,
+            },
+            {
+              label: 'Corpus (Inflation-Adjusted ₹)',
+              data: yearlyCorpusReal,
+              borderWidth: 2.2,
+              borderColor: '#6c93db',
+              backgroundColor: 'rgba(108,147,219,0.09)',
+              tension: 0.18,
+              pointRadius: 2,
+              fill: false,
+              borderDash: [6, 4],
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true, position: 'bottom' },
+            tooltip: {
+              callbacks: {
+                title: function(ctx) {
+                  return ctx[0].label;
+                },
+                label: function(ctx) {
+                  const value = ctx.parsed.y;
+                  const label = ctx.dataset.label;
+                  return label + ': ₹' + Math.round(value).toLocaleString('en-IN');
+                },
+                afterBody: function(ctx) {
+                  if (ctx.length === 1 && ctx[0].datasetIndex === 0 && ctx[0].chart.data.datasets.length > 1) {
+                    const yearIndex = ctx[0].dataIndex;
+                    const realValue = ctx[0].chart.data.datasets[1].data[yearIndex];
+                    return 'Corpus (Inflation-Adjusted ₹): ₹' + Math.round(realValue).toLocaleString('en-IN');
+                  } else if (ctx.length === 1 && ctx[0].datasetIndex === 1 && ctx[0].chart.data.datasets.length > 0) {
+                    const yearIndex = ctx[0].dataIndex;
+                    const nominalValue = ctx[0].chart.data.datasets[0].data[yearIndex];
+                    return 'Corpus (Nominal ₹): ₹' + Math.round(nominalValue).toLocaleString('en-IN');
+                  }
+                  return '';
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(val) {
+                  // Show in Lakhs if value >= 1L, else in Indian grouping
+                  return '₹' + (val / 100000 >= 1
+                    ? (val / 100000).toFixed(1) + 'L'
+                    : val.toLocaleString('en-IN'));
+                }
+              }
+            }
+          }
+        }
+      });
     }
-  });
-}
 
+    // Generate and display yearly projection table
+    function showProjectionTable(P, rate, inflation, years) {
+      let html = `<h3 style="color:#004080;">Yearly Corpus Projection</h3>
+      <table>
+        <tr>
+          <th>Year</th>
+          <th>Nominal Corpus (₹)</th>
+          <th>Inflation-Adjusted (₹)</th>
+        </tr>`;
+      const r = rate/100/12;
+      let tableData = [];
+      for (let year=1; year<=years; year++) {
+        const months = year*12;
+        const FV = r===0 ? P*months : P*(((Math.pow(1+r,months)-1)/r)*(1+r));
+        const FVReal = FV / Math.pow(1+inflation/100, year);
+        html += `<tr>
+          <td>${year}</td>
+          <td>₹${Math.round(FV).toLocaleString('en-IN')}</td>
+          <td>₹${Math.round(FVReal).toLocaleString('en-IN')}</td>
+        </tr>`;
+        tableData.push({year, FV, FVReal});
+      }
+      html += `</table>`;
+      document.getElementById('projection-table-container').innerHTML = html;
+      document.getElementById('download-csv-btn').style.display = 'inline-block';
+      window.projectionTableData = tableData; // for download
+    }
+
+    // Download CSV logic
+    function downloadProjectionCSV() {
+      if (!window.projectionTableData) return;
+      let csv = "Year,Nominal Corpus (INR),Inflation-Adjusted (INR)\n";
+      window.projectionTableData.forEach(row => {
+        csv += `${row.year},${Math.round(row.FV)},${Math.round(row.FVReal)}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = "investment_projection.csv";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
 
     // Main Calculation Function
     function calculateGoal(event) {
       event.preventDefault();
       let P = 0;
       document.querySelectorAll('.route-amount').forEach(input => {
-      const val = parseFloat(input.value);
-      if (!isNaN(val) && val > 0) P += val;
-     });
+        const val = parseFloat(input.value);
+        if (!isNaN(val) && val > 0) P += val;
+      });
       const rate = parseFloat(document.getElementById('rate').value);
       const inflation = parseFloat(document.getElementById('inflation').value);
       const n = parseInt(document.getElementById('duration').value);
       const routes = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
-      
-	  if (P <= 0) {
-      alert('Please enter at least one investment amount.');
-      return;
+
+      if (P <= 0) {
+        alert('Please enter at least one investment amount.');
+        return;
       }
-	  
+
       if (isNaN(P) || P <= 0 || isNaN(rate) || rate < 0 || isNaN(inflation) || inflation < 0 || isNaN(n) || n <= 0 || routes.length === 0) {
         alert('Please fill all fields correctly.');
         return;
@@ -531,11 +497,9 @@ function updateTotalAmount() {
       } else {
         FV = P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
       }
-	  
-	  // Inflation-adjusted corpus
+      // Inflation-adjusted corpus
       const inflationFactor = Math.pow(1 + inflation / 100, n);
       const FVReal = FV / inflationFactor;
-
 
       // XIRR Calculation
       const cashFlows = [];
@@ -563,9 +527,9 @@ function updateTotalAmount() {
       }
 
       document.getElementById('goal-result').innerHTML = `
-  <strong>Future Corpus (Nominal):</strong> ₹${FV.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
-  <strong>Future Corpus (Inflation-Adjusted):</strong> ₹${FVReal.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
-  <strong>Total Invested:</strong> ₹${(P*months).toLocaleString(undefined, {maximumFractionDigits:0})}<br>
+  <strong>Future Corpus (Nominal):</strong> ₹${FV.toLocaleString('en-IN', {maximumFractionDigits:0})}<br>
+  <strong>Future Corpus (Inflation-Adjusted):</strong> ₹${FVReal.toLocaleString('en-IN', {maximumFractionDigits:0})}<br>
+  <strong>Total Invested:</strong> ₹${(P*months).toLocaleString('en-IN', {maximumFractionDigits:0})}<br>
   <strong>XIRR (Annualized Return):</strong> ${irr.toFixed(2)}%<br>
   <strong>Inflation-adjusted (Real) XIRR:</strong> ${realIRR.toFixed(2)}%<br>
   <strong>Selected Routes:</strong> ${routes.join(', ')}<br>
@@ -580,6 +544,21 @@ function updateTotalAmount() {
         years: n,
         canvasId: "plotSIPCorpusChart"
       });
+
+      // Show projection table and enable download
+      showProjectionTable(P, rate, inflation, n);
+	  document.getElementById('assumptions-section').style.display = "block";
+      document.getElementById('chart-section').style.display = "block";
+	  
+	  // Show the Assumptions & Limitations section
+      document.getElementById('assumptions-section').style.display = "block";
+
+      // Example for GoalSet Calculator page
+      localStorage.setItem("lastCalculator", JSON.stringify({
+        name: "Investment Goal Calculator",
+        date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }),
+        link: "investmentgoal.html"
+      }));
     }
   </script>
 
@@ -607,5 +586,19 @@ function updateTotalAmount() {
       setMode(darkPref);
     });
   </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Remove all 'active' classes first
+      document.querySelectorAll('nav a').forEach(function(link) {
+        link.classList.remove('active');
+        // Compare only the filename part to handle different hosting/path situations
+        if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
