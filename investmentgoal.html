@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +59,7 @@
 
       <!-- Chart Container -->
       <div style="margin:24px 0 0 0; background:#fff; border-radius:12px; padding:12px 6px;">
-        <canvas id="corpusChart" style="max-width:100%;"></canvas>
+        <canvas id="plotSIPCorpusChart" style="max-width:100%;"></canvas>
       </div>
     </section>
   </main>
@@ -69,105 +68,68 @@
   </footer>
 
   <script>
-    let chart; // Global chart variable
+    // XIRR Helper Function
+    function xirr(cashFlows, dates, guess = 0.1) {
+      const tol = 1e-7, maxIter = 100;
+      const dayMs = 1000 * 60 * 60 * 24;
+      const xnpv = (rate) => cashFlows.reduce((sum, c, i) =>
+        sum + c / Math.pow(1 + rate, (dates[i] - dates[0]) / dayMs / 365), 0);
 
-    function calculateGoal(event) {
-      event.preventDefault();
-      const P = parseFloat(document.getElementById('monthly-amount').value);
-      const rate = parseFloat(document.getElementById('rate').value);
-      const inflation = parseFloat(document.getElementById('inflation').value);
-      const n = parseInt(document.getElementById('duration').value);
-
-      // Get selected routes (array)
-      const routes = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
-
-      if (isNaN(P) || P <= 0 || isNaN(rate) || rate < 0 || isNaN(inflation) || inflation < 0 || isNaN(n) || n <= 0 || routes.length === 0) {
-        alert('Please fill all fields correctly.');
-        return;
+      let rate = guess;
+      for (let iter = 0; iter < maxIter; iter++) {
+        const npv = xnpv(rate);
+        const dRate = rate * 1.0001 || 1e-6;
+        const dNpv = (xnpv(dRate) - npv) / (dRate - rate);
+        const newRate = rate - npv / dNpv;
+        if (Math.abs(newRate - rate) < tol) return newRate;
+        rate = newRate;
       }
+      return rate;
+    }
 
-      // Prepare yearly corpus data for chart
+    // Chart Drawing Function
+    function plotSIPCorpusChart({ P, rate, inflation, years, canvasId = "plotSIPCorpusChart" }) {
       const yearlyCorpus = [];
       const yearlyCorpusReal = [];
       const labels = [];
-
-      // Monthly rate of return (decimal)
       const r = rate / 100 / 12;
-
-      for (let year = 1; year <= n; year++) {
+      for (let year = 1; year <= years; year++) {
         const months = year * 12;
-        const FV = P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
+        const FV = r === 0
+          ? P * months
+          : P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
         const inflationFactor = Math.pow(1 + inflation / 100, year);
-        const realFV = FV / inflationFactor;
-
         yearlyCorpus.push(FV);
-        yearlyCorpusReal.push(realFV);
+        yearlyCorpusReal.push(FV / inflationFactor);
         labels.push('Year ' + year);
       }
-
-      // Final corpus (last year)
-      const FV = yearlyCorpus[yearlyCorpus.length - 1];
-      const realFV = yearlyCorpusReal[yearlyCorpusReal.length - 1];
-      const totalInvested = P * n * 12;
-
-
-      // Calculate the CAGR (nominal and real)
-      const annualInvested = P * 12;
-      const corpusCAGR = (Math.pow(FV / annualInvested, 1 / n) - 1) * 100;
-      const realCAGR = (Math.pow(realFV / annualInvested, 1 / n) - 1) * 100;
-      const inflationBeat = corpusCAGR - inflation;
-
-      let inflationMsg;
-      if (inflationBeat > 0) {
-      inflationMsg = `🎉 Your investment is projected to beat inflation by <b>${inflationBeat.toFixed(2)}%</b> annually.`;
-      } else if (inflationBeat === 0) {
-      inflationMsg = `⚖️ Your investment is projected to match inflation.`;
-      } else {
-      inflationMsg = `⚠️ Your investment may <b>not</b> keep up with inflation and could lose value in real terms.`;
-      }
-
-
-  document.getElementById('goal-result').innerHTML = `
-  <strong>Future Corpus (Nominal):</strong> ₹${FV.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
-  <strong>Future Corpus (Inflation-Adjusted):</strong> ₹${realFV.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
-  <strong>Total Invested:</strong> ₹${totalInvested.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
-  <strong>Selected Routes:</strong> ${routes.join(', ')}<br>
-  <div style="margin-top:14px;font-size:1.11em;">${inflationMsg}</div>
-`;
-
-
-      // Draw/Update Chart
-      drawChart(labels, yearlyCorpus, yearlyCorpusReal);
-    }
-
-    function drawChart(labels, corpus, corpusReal) {
-      const ctx = document.getElementById('corpusChart').getContext('2d');
-      if (chart) chart.destroy();
-      chart = new Chart(ctx, {
+      const ctx = document.getElementById(canvasId).getContext('2d');
+      if (window.corpusChartInstance) window.corpusChartInstance.destroy();
+      window.corpusChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: labels,
+          labels,
           datasets: [
             {
               label: 'Corpus (Nominal ₹)',
-              data: corpus,
+              data: yearlyCorpus,
               borderWidth: 2.5,
               borderColor: '#004080',
               backgroundColor: 'rgba(0,64,128,0.08)',
-              tension: 0.13,
+              tension: 0.15,
               pointRadius: 2,
               fill: false,
             },
             {
               label: 'Corpus (Inflation-Adjusted ₹)',
-              data: corpusReal,
+              data: yearlyCorpusReal,
               borderWidth: 2.2,
               borderColor: '#6c93db',
               backgroundColor: 'rgba(108,147,219,0.09)',
               tension: 0.18,
               pointRadius: 2,
               fill: false,
-              borderDash: [6,4]
+              borderDash: [6, 4],
             }
           ]
         },
@@ -196,68 +158,99 @@
         }
       });
     }
+
+    // Main Calculation Function
+    function calculateGoal(event) {
+      event.preventDefault();
+      const P = parseFloat(document.getElementById('monthly-amount').value);
+      const rate = parseFloat(document.getElementById('rate').value);
+      const inflation = parseFloat(document.getElementById('inflation').value);
+      const n = parseInt(document.getElementById('duration').value);
+      const routes = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
+
+      if (isNaN(P) || P <= 0 || isNaN(rate) || rate < 0 || isNaN(inflation) || inflation < 0 || isNaN(n) || n <= 0 || routes.length === 0) {
+        alert('Please fill all fields correctly.');
+        return;
+      }
+
+      const r = rate / 100 / 12;
+      const months = n * 12;
+      let FV;
+      if (r === 0) {
+        FV = P * months;
+      } else {
+        FV = P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
+      }
+
+      // XIRR Calculation
+      const cashFlows = [];
+      const dates = [];
+      const startDate = new Date();
+      for (let i = 0; i < months; i++) {
+        const d = new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate());
+        cashFlows.push(-P);
+        dates.push(d);
+      }
+      const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + months, startDate.getDate());
+      cashFlows.push(FV);
+      dates.push(endDate);
+
+      const irr = xirr(cashFlows, dates) * 100;
+      const realIRR = irr - inflation;
+
+      let inflationMsg;
+      if (realIRR > 0) {
+        inflationMsg = `🎉 Your investment is projected to beat inflation by <b>${realIRR.toFixed(2)}%</b> per year (XIRR).`;
+      } else if (realIRR === 0) {
+        inflationMsg = `⚖️ Your investment is projected to match inflation.`;
+      } else {
+        inflationMsg = `⚠️ Your investment may <b>not</b> keep up with inflation and could lose value in real terms.`;
+      }
+
+      document.getElementById('goal-result').innerHTML = `
+        <strong>Future Corpus (Nominal):</strong> ₹${FV.toLocaleString(undefined, {maximumFractionDigits:0})}<br>
+        <strong>Total Invested:</strong> ₹${(P*months).toLocaleString(undefined, {maximumFractionDigits:0})}<br>
+        <strong>XIRR (Annualized Return):</strong> ${irr.toFixed(2)}%<br>
+        <strong>Inflation-adjusted (Real) XIRR:</strong> ${realIRR.toFixed(2)}%<br>
+        <strong>Selected Routes:</strong> ${routes.join(', ')}<br>
+        <div style="margin-top:14px;font-size:1.11em;">${inflationMsg}</div>
+      `;
+
+      // Draw chart
+      plotSIPCorpusChart({
+        P: P,
+        rate: rate,
+        inflation: inflation,
+        years: n,
+        canvasId: "plotSIPCorpusChart"
+      });
+    }
   </script>
 
-
-<script>
-function setMode(dark) {
-  if (dark) {
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("theme", "dark");
-    document.getElementById('dm-label').textContent = "☀️ Light Mode";
-    document.getElementById('darkmode-toggle').checked = true;
-  } else {
-    document.body.classList.remove("dark-mode");
-    localStorage.setItem("theme", "light");
-    document.getElementById('dm-label').textContent = "🌙 Dark Mode";
-    document.getElementById('darkmode-toggle').checked = false;
-  }
-}
-document.getElementById('darkmode-toggle').addEventListener("change", function() {
-  setMode(this.checked);
-});
-// Auto detect or load user preference
-(function() {
-  const userPref = localStorage.getItem("theme");
-  const darkPref = userPref === "dark" ||
-    (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  setMode(darkPref);
-})();
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var nav = document.getElementById('main-nav');
-  var hamburger = document.getElementById('hamburger-btn');
-  var closeNav = document.getElementById('close-nav-btn');
-
-  hamburger.onclick = function() {
-    nav.classList.add('open');
-    document.body.style.overflow = "hidden"; // Prevent background scroll
-  };
-  closeNav.onclick = function() {
-    nav.classList.remove('open');
-    document.body.style.overflow = "";
-  };
-  // Optional: Close nav when clicking a link (for SPA-like feel)
-  nav.querySelectorAll('a').forEach(function(link) {
-    link.onclick = function() {
-      nav.classList.remove('open');
-      document.body.style.overflow = "";
-    };
-  });
-  // Optional: Close nav on escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === "Escape") {
-      nav.classList.remove('open');
-      document.body.style.overflow = "";
+  <script>
+    // Dark Mode Script (unchanged)
+    function setMode(dark) {
+      if (dark) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark");
+        document.getElementById('dm-label').textContent = "☀️ Light Mode";
+        document.getElementById('darkmode-toggle').checked = true;
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("theme", "light");
+        document.getElementById('dm-label').textContent = "🌙 Dark Mode";
+        document.getElementById('darkmode-toggle').checked = false;
+      }
     }
-  });
-});
-</script>
-
-
-
-
+    document.getElementById('darkmode-toggle').addEventListener("change", function() {
+      setMode(this.checked);
+    });
+    (function() {
+      const userPref = localStorage.getItem("theme");
+      const darkPref = userPref === "dark" ||
+        (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      setMode(darkPref);
+    })();
+  </script>
 </body>
 </html>
