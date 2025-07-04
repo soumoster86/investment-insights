@@ -151,6 +151,8 @@ footer {
   left: 0;
   right: 0;
 }
+
+/*Card and Section Stacking*/
 @media (max-width: 700px) {
   main, section, #fd-calculator {
     padding: 8px 3vw !important;
@@ -213,4 +215,79 @@ body.dark-mode a.learn-more {
 body.dark-mode #dm-label {
   color: #fff !important;
 }
+
+@media (max-width: 700px) {
+  #stock-list, #mf-list, #crypto-list, .bond-card, .platform-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .stock-card, .mf-card, .bond-card, .crypto-card, .platform-card {
+    min-width: 90vw !important;
+    max-width: 98vw !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  section, #fd-calculator {
+    padding: 10px 3vw !important;
+  }
+  main {
+    padding: 0 2vw 24px 2vw !important;
+  }
+  header, nav {
+    flex-direction: column !important;
+    gap: 4px !important;
+    text-align: left;
+    align-items: flex-start !important;
+  }
+  nav a {
+    padding: 8px 6px;
+    font-size: 1em;
+    margin: 0 2px;
+  }
+  h1 {
+    font-size: 1.2em !important;
+  }
+  .btn, button, a.learn-more {
+    width: 100%;
+    font-size: 1.03em;
+    padding: 12px 0;
+  }
+  input, textarea, select {
+    font-size: 1.02em !important;
+  }
+  label {
+    font-size: 1em !important;
+  }
+}
+/*Calculator Inputs – Touch Optimization*/
+@media (max-width: 480px) {
+  input, textarea, select {
+    font-size: 1.12em !important;
+    padding: 12px 10px !important;
+    margin-bottom: 20px !important;
+  }
+  label {
+    font-size: 1.04em !important;
+  }
+}
+/*Charts & Tables*/
+@media (max-width: 700px) {
+  canvas, table {
+    width: 100% !important;
+    max-width: 98vw !important;
+    overflow-x: auto !important;
+    display: block !important;
+  }
+  table th, table td {
+    font-size: 0.97em !important;
+    padding: 8px 3px !important;
+  }
+}
+/*Input Number Spinners*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: 2em;
+}
+
 
