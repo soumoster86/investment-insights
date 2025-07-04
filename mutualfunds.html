@@ -308,5 +308,37 @@ document.getElementById('darkmode-toggle').addEventListener("change", function()
 })();
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('main-nav');
+  var hamburger = document.getElementById('hamburger-btn');
+  var closeNav = document.getElementById('close-nav-btn');
+
+  hamburger.onclick = function() {
+    nav.classList.add('open');
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+  };
+  closeNav.onclick = function() {
+    nav.classList.remove('open');
+    document.body.style.overflow = "";
+  };
+  // Optional: Close nav when clicking a link (for SPA-like feel)
+  nav.querySelectorAll('a').forEach(function(link) {
+    link.onclick = function() {
+      nav.classList.remove('open');
+      document.body.style.overflow = "";
+    };
+  });
+  // Optional: Close nav on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+      nav.classList.remove('open');
+      document.body.style.overflow = "";
+    }
+  });
+});
+</script>
+
+
 </body>
 </html>
