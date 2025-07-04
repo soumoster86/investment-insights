@@ -299,11 +299,11 @@
         <a href="investmentgoal.html" class="btn">View or Edit</a>
       </div>
 
-      <div class="card">
-        <h3>🧮 Last Calculator Used</h3>
-        <p id="last-used-info">You last used the <strong>FD Calculator</strong> on <em>July 1</em>.</p>
-        <a href="#" id="last-used-link" class="btn">Reopen Calculator</a>
-      </div>
+     <div class="card">
+     <h3>🧮 Last Calculator Used</h3>
+     <p id="last-used-info">You last used the <strong>FD Calculator</strong> on <em>July 1</em>.</p>
+     <a href="#" id="last-used-link" class="btn">Reopen Calculator</a>
+     </div>
 
       <div class="card">
         <h3>⭐ Top Picks Today</h3>
@@ -485,6 +485,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const lastCalc = localStorage.getItem("lastCalculator");
+  if (lastCalc) {
+    const obj = JSON.parse(lastCalc);
+    document.getElementById('last-used-info').innerHTML =
+      `You last used the <strong>${obj.name}</strong> on <em>${obj.date}</em>.`;
+    document.getElementById('last-used-link').setAttribute("href", obj.link);
+    document.getElementById('last-used-link').style.display = "";
+  } else {
+    document.getElementById('last-used-info').innerHTML = `No calculator used recently.`;
+    document.getElementById('last-used-link').style.display = "none";
+  }
+});
+</script>
   
 </body>
 </html>
