@@ -5,32 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights - Stocks</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .stock-card {
-      background: #f8faff;
-      border-radius: 10px;
-      box-shadow: 0 1px 8px #a4b1cf18;
-      border: 1.3px solid #e4eaf2;
-      padding: 15px 13px 14px 13px;
-      min-width: 230px;
-      max-width: 245px;
-      flex: 1 0 200px;
-      transition: box-shadow 0.15s, border-color 0.16s;
-    }
-    .stock-card:hover {
-      box-shadow: 0 2px 14px #3070c41e;
-      border-color: #96b6f6;
-    }
-    .sector-chip {
-      background: #eaf2ff;
-      color: #2766be;
-      border-radius: 5px;
-      padding: 1px 7px;
-      font-size: 0.85em;
-      margin-left: 7px;
-    }
-  </style>
-</head>
+  </head>
 <body>
 
   <!-- Floating Table of Contents -->
@@ -46,15 +21,17 @@
     </ul>
   </nav>
 
-  <header>
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
     <div style="display: flex; align-items: center;">
-      <img src="logo.png" alt="Investment Insights Logo" />
-      <h1>Investment Insights</h1>
+      <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
+      <h1 style="margin: 0; font-weight: normal; font-size: 1.5em;">Investment Insights</h1>
     </div>
     <label style="display: flex; align-items: center; gap: 8px; cursor:pointer; margin-top: 10px;">
       <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
-      <span id="dm-label">🌙 Dark Mode</span>
+      <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
     </label>
+	
+
     <nav style="width: 100%; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
       <a href="index.html" class="active">🏠 Home</a>
       <a href="stocks.html">📊 Stocks</a>
