@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights - Home</title>
   <link rel="stylesheet" href="style.css" />
-
-   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Investment Dashboard - Home</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     .dashboard-section {
       display: grid;
@@ -39,88 +34,42 @@
       font-weight: bold;
     }
   </style>
-
-
-  
 </head>
 <body>
-  <header style="display: flex; align-items: center; padding: 15px 20px; background-color: #004080; color: white;">
-    <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
-    <div>
-      <h1 style="margin: 0; font-weight: normal;">Investment Insights</h1>
-     <nav style="margin-top: 5px;">
-  <a href="index.html" class="active">
-    <span style="vertical-align:middle; margin-right:7px;">🏠</span> Home
-  </a>
-  <a href="stocks.html">
-    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M4 21v-9h4v9H4zm6 0V10h4v11h-4zm6 0v-6h4v6h-4z"/></svg>
-    Stocks
-  </a>
-  <a href="mutualfunds.html">
-    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M4 19v-2c0-1.1.9-2 2-2h2v-2c0-1.1.9-2 2-2s2 .9 2 2v2h2c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2z"/></svg>
-    Mutual Funds
-  </a>
-  <a href="fixeddeposit.html">
-    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M17 18H7v-2h10v2zm1-4.5a4.5 4.5 0 1 0-9 0v1H5v6h14v-6h-2v-1zm-2 1v-1a2.5 2.5 0 1 1 5 0v1h-5z"/></svg>
-    Fixed Deposits
-  </a>
-  <a href="cryptocurrencies.html">
-    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 5.5 4.5 10 10 10s10-4.5 10-10C22 6.5 17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8zm0-7h3c.6 0 1-.4 1-1s-.4-1-1-1h-3c-.6 0-1 .4-1 1s.4 1 1 1zm-1-4h2v2h-2V9zm0 4h2v2h-2v-2z"/></svg>
-    Cryptocurrencies
-  </a>
-
-    <a href="bonds.html">
-  <svg width="18" height="18" viewBox="0 0 48 48" style="vertical-align:middle; margin-right:7px;">
-    <rect x="5" y="10" width="38" height="28" rx="5" fill="#e3ecff" stroke="#004080" stroke-width="2"/>
-    <circle cx="38" cy="27" r="5" fill="#fff" stroke="#004080" stroke-width="1.6"/>
-    <rect x="9" y="18" width="30" height="4" rx="2" fill="#bdd7ff"/>
-    <rect x="9" y="25" width="14" height="4" rx="2" fill="#bdd7ff"/>
-    <rect x="16" y="32" width="16" height="2" rx="1" fill="#bdd7ff"/>
-  </svg>
-  Bonds
-</a>
-
-       
-  <a href="investmentgoal.html">
-    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M13 2.05v3.02c3.95.49 7 3.85 7 7.93 0 4.08-3.05 7.44-7 7.93v3.02C18.05 22.47 22 17.91 22 12S18.05 1.53 13 2.05zM2 12c0 5.91 4.95 10.47 11 10.95v-3.02c-3.95-.49-7-3.85-7-7.93 0-4.08 3.05-7.44 7-7.93V1.05C6.95 1.53 2 6.09 2 12z"/></svg>
-    Investment Goal
-  </a>
-       
-  <a href="contact.html">
-    <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:7px;"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 20V8.99l8 7 8-7V20H4z"/></svg>
-    Contact
-  </a>
-</nav>
-
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center;">
+      <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
+      <h1 style="margin: 0; font-weight: normal; font-size: 1.5em;">Investment Insights</h1>
     </div>
-
- <div style="margin-top:10px;">
-  <label style="display: flex; align-items: center; gap: 8px; cursor:pointer;">
-    <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
-    <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
-  </label>
-  </div>
-
-
-  <header>
-    <h1>📊 Investment Insights Dashboard</h1>
-  </header>
-
+    <label style="display: flex; align-items: center; gap: 8px; cursor:pointer; margin-top: 10px;">
+      <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
+      <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
+    </label>
+    <nav style="width: 100%; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+      <a href="index.html" class="active">🏠 Home</a>
+      <a href="stocks.html">📊 Stocks</a>
+      <a href="mutualfunds.html">📁 Mutual Funds</a>
+      <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
+      <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
+      <a href="bonds.html">💸 Bonds</a>
+      <a href="investmentgoal.html">🎯 Investment Goal</a>
+      <a href="contact.html">✉️ Contact</a>
+    </nav>
   </header>
 
   <main>
+    <section style="text-align:center; margin-top: 25px;">
+      <h2>📊 Investment Dashboard</h2>
+    </section>
 
-<div class="dashboard-section">
-
-      <!-- Live Index -->
+    <div class="dashboard-section">
       <div class="card">
         <h3>📈 Live Market Index</h3>
         <p>Nifty 50: <span id="nifty">Loading...</span></p>
         <p>Sensex: <span id="sensex">Loading...</span></p>
-        <button onclick="fetchMarketData()">Refresh</button>
+        <button onclick="fetchMarketData()" class="btn" style="margin-top:10px;">Refresh</button>
       </div>
 
-      <!-- Goal Summary -->
       <div class="card">
         <h3>🎯 Your Investment Goal</h3>
         <p><span class="highlight">Monthly SIP:</span> ₹10,000</p>
@@ -129,14 +78,12 @@
         <a href="investmentgoal.html" class="btn">View or Edit</a>
       </div>
 
-      <!-- Last Calculator Used -->
       <div class="card">
         <h3>🧮 Last Calculator Used</h3>
-        <p>You last used the <strong>FD Calculator</strong> on <em>July 1</em>.</p>
-        <a href="fixeddeposit.html" class="btn">Reopen Calculator</a>
+        <p id="last-used-info">You last used the <strong>FD Calculator</strong> on <em>July 1</em>.</p>
+        <a href="#" id="last-used-link" class="btn">Reopen Calculator</a>
       </div>
 
-      <!-- Top Picks Today -->
       <div class="card">
         <h3>⭐ Top Picks Today</h3>
         <ul>
@@ -146,104 +93,61 @@
         </ul>
         <a href="stocks.html" class="btn">Explore More</a>
       </div>
-
     </div>
 
-<section id="intro">
-  <h2>Introduction to Investments</h2>
-  <p>
-    <strong>What is Investment?</strong> Investment is the process of allocating your money into various assets or instruments — such as stocks, mutual funds, fixed deposits, cryptocurrencies or even bonds — with the goal of growing your wealth over time.
-  </p>
-  <p>
-    <strong>Why Should You Invest?</strong> Simply saving money is not enough to secure your financial future. Inflation gradually erodes the purchasing power of your money. By investing wisely, you can beat inflation, achieve your life goals, and build wealth for major milestones such as buying a house, children’s education, or retirement.
-  </p>
-  <ul>
-    <li><strong>Wealth Creation:</strong> Investments help your money grow, turning small savings into substantial wealth over time.</li>
-    <li><strong>Financial Security:</strong> Investing helps you prepare for emergencies and future needs.</li>
-    <li><strong>Beating Inflation:</strong> Returns from investments typically outpace inflation, preserving your purchasing power.</li>
-    <li><strong>Achieving Goals:</strong> Investments enable you to systematically save and grow money for specific goals like home ownership, travel, or children’s education.</li>
-    <li><strong>Generating Passive Income:</strong> Some investments provide regular income, such as interest, dividends, or rental yields.</li>
-  </ul>
-  <p>
-    <em>Start your investment journey today to build a stronger, more secure financial future!</em>
-  </p>
-</section>
-
-
-    <section id="stocks">
-      <h2>Stocks</h2>
-      <p>
-        Stocks represent ownership shares in publicly traded companies. Investing in stocks allows you to participate in a company's growth and profits through capital appreciation and dividends. Stocks are suitable for investors seeking higher returns and willing to accept market volatility.
-      </p>
-      <a class="learn-more" href="stocks.html">Learn more about Stocks &raquo;</a>
+    <section id="intro">
+      <h2>Introduction to Investments</h2>
+      <p><strong>What is Investment?</strong> Investment is the process of allocating your money into various assets...</p>
+      <ul>
+        <li><strong>Wealth Creation:</strong> Investments help your money grow...</li>
+        <li><strong>Financial Security:</strong> Investing helps you prepare for emergencies...</li>
+        <li><strong>Beating Inflation:</strong> Returns from investments typically outpace inflation...</li>
+        <li><strong>Achieving Goals:</strong> Investments enable you to save for specific goals...</li>
+        <li><strong>Generating Passive Income:</strong> Some investments provide regular income...</li>
+      </ul>
     </section>
 
-    <section id="mutualfunds">
-      <h2>Mutual Funds</h2>
-      <p>
-        Mutual funds pool money from many investors to invest in diversified portfolios of stocks, bonds, or other securities. They are managed by professional fund managers and provide diversification and convenience. Mutual funds are ideal for investors looking for a balanced approach to growth and risk.
-      </p>
-      <a class="learn-more" href="mutualfunds.html">Learn more about Mutual Funds &raquo;</a>
-    </section>
-
-    <section id="fixeddeposits">
-      <h2>Fixed Deposits (FDs)</h2>
-      <p>
-        Fixed Deposits are safe, low-risk investment options offered by banks and financial institutions. You deposit a fixed amount for a specified tenure at a guaranteed interest rate. FDs provide steady returns and are suitable for conservative investors seeking capital protection.
-      </p>
-      <a class="learn-more" href="fixeddeposit.html">Learn more about Fixed Deposits &raquo;</a>
-    </section>
-
-    <section id="cryptocurrencies">
-      <h2>Cryptocurrencies</h2>
-      <p>
-        Cryptocurrencies are digital or virtual currencies that use cryptography for security and operate independently of central banks. They offer potential high returns but come with high risks.
-      </p>
-      <a class="learn-more" href="cryptocurrencies.html">Learn more about Cryptocurrencies &raquo;</a>
-    </section>
-
-    <section id="bonds">
-  <h2>Bonds</h2>
-  <p>
-    Bonds are fixed-income investment instruments that offer stable returns with lower risk compared to equities. They are issued by governments or corporations and pay regular interest to investors, making them an essential part of a well-diversified portfolio.
-  </p>
-  <a class="learn-more" href="bonds.html">Learn more about Bonds &raquo;</a>
-</section>
-    
+    <section id="stocks"><h2>Stocks</h2><p>Stocks represent ownership...</p><a class="learn-more" href="stocks.html">Learn more &raquo;</a></section>
+    <section id="mutualfunds"><h2>Mutual Funds</h2><p>Mutual funds pool money...</p><a class="learn-more" href="mutualfunds.html">Learn more &raquo;</a></section>
+    <section id="fixeddeposits"><h2>Fixed Deposits (FDs)</h2><p>Fixed Deposits are safe...</p><a class="learn-more" href="fixeddeposit.html">Learn more &raquo;</a></section>
+    <section id="cryptocurrencies"><h2>Cryptocurrencies</h2><p>Cryptocurrencies are digital or virtual currencies...</p><a class="learn-more" href="cryptocurrencies.html">Learn more &raquo;</a></section>
+    <section id="bonds"><h2>Bonds</h2><p>Bonds are fixed-income instruments...</p><a class="learn-more" href="bonds.html">Learn more &raquo;</a></section>
   </main>
 
   <footer>
     &copy; 2025 Investment Insights. All rights reserved.
   </footer>
-</body>
 
-<script>
-function setMode(dark) {
-  if (dark) {
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("theme", "dark");
-    document.getElementById('dm-label').textContent = "☀️ Light Mode";
-    document.getElementById('darkmode-toggle').checked = true;
-  } else {
-    document.body.classList.remove("dark-mode");
-    localStorage.setItem("theme", "light");
-    document.getElementById('dm-label').textContent = "🌙 Dark Mode";
-    document.getElementById('darkmode-toggle').checked = false;
-  }
-}
-document.getElementById('darkmode-toggle').addEventListener("change", function() {
-  setMode(this.checked);
-});
-// Auto detect or load user preference
-(function() {
-  const userPref = localStorage.getItem("theme");
-  const darkPref = userPref === "dark" ||
-    (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  setMode(darkPref);
-})();
-</script>
+  <script>
+    function setMode(dark) {
+      if (dark) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark");
+        document.getElementById('dm-label').textContent = "☀️ Light Mode";
+        document.getElementById('darkmode-toggle').checked = true;
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("theme", "light");
+        document.getElementById('dm-label').textContent = "🌙 Dark Mode";
+        document.getElementById('darkmode-toggle').checked = false;
+      }
+    }
+    document.getElementById('darkmode-toggle').addEventListener("change", function() {
+      setMode(this.checked);
+    });
+    (function() {
+      const userPref = localStorage.getItem("theme");
+      const darkPref = userPref === "dark" || (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      setMode(darkPref);
 
- <script>
+      // Load last calculator info
+      const last = JSON.parse(localStorage.getItem("lastCalculator"));
+      if (last && last.name && last.url && last.date) {
+        document.getElementById("last-used-info").innerHTML = `You last used the <strong>${last.name}</strong> on <em>${last.date}</em>.`;
+        document.getElementById("last-used-link").href = last.url;
+      }
+    })();
+
     async function fetchMarketData() {
       const url = "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/^NSEI,^BSESN";
       const options = {
@@ -269,6 +173,5 @@ document.getElementById('darkmode-toggle').addEventListener("change", function()
     fetchMarketData();
     setInterval(fetchMarketData, 60000);
   </script>
-
-
+</body>
 </html>
