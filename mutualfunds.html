@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights - MF</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body {
+     body {
       font-family: 'Segoe UI', Arial, sans-serif;
       margin: 0;
       background: linear-gradient(120deg, #e9f0fd 0%, #f4f6f8 100%);
@@ -259,242 +260,8 @@
         min-width: unset;
       }
     }
-  </style>
-</head>
-<body>
-
-<!-- Floating Table of Contents OUTSIDE HEADER -->
-   <nav class="floating-toc" id="floating-toc">
-   <div class="toc-title" style="text-decoration: underline;">On this page</div>
-   <ul>
-    <li><a href="#about-mutual" style="font-style: italic;">About</a></li>
-    <li><a href="#types-mutual" style="font-style: italic;">Types</a></li>
-    <li><a href="#benefits-mutual" style="font-style: italic;">Benefits</a></li>
-    <li><a href="#risk-mutual" style="font-style: italic;">Risks</a></li>
-    <li><a href="#invest-mutual" style="font-style: italic;">Invest</a></li>
-    <li><a href="#sipcalc-mutual" style="font-style: italic;">Calculator</a></li>
-	<li><a href="#top-mutual" style="font-style: italic;">Top Picks</a></li>
-	<li><a href="#tips-mutual" style="font-style: italic;">Investment Tips</a></li>
-   </ul>
-   </nav>
-
-  <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
-    <div style="display: flex; align-items: center;">
-      <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
-      <h1>💡Investment Insights: Learn. Grow. Prosper.</h1>
-    </div>
-    <label style="display: flex; align-items: center; gap: 8px; cursor:pointer; margin-top: 10px;">
-      <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
-      <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
-    </label>
 	
-
-    <nav style="width: 100%; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
-      <a href="index.html" class="active">🏠 Home</a>
-      <a href="stocks.html">📊 Stocks</a>
-      <a href="mutualfunds.html">📁 Mutual Funds</a>
-      <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
-      <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
-      <a href="bonds.html">💸 Bonds</a>
-      <a href="investmentgoal.html">🎯 Investment Goal</a>
-      <a href="contact.html">✉️ Contact</a>
-    </nav>
-  </header>
-
-  <main>
-  <section id="about-mutual">
-    <h2>About Mutual Funds</h2>
-    <p>
-      Mutual funds pool money from many investors to invest in diversified portfolios of stocks, bonds, or other securities.
-      Managed by professional fund managers, they allow investors to access a wide range of investments without needing to pick individual stocks or bonds.
-    </p>
-  </section>
-
-    <section id="types-mutual">
-      <h3>Types of Mutual Funds</h3>
-      <ul>
-        <li><strong>Equity Funds:</strong> Invest primarily in stocks, aiming for capital growth.</li>
-        <li><strong>Debt Funds:</strong> Invest in fixed income securities like bonds, suitable for lower risk tolerance.</li>
-        <li><strong>Hybrid Funds:</strong> Combine equity and debt to balance risk and return.</li>
-        <li><strong>Index Funds:</strong> Track a market index like Nifty 50, offering low-cost passive investing.</li>
-        <li><strong>Sectoral Funds:</strong> Invest in specific sectors such as technology, healthcare, or infrastructure.</li>
-      </ul>
-    </section>
-
-    <section id="benefits-mutual">
-      <h3>Benefits of Mutual Funds</h3>
-      <ul>
-        <li>Diversification reduces risk compared to investing in single stocks.</li>
-        <li>Professional management by experienced fund managers.</li>
-        <li>Liquidity – easy to buy and sell units.</li>
-        <li>Accessible with relatively low minimum investments.</li>
-        <li>Systematic Investment Plans (SIPs) allow disciplined investing.</li>
-      </ul>
-    </section>
-
-    <section id="risk-mutual">
-      <h3>Risks of Mutual Funds</h3>
-      <ul>
-        <li>Market risk – value of investments can fluctuate.</li>
-        <li>Manager risk – performance depends on fund manager's decisions.</li>
-        <li>Expense ratios and fees may reduce returns.</li>
-        <li>Some funds may carry sector or credit risks depending on holdings.</li>
-      </ul>
-    </section>
-
-    <section id="invest-mutual">
-      <h3>How to Invest in Mutual Funds</h3>
-      <p>
-        To invest, you can open an account with mutual fund platforms like Groww, Zerodha Coin, or directly with fund houses.
-        You can invest lump sums or set up SIPs for regular contributions.
-        It's important to assess your risk profile and investment goals before choosing funds.
-      </p>
-    </section>
-
-<section id="sipcalc-mutual">
-  <h3>SIP Calculator</h3>
-  <label for="sip-amount">Monthly Investment (₹):</label>
-  <input type="number" id="sip-amount" min="0" placeholder="e.g. 5000" />
-
-  <label for="sip-rate">Expected Annual Return (%):</label>
-  <input type="number" id="sip-rate" min="0" step="0.01" placeholder="e.g. 12" />
-
-  <label for="sip-years">Investment Period (years):</label>
-  <input type="number" id="sip-years" min="1" placeholder="e.g. 10" />
-
-  <button type="button" onclick="calculateSIP()" class="btn">Calculate Maturity Value</button>
-  <p id="sip-result"></p>
-</section>
-
-<script>
-  function calculateSIP() {
-    const P = parseFloat(document.getElementById('sip-amount').value);
-    const r = parseFloat(document.getElementById('sip-rate').value) / 100 / 12; // monthly rate
-    const n = parseInt(document.getElementById('sip-years').value) * 12;
-
-    if (isNaN(P) || P <= 0) {
-      alert('Please enter a valid monthly investment amount.');
-      return;
-    }
-    if (isNaN(r) || r < 0) {
-      alert('Please enter a valid expected annual return.');
-      return;
-    }
-    if (isNaN(n) || n <= 0) {
-      alert('Please enter a valid investment period.');
-      return;
-    }
-
-    // SIP formula: M = P × [(1 + r)^n – 1] / r × (1 + r)
-    const maturity = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
-    const invested = P * n;
-    const result = `Maturity Value: ₹${maturity.toLocaleString(undefined, {maximumFractionDigits: 0})}
-      <br>Total Invested: ₹${invested.toLocaleString(undefined, {maximumFractionDigits: 0})}
-      <br>Estimated Gain: ₹${(maturity - invested).toLocaleString(undefined, {maximumFractionDigits: 0})}`;
-    document.getElementById('sip-result').innerHTML = result;
-  }
-</script>
-
-
-    <section id="top-mutual">
-  <h3>Top Mutual Fund Recommendations</h3>
-  <input
-    type="text"
-    id="mf-search"
-    placeholder="Search fund or category..."
-    onkeyup="filterFunds()"
-    style="margin-bottom:16px;"
-  />
-  <div id="mf-list" style="display: flex; flex-wrap: wrap; gap: 16px;">
-    <!-- Multi-cap -->
-    <div class="mf-card" data-type="Multi-cap" data-risk="Moderate">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="https://logo.clearbit.com/ppfas.com" alt="Parag Parikh" style="width:34px; height:34px; border-radius:7px;">
-        <strong>Parag Parikh Flexi Cap</strong>
-        <span class="mf-type-chip">Multi-cap</span>
-        <span class="mf-risk-chip">Moderate</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Long-term, value-focused, global exposure</div>
-      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️⭐️</div>
-      <a href="https://www.ppfas.com/mutual-fund/schemes/parag-parikh-flexi-cap-fund/" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Large-cap -->
-    <div class="mf-card" data-type="Large-cap" data-risk="Low">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="https://logo.clearbit.com/axismf.com" alt="Axis MF" style="width:34px; height:34px; border-radius:7px;">
-        <strong>Axis Bluechip Fund</strong>
-        <span class="mf-type-chip">Large-cap</span>
-        <span class="mf-risk-chip">Low</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Consistent performer in top large caps</div>
-      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.axismf.com/" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Mid-cap -->
-    <div class="mf-card" data-type="Mid-cap" data-risk="Moderate">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="https://logo.clearbit.com/dspim.com" alt="DSP MF" style="width:34px; height:34px; border-radius:7px;">
-        <strong>DSP Midcap Fund</strong>
-        <span class="mf-type-chip">Mid-cap</span>
-        <span class="mf-risk-chip">Moderate</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Growth-focused, seasoned fund management</div>
-      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.dspim.com/our-funds/dsp-midcap-fund-direct-plan-growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Hybrid -->
-    <div class="mf-card" data-type="Hybrid" data-risk="Low">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="https://logo.clearbit.com/hdfcfund.com" alt="HDFC MF" style="width:34px; height:34px; border-radius:7px;">
-        <strong>HDFC Balanced Advantage</strong>
-        <span class="mf-type-chip">Hybrid</span>
-        <span class="mf-risk-chip">Low</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Balances growth & stability, dynamic asset allocation</div>
-      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.hdfcfund.com/products/mutual-fund/hdfc-balanced-advantage-fund/regular-plan/growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Large & Mid-cap -->
-    <div class="mf-card" data-type="Large & Mid-cap" data-risk="Moderate">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="https://logo.clearbit.com/icicipruamc.com" alt="ICICI Prudential" style="width:34px; height:34px; border-radius:7px;">
-        <strong>ICICI Pru Equity & Debt</strong>
-        <span class="mf-type-chip">Large & Mid-cap</span>
-        <span class="mf-risk-chip">Moderate</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Equity/debt mix, good for balanced growth</div>
-      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.icicipruamc.com/mutual-fund-scheme/icici-prudential-equity-and-debt-fund" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Large-cap -->
-    <div class="mf-card" data-type="Large-cap" data-risk="Low">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="https://logo.clearbit.com/miraeassetmf.co.in" alt="Mirae Asset" style="width:34px; height:34px; border-radius:7px;">
-        <strong>Mirae Asset Large Cap</strong>
-        <span class="mf-type-chip">Large-cap</span>
-        <span class="mf-risk-chip">Low</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Strong large cap focus, consistent performance</div>
-      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.miraeassetmf.co.in/mutual-fund-schemes/equity/mirae-asset-large-cap-fund" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Small-cap -->
-    <div class="mf-card" data-type="Small-cap" data-risk="High">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="https://logo.clearbit.com/sbimf.com" alt="SBI MF" style="width:34px; height:34px; border-radius:7px;">
-        <strong>SBI Small Cap Fund</strong>
-        <span class="mf-type-chip">Small-cap</span>
-        <span class="mf-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">High growth potential, suitable for aggressive investors</div>
-      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.sbimf.com/en-us/schemes/equity/sbi-small-cap-fund/regular-plan/growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-  </div>
-</section>
-
-<style>
-.mf-card {
+	.mf-card {
   background: #f8faff;
   border-radius: 10px;
   box-shadow: 0 1px 8px #a4b1cf18;
@@ -525,62 +292,343 @@
   font-size: 0.85em;
   margin-left: 7px;
 }
-</style>
+	
+	
+  </style>
+</head>
+<body>
+
+<!-- Floating Table of Contents -->
+<nav class="floating-toc" id="floating-toc">
+  <div class="toc-title" style="text-decoration: underline;">On this page</div>
+  <ul>
+    <li><a href="#about-mutual" style="font-style: italic;">About</a></li>
+    <li><a href="#types-mutual" style="font-style: italic;">Types</a></li>
+    <li><a href="#benefits-mutual" style="font-style: italic;">Benefits</a></li>
+    <li><a href="#risk-mutual" style="font-style: italic;">Risks</a></li>
+    <li><a href="#invest-mutual" style="font-style: italic;">Invest</a></li>
+    <li><a href="#sipcalc-mutual" style="font-style: italic;">Calculator</a></li>
+    <li><a href="#top-mutual" style="font-style: italic;">Top Picks</a></li>
+    <li><a href="#tips-mutual" style="font-style: italic;">Investment Tips</a></li>
+  </ul>
+</nav>
+
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
+  <div style="display: flex; align-items: center;">
+    <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
+    <h1>💡Investment Insights: Learn. Grow. Prosper.</h1>
+  </div>
+  <label style="display: flex; align-items: center; gap: 8px; cursor:pointer; margin-top: 10px;">
+    <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
+    <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
+  </label>
+  <nav style="width: 100%; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+    <a href="index.html" class="active">🏠 Home</a>
+    <a href="stocks.html">📊 Stocks</a>
+    <a href="mutualfunds.html">📁 Mutual Funds</a>
+    <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
+    <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
+    <a href="bonds.html">💸 Bonds</a>
+    <a href="investmentgoal.html">🎯 Investment Goal</a>
+    <a href="contact.html">✉️ Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section id="about-mutual">
+    <h2>About Mutual Funds</h2>
+    <p>
+      Mutual funds pool money from many investors to invest in diversified portfolios of stocks, bonds, or other securities.
+      Managed by professional fund managers, they allow investors to access a wide range of investments without needing to pick individual stocks or bonds.
+    </p>
+  </section>
+
+  <section id="types-mutual">
+    <h3>Types of Mutual Funds</h3>
+    <ul>
+      <li><strong>Equity Funds:</strong> Invest primarily in stocks, aiming for capital growth.</li>
+      <li><strong>Debt Funds:</strong> Invest in fixed income securities like bonds, suitable for lower risk tolerance.</li>
+      <li><strong>Hybrid Funds:</strong> Combine equity and debt to balance risk and return.</li>
+      <li><strong>Index Funds:</strong> Track a market index like Nifty 50, offering low-cost passive investing.</li>
+      <li><strong>Sectoral Funds:</strong> Invest in specific sectors such as technology, healthcare, or infrastructure.</li>
+    </ul>
+  </section>
+
+  <section id="benefits-mutual">
+    <h3>Benefits of Mutual Funds</h3>
+    <ul>
+      <li>Diversification reduces risk compared to investing in single stocks.</li>
+      <li>Professional management by experienced fund managers.</li>
+      <li>Liquidity – easy to buy and sell units.</li>
+      <li>Accessible with relatively low minimum investments.</li>
+      <li>Systematic Investment Plans (SIPs) allow disciplined investing.</li>
+    </ul>
+  </section>
+
+  <section id="risk-mutual">
+    <h3>Risks of Mutual Funds</h3>
+    <ul>
+      <li>Market risk – value of investments can fluctuate.</li>
+      <li>Manager risk – performance depends on fund manager's decisions.</li>
+      <li>Expense ratios and fees may reduce returns.</li>
+      <li>Some funds may carry sector or credit risks depending on holdings.</li>
+    </ul>
+  </section>
+
+  <section id="invest-mutual">
+    <h3>How to Invest in Mutual Funds</h3>
+    <p>
+      To invest, you can open an account with mutual fund platforms like Groww, Zerodha Coin, or directly with fund houses.
+      You can invest lump sums or set up SIPs for regular contributions.
+      It's important to assess your risk profile and investment goals before choosing funds.
+    </p>
+  </section>
+
+  <section id="sipcalc-mutual" style="margin-top:34px;">
+  <h3>📈 SIP Calculator</h3>
+  <form id="sip-form" onsubmit="calculateSIP(event)">
+    <label for="sip-amount">Monthly Investment (₹):</label>
+    <input type="number" id="sip-amount" min="1" step="0.01" required placeholder="e.g. 5000">
+    <label for="sip-rate">Expected Return (% p.a.):</label>
+    <input type="number" id="sip-rate" step="0.01" min="1" required placeholder="e.g. 12">
+    <label for="sip-years">Investment Duration (years):</label>
+    <input type="number" id="sip-years" min="1" required placeholder="e.g. 15">
+    <label for="sip-stepup">Annual SIP Increase (%): <span style="font-weight:normal;">(can be decimal, e.g. 1.5)</span></label>
+    <input type="number" id="sip-stepup" min="0" step="0.01" value="0" placeholder="e.g. 2.5">
+    <button class="btn" type="submit" style="margin-top:9px;">Calculate</button>
+  </form>
+  <div id="sip-result" style="margin-top:18px;"></div>
+  <canvas id="sipChart" style="max-width:100%; margin-top:20px;"></canvas>
+</section>
+
+  <section id="top-mutual">
+  <h3>🌟 Top Mutual Fund Recommendations</h3>
+  <input
+    type="text"
+    id="mf-search"
+    placeholder="Search fund or category..."
+    onkeyup="filterFunds()"
+    style="margin-bottom:16px; width: 250px; padding: 7px; border-radius: 7px; border: 1.2px solid #e4eaf2;"
+  />
+  <div id="mf-list" style="display: flex; flex-wrap: wrap; gap: 18px;">
+    <!-- Example Fund Card 1 -->
+    <div class="mf-card" data-type="Multi-cap" data-risk="Moderate">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/ppfas.com" alt="Parag Parikh" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Parag Parikh Flexi Cap</strong>
+        <span class="mf-type-chip">Multi-cap</span>
+        <span class="mf-risk-chip">Moderate</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Long-term, value-focused, global exposure</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️⭐️</div>
+      <a href="https://www.ppfas.com/mutual-fund/schemes/parag-parikh-flexi-cap-fund/" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <!-- Example Fund Card 2 -->
+    <div class="mf-card" data-type="Large-cap" data-risk="Low">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/axismf.com" alt="Axis MF" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Axis Bluechip Fund</strong>
+        <span class="mf-type-chip">Large-cap</span>
+        <span class="mf-risk-chip">Low</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Consistent performer in top large caps</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.axismf.com/" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <!-- Add more fund cards as needed -->
+    <div class="mf-card" data-type="Mid-cap" data-risk="Moderate">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/dspim.com" alt="DSP MF" style="width:34px; height:34px; border-radius:7px;">
+        <strong>DSP Midcap Fund</strong>
+        <span class="mf-type-chip">Mid-cap</span>
+        <span class="mf-risk-chip">Moderate</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Growth-focused, seasoned fund management</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.dspim.com/our-funds/dsp-midcap-fund-direct-plan-growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <div class="mf-card" data-type="Hybrid" data-risk="Low">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/hdfcfund.com" alt="HDFC MF" style="width:34px; height:34px; border-radius:7px;">
+        <strong>HDFC Balanced Advantage</strong>
+        <span class="mf-type-chip">Hybrid</span>
+        <span class="mf-risk-chip">Low</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Balances growth & stability, dynamic asset allocation</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.hdfcfund.com/products/mutual-fund/hdfc-balanced-advantage-fund/regular-plan/growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <div class="mf-card" data-type="Large & Mid-cap" data-risk="Moderate">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/icicipruamc.com" alt="ICICI Prudential" style="width:34px; height:34px; border-radius:7px;">
+        <strong>ICICI Pru Equity & Debt</strong>
+        <span class="mf-type-chip">Large & Mid-cap</span>
+        <span class="mf-risk-chip">Moderate</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Equity/debt mix, good for balanced growth</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.icicipruamc.com/mutual-fund-scheme/icici-prudential-equity-and-debt-fund" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <div class="mf-card" data-type="Large-cap" data-risk="Low">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/miraeassetmf.co.in" alt="Mirae Asset" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Mirae Asset Large Cap</strong>
+        <span class="mf-type-chip">Large-cap</span>
+        <span class="mf-risk-chip">Low</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Strong large cap focus, consistent performance</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.miraeassetmf.co.in/mutual-fund-schemes/equity/mirae-asset-large-cap-fund" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <div class="mf-card" data-type="Small-cap" data-risk="High">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/sbimf.com" alt="SBI MF" style="width:34px; height:34px; border-radius:7px;">
+        <strong>SBI Small Cap Fund</strong>
+        <span class="mf-type-chip">Small-cap</span>
+        <span class="mf-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">High growth potential, suitable for aggressive investors</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://www.sbimf.com/en-us/schemes/equity/sbi-small-cap-fund/regular-plan/growth" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+	
+<!-- ELSS Tax Saver -->
+<div class="mf-card" data-type="ELSS" data-risk="Moderate">
+  <div style="display:flex; align-items:center; gap:9px;">
+    <img src="https://logo.clearbit.com/abslmf.com" alt="Aditya Birla Sun Life" style="width:34px; height:34px; border-radius:7px;">
+    <strong>Aditya Birla Sun Life Tax Relief 96</strong>
+    <span class="mf-type-chip">ELSS</span>
+    <span class="mf-risk-chip">Moderate</span>
+  </div>
+  <div style="font-size:0.95em; margin:6px 0;">Popular tax-saving (80C) equity fund, >20-year track record</div>
+  <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+  <a href="https://mutualfund.adityabirlacapital.com/products/equity-schemes/tax-savings-funds/aditya-birla-sun-life-tax-relief-96" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+</div>
+
+	
+  </div>
+</section>
 
 
+  <section id="tips-mutual">
+    <h3>Investment Tips</h3>
+    <ul>
+      <li>Start investing early to benefit from compounding.</li>
+      <li>Diversify across fund types and market caps.</li>
+      <li>Consider your risk appetite and investment horizon.</li>
+      <li>Review and rebalance your portfolio periodically.</li>
+      <li>Use SIPs for disciplined investing and rupee cost averaging.</li>
+    </ul>
+  </section>
+</main>
 
-   <section id="tips-mutual">
-      <h3>Investment Tips</h3>
-      <ul>
-        <li>Start investing early to benefit from compounding.</li>
-        <li>Diversify across fund types and market caps.</li>
-        <li>Consider your risk appetite and investment horizon.</li>
-        <li>Review and rebalance your portfolio periodically.</li>
-        <li>Use SIPs for disciplined investing and rupee cost averaging.</li>
-      </ul>
-    </section>
-
-  </main>
-
-  <footer>
-    &copy; 2025 Investment Insights. All rights reserved.
-  </footer>
-
-  <script>
-    function filterFunds() {
-      const input = document.getElementById("mf-search");
-      const filter = input.value.toLowerCase();
-      const ul = document.getElementById("mf-list");
-      const li = ul.getElementsByTagName("li");
-
-      for (let i = 0; i < li.length; i++) {
-        const text = li[i].textContent || li[i].innerText;
-  </script>
+<footer>
+  &copy; 2025 Investment Insights. All rights reserved.
+</footer>
 
 <script>
-    function setMode(dark) {
-      if (dark) {
-        document.body.classList.add("dark-mode");
-        localStorage.setItem("theme", "dark");
-        document.getElementById('dm-label').textContent = "☀️ Light Mode";
-        document.getElementById('darkmode-toggle').checked = true;
-      } else {
-        document.body.classList.remove("dark-mode");
-        localStorage.setItem("theme", "light");
-        document.getElementById('dm-label').textContent = "🌙 Dark Mode";
-        document.getElementById('darkmode-toggle').checked = false;
+function calculateSIP(event) {
+  event.preventDefault();
+  const P = parseFloat(document.getElementById('sip-amount').value);
+  const r = parseFloat(document.getElementById('sip-rate').value)/100/12;
+  const years = parseInt(document.getElementById('sip-years').value);
+  const stepup = parseFloat(document.getElementById('sip-stepup').value || 0);
+
+  let totalInvested = 0;
+  let corpus = 0;
+  let yearlyData = [], labels = [];
+
+  let currP = P;
+  for (let year = 1; year <= years; year++) {
+    for (let m = 1; m <= 12; m++) {
+      corpus = (corpus + currP) * (1 + r);
+      totalInvested += currP;
+    }
+    yearlyData.push(corpus);
+    labels.push('Year ' + year);
+    currP *= (1 + stepup/100); // works for floating, e.g., 1.5% = 1.015
+  }
+
+  let gain = corpus - totalInvested;
+  let cagr = (Math.pow(corpus/totalInvested, 1/years)-1)*100;
+
+  document.getElementById('sip-result').innerHTML = `
+    <strong>Total Invested:</strong> ₹${Math.round(totalInvested).toLocaleString('en-IN')}<br>
+    <strong>Final Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
+    <strong>Total Gain:</strong> ₹${Math.round(gain).toLocaleString('en-IN')}<br>
+    <strong>CAGR:</strong> ${cagr.toFixed(2)}%
+    <br>
+    <details style="margin-top:10px;"><summary>See yearly projection</summary>
+      <table style="width:100%;margin-top:7px;">
+        <tr><th>Year</th><th>Corpus (₹)</th></tr>
+        ${yearlyData.map((amt, i) => `<tr><td>${i+1}</td><td>₹${Math.round(amt).toLocaleString('en-IN')}</td></tr>`).join('')}
+      </table>
+    </details>
+  `;
+
+  // Chart
+  if (window.sipChartInstance) window.sipChartInstance.destroy();
+  const ctx = document.getElementById('sipChart').getContext('2d');
+  window.sipChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: { labels: labels, datasets: [{
+      label: "Corpus Value (₹)",
+      data: yearlyData,
+      borderWidth: 2.5,
+      borderColor: "#1e7bbf",
+      backgroundColor: "rgba(30,123,191,0.11)",
+      tension: 0.18,
+      pointRadius: 2,
+      fill: true,
+    }]},
+    options: {
+      plugins: {
+        legend: { display: true, position: 'bottom' }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: v => '₹'+(v/100000>=1?(v/100000).toFixed(1)+'L':v.toLocaleString('en-IN'))
+          }
+        }
       }
     }
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('darkmode-toggle').addEventListener("change", function() {
-        setMode(this.checked);
-      });
-      const userPref = localStorage.getItem("theme");
-      const darkPref = userPref === "dark" ||
-        (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      setMode(darkPref);
-    });
-  </script>
+  });
+
+  // Save last calculator
+  localStorage.setItem("lastCalculator", JSON.stringify({
+    name: "SIP Calculator",
+    date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }),
+    link: "mutualfunds.html"
+  }));
+}
+</script>
+
+<script>
+function setMode(dark) {
+  if (dark) {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+    document.getElementById('dm-label').textContent = "☀️ Light Mode";
+    document.getElementById('darkmode-toggle').checked = true;
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+    document.getElementById('dm-label').textContent = "🌙 Dark Mode";
+    document.getElementById('darkmode-toggle').checked = false;
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('darkmode-toggle').addEventListener("change", function() {
+    setMode(this.checked);
+  });
+  const userPref = localStorage.getItem("theme");
+  const darkPref = userPref === "dark" ||
+    (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  setMode(darkPref);
+});
+</script>
 
 <script>
 document.querySelectorAll('.floating-toc a').forEach(link => {
@@ -614,6 +662,36 @@ window.addEventListener('scroll', () => {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove all 'active' classes first
+  document.querySelectorAll('nav a').forEach(function(link) {
+    link.classList.remove('active');
+    // Compare only the filename part to handle different hosting/path situations
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+
+<script>
+function filterFunds() {
+  const input = document.getElementById("mf-search");
+  const filter = input.value.toLowerCase();
+  const cards = document.querySelectorAll("#mf-list .mf-card");
+  cards.forEach(card => {
+    if (card.textContent.toLowerCase().includes(filter)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+</script>
+
+
+<!-- Don't forget your mf-card, mf-type-chip, mf-risk-chip styles here, as in your original code! -->
 
 </body>
 </html>
