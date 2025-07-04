@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights - Stocks</title>
   <link rel="stylesheet" href="style.css" />
-  </head>
+  
+</head>
 <body>
-
-  <!-- Floating Table of Contents -->
-  <nav class="floating-toc" id="floating-toc">
-    <div class="toc-title">On this page</div>
-    <ul>
-      <li><a href="#about-stocks"><i>About Stocks</i></a></li>
-      <li><a href="#benefits-stocks"><i>Benefits</i></a></li>
-      <li><a href="#risks-stocks"><i>Risks</i></a></li>
-      <li><a href="#invest-stocks"><i>How to Invest</i></a></li>
-      <li><a href="#top-stocks"><i>Top Picks</i></a></li>
-      <li><a href="#tips-stocks"><i>Investment Tips</i></a></li>
-    </ul>
-  </nav>
+<!-- Floating Table of Contents OUTSIDE HEADER -->
+  	<nav class="floating-toc" id="floating-toc">
+   <div class="toc-title" style="text-decoration: underline;">On this page</div>
+   <ul>
+    <li><a href="#about-stocks" style="font-style: italic;">About Stocks</a></li>
+    <li><a href="#benefits-stocks" style="font-style: italic;">Benefits</a></li>
+    <li><a href="#risks-stocks" style="font-style: italic;">Risks</a></li>
+    <li><a href="#invest-stocks" style="font-style: italic;">How to Invest</a></li>
+    <li><a href="#top-stocks" style="font-style: italic;">Top Picks</a></li>
+    <li><a href="#tips-stocks" style="font-style: italic;">Investment Tips</a></li>
+   </ul>
+   </nav>
 
   <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
     <div style="display: flex; align-items: center;">
@@ -42,9 +42,10 @@
       <a href="investmentgoal.html">🎯 Investment Goal</a>
       <a href="contact.html">✉️ Contact</a>
     </nav>
-  </header>
+	</header>
 
   <main>
+       
     <section id="about-stocks">
       <h2>About Stocks</h2>
       <p>
@@ -52,7 +53,8 @@
         can benefit from the company's profits through dividends and price appreciation.
       </p>
     </section>
-    <section id="benefits-stocks">
+
+   <section id="benefits-stocks">
       <h3>Benefits of Investing in Stocks</h3>
       <ul>
         <li>Potential for high returns over the long term</li>
@@ -61,6 +63,7 @@
         <li>Ownership in businesses you believe in</li>
       </ul>
     </section>
+
     <section id="risks-stocks">
       <h3>Risks of Investing in Stocks</h3>
       <ul>
@@ -69,6 +72,7 @@
         <li>Economic downturns can impact overall market performance</li>
       </ul>
     </section>
+
     <section id="invest-stocks">
       <h3>How to Invest in Stocks</h3>
       <p>
@@ -81,20 +85,170 @@
         (Systematic Investment Plans) or set alerts to manage investments better.
       </p>
     </section>
-    <section id="top-stocks">
-      <h3>Top Stock Recommendations</h3>
-      <input
-        type="text"
-        id="stock-search"
-        placeholder="Search stocks or sectors..."
-        onkeyup="filterStocks()"
-        style="margin-bottom:16px;"
-      />
-      <div id="stock-list" style="display: flex; flex-wrap: wrap; gap: 16px;">
-        <!-- [Stock cards go here, unchanged] -->
-        <!-- ... (same as before) ... -->
+
+  <section id="top-stocks">
+  <h3>Top Stock Recommendations</h3>
+  <input
+    type="text"
+    id="stock-search"
+    placeholder="Search stocks or sectors..."
+    onkeyup="filterStocks()"
+    style="margin-bottom:16px;"
+  />
+  <div id="stock-list" style="display: flex; flex-wrap: wrap; gap: 16px;">
+    <!-- IT -->
+    <div class="stock-card" data-sector="IT">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/tcs.com" alt="TCS" style="width:34px; height:34px; border-radius:7px;">
+        <strong>TCS</strong>
+        <span class="sector-chip">IT</span>
       </div>
-    </section>
+      <div style="font-size:0.95em; margin:6px 0;">India’s IT giant, global leader in digital transformation</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/TCS.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <div class="stock-card" data-sector="IT">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/infosys.com" alt="Infosys" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Infosys</strong>
+        <span class="sector-chip">IT</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Leading IT services firm, strong global client base</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/INFY.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+
+    <!-- Banking -->
+    <div class="stock-card" data-sector="Banking">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/hdfcbank.com" alt="HDFC Bank" style="width:34px; height:34px; border-radius:7px;">
+        <strong>HDFC Bank</strong>
+        <span class="sector-chip">Banking</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">India’s largest private sector bank, stable returns</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️⭐️</div>
+      <a href="https://finance.yahoo.com/quote/HDFCBANK.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <div class="stock-card" data-sector="Banking">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/icicibank.com" alt="ICICI Bank" style="width:34px; height:34px; border-radius:7px;">
+        <strong>ICICI Bank</strong>
+        <span class="sector-chip">Banking</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Strong retail presence, tech-driven banking leader</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/ICICIBANK.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+
+    <!-- FMCG -->
+    <div class="stock-card" data-sector="FMCG">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/hul.co.in" alt="HUL" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Hindustan Unilever</strong>
+        <span class="sector-chip">FMCG</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">India’s leading FMCG company, trusted brands portfolio</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/HINDUNILVR.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <div class="stock-card" data-sector="FMCG">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/asianpaints.com" alt="Asian Paints" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Asian Paints</strong>
+        <span class="sector-chip">FMCG</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Market leader in decorative paints and coatings</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/ASIANPAINT.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+
+    <!-- Auto -->
+    <div class="stock-card" data-sector="Auto">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/marutisuzuki.com" alt="Maruti Suzuki" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Maruti Suzuki</strong>
+        <span class="sector-chip">Auto</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">India’s top automobile manufacturer, strong sales</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/MARUTI.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+    <div class="stock-card" data-sector="Auto">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/tatamotors.com" alt="Tata Motors" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Tata Motors</strong>
+        <span class="sector-chip">Auto</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Leading auto player, strong EV and CV portfolio</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/TATAMOTORS.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+
+    <!-- Infra/Engineering -->
+    <div class="stock-card" data-sector="Infra">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/larsentoubro.com" alt="L&T" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Larsen & Toubro</strong>
+        <span class="sector-chip">Infra</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Engineering and infra conglomerate, diversified order book</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/LT.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+
+    <!-- Telecom -->
+    <div class="stock-card" data-sector="Telecom">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/airtel.com" alt="Bharti Airtel" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Bharti Airtel</strong>
+        <span class="sector-chip">Telecom</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Top telecom operator, growing data market share</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️☆</div>
+      <a href="https://finance.yahoo.com/quote/BHARTIARTL.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+
+    <!-- Conglomerate -->
+    <div class="stock-card" data-sector="Conglomerate">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="https://logo.clearbit.com/ril.com" alt="Reliance Industries" style="width:34px; height:34px; border-radius:7px;">
+        <strong>Reliance Industries</strong>
+        <span class="sector-chip">Conglomerate</span>
+      </div>
+      <div style="font-size:0.95em; margin:6px 0;">Diversified energy, retail, digital, telecom businesses</div>
+      <div style="font-size:0.96em; color:#4caf50;">⭐️⭐️⭐️⭐️⭐️</div>
+      <a href="https://finance.yahoo.com/quote/RELIANCE.NS" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.stock-card {
+  background: #f8faff;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px #a4b1cf18;
+  border: 1.3px solid #e4eaf2;
+  padding: 15px 13px 14px 13px;
+  min-width: 230px;
+  max-width: 245px;
+  flex: 1 0 200px;
+  transition: box-shadow 0.15s, border-color 0.16s;
+}
+.stock-card:hover {
+  box-shadow: 0 2px 14px #3070c41e;
+  border-color: #96b6f6;
+}
+.sector-chip {
+  background: #eaf2ff;
+  color: #2766be;
+  border-radius: 5px;
+  padding: 1px 7px;
+  font-size: 0.85em;
+  margin-left: 7px;
+}
+</style>
+
+
     <section id="tips-stocks">
       <h3>Investment Tips</h3>
       <ul>
@@ -111,35 +265,133 @@
     &copy; 2025 Investment Insights. All rights reserved.
   </footer>
 
-  <!-- Dark Mode Toggle -->
-  <script>
-    function setMode(dark) {
-      if (dark) {
-        document.body.classList.add("dark-mode");
-        localStorage.setItem("theme", "dark");
-        document.getElementById('dm-label').textContent = "☀️ Light Mode";
-        document.getElementById('darkmode-toggle').checked = true;
-      } else {
-        document.body.classList.remove("dark-mode");
-        localStorage.setItem("theme", "light");
-        document.getElementById('dm-label').textContent = "🌙 Dark Mode";
-        document.getElementById('darkmode-toggle').checked = false;
-      }
-    }
-    document.getElementById('darkmode-toggle').addEventListener("change", function() {
-      setMode(this.checked);
-    });
-    // Auto detect or load user preference
-    (function() {
-      const userPref = localStorage.getItem("theme");
-      const darkPref = userPref === "dark" ||
-        (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      setMode(darkPref);
-    })();
-  </script>
+  
+<script>
+function setMode(dark) {
+  if (dark) {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+    document.getElementById('dm-label').textContent = "☀️ Light Mode";
+    document.getElementById('darkmode-toggle').checked = true;
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+    document.getElementById('dm-label').textContent = "🌙 Dark Mode";
+    document.getElementById('darkmode-toggle').checked = false;
+  }
+}
+document.getElementById('darkmode-toggle').addEventListener("change", function() {
+  setMode(this.checked);
+});
+// Auto detect or load user preference
+(function() {
+  const userPref = localStorage.getItem("theme");
+  const darkPref = userPref === "dark" ||
+    (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  setMode(darkPref);
+})();
+</script>
 
-  <!-- [If you have a filterStocks function, keep it here] -->
- 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('main-nav');
+  var hamburger = document.getElementById('hamburger-btn');
+  var closeNav = document.getElementById('close-nav-btn');
+
+  hamburger.onclick = function() {
+    nav.classList.add('open');
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+  };
+  closeNav.onclick = function() {
+    nav.classList.remove('open');
+    document.body.style.overflow = "";
+  };
+  // Optional: Close nav when clicking a link (for SPA-like feel)
+  nav.querySelectorAll('a').forEach(function(link) {
+    link.onclick = function() {
+      nav.classList.remove('open');
+      document.body.style.overflow = "";
+    };
+  });
+  // Optional: Close nav on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+      nav.classList.remove('open');
+      document.body.style.overflow = "";
+    }
+  });
+});
+</script>
+
+
+
+<script>
+async function fetchMarketData() {
+  const url = "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/^NSEI,^BSESN";
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'de33a659f0msh2216102c8047599p189763jsnd638524cdc75',
+      'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com',
+	  
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    const nifty = data.find(x => x.symbol === '^NSEI');
+    const sensex = data.find(x => x.symbol === '^BSESN');
+
+    document.getElementById('nifty').textContent =
+      nifty ? ${nifty.regularMarketPrice} (${nifty.regularMarketChangePercent.toFixed(2)}%) : 'Unavailable';
+
+    document.getElementById('sensex').textContent =
+      sensex ? ${sensex.regularMarketPrice} (${sensex.regularMarketChangePercent.toFixed(2)}%) : 'Unavailable';
+  } catch (err) {
+    console.error(err);
+    document.getElementById('nifty').textContent = "Error";
+    document.getElementById('sensex').textContent = "Error";
+  }
+}
+fetchMarketData();
+setInterval(fetchMarketData, 60000);
+</script>
+
+<script>
+document.querySelectorAll('.floating-toc a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({top: target.offsetTop - 65, behavior: 'smooth'});
+    }
+  });
+});
+window.addEventListener('scroll', () => {
+  const sections = [
+    'about-stocks',
+    'benefits-stocks',
+    'risks-stocks',
+    'invest-stocks',
+    'top-stocks',
+    'tips-stocks'
+  ];
+  let current = '';
+  for (const id of sections) {
+    const sec = document.getElementById(id);
+    if (sec && window.scrollY + 120 >= sec.offsetTop) current = id;
+  }
+  document.querySelectorAll('.floating-toc a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+
 
 </body>
 </html>
+
+
