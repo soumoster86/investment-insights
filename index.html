@@ -8,33 +8,252 @@
   <title>Investment Insights - Home</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(120deg, #e9f0fd 0%, #f4f6f8 100%);
+      color: #222;
+      min-height: 100vh;
+      transition: background 0.4s, color 0.3s;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    header img {
+      height: 50px;
+      margin-right: 15px;
+      border-radius: 10px;
+      background: #fff;
+      padding: 3px;
+      box-shadow: 0 2px 6px #0001;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 1.5em;
+    }
+    #dm-label {
+      color: white;
+      font-size: 1em;
+    }
+    nav {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: none;
+      color: inherit;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 14px;
+      font-weight: 500;
+      font-size: 1.08em;
+      padding: 7px 10px;
+      border-radius: 7px;
+      transition: background .22s;
+    }
+    nav a.active,
+    nav a:hover {
+      background: #012b54;
+      text-decoration: underline;
+    }
+    main {
+      max-width: 900px;
+      margin: 36px auto 24px auto;
+      padding: 0 15px 30px 15px;
+      background: #fff;
+      box-shadow: 0 2px 12px rgb(0 64 128 / 8%);
+      border-radius: 18px;
+      min-height: 75vh;
+      animation: fadeIn 0.8s;
+      transition: background 0.4s, color 0.3s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    section {
+      margin-bottom: 34px;
+      padding: 20px 22px;
+      border: 1.5px solid #e1e6f2;
+      border-radius: 12px;
+      background: #f9faff;
+      box-shadow: 0 1px 10px #00408009;
+      transition: box-shadow 0.18s, border-color 0.2s, background 0.4s, color 0.3s;
+    }
+    section:hover {
+      box-shadow: 0 2px 22px #00408017;
+      border-color: #00408055;
+    }
+    h2 {
+      border-bottom: 2px solid #004080;
+      padding-bottom: 8px;
+      color: #004080;
+      margin-top: 0;
+      font-size: 1.5em;
+    }
+    h3 {
+      color: #004080;
+      font-size: 1.17em;
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+
+    /* Card dashboard styles */
     .dashboard-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 20px;
-      margin-top: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin: 32px 0 40px 0;
+      padding: 0 4px;
     }
     .card {
       background: #f9fbff;
       border: 1.4px solid #e1e9f6;
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      border-radius: 14px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      padding: 22px 18px 18px 18px;
+      transition: box-shadow 0.17s, border-color 0.18s, background 0.21s;
+      display: flex;
+      flex-direction: column;
+      min-height: 210px;
+      justify-content: space-between;
     }
     .card h3 {
       margin-top: 0;
-      color: #004080;
-      font-size: 1.1em;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+      color: #204a80;
+      font-size: 1.17em;
+      font-weight: 600;
     }
-    .card p, .card li {
-      font-size: 0.97em;
-      margin: 6px 0;
+    .card .btn {
+      margin-top: 16px;
+      width: fit-content;
     }
-    .highlight {
-      color: #004080;
-      font-weight: bold;
+    .card ul {
+      margin: 0 0 5px 16px;
+      padding: 0;
+      font-size: 1em;
     }
+    .card p, .card ul li {
+      margin: 0 0 10px 0;
+      font-size: 1em;
+    }
+    .card .highlight {
+      color: #236ad3;
+      font-weight: 500;
+    }
+    .card:hover {
+      box-shadow: 0 2px 18px #3070c422, 0 2px 6px #3070c415;
+      border-color: #96b6f6;
+      background: #f1f6ff;
+    }
+    /* Learn more & button style */
+    .btn, .learn-more {
+      background: #004080;
+      color: white !important;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 1.02em;
+      font-weight: 500;
+      box-shadow: 0 1px 4px #00408012;
+      text-decoration: none;
+      margin-top: 7px;
+      display: inline-block;
+      transition: background .22s, color .19s, border .18s, transform 0.17s;
+    }
+    .btn:hover, .learn-more:hover {
+      background: #002d59;
+      color: #e0eefa !important;
+      transform: translateY(-2px) scale(1.04);
+    }
+    /* Responsive dashboard for mobile */
+    @media (max-width: 750px) {
+      .dashboard-section {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin: 26px 0 22px 0;
+        padding: 0 0px;
+      }
+      .card {
+        min-width: 0;
+        max-width: unset;
+        padding: 18px 10px 14px 14px;
+      }
+    }
+    /* Dark mode: apply to everything */
+    body.dark-mode {
+      background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
+      color: #e7ecfa !important;
+    }
+    body.dark-mode header,
+    body.dark-mode nav,
+    body.dark-mode footer {
+      background: #12203a !important;
+      color: #e7ecfa !important;
+    }
+    body.dark-mode main,
+    body.dark-mode section {
+      background: #191c23 !important;
+      color: #e7ecfa !important;
+      box-shadow: 0 2px 12px #0004;
+      border-color: #2d3752 !important;
+    }
+    body.dark-mode section {
+      background: #171d2a !important;
+    }
+    body.dark-mode h2, 
+    body.dark-mode h3 {
+      color: #8abaff !important;
+      border-color: #273a5a !important;
+    }
+    body.dark-mode .dashboard-section .card {
+      background: #191c23 !important;
+      border-color: #2d3752 !important;
+      color: #e7ecfa !important;
+      box-shadow: 0 2px 14px #0007;
+    }
+    body.dark-mode .dashboard-section .card:hover {
+      background: #1e2536 !important;
+      border-color: #415a89 !important;
+    }
+    body.dark-mode .dashboard-section .card h3,
+    body.dark-mode .dashboard-section .card .highlight {
+      color: #8abaff !important;
+    }
+    body.dark-mode .dashboard-section .card .btn,
+    body.dark-mode .learn-more {
+      background: #2b4e7c !important;
+      color: #e7ecfa !important;
+    }
+    body.dark-mode .btn:hover, 
+    body.dark-mode .learn-more:hover {
+      background: #254068 !important;
+      color: #e7ecfa !important;
+    }
+    body.dark-mode a {
+      color: #8abaff !important;
+    }
+    body.dark-mode nav a {
+      color: #8abaff !important;
+    }
+    body.dark-mode nav a.active,
+    body.dark-mode nav a:hover {
+      background: #274272 !important;
+      color: #fff !important;
+    }
+    body.dark-mode #dm-label { color: #fff !important; }
   </style>
 </head>
 <body>
@@ -109,11 +328,76 @@
       </ul>
     </section>
 
-    <section id="stocks"><h2>Stocks</h2><p>Stocks represent ownership...</p><a class="learn-more" href="stocks.html">Learn more &raquo;</a></section>
-    <section id="mutualfunds"><h2>Mutual Funds</h2><p>Mutual funds pool money...</p><a class="learn-more" href="mutualfunds.html">Learn more &raquo;</a></section>
-    <section id="fixeddeposits"><h2>Fixed Deposits (FDs)</h2><p>Fixed Deposits are safe...</p><a class="learn-more" href="fixeddeposit.html">Learn more &raquo;</a></section>
-    <section id="cryptocurrencies"><h2>Cryptocurrencies</h2><p>Cryptocurrencies are digital or virtual currencies...</p><a class="learn-more" href="cryptocurrencies.html">Learn more &raquo;</a></section>
-    <section id="bonds"><h2>Bonds</h2><p>Bonds are fixed-income instruments...</p><a class="learn-more" href="bonds.html">Learn more &raquo;</a></section>
+    <section id="stocks">
+  <h2>Stocks</h2>
+  <p>
+    <strong>Stocks</strong> (also known as equities or shares) represent partial ownership in a company. When you purchase stocks, you become a shareholder and can benefit from the company's profits in the form of dividends and capital appreciation. 
+  </p>
+  <p>
+    Investing in stocks offers the potential for high returns over the long term, making them a popular choice for wealth creation. However, stock prices can fluctuate due to market volatility, company performance, and broader economic factors, so they carry higher risks compared to traditional savings instruments.
+  </p>
+  <p>
+    Stocks are traded on exchanges like the NSE and BSE in India. With the rise of digital platforms, opening a Demat and trading account has become quick and convenient. To succeed in the stock market, it is important to diversify your portfolio, stay informed about market news, and invest for the long term rather than chase short-term gains.
+  </p>
+  <a class="learn-more" href="stocks.html">Learn more &raquo;</a>
+</section>
+
+    <section id="mutualfunds">
+  <h2>Mutual Funds</h2>
+  <p>
+    <strong>Mutual funds</strong> are professionally managed investment vehicles that pool money from many investors to buy a diversified basket of stocks, bonds, or other securities. Each investor owns units in the fund, representing a proportionate share of its holdings.
+  </p>
+  <p>
+    Mutual funds offer instant diversification, expert fund management, and convenience—making them ideal for those who want exposure to the market without tracking individual stocks. There are various types of funds, including equity, debt, hybrid, and sector funds, catering to different risk profiles and goals.
+  </p>
+  <p>
+    You can invest through Systematic Investment Plans (SIPs) for disciplined, regular investing. Mutual funds are regulated by SEBI, ensuring transparency and investor protection.
+  </p>
+  <a class="learn-more" href="mutualfunds.html">Learn more &raquo;</a>
+</section>
+
+    <section id="fixeddeposits">
+  <h2>Fixed Deposits (FDs)</h2>
+  <p>
+    <strong>Fixed Deposits (FDs)</strong> are one of the safest and most popular savings instruments offered by banks and NBFCs in India. You deposit a lump sum for a fixed period at a predetermined interest rate, and receive your principal plus interest on maturity.
+  </p>
+  <p>
+    FDs provide guaranteed returns, capital protection, and flexible tenures ranging from 7 days to 10 years. They are ideal for conservative investors seeking stability and predictable income, and also offer tax-saving options under Section 80C.
+  </p>
+  <p>
+    While FDs are low-risk, the returns are generally lower than equities or mutual funds and may not always outpace inflation. It’s wise to compare FD rates across banks before investing.
+  </p>
+  <a class="learn-more" href="fixeddeposit.html">Learn more &raquo;</a>
+</section>
+
+    <section id="cryptocurrencies">
+  <h2>Cryptocurrencies</h2>
+  <p>
+    <strong>Cryptocurrencies</strong> are digital or virtual currencies that use cryptography for security and operate on decentralized blockchain technology. Bitcoin, Ethereum, and hundreds of others allow for peer-to-peer transactions without the need for banks or intermediaries.
+  </p>
+  <p>
+    Investing in crypto offers the potential for high returns and global accessibility, but comes with significant price volatility and regulatory uncertainty. Crypto assets can be traded 24/7 on specialized exchanges and are stored in digital wallets.
+  </p>
+  <p>
+    Cryptocurrencies are suitable for tech-savvy investors with a high risk appetite. It’s crucial to do thorough research, start small, and follow best security practices when exploring this new-age asset class.
+  </p>
+  <a class="learn-more" href="cryptocurrencies.html">Learn more &raquo;</a>
+</section>
+
+    <section id="bonds">
+  <h2>Bonds</h2>
+  <p>
+    <strong>Bonds</strong> are fixed-income instruments where you lend money to governments, corporations, or other entities in exchange for regular interest payments and the return of principal at maturity. Bonds are an essential part of a balanced portfolio, offering stability and predictable income.
+  </p>
+  <p>
+    There are various types of bonds: government bonds (like RBI and State loans), corporate bonds, tax-free bonds, and more. Bonds are generally less risky than stocks and provide diversification, especially during market downturns.
+  </p>
+  <p>
+    Bonds suit investors seeking steady returns with lower risk, retirees looking for regular income, and anyone wanting to diversify beyond equities. However, bond prices can fluctuate due to interest rate changes, so it’s important to assess the issuer’s credit quality and yield.
+  </p>
+  <a class="learn-more" href="bonds.html">Learn more &raquo;</a>
+</section>
+
   </main>
 
   <footer>
@@ -121,7 +405,7 @@
   </footer>
 
   <script>
-    function setMode(dark) {
+   function setMode(dark) {
       if (dark) {
         document.body.classList.add("dark-mode");
         localStorage.setItem("theme", "dark");
@@ -134,21 +418,15 @@
         document.getElementById('darkmode-toggle').checked = false;
       }
     }
-    document.getElementById('darkmode-toggle').addEventListener("change", function() {
-      setMode(this.checked);
-    });
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('darkmode-toggle').addEventListener("change", function() {
+        setMode(this.checked);
+      });
       const userPref = localStorage.getItem("theme");
-      const darkPref = userPref === "dark" || (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const darkPref = userPref === "dark" ||
+        (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
       setMode(darkPref);
-
-      // Load last calculator info
-      const last = JSON.parse(localStorage.getItem("lastCalculator"));
-      if (last && last.name && last.url && last.date) {
-        document.getElementById("last-used-info").innerHTML = `You last used the <strong>${last.name}</strong> on <em>${last.date}</em>.`;
-        document.getElementById("last-used-link").href = last.url;
-      }
-    })();
+    });
 
     async function fetchMarketData() {
       const url = "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/^NSEI,^BSESN";
