@@ -376,7 +376,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .floating-toc {
   position: fixed;
-  top: 90px;
+  top: 140px;
   right: 30px;
   width: 200px;
   background: #fff;
