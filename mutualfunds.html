@@ -292,6 +292,43 @@
   font-size: 0.85em;
   margin-left: 7px;
 }
+
+.swp-tab-btn {
+  flex: 1;
+  background: #f4f7fa;
+  border: none;
+  color: #19427a !important;     /* <-- Deep blue, force it for inactive */
+  padding: 13px 0;
+  border-bottom: 2.5px solid #d7e4f8;
+  font-weight: 500;
+  font-size: 1.07em;
+  border-radius: 8px 8px 0 0;
+  transition: background .19s, border-color .17s, color .19s;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.swp-tab-btn.active {
+  background: #fff;
+  border-bottom: 3.5px solid #297afc;
+  color: #004080 !important;   /* Deep blue for active tab, forced */
+  font-weight: 700;
+  z-index: 2;
+}
+
+.swp-tab-btn:not(.active):hover {
+  background: #e9f0fd;
+  color: #004080 !important;   /* On hover, inactive gets even bolder blue */
+}
+
+.swp-tab-content {
+  padding: 18px 2px 4px 0;
+  border-top: 0;
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+  margin-top: -3px;
+}
+
 	
 	
   </style>
@@ -307,7 +344,8 @@
     <li><a href="#benefits-mutual" style="font-style: italic;">Benefits</a></li>
     <li><a href="#risk-mutual" style="font-style: italic;">Risks</a></li>
     <li><a href="#invest-mutual" style="font-style: italic;">Invest</a></li>
-    <li><a href="#sipcalc-mutual" style="font-style: italic;">Calculator</a></li>
+    <li><a href="#sipcalc-mutual" style="font-style: italic;">SIP Calculator</a></li>
+	<li><a href="#swpcalc-mutual" style="font-style: italic;">SWP Calculator</a></li>
     <li><a href="#top-mutual" style="font-style: italic;">Top Picks</a></li>
     <li><a href="#tips-mutual" style="font-style: italic;">Investment Tips</a></li>
   </ul>
@@ -400,6 +438,45 @@
   <div id="sip-result" style="margin-top:18px;"></div>
   <canvas id="sipChart" style="max-width:100%; margin-top:20px;"></canvas>
 </section>
+
+
+   <section id="swpcalc-mutual" style="margin-top:34px;">
+  <h3>💸 Systematic Withdrawal Plan (SWP) Calculator</h3>
+  <div id="swp-tabs" style="display: flex; gap: 0;">
+    <button class="swp-tab-btn active" id="swp-tab1-btn" type="button" onclick="showSWPTab(1)">Regular SWP Projection</button>
+    <button class="swp-tab-btn" id="swp-tab2-btn" type="button" onclick="showSWPTab(2)">Max Withdrawal (Corpus Exhausted)</button>
+  </div>
+  <div id="swp-tab1" class="swp-tab-content" style="display:block;">
+    <form id="swp-form" onsubmit="calculateSWP(event)">
+      <label for="swp-corpus">Initial Corpus (₹):</label>
+      <input type="number" id="swp-corpus" min="1" step="0.01" required placeholder="e.g. 10,00,000">
+      <label for="swp-rate">Expected Return (% p.a.):</label>
+      <input type="number" id="swp-rate" step="0.01" min="0" required placeholder="e.g. 10">
+      <label for="swp-withdraw">Monthly Withdrawal (₹):</label>
+      <input type="number" id="swp-withdraw" min="1" step="0.01" required placeholder="e.g. 10,000">
+      <label for="swp-years">Projection Period (years):</label>
+      <input type="number" id="swp-years" min="1" max="50" placeholder="e.g. 20" required>
+      <button class="btn" type="submit" style="margin-top:9px;">Calculate</button>
+    </form>
+	<div id="swp-result" style="margin-top:18px;"></div>
+    <canvas id="swpChart" style="max-width:100%; margin-top:20px;"></canvas>
+  </div>
+  <div id="swp-tab2" class="swp-tab-content" style="display:none;">
+    <form id="swp-max-form" onsubmit="calculateMaxSWP(event)">
+      <label for="swp-max-corpus">Initial Corpus (₹):</label>
+      <input type="number" id="swp-max-corpus" min="1" step="0.01" required placeholder="e.g. 10,00,000">
+      <label for="swp-max-rate">Expected Return (% p.a.):</label>
+      <input type="number" id="swp-max-rate" step="0.01" min="0" required placeholder="e.g. 10">
+      <label for="swp-max-years">Withdrawal Duration (years):</label>
+      <input type="number" id="swp-max-years" min="1" max="50" placeholder="e.g. 20" required>
+      <button class="btn" type="submit" style="margin-top:9px;">Calculate Max Withdrawal</button>
+    </form>
+	<div id="swp-max-result" style="margin-top:18px;"></div>
+    <canvas id="swpMaxChart" style="max-width:100%; margin-top:20px;"></canvas>
+  </div>
+</section>
+
+
 
   <section id="top-mutual">
   <h3>🌟 Top Mutual Fund Recommendations</h3>
@@ -610,6 +687,177 @@ function calculateSIP(event) {
 }
 </script>
 
+
+<script>
+function showSWPTab(tab) {
+  document.getElementById('swp-tab1').style.display = tab === 1 ? 'block' : 'none';
+  document.getElementById('swp-tab2').style.display = tab === 2 ? 'block' : 'none';
+  document.getElementById('swp-tab1-btn').classList.toggle('active', tab === 1);
+  document.getElementById('swp-tab2-btn').classList.toggle('active', tab === 2);
+}
+
+// Regular SWP Projection
+function calculateSWP(event) {
+  event.preventDefault();
+  const corpus = parseFloat(document.getElementById('swp-corpus').value);
+  const rate = parseFloat(document.getElementById('swp-rate').value)/100/12; // monthly rate
+  const withdraw = parseFloat(document.getElementById('swp-withdraw').value);
+  const years = parseInt(document.getElementById('swp-years').value);
+  if (corpus <= 0 || rate < 0 || withdraw <= 0 || years <= 0) {
+    alert('Please enter valid inputs.');
+    return;
+  }
+  let balance = corpus, exhaustedAt = null, months = years * 12;
+  const data = [], labels = [];
+  for (let i = 1; i <= months; i++) {
+    balance = balance * (1 + rate); // Interest applied first, then withdrawal
+    balance -= withdraw;
+    if (balance <= 0 && !exhaustedAt) exhaustedAt = i;
+    data.push(balance > 0 ? balance : 0);
+    if (i % 12 === 0) labels.push('Year ' + (i / 12));
+    else labels.push('');
+    if (balance <= 0) break;
+  }
+  const endBalance = Math.max(0, data[data.length - 1]);
+  const exhaustedText = exhaustedAt ? `<br><strong>Corpus will be exhausted in:</strong> <span style="color:#c12;">${Math.floor(exhaustedAt/12)} yr ${exhaustedAt%12} mo</span>` : '<br><strong>Corpus sustains for the projection period.</strong>';
+
+  document.getElementById('swp-result').innerHTML = `
+    <strong>Initial Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
+    <strong>Monthly Withdrawal:</strong> ₹${Math.round(withdraw).toLocaleString('en-IN')}<br>
+    <strong>Expected Annual Return:</strong> ${document.getElementById('swp-rate').value}%<br>
+    <strong>Projection Period:</strong> ${years} years<br>
+    <strong>Corpus at End:</strong> ₹${Math.round(endBalance).toLocaleString('en-IN')}
+    ${exhaustedText}
+    <br>
+    <details style="margin-top:10px;"><summary>See year-wise balance</summary>
+      <table style="width:100%;margin-top:7px;">
+        <tr><th>Year</th><th>Corpus at Year End (₹)</th></tr>
+        ${
+          Array.from({length: Math.ceil(data.length/12)}, (_, i) => {
+            const val = data[Math.min((i+1)*12-1, data.length-1)];
+            return `<tr><td>${i+1}</td><td>₹${Math.round(val).toLocaleString('en-IN')}</td></tr>`;
+          }).join('')
+        }
+      </table>
+    </details>
+  `;
+
+  // Chart
+  if (window.swpChartInstance) window.swpChartInstance.destroy?.();
+  const ctx = document.getElementById('swpChart').getContext('2d');
+  window.swpChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels.filter((_,i) => i%12===0 || i===data.length-1),
+      datasets: [{
+        label: "Corpus Value (₹)",
+        data: data.filter((_,i) => i%12===0 || i===data.length-1),
+        borderWidth: 2.5,
+        borderColor: "#8f3ab6",
+        backgroundColor: "rgba(143,58,182,0.09)",
+        tension: 0.17,
+        pointRadius: 2,
+        fill: true,
+      }]
+    },
+    options: {
+      plugins: { legend: { display: true, position: 'bottom' } },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { callback: v => '₹'+(v/100000>=1?(v/100000).toFixed(1)+'L':v.toLocaleString('en-IN')) }
+        }
+      }
+    }
+  });
+  
+
+}
+
+// Max Withdrawal for Exact N Years
+function calculateMaxSWP(event) {
+  event.preventDefault();
+  const corpus = parseFloat(document.getElementById('swp-max-corpus').value);
+  const rate = parseFloat(document.getElementById('swp-max-rate').value) / 100 / 12;
+  const years = parseInt(document.getElementById('swp-max-years').value);
+  const months = years * 12;
+  if (corpus <= 0 || rate < 0 || years <= 0) {
+    alert('Please enter valid inputs.');
+    return;
+  }
+  let maxSWP;
+  if (rate === 0) {
+    maxSWP = corpus / months;
+  } else {
+    maxSWP = corpus * rate / (1 - Math.pow(1 + rate, -months));
+  }
+
+  // For the chart/projection
+  let balance = corpus;
+  const data = [], labels = [];
+  for (let i = 1; i <= months; i++) {
+    balance = balance * (1 + rate);
+    balance -= maxSWP;
+    data.push(balance > 0 ? balance : 0);
+    if (i % 12 === 0) labels.push('Year ' + (i / 12));
+    else labels.push('');
+  }
+  const endBalance = Math.max(0, data[data.length - 1]);
+
+  document.getElementById('swp-max-result').innerHTML = `
+    <strong>Initial Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
+    <strong>Expected Annual Return:</strong> ${document.getElementById('swp-max-rate').value}%<br>
+    <strong>Withdrawal Duration:</strong> ${years} years (${months} months)<br>
+    <strong style="font-size:1.18em;">Maximum Monthly Withdrawal:</strong> <span style="color:#8f3ab6;font-weight:600;">₹${Math.round(maxSWP).toLocaleString('en-IN')}</span>
+    <br>
+    <strong>Corpus at End:</strong> ₹${Math.round(endBalance).toLocaleString('en-IN')}
+    <br>
+    <details style="margin-top:10px;"><summary>See year-wise balance</summary>
+      <table style="width:100%;margin-top:7px;">
+        <tr><th>Year</th><th>Corpus at Year End (₹)</th></tr>
+        ${
+          Array.from({length: Math.ceil(data.length/12)}, (_, i) => {
+            const val = data[Math.min((i+1)*12-1, data.length-1)];
+            return `<tr><td>${i+1}</td><td>₹${Math.round(val).toLocaleString('en-IN')}</td></tr>`;
+          }).join('')
+        }
+      </table>
+    </details>
+  `;
+ 
+  // Chart
+  if (window.swpMaxChartInstance) window.swpMaxChartInstance.destroy?.();
+  const ctx2 = document.getElementById('swpMaxChart').getContext('2d');
+  window.swpMaxChartInstance = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: labels.filter((_,i) => i%12===0 || i===data.length-1),
+      datasets: [{
+        label: "Corpus Value (₹)",
+        data: data.filter((_,i) => i%12===0 || i===data.length-1),
+        borderWidth: 2.5,
+        borderColor: "#ff9800",
+        backgroundColor: "rgba(255,152,0,0.12)",
+        tension: 0.16,
+        pointRadius: 2,
+        fill: true,
+      }]
+    },
+    options: {
+      plugins: { legend: { display: true, position: 'bottom' } },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { callback: v => '₹'+(v/100000>=1?(v/100000).toFixed(1)+'L':v.toLocaleString('en-IN')) }
+        }
+      }
+    }
+  });
+}
+
+</script>
+
+
 <script>
 function setMode(dark) {
   if (dark) {
@@ -719,6 +967,53 @@ window.addEventListener('scroll', function() {
 document.getElementById('back-to-top').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+</script>
+
+
+<script>
+
+const swpFAQ = `
+  <details open>
+    <summary style="font-size:1.07em; font-weight:600; color:#004080;">SWP Calculator FAQs</summary>
+    <ul style="margin:13px 0 0 0; padding:0 0 0 22px;">
+      <li><strong>Q:</strong> What is a Systematic Withdrawal Plan (SWP)?<br>
+        <strong>A:</strong> An SWP lets you withdraw a fixed amount from your mutual fund investment at regular intervals (monthly, quarterly, etc.) while the rest of your money remains invested and continues to earn returns.
+      </li>
+      <li><strong>Q:</strong> Will my corpus last for the full period?<br>
+        <strong>A:</strong> That depends on your withdrawal amount and the returns generated. If your withdrawals exceed growth, your corpus will reduce and may run out.
+      </li>
+      <li><strong>Q:</strong> Is SWP income taxed?<br>
+        <strong>A:</strong> Yes, each withdrawal is subject to mutual fund capital gains tax based on the type of fund and holding period.
+      </li>
+      <li><strong>Q:</strong> Can I change the withdrawal amount later?<br>
+        <strong>A:</strong> Yes, most AMCs let you modify or stop SWP at any time.
+      </li>
+    </ul>
+  </details>
+`;
+</script>
+
+
+<script>
+const swpMaxFAQ = `
+  <details open>
+    <summary style="font-size:1.07em; font-weight:600; color:#004080;">Max Withdrawal SWP Calculator FAQs</summary>
+    <ul style="margin:13px 0 0 0; padding:0 0 0 22px;">
+      <li><strong>Q:</strong> How is the maximum withdrawal calculated?<br>
+        <strong>A:</strong> It’s calculated so your corpus is fully exhausted after your chosen number of years, based on expected returns.
+      </li>
+      <li><strong>Q:</strong> What happens if returns are lower than expected?<br>
+        <strong>A:</strong> Your corpus may run out earlier, so be conservative with your assumptions.
+      </li>
+      <li><strong>Q:</strong> Can I use this for retirement planning?<br>
+        <strong>A:</strong> Yes! It’s widely used for retirement, education, and goal-based withdrawals.
+      </li>
+      <li><strong>Q:</strong> Is this the same as an annuity?<br>
+        <strong>A:</strong> SWP is similar to a self-managed annuity using mutual funds, but with more flexibility and market risk.
+      </li>
+    </ul>
+  </details>
+`;
 </script>
 
 <!-- Don't forget your mf-card, mf-type-chip, mf-risk-chip styles here, as in your original code! -->
