@@ -453,10 +453,12 @@
 
       document.getElementById('fd-result').textContent =
         `Maturity Amount: ₹${maturityAmount.toFixed(2)} (Interest Earned: ₹${interestEarned.toFixed(2)})`;
-      localStorage.setItem("lastCalculator", JSON.stringify({
+      
+	  // Example for FD Calculator page
+localStorage.setItem("lastCalculator", JSON.stringify({
   name: "FD Calculator",
-  url: "fixeddeposit.html",
-  date: new Date().toLocaleDateString()
+  date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }),
+  link: "fixeddeposit.html" // Change this per calculator
 }));
     }
   </script>
@@ -516,7 +518,18 @@ window.addEventListener('scroll', () => {
 });
 </script>
 
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove all 'active' classes first
+  document.querySelectorAll('nav a').forEach(function(link) {
+    link.classList.remove('active');
+    // Compare only the filename part to handle different hosting/path situations
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
 
 </body>
 </html>

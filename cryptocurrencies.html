@@ -620,6 +620,18 @@ window.addEventListener('scroll', () => {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove all 'active' classes first
+  document.querySelectorAll('nav a').forEach(function(link) {
+    link.classList.remove('active');
+    // Compare only the filename part to handle different hosting/path situations
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
 
 
 </body>
