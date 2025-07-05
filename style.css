@@ -437,4 +437,38 @@ input[type="number"]::-webkit-outer-spin-button {
 td, th { text-align: right; }
 td:first-child, th:first-child { text-align: left; }
 
+
+#back-to-top {
+  position: fixed;
+  right: 28px;
+  bottom: 36px;
+  background: #004080;
+  color: #fff !important;
+  padding: 13px 22px 13px 16px;
+  border-radius: 26px;
+  box-shadow: 0 2px 12px #012b5420;
+  font-size: 1.12em;
+  font-weight: 500;
+  z-index: 2002;
+  transition: opacity .21s, background .18s, transform .14s;
+  opacity: 0.97;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  cursor: pointer;
+}
+#back-to-top:hover {
+  background: #012b54;
+  color: #e7ecfa !important;
+  transform: scale(1.05) translateY(-2px);
+}
+@media (max-width:700px) {
+  #back-to-top { right: 9vw; bottom: 15vw; padding: 13px 15px 13px 10px; font-size: 1.01em;}
+  #back-to-top svg { width: 21px; height: 21px;}
+}
+
+
+
 /* End of CSS */

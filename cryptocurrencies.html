@@ -633,6 +633,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<button id="back-to-top" style="display:none;" aria-label="Back to Top">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+    <path d="M12 4L12 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 10L12 4L18 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span style="margin-left:7px;vertical-align:middle;">Top</span>
+</button>
+
+
+<script>
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  // Show when user scrolls below 400px
+  if (window.scrollY > 400) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
+});
+document.getElementById('back-to-top').onclick = function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+</script>
+
 
 </body>
 </html>
