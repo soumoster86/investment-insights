@@ -388,22 +388,7 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-/* Floating ToC - Dark Mode */
-body.dark-mode .floating-toc {
-  background: #1a2030 !important;
-  border-color: #273a5a !important;
-  color: #e7ecfa !important;
-  box-shadow: 0 2px 16px #0018;
-}
-body.dark-mode .floating-toc .toc-title {
-  color: #8abaff !important;
-}
-body.dark-mode .floating-toc a {
-  color: #8abaff !important;
-}
-body.dark-mode .floating-toc a:hover,
-body.dark-mode .floating-toc a.active {
-  color: #48a7ff !important;
+
 }
 
 /* Custom scrollbar */
@@ -448,5 +433,8 @@ body.dark-mode .floating-toc a.active {
   border-color: #002d59;
 }
 
+
+td, th { text-align: right; }
+td:first-child, th:first-child { text-align: left; }
 
 /* End of CSS */

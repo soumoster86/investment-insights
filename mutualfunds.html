@@ -553,18 +553,23 @@ function calculateSIP(event) {
   let cagr = (Math.pow(corpus/totalInvested, 1/years)-1)*100;
 
   document.getElementById('sip-result').innerHTML = `
-    <strong>Total Invested:</strong> ₹${Math.round(totalInvested).toLocaleString('en-IN')}<br>
-    <strong>Final Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
-    <strong>Total Gain:</strong> ₹${Math.round(gain).toLocaleString('en-IN')}<br>
-    <strong>CAGR:</strong> ${cagr.toFixed(2)}%
-    <br>
-    <details style="margin-top:10px;"><summary>See yearly projection</summary>
-      <table style="width:100%;margin-top:7px;">
+  <strong>Total Invested:</strong> ₹${Math.round(totalInvested).toLocaleString('en-IN')}<br>
+  <strong>Final Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
+  <strong>Total Gain:</strong> ₹${Math.round(gain).toLocaleString('en-IN')}<br>
+  <strong>CAGR:</strong> ${cagr.toFixed(2)}%
+  <br>
+  <details style="margin-top:10px;"><summary>See yearly projection</summary>
+    <table style="width:100%;margin-top:7px;">
+      <thead>
         <tr><th>Year</th><th>Corpus (₹)</th></tr>
-        ${yearlyData.map((amt, i) => `<tr><td>${i+1}</td><td>₹${Math.round(amt).toLocaleString('en-IN')}</td></tr>`).join('')}
-      </table>
-    </details>
-  `;
+      </thead>
+      <tbody>
+        ${yearlyData.map((amt, i) => `<tr><td>${labels[i]}</td><td>₹${Math.round(amt).toLocaleString('en-IN')}</td></tr>`).join('')}
+      </tbody>
+    </table>
+  </details>
+`;
+
 
   // Chart
   if (window.sipChartInstance) window.sipChartInstance.destroy();
