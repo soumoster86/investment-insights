@@ -434,9 +434,12 @@
     <label for="sip-stepup">Annual SIP Increase (%): <span style="font-weight:normal;">(can be decimal, e.g. 1.5)</span></label>
     <input type="number" id="sip-stepup" min="0" step="0.01" value="0" placeholder="e.g. 2.5">
     <button class="btn" type="submit" style="margin-top:9px;">Calculate</button>
-  </form>
+	<button class="btn secondary" type="button" onclick="resetSIP()" style="margin-left:7px;">Reset</button>	
+   </form>
   <div id="sip-result" style="margin-top:18px;"></div>
-  <canvas id="sipChart" style="max-width:100%; margin-top:20px;"></canvas>
+  <div id="sipChart-container" style="width:100%; margin-top:20px; display:none;">
+  <canvas id="sipChart" style="max-width:100%;"></canvas>
+   </div>
 </section>
 
 
@@ -446,21 +449,27 @@
     <button class="swp-tab-btn active" id="swp-tab1-btn" type="button" onclick="showSWPTab(1)">Regular SWP Projection</button>
     <button class="swp-tab-btn" id="swp-tab2-btn" type="button" onclick="showSWPTab(2)">Max Withdrawal (Corpus Exhausted)</button>
   </div>
-  <div id="swp-tab1" class="swp-tab-content" style="display:block;">
-    <form id="swp-form" onsubmit="calculateSWP(event)">
-      <label for="swp-corpus">Initial Corpus (₹):</label>
-      <input type="number" id="swp-corpus" min="1" step="0.01" required placeholder="e.g. 10,00,000">
-      <label for="swp-rate">Expected Return (% p.a.):</label>
-      <input type="number" id="swp-rate" step="0.01" min="0" required placeholder="e.g. 10">
-      <label for="swp-withdraw">Monthly Withdrawal (₹):</label>
-      <input type="number" id="swp-withdraw" min="1" step="0.01" required placeholder="e.g. 10,000">
-      <label for="swp-years">Projection Period (years):</label>
-      <input type="number" id="swp-years" min="1" max="50" placeholder="e.g. 20" required>
-      <button class="btn" type="submit" style="margin-top:9px;">Calculate</button>
-    </form>
-	<div id="swp-result" style="margin-top:18px;"></div>
-    <canvas id="swpChart" style="max-width:100%; margin-top:20px;"></canvas>
+<div id="swp-tab1" class="swp-tab-content" style="display:block;">
+  <form id="swp-form" onsubmit="calculateSWP(event)">
+    <label for="swp-corpus">Initial Corpus (₹):</label>
+    <input type="number" id="swp-corpus" min="1" step="0.01" required placeholder="e.g. 10,00,000">
+    <label for="swp-rate">Expected Return (% p.a.):</label>
+    <input type="number" id="swp-rate" step="0.01" min="0" required placeholder="e.g. 10">
+    <label for="swp-withdraw">Monthly Withdrawal (₹):</label>
+    <input type="number" id="swp-withdraw" min="1" step="0.01" required placeholder="e.g. 10,000">
+    <label for="swp-years">Projection Period (years):</label>
+    <input type="number" id="swp-years" min="1" max="50" placeholder="e.g. 20" required>
+    <button class="btn" type="submit" style="margin-top:9px;">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetSWP()" style="margin-left:7px;">Reset</button>
+  </form>
+  <div id="swp-result" style="margin-top:18px;"></div>
+  <div id="swpChart-container" style="width:100%; margin-top:20px; display:none;">
+    <canvas id="swpChart" style="max-width:100%;"></canvas>
   </div>
+  <div id="swp-faq" style="display:none; margin-top:18px;"></div>
+</div>
+
+
   <div id="swp-tab2" class="swp-tab-content" style="display:none;">
     <form id="swp-max-form" onsubmit="calculateMaxSWP(event)">
       <label for="swp-max-corpus">Initial Corpus (₹):</label>
@@ -470,10 +479,16 @@
       <label for="swp-max-years">Withdrawal Duration (years):</label>
       <input type="number" id="swp-max-years" min="1" max="50" placeholder="e.g. 20" required>
       <button class="btn" type="submit" style="margin-top:9px;">Calculate Max Withdrawal</button>
+	  <button class="btn secondary" type="button" onclick="resetSWPMax()" style="margin-left:7px;">Reset</button>
     </form>
 	<div id="swp-max-result" style="margin-top:18px;"></div>
-    <canvas id="swpMaxChart" style="max-width:100%; margin-top:20px;"></canvas>
+    <div id="swpMaxChart-container" style="width:100%; margin-top:20px; display:none;">
+    <canvas id="swpMaxChart" style="max-width:100%;"></canvas>
   </div>
+   </div>
+   
+   <div id="swp-max-faq" style="display:none; margin-top:18px;"></div>
+   
 </section>
 
 
@@ -647,6 +662,10 @@ function calculateSIP(event) {
   </details>
 `;
 
+   document.getElementById('sipChart-container').style.display = 'block';
+   
+   // Show the chart container
+  document.getElementById('swpChart-container').style.display = 'block';
 
   // Chart
   if (window.sipChartInstance) window.sipChartInstance.destroy();
@@ -770,7 +789,9 @@ function calculateSWP(event) {
       }
     }
   });
-  
+  document.getElementById('swpChart-container').style.display = 'block';
+  document.getElementById('swp-faq').innerHTML = swpFAQ;
+  document.getElementById('swp-faq').style.display = 'block';
 
 }
 
@@ -803,7 +824,7 @@ function calculateMaxSWP(event) {
     else labels.push('');
   }
   const endBalance = Math.max(0, data[data.length - 1]);
-
+  
   document.getElementById('swp-max-result').innerHTML = `
     <strong>Initial Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
     <strong>Expected Annual Return:</strong> ${document.getElementById('swp-max-rate').value}%<br>
@@ -824,8 +845,12 @@ function calculateMaxSWP(event) {
       </table>
     </details>
   `;
+    
+	
+     // Show the chart container
+   document.getElementById('swpMaxChart-container').style.display = 'block';
  
-  // Chart
+  // Draw Chart
   if (window.swpMaxChartInstance) window.swpMaxChartInstance.destroy?.();
   const ctx2 = document.getElementById('swpMaxChart').getContext('2d');
   window.swpMaxChartInstance = new Chart(ctx2, {
@@ -853,6 +878,11 @@ function calculateMaxSWP(event) {
       }
     }
   });
+  
+   	 // Show FAQ
+  document.getElementById('swp-max-faq').innerHTML = swpMaxFAQ;
+  document.getElementById('swp-max-faq').style.display = 'block';  
+ 
 }
 
 </script>
@@ -967,6 +997,46 @@ window.addEventListener('scroll', function() {
 document.getElementById('back-to-top').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+</script>
+
+
+<script>
+
+function resetSIP() {
+  document.getElementById('sip-form').reset();
+  document.getElementById('sip-result').innerHTML = '';
+  if (window.sipChartInstance) {
+    window.sipChartInstance.destroy();
+    window.sipChartInstance = null;
+  }
+  document.getElementById('sipChart-container').style.display = 'none';
+}
+
+
+function resetSWP() {
+  document.getElementById('swp-form').reset();
+  document.getElementById('swp-result').innerHTML = '';
+  document.getElementById('swp-faq').style.display = 'none';
+  if (window.swpChartInstance) {
+    window.swpChartInstance.destroy();
+    window.swpChartInstance = null;
+  }
+  
+// Hide the chart container so canvas disappears
+  document.getElementById('swpChart-container').style.display = 'none';
+}
+
+function resetSWPMax() {
+  document.getElementById('swp-max-form').reset();
+  document.getElementById('swp-max-result').innerHTML = '';
+  document.getElementById('swp-max-faq').style.display = 'none';
+  if (window.swpMaxChartInstance) {
+    window.swpMaxChartInstance.destroy();
+    window.swpMaxChartInstance = null;
+  }
+  document.getElementById('swpMaxChart-container').style.display = 'none';
+  }
+
 </script>
 
 
