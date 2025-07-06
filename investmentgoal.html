@@ -305,7 +305,15 @@ body.dark-mode #dm-label { color: #fff !important; }
         Total Monthly Investment: ₹<span id="total-amount-value">0</span>
         </div>
 		
-		<label for="rate">Expected Rate of Return (% per year):</label>
+		<label for="rate" style="display:flex;align-items:center;gap:7px;">
+  Expected Rate of Return (% per year):
+  <span id="return-info" tabindex="0" style="cursor:pointer; color:#004080; font-size:1.1em; display:inline-block; position:relative;">
+    <svg width="18" height="18" style="vertical-align:-2px;"><circle cx="9" cy="9" r="8" fill="#eaf2ff" stroke="#004080" stroke-width="1.5"/><text x="9" y="13" text-anchor="middle" font-size="12" fill="#004080" font-family="Segoe UI,Arial" font-weight="bold">i</text></svg>
+    <span id="rate-tooltip" style="display:none;position:absolute;left:24px;top:-8px;z-index:1000;background:#fff;border:1.5px solid #e1e6f2;box-shadow:0 3px 12px #00408022;padding:13px 17px 11px 13px;border-radius:8px;font-size:0.97em;color:#1a2c4b;min-width:200px;max-width:350px;white-space:normal;">
+      <!-- Dynamic content goes here -->
+    </span>
+  </span>
+</label>
         <input type="number" id="rate" step="0.01" min="0" required placeholder="e.g. 11">
 
         <label for="inflation">Expected Inflation Rate (% per year):</label>
@@ -365,6 +373,16 @@ body.dark-mode #dm-label { color: #fff !important; }
   </footer>
 
   <script>
+  
+  const historicReturns = {
+  "Stocks": "11-13% p.a.",
+  "Mutual Funds": "10-13% p.a.",
+  "Bonds": "6.5-7.5% p.a.",
+  "Fixed Deposits": "6-7% p.a.",
+  "Cryptocurrencies": "Highly volatile, varies widely"
+};
+  
+  
     // Reset Button functionality
     function resetGoalForm() {
   document.getElementById('goal-form').reset();
@@ -810,6 +828,66 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 });
+
+// Tooltip logic for the info icon
+document.addEventListener('DOMContentLoaded', function() {
+  const info = document.getElementById('return-info');
+  const tip = document.getElementById('rate-tooltip');
+  const routesSelect = document.getElementById('routes');
+  
+  function updateRateTooltip() {
+    const selected = Array.from(routesSelect.selectedOptions).map(opt => opt.value);
+    let html = `<strong>Historic Average Returns:</strong><br><span style="display:block;margin-top:5px;">`;
+    let shown = 0;
+    selected.forEach(route => {
+      if (historicReturns[route]) {
+        html += `<b>${route}:</b> ${historicReturns[route]}<br>`;
+        shown++;
+      }
+    });
+    if (!shown) {
+      html += `<span style="color:#be3636;">Select a route to see reference returns.</span>`;
+    }
+    html += `</span><span style="display:block;margin-top:7px;font-size:0.95em;color:#a17512;">Tip: Use these as a starting point. Check latest rates for accuracy.</span>`;
+    tip.innerHTML = html;
+  }
+
+  // --- Always update tooltip *before* showing it
+  function showTooltip() {
+    updateRateTooltip();
+    tip.style.display = 'block';
+  }
+  function hideTooltip() {
+    tip.style.display = 'none';
+  }
+
+  if (info && tip) {
+    info.addEventListener('mouseenter', showTooltip);
+    info.addEventListener('focus', showTooltip);
+    info.addEventListener('mouseleave', hideTooltip);
+    info.addEventListener('blur', hideTooltip);
+
+    info.addEventListener('click', function(e) {
+      // Toggle tooltip
+      if (tip.style.display === 'block') {
+        hideTooltip();
+      } else {
+        showTooltip();
+      }
+      e.stopPropagation();
+    });
+    document.body.addEventListener('click', hideTooltip);
+  }
+
+  // Update tooltip when routes selection changes (with slight delay to ensure selectedOptions is updated)
+  routesSelect.addEventListener('change', function() {
+    setTimeout(updateRateTooltip, 10);
+  });
+
+  // Show the correct info on first page load too
+  updateRateTooltip();
+});
+
 </script>
 
 
