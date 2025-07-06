@@ -257,7 +257,7 @@ body.dark-mode #dm-label { color: #fff !important; }
       <h2>Set Your Investment Goal</h2>
       <form id="goal-form" onsubmit="calculateGoal(event)">
         <label for="routes">Select Investment Routes:</label>
-		<select id="routes" multiple required style="height: 110px;" onchange="generateAmountFields()">
+		<select id="routes" multiple required style="height: 110px;" onchange="generateAmountFields(); updateTotalAmount();">
 			<option value="Stocks">Stocks</option>
 			<option value="Mutual Funds">Mutual Funds</option>
 			<option value="Bonds">Bonds</option>
@@ -269,12 +269,11 @@ body.dark-mode #dm-label { color: #fff !important; }
 <!-- Dynamic input fields for amounts -->
 <div id="route-amount-fields" style="margin-bottom: 10px;"></div>
 
-<!-- Show total monthly investment -->
-<div id="total-monthly-amount" style="font-weight: bold; color: #004080; margin-bottom: 14px;">
-  Total Monthly Investment: ₹<span id="total-amount-value">0</span>
-</div>
-
-        <label for="rate">Expected Rate of Return (% per year):</label>
+        <div id="monthly-investment-total" style="margin:8px 0 18px 0; font-weight: 500; font-size:1.14em; color: #0a3965; display:none;">
+        Total Monthly Investment: ₹<span id="total-amount-value">0</span>
+        </div>
+		
+		<label for="rate">Expected Rate of Return (% per year):</label>
         <input type="number" id="rate" step="0.01" min="0" required placeholder="e.g. 11">
 
         <label for="inflation">Expected Inflation Rate (% per year):</label>
@@ -284,7 +283,7 @@ body.dark-mode #dm-label { color: #fff !important; }
         <input type="number" id="duration" min="1" required placeholder="e.g. 15">
 
         <div style="display: flex; gap: 14px;">
-        <button type="submit" class="btn">Calculate Future Corpus</button>
+        <button type="submit" onclick="calculateGoal(event)">Calculate Future Corpus</button>
         <button type="button" class="btn secondary" onclick="resetGoalForm()">Reset</button>
         </div>
       </form>
@@ -336,16 +335,17 @@ body.dark-mode #dm-label { color: #fff !important; }
   <script>
     // Reset Button functionality
     function resetGoalForm() {
-      document.getElementById('goal-form').reset();
-      document.getElementById('route-amount-fields').innerHTML = '';
-      document.getElementById('total-amount-value').textContent = '0';
-      document.getElementById('goal-result').innerHTML = '';
-      document.getElementById('projection-table-container').innerHTML = '';
-      document.getElementById('download-csv-btn').style.display = 'none';
-	  document.getElementById('assumptions-section').style.display = "none";
-      document.getElementById('chart-section').style.display = "none";
-      if (window.corpusChartInstance) window.corpusChartInstance.destroy();
-    }
+  document.getElementById('goal-form').reset();
+  document.getElementById('route-amount-fields').innerHTML = '';
+  document.getElementById('total-amount-value').textContent = '0';
+  document.getElementById('monthly-investment-total').style.display = 'none'; // <-- Hide the total!
+  document.getElementById('goal-result').innerHTML = '';
+  document.getElementById('projection-table-container').innerHTML = '';
+  document.getElementById('download-csv-btn').style.display = 'none';
+  document.getElementById('assumptions-section').style.display = "none";
+  document.getElementById('chart-section').style.display = "none";
+  if (window.corpusChartInstance) window.corpusChartInstance.destroy();
+}
 
     // Generate Total Amount Dynamically
     function generateAmountFields() {
@@ -363,17 +363,19 @@ body.dark-mode #dm-label { color: #fff !important; }
 
       updateTotalAmount(); // reset total when selection changes
     }
-
+	
     // Calculate and update total monthly investment
     function updateTotalAmount() {
-      const inputs = document.querySelectorAll('.route-amount');
-      let total = 0;
-      inputs.forEach(input => {
-        const val = parseFloat(input.value);
-        if (!isNaN(val) && val > 0) total += val;
-      });
-      document.getElementById('total-amount-value').textContent = total.toLocaleString('en-IN');
-    }
+  const inputs = document.querySelectorAll('.route-amount');
+  let total = 0;
+  inputs.forEach(input => {
+    const val = parseFloat(input.value);
+    if (!isNaN(val) && val > 0) total += val;
+  });
+  document.getElementById('total-amount-value').textContent = total.toLocaleString('en-IN');
+  // Show the total only if there are route inputs (fields are present)
+  document.getElementById('monthly-investment-total').style.display = inputs.length > 0 ? 'block' : 'none';
+}
 
     // XIRR Helper Function
     function xirr(cashFlows, dates, guess = 0.1) {
@@ -535,7 +537,7 @@ body.dark-mode #dm-label { color: #fff !important; }
     // Main Calculation Function
     function calculateGoal(event) {
       event.preventDefault();
-      let P = 0;
+	  let P = 0;
       document.querySelectorAll('.route-amount').forEach(input => {
         const val = parseFloat(input.value);
         if (!isNaN(val) && val > 0) P += val;
