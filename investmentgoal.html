@@ -258,14 +258,46 @@ body.dark-mode #dm-label { color: #fff !important; }
       <form id="goal-form" onsubmit="calculateGoal(event)">
         <label for="routes">Select Investment Routes:</label>
 		<select id="routes" multiple required style="height: 110px;" onchange="generateAmountFields(); updateTotalAmount();">
-			<option value="Stocks">Stocks</option>
-			<option value="Mutual Funds">Mutual Funds</option>
-			<option value="Bonds">Bonds</option>
-			<option value="Fixed Deposits">Fixed Deposits</option>
-			<option value="Cryptocurrencies">Cryptocurrencies</option>
-		</select>
-	<small style="color:#555;display:block;margin-bottom:12px;">(Hold Ctrl/Cmd to select multiple options)</small>
+  <option value="Stocks">Stocks</option>
+  <option value="Mutual Funds">Mutual Funds</option>
+  <option value="Bonds">Bonds</option>
+  <option value="Fixed Deposits">Fixed Deposits</option>
+  <option value="Cryptocurrencies">Cryptocurrencies</option>
+</select>
 
+<small style="color:#555;display:block;margin-top:5px;margin-bottom:12px;">(Hold Ctrl/Cmd to select multiple options)</small>
+
+<button type="button" class="btn secondary" id="suggest-portfolio-btn" onclick="showPortfolioModal()" style="margin-bottom:7px;">
+  💡 Suggest Portfolio
+</button>
+<div id="suggest-portfolio-msg" style="font-size:0.97em; color:#ca7500; margin-bottom:10px; display:none;">
+  * This button is disabled after manual selection. Click on the Reset button below to enable again.
+</div>
+
+
+<!-- Modal for Portfolio Suggestion -->
+<div id="portfolio-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.33); z-index:5000; justify-content:center; align-items:center;">
+  <div style="background:#fff; padding:28px 20px 18px 20px; border-radius:13px; min-width:340px; max-width:92vw; box-shadow:0 4px 22px #0013;">
+    <h3 style="margin-top:0; color:#004080;">Portfolio Model Suggestion</h3>
+    <label for="risk-profile"><b>Select Risk Profile:</b></label>
+    <select id="risk-profile" style="margin-bottom:14px; width:100%;">
+      <option value="moderate">Moderate (Balanced)</option>
+      <option value="aggressive">Aggressive (Growth)</option>
+      <option value="conservative">Conservative (Safe)</option>
+    </select>
+    <div id="suggestion-table" style="margin-bottom:12px;">
+      <!-- Model allocations appear here -->
+    </div>
+    <label><b>Total Monthly Investment (₹):</b></label>
+    <input type="number" id="modal-total-amt" min="100" value="20000" style="width:90%; margin-bottom:10px;" />
+    <div style="text-align:right;">
+      <button type="button" class="btn" onclick="applySuggestedPortfolio()">Apply</button>
+      <button type="button" class="btn secondary" onclick="closePortfolioModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+		
 <!-- Dynamic input fields for amounts -->
 <div id="route-amount-fields" style="margin-bottom: 10px;"></div>
 
@@ -338,15 +370,17 @@ body.dark-mode #dm-label { color: #fff !important; }
   document.getElementById('goal-form').reset();
   document.getElementById('route-amount-fields').innerHTML = '';
   document.getElementById('total-amount-value').textContent = '0';
-  document.getElementById('monthly-investment-total').style.display = 'none'; // <-- Hide the total!
+  document.getElementById('monthly-investment-total').style.display = 'none';
   document.getElementById('goal-result').innerHTML = '';
   document.getElementById('projection-table-container').innerHTML = '';
   document.getElementById('download-csv-btn').style.display = 'none';
   document.getElementById('assumptions-section').style.display = "none";
   document.getElementById('chart-section').style.display = "none";
   if (window.corpusChartInstance) window.corpusChartInstance.destroy();
+  enableSuggestPortfolio(); // <--- This MUST be called
 }
 
+  
     // Generate Total Amount Dynamically
     function generateAmountFields() {
       const selected = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
@@ -692,7 +726,124 @@ window.addEventListener('scroll', function() {
 document.getElementById('back-to-top').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
 </script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // --- 1. Model Portfolio Definitions ---
+  const modelPortfolios = {
+    moderate: {
+      label: "Moderate (Balanced)",
+      allocation: { "Mutual Funds": 50, "Stocks": 30, "Bonds": 10, "Fixed Deposits": 10 }
+    },
+    aggressive: {
+      label: "Aggressive (Growth)",
+      allocation: { "Mutual Funds": 30, "Stocks": 50, "Bonds": 10, "Cryptocurrencies": 10 }
+    },
+    conservative: {
+      label: "Conservative (Safe)",
+      allocation: { "Mutual Funds": 25, "Bonds": 35, "Fixed Deposits": 35, "Stocks": 5 }
+    }
+  };
+
+  let suggestApplied = false;
+
+  // --- 2. Modal Show/Hide & Table Update ---
+  window.showPortfolioModal = function() {
+    document.getElementById('portfolio-modal').style.display = 'flex';
+    document.getElementById('modal-total-amt').value = document.getElementById('total-amount-value').textContent.replace(/,/g, '') || 20000;
+    updateSuggestionTable();
+  }
+  window.closePortfolioModal = function() {
+    document.getElementById('portfolio-modal').style.display = 'none';
+  }
+
+  document.getElementById('risk-profile').addEventListener('change', updateSuggestionTable);
+  document.getElementById('modal-total-amt').addEventListener('input', updateSuggestionTable);
+
+  function updateSuggestionTable() {
+    const risk = document.getElementById('risk-profile').value;
+    const total = parseFloat(document.getElementById('modal-total-amt').value) || 0;
+    const alloc = modelPortfolios[risk].allocation;
+    let html = `<table style="width:100%;margin:7px 0 10px 0;"><tr><th>Route</th><th>Suggested %</th><th>Amount (₹)</th></tr>`;
+    for (let route in alloc) {
+      html += `<tr>
+        <td>${route}</td>
+        <td>${alloc[route]}%</td>
+        <td>₹${Math.round((total * alloc[route]) / 100).toLocaleString('en-IN')}</td>
+      </tr>`;
+    }
+    html += "</table>";
+    document.getElementById('suggestion-table').innerHTML = html;
+  }
+
+  // --- 3. Apply Portfolio: Autofill & Flag ---
+  window.applySuggestedPortfolio = function() {
+    const risk = document.getElementById('risk-profile').value;
+    const total = parseFloat(document.getElementById('modal-total-amt').value) || 0;
+    const alloc = modelPortfolios[risk].allocation;
+    const select = document.getElementById('routes');
+    // Select relevant options
+    for (let i = 0; i < select.options.length; i++) {
+      select.options[i].selected = alloc.hasOwnProperty(select.options[i].value);
+    }
+    // Generate fields and fill values
+    generateAmountFields();
+    for (let route in alloc) {
+      const inputId = `amount-${route.replace(/\s+/g, '').toLowerCase()}`;
+      const field = document.getElementById(inputId);
+      if (field) field.value = Math.round((total * alloc[route]) / 100);
+    }
+    updateTotalAmount();
+    closePortfolioModal();
+    suggestApplied = true;
+  }
+
+    // --- 6. Detect Manual User Change & Disable ---
+  document.getElementById('route-amount-fields').addEventListener('input', function() {
+    if (suggestApplied) disableSuggestPortfolio();
+  });
+  document.getElementById('routes').addEventListener('change', function() {
+    if (suggestApplied) disableSuggestPortfolio();
+  });
+
+});
+</script>
+
+
+<script>
+// Place this outside any DOMContentLoaded or function
+
+window.suggestApplied = false;
+
+function disableSuggestPortfolio() {
+  const btn = document.getElementById('suggest-portfolio-btn');
+  const msg = document.getElementById('suggest-portfolio-msg');
+  if (btn) {
+    btn.disabled = true;
+    btn.style.opacity = 0.55;
+  }
+  if (msg) {
+    msg.style.display = 'block';
+  }
+}
+
+function enableSuggestPortfolio() {
+  const btn = document.getElementById('suggest-portfolio-btn');
+  const msg = document.getElementById('suggest-portfolio-msg');
+  if (btn) {
+    btn.disabled = false;
+    btn.style.opacity = 1;
+  }
+  if (msg) {
+    msg.style.display = 'none';
+  }
+  window.suggestApplied = false;
+}
+</script>
+
 
 
 </body>
