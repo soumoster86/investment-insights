@@ -316,8 +316,34 @@ body.dark-mode #dm-label { color: #fff !important; }
 </label>
         <input type="number" id="rate" step="0.01" min="0" required placeholder="e.g. 11">
 
-        <label for="inflation">Expected Inflation Rate (% per year):</label>
-        <input type="number" id="inflation" step="0.01" min="0" required placeholder="e.g. 6">
+        <label for="inflation" style="display:flex;align-items:center;gap:7px;">
+  Expected Inflation Rate (% per year):
+  <span id="inflation-info" tabindex="0" style="cursor:pointer; color:#004080; font-size:1.1em; display:inline-block; position:relative;">
+    <svg width="18" height="18" style="vertical-align:-2px;"><circle cx="9" cy="9" r="8" fill="#eaf2ff" stroke="#004080" stroke-width="1.5"/><text x="9" y="13" text-anchor="middle" font-size="12" fill="#004080" font-family="Segoe UI,Arial" font-weight="bold">i</text></svg>
+    <span id="inflation-tooltip" style="
+  display:none;
+  position:absolute;
+  left:0;
+  top:130%;
+  z-index:1000;
+  background:#fff;
+  border:1.5px solid #e1e6f2;
+  box-shadow:0 3px 12px #00408022;
+  padding:13px 17px 11px 13px;
+  border-radius:8px;
+  font-size:0.97em;
+  color:#1a2c4b;
+  min-width:220px;
+  max-width:380px;
+  max-height:300px;
+  overflow:auto;
+  white-space:normal;
+">
+      <!-- Historic inflation data will be loaded here -->
+    </span>
+  </span>
+</label>
+<input type="number" id="inflation" step="0.01" min="0" required placeholder="e.g. 6">
 
         <label for="duration">Investment Duration (years):</label>
         <input type="number" id="duration" min="1" required placeholder="e.g. 15">
@@ -381,6 +407,25 @@ body.dark-mode #dm-label { color: #fff !important; }
   "Fixed Deposits": "6-7% p.a.",
   "Cryptocurrencies": "Highly volatile, varies widely"
 };
+
+  const indiaInflationHistory = [
+  { year: 2024, rate: 5.4 },
+  { year: 2023, rate: 5.7 },
+  { year: 2022, rate: 6.7 },
+  { year: 2021, rate: 5.1 },
+  { year: 2020, rate: 6.6 },
+  { year: 2019, rate: 3.7 },
+  { year: 2018, rate: 3.4 },
+  { year: 2017, rate: 3.3 },
+  { year: 2016, rate: 4.9 },
+  { year: 2015, rate: 4.9 },
+  { year: 2014, rate: 6.7 },
+  { year: 2013, rate: 9.4 },
+  { year: 2012, rate: 10.0 },
+  { year: 2011, rate: 8.9 },
+  { year: 2010, rate: 11.9 }
+  // Source: RBI, World Bank, Trading Economics
+];
   
   
     // Reset Button functionality
@@ -887,6 +932,55 @@ document.addEventListener('DOMContentLoaded', function() {
   // Show the correct info on first page load too
   updateRateTooltip();
 });
+
+//Inflation Tooltip
+
+document.addEventListener('DOMContentLoaded', function() {
+  const inflInfo = document.getElementById('inflation-info');
+  const inflTip = document.getElementById('inflation-tooltip');
+
+  function inflationTooltipHtml() {
+    let avg = (indiaInflationHistory.reduce((sum, row) => sum + row.rate, 0) / indiaInflationHistory.length).toFixed(1);
+    let html = `<strong>India's CPI Inflation (YoY, %):</strong><br>
+      <table style="font-size:0.98em;margin-top:5px;">
+        <tr><th style="text-align:left;">Year</th><th style="text-align:right;">Inflation</th></tr>
+        ${indiaInflationHistory.map(row =>
+          `<tr><td style="text-align:left;">${row.year}</td><td style="text-align:right;">${row.rate}%</td></tr>`
+        ).join('')}
+      </table>
+      <div style="margin-top:8px;font-size:0.97em;">
+        <b>15-yr Average:</b> <span style="color:#004080;">${avg}%</span>
+        <br><span style="color:#a17512;">Tip: You may use an average of 5.5-6% for long-term planning.</span>
+      </div>
+      <div style="font-size:0.93em;margin-top:5px;color:#888;">Source: RBI, MOSPI, World Bank, TradingEconomics</div>
+    `;
+    return html;
+  }
+
+  if (inflInfo && inflTip) {
+    inflInfo.addEventListener('mouseenter', function() {
+      inflTip.innerHTML = inflationTooltipHtml();
+      inflTip.style.display = 'block';
+    });
+    inflInfo.addEventListener('focus', function() {
+      inflTip.innerHTML = inflationTooltipHtml();
+      inflTip.style.display = 'block';
+    });
+    inflInfo.addEventListener('mouseleave', function() { inflTip.style.display = 'none'; });
+    inflInfo.addEventListener('blur', function() { inflTip.style.display = 'none'; });
+    inflInfo.addEventListener('click', function(e) {
+      if (inflTip.style.display === 'block') {
+        inflTip.style.display = 'none';
+      } else {
+        inflTip.innerHTML = inflationTooltipHtml();
+        inflTip.style.display = 'block';
+      }
+      e.stopPropagation();
+    });
+    document.body.addEventListener('click', function() { inflTip.style.display = 'none'; });
+  }
+});
+
 
 </script>
 
