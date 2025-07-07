@@ -281,16 +281,24 @@
       <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
       <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
     </label>
-    <nav style="width: 100%; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
-      <a href="index.html" class="active">🏠 Home</a>
-      <a href="stocks.html">📊 Stocks</a>
-      <a href="mutualfunds.html">📁 Mutual Funds</a>
-      <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
-      <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
-      <a href="bonds.html">💸 Bonds</a>
-      <a href="investmentgoal.html">🎯 Investment Goal</a>
-      <a href="contact.html">✉️ Contact</a>
-    </nav>
+    <nav class="main-nav">
+  <a href="index.html">🏠 Home</a>
+  <div class="dropdown">
+    <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
+    <div class="dropdown-menu">
+      <a href="stocks.html"><span>📊</span> Overview</a>
+      <a href="etf.html"><span>📈</span> ETF</a>
+      <a href="ipo.html"><span>🆕</span> IPO</a>
+      <a href="intraday.html"><span>⏱️</span> Intraday</a>
+    </div>
+  </div>
+  <a href="mutualfunds.html">📁 Mutual Funds</a>
+  <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
+  <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
+  <a href="bonds.html">💸 Bonds</a>
+  <a href="investmentgoal.html">🎯 Investment Goal</a>
+  <a href="contact.html">✉️ Contact</a>
+</nav>
   </header>
 
   <main>

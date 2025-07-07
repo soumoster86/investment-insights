@@ -6,6 +6,129 @@ body {
   min-height: 100vh;
 }
 
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;  /* Or your preferred spacing */
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+/*dropdown menu*/
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;        /* Reduce the gap from 32px to something tighter, e.g., 14px */
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav > a,
+.main-nav > .dropdown {
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-weight: 600;
+  font-size: 1.07em;
+  padding: 7px 12px;    /* Reduce horizontal padding */
+  border-radius: 9px;
+  text-decoration: none;
+  color: white;
+  background: none;
+  transition: background .22s, color .19s;
+  min-width: 0;         /* Prevent flex growing nav items too much */
+}
+
+/* Active/Hover States */
+.main-nav > a.active,
+.main-nav > a:hover,
+.main-nav > .dropdown:hover > .dropdown-toggle,
+.main-nav > .dropdown:focus-within > .dropdown-toggle {
+  background: #012b54;
+  color: #fff;
+  text-decoration: underline;
+}
+
+
+/* Dropdown styling */
+.dropdown-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 110%;
+  min-width: 190px;
+  background: #fff;
+  color: #004080;
+  border-radius: 13px;
+  box-shadow: 0 4px 22px #0013;
+  z-index: 100;
+  flex-direction: column;
+  padding: 12px 0;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  color: #004080 !important;
+  background: none;
+  padding: 12px 22px;
+  border-radius: 7px;
+  font-size: 1.07em;
+  text-align: left;
+  font-weight: 500;
+  gap: 9px;
+  margin: 0;
+  transition: background .18s, color .14s;
+  text-decoration: none;
+}
+.dropdown-menu a:hover,
+.dropdown-menu a.active {
+  background: #e9f0fd;
+  color: #012b54 !important;
+}
+
+/* Responsive (optional, for small screens) */
+@media (max-width: 900px) {
+  .main-nav {
+    gap: 8px;
+    font-size: 1em;
+  }
+  .main-nav > a,
+  .main-nav > .dropdown {
+    padding: 10px 9px;
+  }
+}
+
+
+body.dark-mode .dropdown-menu {
+  background: #182a43 !important;
+  color: #cbe3ff;
+  box-shadow: 0 2px 16px #001a;
+}
+
+body.dark-mode .dropdown-menu a {
+  color: #cbe3ff !important;
+}
+body.dark-mode .dropdown-menu a:hover {
+  background: #273a5a;
+  color: #fff !important;
+}
+
+
+
 /* Header/Nav */
 header {
   background: #004080;
