@@ -260,8 +260,102 @@
         min-width: unset;
       }
     }
+	
+	.etf-compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 12px;
+  background: #f9faff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.etf-compare-table th, .etf-compare-table td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: top;
+  font-size: 1.04em;
+}
+.etf-compare-table th {
+  background: #eaf2ff;
+  color: #19427a;
+  font-weight: bold;
+}
+.etf-compare-table td {
+  background: #fff;
+  color: #222;
+}
+@media (max-width: 700px) {
+  .etf-compare-table th, .etf-compare-table td { font-size: 0.97em; padding: 9px 7px; }
+}
+
+
+.etf-float-menu {
+  position: fixed;
+  left: 30px;
+  top: 420px;    /* Adjust to sit nicely below your "On this page" menu if you have one */
+  z-index: 1002;
+  background: #fff;
+  border: 1.5px solid #e4eaf2;
+  box-shadow: 0 4px 20px #00408018;
+  border-radius: 16px;
+  padding: 16px 14px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 175px;
+  max-width: 220px;
+  font-size: 1.07em;
+  transition: box-shadow 0.18s, border-color 0.2s;
+}
+.etf-float-menu .float-title {
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 8px;
+  font-size: 1.09em;
+}
+.etf-float-menu a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 7px 0;
+  color: #22559b;
+  background: none;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 7px 4px 7px 2px;
+  border-radius: 6px;
+  transition: background .16s, color .18s;
+  font-size: 1em;
+  width: 100%;
+}
+.etf-float-menu a:hover, .etf-float-menu a.active {
+  background: #e9f0fd;
+  color: #004080;
+}
+@media (max-width: 1000px) {
+  .etf-float-menu { right: 7px; top: 100px; width: 140px; }
+}
+@media (max-width: 600px) {
+  .etf-float-menu { display: none; }
+}
+body.dark-mode .etf-float-menu {
+  background: #182a43;
+  border-color: #2d3752;
+  box-shadow: 0 4px 22px #001a;
+}
+body.dark-mode .etf-float-menu .float-title { color: #8abaff; }
+body.dark-mode .etf-float-menu a { color: #b0cdfb; }
+body.dark-mode .etf-float-menu a:hover,
+body.dark-mode .etf-float-menu a.active {
+  background: #253458;
+  color: #fff;
+}
+
+
   </style>
-   
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
@@ -295,15 +389,355 @@
 </nav>
 
   </header>
+  
+    <nav class="etf-float-menu">
+  <div class="float-title">Quick Access</div>
+  <a href="stocks.html">📊 Overview</a>
+  <a href="ipo.html">🆕 IPO</a>
+  <a href="intraday.html">⏱️ Intraday</a>
+  </nav>
+  
   <main>
+     <section>
+      <h2>What is an ETF?</h2>
+      <p>
+        <b>ETF</b> stands for <b>Exchange Traded Fund</b>. It is a basket of securities—such as stocks, bonds, or commodities—that is traded on an exchange, just like a stock. ETFs combine the diversification benefits of mutual funds with the ease of trading like stocks. They are designed to track an index (like Nifty 50, Sensex), a sector, or a commodity.
+      </p>
+    </section>
+
     <section>
-      <h2>Exchange Traded Funds (ETFs)</h2>
-      <p>ETFs are investment funds traded on stock exchanges, much like stocks. They offer diversification, low cost, and ease of trading. This page will cover top-performing ETFs, how to invest in them, and comparisons with Index Mutual Funds.</p>
+      <h3>Key Benefits of ETFs</h3>
+      <ul>
+        <li><b>Diversification:</b> Get exposure to a wide range of securities in a single trade.</li>
+        <li><b>Low Cost:</b> Lower expense ratios compared to actively managed funds.</li>
+        <li><b>Liquidity:</b> Buy or sell ETFs anytime during market hours at real-time prices.</li>
+        <li><b>Transparency:</b> Holdings are disclosed daily, so you know exactly what you own.</li>
+        <li><b>Tax Efficiency:</b> Fewer capital gains distributions compared to mutual funds.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Types of ETFs in India</h3>
+      <ul>
+        <li><b>Equity ETFs:</b> Track stock indices like Nifty 50, Sensex, Nifty Next 50, sectoral indices (Banking, IT, Pharma, etc.).</li>
+        <li><b>Debt/Bond ETFs:</b> Invest in government or corporate bonds (e.g., Bharat Bond ETF).</li>
+        <li><b>Gold ETFs:</b> Track the price of gold, a popular way to invest in the yellow metal digitally.</li>
+        <li><b>International ETFs:</b> Track overseas indices like Nasdaq 100, S&P 500, etc.</li>
+        <li><b>Sector/Thematic ETFs:</b> Focus on specific sectors like PSU Banks, IT, Infra, etc.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>How to Invest in ETFs</h3>
+      <ol>
+        <li>Open a Demat and trading account with a broker (Zerodha, Groww, ICICI Direct, etc.).</li>
+        <li>Search for the desired ETF by its ticker (e.g., <b>NIFTYBEES</b> for Nifty 50 ETF, <b>BANKBEES</b> for Nifty Bank ETF).</li>
+        <li>Place a buy order during market hours, similar to buying shares.</li>
+        <li>ETFs can be held in your Demat account and sold anytime on the exchange.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Popular ETFs in India (2024)</h3>
+      <ul>
+        <li><b>Nippon India ETF Nifty BeES (NIFTYBEES)</b> – Tracks Nifty 50</li>
+        <li><b>SBI ETF Sensex (SETFSENSEX)</b> – Tracks Sensex</li>
+        <li><b>HDFC Nifty 50 ETF</b></li>
+        <li><b>Bharat Bond ETF</b> – Tracks government bonds</li>
+        <li><b>ICICI Prudential Gold ETF</b> – Tracks gold prices</li>
+        <li><b>Motilal Oswal Nasdaq 100 ETF</b> – Tracks US tech stocks</li>
+        <li><b>UTI Nifty 50 ETF</b></li>
+        <li><b>SBI ETF Gold</b></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>ETF vs Index Mutual Fund: A Quick Comparison</h3>
+<table class="etf-compare-table">
+  <tr>
+    <th style="width:33%;">Feature</th>
+    <th style="width:33%;">ETF</th>
+    <th style="width:34%;">Index Mutual Fund</th>
+  </tr>
+  <tr>
+    <td>How to Buy</td>
+    <td>On stock exchange (requires Demat account)</td>
+    <td>Directly from AMC/platform (no Demat needed)</td>
+  </tr>
+  <tr>
+    <td>Pricing</td>
+    <td>Real-time, like shares</td>
+    <td>Once daily (end-of-day NAV)</td>
+  </tr>
+  <tr>
+    <td>Expense Ratio</td>
+    <td>Very low (0.05–0.2%)</td>
+    <td>Low (0.1–0.5%)</td>
+  </tr>
+  <tr>
+    <td>Liquidity</td>
+    <td>High (depends on trading volume)</td>
+    <td>Always redeemable at NAV</td>
+  </tr>
+  <tr>
+    <td>SIP Option</td>
+    <td>No (but you can manually invest monthly)</td>
+    <td>Yes, automated SIPs</td>
+  </tr>
+</table>
+    </section>
+
+    <!-- Interactive Chart -->
+    <section style="margin-top:36px;">
+  <h3>ETF SIP Returns (2019–2024): Growth & XIRR</h3>
+  <canvas id="etfChart" style="max-width:100%;min-height:280px;"></canvas>
+  <div id="etf-xirr-summary" style="margin-top:10px;font-size:1.09em;font-weight:500;color:#004080;"></div>
+  <div style="font-size:0.97em;color:#888;margin-top:4px;">
+    <i>SIP of ₹10,000 per month in each ETF at each year’s average price. Past returns do not guarantee future performance.</i>
+  </div>
+</section>
+
+    <section style="margin-top:26px;">
+  <h3>ETF SIP Returns Calculator – FAQs</h3>
+  <details open>
+    <summary style="font-size:1.06em;font-weight:600;color:#004080;">
+      What is SIP in ETFs?
+    </summary>
+    <div>
+      SIP (Systematic Investment Plan) is a disciplined way of investing a fixed amount regularly (e.g., monthly) into an ETF, just like in mutual funds. In practice, you buy ETF units each month via your broker, accumulating units over time.
+    </div>
+  </details>
+  <details>
+    <summary style="font-size:1.06em;font-weight:600;color:#004080;">
+      What is XIRR and why is it important for SIP?
+    </summary>
+    <div>
+      XIRR (Extended Internal Rate of Return) gives you the annualized return for a series of cash flows occurring at different dates. For SIPs, it accurately reflects your real return by considering each investment’s timing, which plain CAGR does not.
+    </div>
+  </details>
+  <details>
+    <summary style="font-size:1.06em;font-weight:600;color:#004080;">
+      Why is ETF SIP XIRR different from index return?
+    </summary>
+    <div>
+      Index returns are based on a lump-sum investment at the start. SIP XIRR considers that you buy at different prices (sometimes high, sometimes low) and thus get a “rupee cost averaging” benefit. The SIP XIRR can be lower or higher than index CAGR, depending on market trends.
+    </div>
+  </details>
+  <details>
+    <summary style="font-size:1.06em;font-weight:600;color:#004080;">
+      Can I do SIP in ETFs automatically?
+    </summary>
+    <div>
+      Most brokers in India do not yet offer automated SIP for ETFs (unlike mutual funds). You need to manually buy ETF units each month, but some discount brokers allow scheduled “buy reminders” or auto-invest via APIs.
+    </div>
+  </details>
+  <details>
+    <summary style="font-size:1.06em;font-weight:600;color:#004080;">
+      Why does the final corpus differ between ETFs?
+    </summary>
+    <div>
+      The difference comes from each ETF’s price growth and volatility. Equity ETFs like NIFTYBEES may outperform gold ETFs like GOLDBEES over long periods, but short-term returns may vary.
+    </div>
+  </details>
+  <details>
+    <summary style="font-size:1.06em;font-weight:600;color:#004080;">
+      Is there any tax on ETF SIP returns?
+    </summary>
+    <div>
+      Yes. Like stocks, you pay capital gains tax when selling ETF units: <b>Equity ETFs</b> (NIFTYBEES) attract 15% STCG (<1 year) and 10% LTCG (>1 year, above ₹1L). <b>Gold and Bond ETFs</b> are taxed as non-equity (20% with indexation after 3 years).
+    </div>
+  </details>
+  <details>
+    <summary style="font-size:1.06em;font-weight:600;color:#004080;">
+      Is XIRR the best metric to track my real SIP performance?
+    </summary>
+    <div>
+      Yes! XIRR is the industry-standard method to measure actual investor returns for SIP or any staggered investment, as it adjusts for both timing and amount of cash flows.
+    </div>
+  </details>
+</section>
+
+
+    <section>
+      <h3>Who Should Invest in ETFs?</h3>
+      <ul>
+        <li>Investors comfortable using a Demat/trading account.</li>
+        <li>Those seeking low-cost, diversified, and passive investing.</li>
+        <li>Investors who want intraday liquidity and control over buy/sell price.</li>
+        <li>Long-term investors seeking index-based growth or asset class exposure (e.g., gold, bonds).</li>
+      </ul>
+      <p style="margin-top:10px;">
+        <b>Tip:</b> If you want a simple, SIP-based approach, consider index mutual funds. If you want intraday trading and lowest cost, go for ETFs.
+      </p>
+    </section>
+
+    <section>
+      <h3>FAQs about ETFs</h3>
+      <details>
+        <summary>Are ETFs safe?</summary>
+        <div>ETFs are regulated by SEBI in India and are as safe as the underlying assets (stocks, bonds, etc.). Market risk applies.</div>
+      </details>
+      <details>
+        <summary>Do ETFs pay dividends?</summary>
+        <div>Some ETFs pay out dividends; others are growth-oriented and reinvest dividends back into the fund.</div>
+      </details>
+      <details>
+        <summary>Is there any minimum investment?</summary>
+        <div>Usually, you can buy as little as 1 unit of an ETF, which can be just ₹100–₹200 for some funds.</div>
+      </details>
+      <details>
+        <summary>Can NRIs invest in Indian ETFs?</summary>
+        <div>Yes, most Indian ETFs are open to NRIs subject to regulations.</div>
+      </details>
     </section>
   </main>
   <footer>
     &copy; 2025 Investment Insights. All rights reserved.
   </footer>
+  
+  
+   <script>
+// --- Helper: XIRR Calculation (Newton-Raphson) ---
+function xirr(values, dates, guess = 0.1) {
+  const days = (d1, d2) => (d2 - d1) / (1000 * 3600 * 24);
+  const npv = rate =>
+    values.reduce(
+      (acc, val, i) =>
+        acc + val / Math.pow(1 + rate, days(dates[0], dates[i]) / 365),
+      0
+    );
+  let rate = guess;
+  for (let i = 0; i < 100; i++) {
+    const npv0 = npv(rate);
+    const npv1 = npv(rate + 1e-5);
+    const deriv = (npv1 - npv0) / 1e-5;
+    const newRate = rate - npv0 / deriv;
+    if (Math.abs(newRate - rate) < 1e-7) return rate;
+    rate = newRate;
+  }
+  return rate;
+}
+
+// --- Simulate SIP & Growth ---
+function simulateSIP(prices, startYear, monthlyAmt, nMonths) {
+  let units = 0;
+  let unitHistory = [];
+  let cashFlows = [], dates = [];
+  let dt = new Date(startYear, 0, 2); // 2nd Jan, to avoid Jan 1 holiday
+  for (let i = 0; i < nMonths; i++) {
+    const year = startYear + Math.floor(i / 12);
+    const price = prices[year];
+    const boughtUnits = monthlyAmt / price;
+    units += boughtUnits;
+    unitHistory.push(units);
+    cashFlows.push(-monthlyAmt);
+    dates.push(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate()));
+    dt.setMonth(dt.getMonth() + 1);
+  }
+  return { units, cashFlows, dates, unitHistory };
+}
+
+// --- Data: Yearly average prices (approximate) ---
+const pricesNifty = { 2019:123, 2020:153, 2021:205, 2022:205, 2023:229, 2024:277 };
+const pricesGold  = { 2019:34,  2020:43,  2021:41,  2022:48,  2023:55,  2024:65  };
+
+const years = [2019,2020,2021,2022,2023,2024];
+const months = (years.length-1)*12; // SIP from Jan 2019 to Jan 2024
+
+// --- SIP simulation for both ETFs ---
+const simNifty = simulateSIP(pricesNifty, 2019, 10000, months);
+const simGold  = simulateSIP(pricesGold,  2019, 10000, months);
+
+// --- Final value: corpus as of Jan 2024 (units * 2024 price) ---
+const endDate = new Date(2024,0,2);
+const corpusNifty = simNifty.units * pricesNifty[2024];
+const corpusGold  = simGold.units  * pricesGold[2024];
+
+// --- Add corpus as final cashflow for XIRR ---
+const cashNifty = simNifty.cashFlows.concat([corpusNifty]);
+const cashGold  = simGold.cashFlows.concat([corpusGold]);
+const datesNifty = simNifty.dates.concat([endDate]);
+const datesGold  = simGold.dates.concat([endDate]);
+
+const xirrNifty = xirr(cashNifty, datesNifty)*100;
+const xirrGold  = xirr(cashGold, datesGold)*100;
+
+// --- Prepare yearly chart points (as of Jan each year) ---
+function getCorpusByYear(sim, prices) {
+  let res = [];
+  for (let i = 0; i < years.length; i++) {
+    const units = sim.unitHistory[Math.max(0, i*12-1)] || 0;
+    res.push(units * prices[years[i]]);
+  }
+  return res;
+}
+const chartNifty = getCorpusByYear(simNifty, pricesNifty);
+const chartGold  = getCorpusByYear(simGold,  pricesGold);
+
+// --- Chart.js ---
+document.addEventListener("DOMContentLoaded", function () {
+  const ctx = document.getElementById('etfChart').getContext('2d');
+  const data = {
+    labels: years.map(String),
+    datasets: [
+      {
+        label: "NIFTYBEES (Nifty 50 ETF)",
+        data: chartNifty,
+        borderColor: "#004080",
+        backgroundColor: "rgba(0,64,128,0.09)",
+        borderWidth: 2.4,
+        tension: 0.14,
+        pointRadius: 3,
+        fill: true
+      },
+      {
+        label: "GOLDBEES (Gold ETF)",
+        data: chartGold,
+        borderColor: "#c4b253",
+        backgroundColor: "rgba(228,203,92,0.09)",
+        borderWidth: 2.2,
+        tension: 0.13,
+        pointRadius: 3,
+        fill: true
+      }
+    ]
+  };
+  new Chart(ctx, {
+    type: "line",
+    data,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: true, position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: ctx =>
+              ctx.dataset.label + ': ₹' + Math.round(ctx.parsed.y).toLocaleString('en-IN')
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: val =>
+              '₹' + (val / 100000 >= 1
+                ? (val / 100000).toFixed(1) + 'L'
+                : val.toLocaleString('en-IN'))
+          }
+        }
+      }
+    }
+  });
+
+  // Show XIRR summary
+  document.getElementById('etf-xirr-summary').innerHTML =
+    `<span style="color:#004080;">NIFTYBEES SIP XIRR:</span> <b>${xirrNifty.toFixed(2)}%</b> &nbsp; | &nbsp; <span style="color:#c4b253;">GOLDBEES SIP XIRR:</span> <b>${xirrGold.toFixed(2)}%</b><br>
+     <span style="font-weight:400;font-size:0.98em;color:#555;">Final corpus (Jan 2024):</span> 
+     <span style="color:#004080;">NIFTYBEES ₹${Math.round(corpusNifty).toLocaleString('en-IN')}</span>, 
+     <span style="color:#c4b253;">GOLDBEES ₹${Math.round(corpusGold).toLocaleString('en-IN')}</span>`;
+});
+</script>
   
   <script>
     function setMode(dark) {
@@ -339,6 +773,13 @@
   <span style="margin-left:7px;vertical-align:middle;">Top</span>
 </button>
 
+<script>
+document.querySelectorAll('.etf-float-menu a').forEach(function(link) {
+  if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+    link.classList.add('active');
+  }
+});
+</script>
 
 <script>
 window.addEventListener('scroll', function() {

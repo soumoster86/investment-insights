@@ -127,6 +127,74 @@ body.dark-mode .dropdown-menu a:hover {
   color: #fff !important;
 }
 
+/*Stocks Floating Window*/
+/* Floating Stock Quick Menu */
+.stock-float-menu {
+  position: fixed;
+  /* Align to the right */
+  left: 30px;   /* or match your On this page margin */
+  right: unset;
+  /* Position below the "On this page" menu */
+  top: 420px;    /* Increase until it's neatly below your right floating menu (adjust as needed) */
+  z-index: 1002;
+  background: #fff;
+  border: 1.5px solid #e4eaf2;
+  box-shadow: 0 4px 20px #00408018;
+  border-radius: 16px;
+  padding: 16px 14px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 175px;
+  max-width: 220px;
+  font-size: 1.07em;
+  transition: box-shadow 0.18s, border-color 0.2s;
+}
+
+.stock-float-menu .float-title {
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 8px;
+  font-size: 1.09em;
+}
+.stock-float-menu a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 7px 0;
+  color: #22559b;
+  background: none;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 7px 4px 7px 2px;
+  border-radius: 6px;
+  transition: background .16s, color .18s;
+  font-size: 1em;
+  width: 100%;
+}
+.stock-float-menu a:hover, .stock-float-menu a.active {
+  background: #e9f0fd;
+  color: #004080;
+}
+@media (max-width: 1000px) {
+  .stock-float-menu { left: 7px; top: 90px; width: 140px; }
+}
+@media (max-width: 600px) {
+  .stock-float-menu { display: none; }
+}
+body.dark-mode .stock-float-menu {
+  background: #182a43;
+  border-color: #2d3752;
+  box-shadow: 0 4px 22px #001a;
+}
+body.dark-mode .stock-float-menu .float-title { color: #8abaff; }
+body.dark-mode .stock-float-menu a { color: #b0cdfb; }
+body.dark-mode .stock-float-menu a:hover,
+body.dark-mode .stock-float-menu a.active {
+  background: #253458;
+  color: #fff;
+}
+
 
 
 /* Header/Nav */

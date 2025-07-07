@@ -262,6 +262,16 @@
   </style>
 </head>
 <body>
+
+  <!-- Quick Floating Access for Stock Subpages -->
+<nav class="stock-float-menu">
+  <div class="float-title">Quick Access</div>
+  <a href="etf.html">📈 ETF</a>
+  <a href="ipo.html">🆕 IPO</a>
+  <a href="intraday.html">⏱️ Intraday</a>
+</nav>
+
+
   <!-- Floating Table of Contents OUTSIDE HEADER -->
   <nav class="floating-toc" id="floating-toc">
     <div class="toc-title">On this page</div>
@@ -620,7 +630,13 @@ document.getElementById('back-to-top').onclick = function() {
 };
 </script>
 
-  
+<script>
+document.querySelectorAll('.stock-float-menu a').forEach(function(link) {
+  if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+    link.classList.add('active');
+  }
+});
+</script>  
   
 </body>
 </html>

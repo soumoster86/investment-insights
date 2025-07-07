@@ -5,263 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights - IPO</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
   
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      background: linear-gradient(120deg, #e9f0fd 0%, #f4f6f8 100%);
-      color: #222;
-      min-height: 100vh;
-      transition: background 0.4s, color 0.3s;
-    }
-    header {
-      background: #004080;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    header img {
-      height: 50px;
-      margin-right: 15px;
-      border-radius: 10px;
-      background: #fff;
-      padding: 3px;
-      box-shadow: 0 2px 6px #0001;
-    }
-    header h1 {
-      margin: 0;
-      font-weight: normal;
-      font-size: 1.5em;
-    }
-    #dm-label {
-      color: white;
-      font-size: 1em;
-    }
-    nav {
-      width: 100%;
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      background: none;
-      color: inherit;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 14px;
-      font-weight: 500;
-      font-size: 1.08em;
-      padding: 7px 10px;
-      border-radius: 7px;
-      transition: background .22s;
-    }
-    nav a.active,
-    nav a:hover {
-      background: #012b54;
-      text-decoration: underline;
-    }
-    main {
-      max-width: 900px;
-      margin: 36px auto 24px auto;
-      padding: 0 15px 30px 15px;
-      background: #fff;
-      box-shadow: 0 2px 12px rgb(0 64 128 / 8%);
-      border-radius: 18px;
-      min-height: 75vh;
-      animation: fadeIn 0.8s;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px);}
-      to   { opacity: 1; transform: translateY(0);}
-    }
-    section {
-      margin-bottom: 34px;
-      padding: 20px 22px;
-      border: 1.5px solid #e1e6f2;
-      border-radius: 12px;
-      background: #f9faff;
-      box-shadow: 0 1px 10px #00408009;
-      transition: box-shadow 0.18s, border-color 0.2s;
-    }
-    section:hover {
-      box-shadow: 0 2px 22px #00408017;
-      border-color: #00408055;
-    }
-    h2 {
-      border-bottom: 2px solid #004080;
-      padding-bottom: 8px;
-      color: #004080;
-      margin-top: 0;
-      font-size: 1.5em;
-    }
-    h3 {
-      color: #004080;
-      font-size: 1.17em;
-      margin-bottom: 12px;
-      margin-top: 20px;
-    }
-    .stock-card {
-      background: #f8faff;
-      border-radius: 10px;
-      box-shadow: 0 1px 8px #a4b1cf18;
-      border: 1.3px solid #e4eaf2;
-      padding: 15px 13px 14px 13px;
-      min-width: 230px;
-      max-width: 245px;
-      flex: 1 0 200px;
-      transition: box-shadow 0.15s, border-color 0.16s;
-    }
-    .stock-card:hover {
-      box-shadow: 0 2px 14px #3070c41e;
-      border-color: #96b6f6;
-    }
-    .sector-chip {
-      background: #eaf2ff;
-      color: #2766be;
-      border-radius: 5px;
-      padding: 1px 7px;
-      font-size: 0.85em;
-      margin-left: 7px;
-    }
-    .floating-toc {
-      position: fixed;
-      top: 140px;
-      right: 30px;
-      width: 200px;
-      background: #fff;
-      border: 1.4px solid #e1e6f2;
-      box-shadow: 0 2px 16px #00408016;
-      border-radius: 12px;
-      padding: 12px 16px 10px 16px;
-      z-index: 1001;
-      font-size: 1em;
-      opacity: 0.98;
-      transition: box-shadow 0.22s, background 0.22s, color 0.22s;
-    }
-    .floating-toc .toc-title {
-      font-weight: 600;
-      color: #004080;
-      margin-bottom: 7px;
-      font-size: 1.06em;
-      letter-spacing: 0.2px;
-    }
-    .floating-toc ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .floating-toc ul li {
-      margin: 6px 0;
-    }
-    .floating-toc a {
-      color: #204a80;
-      text-decoration: none;
-      font-size: 0.98em;
-      transition: color 0.16s;
-    }
-    .floating-toc a:hover,
-    .floating-toc a.active {
-      color: #1c6ddb;
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      padding: 18px 0 13px 0;
-      font-size: 0.97em;
-      color: #666;
-      border-top: 1px solid #e0e5f0;
-      margin-top: 24px;
-      background: #fafbfc;
-      position: relative;
-      left: 0;
-      right: 0;
-    }
-    /* Dark mode overrides */
-    body.dark-mode {
-      background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
-      color: #e7ecfa !important;
-    }
-    body.dark-mode header, body.dark-mode nav, body.dark-mode footer {
-      background: #12203a !important;
-      color: #e7ecfa !important;
-    }
-    body.dark-mode main, body.dark-mode section, body.dark-mode .stock-card {
-      background: #191c23 !important;
-      color: #e7ecfa !important;
-      box-shadow: 0 2px 12px #0004;
-      border-color: #2d3752 !important;
-    }
-    body.dark-mode h2, body.dark-mode h3, body.dark-mode .floating-toc .toc-title {
-      color: #8abaff !important;
-      border-color: #273a5a !important;
-    }
-    body.dark-mode .floating-toc {
-      background: #1a2030 !important;
-      border-color: #273a5a !important;
-      color: #8abaff !important;
-      box-shadow: 0 2px 16px #0018;
-    }
-    body.dark-mode .floating-toc a {
-      color: #8abaff !important;
-    }
-    body.dark-mode .floating-toc a:hover,
-    body.dark-mode .floating-toc a.active {
-      color: #48a7ff !important;
-    }
-    body.dark-mode nav a {
-      color: #8abaff !important;
-    }
-    body.dark-mode nav a.active,
-    body.dark-mode nav a:hover {
-      background: #274272 !important;
-      color: #fff !important;
-    }
-    body.dark-mode .stock-card {
-      background: #23273b !important;
-      color: #e7ecfa !important;
-      border-color: #39588a !important;
-    }
-    body.dark-mode .sector-chip {
-      background: #2d3752 !important;
-      color: #8abaff !important;
-    }
-    body.dark-mode #dm-label { color: #fff !important; }
-    /* Responsive for ToC */
-    @media (max-width: 900px) {
-      .floating-toc {
-        right: 8px;
-        width: 88vw;
-        min-width: 155px;
-        max-width: 97vw;
-        font-size: 0.97em;
-        top: unset;
-        bottom: 16px;
-        padding: 10px 13px 10px 13px;
-        border-radius: 10px;
-        opacity: 0.97;
-      }
-    }
-    @media (max-width: 600px) {
-      .floating-toc {
-        right: 2vw;
-        left: 2vw;
-        width: unset;
-        font-size: 1em;
-        padding: 10px 6vw;
-        top: unset;
-        bottom: 14px;
-        border-radius: 10px;
-        max-width: unset;
-        min-width: unset;
-      }
-    }
-  </style>
   
+  .ipo-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f9faff;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 10px;
+  font-size: 1.05em;
+  box-sizing: border-box;
+}
+.ipo-table th, .ipo-table td {
+  padding: 12px 16px;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.ipo-table th {
+  background: #eaf2ff;
+  color: #19427a;
+  font-weight: bold;
+  text-align: left;
+}
+.ipo-table td {
+  background: #fff;
+  color: #222;
+}
+.ipo-table td,
+.ipo-table th {
+  border: none;
+}
+.ipo-table td:nth-child(3), /* Price Band */
+.ipo-table td:nth-child(4)  /* Issue Size */ {
+  text-align: right;
+}
+.ipo-table td:last-child, .ipo-table th:last-
+
+  
+  </style>
 </head>
 <body>
   <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
@@ -297,8 +82,128 @@
   </header>
   <main>
     <section>
-      <h2>Initial Public Offerings (IPOs)</h2>
-      <p>IPOs are the first sale of stock by a company to the public. Learn about upcoming IPOs, how to apply, risks and opportunities, and historical IPO performance data.</p>
+      <h2>What is an IPO?</h2>
+      <p>
+        <b>IPO</b> stands for <b>Initial Public Offering</b>. It is the process through which a private company offers its shares to the public for the first time and becomes a publicly listed company on a stock exchange (like NSE or BSE in India). IPOs are major milestones in a company's growth and offer investors an early opportunity to participate in a company’s potential.
+      </p>
+    </section>
+
+    <section>
+      <h3>How Does an IPO Work?</h3>
+      <ol>
+        <li>The company files a draft red herring prospectus (DRHP) with SEBI detailing its business, finances, and reasons for raising funds.</li>
+        <li>SEBI reviews and approves the IPO.</li>
+        <li>The company sets a price band and IPO dates.</li>
+        <li>Investors apply for shares during the IPO window (typically 3–5 days).</li>
+        <li>Shares are allotted based on demand and listing takes place on the stock exchange.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Why Invest in IPOs?</h3>
+      <ul>
+        <li><b>Early Access:</b> Invest in a company before it starts trading on the stock exchange.</li>
+        <li><b>Listing Gains:</b> Some IPOs offer immediate gains if the listing price is higher than the IPO price.</li>
+        <li><b>Long-Term Growth:</b> Opportunity to invest in promising businesses early in their public journey.</li>
+        <li><b>Portfolio Diversification:</b> New companies can offer sector or business diversity.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Risks of IPO Investing</h3>
+      <ul>
+        <li><b>Overvaluation:</b> Some IPOs may be aggressively priced.</li>
+        <li><b>Volatility:</b> Prices can fluctuate sharply on listing and in the first few weeks.</li>
+        <li><b>Allotment Risk:</b> High demand can mean partial or no allotment for retail investors.</li>
+        <li><b>Uncertain Track Record:</b> Less historical data compared to established listed companies.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>How to Apply for an IPO in India</h3>
+      <ol>
+        <li>Open a Demat and trading account with a SEBI-registered broker (Zerodha, Groww, Upstox, ICICI, etc.).</li>
+        <li>Login to your broker’s app/platform during the IPO window.</li>
+        <li>Select the IPO, enter bid details (quantity, price), and provide your UPI ID for payment.</li>
+        <li>Approve the payment request in your UPI app.</li>
+        <li>Wait for the allotment result (announced a few days after IPO closes).</li>
+        <li>Allotted shares are credited to your Demat account on listing day.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Upcoming & Recent IPOs (2024)</h3>
+      <table class="ipo-table">
+  <thead>
+    <tr>
+      <th style="width:28%;">Company</th>
+      <th style="width:22%;">IPO Dates</th>
+      <th style="width:18%;">Price Band (₹)</th>
+      <th style="width:18%;">Issue Size</th>
+      <th style="width:14%;">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TVS Infrastructure Trust</td>
+      <td>8–11 July 2025</td>
+      <td>320–340</td>
+      <td>₹2,000 Cr</td>
+      <td>Upcoming</td>
+    </tr>
+    <tr>
+      <td>Cryogenic OGS Ltd</td>
+      <td>3–7 July 2025</td>
+      <td>94–100</td>
+      <td>₹18 Cr</td>
+      <td>Closed</td>
+    </tr>
+    <tr>
+      <td>Glen Industries Ltd</td>
+      <td>8–10 July 2025</td>
+      <td>92–97</td>
+      <td>₹63 Cr</td>
+      <td>Listed</td>
+    </tr>
+  </tbody>
+</table>
+
+      <div style="font-size:0.97em;color:#777;margin-top:6px;">
+        <i>Tip: Check your broker’s platform or <a href="https://www.nseindia.com/market-data/new-stock-exchange-listings-today" target="_blank">NSE India IPO page</a> for live updates.</i>
+      </div>
+    </section>
+	
+	<section style="margin-top:36px;">
+  <h3>Average Listing Gains of Recent IPOs</h3>
+  <canvas id="ipoListingChart" style="max-width:100%;min-height:260px;"></canvas>
+  <div style="font-size:0.97em;color:#888;margin-top:6px;">
+    <i>Shows the % change from IPO price to listing price for select recent IPOs (dummy data for illustration; update as needed).</i>
+  </div>
+</section>
+
+
+    <section>
+      <h3>FAQs about IPOs</h3>
+      <details>
+        <summary>What is the minimum amount needed to apply for an IPO?</summary>
+        <div>Usually, the minimum bid is one lot (often 10–15 shares). The cost depends on the price band (e.g., ₹15,000–₹20,000 for most mainboard IPOs).</div>
+      </details>
+      <details>
+        <summary>How are IPO shares allotted?</summary>
+        <div>Allotment is via lottery if demand exceeds supply. If under-subscribed, all valid bids may get full allotment.</div>
+      </details>
+      <details>
+        <summary>Can I sell IPO shares on listing day?</summary>
+        <div>Yes, once shares are credited to your Demat, you can sell anytime during market hours.</div>
+      </details>
+      <details>
+        <summary>Is IPO investment risky?</summary>
+        <div>Yes. IPOs can be volatile and past performance is no guarantee of future results. Review the DRHP and company fundamentals before investing.</div>
+      </details>
+      <details>
+        <summary>Are IPO gains taxable?</summary>
+        <div>Yes. Gains are subject to capital gains tax (short-term if sold within 1 year, long-term after 1 year, as per equity rules).</div>
+      </details>
     </section>
   </main>
   <footer>
@@ -356,6 +261,79 @@ document.getElementById('back-to-top').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 </script>
-  
+ 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const ctx = document.getElementById('ipoListingChart').getContext('2d');
+  // Replace this data with real listing gain/loss values if available
+  const ipoNames = [
+    "ABC Tech Ltd",
+    "Global Fashions",
+    "NextGen Infra",
+    "SmartRetail",
+    "Innovate Fin",
+    "MediCare Health"
+  ];
+  const ipoGains = [
+    22.5,    // e.g., 22.5% above IPO price
+    9.7,
+    -5.2,    // e.g., 5.2% below IPO price
+    12.1,
+    37.0,
+    4.9
+  ];
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ipoNames,
+      datasets: [{
+        label: 'Listing Gain (%)',
+        data: ipoGains,
+        backgroundColor: ipoGains.map(gain =>
+          gain >= 0 ? "rgba(67,160,71,0.80)" : "rgba(220,44,44,0.78)"
+        ),
+        borderRadius: 7,
+        borderSkipped: false,
+        maxBarThickness: 38
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx =>
+              ctx.parsed.y >= 0
+                ? '+' + ctx.parsed.y.toFixed(1) + '%'
+                : ctx.parsed.y.toFixed(1) + '%'
+          }
+        },
+        title: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          title: { display: false },
+          ticks: { font: { size: 13, weight: 500 } }
+        },
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'Listing Gain (%)' },
+          ticks: {
+            callback: val => (val > 0 ? '+' : '') + val + '%'
+          }
+        }
+      }
+    }
+  });
+});
+</script>
+
+
+ 
 </body>
 </html>
