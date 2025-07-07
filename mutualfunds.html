@@ -967,6 +967,102 @@ function resetSWPMax() {
 }
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove all 'active' classes first
+  document.querySelectorAll('nav a').forEach(function(link) {
+    link.classList.remove('active');
+    // Compare only the filename part to handle different hosting/path situations
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+
+<button id="back-to-top" style="display:none;" aria-label="Back to Top">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+    <path d="M12 4L12 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 10L12 4L18 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span style="margin-left:7px;vertical-align:middle;">Top</span>
+</button>
+
+
+<script>
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  // Show when user scrolls below 400px
+  if (window.scrollY > 400) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
+});
+document.getElementById('back-to-top').onclick = function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+</script>
+
+<script>
+    function setMode(dark) {
+      if (dark) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark");
+        document.getElementById('dm-label').textContent = "☀️ Light Mode";
+        document.getElementById('darkmode-toggle').checked = true;
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("theme", "light");
+        document.getElementById('dm-label').textContent = "🌙 Dark Mode";
+        document.getElementById('darkmode-toggle').checked = false;
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('darkmode-toggle').addEventListener("change", function() {
+        setMode(this.checked);
+      });
+      const userPref = localStorage.getItem("theme");
+      const darkPref = userPref === "dark" ||
+        (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      setMode(darkPref);
+    });
+  </script>
+  
+  
+  <script>
+document.querySelectorAll('.floating-toc a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({top: target.offsetTop - 65, behavior: 'smooth'});
+    }
+  });
+});
+window.addEventListener('scroll', () => {
+  const sections = [
+    'about-mutual',
+    'types-mutual',
+    'benefits-mutual',
+    'risk-mutual',
+    'invest-mutual',
+    'sipcalc-mutual',
+	'swpcalc-mutual',
+	'top-mutual',
+	'tips-mutual'
+  ];
+  let current = '';
+  for (const id of sections) {
+    const sec = document.getElementById(id);
+    if (sec && window.scrollY + 120 >= sec.offsetTop) current = id;
+  }
+  document.querySelectorAll('.floating-toc a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
 
 </body>
 </html>
