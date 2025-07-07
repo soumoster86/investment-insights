@@ -797,19 +797,41 @@ document.getElementById('back-to-top').onclick = function() {
 document.addEventListener('DOMContentLoaded', function() {
   // --- 1. Model Portfolio Definitions ---
   const modelPortfolios = {
-    moderate: {
-      label: "Moderate (Balanced)",
-      allocation: { "Mutual Funds": 50, "Stocks": 30, "Bonds": 10, "Fixed Deposits": 10 }
-    },
-    aggressive: {
-      label: "Aggressive (Growth)",
-      allocation: { "Mutual Funds": 30, "Stocks": 50, "Bonds": 10, "Cryptocurrencies": 10 }
-    },
-    conservative: {
-      label: "Conservative (Safe)",
-      allocation: { "Mutual Funds": 25, "Bonds": 35, "Fixed Deposits": 35, "Stocks": 5 }
+  moderate: {
+    label: "Moderate (Balanced)",
+    allocation: { "Mutual Funds": 50, "Stocks": 30, "Bonds": 10, "Fixed Deposits": 10 },
+    recommendations: {
+      "Stocks": ["HDFC Bank", "Infosys", "Asian Paints"],
+      "Mutual Funds": ["Axis Bluechip Fund", "HDFC Hybrid Equity"],
+      "Bonds": ["REC Ltd NCD", "HDFC Ltd Bond"],
+      "Fixed Deposits": ["SBI FD @ 6.7%", "HDFC Bank FD @ 7%"],
+      "Cryptocurrencies": []
     }
-  };
+  },
+  aggressive: {
+    label: "Aggressive (Growth)",
+    allocation: { "Mutual Funds": 30, "Stocks": 50, "Bonds": 10, "Cryptocurrencies": 10 },
+    recommendations: {
+      "Stocks": ["Bharat Electronics", "Bharti Airtel", "Adani Enterprise"],
+      "Mutual Funds": ["Quant Small Cap Fund", "Mirae Asset Emerging Bluechip"],
+      "Bonds": ["Bharat Bond ETF"],
+      "Fixed Deposits": [],
+      "Cryptocurrencies": ["Bitcoin", "Ethereum", "Solana"]
+    }
+  },
+  conservative: {
+    label: "Conservative (Safe)",
+    allocation: { "Mutual Funds": 25, "Bonds": 35, "Fixed Deposits": 35, "Stocks": 5 },
+    recommendations: {
+      "Stocks": ["ITC"],
+      "Mutual Funds": ["ICICI Prudential Balanced Advantage"],
+      "Bonds": ["PFC Bond", "ICICI NCD"],
+      "Fixed Deposits": ["Post Office Time Deposit", "ICICI FD @ 7.25%"],
+      "Cryptocurrencies": []
+    }
+  }
+};
+
 
   let suggestApplied = false;
 
@@ -827,20 +849,33 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('modal-total-amt').addEventListener('input', updateSuggestionTable);
 
   function updateSuggestionTable() {
-    const risk = document.getElementById('risk-profile').value;
-    const total = parseFloat(document.getElementById('modal-total-amt').value) || 0;
-    const alloc = modelPortfolios[risk].allocation;
-    let html = `<table style="width:100%;margin:7px 0 10px 0;"><tr><th>Route</th><th>Suggested %</th><th>Amount (₹)</th></tr>`;
-    for (let route in alloc) {
-      html += `<tr>
-        <td>${route}</td>
-        <td>${alloc[route]}%</td>
-        <td>₹${Math.round((total * alloc[route]) / 100).toLocaleString('en-IN')}</td>
-      </tr>`;
-    }
-    html += "</table>";
-    document.getElementById('suggestion-table').innerHTML = html;
+  const risk = document.getElementById('risk-profile').value;
+  const total = parseFloat(document.getElementById('modal-total-amt').value) || 0;
+  const alloc = modelPortfolios[risk].allocation;
+  const recs = modelPortfolios[risk].recommendations;
+
+  let html = `<table style="width:100%;margin:7px 0 10px 0;">
+    <tr><th>Route</th><th>Suggested %</th><th>Amount (₹)</th></tr>`;
+  for (let route in alloc) {
+    html += `<tr>
+      <td>${route}</td>
+      <td>${alloc[route]}%</td>
+      <td>₹${Math.round((total * alloc[route]) / 100).toLocaleString('en-IN')}</td>
+    </tr>`;
   }
+  html += "</table>";
+
+  html += `<div style="margin-top:10px;"><h4 style="color:#004080;">🔍 Top Investment Picks</h4><ul style="padding-left:20px;">`;
+  for (let route in recs) {
+    if (recs[route] && recs[route].length > 0) {
+      html += `<li><b>${route}:</b> ${recs[route].join(', ')}</li>`;
+    }
+  }
+  html += "</ul></div>";
+
+  document.getElementById('suggestion-table').innerHTML = html;
+}
+
 
   // --- 3. Apply Portfolio: Autofill & Flag ---
   window.applySuggestedPortfolio = function() {
