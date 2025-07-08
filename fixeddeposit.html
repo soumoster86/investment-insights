@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights - FD</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -259,6 +260,33 @@
         min-width: unset;
       }
     }
+	
+	#fd-chart-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#fd-chart-container {
+  width: 100%;
+  margin: 20px 0 0 0;
+}
+#fdChart {
+  width: 100% !important;
+  height: 400px !important;
+  min-height: 320px;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+}
+@media (max-width: 800px) {
+  #fdChart {
+    height: 260px !important;
+    min-height: 180px;
+  }
+}
+
+	
   </style>
 </head>
 <body>
@@ -269,8 +297,11 @@
   <ul>
     <li><a href="#about-fd" style="font-style: italic;">About FDs</a></li>
     <li><a href="#benefits-fd" style="font-style: italic;">Benefits</a></li>
+	<li><a href="#types-fd" style="font-style: italic;">Types</a></li>
     <li><a href="#rates-fd" style="font-style: italic;">Top Rates</a></li>
     <li><a href="#fd-calculator" style="font-style: italic;">FD Calculator</a></li>
+	<li><a href="#taxation-fd" style="font-style: italic;">Taxation</a></li>
+	<li><a href="#compare-safe" style="font-style: italic;">Comparison</a></li>
     <li><a href="#tips-fd" style="font-style: italic;">Tips</a></li>
     <li><a href="#faq-fd" style="font-style: italic;">FAQs</a></li>
    </ul>
@@ -328,89 +359,185 @@
         <li><strong>Interest Payment Options:</strong> Monthly, quarterly, cumulative, or payout at maturity.</li>
       </ul>
     </section>
+	
+	<section id="types-fd">
+  <h3>Types of Fixed Deposits</h3>
+  <ul>
+    <li><strong>Regular FD:</strong> Standard fixed deposit for all investors.</li>
+    <li><strong>Tax-saving FD:</strong> 5-year lock-in, eligible for tax benefits under Section 80C.</li>
+    <li><strong>Senior Citizen FD:</strong> Higher interest rates for investors above 60 years.</li>
+    <li><strong>Flexi/Auto-sweep FD:</strong> Automatically sweeps excess savings into FD for higher returns with liquidity.</li>
+  </ul>
+</section>
+
 
     <section id="rates-fd">
-      <h3>Recommended Fixed Deposit Rates from Leading Banks (as of 2025)</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Bank</th>
-            <th>Interest Rate (Regular FD)</th>
-            <th>Interest Rate (Senior Citizens)</th>
-            <th>Tenure Range</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>State Bank of India (SBI)</td>
-            <td>5.40% - 6.10%</td>
-            <td>5.90% - 6.60%</td>
-            <td>7 days to 10 years</td>
-          </tr>
-          <tr>
-            <td>HDFC Bank</td>
-            <td>5.50% - 6.25%</td>
-            <td>6.00% - 6.75%</td>
-            <td>7 days to 10 years</td>
-          </tr>
-          <tr>
-            <td>ICICI Bank</td>
-            <td>5.50% - 6.20%</td>
-            <td>6.00% - 6.75%</td>
-            <td>7 days to 10 years</td>
-          </tr>
-          <tr>
-            <td>Axis Bank</td>
-            <td>5.75% - 6.25%</td>
-            <td>6.25% - 6.75%</td>
-            <td>7 days to 10 years</td>
-          </tr>
-          <tr>
-            <td>Punjab National Bank (PNB)</td>
-            <td>5.40% - 6.00%</td>
-            <td>5.90% - 6.50%</td>
-            <td>7 days to 10 years</td>
-          </tr>
-        </tbody>
-      </table>
-      <p style="font-size: 0.9em; color: #666;">
-        *Interest rates vary by tenure and are subject to change. Check the bank websites for latest rates.
-      </p>
-    </section>
+  <h3>Recommended Fixed Deposit Rates from Leading Banks (as of 2025)</h3>
+  <div style="overflow-x:auto;">
+  <table style="width:100%; border-collapse:collapse; min-width:540px;">
+    <thead>
+      <tr style="background:#eaf2ff;">
+        <th style="text-align:left; padding:8px 12px;">Bank</th>
+        <th style="text-align:center; padding:8px 12px;">Interest Rate<br>(Regular FD)</th>
+        <th style="text-align:center; padding:8px 12px;">Interest Rate<br>(Senior Citizens)</th>
+        <th style="text-align:center; padding:8px 12px;">Tenure Range</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:8px 12px;">State Bank of India (SBI)</td>
+        <td style="text-align:center;">5.40% – 6.10%</td>
+        <td style="text-align:center;">5.90% – 6.60%</td>
+        <td style="text-align:center;">7 days to 10 years</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 12px;">HDFC Bank</td>
+        <td style="text-align:center;">5.50% – 6.25%</td>
+        <td style="text-align:center;">6.00% – 6.75%</td>
+        <td style="text-align:center;">7 days to 10 years</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 12px;">ICICI Bank</td>
+        <td style="text-align:center;">5.50% – 6.20%</td>
+        <td style="text-align:center;">6.00% – 6.75%</td>
+        <td style="text-align:center;">7 days to 10 years</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 12px;">Axis Bank</td>
+        <td style="text-align:center;">5.75% – 6.25%</td>
+        <td style="text-align:center;">6.25% – 6.75%</td>
+        <td style="text-align:center;">7 days to 10 years</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 12px;">Punjab National Bank (PNB)</td>
+        <td style="text-align:center;">5.40% – 6.00%</td>
+        <td style="text-align:center;">5.90% – 6.50%</td>
+        <td style="text-align:center;">7 days to 10 years</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <small style="display:block;margin-top:7px; color:#5370a2;">
+    *Interest rates vary by tenure and are subject to change. Check the bank websites for latest rates.
+  </small>
+</section>
+
 
     <section id="fd-calculator">
-      <h3>Fixed Deposit Calculator</h3>
-      <label for="principal">Principal Amount (₹):</label>
-      <input type="number" id="principal" placeholder="Enter amount" min="0" />
+  <h3>FD Calculator</h3>
+  <form id="fd-form" onsubmit="calculateFD(event)">
+    <label for="fd-principal">Principal Amount (₹):</label>
+    <input type="number" id="fd-principal" min="1000" required placeholder="e.g. 1,00,000" />
 
-      <label for="rate">Annual Interest Rate (%):</label>
-      <input type="number" id="rate" placeholder="Enter interest rate" step="0.01" min="0" />
+    <label for="fd-rate">Interest Rate (% p.a.):</label>
+    <input type="number" id="fd-rate" min="1" step="0.01" required placeholder="e.g. 6.5" />
 
-      <label for="tenure">Tenure (years):</label>
-      <input type="number" id="tenure" placeholder="Enter tenure in years" min="0" />
+    <label>Tenure:</label>
+    <div style="display:flex;gap:10px;align-items:center;">
+     <input type="number" id="fd-years" min="0" placeholder="Years" style="width:80px;" />
+     <input type="number" id="fd-months" min="0" max="11" placeholder="Months" style="width:80px;" />
+     <input type="number" id="fd-days" min="0" max="31" placeholder="Days" style="width:80px;" />
+    </div>
 
-      <label for="compounding">Compounding Frequency:</label>
-      <select id="compounding">
-        <option value="1">Annually</option>
-        <option value="2">Half-Yearly</option>
-        <option value="4">Quarterly</option>
-        <option value="12">Monthly</option>
-      </select>
+    <label for="fd-compounding">Compounding Frequency:</label>
+    <select id="fd-compounding" required>
+      <option value="1" selected>Yearly</option>
+      <option value="2">Half-Yearly</option>
+      <option value="4" >Quarterly</option>
+      <option value="12">Monthly</option>
+    </select>
 
-      <button onclick="calculateFD()">Calculate Maturity Amount</button>
-      <p id="fd-result"></p>
-    </section>
+    <button class="btn" type="submit" style="margin-top:12px;">Calculate</button>
+	<button class="btn secondary" type="button" onclick="resetFDCalculator()" style="margin-top:12px;margin-left:8px;">Reset</button>
+  </form>
+     
+
+  <div id="fd-result" style="margin-top:20px; display:none;">
+    <h4>FD Summary</h4>
+    <ul>
+      <li><b>Total Interest Earned:</b> ₹<span id="fd-interest"></span></li>
+      <li><b>Maturity Amount:</b> ₹<span id="fd-maturity"></span></li>
+      <li><b>Effective Annual Yield (APY):</b> <span id="fd-apy"></span>%</li>
+    </ul>
+    <div id="fd-breakdown-table-container"></div>
+    <!-- Place this inside a main container that has at least 90vw or 100% width -->
+    <div id="fd-chart-container" style="width:100%;margin:20px 0 0 0;display:none;">
+      <canvas id="fdChart"></canvas>
+    </div>
+
+  </div>
+   </section>
+
+	
+	<section id="taxation-fd">
+  <h3>Taxation on FD Interest</h3>
+  <ul>
+    <li>Interest earned is fully taxable as per your income tax slab.</li>
+    <li>Banks deduct TDS if annual interest exceeds ₹40,000 (₹50,000 for seniors).</li>
+    <li>Submit Form 15G/15H if your total income is below taxable limits to avoid TDS.</li>
+  </ul>
+</section>
+
+    <section id="compare-safe">
+  <h3>FD vs Other Safe Investments</h3>
+  <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; min-width:440px;">
+      <thead>
+        <tr style="background:#eaf2ff;">
+          <th style="text-align:left; padding:8px 12px;">Instrument</th>
+          <th style="text-align:center; padding:8px 12px;">Interest Rate<br>(approx.)</th>
+          <th style="text-align:center; padding:8px 12px;">Lock-in</th>
+          <th style="text-align:center; padding:8px 12px;">Risk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:8px 12px;">Fixed Deposit</td>
+          <td style="text-align:center;">5.5–6.5%</td>
+          <td style="text-align:center;">Flexible</td>
+          <td style="text-align:center;">Low</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 12px;">Recurring Deposit</td>
+          <td style="text-align:center;">5.5–6.5%</td>
+          <td style="text-align:center;">Flexible</td>
+          <td style="text-align:center;">Low</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 12px;">Post Office Time Deposit</td>
+          <td style="text-align:center;">6–7%</td>
+          <td style="text-align:center;">1–5 yrs</td>
+          <td style="text-align:center;">Very Low</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 12px;">Senior Citizen Saving Scheme</td>
+          <td style="text-align:center;">6-7%</td>
+          <td style="text-align:center;">5 yrs</td>
+          <td style="text-align:center;">Very Low</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <small style="display:block;margin-top:7px; color:#5370a2;">
+    *Interest rates vary by tenure and are subject to change. Check the bank websites for latest rates.
+  </small>
+  
+</section>
+
+
+
 
     <section id="tips-fd">
-      <h3>Tips for Investing in Fixed Deposits</h3>
-      <ul>
-        <li>Compare rates from multiple banks and NBFCs to maximize returns.</li>
-        <li>Consider laddering your FDs with staggered maturities for better liquidity.</li>
-        <li>Be mindful of premature withdrawal penalties and lock-in periods.</li>
-        <li>Choose cumulative FDs if you want compounded interest payouts at maturity.</li>
-        <li>Review tax implications; interest income is taxable as per your slab.</li>
-      </ul>
-    </section>
+  <h3>Tips for Maximizing FD Returns</h3>
+  <ul>
+    <li>Ladder your FDs with different tenures to access liquidity and get better rates.</li>
+    <li>Compare rates across banks and NBFCs for the best deal.</li>
+    <li>Consider senior citizen FDs or tax-saving FDs for higher returns or tax benefits.</li>
+    <li>Use cumulative FDs if you don’t need regular interest payouts, for the power of compounding.</li>
+  </ul>
+</section>
+
 
     <section id="faq-fd">
       <h3>Frequently Asked Questions (FAQs)</h3>
@@ -431,45 +558,138 @@
     &copy; 2025 Investment Insights. All rights reserved.
   </footer>
 
-  <script>
-    function calculateFD() {
-      const principal = parseFloat(document.getElementById('principal').value);
-      const rate = parseFloat(document.getElementById('rate').value);
-      const tenure = parseFloat(document.getElementById('tenure').value);
-      const compounding = parseInt(document.getElementById('compounding').value);
+     <script>
+function calculateFD(event) {
+  event.preventDefault();
+  // Gather inputs
+  const P = parseFloat(document.getElementById('fd-principal').value);
+  const r = parseFloat(document.getElementById('fd-rate').value) / 100;
+  const n = parseInt(document.getElementById('fd-compounding').value);
 
-      if (isNaN(principal) || principal <= 0) {
-        alert('Please enter a valid principal amount.');
-        return;
+  const years = parseInt(document.getElementById('fd-years').value) || 0;
+  const months = parseInt(document.getElementById('fd-months').value) || 0;
+  const days = parseInt(document.getElementById('fd-days').value) || 0;
+  const totalYears = years + (months / 12) + (days / 365);
+
+  if (!P || !r || !n || totalYears <= 0) {
+    alert("Please fill all fields and provide a valid tenure.");
+    return;
+  }
+
+  // Compound interest calculation
+  const A = P * Math.pow(1 + r / n, n * totalYears);
+  const totalInterest = A - P;
+  const apy = (Math.pow(1 + r / n, n) - 1) * 100;
+
+  // Show summary
+  document.getElementById('fd-interest').innerText = totalInterest.toLocaleString('en-IN', {maximumFractionDigits: 2});
+  document.getElementById('fd-maturity').innerText = A.toLocaleString('en-IN', {maximumFractionDigits: 2});
+  document.getElementById('fd-apy').innerText = apy.toFixed(2);
+
+  // Year-wise breakdown (and handle partial last year)
+  let breakdownHTML = '<h4>Year-wise Breakdown</h4><table style="width:100%;margin-top:10px;border-collapse:collapse;"><tr style="background:#eaf2ff;"><th>Year</th><th>Principal Start (₹)</th><th>Interest Earned (₹)</th><th>End Balance (₹)</th></tr>';
+  let balance = P;
+  let chartLabels = [], principalData = [], interestData = [];
+  const totalPeriods = totalYears;
+  const fullYears = Math.floor(totalPeriods);
+  const remainder = totalPeriods - fullYears;
+
+  for (let y = 1; y <= fullYears; y++) {
+    const start = balance;
+    const end = P * Math.pow(1 + r / n, n * y);
+    const interest = end - balance;
+    breakdownHTML += `<tr>
+      <td style="text-align:center;">${y}</td>
+      <td style="text-align:right;">${start.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+      <td style="text-align:right;">${interest.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+      <td style="text-align:right;">${end.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+    </tr>`;
+    chartLabels.push('Year ' + y);
+    principalData.push(P);
+    interestData.push(end - P);
+    balance = end;
+  }
+
+  // Handle partial last period
+  if (remainder > 0) {
+    const start = balance;
+    const end = P * Math.pow(1 + r / n, n * totalPeriods);
+    const interest = end - balance;
+    // Show months and days for the label
+    const monthsPartial = Math.floor(remainder * 12);
+    const daysPartial = Math.round(((remainder * 12) - monthsPartial) * 30.44);
+    let partialLabel = '';
+    if (monthsPartial > 0) partialLabel += `${monthsPartial}m `;
+    if (daysPartial > 0) partialLabel += `${daysPartial}d`;
+    partialLabel = partialLabel.trim() || `${(remainder*12).toFixed(1)}m`;
+
+    breakdownHTML += `<tr>
+      <td style="text-align:center;">${fullYears + 1}${partialLabel ? ' (' + partialLabel + ')' : ''}</td>
+      <td style="text-align:right;">${start.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+      <td style="text-align:right;">${interest.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+      <td style="text-align:right;">${end.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+    </tr>`;
+    chartLabels.push('Yr ' + (fullYears + 1) + (partialLabel ? ' (' + partialLabel + ')' : ''));
+    principalData.push(P);
+    interestData.push(end - P);
+  }
+
+  breakdownHTML += '</table>';
+  document.getElementById('fd-breakdown-table-container').innerHTML = breakdownHTML;
+
+  // Draw the chart
+  if(window.fdChartInstance) window.fdChartInstance.destroy();
+  const ctx = document.getElementById('fdChart').getContext('2d');
+  window.fdChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartLabels,
+      datasets: [
+        {
+          label: 'Principal (₹)',
+          data: principalData,
+          backgroundColor: 'rgba(52,152,219,0.35)'
+        },
+        {
+          label: 'Interest Earned (₹)',
+          data: interestData,
+          backgroundColor: 'rgba(46,204,113,0.35)'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {position: 'top'},
+        title: {display: true, text: 'Principal vs Interest Growth'}
+      },
+      scales: {
+        x: {stacked:true},
+        y: {stacked:true, beginAtZero:true, ticks: {callback: value => value.toLocaleString('en-IN')}}
       }
-      if (isNaN(rate) || rate <= 0) {
-        alert('Please enter a valid interest rate.');
-        return;
-      }
-      if (isNaN(tenure) || tenure <= 0) {
-        alert('Please enter a valid tenure.');
-        return;
-      }
-
-      // Compound Interest Formula: A = P (1 + r/n)^(nt)
-      const r = rate / 100;
-      const n = compounding;
-      const t = tenure;
-
-      const maturityAmount = principal * Math.pow((1 + r / n), n * t);
-      const interestEarned = maturityAmount - principal;
-
-      document.getElementById('fd-result').textContent =
-        `Maturity Amount: ₹${maturityAmount.toFixed(2)} (Interest Earned: ₹${interestEarned.toFixed(2)})`;
-      
-	  // Example for FD Calculator page
-localStorage.setItem("lastCalculator", JSON.stringify({
-  name: "FD Calculator",
-  date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }),
-  link: "fixeddeposit.html" // Change this per calculator
-}));
     }
-  </script>
+  });
+
+  document.getElementById('fd-chart-container').style.display = 'block';
+  document.getElementById('fd-result').style.display = 'block';
+}
+
+// RESET function
+function resetFDCalculator() {
+  document.getElementById('fd-form').reset();
+  document.getElementById('fd-result').style.display = 'none';
+  document.getElementById('fd-interest').innerText = '';
+  document.getElementById('fd-maturity').innerText = '';
+  document.getElementById('fd-apy').innerText = '';
+  document.getElementById('fd-breakdown-table-container').innerHTML = '';
+  if (window.fdChartInstance) {
+    window.fdChartInstance.destroy();
+    window.fdChartInstance = null;
+  }
+  document.getElementById('fd-chart-container').style.display = 'none';
+}
+   </script>
 
 <script>
     function setMode(dark) {
