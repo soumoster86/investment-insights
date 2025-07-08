@@ -9,6 +9,77 @@
   
   <style>
   
+  
+  .ipo-float-menu {
+  position: fixed;
+  left: 30px;
+  top: 420px;    /* Adjust to sit nicely below your "On this page" menu if you have one */
+  z-index: 1002;
+  background: #fff;
+  border: 1.5px solid #e4eaf2;
+  box-shadow: 0 4px 20px #00408018;
+  border-radius: 16px;
+  padding: 16px 14px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 175px;
+  max-width: 220px;
+  font-size: 1.07em;
+  transition: box-shadow 0.18s, border-color 0.2s;
+  
+}
+.ipo-float-menu .float-title {
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 8px;
+  font-size: 1.09em;
+}
+.ipo-float-menu a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #22559b;
+  background: none;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 7px 4px 7px 2px;
+  border-radius: 6px;
+  transition: background .16s, color .18s;
+  font-size: 1em;
+  width: 100%;
+  margin: 0;              /* Remove top/bottom margin */
+}
+.ipo-float-menu a + a {
+  margin-top: 6px;        /* Add only a small gap between links */
+}
+
+.ipo-float-menu a:hover, .ipo-float-menu a.active {
+  background: #e9f0fd;
+  color: #004080;
+}
+@media (max-width: 1000px) {
+  .ipo-float-menu { right: 7px; top: 100px; width: 140px; }
+}
+@media (max-width: 600px) {
+  .ipo-float-menu { display: none; }
+}
+body.dark-mode .ipo-float-menu {
+  background: #182a43;
+  border-color: #2d3752;
+  box-shadow: 0 4px 22px #001a;
+}
+body.dark-mode .ipo-float-menu .float-title { color: #8abaff; }
+body.dark-mode .ipo-float-menu a { color: #b0cdfb; }
+body.dark-mode .ipo-float-menu a:hover,
+body.dark-mode .ipo-float-menu a.active {
+  background: #253458;
+  color: #fff;
+}
+
+  
+  
+  
   .ipo-table {
   width: 100%;
   border-collapse: separate;
@@ -45,6 +116,77 @@
 }
 .ipo-table td:last-child, .ipo-table th:last-
 
+
+body.dark-mode, html.dark-mode {
+  background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
+  color: #e7ecfa !important;
+}
+
+
+body.dark-mode {
+  background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
+  color: #e7ecfa !important;
+}
+
+body.dark-mode header,
+body.dark-mode nav,
+body.dark-mode footer {
+  background: #12203a !important;
+  color: #e7ecfa !important;
+}
+
+body.dark-mode main,
+body.dark-mode section,
+body.dark-mode .info-box,
+body.dark-mode .tips-box,
+body.dark-mode .faq-box,
+body.dark-mode .assumptions-box {
+  background: #191c23 !important;
+  color: #e7ecfa !important;
+  box-shadow: 0 2px 12px #0004;
+  border-color: #2d3752 !important;
+}
+
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode .faq-box h3, 
+body.dark-mode .tips-box h3, 
+body.dark-mode .assumptions-box h3 {
+  color: #8abaff !important;
+  border-color: #273a5a !important;
+}
+
+/* For tables */
+body.dark-mode table,
+body.dark-mode .ipo-table {
+  background: #1b2231 !important;
+}
+body.dark-mode th, 
+body.dark-mode td,
+body.dark-mode .ipo-table th,
+body.dark-mode .ipo-table td {
+  background: #23273b !important;
+  color: #e7ecfa !important;
+  border-color: #2d3752 !important;
+}
+body.dark-mode th {
+  background: #273a5a !important;
+  color: #b0cdfb !important;
+}
+
+/* For inputs, selects, etc */
+body.dark-mode input, 
+body.dark-mode select {
+  background: #222a3d !important;
+  color: #e7ecfa !important;
+  border: 1.3px solid #273a5a !important;
+}
+body.dark-mode label, 
+body.dark-mode small {
+  color: #b0cdfb !important;
+}
+
+	
   
   </style>
 </head>
@@ -80,6 +222,15 @@
 </nav>
 
   </header>
+  
+  <!-- Quick Access Floating Menu for IPO Section -->
+<nav class="ipo-float-menu">
+  <div class="float-title">Quick Access</div>
+  <a href="stocks.html">📊 Overview</a>
+  <a href="etf.html">📈 ETF</a>
+  <a href="intraday.html">⏱️ Intraday</a>
+</nav>
+  
   <main>
     <section>
       <h2>What is an IPO?</h2>
@@ -130,9 +281,20 @@
         <li>Allotted shares are credited to your Demat account on listing day.</li>
       </ol>
     </section>
+	
+	
+	<section>
+  <h3>Live IPO Listings</h3>
+  <a class="download-btn" href="https://www.nseindia.com/market-data/new-stock-exchange-listings-recent" target="_blank" rel="noopener">
+    📈 View Live IPO Listings at NSE India &raquo;
+  </a>
+  <div style="font-size:0.97em;color:#888;margin-top:8px;">
+    Also see: <a href="https://www.chittorgarh.com/ipo/ipo_calendar.asp" target="_blank" rel="noopener">Chittorgarh IPO Calendar</a> for more details and analysis.
+  </div>
+</section>
 
     <section>
-      <h3>Upcoming & Recent IPOs (2024)</h3>
+      <h3>Upcoming & Recent IPOs (2025)</h3>
       <table class="ipo-table">
   <thead>
     <tr>
@@ -333,6 +495,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<script>
+document.querySelectorAll('.ipo-float-menu a').forEach(function(link) {
+  if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+    link.classList.add('active');
+  }
+});
+</script>
 
  
 </body>

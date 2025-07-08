@@ -259,6 +259,38 @@
         min-width: unset;
       }
     }
+	
+	.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.dropdown-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 110%; /* directly below */
+  left: 0;
+  min-width: 180px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 22px #0013;
+  z-index: 100;
+  flex-direction: column;
+  padding: 10px 0;
+}
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: flex;
+}
+
+	
+	
+	
   </style>
 </head>
 <body>

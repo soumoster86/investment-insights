@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights - Intraday</title>
   <link rel="stylesheet" href="style.css" />
-  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -260,6 +260,138 @@
         min-width: unset;
       }
     }
+	
+	.active-stocks-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f9faff;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 10px 0 16px 0;
+  font-size: 1.08em;
+  box-shadow: 0 1px 8px #00408013;
+}
+.active-stocks-table th,
+.active-stocks-table td {
+  padding: 12px 20px;
+  vertical-align: middle;
+  font-weight: 400;
+}
+.active-stocks-table th {
+  background: #eaf2ff;
+  color: #19427a;
+  font-weight: bold;
+  text-align: left;
+  font-size: 1.09em;
+  letter-spacing: .01em;
+}
+.active-stocks-table td {
+  background: #fff;
+  color: #222;
+  border-bottom: 1px solid #e1eaf2;
+}
+.active-stocks-table tr:last-child td {
+  border-bottom: none;
+}
+/* Alignment for each column */
+.active-stocks-table td:nth-child(1),
+.active-stocks-table th:nth-child(1) {
+  text-align: left;
+}
+.active-stocks-table td:nth-child(2),
+.active-stocks-table th:nth-child(2),
+.active-stocks-table td:nth-child(3),
+.active-stocks-table th:nth-child(3),
+.active-stocks-table td:nth-child(4),
+.active-stocks-table th:nth-child(4) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 700px) {
+  .active-stocks-table th,
+  .active-stocks-table td { font-size: 0.97em; padding: 8px 7px; }
+}
+body.dark-mode .active-stocks-table th,
+body.dark-mode .active-stocks-table td {
+  background: #23273b !important;
+  color: #e7ecfa !important;
+  border-color: #2d3752 !important;
+}
+body.dark-mode .active-stocks-table th {
+  background: #273a5a !important;
+  color: #b0cdfb !important;
+}
+body.dark-mode .active-stocks-table {
+  background: #1b2231 !important;
+}
+
+.intraday-float-menu {
+  position: fixed;
+  left: 30px;
+  top: 440px;     /* Place below your header/nav; adjust as needed */
+  z-index: 1002;
+  background: #fff;
+  border: 1.5px solid #e4eaf2;
+  box-shadow: 0 4px 20px #00408018;
+  border-radius: 16px;
+  padding: 16px 14px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 175px;
+  max-width: 220px;
+  font-size: 1.07em;
+  transition: box-shadow 0.18s, border-color 0.2s;
+}
+.intraday-float-menu .float-title {
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 8px;
+  font-size: 1.09em;
+}
+.intraday-float-menu a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: #22559b;
+  background: none;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 7px 4px 7px 2px;
+  border-radius: 6px;
+  transition: background .16s, color .18s;
+  font-size: 1em;
+  width: 100%;
+}
+.intraday-float-menu a + a {
+  margin-top: 6px;
+}
+.intraday-float-menu a:hover, .intraday-float-menu a.active {
+  background: #e9f0fd;
+  color: #004080;
+}
+@media (max-width: 1000px) {
+  .intraday-float-menu { right: 7px; top: 100px; width: 140px; }
+}
+@media (max-width: 600px) {
+  .intraday-float-menu { display: none; }
+}
+body.dark-mode .intraday-float-menu {
+  background: #182a43;
+  border-color: #2d3752;
+  box-shadow: 0 4px 22px #001a;
+}
+body.dark-mode .intraday-float-menu .float-title { color: #8abaff; }
+body.dark-mode .intraday-float-menu a { color: #b0cdfb; }
+body.dark-mode .intraday-float-menu a:hover,
+body.dark-mode .intraday-float-menu a.active {
+  background: #253458;
+  color: #fff;
+}
+
+	
   </style>
   
 </head>
@@ -295,15 +427,233 @@
 </nav>
 
   </header>
-  <main>
+  
+     <!-- Quick Access Floating Menu for Intraday Section -->
+<nav class="intraday-float-menu">
+  <div class="float-title">Quick Access</div>
+  <a href="stocks.html">📊 Overview</a>
+  <a href="etf.html">📈 ETF</a>
+  <a href="ipo.html">🆕 IPO</a>
+</nav>
+
+  
+  
+    <main>
     <section>
-      <h2>Intraday Trading</h2>
-      <p>Intraday trading involves buying and selling stocks within the same trading day. Understand strategies, risks, chart patterns, and tools to use for intraday trades.</p>
+      <h2>What is Intraday Trading?</h2>
+      <p>
+        <b>Intraday trading</b> refers to buying and selling stocks or other financial instruments within the same trading day—positions are squared off before market close. The aim is to profit from short-term price movements, rather than long-term investment growth.
+      </p>
+    </section>
+
+    <section>
+      <h3>Sample Intraday Volatility Chart</h3>
+      <canvas id="intradayChart" style="max-width:100%;min-height:250px;"></canvas>
+      <div style="font-size:0.97em;color:#888;margin-top:4px;">
+        <i>Example: Simulated price movement of a stock during a single trading day.</i>
+      </div>
+    </section>
+
+    <section>
+      <h3>How Intraday Trading Works</h3>
+      <ol>
+        <li>You buy and sell stocks through your trading account, choosing the ‘Intraday’ or ‘MIS’ (Margin Intraday Square-off) option.</li>
+        <li>All open intraday positions are automatically squared off by the broker before market close (usually 3:15 PM IST).</li>
+        <li>You can trade with margin (leverage), meaning you can buy/sell more than your actual funds (but with higher risk).</li>
+        <li>Profits (or losses) are realized the same day, credited to your trading account.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Glossary: Key Intraday Trading Terms</h3>
+      <ul>
+        <li><b>Margin:</b> Borrowed funds from broker to trade larger positions than your balance allows.</li>
+        <li><b>Square Off:</b> Closing an open position (buy/sell) within the same trading day.</li>
+        <li><b>Stop-Loss:</b> An order set to automatically sell a position at a preset price to limit loss.</li>
+        <li><b>Volume:</b> Number of shares traded during a given period. High volume = high liquidity.</li>
+        <li><b>Volatility:</b> Degree of variation in stock price within a period—higher volatility means more price swings.</li>
+        <li><b>Leverage:</b> Using borrowed money to increase potential return (and risk).</li>
+        <li><b>Order Book:</b> Real-time list of buy and sell orders for a particular stock.</li>
+        <li><b>Bid-Ask Spread:</b> Difference between the highest price a buyer will pay and the lowest price a seller will accept.</li>
+        <li><b>Intraday High/Low:</b> Highest and lowest price of a stock during the trading day.</li>
+        <li><b>Scalping:</b> Intraday strategy involving multiple trades for small gains.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Popular Intraday Trading Strategies</h3>
+      <ul>
+        <li><b>Momentum Trading:</b> Buy stocks showing strong upward momentum; sell if momentum fades.</li>
+        <li><b>Breakout Trading:</b> Enter trades when price breaks above resistance or below support with volume.</li>
+        <li><b>Reversal/Mean Reversion:</b> Trade against the trend, expecting a price reversal.</li>
+        <li><b>Scalping:</b> Make many small trades for tiny profits; requires very quick execution.</li>
+        <li><b>Gap Trading:</b> Trade based on stocks opening much higher/lower than the previous day’s close.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Tips for Intraday Traders</h3>
+      <ul>
+        <li>Trade only with money you can afford to lose—risk management is critical.</li>
+        <li>Use stop-loss orders to limit potential losses.</li>
+        <li>Choose stocks with high liquidity and tight bid-ask spreads.</li>
+        <li>Don’t let emotions guide your trades—stick to your strategy.</li>
+        <li>Start small, practice on demo or with minimal capital before increasing size.</li>
+        <li>Track and analyze your trades to learn and improve.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Common Mistakes in Intraday Trading</h3>
+      <ul>
+        <li>Not setting stop-loss, leading to big losses.</li>
+        <li>Overtrading or chasing losses.</li>
+        <li>Ignoring transaction costs and taxes.</li>
+        <li>Trading illiquid or penny stocks.</li>
+        <li>Letting fear or greed override trading discipline.</li>
+      </ul>
+    </section>
+
+    <section>
+  <h3>Real-Time Most Active Stocks for Intraday Trading</h3>
+  
+  <table class="active-stocks-table">
+  <thead>
+    <tr>
+      <th>Stock</th>
+      <th>Last Price (₹)</th>
+      <th>Volume</th>
+      <th>Value (₹ Cr)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>RELIANCE</td><td>1,539.20</td><td>51,90,150</td><td>1,513.7</td></tr>
+    <tr><td>HDFC BANK</td><td>1,990.25</td><td>40,05,800</td><td>659.8</td></tr>
+    <tr><td>ICICI BANK</td><td>1,462.50</td><td>28,14,200</td><td>312.1</td></tr>
+    <tr><td>INFY</td><td>1,635.30</td><td>25,00,400</td><td>202.8</td></tr>
+    <tr><td>TATA MOTORS</td><td>690.90</td><td>22,85,100</td><td>197.3</td></tr>
+  </tbody>
+</table>
+
+
+  
+  <div style="margin-bottom:7px;color:#666;font-size:0.98em;">
+    <i>Click below to view top traded stocks on NSE, updated in real time.</i>
+  </div>
+  <a href="https://www.nseindia.com/market-data/live-equity-market"
+     target="_blank"
+     rel="noopener"
+     class="download-btn"
+     style="display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:1.09em;">
+    <span style="color:#27a243;">●</span> View Live Most Active Stocks at NSE India
+  </a>
+  <div style="font-size:0.97em;color:#888;margin-top:7px;">
+    <i>Data opens in a new tab for security reasons.</i>
+  </div>
+</section>
+
+
+    <section>
+      <h3>FAQs about Intraday Trading</h3>
+      <details>
+        <summary>Is intraday trading suitable for beginners?</summary>
+        <div>
+          Intraday trading is challenging and risky, especially for beginners. Start small, learn with virtual accounts, and never risk money you can’t afford to lose.
+        </div>
+      </details>
+      <details>
+        <summary>What is the minimum amount needed for intraday trading?</summary>
+        <div>
+          You can start with as little as ₹500–₹1,000, but higher capital allows better diversification and risk management. Remember, margin/leverage can amplify both gains and losses.
+        </div>
+      </details>
+      <details>
+        <summary>Do I need to pay taxes on intraday profits?</summary>
+        <div>
+          Yes. Intraday profits are considered speculative income and taxed as per your income slab. Keep detailed records for tax filing.
+        </div>
+      </details>
+      <details>
+        <summary>Can I hold intraday positions overnight?</summary>
+        <div>
+          No. Intraday trades must be closed the same day. If not, your broker will square them off automatically.
+        </div>
+      </details>
+      <details>
+        <summary>How to pick stocks for intraday trading?</summary>
+        <div>
+          Look for stocks with high liquidity, volatility, and trading volume. Nifty 50 or large-cap stocks are common choices.
+        </div>
+      </details>
+      <details>
+        <summary>Where can I learn intraday trading strategies?</summary>
+        <div>
+          Use broker-provided education, free courses, YouTube, books, and practice on paper-trading accounts.
+        </div>
+      </details>
     </section>
   </main>
   <footer>
     &copy; 2025 Investment Insights. All rights reserved.
   </footer>
+  
+  
+  <script>
+  // Simulated Intraday Chart Example (replace with real API if desired)
+  document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('intradayChart').getContext('2d');
+    const labels = [
+      "09:15", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",
+      "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:15"
+    ];
+    // Simulated price (₹)
+    const price = [
+      250.0, 251.8, 249.6, 252.2, 254.0, 253.1, 251.3,
+      252.5, 250.7, 248.9, 247.3, 246.8, 247.9, 249.5
+    ];
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "Price (₹)",
+          data: price,
+          borderColor: "#004080",
+          backgroundColor: "rgba(0,64,128,0.08)",
+          borderWidth: 2.3,
+          pointRadius: 2.5,
+          tension: 0.15,
+          fill: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx =>
+                "₹" + ctx.parsed.y.toFixed(2)
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            title: { display: true, text: "Price (₹)" },
+            ticks: {
+              callback: val =>
+                '₹' + val.toFixed(1)
+            }
+          },
+          x: {
+            title: { display: true, text: "Time" }
+          }
+        }
+      }
+    });
+  });
+  </script>
   
   <script>
     function setMode(dark) {
@@ -337,6 +687,15 @@
   </svg>
   <span style="margin-left:7px;vertical-align:middle;">Top</span>
 </button>
+
+
+<script>
+document.querySelectorAll('.intraday-float-menu a').forEach(function(link) {
+  if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+    link.classList.add('active');
+  }
+});
+</script>
 
 
 <script>
