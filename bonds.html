@@ -260,6 +260,13 @@
         min-width: unset;
       }
     }
+	
+	td {
+  word-break: break-word;
+  vertical-align: top;
+}
+
+	
   </style>
 </head>
 <body>
@@ -270,11 +277,13 @@
     <ul>
     <li><a href="#about-bonds" style="font-style: italic;">About Bonds</a></li>
     <li><a href="#benefits-bonds" style="font-style: italic;">Benefits</a></li>
-    <li><a href="#invest-bonds" style="font-style: italic;">How to Invest</a></li>
+	<li><a href="#bond-ratings" style="font-style: italic;">Bond Ratings</a></li>
+	<li><a href="#invest-bonds" style="font-style: italic;">How to Invest</a></li>
 	<li><a href="#bond-yield-calculator" style="font-style: italic;">Yield Calculator</a></li>
     <li><a href="#top-bonds" style="font-style: italic;">Top Picks</a></li>
     <li><a href="#tips-bonds" style="font-style: italic;">Investment Tips</a></li>
-   </ul>
+	<li><a href="#bond-laddering" style="font-style: italic;">Bond Laddering</a></li>
+	   </ul>
    </nav>
 
   <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
@@ -329,6 +338,79 @@
         <li><strong>Tax Benefits:</strong> Some bonds, like tax-free government bonds, offer tax incentives.</li>
       </ul>
     </section>
+	
+	
+	<section id="bond-ratings" style="margin-top:34px;">
+  <h3>Bond Ratings & Credit Risk</h3>
+  <div style="margin-bottom:14px;">
+    <b>What are Bond Ratings?</b>
+    <p>
+      Bond ratings are independent opinions on the creditworthiness of a bond issuer and their ability to meet interest and principal payments. Ratings like <b>AAA</b>, <b>AA+</b>, <b>AA</b>, <b>A</b>, <b>BBB</b>, etc., are assigned by credit rating agencies. Higher ratings (AAA/AA) mean lower credit risk, while lower ratings (BB and below) indicate higher risk of default.
+    </p>
+  </div>
+  <div style="margin-bottom:14px;">
+    <b>How do Credit Rating Agencies Work?</b>
+    <p>
+      Agencies such as <b>CRISIL</b>, <b>ICRA</b>, <b>CARE Ratings</b>, and <b>India Ratings</b> evaluate issuers based on financial strength, business outlook, management quality, and repayment history. They continuously monitor issuers and revise ratings as risks change. Ratings are crucial for investors, as they help assess the likelihood of timely interest and principal payments.
+    </p>
+  </div>
+  <div style="margin-bottom:12px;">
+    <b>Why do Bond Ratings Matter for Investors?</b>
+    <ul style="margin-left:18px;">
+      <li><b>Safety:</b> Higher-rated bonds (AAA/AA) are safer but typically offer lower yields. Lower-rated bonds offer higher returns but come with increased default risk.</li>
+      <li><b>Regulatory:</b> Many institutions and mutual funds can only invest in bonds above a certain rating.</li>
+      <li><b>Market Impact:</b> Downgrades can lead to price falls and liquidity issues, while upgrades may boost bond prices.</li>
+    </ul>
+  </div>
+  <div style="margin-bottom:10px;">
+    <b>Recent Notable Bond Rating Changes (India)</b>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; background:#f8faff; border-radius:8px;">
+  <tr style="background:#eaf2ff; color:#204a80;">
+    <th style="padding:7px 10px; text-align:left;">Issuer</th>
+    <th style="padding:7px 10px; text-align:left;">Old Rating</th>
+    <th style="padding:7px 10px; text-align:left;">New Rating</th>
+    <th style="padding:7px 10px; text-align:left;">Date</th>
+    <th style="padding:7px 10px; text-align:left;">Remarks</th>
+  </tr>
+  <tr>
+    <td style="padding:7px 10px; text-align:left;">Adani Ports</td>
+    <td style="padding:7px 10px; text-align:left;">AA+</td>
+    <td style="padding:7px 10px; text-align:left;">AAA</td>
+    <td style="padding:7px 10px; text-align:left;">May 2024</td>
+    <td style="padding:7px 10px; text-align:left;">Upgrade (business profile improved)</td>
+  </tr>
+  <tr>
+    <td style="padding:7px 10px; text-align:left;">Vodafone Idea</td>
+    <td style="padding:7px 10px; text-align:left;">BBB-</td>
+    <td style="padding:7px 10px; text-align:left;">BB+</td>
+    <td style="padding:7px 10px; text-align:left;">Jan 2024</td>
+    <td style="padding:7px 10px; text-align:left;">Downgrade (liquidity concerns)</td>
+  </tr>
+  <tr>
+    <td style="padding:7px 10px; text-align:left;">JSW Steel</td>
+    <td style="padding:7px 10px; text-align:left;">AA-</td>
+    <td style="padding:7px 10px; text-align:left;">AA</td>
+    <td style="padding:7px 10px; text-align:left;">Nov 2023</td>
+    <td style="padding:7px 10px; text-align:left;">Upgrade (debt reduction)</td>
+  </tr>
+  <tr>
+    <td style="padding:7px 10px; text-align:left;">IL&amp;FS</td>
+    <td style="padding:7px 10px; text-align:left;">BBB+</td>
+    <td style="padding:7px 10px; text-align:left;">D</td>
+    <td style="padding:7px 10px; text-align:left;">2023</td>
+    <td style="padding:7px 10px; text-align:left;">Downgrade (defaulted)</td>
+  </tr>
+</table>
+
+    </div>
+    <div style="font-size:0.94em; color:#6a6a6a; margin-top:7px;">
+      <i>Note: Always check the latest rating before investing. Even top-rated bonds can be downgraded if a company's financials worsen.</i>
+    </div>
+  </div>
+</section>
+
+	
 
 <section id="invest-bonds">
       <h3>How to Invest in Bonds</h3>
@@ -430,6 +512,83 @@
         <li>Review tax implications—tax-free bonds vs. taxable bonds.</li>
       </ul>
     </section>
+	
+	
+	<section id="bond-laddering" style="margin-top:34px;">
+  <h3>Bond Laddering & Portfolio Strategies</h3>
+  <div style="margin-bottom:12px;">
+    <b>What is Bond Laddering?</b>
+    <p>
+      Bond laddering is a strategy where you invest in multiple bonds with different maturity dates (e.g., 1, 3, 5, 7 years). As each bond matures, you reinvest the proceeds in a new long-term bond, creating a continuous cycle of maturing investments and steady cash flow.
+    </p>
+  </div>
+  <div style="margin-bottom:12px;">
+    <b>How to Create a Bond Ladder for Stable Income</b>
+    <ol style="margin-left:18px;">
+      <li>Choose your ladder length (e.g., 5 years) and divide your total investment across equal "rungs" (e.g., ₹1 lakh each in bonds maturing every year from Year 1 to Year 5).</li>
+      <li>Each year, as a bond matures, reinvest the principal into a new long-term bond at the end of the ladder.</li>
+      <li>This way, you receive regular maturity proceeds and reduce interest rate risk, as your investments are spread across different rates and periods.</li>
+    </ol>
+  </div>
+  <div style="margin-bottom:12px;">
+    <b>Portfolio Tips: Blending Bonds with Other Asset Classes</b>
+    <ul style="margin-left:18px;">
+      <li><b>Balance Risk:</b> Mix bonds with equities, mutual funds, and FDs to balance growth and safety.</li>
+      <li><b>Adjust to Goals:</b> For short-term needs, use higher allocation to short-duration bonds and FDs. For long-term goals, blend bonds with stocks and equity funds.</li>
+      <li><b>Liquidity & Tax:</b> Keep some investments in liquid funds or short-term bonds for emergencies. Consider tax-free bonds if you are in a higher tax bracket.</li>
+      <li><b>Review Regularly:</b> Rebalance your bond allocation every year or when interest rates change significantly.</li>
+    </ul>
+  </div>
+  <div style="font-size:0.96em; color:#35705b;">
+    <i>Smart tip:</i> A laddered portfolio reduces reinvestment risk and helps generate steady income, especially useful for retirees and conservative investors.
+  </div>
+</section>
+
+
+<div id="ladder-visual" style="margin: 24px 0 32px 0; display: flex; justify-content: center;">
+  <div style="background: #f4f7fa; border-radius: 15px; padding: 20px 26px; box-shadow: 0 2px 14px #00408013; max-width: 540px;">
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="font-weight: bold; color: #226b4a; font-size: 1.15em; text-align: center;">
+        <span style="font-size:1.3em;">🔗</span> Bond Laddering in Action
+      </div>
+      <div style="display: flex; align-items: flex-end; gap: 26px; justify-content: center;">
+        <!-- Each bond rung -->
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="height:32px;width:32px;border-radius:50%;background:#bee4d6;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#226b4a;">Y1</div>
+          <div style="height:40px;width:6px;background:#57bba7;margin:4px 0;"></div>
+          <div style="font-size:0.99em; color:#226b4a; font-weight:500; margin-top:4px;">1-Year Bond</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="height:32px;width:32px;border-radius:50%;background:#bee4d6;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#226b4a;">Y2</div>
+          <div style="height:64px;width:6px;background:#57bba7;margin:4px 0;"></div>
+          <div style="font-size:0.99em; color:#226b4a; font-weight:500; margin-top:4px;">2-Year Bond</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="height:32px;width:32px;border-radius:50%;background:#bee4d6;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#226b4a;">Y3</div>
+          <div style="height:88px;width:6px;background:#57bba7;margin:4px 0;"></div>
+          <div style="font-size:0.99em; color:#226b4a; font-weight:500; margin-top:4px;">3-Year Bond</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="height:32px;width:32px;border-radius:50%;background:#bee4d6;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#226b4a;">Y4</div>
+          <div style="height:112px;width:6px;background:#57bba7;margin:4px 0;"></div>
+          <div style="font-size:0.99em; color:#226b4a; font-weight:500; margin-top:4px;">4-Year Bond</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="height:32px;width:32px;border-radius:50%;background:#bee4d6;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#226b4a;">Y5</div>
+          <div style="height:136px;width:6px;background:#57bba7;margin:4px 0;"></div>
+          <div style="font-size:0.99em; color:#226b4a; font-weight:500; margin-top:4px;">5-Year Bond</div>
+        </div>
+      </div>
+      <div style="font-size:1em; color:#28587c; margin-top:16px; text-align:center;">
+        Each year, the maturing bond at the “lowest rung” is reinvested at the top, locking in current rates and creating a steady stream of income and liquidity.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	
+	
   </main>
 
   <footer>
@@ -654,10 +813,12 @@ window.addEventListener('scroll', () => {
   const sections = [
     'about-bonds',
     'benefits-bonds',
+	'bond-ratings',
     'invest-bonds',
 	'bond-yield-calculator',
     'top-bonds',
-    'tips-bonds'
+    'tips-bonds',
+	'bond-laddering'
   ];
   let current = '';
   for (const id of sections) {

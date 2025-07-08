@@ -775,4 +775,31 @@ body.dark-mode #bondYieldResult .note {
 }
 
 
+body.dark-mode table,
+body.dark-mode table tr,
+body.dark-mode table td,
+body.dark-mode table th {
+  background: #23273b !important;
+  color: #e7ecfa !important;
+  border-color: #2d3752 !important;
+}
+
+body.dark-mode table tr {
+  background: #23273b !important;
+}
+
+body.dark-mode table th {
+  background: #273a5a !important;
+  color: #b0cdfb !important;
+}
+
+body.dark-mode table td {
+  color: #e7ecfa !important;
+}
+
+body.dark-mode table tr:nth-child(even) td {
+  background: #242a3e !important;
+}
+
+
 /* End of CSS */
