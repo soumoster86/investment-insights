@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Investment Insights - US Stocks</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+  
+  
+    /* Floating Stock Quick Menu */
+.stock-float-menu {
+  position: fixed;
+  left: 30px;
+  top: 420px;    /* Adjust to sit nicely below your "On this page" menu if you have one */
+  z-index: 1002;
+  background: #fff;
+  border: 1.5px solid #e4eaf2;
+  box-shadow: 0 4px 20px #00408018;
+  border-radius: 16px;
+  padding: 16px 14px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 175px;
+  max-width: 220px;
+  font-size: 1.07em;
+  transition: box-shadow 0.18s, border-color 0.2s;
+}
+.stock-float-menu .float-title {
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 8px;
+  font-size: 1.09em;
+}
+.stock-float-menu a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 7px 0;
+  color: #22559b;
+  background: none;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 7px 4px 7px 2px;
+  border-radius: 6px;
+  transition: background .16s, color .18s;
+  font-size: 1em;
+  width: 100%;
+}
+.stock-float-menu a:hover, .stock-float-menu a.active {
+  background: #e9f0fd;
+  color: #004080;
+}
+@media (max-width: 1000px) {
+  .stock-float-menu { right: 7px; top: 100px; width: 140px; }
+}
+@media (max-width: 600px) {
+  .stock-float-menu { display: none; }
+}
+body.dark-mode .stock-float-menu {
+  background: #182a43;
+  border-color: #2d3752;
+  box-shadow: 0 4px 22px #001a;
+}
+body.dark-mode .stock-float-menu .float-title { color: #8abaff; }
+body.dark-mode .stock-float-menu a { color: #b0cdfb; }
+body.dark-mode .stock-float-menu a:hover,
+body.dark-mode .stock-float-menu a.active {
+  background: #253458;
+  color: #fff;
+}
+
+
+  
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(120deg, #e9f0fd 0%, #f4f6f8 100%);
+      color: #222;
+      min-height: 100vh;
+      transition: background 0.4s, color 0.3s;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    header img {
+      height: 50px;
+      margin-right: 15px;
+      border-radius: 10px;
+      background: #fff;
+      padding: 3px;
+      box-shadow: 0 2px 6px #0001;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 1.5em;
+    }
+    #dm-label {
+      color: white;
+      font-size: 1em;
+    }
+    nav {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: none;
+      color: inherit;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 14px;
+      font-weight: 500;
+      font-size: 1.08em;
+      padding: 7px 10px;
+      border-radius: 7px;
+      transition: background .22s;
+    }
+    nav a.active,
+    nav a:hover {
+      background: #012b54;
+      text-decoration: underline;
+    }
+    main {
+      max-width: 900px;
+      margin: 36px auto 24px auto;
+      padding: 0 15px 30px 15px;
+      background: #fff;
+      box-shadow: 0 2px 12px rgb(0 64 128 / 8%);
+      border-radius: 18px;
+      min-height: 75vh;
+      animation: fadeIn 0.8s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    section {
+      margin-bottom: 34px;
+      padding: 20px 22px;
+      border: 1.5px solid #e1e6f2;
+      border-radius: 12px;
+      background: #f9faff;
+      box-shadow: 0 1px 10px #00408009;
+      transition: box-shadow 0.18s, border-color 0.2s;
+    }
+    section:hover {
+      box-shadow: 0 2px 22px #00408017;
+      border-color: #00408055;
+    }
+    h2 {
+      border-bottom: 2px solid #004080;
+      padding-bottom: 8px;
+      color: #004080;
+      margin-top: 0;
+      font-size: 1.5em;
+    }
+    h3 {
+      color: #004080;
+      font-size: 1.17em;
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+  
+    body.dark-mode, html.dark-mode {
+  background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
+  color: #e7ecfa !important;
+}
+
+
+body.dark-mode {
+  background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
+  color: #e7ecfa !important;
+}
+
+body.dark-mode header,
+body.dark-mode nav,
+body.dark-mode footer {
+  background: #12203a !important;
+  color: #e7ecfa !important;
+}
+
+body.dark-mode main,
+body.dark-mode section,
+body.dark-mode .info-box,
+body.dark-mode .tips-box,
+body.dark-mode .faq-box,
+body.dark-mode .assumptions-box {
+  background: #191c23 !important;
+  color: #e7ecfa !important;
+  box-shadow: 0 2px 12px #0004;
+  border-color: #2d3752 !important;
+}
+
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode .faq-box h3, 
+body.dark-mode .tips-box h3, 
+body.dark-mode .assumptions-box h3 {
+  color: #8abaff !important;
+  border-color: #273a5a !important;
+}
+
+/* For tables */
+body.dark-mode table,
+body.dark-mode .ipo-table {
+  background: #1b2231 !important;
+}
+body.dark-mode th, 
+body.dark-mode td,
+body.dark-mode .ipo-table th,
+body.dark-mode .ipo-table td {
+  background: #23273b !important;
+  color: #e7ecfa !important;
+  border-color: #2d3752 !important;
+}
+body.dark-mode th {
+  background: #273a5a !important;
+  color: #b0cdfb !important;
+}
+
+/* For inputs, selects, etc */
+body.dark-mode input, 
+body.dark-mode select {
+  background: #222a3d !important;
+  color: #e7ecfa !important;
+  border: 1.3px solid #273a5a !important;
+}
+body.dark-mode label, 
+body.dark-mode small {
+  color: #b0cdfb !important;
+}
+  
+  .us-stocks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 22px 32px;    /* row-gap, column-gap */
+  margin-top: 18px;
+}
+@media (max-width: 800px) {
+  .us-stocks-grid { grid-template-columns: 1fr; }
+}
+
+.us-stock-card {
+  background: #f9faff;
+  border-radius: 11px;
+  box-shadow: 0 1px 8px #00408012;
+  border: 1.2px solid #e4eaf2;
+  padding: 18px 18px 14px 18px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.us-stock-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+.us-stock-header img {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #fff;
+  object-fit: contain;
+  box-shadow: 0 0 0 1px #e3e8f3;
+}
+.us-stock-header strong {
+  font-size: 1.13em;
+  font-weight: 600;
+  margin-right: 6px;
+}
+.us-stock-sector {
+  background: #eaf2ff;
+  color: #2766be;
+  border-radius: 5px;
+  padding: 1px 7px;
+  font-size: 0.95em;
+  margin-left: 10px;
+}
+.us-stock-desc {
+  font-size: 1em;
+  color: #2c3851;
+  margin-bottom: 3px;
+}
+.us-stock-stars {
+  font-size: 1.26em;
+  color: #ffc107;
+  margin: 3px 0 0 0;
+}
+.us-stock-details {
+  margin-top: 10px;
+}
+.us-stock-details .btn {
+  background: #004080;
+  color: #fff;
+  border: none;
+  padding: 7px 17px;
+  border-radius: 7px;
+  font-size: 1em;
+  font-weight: 500;
+  transition: background .19s, color .16s;
+  text-decoration: none;
+  box-shadow: 0 1px 4px #00408012;
+}
+.us-stock-details .btn:hover {
+  background: #012b54;
+}
+
+  .tradingview-widget-container {
+  margin: 16px 0 24px 0;
+}
+  
+  
+  </style>
+  
+  
+</head>
+<body>
+  <!-- Floating menu for quick nav under stocks -->
+  <nav class="stock-float-menu">
+    <div class="float-title">Quick Access</div>
+    <a href="stocks.html"><span>📊</span> Overview</a>
+	<a href="etf.html">📈 ETF</a>
+    <a href="ipo.html">🆕 IPO</a>
+    <a href="intraday.html">⏱️ Intraday</a>
+    <a href="usstocks.html" class="active">🇺🇸 US Stocks</a>
+  </nav>
+  <!-- Floating ToC (optional) -->
+  <!--
+  <nav class="floating-toc" id="floating-toc">
+    <div class="toc-title">On this page</div>
+    <ul>
+      <li><a href="#about-usstocks"><i>About US Stocks</i></a></li>
+      <li><a href="#why-invest-us"><i>Why Invest</i></a></li>
+      <li><a href="#how-invest-us"><i>How to Invest</i></a></li>
+      <li><a href="#top-us-stocks"><i>Top US Stocks</i></a></li>
+      <li><a href="#us-tips"><i>Investment Tips</i></a></li>
+    </ul>
+  </nav>
+  <-->
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center;">
+      <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
+      <h1>💡Investment Insights: Learn. Grow. Prosper.</h1>
+    </div>
+    <label style="display: flex; align-items: center; gap: 8px; cursor:pointer; margin-top: 10px;">
+      <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
+      <span id="dm-label">🌙 Dark Mode</span>
+    </label>
+    <nav class="main-nav">
+      <a href="index.html">🏠 Home</a>
+      <div class="dropdown">
+        <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
+        <div class="dropdown-menu">
+          <a href="stocks.html"><span>📊</span> Overview</a>
+          <a href="etf.html"><span>📈</span> ETF</a>
+          <a href="ipo.html"><span>🆕</span> IPO</a>
+          <a href="intraday.html"><span>⏱️</span> Intraday</a>
+          <a href="usstocks.html"><span>🇺🇸</span> US Stocks</a>
+        </div>
+      </div>
+      <a href="mutualfunds.html">📁 Mutual Funds</a>
+      <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
+      <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
+      <a href="bonds.html">💸 Bonds</a>
+      <a href="investmentgoal.html">🎯 Investment Goal</a>
+      <a href="contact.html">✉️ Contact</a>
+    </nav>
+  </header>
+  
+  
+    <!-- TradingView US Stocks Live Ticker -->
+<div class="tradingview-widget-container" style="margin:18px 0;">
+  <div id="tradingview_us_ticker"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+    "symbols": [
+      { "proName": "NASDAQ:AAPL", "title": "Apple" },
+      { "proName": "NASDAQ:MSFT", "title": "Microsoft" },
+      { "proName": "NASDAQ:GOOGL", "title": "Alphabet" },
+      { "proName": "NASDAQ:AMZN", "title": "Amazon" },
+      { "proName": "NASDAQ:NVDA", "title": "Nvidia" },
+      { "proName": "NASDAQ:TSLA", "title": "Tesla" },
+      { "proName": "NASDAQ:META", "title": "Meta" },
+      { "proName": "NYSE:BRK.B", "title": "Berkshire Hathaway" },
+      { "proName": "NYSE:JPM", "title": "JPMorgan Chase" },
+      { "proName": "NYSE:WMT", "title": "Walmart" },
+      { "proName": "NYSE:PG", "title": "Procter & Gamble" },
+      { "proName": "NYSE:V", "title": "Visa" },
+      { "proName": "NYSE:JNJ", "title": "Johnson & Johnson" },
+      { "proName": "NYSE:KO", "title": "Coca-Cola" },
+      { "proName": "NYSE:MCD", "title": "McDonald's" },
+      { "proName": "NYSE:XOM", "title": "Exxon Mobil" },
+      { "proName": "NASDAQ:NFLX", "title": "Netflix" },
+      { "proName": "NASDAQ:PEP", "title": "PepsiCo" },
+      { "proName": "NASDAQ:SBUX", "title": "Starbucks" },
+      { "proName": "NASDAQ:COST", "title": "Costco" },
+      { "proName": "NASDAQ:QQQ", "title": "Invesco QQQ" },
+      { "proName": "AMEX:VOO", "title": "Vanguard S&P 500 ETF" },
+      { "proName": "NYSEARCA:SPY", "title": "SPDR S&P 500 ETF" },
+      { "proName": "NYSEARCA:IVV", "title": "iShares Core S&P 500 ETF" },
+      { "proName": "OANDA:SPX500USD", "title": "S&P 500" },
+      { "proName": "DJI:DJI", "title": "Dow Jones" }
+    ],
+    "colorTheme": "light",
+    "isTransparent": false,
+    "displayMode": "adaptive",
+    "locale": "en"
+  }
+  </script>
+</div>
+
+
+  
+  
+  <main>
+   
+	<section id="us-market-overview">
+  <h2>About US Market</h2>
+  <p>
+    The United States is home to the world’s largest and most influential stock markets—the <b>New York Stock Exchange (NYSE)</b> and <b>NASDAQ</b>. The US stock market is the backbone of global investing, with indices like the S&P 500, Nasdaq 100, and Dow Jones Industrial Average setting the tone for international investors.
+  </p>
+  <ul>
+    <li><b>S&P 500:</b> 500 largest US companies, represents over 80% of total US market cap.</li>
+    <li><b>NASDAQ 100:</b> Tech-heavy, includes Apple, Microsoft, Amazon, Nvidia, Tesla, and more.</li>
+    <li><b>Dow Jones:</b> 30 blue-chip US companies, oldest stock index in the US.</li>
+  </ul>
+  <p>
+    With a market cap exceeding <b>$45 trillion</b>, the US market offers innovation, global leadership, and sectoral depth unmatched by any other economy.
+  </p>
+</section>
+	
+    <section id="why-invest-us">
+      <h3>Why Invest in US Stocks?</h3>
+      <ul>
+        <li>Access to world’s largest and most innovative companies</li>
+        <li>Diversification outside India for currency & geo-risk</li>
+        <li>Participate in global trends (AI, Tech, EVs, Healthcare)</li>
+        <li>Potential for strong long-term dollar returns</li>
+      </ul>
+    </section>
+    <section id="how-invest-us">
+      <h3>How to Invest in US Stocks from India?</h3>
+      <ul>
+        <li>Use Indian brokers with global access: <a href="https://www.indmoney.com/us-stocks" target="_blank">IndMoney</a>, <a href="https://www.motilaloswal.com/us-stocks" target="_blank">Motilal Oswal</a>, <a href="https://www.hdfcsec.com/globalinvesting" target="_blank">HDFC Securities</a>, etc.</li>
+        <li>Invest in US-focused mutual funds or ETFs (like Nasdaq 100 ETF)</li>
+        <li>Open accounts with global platforms (e.g., Vested, INDmoney)</li>
+        <li>Be aware of LRS ($250,000/year limit) and RBI rules</li>
+      </ul>
+    </section>
+	
+	<section>
+  <h3>S&P 500 vs Nifty 50 (10-Year Returns)</h3>
+  <canvas id="usIndiaChart" style="max-width:100%;min-height:260px;"></canvas>
+</section>
+<script>
+const ctx = document.getElementById('usIndiaChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'],
+    datasets: [
+      {
+        label: 'S&P 500 (USD)',
+        data: [2044,2238,2673,2506,3230,3756,4766,3839,4765,5335],
+        borderColor: '#1976d2',
+        fill: false
+      },
+      {
+        label: 'Nifty 50 (INR)',
+        data: [8283,8186,10530,10862,12168,13982,17354,18105,21631,24010],
+        borderColor: '#ff9800',
+        fill: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+</script>
+
+    <section id="us-indices-etfs">
+  <h3>Major US Indices & Popular ETFs</h3>
+  <table style="width:100%;background:#f9faff;border-radius:10px;overflow:hidden;margin-top:12px;">
+    <thead>
+      <tr style="background:#eaf2ff;">
+        <th>Index/ETF</th>
+        <th>Symbol</th>
+        <th>Description</th>
+        <th>5Y CAGR*</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>S&P 500</td>
+        <td>^GSPC</td>
+        <td>500 largest US companies</td>
+        <td>13.7%</td>
+      </tr>
+      <tr>
+        <td>Nasdaq 100</td>
+        <td>^NDX</td>
+        <td>Top 100 non-financial tech-heavy stocks</td>
+        <td>18.2%</td>
+      </tr>
+      <tr>
+        <td>Dow Jones</td>
+        <td>^DJI</td>
+        <td>30 blue-chip US companies</td>
+        <td>9.6%</td>
+      </tr>
+      <tr>
+        <td>Vanguard S&P 500 ETF</td>
+        <td>VOO</td>
+        <td>Low-cost S&P 500 index fund</td>
+        <td>13.6%</td>
+      </tr>
+      <tr>
+        <td>Invesco QQQ ETF</td>
+        <td>QQQ</td>
+        <td>Tracks Nasdaq 100</td>
+        <td>18.1%</td>
+      </tr>
+      <tr>
+        <td>iShares Core S&P 500 ETF</td>
+        <td>IVV</td>
+        <td>Another S&P 500 option</td>
+        <td>13.6%</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:0.97em;color:#888;margin-top:5px;">
+    *5Y CAGR as of June 2025 (USD, before taxes). Source: Yahoo Finance.
+  </div>
+</section>
+
+
+	
+    <section id="top-us-stocks">
+  <h3>Top US Stocks</h3>
+  <div class="us-stocks-grid">
+    <!-- Apple -->
+    <div class="us-stock-card">
+      <div class="us-stock-header">
+        <img src="https://logo.clearbit.com/apple.com" alt="Apple">
+        <div>
+          <strong>Apple (AAPL)</strong>
+          <span class="us-stock-sector">Tech</span>
+        </div>
+      </div>
+      <div class="us-stock-desc">
+        World’s largest company, iPhone, Mac, services ecosystem
+      </div>
+      <div class="us-stock-stars">★ ★ ★ ★ ★</div>
+      <div class="us-stock-details">
+        <a href="https://finance.yahoo.com/quote/AAPL" target="_blank" class="btn">Details</a>
+      </div>
+    </div>
+    <!-- Microsoft -->
+    <div class="us-stock-card">
+      <div class="us-stock-header">
+        <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft">
+        <div>
+          <strong>Microsoft (MSFT)</strong>
+          <span class="us-stock-sector">Tech</span>
+        </div>
+      </div>
+      <div class="us-stock-desc">
+        Cloud leader (Azure), Windows, AI, enterprise software
+      </div>
+      <div class="us-stock-stars">★ ★ ★ ★ ★</div>
+      <div class="us-stock-details">
+        <a href="https://finance.yahoo.com/quote/MSFT" target="_blank" class="btn">Details</a>
+      </div>
+    </div>
+    <!-- Alphabet (Google) -->
+    <div class="us-stock-card">
+      <div class="us-stock-header">
+        <img src="https://logo.clearbit.com/abc.xyz" alt="Alphabet">
+        <div>
+          <strong>Alphabet (GOOGL)</strong>
+          <span class="us-stock-sector">Tech</span>
+        </div>
+      </div>
+      <div class="us-stock-desc">
+        Google, YouTube, Android, search & AI innovation
+      </div>
+      <div class="us-stock-stars">★ ★ ★ ★ ★</div>
+      <div class="us-stock-details">
+        <a href="https://finance.yahoo.com/quote/GOOGL" target="_blank" class="btn">Details</a>
+      </div>
+    </div>
+    <!-- Amazon -->
+    <div class="us-stock-card">
+      <div class="us-stock-header">
+        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon">
+        <div>
+          <strong>Amazon (AMZN)</strong>
+          <span class="us-stock-sector">E-Commerce</span>
+        </div>
+      </div>
+      <div class="us-stock-desc">
+        E-commerce leader, AWS cloud, Prime ecosystem
+      </div>
+      <div class="us-stock-stars">★ ★ ★ ★ ★</div>
+      <div class="us-stock-details">
+        <a href="https://finance.yahoo.com/quote/AMZN" target="_blank" class="btn">Details</a>
+      </div>
+    </div>
+    <!-- Tesla -->
+    <div class="us-stock-card">
+      <div class="us-stock-header">
+        <img src="https://logo.clearbit.com/tesla.com" alt="Tesla">
+        <div>
+          <strong>Tesla (TSLA)</strong>
+          <span class="us-stock-sector">EV/Tech</span>
+        </div>
+      </div>
+      <div class="us-stock-desc">
+        Electric vehicles, battery tech, renewable energy
+      </div>
+      <div class="us-stock-stars">★ ★ ★ ★ ☆</div>
+      <div class="us-stock-details">
+        <a href="https://finance.yahoo.com/quote/TSLA" target="_blank" class="btn">Details</a>
+      </div>
+    </div>
+    <!-- Nvidia -->
+    <div class="us-stock-card">
+      <div class="us-stock-header">
+        <img src="https://logo.clearbit.com/nvidia.com" alt="Nvidia">
+        <div>
+          <strong>Nvidia (NVDA)</strong>
+          <span class="us-stock-sector">Semiconductors</span>
+        </div>
+      </div>
+      <div class="us-stock-desc">
+        AI chips, graphics processors, data center growth
+      </div>
+      <div class="us-stock-stars">★ ★ ★ ★ ★</div>
+      <div class="us-stock-details">
+        <a href="https://finance.yahoo.com/quote/NVDA" target="_blank" class="btn">Details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+     <section id="us-dividend-stocks">
+  <h3>Top US Dividend Stocks</h3>
+  <table style="width:100%;background:#f9faff;border-radius:10px;overflow:hidden;margin-top:12px;">
+    <thead>
+      <tr style="background:#eaf2ff;">
+        <th>Company</th>
+        <th>Symbol</th>
+        <th>Dividend Yield</th>
+        <th>Sector</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Johnson & Johnson</td>
+        <td>JNJ</td>
+        <td>3.4%</td>
+        <td>Healthcare</td>
+      </tr>
+      <tr>
+        <td>Procter & Gamble</td>
+        <td>PG</td>
+        <td>2.5%</td>
+        <td>Consumer</td>
+      </tr>
+      <tr>
+        <td>Coca-Cola</td>
+        <td>KO</td>
+        <td>3.1%</td>
+        <td>Beverages</td>
+      </tr>
+      <tr>
+        <td>PepsiCo</td>
+        <td>PEP</td>
+        <td>2.9%</td>
+        <td>Beverages</td>
+      </tr>
+      <tr>
+        <td>Exxon Mobil</td>
+        <td>XOM</td>
+        <td>3.6%</td>
+        <td>Energy</td>
+      </tr>
+      <tr>
+        <td>3M Company</td>
+        <td>MMM</td>
+        <td>5.6%</td>
+        <td>Industrials</td>
+      </tr>
+      <tr>
+        <td>Chevron</td>
+        <td>CVX</td>
+        <td>4.2%</td>
+        <td>Energy</td>
+      </tr>
+      <tr>
+        <td>IBM</td>
+        <td>IBM</td>
+        <td>4.1%</td>
+        <td>Tech</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:0.97em;color:#888;margin-top:5px;">
+    Yields as of July 2025 (approximate). Source: Yahoo Finance/SeekingAlpha.
+  </div>
+</section>
+
+
+    <section id="us-tax-risk">
+  <h3>Taxation & Risks for Indian Investors</h3>
+  <ul>
+    <li>
+      <b>Currency Risk:</b> US investments are in USD; INR-USD exchange rate fluctuations can impact your returns (positively or negatively).
+    </li>
+    <li>
+      <b>Tax on US Stocks:</b> Capital gains from US stocks/ETFs are taxed in India as per your income slab (if held <2 years), and at 20% with indexation for >2 years. No tax in US on capital gains for Indians.
+    </li>
+    <li>
+      <b>Dividend Tax:</b> US deducts 25% withholding tax on dividends (post W-8BEN form). Dividends are taxed again in India (with foreign tax credit).
+    </li>
+    <li>
+      <b>LRS Limit:</b> You can remit up to $250,000 per financial year (under RBI’s Liberalized Remittance Scheme).
+    </li>
+    <li>
+      <b>Remittance Tax (TCS):</b> Tax Collected at Source (TCS) is levied on overseas investments above ₹7 lakh/year. You can claim this back while filing ITR.
+    </li>
+    <li>
+      <b>Other Risks:</b> US market volatility, regulatory risk, geo-political events, and unfamiliarity with US companies/sectors.
+    </li>
+  </ul>
+  <div class="tips-box" style="background:#fffcf2;border:1.2px solid #f2e7b1;border-radius:8px;margin-top:14px;padding:14px 16px;">
+    <b>Tip:</b> Consult a tax advisor for the latest tax rules before investing in US markets.
+  </div>
+</section>
+
+
+
+    <section id="us-tips">
+      <h3>Tips for US Equity Investing</h3>
+      <ul>
+        <li>Start with US ETFs or Index Funds for easy diversification</li>
+        <li>Track currency conversion (INR-USD) costs & taxes</li>
+        <li>Monitor US earnings, Fed news, global macro trends</li>
+        <li>Beware of time-zone differences for trading</li>
+      </ul>
+    </section>
+	
+	
+	<section id="us-links">
+  <h3>Resources & Useful Links</h3>
+  <ul style="line-height:2;">
+    <li><a href="https://www.investor.gov/introduction-investing" target="_blank">US SEC: Introduction to Investing</a></li>
+    <li><a href="https://www.nasdaq.com/" target="_blank">NASDAQ Official Site</a></li>
+    <li><a href="https://www.nyse.com/index" target="_blank">NYSE Official Site</a></li>
+    <li><a href="https://www.rbi.org.in/Scripts/FAQView.aspx?Id=115" target="_blank">RBI LRS Guidelines (for Indians)</a></li>
+    <li><a href="https://www.vested.co.in/learn/taxation" target="_blank">Vested: US Stocks Taxation for Indians</a></li>
+    <li><a href="https://www.valuepenguin.com/how-to-invest-us-stock-market-india" target="_blank">How to Invest in US Stocks from India (Guide)</a></li>
+    <li><a href="https://www.moneycontrol.com/stocks/marketstats/index.php" target="_blank">MoneyControl: US Market Live</a></li>
+    <li><a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a></li>
+  </ul>
+</section>
+
+	
+	
+	
+  </main>
+  <footer>
+    &copy; 2025 Investment Insights. All rights reserved.
+  </footer>
+  
+  
+  
+  <script>
+    function setMode(dark) {
+      if (dark) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark");
+        document.getElementById('dm-label').textContent = "☀️ Light Mode";
+        document.getElementById('darkmode-toggle').checked = true;
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("theme", "light");
+        document.getElementById('dm-label').textContent = "🌙 Dark Mode";
+        document.getElementById('darkmode-toggle').checked = false;
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('darkmode-toggle').addEventListener("change", function() {
+        setMode(this.checked);
+      });
+      const userPref = localStorage.getItem("theme");
+      const darkPref = userPref === "dark" ||
+        (!userPref && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      setMode(darkPref);
+    });
+  </script>
+  
+   <button id="back-to-top" style="display:none;" aria-label="Back to Top">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+    <path d="M12 4L12 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 10L12 4L18 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span style="margin-left:7px;vertical-align:middle;">Top</span>
+</button>
+  
+  <script>
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  // Show when user scrolls below 400px
+  if (window.scrollY > 400) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
+});
+document.getElementById('back-to-top').onclick = function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+</script> 
+  
+<script>
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  // Show when user scrolls below 400px
+  if (window.scrollY > 400) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
+});
+document.getElementById('back-to-top').onclick = function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+</script>
+  
+</body>
+</html>

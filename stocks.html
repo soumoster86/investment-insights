@@ -301,6 +301,8 @@
   <a href="etf.html">📈 ETF</a>
   <a href="ipo.html">🆕 IPO</a>
   <a href="intraday.html">⏱️ Intraday</a>
+  <a href="usstocks.html">🇺🇸 US Stocks</a>
+
 </nav>
 
 
@@ -331,11 +333,12 @@
   <div class="dropdown">
     <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
     <div class="dropdown-menu">
-      <a href="stocks.html"><span>📊</span> Overview</a>
-      <a href="etf.html"><span>📈</span> ETF</a>
-      <a href="ipo.html"><span>🆕</span> IPO</a>
-      <a href="intraday.html"><span>⏱️</span> Intraday</a>
-    </div>
+  <a href="stocks.html"><span>📊</span> Overview</a>
+  <a href="etf.html"><span>📈</span> ETF</a>
+  <a href="ipo.html"><span>🆕</span> IPO</a>
+  <a href="intraday.html"><span>⏱️</span> Intraday</a>
+  <a href="usstocks.html"><span>🇺🇸</span> US Stocks</a> <!-- NEW -->
+</div>
   </div>
   <a href="mutualfunds.html">📁 Mutual Funds</a>
   <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
@@ -346,9 +349,20 @@
 </nav>
 
   </header>
-
+  
+  
+      <!-- NSE/BSE Live Ticker via ShareWatch 
+<div id="live-ticker" class="live-ticker" style="width:100%;overflow:hidden;background:#004080;color:#fff;font-size:1.07em;padding:6px 0;">
+  <div id="ticker-content" style="white-space:nowrap;display:inline-block;"></div>
+</div>
+-->
 
   <main>
+  
+    <!-- NSE/BSE Live Ticker (IndianAPI) -->
+<div id="live-ticker" class="live-ticker" style="width:100%;overflow:hidden;background:#004080;color:#fff;font-size:1.07em;padding:6px 0;">
+  <div id="ticker-content" style="white-space:nowrap;display:inline-block;"></div>
+</div>
        
     <section id="about-stocks">
       <h2>About Stocks</h2>
@@ -568,6 +582,72 @@
     &copy; 2025 Investment Insights. All rights reserved.
   </footer>
 
+
+<script>
+// Replace this with your actual API Key
+const INDIANAPI_KEY = "sk-live-gMRovYGPMhqv70DKKfeFMZpPQhwml7hTVrTN05ZX";
+
+// Indices and stocks you want to show in the ticker
+const tickerSymbols = [
+  { symbol: "NIFTY 50", type: "index" },
+  { symbol: "SENSEX", type: "index" },
+  { symbol: "RELIANCE", type: "stock" },
+  { symbol: "TCS", type: "stock" },
+  { symbol: "HDFCBANK", type: "stock" },
+  { symbol: "INFY", type: "stock" },
+  { symbol: "ICICIBANK", type: "stock" },
+  { symbol: "ITC", type: "stock" },
+  { symbol: "SBIN", type: "stock" }
+];
+
+// Helper to fetch a quote (returns Promise)
+async function fetchQuote(symbol, type) {
+  let url;
+  if (type === "index") {
+    url = `https://indianapi.in/api/index/${encodeURIComponent(symbol)}?api_key=${INDIANAPI_KEY}`;
+  } else {
+    url = `https://indianapi.in/api/stock/${encodeURIComponent(symbol)}?api_key=${INDIANAPI_KEY}`;
+  }
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) return null;
+    const json = await resp.json();
+    return json.data || json; // "data" for stocks, root for index
+  } catch (e) { return null; }
+}
+
+async function updateTicker() {
+  const tickerData = [];
+  for (let i = 0; i < tickerSymbols.length; i++) {
+    const { symbol, type } = tickerSymbols[i];
+    const data = await fetchQuote(symbol, type);
+    if (data) tickerData.push({ ...data, type });
+  }
+
+  // Render
+  const container = document.getElementById('ticker-content');
+  let html = '';
+  tickerData.forEach(item => {
+    let name = item.symbol || item.index || "";
+    let price = item.lastPrice || item.close || item.price || "--";
+    let change = item.change || item.pointChange || 0;
+    let perChange = item.percentageChange || item.percentChange || 0;
+    let color = change > 0 ? '#a4fa93' : (change < 0 ? '#ff8d8d' : '#fff');
+    let sign = change > 0 ? '+' : '';
+    html += `<span style="margin-right:22px;">
+      ${name}: <b>${price}</b>
+      <span style="color:${color}">${sign}${change} (${sign}${perChange}%)</span>
+    </span>`;
+  });
+
+  container.innerHTML = `<span class="ticker-scroll">${html}</span>`;
+  setTimeout(updateTicker, 30000); // Update every 30s
+}
+
+// Start ticker after DOM load
+document.addEventListener("DOMContentLoaded", updateTicker);
+</script>
+
   
 <script>
     function setMode(dark) {
@@ -669,6 +749,7 @@ document.querySelectorAll('.stock-float-menu a').forEach(function(link) {
   }
 });
 </script>  
+
   
 </body>
 </html>

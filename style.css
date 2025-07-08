@@ -709,6 +709,32 @@ body.dark-mode .swp-tab-btn { background: #212739; color: #8abaff; border-bottom
 body.dark-mode .swp-tab-btn.active { background: #191c23; color: #c8aaff; border-bottom-color: #a569c8;}
 body.dark-mode .swp-tab-content { background: #191c23; }
 
+.live-ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #004080;
+  color: #fff;
+  z-index: 2100;
+  font-size: 1.05em;
+  padding: 6px 0;
+  box-shadow: 0 1px 8px #00408011;
+  overflow: hidden;
+}
+.live-ticker .ticker-scroll {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  animation: ticker-scroll 28s linear infinite;
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(100%);}
+  100% { transform: translateX(-100%);}
+}
+@media (max-width:700px) {
+  .live-ticker { font-size: 0.97em; }
+}
 
 
 /* End of CSS */

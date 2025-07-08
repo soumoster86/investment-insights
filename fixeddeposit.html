@@ -300,8 +300,8 @@
 	<li><a href="#types-fd" style="font-style: italic;">Types</a></li>
     <li><a href="#rates-fd" style="font-style: italic;">Top Rates</a></li>
     <li><a href="#fd-calculator" style="font-style: italic;">FD Calculator</a></li>
-	<li><a href="#taxation-fd" style="font-style: italic;">Taxation</a></li>
-	<li><a href="#compare-safe" style="font-style: italic;">Comparison</a></li>
+	<li><a href="#taxation" style="font-style: italic;">Taxation</a></li>
+	<li><a href="#comparison" style="font-style: italic;">Comparison</a></li>
     <li><a href="#tips-fd" style="font-style: italic;">Tips</a></li>
     <li><a href="#faq-fd" style="font-style: italic;">FAQs</a></li>
    </ul>
@@ -323,11 +323,12 @@
   <div class="dropdown">
     <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
     <div class="dropdown-menu">
-      <a href="stocks.html"><span>📊</span> Overview</a>
-      <a href="etf.html"><span>📈</span> ETF</a>
-      <a href="ipo.html"><span>🆕</span> IPO</a>
-      <a href="intraday.html"><span>⏱️</span> Intraday</a>
-    </div>
+  <a href="stocks.html"><span>📊</span> Overview</a>
+  <a href="etf.html"><span>📈</span> ETF</a>
+  <a href="ipo.html"><span>🆕</span> IPO</a>
+  <a href="intraday.html"><span>⏱️</span> Intraday</a>
+  <a href="usstocks.html"><span>🇺🇸</span> US Stocks</a> <!-- NEW -->
+</div>
   </div>
   <a href="mutualfunds.html">📁 Mutual Funds</a>
   <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
@@ -497,7 +498,7 @@
    </section>
 
 	
-	<section id="taxation-fd">
+	<section id="taxation">
   <h3>Taxation on FD Interest</h3>
   <ul>
     <li>Interest earned is fully taxable as per your income tax slab.</li>
@@ -506,7 +507,7 @@
   </ul>
 </section>
 
-    <section id="compare-safe">
+    <section id="comparison">
   <h3>FD vs Other Safe Investments</h3>
   <div style="overflow-x:auto;">
     <table style="width:100%; border-collapse:collapse; min-width:440px;">
@@ -775,17 +776,29 @@ window.addEventListener('scroll', () => {
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Remove all 'active' classes first
-  document.querySelectorAll('nav a').forEach(function(link) {
-    link.classList.remove('active');
-    // Compare only the filename part to handle different hosting/path situations
-    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
-      link.classList.add('active');
-    }
-  });
+document.addEventListener("DOMContentLoaded", function() {
+  const tocLinks = document.querySelectorAll('.floating-toc a');
+  const sections = Array.from(tocLinks).map(link =>
+    document.querySelector(link.getAttribute('href'))
+  );
+
+  function onScroll() {
+    const scrollPos = window.scrollY + 140; // Offset for fixed headers/ticker
+    let activeIndex = 0;
+    sections.forEach((section, i) => {
+      if (section && section.offsetTop <= scrollPos) {
+        activeIndex = i;
+      }
+    });
+    tocLinks.forEach(link => link.classList.remove('active'));
+    tocLinks[activeIndex].classList.add('active');
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // Set on load
 });
 </script>
+
 
 <button id="back-to-top" style="display:none;" aria-label="Back to Top">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
