@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights - Bonds</title>
   <link rel="stylesheet" href="style.css" />
+  
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -270,6 +271,7 @@
     <li><a href="#about-bonds" style="font-style: italic;">About Bonds</a></li>
     <li><a href="#benefits-bonds" style="font-style: italic;">Benefits</a></li>
     <li><a href="#invest-bonds" style="font-style: italic;">How to Invest</a></li>
+	<li><a href="#bond-yield-calculator" style="font-style: italic;">Yield Calculator</a></li>
     <li><a href="#top-bonds" style="font-style: italic;">Top Picks</a></li>
     <li><a href="#tips-bonds" style="font-style: italic;">Investment Tips</a></li>
    </ul>
@@ -338,9 +340,45 @@
         <li>Look at platforms like <a href="https://www.rbidirect.org.in/" target="_blank">RBI Retail Direct</a> for direct access to government securities.</li>
       </ul>
     </section>
+	
+	
+	<section id="bond-yield-calculator" style="margin-top:34px;">
+  <h3>📈 Bond Yield Calculator</h3>
+  <form id="bondYieldForm" onsubmit="calculateBondYield(event)" style="max-width:380px;">
+    <label for="faceValue">Face Value (₹):</label>
+    <input type="number" id="faceValue" required min="1" step="0.01" placeholder="e.g. 1000">
+
+    <label for="couponRate">Annual Coupon Rate (%):</label>
+    <input type="number" id="couponRate" required min="0" step="0.01" placeholder="e.g. 7.5">
+
+    <label for="yearsToMaturity">Years to Maturity:</label>
+    <input type="number" id="yearsToMaturity" required min="1" step="1" placeholder="e.g. 5">
+
+    <label for="marketPrice">Purchase Price / Market Price (₹):</label>
+    <input type="number" id="marketPrice" required min="1" step="0.01" placeholder="e.g. 980">
+
+    <button class="btn" type="submit" style="margin-top:10px;">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetBondYield()" style="margin-left:10px;">Reset</button>
+  </form>
+  <div id="bondYieldResult" style="margin-top:18px;"></div>
+    <div id="bondYieldFaq" style="display:none; margin-top:16px; background:#f9f9fd; color:#26498c; border:1.1px solid #b1c2ef; border-radius:8px; padding:14px 18px; font-size:0.98em;">
+  <b>Bond Yield Calculator – FAQ</b>
+  <ul style="margin:11px 0 0 18px; padding:0;">
+    <li><b>What is Current Yield?</b> The annual coupon (interest) divided by the bond’s current price. It shows income as a percentage of the price paid.</li>
+    <li><b>What is Yield to Maturity (YTM)?</b> YTM is the total return if you hold the bond till maturity, accounting for coupon payments and any gain/loss if bought at a price different from face value.</li>
+    <li><b>Is YTM exact?</b> The calculator gives an approximate YTM. The real YTM depends on actual reinvestment rates and whether you hold till maturity.</li>
+    <li><b>How do bond prices and yields move?</b> Bond prices and yields move inversely. If market interest rates rise, bond prices usually fall (and vice versa).</li>
+    <li><b>Can I use this for tax-free or perpetual bonds?</b> You can, but check if coupon frequency or special features (like call/put options) affect the result. This tool assumes annual coupons and a set maturity date.</li>
+  </ul>
+</div>
+    <div id="bondChart-container" style="width:100%; margin-top:20px; display:none;">
+  <canvas id="bondChart" style="max-width:100%; min-height:260px;"></canvas>
+</div>
+</section>
+
 
 <section id="top-bonds">
-      <h3>Top Bonds Recommendation</h3>
+      <h3>Top Bonds Pick</h3>
       <div style="display:flex;flex-wrap:wrap;gap:18px;">
         <div class="bond-card">
           <strong>RBI Floating Rate Savings Bonds (2020)</strong>
@@ -430,6 +468,121 @@
       color: #8abaff !important;
     }
   </style>
+  
+  
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let bondChartInstance = null;
+
+function drawBondChart(face, annualCoupon, years) {
+  // Prepare labels and data
+  const labels = [];
+  const coupons = [];
+  const cumulative = [];
+  let cum = 0;
+
+  for(let y=1; y<=years; y++) {
+    labels.push('Year ' + y);
+    if(y < years) {
+      coupons.push(annualCoupon);
+      cum += annualCoupon;
+    } else {
+      // Last year: coupon + face value (principal repaid)
+      coupons.push(annualCoupon + face);
+      cum += annualCoupon + face;
+    }
+    cumulative.push(cum);
+  }
+
+  // Show chart container
+  document.getElementById('bondChart-container').style.display = 'block';
+
+  const ctx = document.getElementById('bondChart').getContext('2d');
+  if(bondChartInstance) bondChartInstance.destroy();
+
+  bondChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Cash Received Each Year (₹)',
+          data: coupons,
+          borderWidth: 1,
+          backgroundColor: 'rgba(34, 139, 34, 0.25)',
+          borderColor: 'rgba(34, 139, 34, 1)'
+        },
+        {
+          label: 'Total Cash Accumulated (₹)',
+          data: cumulative,
+          type: 'line',
+          borderColor: 'rgba(45, 91, 219, 0.85)',
+          backgroundColor: 'rgba(45, 91, 219, 0.1)',
+          fill: false,
+          yAxisID: 'y2'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' }
+      },
+      scales: {
+        y: { 
+          beginAtZero: true, 
+          title: { display: true, text: 'Yearly Cash (₹)' }
+        },
+        y2: {
+          position: 'right',
+          beginAtZero: true,
+          grid: { drawOnChartArea: false },
+          title: { display: true, text: 'Total Accumulated (₹)' }
+        }
+      }
+    }
+  });
+}
+
+function calculateBondYield(event) {
+  event.preventDefault();
+  const face = parseFloat(document.getElementById('faceValue').value);
+  const coupon = parseFloat(document.getElementById('couponRate').value);
+  const years = parseInt(document.getElementById('yearsToMaturity').value, 10);
+  const price = parseFloat(document.getElementById('marketPrice').value);
+
+  // Calculate Annual Coupon
+  const annualCoupon = face * coupon / 100;
+  // Current Yield = Annual Coupon / Market Price
+  const currentYield = (annualCoupon / price) * 100;
+
+  // Yield to Maturity (approximate formula)
+  const ytm = ((annualCoupon + (face - price) / years) / ((face + price) / 2)) * 100;
+
+  // Call the chart function here!
+  drawBondChart(face, annualCoupon, years);
+
+  document.getElementById('bondYieldResult').innerHTML =
+    `<div>
+      <b>Current Yield:</b> ${currentYield.toFixed(2)}%<br>
+      <b>Yield to Maturity (YTM):</b> ${ytm.toFixed(2)}%
+      <div class="note" style="font-size:0.93em; margin-top:7px;">
+        <i>Note: YTM is approximate. It assumes you hold the bond to maturity and all coupons are reinvested at the same rate.</i>
+      </div>
+    </div>`;
+
+   document.getElementById('bondYieldFaq').style.display = 'block';
+}
+
+function resetBondYield() {
+  document.getElementById('bondYieldForm').reset();
+  document.getElementById('bondYieldResult').innerHTML = '';
+  document.getElementById('bondYieldFaq').style.display = 'none';
+  document.getElementById('bondChart-container').style.display = 'none';
+  if (bondChartInstance) bondChartInstance.destroy();
+}
+</script>
+
 
   <script>
     function setMode(dark) {
@@ -502,6 +655,7 @@ window.addEventListener('scroll', () => {
     'about-bonds',
     'benefits-bonds',
     'invest-bonds',
+	'bond-yield-calculator',
     'top-bonds',
     'tips-bonds'
   ];
@@ -553,6 +707,7 @@ document.getElementById('back-to-top').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 </script>
+
 
 </body>
 </html>

@@ -446,6 +446,10 @@
 	<button class="btn secondary" type="button" onclick="resetSIP()" style="margin-left:7px;">Reset</button>	
    </form>
   <div id="sip-result" style="margin-top:18px;"></div>
+  <div id="sip-disclaimer" style="display:none; margin-top:14px; background:#fff8e1; color:#9b7900; border:1.2px solid #ffe599; border-radius:8px; padding:12px 16px; font-size:0.97em;">
+  <strong>Disclaimer:</strong> The SIP Calculator provides an estimate based on inputs and assumed rates of return. Actual returns may vary due to market risks. This tool does not constitute financial advice. Please consult your advisor before making investment decisions.
+</div>
+ 
   <div id="sipChart-container" style="width:100%; margin-top:20px; display:none;">
   <canvas id="sipChart" style="max-width:100%;"></canvas>
    </div>
@@ -714,8 +718,10 @@ function calculateSIP(event) {
         </tbody>
       </table>
     </details>
+	
+	
   `;
-
+  document.getElementById('sip-disclaimer').style.display = 'block';
   document.getElementById('sipChart-container').style.display = 'block';
 
   if (window.sipChartInstance) window.sipChartInstance.destroy();
@@ -769,6 +775,8 @@ function resetSIP() {
     window.sipChartInstance.destroy();
     window.sipChartInstance = null;
   }
+  document.getElementById('sip-disclaimer').style.display = 'none';
+
   document.getElementById('sipChart-container').style.display = 'none';
 }
 

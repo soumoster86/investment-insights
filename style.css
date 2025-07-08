@@ -736,5 +736,43 @@ body.dark-mode .swp-tab-content { background: #191c23; }
   .live-ticker { font-size: 0.97em; }
 }
 
+body.dark-mode #sip-disclaimer {
+  background: #2e2a17 !important;
+  color: #f4e0a5 !important;
+  border-color: #746000 !important;
+}
+
+
+body.dark-mode #bondYieldResult {
+  background: #222b26 !important;   /* much darker background */
+  color: #d4edda !important;        /* light green text for good contrast */
+  border-color: #397c45 !important; /* stronger border for separation */
+}
+
+body.dark-mode #bondYieldResult b {
+  color: #d4edda !important;        /* bold text also light green */
+}
+
+body.dark-mode #bondYieldResult i,
+body.dark-mode #bondYieldResult .note {
+  color: #b2efc7 !important;        /* lighter, italic text for the note */
+  opacity: 0.85 !important;
+}
+
+
+body.dark-mode #bondYieldFaq {
+  background: #202a3d !important;
+  color: #b5ccf6 !important;
+  border-color: #3c5a93 !important;
+}
+
+body.dark-mode #bondYieldResult {
+  box-shadow: 0 2px 14px #000a !important;
+}
+
+body.dark-mode #bondYieldResult .note {
+  color: #b2efc7 !important;
+}
+
 
 /* End of CSS */
