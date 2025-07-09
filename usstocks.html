@@ -464,34 +464,103 @@ body.dark-mode small {
     </section>
 	
 	<section>
-  <h3>S&P 500 vs Nifty 50 (10-Year Returns)</h3>
-  <canvas id="usIndiaChart" style="max-width:100%;min-height:260px;"></canvas>
+    <h3>S&P 500 vs Nifty 50 – Performance Comparison</h3>
+  <label for="currency-toggle" style="margin-right:12px;font-weight:500;">
+    Show values in:
+  </label>
+  <select id="currency-toggle" style="margin-bottom:18px;">
+    <option value="INR">INR</option>
+    <option value="USD">USD</option>
+  </select>
+  <canvas id="spNiftyChart" style="max-width:100%;min-height:320px;"></canvas>
+  <div style="font-size:0.95em; color:#666; margin-top:8px;">
+    S&P 500 and Nifty 50 values shown in selected currency using year-end USD/INR rates.
+  </div>
 </section>
 <script>
-const ctx = document.getElementById('usIndiaChart').getContext('2d');
-new Chart(ctx, {
+const labels = ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+const nifty50INR = [6100, 7900, 9500, 10500, 10900, 12100, 13900, 17350, 18105, 19390, 22500];
+const sp500USD = [1800, 2100, 2250, 2650, 2500, 2900, 3750, 4766, 3839, 4769, 4800];
+const usdInr = [61.0, 62.5, 67.0, 64.0, 69.0, 71.0, 73.0, 75.0, 82.7, 83.0, 83.5];
+
+function getChartData(currency) {
+  if (currency === "USD") {
+    // Convert Nifty 50 to USD for fair comparison
+    const nifty50USD = nifty50INR.map((v, i) => v / usdInr[i]);
+    return {
+      datasets: [
+        {
+          label: 'Nifty 50 (USD)',
+          data: nifty50USD,
+          borderColor: '#0b6ef6',
+          backgroundColor: '#0b6ef655',
+          tension: 0.1,
+        },
+        {
+          label: 'S&P 500 (USD)',
+          data: sp500USD,
+          borderColor: '#f69c0b',
+          backgroundColor: '#f69c0b55',
+          tension: 0.1,
+        }
+      ]
+    };
+  } else {
+    // Default: Show both in INR
+    const sp500INR = sp500USD.map((v, i) => v * usdInr[i]);
+    return {
+      datasets: [
+        {
+          label: 'Nifty 50 (INR)',
+          data: nifty50INR,
+          borderColor: '#0b6ef6',
+          backgroundColor: '#0b6ef655',
+          tension: 0.1,
+        },
+        {
+          label: 'S&P 500 (INR)',
+          data: sp500INR,
+          borderColor: '#f69c0b',
+          backgroundColor: '#f69c0b55',
+          tension: 0.1,
+        }
+      ]
+    };
+  }
+}
+
+const ctx = document.getElementById('spNiftyChart').getContext('2d');
+let currency = document.getElementById('currency-toggle').value;
+let spNiftyChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'],
-    datasets: [
-      {
-        label: 'S&P 500 (USD)',
-        data: [2044,2238,2673,2506,3230,3756,4766,3839,4765,5335],
-        borderColor: '#1976d2',
-        fill: false
-      },
-      {
-        label: 'Nifty 50 (INR)',
-        data: [8283,8186,10530,10862,12168,13982,17354,18105,21631,24010],
-        borderColor: '#ff9800',
-        fill: false
-      }
-    ]
+    labels: labels,
+    ...getChartData(currency)
   },
   options: {
     responsive: true,
-    plugins: { legend: { position: 'bottom' } }
+    plugins: {
+      legend: { position: 'top' },
+      title: {
+        display: true,
+        text: () => `S&P 500 vs Nifty 50 (Returns in ${currency})`
+      }
+    },
+    scales: {
+      y: { title: { display: true, text: () => `Value (${currency})` } }
+    }
   }
+});
+
+document.getElementById('currency-toggle').addEventListener('change', function () {
+  currency = this.value;
+  // Update datasets
+  const newData = getChartData(currency);
+  spNiftyChart.data.datasets = newData.datasets;
+  // Update Y axis label and title
+  spNiftyChart.options.scales.y.title.text = `Value (${currency})`;
+  spNiftyChart.options.plugins.title.text = `S&P 500 vs Nifty 50 (Returns in ${currency})`;
+  spNiftyChart.update();
 });
 </script>
 
