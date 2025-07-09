@@ -1,0 +1,12 @@
+{
+  "name": "investment-insights",
+  "version": "1.0.0",
+  "description": "Investment Insights site",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.6.1",
+    "jsdom": "^22.1.0"
+  }
+}
