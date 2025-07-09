@@ -131,8 +131,8 @@ body.dark-mode .dropdown-menu a:hover {
 /* Floating Stock Quick Menu */
 .stock-float-menu {
   position: fixed;
-  /* Align to the right */
-  left: 30px;   /* or match your On this page margin */
+  /* Position the stock quick menu on the left below the "On This Page" menu */
+  left: 30px;   /* match the "On This Page" margin */
   right: unset;
   /* Position below the "On this page" menu */
   top: 420px;    /* Increase until it's neatly below your right floating menu (adjust as needed) */
