@@ -265,6 +265,7 @@
     <li><a href="#stocks" style="font-style: italic;">Stocks</a></li>
     <li><a href="#mutualfunds" style="font-style: italic;">Mutual Funds</a></li>
     <li><a href="#fixeddeposits" style="font-style: italic;">Fixed Deposits</a></li>
+	<li><a href="#nps" style="font-style: italic;">NPS (Retirement)</a></li>
     <li><a href="#cryptocurrencies" style="font-style: italic;">Cryptocurrencies</a></li>
     <li><a href="#bonds" style="font-style: italic;">Bonds</a></li>
   </ul>
@@ -281,9 +282,7 @@
       <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
       <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
     </label>
-    <button id="hamburger-btn" class="hamburger" aria-label="Open Navigation">&#9776;</button>
-    <nav class="main-nav" id="main-nav">
-      <button id="close-nav-btn" class="close-nav" aria-label="Close Navigation">&times;</button>
+    <nav class="main-nav">
   <a href="index.html">🏠 Home</a>
   <div class="dropdown">
     <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
@@ -297,6 +296,7 @@
   </div>
   <a href="mutualfunds.html">📁 Mutual Funds</a>
   <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
+  <a href="nps.html">🏦 NPS (Retirement)</a>
   <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
   <a href="bonds.html">💸 Bonds</a>
   <a href="investmentgoal.html">🎯 Investment Goal</a>
@@ -480,6 +480,14 @@
   </p>
   <a class="learn-more" href="fixeddeposit.html">Learn more &raquo;</a>
 </section>
+  
+  <section id="nps">
+  <h2>National Pension Scheme (NPS)</h2>
+  <p>
+    Plan your retirement with one of India’s most tax-efficient investment options.
+  </p>
+  <a class="learn-more" href="nps.html">Learn more &raquo;</a>
+</section>
 
     <section id="cryptocurrencies">
   <h2>Cryptocurrencies</h2>
@@ -642,6 +650,7 @@ document.addEventListener('DOMContentLoaded', function() {
       'stocks',
       'mutualfunds',
       'fixeddeposits',
+	  'nps',
       'cryptocurrencies',
       'bonds'
     ];

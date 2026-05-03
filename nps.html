@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Investment Insights - NPS</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+        body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(120deg, #e9f0fd 0%, #f4f6f8 100%);
+      color: #222;
+      min-height: 100vh;
+      transition: background 0.4s, color 0.3s;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    header img {
+      height: 50px;
+      margin-right: 15px;
+      border-radius: 10px;
+      background: #fff;
+      padding: 3px;
+      box-shadow: 0 2px 6px #0001;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 1.5em;
+    }
+    #dm-label {
+      color: white;
+      font-size: 1em;
+    }
+    nav {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: none;
+      color: inherit;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 14px;
+      font-weight: 500;
+      font-size: 1.08em;
+      padding: 7px 10px;
+      border-radius: 7px;
+      transition: background .22s;
+    }
+    nav a.active,
+    nav a:hover {
+      background: #012b54;
+      text-decoration: underline;
+    }
+    main {
+      max-width: 900px;
+      margin: 36px auto 24px auto;
+      padding: 0 15px 30px 15px;
+      background: #fff;
+      box-shadow: 0 2px 12px rgb(0 64 128 / 8%);
+      border-radius: 18px;
+      min-height: 75vh;
+      animation: fadeIn 0.8s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    section {
+      margin-bottom: 34px;
+      padding: 20px 22px;
+      border: 1.5px solid #e1e6f2;
+      border-radius: 12px;
+      background: #f9faff;
+      box-shadow: 0 1px 10px #00408009;
+      transition: box-shadow 0.18s, border-color 0.2s;
+    }
+    section:hover {
+      box-shadow: 0 2px 22px #00408017;
+      border-color: #00408055;
+    }
+    h2 {
+      border-bottom: 2px solid #004080;
+      padding-bottom: 8px;
+      color: #004080;
+      margin-top: 0;
+      font-size: 1.5em;
+    }
+    h3 {
+      color: #004080;
+      font-size: 1.17em;
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+    .stock-card {
+      background: #f8faff;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px #a4b1cf18;
+      border: 1.3px solid #e4eaf2;
+      padding: 15px 13px 14px 13px;
+      min-width: 230px;
+      max-width: 245px;
+      flex: 1 0 200px;
+      transition: box-shadow 0.15s, border-color 0.16s;
+    }
+    .stock-card:hover {
+      box-shadow: 0 2px 14px #3070c41e;
+      border-color: #96b6f6;
+    }
+    .sector-chip {
+      background: #eaf2ff;
+      color: #2766be;
+      border-radius: 5px;
+      padding: 1px 7px;
+      font-size: 0.85em;
+      margin-left: 7px;
+    }
+    .floating-toc {
+      position: fixed;
+      top: 140px;
+      right: 30px;
+      width: 200px;
+      background: #fff;
+      border: 1.4px solid #e1e6f2;
+      box-shadow: 0 2px 16px #00408016;
+      border-radius: 12px;
+      padding: 12px 16px 10px 16px;
+      z-index: 1001;
+      font-size: 1em;
+      opacity: 0.98;
+      transition: box-shadow 0.22s, background 0.22s, color 0.22s;
+    }
+    .floating-toc .toc-title {
+      font-weight: 600;
+      color: #004080;
+      margin-bottom: 7px;
+      font-size: 1.06em;
+      letter-spacing: 0.2px;
+    }
+    .floating-toc ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .floating-toc ul li {
+      margin: 6px 0;
+    }
+    .floating-toc a {
+      color: #204a80;
+      text-decoration: none;
+      font-size: 0.98em;
+      transition: color 0.16s;
+    }
+    .floating-toc a:hover,
+    .floating-toc a.active {
+      color: #1c6ddb;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 18px 0 13px 0;
+      font-size: 0.97em;
+      color: #666;
+      border-top: 1px solid #e0e5f0;
+      margin-top: 24px;
+      background: #fafbfc;
+      position: relative;
+      left: 0;
+      right: 0;
+    }
+    /* Dark mode overrides */
+    body.dark-mode {
+      background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
+      color: #e7ecfa !important;
+    }
+    body.dark-mode header, body.dark-mode nav, body.dark-mode footer {
+      background: #12203a !important;
+      color: #e7ecfa !important;
+    }
+    body.dark-mode main, body.dark-mode section, body.dark-mode .stock-card {
+      background: #191c23 !important;
+      color: #e7ecfa !important;
+      box-shadow: 0 2px 12px #0004;
+      border-color: #2d3752 !important;
+    }
+    body.dark-mode h2, body.dark-mode h3, body.dark-mode .floating-toc .toc-title {
+      color: #8abaff !important;
+      border-color: #273a5a !important;
+    }
+    body.dark-mode .floating-toc {
+      background: #1a2030 !important;
+      border-color: #273a5a !important;
+      color: #8abaff !important;
+      box-shadow: 0 2px 16px #0018;
+    }
+    body.dark-mode .floating-toc a {
+      color: #8abaff !important;
+    }
+    body.dark-mode .floating-toc a:hover,
+    body.dark-mode .floating-toc a.active {
+      color: #48a7ff !important;
+    }
+    body.dark-mode nav a {
+      color: #8abaff !important;
+    }
+    body.dark-mode nav a.active,
+    body.dark-mode nav a:hover {
+      background: #274272 !important;
+      color: #fff !important;
+    }
+    body.dark-mode .stock-card {
+      background: #23273b !important;
+      color: #e7ecfa !important;
+      border-color: #39588a !important;
+    }
+    body.dark-mode .sector-chip {
+      background: #2d3752 !important;
+      color: #8abaff !important;
+    }
+    body.dark-mode #dm-label { color: #fff !important; }
+    /* Responsive for ToC */
+    @media (max-width: 900px) {
+      .floating-toc {
+        right: 8px;
+        width: 88vw;
+        min-width: 155px;
+        max-width: 97vw;
+        font-size: 0.97em;
+        top: unset;
+        bottom: 16px;
+        padding: 10px 13px 10px 13px;
+        border-radius: 10px;
+        opacity: 0.97;
+      }
+    }
+    @media (max-width: 600px) {
+      .floating-toc {
+        right: 2vw;
+        left: 2vw;
+        width: unset;
+        font-size: 1em;
+        padding: 10px 6vw;
+        top: unset;
+        bottom: 14px;
+        border-radius: 10px;
+        max-width: unset;
+        min-width: unset;
+      }
+    }
+	
+	td {
+  word-break: break-word;
+  vertical-align: top;
+}
+  </style>
+</head>
+
+<body>
+
+<nav class="floating-toc">
+  <div class="toc-title">On this page</div>
+  <ul>
+    <li><a href="#about-nps">About NPS</a></li>
+    <li><a href="#features-nps">Features</a></li>
+    <li><a href="#benefits-nps">Benefits</a></li>
+    <li><a href="#limitations-nps">Limitations</a></li>
+    <li><a href="#invest-nps">How to Invest</a></li>
+    <li><a href="#who-nps">Who should Invest</a></li>
+    <li><a href="#tips-nps">Tips</a></li>
+  </ul>
+</nav>
+
+
+
+ <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center;">
+      <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
+      <h1>💡Investment Insights: Learn. Grow. Prosper.</h1>
+    </div>
+    <label style="display: flex; align-items: center; gap: 8px; cursor:pointer; margin-top: 10px;">
+      <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
+      <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
+    </label>
+	
+
+    <nav class="main-nav">
+  <a href="index.html">🏠 Home</a>
+  <div class="dropdown">
+    <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
+    <div class="dropdown-menu">
+  <a href="stocks.html"><span>📊</span> Overview</a>
+  <a href="etf.html"><span>📈</span> ETF</a>
+  <a href="ipo.html"><span>🆕</span> IPO</a>
+  <a href="intraday.html"><span>⏱️</span> Intraday</a>
+  <a href="usstocks.html"><span>🇺🇸</span> US Stocks</a> <!-- NEW -->
+</div>
+  </div>
+  <a href="mutualfunds.html">📁 Mutual Funds</a>
+  <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
+  <a href="nps.html">🏦 NPS (Retirement)</a>
+  <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
+  <a href="bonds.html">💸 Bonds</a>
+  <a href="investmentgoal.html">🎯 Investment Goal</a>
+  <a href="contact.html">✉️ Contact</a>
+</nav>
+		
+  </header>
+
+<main>
+
+<section id="about-nps">
+  <h2>What is NPS?</h2>
+  <p>
+    <strong>National Pension Scheme (NPS)</strong> is a government-backed retirement savings scheme in India that helps individuals build a retirement corpus through disciplined long-term investing.
+  </p>
+  <p>
+    It is regulated by the Pension Fund Regulatory and Development Authority (PFRDA) and offers a mix of equity, corporate bonds, and government securities.
+  </p>
+</section>
+
+<section id="features-nps">
+  <h2>Key Features</h2>
+  <ul>
+    <li>Low-cost retirement investment</li>
+    <li>Market-linked returns (Equity + Debt)</li>
+    <li>Flexible asset allocation</li>
+    <li>Long-term wealth creation</li>
+    <li>Available to all Indian citizens (18–70 years)</li>
+  </ul>
+</section>
+
+<section id="benefits-nps">
+  <h2>Tax Benefits</h2>
+  <div class="highlight-box">
+    <ul>
+      <li>₹1.5L deduction under Section 80C</li>
+      <li>Additional ₹50,000 under Section 80CCD(1B)</li>
+      <li>Employer contribution benefit under 80CCD(2)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="limitations-nps">
+  <h2>Types of NPS Accounts</h2>
+  <ul>
+    <li><strong>Tier I:</strong> Mandatory retirement account (lock-in till 60)</li>
+    <li><strong>Tier II:</strong> Optional, flexible withdrawal account</li>
+  </ul>
+</section>
+
+<section id="invest-nps">
+  <h2>Benefits of Investing in NPS</h2>
+  <ul>
+    <li>Disciplined retirement savings</li>
+    <li>Very low fund management cost</li>
+    <li>Tax-efficient investment</li>
+    <li>Diversified portfolio</li>
+    <li>Long-term compounding benefits</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Limitations</h2>
+  <ul>
+    <li>Lock-in till retirement age (60 years)</li>
+    <li>Partial withdrawal restrictions</li>
+    <li>Mandatory annuity purchase at maturity</li>
+    <li>Returns are market-dependent</li>
+  </ul>
+</section>
+
+<section>
+  <h2>How to Invest in NPS</h2>
+  <ul>
+    <li>Register online via NSDL or Karvy portal</li>
+    <li>Open NPS account through banks or brokers</li>
+    <li>Select fund manager and asset allocation</li>
+    <li>Start contributing regularly</li>
+  </ul>
+</section>
+
+<section id="who-nps">
+  <h2>Who Should Invest?</h2>
+  <ul>
+    <li>Salaried individuals looking for tax savings</li>
+    <li>Long-term retirement planners</li>
+    <li>Investors seeking low-cost diversified exposure</li>
+  </ul>
+</section>
+
+<section id="tips-nps" class="highlight-box">
+  <h3>💡 Pro Tip</h3>
+  <p>
+    Use NPS mainly for <strong>tax saving + retirement discipline</strong>, not as your only investment. Combine it with mutual funds for better flexibility.
+  </p>
+</section>
+
+<section>
+  <h2>📊 NPS Calculator (Coming Soon)</h2>
+  <p>
+    We will soon add an NPS calculator to help you estimate your retirement corpus based on monthly contributions, expected returns, and duration.
+  </p>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:15px;color:#666;">
+  © 2025 Investment Insights
+</footer>
+
+
+<script>
+window.addEventListener('scroll', () => {
+  const sections = [
+    'about-nps',
+    'features-nps',
+    'benefits-nps',
+    'limitations-nps',
+    'invest-nps',
+    'tips-nps'
+  ];
+
+  let current = '';
+  for (const id of sections) {
+    const sec = document.getElementById(id);
+    if (sec && window.scrollY + 120 >= sec.offsetTop) {
+      current = id;
+    }
+  }
+
+  document.querySelectorAll('.floating-toc a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+<script>
+function setMode(dark) {
+  if (dark) {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+    document.getElementById('dm-label').textContent = "☀️ Light Mode";
+    document.getElementById('darkmode-toggle').checked = true;
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+    document.getElementById('dm-label').textContent = "🌙 Dark Mode";
+    document.getElementById('darkmode-toggle').checked = false;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('darkmode-toggle').addEventListener("change", function() {
+    setMode(this.checked);
+  });
+
+  const userPref = localStorage.getItem("theme");
+  const darkPref = userPref === "dark" ||
+    (!userPref && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+  setMode(darkPref);
+});
+</script>
+
+
+
+<script>
+document.querySelectorAll('.floating-toc a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({top: target.offsetTop - 65, behavior: 'smooth'});
+    }
+  });
+});
+window.addEventListener('scroll', () => {
+  const sections = [
+    'about-nps',
+    'features-nps',
+	'benefits-nps',
+    'limitations-nps',
+	'invest-nps',
+    'who-nps',
+    'tips-nps'
+  ];
+  let current = '';
+  for (const id of sections) {
+    const sec = document.getElementById(id);
+    if (sec && window.scrollY + 120 >= sec.offsetTop) current = id;
+  }
+  document.querySelectorAll('.floating-toc a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove all 'active' classes first
+  document.querySelectorAll('nav a').forEach(function(link) {
+    link.classList.remove('active');
+    // Compare only the filename part to handle different hosting/path situations
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+
+
+
+
+
+<button id="back-to-top" style="display:none;" aria-label="Back to Top">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+    <path d="M12 4L12 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 10L12 4L18 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span style="margin-left:7px;vertical-align:middle;">Top</span>
+</button>
+
+
+<script>
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  // Show when user scrolls below 400px
+  if (window.scrollY > 400) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
+});
+document.getElementById('back-to-top').onclick = function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+</script>
+
+
+</body>
+</html>

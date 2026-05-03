@@ -360,7 +360,7 @@
     <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
     <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
   </label>
-  <nav class="main-nav" id="main-nav">
+  <nav class="main-nav">
   <a href="index.html">🏠 Home</a>
   <div class="dropdown">
     <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
@@ -374,6 +374,7 @@
   </div>
   <a href="mutualfunds.html">📁 Mutual Funds</a>
   <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
+  <a href="nps.html">🏦 NPS (Retirement)</a>
   <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
   <a href="bonds.html">💸 Bonds</a>
   <a href="investmentgoal.html">🎯 Investment Goal</a>
@@ -1068,7 +1069,8 @@ window.addEventListener('scroll', () => {
     'sipcalc-mutual',
 	'swpcalc-mutual',
 	'top-mutual',
-	'tips-mutual'
+	'tips-mutual',
+	''
   ];
   let current = '';
   for (const id of sections) {
