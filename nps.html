@@ -7,263 +7,392 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
-        body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      background: linear-gradient(120deg, #e9f0fd 0%, #f4f6f8 100%);
-      color: #222;
-      min-height: 100vh;
-      transition: background 0.4s, color 0.3s;
-    }
-    header {
-      background: #004080;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    header img {
-      height: 50px;
-      margin-right: 15px;
-      border-radius: 10px;
-      background: #fff;
-      padding: 3px;
-      box-shadow: 0 2px 6px #0001;
-    }
-    header h1 {
-      margin: 0;
-      font-weight: normal;
-      font-size: 1.5em;
-    }
-    #dm-label {
-      color: white;
-      font-size: 1em;
-    }
-    nav {
-      width: 100%;
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      background: none;
-      color: inherit;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 14px;
-      font-weight: 500;
-      font-size: 1.08em;
-      padding: 7px 10px;
-      border-radius: 7px;
-      transition: background .22s;
-    }
-    nav a.active,
-    nav a:hover {
-      background: #012b54;
-      text-decoration: underline;
-    }
-    main {
-      max-width: 900px;
-      margin: 36px auto 24px auto;
-      padding: 0 15px 30px 15px;
-      background: #fff;
-      box-shadow: 0 2px 12px rgb(0 64 128 / 8%);
-      border-radius: 18px;
-      min-height: 75vh;
-      animation: fadeIn 0.8s;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px);}
-      to   { opacity: 1; transform: translateY(0);}
-    }
-    section {
-      margin-bottom: 34px;
-      padding: 20px 22px;
-      border: 1.5px solid #e1e6f2;
-      border-radius: 12px;
-      background: #f9faff;
-      box-shadow: 0 1px 10px #00408009;
-      transition: box-shadow 0.18s, border-color 0.2s;
-    }
-    section:hover {
-      box-shadow: 0 2px 22px #00408017;
-      border-color: #00408055;
-    }
-    h2 {
-      border-bottom: 2px solid #004080;
-      padding-bottom: 8px;
-      color: #004080;
-      margin-top: 0;
-      font-size: 1.5em;
-    }
-    h3 {
-      color: #004080;
-      font-size: 1.17em;
-      margin-bottom: 12px;
-      margin-top: 20px;
-    }
-    .stock-card {
-      background: #f8faff;
-      border-radius: 10px;
-      box-shadow: 0 1px 8px #a4b1cf18;
-      border: 1.3px solid #e4eaf2;
-      padding: 15px 13px 14px 13px;
-      min-width: 230px;
-      max-width: 245px;
-      flex: 1 0 200px;
-      transition: box-shadow 0.15s, border-color 0.16s;
-    }
-    .stock-card:hover {
-      box-shadow: 0 2px 14px #3070c41e;
-      border-color: #96b6f6;
-    }
-    .sector-chip {
-      background: #eaf2ff;
-      color: #2766be;
-      border-radius: 5px;
-      padding: 1px 7px;
-      font-size: 0.85em;
-      margin-left: 7px;
-    }
-    .floating-toc {
-      position: fixed;
-      top: 140px;
-      right: 30px;
-      width: 200px;
-      background: #fff;
-      border: 1.4px solid #e1e6f2;
-      box-shadow: 0 2px 16px #00408016;
-      border-radius: 12px;
-      padding: 12px 16px 10px 16px;
-      z-index: 1001;
-      font-size: 1em;
-      opacity: 0.98;
-      transition: box-shadow 0.22s, background 0.22s, color 0.22s;
-    }
-    .floating-toc .toc-title {
-      font-weight: 600;
-      color: #004080;
-      margin-bottom: 7px;
-      font-size: 1.06em;
-      letter-spacing: 0.2px;
-    }
-    .floating-toc ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .floating-toc ul li {
-      margin: 6px 0;
-    }
-    .floating-toc a {
-      color: #204a80;
-      text-decoration: none;
-      font-size: 0.98em;
-      transition: color 0.16s;
-    }
-    .floating-toc a:hover,
-    .floating-toc a.active {
-      color: #1c6ddb;
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      padding: 18px 0 13px 0;
-      font-size: 0.97em;
-      color: #666;
-      border-top: 1px solid #e0e5f0;
-      margin-top: 24px;
-      background: #fafbfc;
-      position: relative;
-      left: 0;
-      right: 0;
-    }
-    /* Dark mode overrides */
-    body.dark-mode {
-      background: linear-gradient(120deg,#141b27 0%, #22242a 100%) !important;
-      color: #e7ecfa !important;
-    }
-    body.dark-mode header, body.dark-mode nav, body.dark-mode footer {
-      background: #12203a !important;
-      color: #e7ecfa !important;
-    }
-    body.dark-mode main, body.dark-mode section, body.dark-mode .stock-card {
-      background: #191c23 !important;
-      color: #e7ecfa !important;
-      box-shadow: 0 2px 12px #0004;
-      border-color: #2d3752 !important;
-    }
-    body.dark-mode h2, body.dark-mode h3, body.dark-mode .floating-toc .toc-title {
-      color: #8abaff !important;
-      border-color: #273a5a !important;
-    }
-    body.dark-mode .floating-toc {
-      background: #1a2030 !important;
-      border-color: #273a5a !important;
-      color: #8abaff !important;
-      box-shadow: 0 2px 16px #0018;
-    }
-    body.dark-mode .floating-toc a {
-      color: #8abaff !important;
-    }
-    body.dark-mode .floating-toc a:hover,
-    body.dark-mode .floating-toc a.active {
-      color: #48a7ff !important;
-    }
-    body.dark-mode nav a {
-      color: #8abaff !important;
-    }
-    body.dark-mode nav a.active,
-    body.dark-mode nav a:hover {
-      background: #274272 !important;
-      color: #fff !important;
-    }
-    body.dark-mode .stock-card {
-      background: #23273b !important;
-      color: #e7ecfa !important;
-      border-color: #39588a !important;
-    }
-    body.dark-mode .sector-chip {
-      background: #2d3752 !important;
-      color: #8abaff !important;
-    }
-    body.dark-mode #dm-label { color: #fff !important; }
-    /* Responsive for ToC */
-    @media (max-width: 900px) {
-      .floating-toc {
-        right: 8px;
-        width: 88vw;
-        min-width: 155px;
-        max-width: 97vw;
-        font-size: 0.97em;
-        top: unset;
-        bottom: 16px;
-        padding: 10px 13px 10px 13px;
-        border-radius: 10px;
-        opacity: 0.97;
-      }
-    }
-    @media (max-width: 600px) {
-      .floating-toc {
-        right: 2vw;
-        left: 2vw;
-        width: unset;
-        font-size: 1em;
-        padding: 10px 6vw;
-        top: unset;
-        bottom: 14px;
-        border-radius: 10px;
-        max-width: unset;
-        min-width: unset;
-      }
-    }
-	
-	td {
-  word-break: break-word;
-  vertical-align: top;
+/* =========================
+   GLOBAL
+========================= */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  background: linear-gradient(120deg, #e9f0fd 0%, #f4f6f8 100%);
+  color: #222;
+  min-height: 100vh;
+  transition: background 0.4s, color 0.3s;
+}
+
+/* =========================
+   HEADER + NAV
+========================= */
+header {
+  background: #004080;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  height: 50px;
+  border-radius: 10px;
+  background: #fff;
+  padding: 3px;
+}
+
+nav {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 7px;
+  transition: background 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+  background: #012b54;
+}
+
+/* =========================
+   MAIN + SECTIONS
+========================= */
+main {
+  max-width: 900px;
+  margin: 36px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,64,128,0.08);
+}
+
+section {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f9faff;
+  border: 1px solid #e1e6f2;
+  transition: 0.2s;
+}
+
+section:hover {
+  box-shadow: 0 4px 20px rgba(0,64,128,0.12);
+}
+
+h2 {
+  color: #004080;
+  border-bottom: 2px solid #004080;
+  padding-bottom: 6px;
+}
+
+h3 {
+  color: #004080;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 1.05em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Primary */
+.primary-btn {
+  background: #0a3d75;
+  color: #fff;
+  border: none;
+}
+
+.primary-btn:hover {
+  background: #062f5a;
+}
+
+/* Reset Button FIXED */
+.outline-btn {
+  background: transparent;
+  color: #0a3d75;
+  border: 2px solid #0a3d75;
+  opacity: 1;
+}
+
+.outline-btn:hover {
+  background: #e9f0fd;
+  color: #062f5a;
+}
+
+.outline-btn:active {
+  transform: scale(0.97);
+}
+
+/* =========================
+   CARDS
+========================= */
+.result-cards {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.card {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  background: #f1f6ff;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card.highlight {
+  background: #0a3d75;
+  color: white;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+.progress-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar .invested {
+  background: #7da7d9;
+}
+
+.progress-bar .gain {
+  background: #2ecc71;
+}
+
+.progress-labels {
+  display: flex;
+}
+
+.label {
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* =========================
+   SPLIT BAR
+========================= */
+.split-bar {
+  display: flex;
+  height: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.split-bar .lump {
+  background: #1abc9c;
+}
+
+.split-bar .pension {
+  background: #3498db;
+}
+
+.split-labels {
+  display: flex;
+}
+
+/* =========================
+   PENSION BOX
+========================= */
+.pension-box {
+  background: #eafaf1;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.pension-value {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+/* =========================
+   TOOLTIP
+========================= */
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 140%;
+  transform: translateY(-50%);
+  width: 240px;
+  background: #004080;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.2s;
+  z-index: 100;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* =========================
+   INSIGHT + ERROR
+========================= */
+.insight-box {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+}
+
+.error-box {
+  background: #ffe5e5;
+  border: 1px solid #ffb3b3;
+  color: #b30000;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* =========================
+   DARK MODE
+========================= */
+body.dark-mode {
+  background: #121826;
+  color: #e7ecfa;
+}
+
+body.dark-mode main {
+  background: #1a2235;
+}
+
+body.dark-mode section {
+  background: #202a40;
+  border-color: #2c3a5a;
+}
+
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #9ecbff;
+}
+
+/* Cards */
+body.dark-mode .card {
+  background: #2a3550;
+}
+
+body.dark-mode .card.highlight {
+  background: #1f4e8c;
+}
+
+/* Bars */
+body.dark-mode .progress-bar .invested {
+  background: #5f86c2;
+}
+
+body.dark-mode .progress-bar .gain {
+  background: #2fd07f;
+}
+
+body.dark-mode .split-bar .lump {
+  background: #20c997;
+}
+
+body.dark-mode .split-bar .pension {
+  background: #4dabf7;
+}
+
+/* Pension */
+body.dark-mode .pension-box {
+  background: #1f2f2a;
+  border: 1px solid #2ecc71;
+}
+
+/* Tooltip */
+body.dark-mode .tooltip-text {
+  background: #1f3d66;
+}
+
+/* Insight */
+body.dark-mode .insight-box {
+  background: #3a2f12;
+  color: #ffd966;
+}
+
+/* Error */
+body.dark-mode .error-box {
+  background: #3a1c1c;
+  color: #ff8080;
+}
+
+/* Buttons in dark mode */
+body.dark-mode .outline-btn {
+  color: #8abaff;
+  border-color: #8abaff;
+}
+
+body.dark-mode .outline-btn:hover {
+  background: #253458;
+  color: #fff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .result-cards {
+    flex-direction: column;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}
+
+
+/* FORCE Reset button visibility */
+.outline-btn {
+  opacity: 1 !important;
+  color: #0a3d75 !important;
+  border: 2px solid #0a3d75 !important;
+  background: transparent !important;
+}
+
+/* Fix faded text */
+.outline-btn span,
+.outline-btn {
+  color: #0a3d75 !important;
 }
   </style>
 </head>
@@ -280,6 +409,7 @@
     <li><a href="#invest-nps">How to Invest</a></li>
     <li><a href="#who-nps">Who should Invest</a></li>
     <li><a href="#tips-nps">Tips</a></li>
+	<li><a href="#calculator-nps">Calculator</a></li>
   </ul>
 </nav>
 
@@ -408,11 +538,64 @@
   </p>
 </section>
 
-<section>
-  <h2>📊 NPS Calculator (Coming Soon)</h2>
-  <p>
-    We will soon add an NPS calculator to help you estimate your retirement corpus based on monthly contributions, expected returns, and duration.
-  </p>
+<section id="calculator-nps">
+  <h2>📊 NPS Calculator</h2>
+
+  <div class="calculator-box">
+
+    <label>
+  Monthly Investment (₹)
+  <span class="tooltip">
+     ⓘ
+    <span class="tooltip-text">
+      Amount you invest every month in NPS.
+    </span>
+  </span>
+</label>
+<input type="number" id="monthly" placeholder="e.g. 5,000" />
+
+<label>
+  Expected Return (%)
+  <span class="tooltip">
+     ⓘ
+    <span class="tooltip-text">
+      Average annual return. Typically 8–12% for NPS.
+    </span>
+  </span>
+</label>
+<input type="number" id="rate" placeholder="e.g. 10" />
+
+<label>
+  Years to Retirement
+  <span class="tooltip">
+     ⓘ
+    <span class="tooltip-text">
+      Number of years you will keep investing.
+    </span>
+  </span>
+</label>
+<input type="number" id="years" placeholder="e.g. 25" />
+
+<label>
+  Annuity Return (%)
+  <span class="tooltip">
+     ⓘ
+    <span class="tooltip-text">
+      Expected pension return rate (usually 5–7%).
+    </span>
+  </span>
+</label>
+<input type="number" id="annuity" placeholder="e.g. 6" />
+
+    <div class="btn-group">
+	<button onclick="calculateNPS()" class="btn primary-btn">Calculate</button>
+	<button onclick="resetNPS()" class="btn outline-btn">Reset</button>
+	</div>
+
+    <div id="nps-result" class="result-box"></div>
+
+  </div>
+
 </section>
 
 </main>
@@ -421,6 +604,160 @@
   © 2025 Investment Insights
 </footer>
 
+
+
+<script>
+function calculateNPS() {
+
+  // ✅ STEP 1: Get values
+  const monthly = parseFloat(document.getElementById("monthly").value);
+  const rateInput = parseFloat(document.getElementById("rate").value);
+  const years = parseFloat(document.getElementById("years").value);
+  const annuityInput = parseFloat(document.getElementById("annuity").value);
+
+  // ✅ STEP 2: Validation
+  const errors = [];
+
+  if (!monthly || monthly <= 0) errors.push("Monthly Investment");
+  if (!rateInput || rateInput <= 0) errors.push("Expected Return");
+  if (!years || years <= 0) errors.push("Years to Retirement");
+  if (!annuityInput || annuityInput <= 0) errors.push("Annuity Return");
+
+  if (errors.length > 0) {
+    document.getElementById("nps-result").innerHTML = `
+      <div class="error-box">
+        ⚠️ Please fill valid values for: <b>${errors.join(", ")}</b>
+      </div>
+    `;
+    return;
+  }
+
+  // ✅ STEP 3: Convert values
+  const rate = rateInput / 100 / 12;
+  const annuityRate = annuityInput / 100;
+
+  const months = years * 12;
+
+  // ✅ STEP 4: Calculation
+  const corpus = monthly * ((Math.pow(1 + rate, months) - 1) / rate) * (1 + rate);
+
+  const invested = monthly * months;
+  const gain = corpus - invested;
+
+  const lumpSum = corpus * 0.6;
+  const annuityCorpus = corpus * 0.4;
+
+  const monthlyPension = (annuityCorpus * annuityRate) / 12;
+
+  // ✅ STEP 5: Render FULL UI (restored)
+  document.getElementById("nps-result").innerHTML = `
+    <div class="result-cards">
+      <div class="card small">
+        <span>Total Invested</span>
+        <b>₹${formatINR(invested)}</b>
+      </div>
+      <div class="card small">
+        <span>Wealth Gained</span>
+        <b>₹${formatINR(gain)}</b>
+      </div>
+      <div class="card highlight">
+        <span>Total Corpus</span>
+        <b>₹${formatINR(corpus)}</b>
+      </div>
+    </div>
+
+    <h3>📊 Investment vs Returns</h3>
+
+<div class="progress-bar-wrapper">
+
+  <!-- BAR -->
+  <div class="progress-bar">
+    <div class="invested" style="width:${(invested/corpus)*100}%"></div>
+    <div class="gain" style="width:${(gain/corpus)*100}%"></div>
+  </div>
+
+  <!-- LABELS aligned with bar -->
+  <div class="progress-labels">
+    <div class="label invested-label" style="width:${(invested/corpus)*100}%">
+      💼 ₹${formatINR(invested)} <br>
+      <span>(${((invested/corpus)*100).toFixed(0)}%) Invested</span>
+    </div>
+
+    <div class="label gain-label" style="width:${(gain/corpus)*100}%">
+      📈 ₹${formatINR(gain)} <br>
+      <span>(${((gain/corpus)*100).toFixed(0)}%) Returns</span>
+    </div>
+  </div>
+
+</div>
+
+<p class="context-text">
+  You invested ₹${formatINR(invested)} and earned ₹${formatINR(gain)} — 
+  that’s <b>${(gain/invested).toFixed(1)}x growth</b> on your money.
+</p>
+
+    <h3>💰 Withdrawal Split</h3>
+
+<div class="split-wrapper">
+
+  <!-- BAR ONLY -->
+  <div class="split-bar">
+    <div class="lump" style="width:60%"></div>
+    <div class="pension" style="width:40%"></div>
+  </div>
+
+  <!-- LABELS BELOW (aligned like investment section) -->
+  <div class="split-labels">
+    <div class="label lump-label" style="width:60%">
+      💰 ₹${formatINR(lumpSum)} <br>
+      <span>60% Lump Sum</span>
+    </div>
+
+    <div class="label pension-label" style="width:40%">
+      🏦 ₹${formatINR(annuityCorpus)} <br>
+      <span>40% Pension</span>
+    </div>
+  </div>
+
+</div>
+
+<p class="context-text">
+  You can withdraw <b>₹${formatINR(lumpSum)}</b> at retirement, 
+  while <b>₹${formatINR(annuityCorpus)}</b> will generate your monthly pension.
+</p>
+
+
+    <div class="pension-box">
+      <h3>📅 Monthly Pension</h3>
+      <div class="pension-value">₹${formatINR(monthlyPension, 0)}</div>
+    </div>
+
+    <div class="insight-box">
+      ${generateInsight(monthlyPension)}
+    </div>
+  `;
+}
+</script>
+
+<script>
+function formatINR(num, digits = 0) {
+  return num.toLocaleString('en-IN', {
+    maximumFractionDigits: digits
+  });
+}
+</script>
+
+<script>
+function generateInsight(pension) {
+  if (pension < 20000) {
+    return "⚠️ Your projected pension is quite low. Consider increasing your monthly contribution or extending your investment duration.";
+  } else if (pension < 50000) {
+    return "👍 You are on a moderate track. Increasing contributions slightly can significantly improve retirement comfort.";
+  } else {
+    return "🎯 Great! Your retirement plan looks strong with a healthy projected pension.";
+  }
+}
+</script>
 
 <script>
 window.addEventListener('scroll', () => {
@@ -475,7 +812,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+function resetNPS() {
+  document.getElementById("monthly").value = "";
+  document.getElementById("rate").value = "";
+  document.getElementById("years").value = "";
+  document.getElementById("annuity").value = "";
 
+  // Clear result
+  document.getElementById("nps-result").innerHTML = "";
+}
+</script>
 
 <script>
 document.querySelectorAll('.floating-toc a').forEach(link => {
