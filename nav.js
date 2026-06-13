@@ -104,10 +104,26 @@
     });
   }
 
+  /* ---------- Keep --header-h in sync with the real header ----------
+     The header wraps to two rows at most widths, so a hardcoded height
+     is wrong and the floating side boxes ride up under it. Measure the
+     actual rendered header and publish it as the CSS variable that the
+     boxes (and scroll-padding) are positioned from. */
+  function syncHeaderHeight() {
+    var header = document.querySelector(".site-header");
+    if (!header) return;
+    var h = Math.round(header.getBoundingClientRect().height);
+    document.documentElement.style.setProperty("--header-h", h + "px");
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initDarkMode();
     initNav();
     initActiveLink();
     initBackToTop();
+    syncHeaderHeight();
+    window.addEventListener("resize", syncHeaderHeight);
+    // Re-measure once fonts/emoji settle, which can change wrap height.
+    window.addEventListener("load", syncHeaderHeight);
   });
 })();
