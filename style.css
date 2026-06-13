@@ -371,17 +371,15 @@ body.dark-mode h3 { color: #8abaff !important; border-color: #273a5a !important;
    (body … specificity beats the per-page inline <style>.)
    ============================================================ */
 
-/* Shared shell for every floating box */
+/* Shared shell for both kinds of floating box */
 body .floating-toc,
 body .stock-float-menu,
 body .etf-float-menu,
 body .ipo-float-menu,
 body .intraday-float-menu {
   position: fixed;
-  top: calc(var(--header-h) + 24px);
   width: 210px;
   max-width: 220px;
-  max-height: calc(100vh - var(--header-h) - 48px);
   overflow-y: auto;
   background: var(--surface);
   border: 1.4px solid var(--border-soft);
@@ -393,18 +391,27 @@ body .intraday-float-menu {
   display: block;
 }
 
-/* Quick Access → left */
+/* Quick Access → docked bottom-left, so it never collides with the
+   header or with top-of-page content (the live ticker on US Stocks,
+   charts on Intraday). */
 body .stock-float-menu,
 body .etf-float-menu,
 body .ipo-float-menu,
 body .intraday-float-menu {
   left: 24px;
   right: auto;
+  top: auto;
+  bottom: 24px;
+  max-height: calc(100vh - 48px);
 }
-/* On this page → right */
+
+/* On this page → top-right (short index, safe below the header) */
 body .floating-toc {
   right: 24px;
   left: auto;
+  bottom: auto;
+  top: calc(var(--header-h) + 24px);
+  max-height: calc(100vh - var(--header-h) - 48px);
 }
 
 /* Titles */
