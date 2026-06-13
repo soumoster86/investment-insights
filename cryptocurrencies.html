@@ -457,79 +457,9 @@
     style="margin-bottom:16px;"
   />
   <div id="crypto-list" style="display: flex; flex-wrap: wrap; gap: 16px;">
-    <!-- Bitcoin -->
-    <div class="crypto-card" data-category="Payment" data-risk="High">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="bitcoin-logo.png" alt="Bitcoin" style="width:34px; height:34px; border-radius:7px; background:#fff;">
-        <strong>Bitcoin (BTC)</strong>
-        <span class="crypto-type-chip">Payment</span>
-        <span class="crypto-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">First and largest cryptocurrency, “digital gold”</div>
-      <div style="font-size:0.96em; color:#fb8c00;">⭐️⭐️⭐️⭐️⭐️</div>
-      <a href="https://www.coingecko.com/en/coins/bitcoin" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Ethereum -->
-    <div class="crypto-card" data-category="Smart Contracts" data-risk="High">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="ethereum-logo.png" alt="Ethereum" style="width:34px; height:34px; border-radius:7px; background:#fff;">
-        <strong>Ethereum (ETH)</strong>
-        <span class="crypto-type-chip">Smart Contracts</span>
-        <span class="crypto-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Smart contracts pioneer, DeFi & NFT leader</div>
-      <div style="font-size:0.96em; color:#fb8c00;">⭐️⭐️⭐️⭐️⭐️</div>
-      <a href="https://www.coingecko.com/en/coins/ethereum" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Binance Coin -->
-    <div class="crypto-card" data-category="Exchange" data-risk="High">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="binance-coin-logo.png" alt="BNB" style="width:34px; height:34px; border-radius:7px; background:#fff;">
-        <strong>BNB (Binance Coin)</strong>
-        <span class="crypto-type-chip">Exchange</span>
-        <span class="crypto-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Major exchange token, utility on Binance ecosystem</div>
-      <div style="font-size:0.96em; color:#fb8c00;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.coingecko.com/en/coins/binancecoin" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Solana -->
-    <div class="crypto-card" data-category="Smart Contracts" data-risk="High">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="solana-logo.png" alt="Solana" style="width:34px; height:34px; border-radius:7px; background:#fff;">
-        <strong>Solana (SOL)</strong>
-        <span class="crypto-type-chip">Smart Contracts</span>
-        <span class="crypto-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">High-speed, low-cost blockchain for DeFi & NFTs</div>
-      <div style="font-size:0.96em; color:#fb8c00;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.coingecko.com/en/coins/solana" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- Polygon -->
-    <div class="crypto-card" data-category="Layer 2" data-risk="High">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="polygon-logo.png" alt="Polygon" style="width:34px; height:34px; border-radius:7px; background:#fff;">
-        <strong>Polygon (MATIC)</strong>
-        <span class="crypto-type-chip">Layer 2</span>
-        <span class="crypto-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Ethereum scaling, Indian founders, rapid ecosystem growth</div>
-      <div style="font-size:0.96em; color:#fb8c00;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.coingecko.com/en/coins/polygon" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
-    <!-- XRP -->
-    <div class="crypto-card" data-category="Payment" data-risk="High">
-      <div style="display:flex; align-items:center; gap:9px;">
-        <img src="ripple-xrp-logo.png" alt="XRP" style="width:34px; height:34px; border-radius:7px; background:#fff;">
-        <strong>XRP (Ripple)</strong>
-        <span class="crypto-type-chip">Payment</span>
-        <span class="crypto-risk-chip" style="background:#fdecea;color:#be3636;">High</span>
-      </div>
-      <div style="font-size:0.95em; margin:6px 0;">Cross-border payments network, fast settlements</div>
-      <div style="font-size:0.96em; color:#fb8c00;">⭐️⭐️⭐️⭐️☆</div>
-      <a href="https://www.coingecko.com/en/coins/ripple" target="_blank" class="btn" style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>
-    </div>
+    <!-- Cards rendered from recommendations.js -->
   </div>
+  <p id="crypto-list-empty" style="display:none; color:#777; margin-top:10px;">No matching cryptocurrencies found.</p>
 </section>
 
 <style>
