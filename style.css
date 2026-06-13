@@ -359,28 +359,26 @@ body.dark-mode h3 { color: #8abaff !important; border-color: #273a5a !important;
 
 /* ============================================================
    Floating in-page navigation boxes
-   Two kinds existed, with four different class names:
-     1. "On this page" section TOC ............. .floating-toc
-     2. "Quick Access" stocks sub-nav .......... .ipo-float-menu,
-        .stock-float-menu, .etf-float-menu
-   The Quick Access boxes duplicate the header's Stocks dropdown
-   (ETF / IPO / Intraday / US Stocks) and used stale position:fixed
-   offsets that left them stranded at the top of the page, and on
-   Stocks/US-Stocks they overlapped the "On this page" box. They add
-   nothing the header nav doesn't already give, so hide them and keep
-   a single, consistently-placed "On this page" TOC.
+   Two kinds exist, each under several class names:
+     1. "On this page" section index ... .floating-toc
+     2. "Quick Access" stocks sub-nav ... .stock-float-menu,
+        .etf-float-menu, .ipo-float-menu, .intraday-float-menu
+   All previously used position:fixed with stale top offsets that
+   left them stranded over the page top, and the five Quick Access
+   classes were styled inconsistently per page. They are unified
+   here: Quick Access docks LEFT, "On this page" docks RIGHT, so the
+   two never collide on pages (Stocks, US Stocks) that have both.
    (body … specificity beats the per-page inline <style>.)
    ============================================================ */
-body .ipo-float-menu,
-body .stock-float-menu,
-body .etf-float-menu { display: none !important; }
 
-body .floating-toc {
+/* Shared shell for every floating box */
+body .floating-toc,
+body .stock-float-menu,
+body .etf-float-menu,
+body .ipo-float-menu,
+body .intraday-float-menu {
   position: fixed;
   top: calc(var(--header-h) + 24px);
-  right: 24px;
-  left: auto;
-  bottom: auto;
   width: 210px;
   max-width: 220px;
   max-height: calc(100vh - var(--header-h) - 48px);
@@ -390,26 +388,103 @@ body .floating-toc {
   box-shadow: 0 4px 18px rgba(0, 64, 128, 0.12);
   border-radius: 12px;
   padding: 14px 16px;
+  font-size: 1em;
   z-index: 900;
+  display: block;
 }
-body .floating-toc .toc-title {
+
+/* Quick Access → left */
+body .stock-float-menu,
+body .etf-float-menu,
+body .ipo-float-menu,
+body .intraday-float-menu {
+  left: 24px;
+  right: auto;
+}
+/* On this page → right */
+body .floating-toc {
+  right: 24px;
+  left: auto;
+}
+
+/* Titles */
+body .floating-toc .toc-title,
+body .stock-float-menu .float-title,
+body .etf-float-menu .float-title,
+body .ipo-float-menu .float-title,
+body .intraday-float-menu .float-title {
   font-weight: 600;
   color: var(--brand);
-  margin-bottom: 8px;
+  font-size: 1.05em;
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-soft);
 }
-body .floating-toc a { color: #204a80; }
 
-body.dark-mode .floating-toc {
+/* Reset list styling for the TOC so it reads cleanly */
+body .floating-toc ul { margin: 0; padding: 0; list-style: none; }
+body .floating-toc li { margin: 0; }
+
+/* Links — consistent spacing, upright (override inline italic), readable */
+body .floating-toc a,
+body .stock-float-menu a,
+body .etf-float-menu a,
+body .ipo-float-menu a,
+body .intraday-float-menu a {
+  display: block;
+  color: #204a80;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  padding: 8px 10px;
+  margin: 2px 0;
+  border-radius: 7px;
+  transition: background 0.16s, color 0.16s;
+}
+body .floating-toc a:hover,
+body .floating-toc a.active,
+body .stock-float-menu a:hover,
+body .etf-float-menu a:hover,
+body .ipo-float-menu a:hover,
+body .ipo-float-menu a.active,
+body .intraday-float-menu a:hover {
+  background: #eaf1fb;
+  color: var(--brand);
+}
+
+/* Dark mode */
+body.dark-mode .floating-toc,
+body.dark-mode .stock-float-menu,
+body.dark-mode .etf-float-menu,
+body.dark-mode .ipo-float-menu,
+body.dark-mode .intraday-float-menu {
   background: #1a2030;
   border-color: #273a5a;
 }
+body.dark-mode .floating-toc .toc-title,
 body.dark-mode .floating-toc a,
-body.dark-mode .floating-toc .toc-title { color: #8abaff; }
+body.dark-mode .stock-float-menu .float-title,
+body.dark-mode .stock-float-menu a,
+body.dark-mode .etf-float-menu .float-title,
+body.dark-mode .etf-float-menu a,
+body.dark-mode .ipo-float-menu .float-title,
+body.dark-mode .ipo-float-menu a,
+body.dark-mode .intraday-float-menu .float-title,
+body.dark-mode .intraday-float-menu a { color: #8abaff; }
+body.dark-mode .floating-toc a:hover,
+body.dark-mode .stock-float-menu a:hover,
+body.dark-mode .etf-float-menu a:hover,
+body.dark-mode .ipo-float-menu a:hover,
+body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; }
 
-/* On laptops/tablets the side box crowds the main column — hide it.
-   The header nav already provides full navigation. */
+/* On laptops/tablets the side boxes crowd the main column — hide them.
+   The header nav (incl. Stocks dropdown) already covers navigation. */
 @media (max-width: 1180px) {
-  body .floating-toc { display: none; }
+  body .floating-toc,
+  body .stock-float-menu,
+  body .etf-float-menu,
+  body .ipo-float-menu,
+  body .intraday-float-menu { display: none; }
 }
 
 
