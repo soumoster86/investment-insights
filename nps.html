@@ -380,7 +380,6 @@ body.dark-mode .outline-btn:hover {
   }
 }
 
-
 /* FORCE Reset button visibility */
 .outline-btn {
   opacity: 1 !important;
@@ -413,40 +412,37 @@ body.dark-mode .outline-btn:hover {
   </ul>
 </nav>
 
-
-
- <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background-color: #004080; color: white; flex-wrap: wrap;">
-    <div style="display: flex; align-items: center;">
-      <img src="logo.png" alt="Investment Insights Logo" style="height: 50px; margin-right: 15px;" />
-      <h1>💡Investment Insights: Learn. Grow. Prosper.</h1>
+   <header class="site-header">
+    <div class="brand">
+      <img src="logo.png" alt="Investment Insights logo" />
+      <h1>💡 Investment Insights</h1>
     </div>
-    <label style="display: flex; align-items: center; gap: 8px; cursor:pointer; margin-top: 10px;">
-      <input type="checkbox" id="darkmode-toggle" style="width:20px; height:20px;" />
-      <span id="dm-label" style="color:white;font-size:1em;">🌙 Dark Mode</span>
+    <label class="dm-toggle">
+      <input type="checkbox" id="darkmode-toggle" />
+      <span id="dm-label">🌙 Dark Mode</span>
     </label>
-	
-
-    <nav class="main-nav">
-  <a href="index.html">🏠 Home</a>
-  <div class="dropdown">
-    <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
-    <div class="dropdown-menu">
-  <a href="stocks.html"><span>📊</span> Overview</a>
-  <a href="etf.html"><span>📈</span> ETF</a>
-  <a href="ipo.html"><span>🆕</span> IPO</a>
-  <a href="intraday.html"><span>⏱️</span> Intraday</a>
-  <a href="usstocks.html"><span>🇺🇸</span> US Stocks</a> <!-- NEW -->
-</div>
-  </div>
-  <a href="mutualfunds.html">📁 Mutual Funds</a>
-  <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
-  <a href="nps.html">🏦 NPS (Retirement)</a>
-  <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
-  <a href="bonds.html">💸 Bonds</a>
-  <a href="investmentgoal.html">🎯 Investment Goal</a>
-  <a href="contact.html">✉️ Contact</a>
-</nav>
-		
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false">☰</button>
+    <nav class="main-nav" id="main-nav" aria-label="Primary">
+      <button class="nav-close" id="nav-close" aria-label="Close menu">×</button>
+      <a href="index.html">🏠 Home</a>
+      <div class="dropdown">
+        <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
+        <div class="dropdown-menu">
+          <a href="stocks.html"><span>📊</span> Overview</a>
+          <a href="etf.html"><span>📈</span> ETF</a>
+          <a href="ipo.html"><span>🆕</span> IPO</a>
+          <a href="intraday.html"><span>⏱️</span> Intraday</a>
+          <a href="usstocks.html"><span>🇺🇸</span> US Stocks</a>
+        </div>
+      </div>
+      <a href="mutualfunds.html">📁 Mutual Funds</a>
+      <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
+      <a href="nps.html">🏦 NPS (Retirement)</a>
+      <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
+      <a href="bonds.html">💸 Bonds</a>
+      <a href="investmentgoal.html">🎯 Investment Goal</a>
+      <a href="contact.html">✉️ Contact</a>
+    </nav>
   </header>
 
 <main>
@@ -604,8 +600,6 @@ body.dark-mode .outline-btn:hover {
   © 2025 Investment Insights
 </footer>
 
-
-
 <script>
 function calculateNPS() {
 
@@ -726,7 +720,6 @@ function calculateNPS() {
   while <b>₹${formatINR(annuityCorpus)}</b> will generate your monthly pension.
 </p>
 
-
     <div class="pension-box">
       <h3>📅 Monthly Pension</h3>
       <div class="pension-value">₹${formatINR(monthlyPension, 0)}</div>
@@ -785,34 +778,6 @@ window.addEventListener('scroll', () => {
 </script>
 
 <script>
-function setMode(dark) {
-  if (dark) {
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("theme", "dark");
-    document.getElementById('dm-label').textContent = "☀️ Light Mode";
-    document.getElementById('darkmode-toggle').checked = true;
-  } else {
-    document.body.classList.remove("dark-mode");
-    localStorage.setItem("theme", "light");
-    document.getElementById('dm-label').textContent = "🌙 Dark Mode";
-    document.getElementById('darkmode-toggle').checked = false;
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('darkmode-toggle').addEventListener("change", function() {
-    setMode(this.checked);
-  });
-
-  const userPref = localStorage.getItem("theme");
-  const darkPref = userPref === "dark" ||
-    (!userPref && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-  setMode(darkPref);
-});
-</script>
-
-<script>
 function resetNPS() {
   document.getElementById("monthly").value = "";
   document.getElementById("rate").value = "";
@@ -855,48 +820,13 @@ window.addEventListener('scroll', () => {
 });
 </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Remove all 'active' classes first
-  document.querySelectorAll('nav a').forEach(function(link) {
-    link.classList.remove('active');
-    // Compare only the filename part to handle different hosting/path situations
-    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
-      link.classList.add('active');
-    }
-  });
-});
-</script>
-
-
-
-
-
-<button id="back-to-top" style="display:none;" aria-label="Back to Top">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
-    <path d="M12 4L12 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M6 10L12 4L18 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <span style="margin-left:7px;vertical-align:middle;">Top</span>
-</button>
-
-
-<script>
-window.addEventListener('scroll', function() {
-  const btn = document.getElementById('back-to-top');
-  if (!btn) return;
-  // Show when user scrolls below 400px
-  if (window.scrollY > 400) {
-    btn.style.display = 'flex';
-  } else {
-    btn.style.display = 'none';
-  }
-});
-document.getElementById('back-to-top').onclick = function() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-</script>
-
-
+  <button id="back-to-top" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+      <path d="M12 4L12 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 10L12 4L18 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span style="margin-left:6px;vertical-align:middle;">Top</span>
+  </button>
+  <script src="nav.js" defer></script>
 </body>
 </html>
