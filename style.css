@@ -226,8 +226,13 @@ button[type="button"]:hover {
   transform: translateY(-1px);
 }
 
-/* ---------- Forms (calculators, contact, goal) ---------- */
-form label {
+/* ---------- Forms & calculators (consistent across all pages) ----------
+   Calculators use three different wrappers across the site:
+     <form id="…-form">      (SIP, SWP, FD, Investment Goal)
+     <div class="calculator-box">  (NPS)
+   Both are styled identically here so every calculator matches. */
+form label,
+.calculator-box label {
   display: block;
   font-weight: 600;
   color: #2b3a52;
@@ -237,7 +242,11 @@ form input[type="text"],
 form input[type="number"],
 form input[type="email"],
 form select,
-form textarea {
+form textarea,
+.calculator-box input[type="text"],
+.calculator-box input[type="number"],
+.calculator-box select {
+  display: block;
   width: 100%;
   max-width: 340px;
   padding: 10px 12px;
@@ -250,17 +259,50 @@ form textarea {
 }
 form input:focus,
 form select:focus,
-form textarea:focus {
+form textarea:focus,
+.calculator-box input:focus,
+.calculator-box select:focus {
   border-color: var(--brand-accent);
   outline: none;
   box-shadow: 0 0 0 3px rgba(35, 106, 211, 0.15);
 }
-/* Inline numeric fields (FD tenure: years / months / days) keep their inline width */
-form input[style*="width"] { width: auto; }
+/* Inline numeric fields (e.g. FD tenure Years/Months/Days) keep their width */
+form input[style*="width"],
+.calculator-box input[style*="width"] { display: inline-block; width: auto; }
 
 form select { max-width: 220px; cursor: pointer; }
 form textarea { max-width: 100%; min-height: 120px; resize: vertical; }
-form button { margin-top: 16px; margin-right: 8px; }
+
+/* Button group: Calculate + Reset, consistent placement on every calculator */
+.btn-group { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+form button,
+.calculator-box button { margin-top: 18px; margin-right: 0; }
+.btn-group button { margin-top: 0; }
+
+/* Button variants — unify the many class names used across calculators.
+   Primary (Calculate) = solid brand. Secondary/Reset = outline. */
+.btn,
+.primary-btn,
+button[type="submit"] {
+  background: var(--brand);
+  color: #fff !important;
+  border: 1.5px solid var(--brand);
+}
+.btn.secondary,
+.secondary-btn,
+.outline-btn,
+.btn.outline-btn {
+  background: #fff !important;
+  color: var(--brand) !important;
+  border: 1.5px solid var(--brand) !important;
+}
+.btn.secondary:hover,
+.secondary-btn:hover,
+.outline-btn:hover,
+.btn.outline-btn:hover {
+  background: #eaf1fb !important;
+  color: var(--brand-dark) !important;
+}
 
 /* Multi-select list (investment goal) */
 form select[multiple] {
@@ -272,12 +314,23 @@ form select[multiple] {
 /* Dark-mode form controls (shared) */
 body.dark-mode form input,
 body.dark-mode form select,
-body.dark-mode form textarea {
+body.dark-mode form textarea,
+body.dark-mode .calculator-box input,
+body.dark-mode .calculator-box select {
   background: #222a3d;
   color: #e7ecfa;
   border-color: #2f3d5c;
 }
-body.dark-mode form label { color: #b8c9ec; }
+body.dark-mode form label,
+body.dark-mode .calculator-box label { color: #b8c9ec; }
+body.dark-mode .btn.secondary,
+body.dark-mode .secondary-btn,
+body.dark-mode .outline-btn,
+body.dark-mode .btn.outline-btn {
+  background: #182a43 !important;
+  color: #8abaff !important;
+  border-color: #39588a !important;
+}
 body.dark-mode main,
 body.dark-mode section {
   background: #191c23 !important;
@@ -306,15 +359,23 @@ body.dark-mode h3 { color: #8abaff !important; border-color: #273a5a !important;
 
 /* ============================================================
    Floating in-page navigation boxes
-   (.floating-toc and IPO's .ipo-float-menu)
-   These used position:fixed with a top offset tuned for the OLD
-   non-sticky header, so they drifted to the very top of the page.
-   Re-anchor them below the sticky header and hide on narrow
-   viewports where they overlapped content. Higher specificity
-   (body …) so these win over the per-page inline <style>.
+   Two kinds existed, with four different class names:
+     1. "On this page" section TOC ............. .floating-toc
+     2. "Quick Access" stocks sub-nav .......... .ipo-float-menu,
+        .stock-float-menu, .etf-float-menu
+   The Quick Access boxes duplicate the header's Stocks dropdown
+   (ETF / IPO / Intraday / US Stocks) and used stale position:fixed
+   offsets that left them stranded at the top of the page, and on
+   Stocks/US-Stocks they overlapped the "On this page" box. They add
+   nothing the header nav doesn't already give, so hide them and keep
+   a single, consistently-placed "On this page" TOC.
+   (body … specificity beats the per-page inline <style>.)
    ============================================================ */
-body .floating-toc,
-body .ipo-float-menu {
+body .ipo-float-menu,
+body .stock-float-menu,
+body .etf-float-menu { display: none !important; }
+
+body .floating-toc {
   position: fixed;
   top: calc(var(--header-h) + 24px);
   right: 24px;
@@ -331,30 +392,24 @@ body .ipo-float-menu {
   padding: 14px 16px;
   z-index: 900;
 }
-body .floating-toc .toc-title,
-body .ipo-float-menu .float-title {
+body .floating-toc .toc-title {
   font-weight: 600;
   color: var(--brand);
   margin-bottom: 8px;
 }
-body .floating-toc a,
-body .ipo-float-menu a { color: #204a80; }
+body .floating-toc a { color: #204a80; }
 
-body.dark-mode .floating-toc,
-body.dark-mode .ipo-float-menu {
+body.dark-mode .floating-toc {
   background: #1a2030;
   border-color: #273a5a;
 }
 body.dark-mode .floating-toc a,
-body.dark-mode .floating-toc .toc-title,
-body.dark-mode .ipo-float-menu a,
-body.dark-mode .ipo-float-menu .float-title { color: #8abaff; }
+body.dark-mode .floating-toc .toc-title { color: #8abaff; }
 
 /* On laptops/tablets the side box crowds the main column — hide it.
    The header nav already provides full navigation. */
 @media (max-width: 1180px) {
-  body .floating-toc,
-  body .ipo-float-menu { display: none; }
+  body .floating-toc { display: none; }
 }
 
 
