@@ -169,6 +169,124 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
+/* ============================================================
+   Shared content shell — main / sections / headings / buttons
+   (Previously duplicated inline per page, and missing entirely
+   on some pages like ipo.html. Centralized here.)
+   ============================================================ */
+main {
+  max-width: 900px;
+  margin: 32px auto 24px auto;
+  padding: 8px 18px 30px;
+  background: var(--surface);
+  box-shadow: 0 2px 12px rgb(0 64 128 / 8%);
+  border-radius: 18px;
+  min-height: 70vh;
+}
+main > section,
+section {
+  margin-bottom: 28px;
+  padding: 20px 22px;
+  border: 1.5px solid var(--border-soft);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  box-shadow: 0 1px 10px #00408009;
+}
+h2 {
+  border-bottom: 2px solid var(--brand);
+  padding-bottom: 8px;
+  color: var(--brand);
+  margin-top: 0;
+  font-size: 1.5em;
+}
+h3 { color: var(--brand); font-size: 1.17em; margin: 18px 0 12px; }
+
+/* Buttons & "learn more" links */
+.btn,
+.learn-more,
+button[type="submit"],
+button[type="button"] {
+  background: var(--brand);
+  color: #fff !important;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 1.02em;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.22s, transform 0.17s;
+}
+.btn:hover,
+.learn-more:hover,
+button[type="submit"]:hover,
+button[type="button"]:hover {
+  background: var(--brand-dark);
+  transform: translateY(-1px);
+}
+
+/* ---------- Forms (calculators, contact, goal) ---------- */
+form label {
+  display: block;
+  font-weight: 600;
+  color: #2b3a52;
+  margin: 14px 0 6px;
+}
+form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form select,
+form textarea {
+  width: 100%;
+  max-width: 340px;
+  padding: 10px 12px;
+  border: 1.5px solid #cdd7ea;
+  border-radius: 8px;
+  font-size: 1em;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+}
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: var(--brand-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(35, 106, 211, 0.15);
+}
+/* Inline numeric fields (FD tenure: years / months / days) keep their inline width */
+form input[style*="width"] { width: auto; }
+
+form select { max-width: 220px; cursor: pointer; }
+form textarea { max-width: 100%; min-height: 120px; resize: vertical; }
+form button { margin-top: 16px; margin-right: 8px; }
+
+/* Multi-select list (investment goal) */
+form select[multiple] {
+  max-width: 260px;
+  padding: 4px;
+  min-height: 130px;
+}
+
+/* Dark-mode form controls (shared) */
+body.dark-mode form input,
+body.dark-mode form select,
+body.dark-mode form textarea {
+  background: #222a3d;
+  color: #e7ecfa;
+  border-color: #2f3d5c;
+}
+body.dark-mode form label { color: #b8c9ec; }
+body.dark-mode main,
+body.dark-mode section {
+  background: #191c23 !important;
+  color: #e7ecfa !important;
+  border-color: #2d3752 !important;
+}
+body.dark-mode h2,
+body.dark-mode h3 { color: #8abaff !important; border-color: #273a5a !important; }
+
 /* ---------- Back to top ---------- */
 #back-to-top {
   position: fixed;
@@ -187,8 +305,59 @@ textarea:focus-visible {
 }
 
 /* ============================================================
-   Mobile (<= 820px): hamburger drawer
+   Floating in-page navigation boxes
+   (.floating-toc and IPO's .ipo-float-menu)
+   These used position:fixed with a top offset tuned for the OLD
+   non-sticky header, so they drifted to the very top of the page.
+   Re-anchor them below the sticky header and hide on narrow
+   viewports where they overlapped content. Higher specificity
+   (body …) so these win over the per-page inline <style>.
    ============================================================ */
+body .floating-toc,
+body .ipo-float-menu {
+  position: fixed;
+  top: calc(var(--header-h) + 24px);
+  right: 24px;
+  left: auto;
+  bottom: auto;
+  width: 210px;
+  max-width: 220px;
+  max-height: calc(100vh - var(--header-h) - 48px);
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1.4px solid var(--border-soft);
+  box-shadow: 0 4px 18px rgba(0, 64, 128, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  z-index: 900;
+}
+body .floating-toc .toc-title,
+body .ipo-float-menu .float-title {
+  font-weight: 600;
+  color: var(--brand);
+  margin-bottom: 8px;
+}
+body .floating-toc a,
+body .ipo-float-menu a { color: #204a80; }
+
+body.dark-mode .floating-toc,
+body.dark-mode .ipo-float-menu {
+  background: #1a2030;
+  border-color: #273a5a;
+}
+body.dark-mode .floating-toc a,
+body.dark-mode .floating-toc .toc-title,
+body.dark-mode .ipo-float-menu a,
+body.dark-mode .ipo-float-menu .float-title { color: #8abaff; }
+
+/* On laptops/tablets the side box crowds the main column — hide it.
+   The header nav already provides full navigation. */
+@media (max-width: 1180px) {
+  body .floating-toc,
+  body .ipo-float-menu { display: none; }
+}
+
+
 @media (max-width: 820px) {
   .site-header h1 { font-size: 1.05em; }
   .nav-toggle { display: inline-flex; order: 3; }
