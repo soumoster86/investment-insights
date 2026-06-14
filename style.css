@@ -568,3 +568,113 @@ body.dark-mode .main-nav a:hover,
 body.dark-mode .main-nav a:focus-visible { background: #274272 !important; color: #fff !important; }
 body.dark-mode #dm-label { color: #fff !important; }
 body.dark-mode #back-to-top { background: #2b4e7c !important; }
+
+/* ============================================================
+   Dark mode — shared component coverage
+   Centralizes dark-mode fixes for cards, chips, calculator tabs,
+   data tables and the portfolio modal so every page renders these
+   uniformly readable in dark mode. (body-scoped selectors beat the
+   per-page inline <style> blocks; some inline style="" attributes
+   on individual elements are handled in the page HTML directly.)
+   ============================================================ */
+
+/* --- Recommendation cards (Stocks / Mutual Funds / Crypto) --- */
+body.dark-mode .stock-card,
+body.dark-mode .mf-card,
+body.dark-mode .crypto-card,
+body.dark-mode .bond-card {
+  background: #23273b !important;
+  color: #e7ecfa !important;
+  border-color: #39588a !important;
+  box-shadow: 0 1px 8px #0005 !important;
+}
+body.dark-mode .stock-card:hover,
+body.dark-mode .mf-card:hover,
+body.dark-mode .crypto-card:hover,
+body.dark-mode .bond-card:hover {
+  border-color: #6a8fd6 !important;
+  box-shadow: 0 2px 14px #0007 !important;
+}
+body.dark-mode .stock-card strong,
+body.dark-mode .mf-card strong,
+body.dark-mode .crypto-card strong,
+body.dark-mode .bond-card strong { color: #e7ecfa !important; }
+
+/* --- Chips on the cards --- */
+body.dark-mode .sector-chip,
+body.dark-mode .mf-type-chip,
+body.dark-mode .crypto-type-chip {
+  background: #2d3752 !important;
+  color: #9fc2ff !important;
+}
+body.dark-mode .mf-risk-chip,
+body.dark-mode .crypto-risk-chip {
+  background: #3a3320 !important;
+  color: #e7c766 !important;
+}
+/* High-risk chips keep their warning hue, darkened for contrast */
+body.dark-mode .mf-risk-chip[style*="background"],
+body.dark-mode .crypto-risk-chip[style*="background"] {
+  background: #3a2222 !important;
+  color: #ff9a9a !important;
+}
+
+/* --- SWP / Mutual Funds calculator tab body (was hard-coded white) --- */
+body.dark-mode .swp-tab-content {
+  background: #191c23 !important;
+  color: #e7ecfa !important;
+}
+
+/* --- Data tables (FD recommended rates, bond rating changes, etc.) ---
+   Targets generic tables inside dark-mode sections, including those
+   whose header rows use inline style="background:#eaf2ff". */
+body.dark-mode main table,
+body.dark-mode section table {
+  background: #1b2231 !important;
+  color: #e7ecfa !important;
+}
+body.dark-mode main table th,
+body.dark-mode section table th,
+body.dark-mode main table tr[style*="background"] th,
+body.dark-mode section table tr[style*="background"] th {
+  background: #273a5a !important;
+  color: #cfe0ff !important;
+  border-color: #2d3752 !important;
+}
+body.dark-mode main table td,
+body.dark-mode section table td {
+  background: #23273b !important;
+  color: #e7ecfa !important;
+  border-color: #2d3752 !important;
+}
+/* Override inline-coloured header rows (e.g. <tr style="background:#eaf2ff">) */
+body.dark-mode main table tr[style*="background"],
+body.dark-mode section table tr[style*="background"] {
+  background: #273a5a !important;
+}
+
+/* --- Portfolio Model Suggestion modal (investment goal page) --- */
+body.dark-mode #portfolio-modal > div {
+  background: #191c23 !important;
+  color: #e7ecfa !important;
+  box-shadow: 0 4px 22px #000a !important;
+}
+body.dark-mode #portfolio-modal h3,
+body.dark-mode #portfolio-modal h4 { color: #8abaff !important; }
+body.dark-mode #portfolio-modal label,
+body.dark-mode #portfolio-modal b { color: #e7ecfa !important; }
+body.dark-mode #portfolio-modal table { background: #1b2231 !important; }
+body.dark-mode #portfolio-modal th {
+  background: #273a5a !important;
+  color: #cfe0ff !important;
+}
+body.dark-mode #portfolio-modal td {
+  background: #23273b !important;
+  color: #e7ecfa !important;
+}
+body.dark-mode #portfolio-modal input,
+body.dark-mode #portfolio-modal select {
+  background: #222a3d !important;
+  color: #e7ecfa !important;
+  border-color: #2f3d5c !important;
+}
