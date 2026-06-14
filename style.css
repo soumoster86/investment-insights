@@ -497,9 +497,25 @@ body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; 
 
 @media (max-width: 820px) {
   .site-header h1 { font-size: 1.05em; }
-  .nav-toggle { display: inline-flex; order: 3; }
 
-  .main-nav {
+  /* Deterministic header layout on mobile so the hamburger is ALWAYS
+     pinned to the top-right, regardless of title length or how the
+     header wraps. Brand takes row 1 and grows to fill; the dark-mode
+     toggle and hamburger stay grouped on the right, hamburger last.
+     (Previously the dm-toggle's `margin-left:auto` and the hamburger
+     competed for the right edge, so a long title pushed the hamburger
+     onto a second row where it appeared bottom-left on some pages.) */
+  .site-header { flex-wrap: wrap; row-gap: 8px; }
+  .site-header .brand { flex: 1 1 auto; order: 1; min-width: 0; }
+  .site-header .brand h1 { overflow-wrap: anywhere; }
+  .site-header .dm-toggle { order: 2; margin-left: 0; }
+  .nav-toggle { display: inline-flex; order: 3; margin-left: 8px; }
+
+  /* Scoped to .site-header so it outranks the defensive
+     `.site-header .main-nav { background: none }` rule above and the
+     legacy per-page `nav { background: none }` blocks — otherwise the
+     open drawer renders transparent in light mode. */
+  .site-header .main-nav {
     position: fixed;
     inset: 0 0 0 auto;
     width: min(82vw, 320px);

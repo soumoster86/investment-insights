@@ -266,6 +266,23 @@ h3 {
   opacity: 1;
 }
 
+/* On narrow screens the `left:140%` tooltips shot far past the right
+   edge, widening the page and creating horizontal overflow — which in
+   turn clipped the fixed "Back to top" button at the right viewport
+   edge. Re-anchor them within the viewport on mobile and clip any
+   residual overflow so the button renders fully. */
+@media (max-width: 820px) {
+  .tooltip-text {
+    left: 0;
+    right: auto;
+    top: calc(100% + 8px);
+    transform: none;
+    width: min(240px, 80vw);
+    max-width: 80vw;
+  }
+}
+html, body { overflow-x: clip; }
+
 /* =========================
    INSIGHT + ERROR
 ========================= */
