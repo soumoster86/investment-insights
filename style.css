@@ -1,5 +1,5 @@
-/* ============================================================
-   Investment Insights ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â shared stylesheet
+﻿/* ============================================================
+   Investment Insights ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â shared stylesheet
    Loaded by every page. Owns shell, components, and visual system.
    ============================================================ */
 
@@ -57,12 +57,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ---------- Header ---------- */
+/* ---------- Header (glass / modern) ---------- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: linear-gradient(135deg, #0a4d8c 0%, #0c5eaa 48%, #0a457a 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(8, 42, 82, 0.88) 0%,
+    rgba(12, 74, 140, 0.82) 50%,
+    rgba(8, 48, 96, 0.9) 100%
+  );
   color: #fff;
   padding: 12px 20px 14px;
   display: flex;
@@ -70,8 +75,9 @@ body {
   gap: 12px;
   flex-wrap: wrap;
   box-shadow: var(--shadow-header);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: saturate(1.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px) saturate(1.35);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
 }
 .site-header .brand {
   display: flex;
@@ -91,7 +97,7 @@ body {
 }
 .site-header h1 {
   margin: 0;
-   param($m) $m 
+  font-weight: 600;
   font-size: 1.22em;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -109,7 +115,7 @@ body {
 .dm-toggle input { width: 20px; height: 20px; cursor: pointer; }
 #dm-label { color: #fff; font-size: 0.95em; }
 
-/* Hamburger ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â hidden on desktop, shown on mobile */
+/* Hamburger ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â hidden on desktop, shown on mobile */
 .nav-toggle {
   display: none;
   align-items: center;
@@ -124,7 +130,7 @@ body {
   cursor: pointer;
 }
 /* Must beat button[type="button"] { display:inline-block } from shared btn styles,
-   otherwise a white ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÆ’Ã¢â‚¬â€ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â shows in the desktop header (reported as a red-marked cross). */
+   otherwise a white ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â shows in the desktop header (reported as a red-marked cross). */
 .nav-close,
 button.nav-close,
 .site-header button.nav-close {
@@ -178,7 +184,7 @@ button.nav-close:hover {
   box-shadow: inset 0 0 0 1px rgba(255, 207, 92, 0.35);
 }
 
-/* Dropdown (Stocks ÃƒÂ¢Ã¢â‚¬â€œÃ‚Â¾) */
+/* Dropdown (Stocks ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾) */
 .dropdown { position: relative; }
 .dropdown-menu {
   display: none;
@@ -216,7 +222,7 @@ textarea:focus-visible {
 }
 
 /* ============================================================
-   Shared content shell ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â main / sections / headings / buttons
+   Shared content shell ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â main / sections / headings / buttons
    ============================================================ */
 main {
   max-width: 920px;
@@ -228,6 +234,20 @@ main {
   min-height: 70vh;
   border: 1px solid rgba(255, 255, 255, 0.7);
   animation: fadeIn 0.55s var(--ease);
+}
+/* Wider shell for product-style home / dashboards */
+body.page-home main,
+main.layout-wide {
+  max-width: 1120px;
+  padding: 20px 28px 40px;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+}
+body.page-home main > section,
+main.layout-wide > section {
+  background: var(--surface);
 }
 main > section,
 section {
@@ -286,7 +306,7 @@ main a:not(.btn):not(.learn-more):hover {
   color: var(--brand-dark);
 }
 
-/* Buttons & "learn more" links ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â exclude header chrome controls */
+/* Buttons & "learn more" links ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â exclude header chrome controls */
 .btn,
 .learn-more,
 button[type="submit"],
@@ -317,7 +337,7 @@ button[type="button"]:not(.nav-close):not(.nav-toggle):hover {
 
 /* ---------- Forms & calculators (consistent across all pages) ----------
    Calculators use three different wrappers across the site:
-     <form id="ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦-form">      (SIP, SWP, FD, Investment Goal)
+     <form id="ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦-form">      (SIP, SWP, FD, Investment Goal)
      <div class="calculator-box">  (NPS)
    Both are styled identically here so every calculator matches. */
 form label,
@@ -368,7 +388,7 @@ form button,
 .calculator-box button { margin-top: 18px; margin-right: 0; }
 .btn-group button { margin-top: 0; }
 
-/* Button variants ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â unify the many class names used across calculators.
+/* Button variants ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â unify the many class names used across calculators.
    Primary (Calculate) = solid brand. Secondary/Reset = outline. */
 .btn,
 .primary-btn,
@@ -488,7 +508,7 @@ form textarea:focus,
    classes were styled inconsistently per page. They are unified
    here: Quick Access docks LEFT, "On this page" docks RIGHT, so the
    two never collide on pages (Stocks, US Stocks) that have both.
-   (body ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ specificity beats the per-page inline <style>.)
+   (body ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ specificity beats the per-page inline <style>.)
    ============================================================ */
 
 /* Shared shell for both kinds of floating box */
@@ -513,7 +533,7 @@ body .intraday-float-menu {
   display: block;
 }
 
-/* Quick Access ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ docked bottom-left, so it never collides with the
+/* Quick Access ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ docked bottom-left, so it never collides with the
    header or with top-of-page content (the live ticker on US Stocks,
    charts on Intraday). */
 body .stock-float-menu,
@@ -527,7 +547,7 @@ body .intraday-float-menu {
   max-height: calc(100vh - 48px);
 }
 
-/* On this page ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ top-right (short index, safe below the header) */
+/* On this page ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ top-right (short index, safe below the header) */
 body .floating-toc {
   right: 24px;
   left: auto;
@@ -554,7 +574,7 @@ body .intraday-float-menu .float-title {
 body .floating-toc ul { margin: 0; padding: 0; list-style: none; }
 body .floating-toc li { margin: 0; }
 
-/* Links ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â consistent spacing, upright (override inline italic), readable */
+/* Links ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â consistent spacing, upright (override inline italic), readable */
 body .floating-toc a,
 body .stock-float-menu a,
 body .etf-float-menu a,
@@ -606,7 +626,7 @@ body.dark-mode .etf-float-menu a:hover,
 body.dark-mode .ipo-float-menu a:hover,
 body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; }
 
-/* On laptops/tablets the side boxes crowd the main column ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â hide them.
+/* On laptops/tablets the side boxes crowd the main column ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â hide them.
    The header nav (incl. Stocks dropdown) already covers navigation. */
 @media (max-width: 1180px) {
   body .floating-toc,
@@ -635,7 +655,7 @@ body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; 
 
   /* Scoped to .site-header so it outranks the defensive
      `.site-header .main-nav { background: none }` rule above and the
-     legacy per-page `nav { background: none }` blocks ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â otherwise the
+     legacy per-page `nav { background: none }` blocks ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â otherwise the
      open drawer renders transparent in light mode. */
   .site-header .main-nav {
     position: fixed;
@@ -724,7 +744,7 @@ body.dark-mode #dm-label { color: #fff !important; }
 body.dark-mode #back-to-top { background: #2b4e7c !important; }
 
 /* ============================================================
-   Dark mode ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â shared component coverage
+   Dark mode ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â shared component coverage
    Centralizes dark-mode fixes for cards, chips, calculator tabs,
    data tables and the portfolio modal so every page renders these
    uniformly readable in dark mode. (body-scoped selectors beat the
@@ -1532,7 +1552,7 @@ body.dark-mode .error-box {
   vertical-align: middle;
 }
 
-/* Contact form honeypot ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â hidden from humans, traps bots */
+/* Contact form honeypot ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â hidden from humans, traps bots */
 .hp-field {
   position: absolute !important;
   left: -9999px !important;
@@ -1551,7 +1571,7 @@ body.dark-mode .error-box {
 }
 
 /* ============================================================
-   Phase 3 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â a11y + recommendation toolbar + avatars
+   Phase 3 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a11y + recommendation toolbar + avatars
    ============================================================ */
 
 .skip-link {
@@ -1736,7 +1756,7 @@ body.dark-mode .live-ticker-wrap {
   border-color: #2d3752;
 }
 
-/* Phase 4 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â content freshness footer line */
+/* Phase 4 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â content freshness footer line */
 footer .footer-reviewed {
   margin: 8px 0 0;
   font-size: 0.88em;
@@ -1755,7 +1775,7 @@ body.dark-mode footer .footer-reviewed {
 body.dark-mode .rec-freshness { color: #9fb4d6 !important; }
 
 /* ============================================================
-   Visual refresh ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â cards, footer, tables, rec polish
+   Visual refresh ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â cards, footer, tables, rec polish
    ============================================================ */
 
 /* Dashboard cards */
@@ -2009,4 +2029,513 @@ body.dark-mode .dashboard-hero {
 }
 .dm-toggle:hover {
   background: rgba(255,255,255,0.14);
+}
+/* ============================================================
+   Package A+B â€” UI kit + modern home
+   ============================================================ */
+
+/* Icons */
+.ii-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35em;
+  height: 1.35em;
+  flex: 0 0 auto;
+  color: var(--brand-accent);
+}
+.ii-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.kpi-head .ii-icon,
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(43,125,233,0.12), rgba(10,77,140,0.06));
+  color: var(--brand);
+  padding: 8px;
+  box-sizing: border-box;
+}
+.feature-icon { margin-bottom: 12px; }
+
+/* Compact buttons */
+.btn-sm {
+  padding: 8px 14px !important;
+  font-size: 0.9em !important;
+}
+
+/* Calculator result panels (all calc pages) */
+#sip-result,
+#swp-result,
+#swp-max-result,
+#fd-result,
+#goal-result,
+#nps-result,
+#bondYieldResult,
+.calc-result-panel {
+  margin-top: 18px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: linear-gradient(165deg, #f3f8ff 0%, #eef5ff 45%, #f8fbff 100%);
+  border: 1px solid rgba(43, 125, 233, 0.18);
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+  line-height: 1.55;
+}
+#sip-result strong,
+#swp-result strong,
+#fd-result strong,
+#goal-result strong,
+#nps-result strong,
+#bondYieldResult b {
+  color: var(--brand);
+  font-weight: 700;
+}
+body.dark-mode #sip-result,
+body.dark-mode #swp-result,
+body.dark-mode #swp-max-result,
+body.dark-mode #fd-result,
+body.dark-mode #goal-result,
+body.dark-mode #nps-result,
+body.dark-mode #bondYieldResult {
+  background: linear-gradient(165deg, #1a2438 0%, #151d2c 100%) !important;
+  border-color: #2d3b58 !important;
+  color: #e7ecfa !important;
+}
+
+/* ----- Home layout ----- */
+body.page-home .floating-toc { top: calc(var(--header-h) + 20px); }
+
+.home-hero {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 28px;
+  align-items: center;
+  padding: 36px 32px !important;
+  margin-bottom: 22px;
+  border-radius: 22px !important;
+  border: 1px solid rgba(43, 125, 233, 0.16) !important;
+  background:
+    radial-gradient(600px 280px at 90% 10%, rgba(43,125,233,0.16), transparent 60%),
+    linear-gradient(145deg, #ffffff 0%, #f3f8ff 100%) !important;
+  box-shadow: var(--shadow-md) !important;
+  overflow: hidden;
+}
+.home-hero:hover { transform: none; }
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.82em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand);
+  background: rgba(43, 125, 233, 0.1);
+  border: 1px solid rgba(43, 125, 233, 0.16);
+}
+.home-hero-title {
+  margin: 0 0 12px;
+  font-size: clamp(1.7em, 3.2vw, 2.35em);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: var(--text);
+}
+.home-hero-sub {
+  margin: 0 0 22px;
+  max-width: 38ch;
+  font-size: 1.06em;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.home-hero-panel {
+  display: grid;
+  gap: 12px;
+}
+.hero-stat {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  row-gap: 2px;
+}
+.hero-stat-label {
+  grid-column: 1 / -1;
+  font-size: 0.78em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.hero-stat-value {
+  font-size: 1.65em;
+  font-weight: 700;
+  color: var(--brand);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.hero-stat-hint {
+  align-self: end;
+  color: var(--text-muted);
+  font-size: 0.92em;
+  padding-bottom: 4px;
+}
+
+/* KPI strip */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.kpi-strip:hover { transform: none; box-shadow: none !important; }
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 180px;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.kpi-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.kpi-head h2 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 600;
+  border: none;
+  display: block;
+}
+.kpi-head h2::after { display: none; }
+.kpi-meta, .kpi-empty {
+  margin: 0;
+  font-size: 0.86em;
+  color: var(--text-muted);
+}
+.kpi-card .btn { margin-top: auto; align-self: flex-start; }
+.kpi-markets { min-height: 180px; }
+.kpi-ticker { min-height: 52px; border-radius: 10px; overflow: hidden; }
+.kpi-metals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  font-size: 0.9em;
+}
+.kpi-metals span { display: block; color: var(--text-muted); font-size: 0.85em; }
+.kpi-metals strong { color: var(--brand); font-size: 1.05em; }
+.kpi-card .highlight { color: var(--brand-accent); font-weight: 600; margin-right: 6px; }
+
+/* Section headings */
+.home-section {
+  margin-bottom: 28px;
+  padding: 8px 0 4px !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.home-section:hover { transform: none; box-shadow: none !important; border: none !important; }
+.section-heading {
+  margin-bottom: 18px;
+}
+.section-heading h2 {
+  margin-bottom: 6px;
+  font-size: 1.45em;
+}
+.section-heading p {
+  margin: 0;
+  color: var(--text-muted);
+  max-width: 48ch;
+}
+
+/* Feature grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 16px 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), border-color 0.2s;
+  min-height: 180px;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(43, 125, 233, 0.35);
+  color: inherit !important;
+}
+.feature-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05em;
+  color: var(--text);
+}
+.feature-card p {
+  margin: 0 0 12px;
+  font-size: 0.93em;
+  color: var(--text-muted);
+  flex: 1;
+  line-height: 1.45;
+}
+.feature-cta {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--brand-accent);
+}
+
+/* Calculator chips */
+.calc-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.calc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none !important;
+  color: var(--text) !important;
+  font-weight: 600;
+  transition: transform 0.18s var(--ease), border-color 0.18s, box-shadow 0.18s;
+}
+.calc-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(43, 125, 233, 0.4);
+  box-shadow: var(--shadow-md);
+  color: var(--brand) !important;
+}
+.calc-chip .ii-icon { width: 1.2em; height: 1.2em; }
+
+/* Tools row */
+.tools-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 14px;
+}
+.tools-card {
+  padding: 18px !important;
+  border-radius: 16px !important;
+  min-height: auto !important;
+  background: var(--surface) !important;
+}
+.tools-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 0;
+}
+.currency-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.currency-row input,
+.currency-row select {
+  max-width: 120px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-soft);
+  font-family: inherit;
+}
+.currency-to { color: var(--text-muted); font-size: 0.92em; }
+.calc-result-inline {
+  min-height: 1.4em;
+  font-size: 1.05em;
+  color: var(--brand);
+  font-weight: 600;
+}
+.top-picks-list {
+  margin: 0 0 14px;
+  padding-left: 1.1em;
+  color: var(--text);
+}
+.top-picks-list li { margin-bottom: 6px; }
+
+/* Learn panel */
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.learn-item {
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+}
+.learn-item h3 {
+  margin: 0 0 8px;
+  font-size: 1.02em;
+}
+.learn-item p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95em;
+}
+
+/* Trust strip */
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 8px 0 12px;
+  padding: 18px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(135deg, rgba(10,77,140,0.06), rgba(43,125,233,0.08)) !important;
+  border: 1px solid rgba(43, 125, 233, 0.14) !important;
+  box-shadow: none !important;
+}
+.trust-strip:hover { transform: none; }
+.trust-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.trust-item strong {
+  display: block;
+  font-size: 0.95em;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.trust-item p {
+  margin: 0;
+  font-size: 0.86em;
+  color: var(--text-muted);
+}
+.trust-item .ii-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.7);
+  padding: 7px;
+  box-sizing: border-box;
+}
+
+/* Dark mode home */
+body.dark-mode.page-home main { background: transparent !important; }
+body.dark-mode .home-hero {
+  background:
+    radial-gradient(600px 280px at 90% 10%, rgba(43,125,233,0.18), transparent 60%),
+    linear-gradient(145deg, #172033 0%, #121a28 100%) !important;
+  border-color: #2d3b58 !important;
+}
+body.dark-mode .home-hero-title { color: #e7ecfa !important; }
+body.dark-mode .hero-stat {
+  background: rgba(20, 28, 44, 0.85);
+  border-color: #2d3b58;
+}
+body.dark-mode .kpi-card,
+body.dark-mode .feature-card,
+body.dark-mode .calc-chip,
+body.dark-mode .tools-card,
+body.dark-mode .learn-item {
+  background: #171f2e !important;
+  border-color: #2a3650 !important;
+  color: #e7ecfa !important;
+}
+body.dark-mode .feature-card h3,
+body.dark-mode .kpi-head h2 { color: #e7ecfa !important; }
+body.dark-mode .trust-strip {
+  background: linear-gradient(135deg, rgba(20,30,50,0.9), rgba(25,40,70,0.85)) !important;
+  border-color: #2d3b58 !important;
+}
+body.dark-mode .trust-item .ii-icon { background: rgba(30,40,60,0.9); }
+body.dark-mode .eyebrow {
+  background: rgba(43,125,233,0.15);
+  color: #9fc2ff;
+  border-color: #2d3b58;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .kpi-strip { grid-template-columns: 1fr 1fr; }
+  .feature-grid { grid-template-columns: 1fr 1fr; }
+  .trust-strip { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 820px) {
+  .home-hero { grid-template-columns: 1fr; padding: 24px 18px !important; }
+  .home-hero-panel { grid-template-columns: 1fr; }
+  .tools-row { grid-template-columns: 1fr; }
+  .learn-grid { grid-template-columns: 1fr; }
+  body.page-home main,
+  main.layout-wide {
+    padding: 12px 12px 28px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 560px) {
+  .kpi-strip { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .trust-strip { grid-template-columns: 1fr; }
+  .home-hero-actions { flex-direction: column; align-items: stretch; }
+  .home-hero-actions .btn { text-align: center; }
+}
+
+/* Dark header glass */
+body.dark-mode .site-header {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 18, 32, 0.9) 0%,
+    rgba(18, 32, 56, 0.86) 50%,
+    rgba(12, 22, 40, 0.92) 100%
+  ) !important;
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+}
+
+/* Nav open drawer must stay solid brand blue */
+@media (max-width: 820px) {
+  .site-header .main-nav {
+    background: var(--brand) !important;
+    backdrop-filter: none;
+  }
+  body.dark-mode .site-header .main-nav {
+    background: #12203a !important;
+  }
 }

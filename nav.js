@@ -13,11 +13,11 @@
     var toggle = document.getElementById("darkmode-toggle");
     if (dark) {
       document.body.classList.add("dark-mode");
-      if (label) label.textContent = "☀️ Light Mode";
+      if (label) label.textContent = "Light Mode";
       if (toggle) toggle.checked = true;
     } else {
       document.body.classList.remove("dark-mode");
-      if (label) label.textContent = "🌙 Dark Mode";
+      if (label) label.textContent = "Dark Mode";
       if (toggle) toggle.checked = false;
     }
     try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Insights — Learn Investing in India</title>
@@ -22,7 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <!-- BEGIN JSON-LD -->
+  <!-- BEGIN JSON-LD -->
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -46,278 +45,365 @@
   </script>
 <!-- END JSON-LD -->
 </head>
-<body>
+<body class="page-home">
 
-    <nav class="floating-toc" id="floating-toc">
-  <div class="toc-title">Quick Navigation</div>
-  <ul>
-    <li><a href="#intro">Introduction</a></li>
-    <li><a href="#stocks">Stocks</a></li>
-    <li><a href="#mutualfunds">Mutual Funds</a></li>
-    <li><a href="#fixeddeposits">Fixed Deposits</a></li>
-	<li><a href="#nps">NPS (Retirement)</a></li>
-    <li><a href="#cryptocurrencies">Cryptocurrencies</a></li>
-    <li><a href="#bonds">Bonds</a></li>
-  </ul>
-</nav>
+  <nav class="floating-toc" id="floating-toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul>
+      <li><a href="#hero">Overview</a></li>
+      <li><a href="#kpi">Markets &amp; tools</a></li>
+      <li><a href="#explore">Explore</a></li>
+      <li><a href="#calculators">Calculators</a></li>
+      <li><a href="#learn">Learn</a></li>
+    </ul>
+  </nav>
 
-    <!-- BEGIN SITE HEADER -->
+<!-- BEGIN SITE HEADER -->
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
   <div class="brand">
     <a href="index.html" class="brand-link">
       <img src="logo.png" width="46" height="46" alt="" />
-      <h1>💡 Investment Insights</h1>
+      <h1>Investment Insights</h1>
     </a>
   </div>
   <label class="dm-toggle" for="darkmode-toggle">
     <input type="checkbox" id="darkmode-toggle" />
-    <span id="dm-label">🌙 Dark Mode</span>
+    <span id="dm-label">Dark Mode</span>
   </label>
   <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false">☰</button>
   <nav class="main-nav" id="main-nav" aria-label="Primary">
     <button type="button" class="nav-close" id="nav-close" aria-label="Close menu">×</button>
-    <a href="index.html">🏠 Home</a>
+    <a href="index.html">Home</a>
     <div class="dropdown">
-      <a href="stocks.html" class="dropdown-toggle" aria-haspopup="true">📊 Stocks ▾</a>
+      <a href="stocks.html" class="dropdown-toggle" aria-haspopup="true">Stocks ▾</a>
       <div class="dropdown-menu" role="menu">
-        <a href="stocks.html" role="menuitem"><span aria-hidden="true">📊</span> Overview</a>
-        <a href="etf.html" role="menuitem"><span aria-hidden="true">📈</span> ETF</a>
-        <a href="ipo.html" role="menuitem"><span aria-hidden="true">🆕</span> IPO</a>
-        <a href="intraday.html" role="menuitem"><span aria-hidden="true">⏱️</span> Intraday</a>
-        <a href="usstocks.html" role="menuitem"><span aria-hidden="true">🇺🇸</span> US Stocks</a>
+        <a href="stocks.html" role="menuitem">Overview</a>
+        <a href="etf.html" role="menuitem">ETF</a>
+        <a href="ipo.html" role="menuitem">IPO</a>
+        <a href="intraday.html" role="menuitem">Intraday</a>
+        <a href="usstocks.html" role="menuitem">US Stocks</a>
       </div>
     </div>
-    <a href="mutualfunds.html">📁 Mutual Funds</a>
-    <a href="fixeddeposit.html">🏦 Fixed Deposits</a>
-    <a href="nps.html">🏦 NPS (Retirement)</a>
-    <a href="cryptocurrencies.html">💱 Cryptocurrencies</a>
-    <a href="bonds.html">💸 Bonds</a>
-    <a href="investmentgoal.html">🎯 Investment Goal</a>
-    <a href="contact.html">✉️ Contact</a>
+    <a href="mutualfunds.html">Mutual Funds</a>
+    <a href="fixeddeposit.html">Fixed Deposits</a>
+    <a href="nps.html">NPS</a>
+    <a href="cryptocurrencies.html">Crypto</a>
+    <a href="bonds.html">Bonds</a>
+    <a href="investmentgoal.html">Goals</a>
+    <a href="contact.html">Contact</a>
   </nav>
 </header>
 <!-- END SITE HEADER -->
 
-  <main id="main-content" tabindex="-1">
-    <section class="dashboard-hero" style="margin-top: 8px;">
-      <h2>📊 Investment Dashboard</h2>
-      <p class="dashboard-lead">Track markets, plan goals, and explore educational tools for investing in India.</p>
+  <main id="main-content" class="layout-wide" tabindex="-1">
+
+    <!-- B: Hero -->
+    <section id="hero" class="home-hero">
+      <div class="home-hero-copy">
+        <p class="eyebrow">Educational · Free · India-focused</p>
+        <h1 class="home-hero-title">Invest smarter with clear guides &amp; calculators</h1>
+        <p class="home-hero-sub">
+          Learn stocks, mutual funds, FDs, NPS, bonds, and more — then run SIP, SWP, FD, and goal planners with transparent assumptions.
+        </p>
+        <div class="home-hero-actions">
+          <a class="btn" href="investmentgoal.html">Plan a goal</a>
+          <a class="btn secondary" href="mutualfunds.html#sipcalc-mutual">Try SIP calculator</a>
+        </div>
+      </div>
+      <div class="home-hero-panel" aria-hidden="true">
+        <div class="hero-stat">
+          <span class="hero-stat-label">Tools</span>
+          <span class="hero-stat-value">6+</span>
+          <span class="hero-stat-hint">Calculators</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-label">Topics</span>
+          <span class="hero-stat-value">10+</span>
+          <span class="hero-stat-hint">Asset classes</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-label">Cost</span>
+          <span class="hero-stat-value">₹0</span>
+          <span class="hero-stat-hint">Always free</span>
+        </div>
+      </div>
     </section>
 
-    <div class="dashboard-section">
-      <div class="card" style="min-width:330px;">
-  <h3>📈 NSE & BSE Live Ticker</h3>
-  <div style="min-height:60px;">
-    <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container">
-      <div id="tradingview_ticker"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-      {
-        "symbols": [
-          { "proName": "BSE:SENSEX",   "title": "Sensex" },
-          { "proName": "NSE:NIFTY",    "title": "Nifty 50" },
-          { "proName": "BSE:BANK",     "title": "Bankex" },
-          { "proName": "NSE:BANKNIFTY","title": "Nifty Bank" },
-          { "proName": "BSE:500325",   "title": "Reliance" },
-          { "proName": "NSE:TCS",      "title": "TCS" }
-        ],
-        "colorTheme": "light",
-        "isTransparent": false,
-        "displayMode": "adaptive",
-        "locale": "en"
-      }
-      </script>
-    </div>
-    <!-- TradingView Widget END -->
-  </div>
-  <p style="font-size:0.93em; color:#888; margin-top:6px;">
-    Data: TradingView (15-min delay for some symbols)
-  </p>
-</div>
+    <!-- B: KPI strip -->
+    <section id="kpi" class="kpi-strip" aria-label="Live snapshot">
+      <article class="kpi-card kpi-markets">
+        <header class="kpi-head">
+          <span class="ii-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+          </span>
+          <h2>Markets</h2>
+        </header>
+        <div class="tradingview-widget-container kpi-ticker">
+          <div id="tradingview_ticker"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+          {
+            "symbols": [
+              { "proName": "BSE:SENSEX", "title": "Sensex" },
+              { "proName": "NSE:NIFTY", "title": "Nifty 50" },
+              { "proName": "NSE:BANKNIFTY", "title": "Bank Nifty" },
+              { "proName": "NSE:TCS", "title": "TCS" },
+              { "proName": "NSE:RELIANCE", "title": "Reliance" }
+            ],
+            "colorTheme": "light",
+            "isTransparent": true,
+            "displayMode": "adaptive",
+            "locale": "en"
+          }
+          </script>
+        </div>
+        <p class="kpi-meta">TradingView · may be delayed</p>
+      </article>
 
-      <div class="card" id="goal-summary-card">
-        <h3>🎯 Your Investment Goal</h3>
+      <article class="kpi-card" id="goal-summary-card">
+        <header class="kpi-head">
+          <span class="ii-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+          </span>
+          <h2>Your goal</h2>
+        </header>
         <div id="goal-summary-empty">
-          <p>No goal saved yet. Run the Investment Goal calculator to personalize this card.</p>
+          <p class="kpi-empty">No goal saved yet.</p>
         </div>
         <div id="goal-summary-filled" style="display:none;">
-          <p><span class="highlight">Monthly SIP:</span> <span id="goal-summary-sip">—</span></p>
-          <p><span class="highlight">Target Duration:</span> <span id="goal-summary-years">—</span></p>
-          <p><span class="highlight">Expected Corpus:</span> <span id="goal-summary-corpus">—</span></p>
+          <p><span class="highlight">SIP</span> <span id="goal-summary-sip">—</span></p>
+          <p><span class="highlight">Duration</span> <span id="goal-summary-years">—</span></p>
+          <p><span class="highlight">Corpus</span> <span id="goal-summary-corpus">—</span></p>
         </div>
-        <a href="investmentgoal.html" class="btn" id="goal-summary-btn">Plan a Goal</a>
-      </div>
+        <a href="investmentgoal.html" class="btn btn-sm" id="goal-summary-btn">Plan a goal</a>
+      </article>
 
-     <div class="card">
-     <h3>🧮 Last Calculator Used</h3>
-     <p id="last-used-info">No calculator used recently.</p>
-     <a href="#" id="last-used-link" class="btn">Reopen Calculator</a>
-     </div>
+      <article class="kpi-card">
+        <header class="kpi-head">
+          <span class="ii-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+          </span>
+          <h2>Last calculator</h2>
+        </header>
+        <p id="last-used-info">No calculator used recently.</p>
+        <a href="#" id="last-used-link" class="btn btn-sm secondary">Reopen</a>
+      </article>
 
-      <div class="card" id="top-picks-card">
-        <h3>⭐ Top Picks Today</h3>
-        <ul id="top-picks-list">
-          <li>Loading recommendations…</li>
-        </ul>
-        <a href="stocks.html" class="btn">Explore More</a>
-      </div>
-	  
-	  <div class="card" id="currency-card">
-  <h3>💱 Currency Converter</h3>
-  <div style="margin-bottom:10px;">
-    <label class="sr-only" for="amount">Amount</label>
-    <input type="number" id="amount" placeholder="Amount" style="width:90px; display:inline-block;">
-    <label class="sr-only" for="from-currency">From currency</label>
-    <select id="from-currency" style="width:80px;">
-      <option value="USD">USD</option>
-      <option value="INR">INR</option>
-      <option value="EUR">EUR</option>
-      <option value="GBP">GBP</option>
-      <option value="JPY">JPY</option>
-	  <option value="SGD">SGD</option>
-	  <option value="CHF">CHF</option>
-	  
-    </select>
-    to
-    <label class="sr-only" for="to-currency">To currency</label>
-    <select id="to-currency" style="width:80px;">
-      <option value="INR">INR</option>
-      <option value="USD">USD</option>
-      <option value="EUR">EUR</option>
-      <option value="GBP">GBP</option>
-      <option value="JPY">JPY</option>
-	  <option value="SGD">SGD</option>
-	  <option value="CHF">CHF</option>
-    </select>
-  </div>
-  <button onclick="convertCurrency()" class="btn" style="margin-top:5px;">Convert</button>
-  <div id="currency-result" style="margin-top:10px;font-size:1.18em;color:#004080;"></div>
-</div>
-
-    <div class="card" id="gold-silver-card">
-  <h3>🪙 Gold & Silver Price</h3>
-  <div id="metal-rate-content">
-    <table style="width:100%;font-size:1em;">
-      <tr>
-        <th></th>
-        <th>1g</th>
-        <th>10g</th>
-      </tr>
-      <tr>
-        <td><b>Gold (24K)</b></td>
-        <td id="gold1g">--</td>
-        <td id="gold10g">--</td>
-      </tr>
-      <tr>
-        <td><b>Silver</b></td>
-        <td id="silver1g">--</td>
-        <td id="silver10g">--</td>
-      </tr>
-    </table>
-    <p id="metal-rate-update" style="font-size:0.96em; color:#666; margin-top:8px;"></p>
-    <button class="btn" onclick="fetchMetalRates()" style="margin-top:5px;">Refresh</button>
-  </div>
-</div>
-
-	   
-    </div>
-	
-	  
-
-    <section id="intro">
-      <h2>Introduction to Investments</h2>
-      <p><strong>What is Investment?</strong> Investment is the process of allocating your money into various assets...</p>
-      <ul>
-        <li><strong>Wealth Creation:</strong> Investments help your money grow...</li>
-        <li><strong>Financial Security:</strong> Investing helps you prepare for emergencies...</li>
-        <li><strong>Beating Inflation:</strong> Returns from investments typically outpace inflation...</li>
-        <li><strong>Achieving Goals:</strong> Investments enable you to save for specific goals...</li>
-        <li><strong>Generating Passive Income:</strong> Some investments provide regular income...</li>
-      </ul>
+      <article class="kpi-card" id="gold-silver-card">
+        <header class="kpi-head">
+          <span class="ii-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 10.5c.8-.8 1.8-1.2 3-1.2s2.2.4 3 1.2M9 13.5c.8.8 1.8 1.2 3 1.2s2.2-.4 3-1.2"/></svg>
+          </span>
+          <h2>Metals (INR)</h2>
+        </header>
+        <div id="metal-rate-content" class="kpi-metals">
+          <div><span>Gold / g</span><strong id="gold1g">—</strong></div>
+          <div><span>Gold / 10g</span><strong id="gold10g">—</strong></div>
+          <div><span>Silver / g</span><strong id="silver1g">—</strong></div>
+          <div><span>Silver / 10g</span><strong id="silver10g">—</strong></div>
+        </div>
+        <p id="metal-rate-update" class="kpi-meta"></p>
+        <button type="button" class="btn btn-sm secondary" onclick="fetchMetalRates()">Refresh</button>
+      </article>
     </section>
 
-    <section id="stocks">
-  <h2>Stocks</h2>
-  <p>
-    <strong>Stocks</strong> (also known as equities or shares) represent partial ownership in a company. When you purchase stocks, you become a shareholder and can benefit from the company's profits in the form of dividends and capital appreciation. 
-  </p>
-  <p>
-    Investing in stocks offers the potential for high returns over the long term, making them a popular choice for wealth creation. However, stock prices can fluctuate due to market volatility, company performance, and broader economic factors, so they carry higher risks compared to traditional savings instruments.
-  </p>
-  <p>
-    Stocks are traded on exchanges like the NSE and BSE in India. With the rise of digital platforms, opening a Demat and trading account has become quick and convenient. To succeed in the stock market, it is important to diversify your portfolio, stay informed about market news, and invest for the long term rather than chase short-term gains.
-  </p>
-  <a class="learn-more" href="stocks.html">Learn more &raquo;</a>
-</section>
+    <!-- B: Feature grid -->
+    <section id="explore" class="home-section">
+      <div class="section-heading">
+        <h2>Explore topics</h2>
+        <p>Short, practical primers — written for Indian investors.</p>
+      </div>
+      <div class="feature-grid">
+        <a class="feature-card" href="stocks.html">
+          <span class="ii-icon feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-7"/></svg></span>
+          <h3>Stocks</h3>
+          <p>Ownership, risk, and how to start on NSE/BSE.</p>
+          <span class="feature-cta">Open guide →</span>
+        </a>
+        <a class="feature-card" href="mutualfunds.html">
+          <span class="ii-icon feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20V8"/></svg></span>
+          <h3>Mutual funds</h3>
+          <p>SIPs, diversification, and SWP planning tools.</p>
+          <span class="feature-cta">Open guide →</span>
+        </a>
+        <a class="feature-card" href="fixeddeposit.html">
+          <span class="ii-icon feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span>
+          <h3>Fixed deposits</h3>
+          <p>Safe returns with a clear FD maturity calculator.</p>
+          <span class="feature-cta">Open guide →</span>
+        </a>
+        <a class="feature-card" href="nps.html">
+          <span class="ii-icon feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M6 8h9a3 3 0 010 6H9a3 3 0 000 6h9"/></svg></span>
+          <h3>NPS</h3>
+          <p>Retirement corpus, lump sum, and pension estimates.</p>
+          <span class="feature-cta">Open guide →</span>
+        </a>
+        <a class="feature-card" href="etf.html">
+          <span class="ii-icon feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></span>
+          <h3>ETFs</h3>
+          <p>Index-tracking funds you can trade like stocks.</p>
+          <span class="feature-cta">Open guide →</span>
+        </a>
+        <a class="feature-card" href="bonds.html">
+          <span class="ii-icon feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2M8 17v2h8v-2"/></svg></span>
+          <h3>Bonds</h3>
+          <p>Income instruments with a simple yield calculator.</p>
+          <span class="feature-cta">Open guide →</span>
+        </a>
+        <a class="feature-card" href="cryptocurrencies.html">
+          <span class="ii-icon feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M8 7h5.5a3 3 0 010 6H8m0 0h6a3 3 0 010 6H8"/></svg></span>
+          <h3>Crypto</h3>
+          <p>High-risk digital assets with clear caveats.</p>
+          <span class="feature-cta">Open guide →</span>
+        </a>
+        <a class="feature-card" href="investmentgoal.html">
+          <span class="ii-icon feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l6-6 4 4 6-8"/><path d="M14 6h6v6"/></svg></span>
+          <h3>Goal planner</h3>
+          <p>Project corpus with inflation-aware SIP math.</p>
+          <span class="feature-cta">Open planner →</span>
+        </a>
+      </div>
+    </section>
 
-    <section id="mutualfunds">
-  <h2>Mutual Funds</h2>
-  <p>
-    <strong>Mutual funds</strong> are professionally managed investment vehicles that pool money from many investors to buy a diversified basket of stocks, bonds, or other securities. Each investor owns units in the fund, representing a proportionate share of its holdings.
-  </p>
-  <p>
-    Mutual funds offer instant diversification, expert fund management, and convenience—making them ideal for those who want exposure to the market without tracking individual stocks. There are various types of funds, including equity, debt, hybrid, and sector funds, catering to different risk profiles and goals.
-  </p>
-  <p>
-    You can invest through Systematic Investment Plans (SIPs) for disciplined, regular investing. Mutual funds are regulated by SEBI, ensuring transparency and investor protection.
-  </p>
-  <a class="learn-more" href="mutualfunds.html">Learn more &raquo;</a>
-</section>
+    <!-- Calculators strip -->
+    <section id="calculators" class="home-section calc-strip">
+      <div class="section-heading">
+        <h2>Popular calculators</h2>
+        <p>Transparent formulas — estimates only, not advice.</p>
+      </div>
+      <div class="calc-grid">
+        <a class="calc-chip" href="mutualfunds.html#sipcalc-mutual">
+          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+          SIP
+        </a>
+        <a class="calc-chip" href="mutualfunds.html#swpcalc-mutual">
+          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          SWP
+        </a>
+        <a class="calc-chip" href="fixeddeposit.html">
+          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/></svg></span>
+          FD
+        </a>
+        <a class="calc-chip" href="nps.html">
+          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg></span>
+          NPS
+        </a>
+        <a class="calc-chip" href="investmentgoal.html">
+          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span>
+          Goal
+        </a>
+        <a class="calc-chip" href="bonds.html">
+          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h16v8H4z"/></svg></span>
+          Bond yield
+        </a>
+      </div>
+    </section>
 
-    <section id="fixeddeposits">
-  <h2>Fixed Deposits (FDs)</h2>
-  <p>
-    <strong>Fixed Deposits (FDs)</strong> are one of the safest and most popular savings instruments offered by banks and NBFCs in India. You deposit a lump sum for a fixed period at a predetermined interest rate, and receive your principal plus interest on maturity.
-  </p>
-  <p>
-    FDs provide guaranteed returns, capital protection, and flexible tenures ranging from 7 days to 10 years. They are ideal for conservative investors seeking stability and predictable income, and also offer tax-saving options under Section 80C.
-  </p>
-  <p>
-    While FDs are low-risk, the returns are generally lower than equities or mutual funds and may not always outpace inflation. It’s wise to compare FD rates across banks before investing.
-  </p>
-  <a class="learn-more" href="fixeddeposit.html">Learn more &raquo;</a>
-</section>
-  
-  <section id="nps">
-  <h2>National Pension Scheme (NPS)</h2>
-  <p>
-    Plan your retirement with one of India’s most tax-efficient investment options.
-  </p>
-  <a class="learn-more" href="nps.html">Learn more &raquo;</a>
-</section>
+    <!-- Tools row: currency + top picks -->
+    <section class="home-section tools-row">
+      <div class="card tools-card" id="currency-card">
+        <h3>
+          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5c.7-.7 1.6-1 3-1s2.3.3 3 1M9 14.5c.7.7 1.6 1 3 1s2.3-.3 3-1"/></svg></span>
+          Currency converter
+        </h3>
+        <div class="currency-row">
+          <label class="sr-only" for="amount">Amount</label>
+          <input type="number" id="amount" placeholder="Amount" min="0" step="any" />
+          <label class="sr-only" for="from-currency">From</label>
+          <select id="from-currency">
+            <option value="USD">USD</option>
+            <option value="INR" selected>INR</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="SGD">SGD</option>
+            <option value="CHF">CHF</option>
+          </select>
+          <span class="currency-to">to</span>
+          <label class="sr-only" for="to-currency">To</label>
+          <select id="to-currency">
+            <option value="INR">INR</option>
+            <option value="USD" selected>USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="SGD">SGD</option>
+            <option value="CHF">CHF</option>
+          </select>
+          <button type="button" class="btn btn-sm" onclick="convertCurrency()">Convert</button>
+        </div>
+        <div id="currency-result" class="calc-result-inline" role="status"></div>
+      </div>
 
-    <section id="cryptocurrencies">
-  <h2>Cryptocurrencies</h2>
-  <p>
-    <strong>Cryptocurrencies</strong> are digital or virtual currencies that use cryptography for security and operate on decentralized blockchain technology. Bitcoin, Ethereum, and hundreds of others allow for peer-to-peer transactions without the need for banks or intermediaries.
-  </p>
-  <p>
-    Investing in crypto offers the potential for high returns and global accessibility, but comes with significant price volatility and regulatory uncertainty. Crypto assets can be traded 24/7 on specialized exchanges and are stored in digital wallets.
-  </p>
-  <p>
-    Cryptocurrencies are suitable for tech-savvy investors with a high risk appetite. It’s crucial to do thorough research, start small, and follow best security practices when exploring this new-age asset class.
-  </p>
-  <a class="learn-more" href="cryptocurrencies.html">Learn more &raquo;</a>
-</section>
+      <div class="card tools-card" id="top-picks-card">
+        <h3>
+          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 6.5L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.5-.5L12 3z"/></svg></span>
+          Top picks
+        </h3>
+        <ul id="top-picks-list" class="top-picks-list">
+          <li>Loading…</li>
+        </ul>
+        <a href="stocks.html" class="btn btn-sm secondary">Browse recommendations</a>
+      </div>
+    </section>
 
-    <section id="bonds">
-  <h2>Bonds</h2>
-  <p>
-    <strong>Bonds</strong> are fixed-income instruments where you lend money to governments, corporations, or other entities in exchange for regular interest payments and the return of principal at maturity. Bonds are an essential part of a balanced portfolio, offering stability and predictable income.
-  </p>
-  <p>
-    There are various types of bonds: government bonds (like RBI and State loans), corporate bonds, tax-free bonds, and more. Bonds are generally less risky than stocks and provide diversification, especially during market downturns.
-  </p>
-  <p>
-    Bonds suit investors seeking steady returns with lower risk, retirees looking for regular income, and anyone wanting to diversify beyond equities. However, bond prices can fluctuate due to interest rate changes, so it’s important to assess the issuer’s credit quality and yield.
-  </p>
-  <a class="learn-more" href="bonds.html">Learn more &raquo;</a>
-</section>
+    <!-- Compact learn intro -->
+    <section id="learn" class="home-section learn-panel">
+      <div class="section-heading">
+        <h2>Why invest?</h2>
+        <p>A one-minute primer before you dive into asset classes.</p>
+      </div>
+      <div class="learn-grid">
+        <div class="learn-item">
+          <h3>Wealth creation</h3>
+          <p>Put money to work in assets that can grow faster than a savings account over long horizons.</p>
+        </div>
+        <div class="learn-item">
+          <h3>Beat inflation</h3>
+          <p>Returns that outpace inflation help protect purchasing power for future goals.</p>
+        </div>
+        <div class="learn-item">
+          <h3>Goal funding</h3>
+          <p>House, education, retirement — map targets to SIPs and timelines with our planners.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust strip -->
+    <section class="trust-strip" aria-label="Site promises">
+      <div class="trust-item">
+        <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg></span>
+        <div>
+          <strong>Educational only</strong>
+          <p>Not SEBI-registered advice</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span>
+        <div>
+          <strong>Free calculators</strong>
+          <p>No signup required</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div>
+          <strong>Content reviewed</strong>
+          <p id="trust-reviewed">See footer for date</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6"/></svg></span>
+        <div>
+          <strong>Transparent math</strong>
+          <p>Assumptions shown up front</p>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <!-- BEGIN SITE FOOTER -->
+<!-- BEGIN SITE FOOTER -->
 <footer>
   <div class="footer-inner">
     <p class="footer-brand">💡 Investment Insights</p>
@@ -335,51 +421,40 @@
 </button>
 <!-- END SITE FOOTER -->
 
-  
-  
-  
-
-
 <script>
-  // Floating TOC scroll spy for active section highlighting
-  document.querySelectorAll('.floating-toc a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
+  document.querySelectorAll('.floating-toc a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var target = document.querySelector(this.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        window.scrollTo({top: target.offsetTop - 65, behavior: 'smooth'});
+        window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
       }
     });
   });
-  window.addEventListener('scroll', () => {
-    const sections = [
-      'intro',
-      'stocks',
-      'mutualfunds',
-      'fixeddeposits',
-	  'nps',
-      'cryptocurrencies',
-      'bonds'
-    ];
-    let current = '';
-    for (const id of sections) {
-      const sec = document.getElementById(id);
-      if (sec && window.scrollY + 120 >= sec.offsetTop) current = id;
+  window.addEventListener('scroll', function () {
+    var sections = ['hero', 'kpi', 'explore', 'calculators', 'learn'];
+    var current = '';
+    for (var i = 0; i < sections.length; i++) {
+      var sec = document.getElementById(sections[i]);
+      if (sec && window.scrollY + 120 >= sec.offsetTop) current = sections[i];
     }
-    document.querySelectorAll('.floating-toc a').forEach(a => {
+    document.querySelectorAll('.floating-toc a').forEach(function (a) {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
   });
+  document.addEventListener('DOMContentLoaded', function () {
+    var rev = document.querySelector('.footer-reviewed time');
+    var trust = document.getElementById('trust-reviewed');
+    if (rev && trust) trust.textContent = 'Reviewed ' + rev.textContent;
+  });
 </script>
 
-
-      <script src="js/site-config.js"></script>
-<script src="js/calc-core.js"></script>
+  <script src="js/site-config.js"></script>
+  <script src="js/calc-core.js"></script>
   <script src="js/storage.js"></script>
   <script src="recommendations.js" defer></script>
   <script src="js/dashboard.js" defer></script>
-<script src="js/analytics.js" defer></script>
-
-<script src="nav.js" defer></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="nav.js" defer></script>
 </body>
 </html>
