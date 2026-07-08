@@ -13,13 +13,12 @@
     var toggle = document.getElementById("darkmode-toggle");
     if (dark) {
       document.body.classList.add("dark-mode");
-      if (label) label.textContent = "Light Mode";
-      if (toggle) toggle.checked = true;
     } else {
       document.body.classList.remove("dark-mode");
-      if (label) label.textContent = "Dark Mode";
-      if (toggle) toggle.checked = false;
     }
+    // Label always names the control; checked = dark mode is ON
+    if (label) label.textContent = "Dark mode";
+    if (toggle) toggle.checked = !!dark;
     try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
   }
 
