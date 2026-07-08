@@ -70,18 +70,33 @@
   <a href="ipo.html">🆕 IPO</a>
   <a href="usstocks.html">🇺🇸 US Stocks</a>
 </nav>
+  <nav class="floating-toc" id="floating-toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul>
+      <li><a href="#about-intraday">What is intraday?</a></li>
+      <li><a href="#chart-intraday">Sample chart</a></li>
+      <li><a href="#how-intraday">How it works</a></li>
+      <li><a href="#glossary-intraday">Glossary</a></li>
+      <li><a href="#strategies-intraday">Strategies</a></li>
+      <li><a href="#tips-intraday">Tips</a></li>
+      <li><a href="#mistakes-intraday">Mistakes</a></li>
+      <li><a href="#active-stocks">Active stocks</a></li>
+      <li><a href="#faq-intraday">FAQs</a></li>
+    </ul>
+  </nav>
+
 
   
   
     <main id="main-content" tabindex="-1">
-    <section>
+    <section id="about-intraday">
       <h2>What is Intraday Trading?</h2>
       <p>
         <b>Intraday trading</b> refers to buying and selling stocks or other financial instruments within the same trading day—positions are squared off before market close. The aim is to profit from short-term price movements, rather than long-term investment growth.
       </p>
     </section>
 
-    <section>
+    <section id="chart-intraday">
       <h3>Sample Intraday Volatility Chart</h3>
       <canvas id="intradayChart" style="max-width:100%;min-height:250px;"></canvas>
       <div style="font-size:0.97em;color:#888;margin-top:4px;">
@@ -89,7 +104,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="how-intraday">
       <h3>How Intraday Trading Works</h3>
       <ol>
         <li>You buy and sell stocks through your trading account, choosing the ‘Intraday’ or ‘MIS’ (Margin Intraday Square-off) option.</li>
@@ -99,7 +114,7 @@
       </ol>
     </section>
 
-    <section>
+    <section id="glossary-intraday">
       <h3>Glossary: Key Intraday Trading Terms</h3>
       <ul>
         <li><b>Margin:</b> Borrowed funds from broker to trade larger positions than your balance allows.</li>
@@ -115,7 +130,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="strategies-intraday">
       <h3>Popular Intraday Trading Strategies</h3>
       <ul>
         <li><b>Momentum Trading:</b> Buy stocks showing strong upward momentum; sell if momentum fades.</li>
@@ -126,7 +141,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="tips-intraday">
       <h3>Tips for Intraday Traders</h3>
       <ul>
         <li>Trade only with money you can afford to lose—risk management is critical.</li>
@@ -138,7 +153,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="mistakes-intraday">
       <h3>Common Mistakes in Intraday Trading</h3>
       <ul>
         <li>Not setting stop-loss, leading to big losses.</li>
@@ -149,7 +164,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="active-stocks">
   <h3>Real-Time Most Active Stocks for Intraday Trading</h3>
   
   <table class="active-stocks-table">
@@ -188,7 +203,7 @@
 </section>
 
 
-    <section>
+    <section id="faq-intraday">
       <h3>FAQs about Intraday Trading</h3>
       <details>
         <summary>Is intraday trading suitable for beginners?</summary>
@@ -318,6 +333,32 @@ document.querySelectorAll('.intraday-float-menu a').forEach(function(link) {
   <script src="js/analytics.js" defer></script>
 
   
-  <script src="nav.js" defer></script>
+  
+<script>
+(function () {
+  var sections = ["about-intraday","chart-intraday","how-intraday","glossary-intraday","strategies-intraday","tips-intraday","mistakes-intraday","active-stocks","faq-intraday"];
+  document.querySelectorAll(".floating-toc a").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 65, behavior: "smooth" });
+      }
+    });
+  });
+  window.addEventListener("scroll", function () {
+    var current = "";
+    for (var i = 0; i < sections.length; i++) {
+      var sec = document.getElementById(sections[i]);
+      if (sec && window.scrollY + 120 >= sec.offsetTop) current = sections[i];
+    }
+    document.querySelectorAll(".floating-toc a").forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+  });
+})();
+</script>
+
+<script src="nav.js" defer></script>
 </body>
 </html>

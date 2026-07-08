@@ -71,16 +71,31 @@
   <a href="intraday.html">⏱️ Intraday</a>
   <a href="usstocks.html">🇺🇸 US Stocks</a>
 </nav>
+  <nav class="floating-toc" id="floating-toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul>
+      <li><a href="#about-ipo">What is an IPO?</a></li>
+      <li><a href="#how-ipo">How it works</a></li>
+      <li><a href="#why-ipo">Why invest</a></li>
+      <li><a href="#risks-ipo">Risks</a></li>
+      <li><a href="#apply-ipo">How to apply</a></li>
+      <li><a href="#live-ipo">Live listings</a></li>
+      <li><a href="#recent-ipo">Recent IPOs</a></li>
+      <li><a href="#listing-gains">Listing gains</a></li>
+      <li><a href="#faq-ipo">FAQs</a></li>
+    </ul>
+  </nav>
+
   
   <main id="main-content" tabindex="-1">
-    <section>
+    <section id="about-ipo">
       <h2>What is an IPO?</h2>
       <p>
         <b>IPO</b> stands for <b>Initial Public Offering</b>. It is the process through which a private company offers its shares to the public for the first time and becomes a publicly listed company on a stock exchange (like NSE or BSE in India). IPOs are major milestones in a company's growth and offer investors an early opportunity to participate in a company’s potential.
       </p>
     </section>
 
-    <section>
+    <section id="how-ipo">
       <h3>How Does an IPO Work?</h3>
       <ol>
         <li>The company files a draft red herring prospectus (DRHP) with SEBI detailing its business, finances, and reasons for raising funds.</li>
@@ -91,7 +106,7 @@
       </ol>
     </section>
 
-    <section>
+    <section id="why-ipo">
       <h3>Why Invest in IPOs?</h3>
       <ul>
         <li><b>Early Access:</b> Invest in a company before it starts trading on the stock exchange.</li>
@@ -101,7 +116,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="risks-ipo">
       <h3>Risks of IPO Investing</h3>
       <ul>
         <li><b>Overvaluation:</b> Some IPOs may be aggressively priced.</li>
@@ -111,7 +126,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="apply-ipo">
       <h3>How to Apply for an IPO in India</h3>
       <ol>
         <li>Open a Demat and trading account with a SEBI-registered broker (Zerodha, Groww, Upstox, ICICI, etc.).</li>
@@ -124,7 +139,7 @@
     </section>
 	
 	
-	<section>
+	<section id="live-ipo">
   <h3>Live IPO Listings</h3>
   <a class="download-btn" href="https://www.nseindia.com/market-data/new-stock-exchange-listings-recent" target="_blank" rel="noopener">
     📈 View Live IPO Listings at NSE India &raquo;
@@ -134,7 +149,7 @@
   </div>
 </section>
 
-    <section>
+    <section id="recent-ipo">
       <h3>Upcoming & Recent IPOs (2025)</h3>
       <table class="ipo-table">
   <thead>
@@ -176,7 +191,7 @@
       </div>
     </section>
 	
-	<section style="margin-top:36px;">
+	<section id="listing-gains" style="margin-top:36px;">
   <h3>Average Listing Gains of Recent IPOs</h3>
   <canvas id="ipoListingChart" style="max-width:100%;min-height:260px;"></canvas>
   <div style="font-size:0.97em;color:#888;margin-top:6px;">
@@ -184,7 +199,7 @@
   </div>
 </section>
 
-    <section>
+    <section id="faq-ipo">
       <h3>FAQs about IPOs</h3>
       <details>
         <summary>What is the minimum amount needed to apply for an IPO?</summary>
@@ -311,6 +326,32 @@ document.querySelectorAll('.ipo-float-menu a').forEach(function(link) {
   <script src="js/site-config.js"></script>
   <script src="js/analytics.js" defer></script>
 
-  <script src="nav.js" defer></script>
+  
+<script>
+(function () {
+  var sections = ["about-ipo","how-ipo","why-ipo","risks-ipo","apply-ipo","live-ipo","recent-ipo","listing-gains","faq-ipo"];
+  document.querySelectorAll(".floating-toc a").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 65, behavior: "smooth" });
+      }
+    });
+  });
+  window.addEventListener("scroll", function () {
+    var current = "";
+    for (var i = 0; i < sections.length; i++) {
+      var sec = document.getElementById(sections[i]);
+      if (sec && window.scrollY + 120 >= sec.offsetTop) current = sections[i];
+    }
+    document.querySelectorAll(".floating-toc a").forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+  });
+})();
+</script>
+
+<script src="nav.js" defer></script>
 </body>
 </html>

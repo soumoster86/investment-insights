@@ -70,16 +70,32 @@
   <a href="intraday.html">⏱️ Intraday</a>
   <a href="usstocks.html">🇺🇸 US Stocks</a>
   </nav>
+  <nav class="floating-toc" id="floating-toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul>
+      <li><a href="#about-etf">What is an ETF?</a></li>
+      <li><a href="#benefits-etf">Benefits</a></li>
+      <li><a href="#types-etf">Types</a></li>
+      <li><a href="#invest-etf">How to invest</a></li>
+      <li><a href="#popular-etf">Popular ETFs</a></li>
+      <li><a href="#compare-etf">ETF vs Index MF</a></li>
+      <li><a href="#sip-returns-etf">SIP returns</a></li>
+      <li><a href="#sip-faq-etf">SIP FAQs</a></li>
+      <li><a href="#who-etf">Who should invest</a></li>
+      <li><a href="#faq-etf">FAQs</a></li>
+    </ul>
+  </nav>
+
   
   <main id="main-content" tabindex="-1">
-     <section>
+     <section id="about-etf">
       <h2>What is an ETF?</h2>
       <p>
         <b>ETF</b> stands for <b>Exchange Traded Fund</b>. It is a basket of securities—such as stocks, bonds, or commodities—that is traded on an exchange, just like a stock. ETFs combine the diversification benefits of mutual funds with the ease of trading like stocks. They are designed to track an index (like Nifty 50, Sensex), a sector, or a commodity.
       </p>
     </section>
 
-    <section>
+    <section id="benefits-etf">
       <h3>Key Benefits of ETFs</h3>
       <ul>
         <li><b>Diversification:</b> Get exposure to a wide range of securities in a single trade.</li>
@@ -90,7 +106,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="types-etf">
       <h3>Types of ETFs in India</h3>
       <ul>
         <li><b>Equity ETFs:</b> Track stock indices like Nifty 50, Sensex, Nifty Next 50, sectoral indices (Banking, IT, Pharma, etc.).</li>
@@ -101,7 +117,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="invest-etf">
       <h3>How to Invest in ETFs</h3>
       <ol>
         <li>Open a Demat and trading account with a broker (Zerodha, Groww, ICICI Direct, etc.).</li>
@@ -111,7 +127,7 @@
       </ol>
     </section>
 
-    <section>
+    <section id="popular-etf">
       <h3>Popular ETFs in India (2024)</h3>
       <ul>
         <li><b>Nippon India ETF Nifty BeES (NIFTYBEES)</b> – Tracks Nifty 50</li>
@@ -125,7 +141,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="compare-etf">
       <h3>ETF vs Index Mutual Fund: A Quick Comparison</h3>
 <table class="etf-compare-table">
   <tr>
@@ -162,7 +178,7 @@
     </section>
 
     <!-- Interactive Chart -->
-    <section style="margin-top:36px;">
+    <section id="sip-returns-etf" style="margin-top:36px;">
   <h3>ETF SIP Returns (2019–2024): Growth & XIRR</h3>
   <canvas id="etfChart" style="max-width:100%;min-height:280px;"></canvas>
   <div id="etf-xirr-summary" style="margin-top:10px;font-size:1.09em;font-weight:500;color:#004080;"></div>
@@ -171,7 +187,7 @@
   </div>
 </section>
 
-    <section style="margin-top:26px;">
+    <section id="sip-faq-etf" style="margin-top:26px;">
   <h3>ETF SIP Returns Calculator – FAQs</h3>
   <details open>
     <summary style="font-size:1.06em;font-weight:600;color:#004080;">
@@ -231,7 +247,7 @@
   </details>
 </section>
 
-    <section>
+    <section id="who-etf">
       <h3>Who Should Invest in ETFs?</h3>
       <ul>
         <li>Investors comfortable using a Demat/trading account.</li>
@@ -244,7 +260,7 @@
       </p>
     </section>
 
-    <section>
+    <section id="faq-etf">
       <h3>FAQs about ETFs</h3>
       <details>
         <summary>Are ETFs safe?</summary>
@@ -438,6 +454,32 @@ document.querySelectorAll('.etf-float-menu a').forEach(function(link) {
   <script src="js/site-config.js"></script>
   <script src="js/analytics.js" defer></script>
 
-  <script src="nav.js" defer></script>
+  
+<script>
+(function () {
+  var sections = ["about-etf","benefits-etf","types-etf","invest-etf","popular-etf","compare-etf","sip-returns-etf","sip-faq-etf","who-etf","faq-etf"];
+  document.querySelectorAll(".floating-toc a").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 65, behavior: "smooth" });
+      }
+    });
+  });
+  window.addEventListener("scroll", function () {
+    var current = "";
+    for (var i = 0; i < sections.length; i++) {
+      var sec = document.getElementById(sections[i]);
+      if (sec && window.scrollY + 120 >= sec.offsetTop) current = sections[i];
+    }
+    document.querySelectorAll(".floating-toc a").forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+  });
+})();
+</script>
+
+<script src="nav.js" defer></script>
 </body>
 </html>
