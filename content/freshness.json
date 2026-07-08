@@ -1,5 +1,5 @@
 {
-  "lastReviewed": "2026-07-08",
+  "lastReviewed": "2026-07-09",
   "reviewedBy": "site-maintainer",
   "scope": "Educational copy, recommendation lists, and calculator assumptions",
   "nextReviewHint": "Re-check recommendation narratives and sample figures quarterly",
@@ -11,6 +11,10 @@
     {
       "date": "2026-07-08",
       "note": "Phase 4: metals proxy, freshness workflow, analytics opt-in, structured data"
+    },
+    {
+      "date": "2026-07-09",
+      "note": "Learn hub priorities 4–6: emergency/insurance, tax overview, gold, index vs active"
     }
   ]
 }

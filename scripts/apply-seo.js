@@ -77,7 +77,7 @@ const PAGES = {
   "learn.html": {
     title: "Learn Investing | Investment Insights",
     description:
-      "Browse educational guides on stocks, mutual funds, FDs, NPS, bonds, ETFs, IPOs, US stocks, and crypto for Indian investors."
+      "Educational path for Indian investors: basics, risk, PPF, emergency fund, tax overview, gold, index vs active, plus product guides."
   },
   "calculators.html": {
     title: "Investment Calculators | Investment Insights",
@@ -103,6 +103,26 @@ const PAGES = {
     title: "PPF & Tax-Saving Basics | Investment Insights",
     description:
       "Educational overview of PPF and Section 80C-style options in India. Not tax advice — verify with official sources."
+  },
+  "insurance-emergency.html": {
+    title: "Emergency Fund & Insurance Basics | Investment Insights",
+    description:
+      "Build an emergency fund and understand term life and health insurance basics for Indian households. Educational only — not advice."
+  },
+  "tax-overview.html": {
+    title: "Tax Overview for Investors (India) | Investment Insights",
+    description:
+      "High-level educational map of how Indian investors often encounter tax: regimes, capital gains concepts, and reporting hygiene. Not tax advice."
+  },
+  "gold.html": {
+    title: "Gold Investing in India | Investment Insights",
+    description:
+      "Educational guide to gold as an asset: physical jewellery vs coins, gold ETFs, sovereign gold bonds, and portfolio role for Indian investors."
+  },
+  "index-vs-active.html": {
+    title: "Index Funds vs Active Funds | Investment Insights",
+    description:
+      "Learn the difference between index (passive) and active mutual funds/ETFs: costs, tracking, and how investors compare them. Educational only."
   }
 };
 

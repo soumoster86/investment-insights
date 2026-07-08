@@ -3327,19 +3327,20 @@ body.dark-mode .calc-error { color: #ff8e8e !important; }
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 28px;
+  min-width: 28px;
   height: 28px;
-  border-radius: 50%;
+  padding: 0 6px;
+  border-radius: 999px;
   background: #0a4d8c;
   color: #fff;
   font-weight: 700;
-  font-size: 0.85em;
+  font-size: 0.8em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 .start-here-grid {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 body.dark-mode .article-hero {
