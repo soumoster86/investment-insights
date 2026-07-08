@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Investment Insights site",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "sync-shell": "node scripts/sync-shell.js",
+    "optimize-logo": "python scripts/optimize-logo.py"
   },
   "devDependencies": {
     "jest": "^29.6.1",

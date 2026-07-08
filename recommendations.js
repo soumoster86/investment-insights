@@ -61,20 +61,18 @@
   }
 
   function detailsLink(url) {
-    return '<a href="' + esc(url) + '" target="_blank" rel="noopener" class="btn" ' +
-      'style="margin-top:8px; padding:5px 12px; font-size:0.94em;">Details</a>';
+    return '<a href="' + esc(url) + '" target="_blank" rel="noopener" class="btn rec-details-btn">Details</a>';
   }
 
   function header(logo, name, chipsHtml) {
-    return '<div style="display:flex; align-items:center; gap:9px; flex-wrap:wrap;">' +
-      '<img src="' + esc(logo) + '" alt="' + esc(name) + '" loading="lazy" ' +
-      'style="width:34px; height:34px; border-radius:7px; background:#fff;" ' +
+    return '<div class="rec-card-header">' +
+      '<img src="' + esc(logo) + '" alt="' + esc(name) + '" width="34" height="34" loading="lazy" ' +
       'onerror="this.style.display=\'none\'">' +
       '<strong>' + esc(name) + '</strong>' + chipsHtml + '</div>';
   }
 
   function desc(text) {
-    return '<div style="font-size:0.95em; margin:6px 0;">' + esc(text) + '</div>';
+    return '<div class="rec-card-desc">' + esc(text) + '</div>';
   }
 
   /* ---------- Card builders ---------- */
@@ -83,13 +81,13 @@
     var chips = '<span class="sector-chip">' + esc(s.sector) + '</span>';
     return '<div class="stock-card" data-sector="' + esc(s.sector) + '">' +
       header(s.logo, s.name, chips) + desc(s.desc) +
-      '<div style="font-size:0.96em; color:#4caf50;">' + stars(s.rating) + '</div>' +
+      '<div class="rec-card-rating">' + stars(s.rating) + '</div>' +
       detailsLink(s.url) + '</div>';
   }
 
   function riskChip(cls, risk) {
-    var style = risk === "High" ? ' style="background:#fdecea;color:#be3636;"' : "";
-    return '<span class="' + cls + '"' + style + '>' + esc(risk) + '</span>';
+    var high = risk === "High" ? " risk-high" : "";
+    return '<span class="' + cls + high + '">' + esc(risk) + '</span>';
   }
 
   function fundCard(f) {
@@ -97,7 +95,7 @@
       riskChip("mf-risk-chip", f.risk);
     return '<div class="mf-card" data-type="' + esc(f.type) + '" data-risk="' + esc(f.risk) + '">' +
       header(f.logo, f.name, chips) + desc(f.desc) +
-      '<div style="font-size:0.96em; color:#4caf50;">' + stars(f.rating) + '</div>' +
+      '<div class="rec-card-rating">' + stars(f.rating) + '</div>' +
       detailsLink(f.url) + '</div>';
   }
 
@@ -106,7 +104,7 @@
       riskChip("crypto-risk-chip", c.risk);
     return '<div class="crypto-card" data-category="' + esc(c.category) + '" data-risk="' + esc(c.risk) + '">' +
       header(c.logo, c.name, chips) + desc(c.desc) +
-      '<div style="font-size:0.96em; color:#fb8c00;">' + stars(c.rating) + '</div>' +
+      '<div class="rec-card-rating crypto">' + stars(c.rating) + '</div>' +
       detailsLink(c.url) + '</div>';
   }
 

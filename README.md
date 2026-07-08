@@ -2,7 +2,7 @@
 
 A static, multi-page educational website about investing in India — covering stocks, mutual funds, fixed deposits, NPS, cryptocurrencies, bonds, IPOs, ETFs, US stocks, and goal-based planning. It includes interactive calculators (SIP, SWP, FD, NPS, investment goal), data-driven recommendation lists, live market widgets, light/dark mode, and a mobile-friendly navigation drawer.
 
-The site is built with plain HTML, CSS, and vanilla JavaScript — no build step and no framework — so it can be hosted on any static host (it currently runs on Netlify).
+The site is built with plain HTML, CSS, and vanilla JavaScript — no framework — so it can be hosted on any static host (it currently runs on Netlify). Shared chrome (header/footer) is maintained as partials and synced into every page with a small Node script.
 
 ## Live site
 
@@ -15,47 +15,40 @@ https://investment-insight.netlify.app
 - TradingView embedded widgets for the live ticker on the home and US stocks pages
 - [Formspree](https://formspree.io/) for the contact form submission
 - Clearbit Logo API and local image files for company/coin logos
-- No bundler, package manager, or server-side code required
+- No bundler required for deploy; optional Node scripts for shell sync / logo tooling
 
 ## Project structure
 
-The shared shell (header, navigation, dark mode, calculators, recommendation cards, floating menus) lives in three shared assets that every page links. Each page also keeps a page-specific `<style>` block for content unique to that page.
-
 ```
 .
-├── index.html            Home dashboard (live ticker, goal summary)
-├── stocks.html           Stocks overview + dynamic stock recommendations
-├── etf.html              ETF overview
-├── ipo.html              IPO guide + listing-gains chart
-├── intraday.html         Intraday trading overview + sample chart
-├── usstocks.html         US market overview + live US ticker
-├── mutualfunds.html      MF overview + SIP & SWP calculators + dynamic fund recommendations
-├── fixeddeposit.html     FD overview + FD calculator
-├── nps.html              NPS overview + NPS calculator
-├── cryptocurrencies.html Crypto overview + dynamic coin recommendations
-├── bonds.html            Bonds overview
-├── investmentgoal.html   Goal-based planning calculator
-├── contact.html          Contact form (Formspree)
-│
-├── style.css             Shared shell: layout, header, nav, dropdown,
-│                         mobile drawer, calculators, floating menus, dark mode
-├── nav.js                Shared behaviour: dark-mode toggle, mobile nav,
-│                         active-link highlight, back-to-top, header-height sync
-└── recommendations.js    Data-driven Stocks / Mutual Funds / Crypto cards + search
+├── index.html … contact.html   Page content (shared header/footer injected)
+├── style.css                   All shared + component styles (single source of truth)
+├── nav.js                      Dark mode, mobile nav, active link, back-to-top
+├── recommendations.js          Stocks / MF / Crypto cards + search
+├── logo.png / favicon.*        Compressed brand assets
+├── partials/
+│   ├── header.html             Canonical site header + primary nav
+│   └── footer.html             Canonical footer + back-to-top button
+└── scripts/
+    ├── sync-shell.js           Inject partials into every *.html page
+    └── optimize-logo.py        Compress logo + generate favicons
 ```
 
 ### Shared assets
 
-**`style.css`** owns everything that should look the same on every page: the sticky header, the primary navigation (including the mobile hamburger drawer and the "Stocks" dropdown), form and calculator styling, the floating "Quick Access" / "On this page" side menus, the back-to-top button, and all dark-mode rules.
+**`style.css`** owns layout, header, navigation (including mobile drawer and Stocks dropdown), forms/calculators, recommendation cards, dashboard cards, floating menus, tables, page-specific components (NPS bars, SWP tabs, US stock grid, IPO/ETF tables), and dark mode.
 
-**`nav.js`** is loaded with `defer` on every page and is written defensively (every element lookup is null-checked, so a page missing an element never throws). It handles:
-- Dark-mode toggle with `localStorage` persistence and a system-preference fallback
-- The mobile navigation drawer (hamburger open/close, scrim, Escape to close, inline dropdown expand on touch)
-- Active-link highlighting in the header
-- The back-to-top button
-- Measuring the real header height and publishing it as the `--header-h` CSS variable, so floating side menus position correctly regardless of how the nav wraps
+**`nav.js`** is loaded with `defer` on every page and is written defensively (every element lookup is null-checked). It handles dark mode, the mobile drawer, active-link highlighting, back-to-top, and `--header-h` sync for floating menus.
 
-**`recommendations.js`** is loaded only on the three pages that show recommendation cards (Stocks, Mutual Funds, Cryptocurrencies). It renders the cards from data arrays and wires up each search box.
+**`recommendations.js`** is loaded only on Stocks, Mutual Funds, and Cryptocurrencies. It renders cards from data arrays and wires search.
+
+**`partials/header.html` / `partials/footer.html`** are the single source of truth for the site chrome. After editing either file, run:
+
+```bash
+npm run sync-shell
+```
+
+Pages mark the injected regions with `<!-- BEGIN SITE HEADER -->` / `<!-- END SITE HEADER -->` (and the footer equivalents) so re-runs replace only those blocks.
 
 ## Editing the recommendation lists
 
@@ -75,7 +68,7 @@ The Stocks, Mutual Funds, and Cryptocurrency recommendation cards are generated 
 | mutualfunds.html | `mf-list` | `mf-search` |
 | cryptocurrencies.html | `crypto-list` | `crypto-search` |
 
-Each page also includes `<script src="recommendations.js" defer></script>` before `nav.js`. If the cards ever stop appearing, the first thing to check is that this script tag is present on the page.
+Each of those pages includes `<script src="recommendations.js" defer></script>` before `nav.js`.
 
 ## Running locally
 
@@ -83,7 +76,7 @@ Because everything is static, you can open the files directly or serve the folde
 
 ```bash
 # Python 3
-python3 -m http.server 8000
+python -m http.server 8000
 
 # or Node
 npx serve .
@@ -91,18 +84,37 @@ npx serve .
 
 Then open `http://localhost:8000` in a browser.
 
+### Optional tooling
+
+```bash
+npm run sync-shell      # re-inject header/footer partials into all pages
+npm run optimize-logo   # recompress logo.png + regenerate favicons (needs Pillow)
+npm test                # Jest (install devDependencies first)
+```
+
 ## Deployment
 
-The site is a static bundle, so deployment is a drag-and-drop (or Git-connected) publish on Netlify, GitHub Pages, Vercel, or any static host. No build command is needed; the publish directory is the project root. Ensure `style.css`, `nav.js`, and `recommendations.js` are deployed alongside the HTML, and that local logo images (e.g. the crypto coin logos) are included.
+The site is a static bundle, so deployment is a drag-and-drop (or Git-connected) publish on Netlify, GitHub Pages, Vercel, or any static host. No build command is required for Netlify; the publish directory is the project root.
+
+Ensure these ship with the HTML:
+
+- `style.css`, `nav.js`, `recommendations.js`
+- Logo / favicon assets (`logo.png`, `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`)
+- Local coin/exchange images used on the crypto page
+
+`partials/` and `scripts/` are for maintainers only — they are not required at runtime.
 
 ## Notes & disclaimers
 
 - All recommendations, calculator outputs, and sample charts are for **educational illustration only** and are not financial advice. Figures such as IPO listing gains use placeholder data.
 - Some pages embed third-party widgets and call third-party logo/data services; those depend on the external services being reachable.
 - Market data shown via embedded widgets may be delayed.
+- **API keys must never be committed** in page source. Prefer server-side proxies (e.g. Netlify Functions) for any authenticated market/metals APIs.
 
 ## Possible next steps
 
-- Consolidate the per-page inline `<style>` blocks into `style.css` so styling has a single source of truth and stops drifting between pages.
-- Move any client-side third-party API keys out of page source (e.g. behind a small serverless proxy) so they aren't publicly exposed.
-- Add optional sort/filter controls (by rating, sector, or risk) to the recommendation lists, now that the data is structured.
+- Move calculators into shared `js/` modules and expand unit tests.
+- Wire the home dashboard to real goal / last-calculator localStorage data.
+- Add sort/filter controls (by rating, sector, or risk) to recommendation lists.
+- Proxy paid APIs behind serverless functions; rotate any keys that were ever exposed client-side.
+- SEO: meta descriptions, Open Graph tags, `sitemap.xml`.
