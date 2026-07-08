@@ -1,36 +1,60 @@
 /* ============================================================
-   Investment Insights — shared stylesheet
-   Loaded by every page. Page-specific <style> blocks remain
-   in each file; this file owns the shared shell: layout,
-   header, navigation (incl. mobile), dropdown, and dark mode.
+   Investment Insights ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â shared stylesheet
+   Loaded by every page. Owns shell, components, and visual system.
    ============================================================ */
 
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap");
+
 :root {
-  --brand: #004080;
-  --brand-dark: #002d59;
-  --brand-accent: #236ad3;
-  --page-bg-1: #e9f0fd;
-  --page-bg-2: #f4f6f8;
+  --brand: #0a4d8c;
+  --brand-dark: #063566;
+  --brand-accent: #2b7de9;
+  --brand-glow: rgba(43, 125, 233, 0.28);
+  --page-bg-1: #e8f1fc;
+  --page-bg-2: #f3f6fb;
+  --page-bg-3: #eef6ff;
   --surface: #ffffff;
-  --surface-soft: #f9faff;
-  --border-soft: #e1e6f2;
-  --text: #222222;
+  --surface-soft: #f7faff;
+  --border-soft: #dce6f5;
+  --text: #1a2332;
+  --text-muted: #5b6b82;
   --header-h: 64px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --shadow-sm: 0 1px 3px rgba(10, 40, 90, 0.06);
+  --shadow-md: 0 6px 20px rgba(10, 50, 110, 0.08);
+  --shadow-lg: 0 14px 40px rgba(10, 50, 110, 0.12);
+  --shadow-header: 0 4px 24px rgba(4, 30, 70, 0.18);
+  --font: "DM Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
+::selection {
+  background: rgba(43, 125, 233, 0.22);
+  color: var(--text);
+}
+
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: var(--font);
   margin: 0;
-  background: linear-gradient(120deg, var(--page-bg-1) 0%, var(--page-bg-2) 100%);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(43, 125, 233, 0.14), transparent 55%),
+    radial-gradient(900px 500px at 95% 5%, rgba(10, 77, 140, 0.1), transparent 50%),
+    linear-gradient(165deg, var(--page-bg-1) 0%, var(--page-bg-2) 45%, var(--page-bg-3) 100%);
+  background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
   transition: background 0.4s, color 0.3s;
-  /* Offset for the sticky header so anchored content isn't hidden. */
   scroll-padding-top: calc(var(--header-h) + 12px);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ---------- Header ---------- */
@@ -38,14 +62,16 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--brand);
+  background: linear-gradient(135deg, #0a4d8c 0%, #0c5eaa 48%, #0a457a 100%);
   color: #fff;
-  padding: 12px 18px;
+  padding: 12px 20px 14px;
   display: flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-header);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: saturate(1.2);
 }
 .site-header .brand {
   display: flex;
@@ -55,17 +81,20 @@ body {
 }
 .site-header .brand img {
   height: 46px;
-  border-radius: 10px;
+  width: 46px;
+  border-radius: 12px;
   background: #fff;
   padding: 3px;
-  box-shadow: 0 2px 6px #0001;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   flex: 0 0 auto;
+  object-fit: contain;
 }
 .site-header h1 {
   margin: 0;
-  font-weight: 500;
-  font-size: 1.25em;
+   param($m) $m 
+  font-size: 1.22em;
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 /* Dark-mode toggle */
@@ -80,7 +109,7 @@ body {
 .dm-toggle input { width: 20px; height: 20px; cursor: pointer; }
 #dm-label { color: #fff; font-size: 0.95em; }
 
-/* Hamburger — hidden on desktop, shown on mobile */
+/* Hamburger ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â hidden on desktop, shown on mobile */
 .nav-toggle {
   display: none;
   align-items: center;
@@ -95,7 +124,7 @@ body {
   cursor: pointer;
 }
 /* Must beat button[type="button"] { display:inline-block } from shared btn styles,
-   otherwise a white “×” shows in the desktop header (reported as a red-marked cross). */
+   otherwise a white ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÆ’Ã¢â‚¬â€ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â shows in the desktop header (reported as a red-marked cross). */
 .nav-close,
 button.nav-close,
 .site-header button.nav-close {
@@ -123,17 +152,17 @@ button.nav-close:hover {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px 4px;
+  gap: 4px 2px;
 }
 .main-nav a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
-  font-size: 1.02em;
-  margin: 0;            /* override legacy `nav a { margin: 0 14px }` */
-  padding: 8px 11px;
-  border-radius: 7px;
-  transition: background 0.22s;
+  font-size: 0.98em;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background 0.2s var(--ease), box-shadow 0.2s var(--ease), transform 0.15s var(--ease);
   white-space: nowrap;
 }
 /* Defensive: neutralize any legacy bare `nav { width:100% }` interplay */
@@ -141,29 +170,35 @@ button.nav-close:hover {
 .main-nav a.active,
 .main-nav a:hover,
 .main-nav a:focus-visible {
-  background: #012b54;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+.main-nav a.active {
+  background: rgba(255, 207, 92, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 207, 92, 0.35);
 }
 
-/* Dropdown (Stocks ▾) */
+/* Dropdown (Stocks ÃƒÂ¢Ã¢â‚¬â€œÃ‚Â¾) */
 .dropdown { position: relative; }
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 6px);
   left: 0;
-  min-width: 190px;
-  background: var(--brand);
-  border-radius: 0 0 9px 9px;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
-  padding: 6px;
+  min-width: 200px;
+  background: linear-gradient(180deg, #0c5eaa 0%, #0a457a 100%);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
   z-index: 1200;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .dropdown-menu a {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 12px;
-  border-radius: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
 }
 /* Open on hover (desktop) and when JS adds .open (touch / keyboard) */
 .dropdown:hover .dropdown-menu,
@@ -181,71 +216,114 @@ textarea:focus-visible {
 }
 
 /* ============================================================
-   Shared content shell — main / sections / headings / buttons
-   (Previously duplicated inline per page, and missing entirely
-   on some pages like ipo.html. Centralized here.)
+   Shared content shell ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â main / sections / headings / buttons
    ============================================================ */
 main {
-  max-width: 900px;
-  margin: 32px auto 24px auto;
-  padding: 8px 18px 30px;
+  max-width: 920px;
+  margin: 28px auto 32px;
+  padding: 16px 22px 36px;
   background: var(--surface);
-  box-shadow: 0 2px 12px rgb(0 64 128 / 8%);
-  border-radius: 18px;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-xl);
   min-height: 70vh;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  animation: fadeIn 0.55s var(--ease);
 }
 main > section,
 section {
-  margin-bottom: 28px;
-  padding: 20px 22px;
-  border: 1.5px solid var(--border-soft);
-  border-radius: 12px;
-  background: var(--surface-soft);
-  box-shadow: 0 1px 10px #00408009;
+  margin-bottom: 22px;
+  padding: 22px 24px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, #ffffff 0%, var(--surface-soft) 100%);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.22s var(--ease), border-color 0.22s var(--ease), transform 0.22s var(--ease);
+}
+main > section:hover,
+section:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(43, 125, 233, 0.28);
 }
 h2 {
-  border-bottom: 2px solid var(--brand);
-  padding-bottom: 8px;
-  color: var(--brand);
+  border-bottom: none;
+  padding-bottom: 0;
   margin-top: 0;
-  font-size: 1.5em;
+  margin-bottom: 14px;
+  font-size: 1.45em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.3;
 }
-h3 { color: var(--brand); font-size: 1.17em; margin: 18px 0 12px; }
+h2::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  margin-left: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--brand-accent), transparent);
+  opacity: 0.45;
+  min-width: 40px;
+}
+h3 {
+  color: var(--brand);
+  font-size: 1.14em;
+   param($m) $m 
+  margin: 16px 0 10px;
+  letter-spacing: -0.01em;
+}
 
-/* Buttons & "learn more" links — exclude header chrome controls */
+p { color: var(--text); }
+main a:not(.btn):not(.learn-more) {
+  color: var(--brand-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+main a:not(.btn):not(.learn-more):hover {
+  color: var(--brand-dark);
+}
+
+/* Buttons & "learn more" links ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â exclude header chrome controls */
 .btn,
 .learn-more,
 button[type="submit"],
 button[type="button"]:not(.nav-close):not(.nav-toggle) {
-  background: var(--brand);
+  background: linear-gradient(180deg, var(--brand-accent) 0%, var(--brand) 100%);
   color: #fff !important;
   border: none;
-  padding: 10px 16px;
-  border-radius: 7px;
+  padding: 10px 18px;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 1.02em;
-  font-weight: 500;
+  font-size: 0.98em;
+   param($m) $m 
+  font-family: inherit;
   text-decoration: none;
   display: inline-block;
-  transition: background 0.22s, transform 0.17s;
+  box-shadow: 0 4px 12px var(--brand-glow);
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), filter 0.18s;
 }
 .btn:hover,
 .learn-more:hover,
 button[type="submit"]:hover,
 button[type="button"]:not(.nav-close):not(.nav-toggle):hover {
-  background: var(--brand-dark);
-  transform: translateY(-1px);
+  background: linear-gradient(180deg, #3b8af0 0%, var(--brand-dark) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px var(--brand-glow);
+  filter: brightness(1.03);
 }
 
 /* ---------- Forms & calculators (consistent across all pages) ----------
    Calculators use three different wrappers across the site:
-     <form id="…-form">      (SIP, SWP, FD, Investment Goal)
+     <form id="ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦-form">      (SIP, SWP, FD, Investment Goal)
      <div class="calculator-box">  (NPS)
    Both are styled identically here so every calculator matches. */
 form label,
 .calculator-box label {
   display: block;
-  font-weight: 600;
+   param($m) $m 
   color: #2b3a52;
   margin: 14px 0 6px;
 }
@@ -290,7 +368,7 @@ form button,
 .calculator-box button { margin-top: 18px; margin-right: 0; }
 .btn-group button { margin-top: 0; }
 
-/* Button variants — unify the many class names used across calculators.
+/* Button variants ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â unify the many class names used across calculators.
    Primary (Calculate) = solid brand. Secondary/Reset = outline. */
 .btn,
 .primary-btn,
@@ -305,14 +383,16 @@ button[type="submit"] {
 .btn.outline-btn {
   background: #fff !important;
   color: var(--brand) !important;
-  border: 1.5px solid var(--brand) !important;
+  border: 1.5px solid rgba(10, 77, 140, 0.35) !important;
+  box-shadow: none !important;
 }
 .btn.secondary:hover,
 .secondary-btn:hover,
 .outline-btn:hover,
 .btn.outline-btn:hover {
-  background: #eaf1fb !important;
+  background: #eef5ff !important;
   color: var(--brand-dark) !important;
+  border-color: var(--brand) !important;
 }
 
 /* Multi-select list (investment goal) */
@@ -351,21 +431,50 @@ body.dark-mode section {
 body.dark-mode h2,
 body.dark-mode h3 { color: #8abaff !important; border-color: #273a5a !important; }
 
+/* Form controls polish */
+form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form select,
+form textarea,
+.calculator-box input[type="text"],
+.calculator-box input[type="number"],
+.calculator-box select {
+  border-radius: 10px;
+  border-color: var(--border-soft);
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+form input:focus,
+form select:focus,
+form textarea:focus,
+.calculator-box input:focus,
+.calculator-box select:focus {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 4px var(--brand-glow);
+}
+
 /* ---------- Back to top ---------- */
 #back-to-top {
   position: fixed;
-  right: 18px;
-  bottom: 18px;
+  right: 20px;
+  bottom: 22px;
   z-index: 1500;
   display: none;
   align-items: center;
-  background: var(--brand);
+  justify-content: center;
+  gap: 4px;
+  background: linear-gradient(180deg, var(--brand-accent), var(--brand));
   color: #fff;
   border: none;
-  border-radius: 24px;
-  padding: 10px 14px;
+  border-radius: 999px;
+  padding: 12px 16px;
   cursor: pointer;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(10, 50, 110, 0.28);
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+#back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(10, 50, 110, 0.34);
 }
 
 /* ============================================================
@@ -379,7 +488,7 @@ body.dark-mode h3 { color: #8abaff !important; border-color: #273a5a !important;
    classes were styled inconsistently per page. They are unified
    here: Quick Access docks LEFT, "On this page" docks RIGHT, so the
    two never collide on pages (Stocks, US Stocks) that have both.
-   (body … specificity beats the per-page inline <style>.)
+   (body ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ specificity beats the per-page inline <style>.)
    ============================================================ */
 
 /* Shared shell for both kinds of floating box */
@@ -392,17 +501,19 @@ body .intraday-float-menu {
   width: 210px;
   max-width: 220px;
   overflow-y: auto;
-  background: var(--surface);
-  border: 1.4px solid var(--border-soft);
-  box-shadow: 0 4px 18px rgba(0, 64, 128, 0.12);
-  border-radius: 12px;
-  padding: 14px 16px;
-  font-size: 1em;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(220, 230, 245, 0.95);
+  box-shadow: var(--shadow-md);
+  border-radius: 14px;
+  padding: 14px 14px 12px;
+  font-size: 0.96em;
   z-index: 900;
   display: block;
 }
 
-/* Quick Access → docked bottom-left, so it never collides with the
+/* Quick Access ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ docked bottom-left, so it never collides with the
    header or with top-of-page content (the live ticker on US Stocks,
    charts on Intraday). */
 body .stock-float-menu,
@@ -416,7 +527,7 @@ body .intraday-float-menu {
   max-height: calc(100vh - 48px);
 }
 
-/* On this page → top-right (short index, safe below the header) */
+/* On this page ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ top-right (short index, safe below the header) */
 body .floating-toc {
   right: 24px;
   left: auto;
@@ -431,7 +542,7 @@ body .stock-float-menu .float-title,
 body .etf-float-menu .float-title,
 body .ipo-float-menu .float-title,
 body .intraday-float-menu .float-title {
-  font-weight: 600;
+   param($m) $m 
   color: var(--brand);
   font-size: 1.05em;
   margin: 0 0 10px;
@@ -443,7 +554,7 @@ body .intraday-float-menu .float-title {
 body .floating-toc ul { margin: 0; padding: 0; list-style: none; }
 body .floating-toc li { margin: 0; }
 
-/* Links — consistent spacing, upright (override inline italic), readable */
+/* Links ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â consistent spacing, upright (override inline italic), readable */
 body .floating-toc a,
 body .stock-float-menu a,
 body .etf-float-menu a,
@@ -495,7 +606,7 @@ body.dark-mode .etf-float-menu a:hover,
 body.dark-mode .ipo-float-menu a:hover,
 body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; }
 
-/* On laptops/tablets the side boxes crowd the main column — hide them.
+/* On laptops/tablets the side boxes crowd the main column ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â hide them.
    The header nav (incl. Stocks dropdown) already covers navigation. */
 @media (max-width: 1180px) {
   body .floating-toc,
@@ -524,7 +635,7 @@ body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; 
 
   /* Scoped to .site-header so it outranks the defensive
      `.site-header .main-nav { background: none }` rule above and the
-     legacy per-page `nav { background: none }` blocks — otherwise the
+     legacy per-page `nav { background: none }` blocks ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â otherwise the
      open drawer renders transparent in light mode. */
   .site-header .main-nav {
     position: fixed;
@@ -583,16 +694,28 @@ body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; 
    Dark mode (shared shell only)
    ============================================================ */
 body.dark-mode {
-  background: linear-gradient(120deg, #141b27 0%, #22242a 100%) !important;
+  background:
+    radial-gradient(1000px 500px at 15% -5%, rgba(43, 125, 233, 0.12), transparent 50%),
+    linear-gradient(165deg, #0f1520 0%, #171d2b 50%, #121820 100%) !important;
   color: #e7ecfa !important;
 }
-body.dark-mode .site-header,
+body.dark-mode .site-header {
+  background: linear-gradient(135deg, #0d1b33 0%, #163056 50%, #0f2038 100%) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+}
 body.dark-mode .main-nav,
 body.dark-mode footer {
-  background: #12203a !important;
+  background: transparent !important;
   color: #e7ecfa !important;
 }
-body.dark-mode .dropdown-menu { background: #12203a !important; }
+body.dark-mode footer {
+  background: #0d1524 !important;
+  border-top-color: #243148 !important;
+}
+body.dark-mode .dropdown-menu {
+  background: linear-gradient(180deg, #163056 0%, #0f2038 100%) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
 body.dark-mode .main-nav a { color: #cfe0ff !important; }
 body.dark-mode .main-nav a.active,
 body.dark-mode .main-nav a:hover,
@@ -601,7 +724,7 @@ body.dark-mode #dm-label { color: #fff !important; }
 body.dark-mode #back-to-top { background: #2b4e7c !important; }
 
 /* ============================================================
-   Dark mode — shared component coverage
+   Dark mode ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â shared component coverage
    Centralizes dark-mode fixes for cards, chips, calculator tabs,
    data tables and the portfolio modal so every page renders these
    uniformly readable in dark mode. (body-scoped selectors beat the
@@ -938,7 +1061,7 @@ body.dark-mode .platform-card a { color: #9fc2ff !important; }
   margin-bottom: 14px;
   color: #204a80;
   font-size: 1.17em;
-  font-weight: 600;
+   param($m) $m 
 }
 .dashboard-section .card .btn {
   margin-top: 16px;
@@ -1120,7 +1243,7 @@ body.dark-mode .swp-tab-btn.active {
 }
 .us-stock-header strong {
   font-size: 1.13em;
-  font-weight: 600;
+   param($m) $m 
   margin-right: 6px;
 }
 .us-stock-sector {
@@ -1409,7 +1532,7 @@ body.dark-mode .error-box {
   vertical-align: middle;
 }
 
-/* Contact form honeypot — hidden from humans, traps bots */
+/* Contact form honeypot ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â hidden from humans, traps bots */
 .hp-field {
   position: absolute !important;
   left: -9999px !important;
@@ -1428,7 +1551,7 @@ body.dark-mode .error-box {
 }
 
 /* ============================================================
-   Phase 3 — a11y + recommendation toolbar + avatars
+   Phase 3 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â a11y + recommendation toolbar + avatars
    ============================================================ */
 
 .skip-link {
@@ -1439,7 +1562,7 @@ body.dark-mode .error-box {
   background: #ffcf5c;
   color: #12203a;
   padding: 10px 16px;
-  font-weight: 600;
+   param($m) $m 
   border-radius: 0 0 8px 0;
   text-decoration: none;
 }
@@ -1503,7 +1626,7 @@ body.dark-mode .error-box {
   margin: 0;
 }
 .rec-control-label {
-  font-weight: 600;
+   param($m) $m 
   color: #2b3a52;
 }
 .rec-control select {
@@ -1573,7 +1696,7 @@ body.dark-mode .rec-count { color: #9fb4d6 !important; }
 }
 .rec-controls-wrap .rec-search-label {
   display: block;
-  font-weight: 600;
+   param($m) $m 
   margin-bottom: 6px;
   color: #2b3a52;
 }
@@ -1613,7 +1736,7 @@ body.dark-mode .live-ticker-wrap {
   border-color: #2d3752;
 }
 
-/* Phase 4 — content freshness footer line */
+/* Phase 4 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â content freshness footer line */
 footer .footer-reviewed {
   margin: 8px 0 0;
   font-size: 0.88em;
@@ -1630,3 +1753,260 @@ body.dark-mode footer .footer-reviewed {
   margin: 0 0 10px;
 }
 body.dark-mode .rec-freshness { color: #9fb4d6 !important; }
+
+/* ============================================================
+   Visual refresh ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â cards, footer, tables, rec polish
+   ============================================================ */
+
+/* Dashboard cards */
+.dashboard-section {
+  gap: 20px;
+}
+.dashboard-section .card {
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), border-color 0.22s;
+}
+.dashboard-section .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-accent), #6ec8ff);
+  opacity: 0.9;
+}
+.dashboard-section .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(43, 125, 233, 0.3);
+  background: #fff;
+}
+.dashboard-section .card h3 {
+  font-size: 1.08em;
+  letter-spacing: -0.01em;
+}
+.dashboard-section .card .btn {
+  margin-top: auto;
+}
+
+/* Home hero title strip */
+#main-content:has(.dashboard-section) > section:first-of-type {
+  background: linear-gradient(135deg, rgba(43, 125, 233, 0.08), rgba(10, 77, 140, 0.04));
+  border-color: rgba(43, 125, 233, 0.15);
+  text-align: center;
+}
+#main-content:has(.dashboard-section) > section:first-of-type h2 {
+  justify-content: center;
+  margin-bottom: 0;
+}
+#main-content:has(.dashboard-section) > section:first-of-type h2::after {
+  display: none;
+}
+
+/* Recommendation cards */
+.stock-card,
+.mf-card,
+.crypto-card,
+.bond-card,
+.us-stock-card {
+  border-radius: 14px !important;
+  border: 1px solid var(--border-soft) !important;
+  box-shadow: var(--shadow-sm) !important;
+  background: linear-gradient(180deg, #fff 0%, #f8fbff 100%) !important;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), border-color 0.2s !important;
+}
+.stock-card:hover,
+.mf-card:hover,
+.crypto-card:hover,
+.bond-card:hover,
+.us-stock-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md) !important;
+  border-color: rgba(43, 125, 233, 0.35) !important;
+}
+.sector-chip,
+.mf-type-chip,
+.crypto-type-chip,
+.us-stock-sector {
+  border-radius: 999px !important;
+   param($m) $m 
+  letter-spacing: 0.02em;
+}
+.rec-avatar {
+  box-shadow: 0 2px 8px rgba(10, 40, 90, 0.18);
+  font-weight: 700;
+}
+.rec-toolbar {
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f8fbff, #f2f6fc);
+  box-shadow: var(--shadow-sm);
+}
+.rec-control select {
+  border-radius: 10px;
+}
+
+/* Tables */
+main table,
+.ipo-table,
+.etf-compare-table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+main th,
+.ipo-table th,
+.etf-compare-table th {
+  background: linear-gradient(180deg, #eaf2ff, #e2ecfb) !important;
+   param($m) $m 
+  letter-spacing: 0.01em;
+}
+
+/* Footer */
+footer {
+  margin-top: 8px;
+  padding: 28px 20px 32px;
+  background: linear-gradient(180deg, #f7faff 0%, #eef3fa 100%);
+  border-top: 1px solid var(--border-soft);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+footer p {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+footer .footer-disclaimer {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+body.dark-mode footer {
+  background: linear-gradient(180deg, #121a28 0%, #0d1524 100%) !important;
+}
+
+/* Dark mode cards / main */
+body.dark-mode main {
+  background: #161d2b !important;
+  border-color: #243148 !important;
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35) !important;
+}
+body.dark-mode main > section,
+body.dark-mode section {
+  background: linear-gradient(180deg, #1b2436 0%, #171f2e 100%) !important;
+  border-color: #2a3650 !important;
+}
+body.dark-mode .dashboard-section .card {
+  background: linear-gradient(180deg, #1c2538 0%, #171f2e 100%) !important;
+}
+body.dark-mode .floating-toc,
+body.dark-mode .stock-float-menu,
+body.dark-mode .etf-float-menu,
+body.dark-mode .ipo-float-menu,
+body.dark-mode .intraday-float-menu {
+  background: rgba(22, 30, 46, 0.92) !important;
+  border-color: #2d3b58 !important;
+  backdrop-filter: blur(12px);
+}
+body.dark-mode .rec-toolbar {
+  background: #1b2436 !important;
+}
+body.dark-mode h2::after {
+  background: linear-gradient(90deg, #6aa8ff, transparent);
+  opacity: 0.5;
+}
+
+/* Learn-more link as soft pill */
+.learn-more {
+  margin-top: 10px;
+}
+
+/* Contact form polish */
+#contact-form {
+  max-width: 520px;
+}
+#contact-form button[type="submit"] {
+  margin-top: 8px;
+  min-width: 140px;
+}
+
+/* Slightly tighter mobile main padding */
+@media (max-width: 640px) {
+  main {
+    margin: 16px 10px 24px;
+    padding: 12px 12px 28px;
+    border-radius: 16px;
+  }
+  main > section,
+  section {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  h2 { font-size: 1.28em; }
+  .dashboard-section .card:hover {
+    transform: none;
+  }
+}
+
+.footer-inner { max-width: 720px; margin: 0 auto; }
+.footer-brand {
+  font-weight: 700;
+  font-size: 1.05em;
+  color: var(--brand);
+  margin: 0 0 8px !important;
+  letter-spacing: -0.01em;
+}
+body.dark-mode .footer-brand { color: #8abaff !important; }
+
+/* Explicit dashboard hero (home) */
+.dashboard-hero {
+  background: linear-gradient(135deg, rgba(43, 125, 233, 0.1), rgba(10, 77, 140, 0.05)) !important;
+  border-color: rgba(43, 125, 233, 0.18) !important;
+  text-align: center;
+  padding-top: 28px !important;
+  padding-bottom: 26px !important;
+}
+.dashboard-hero h2 {
+  justify-content: center;
+  margin-bottom: 8px;
+  font-size: 1.55em;
+}
+.dashboard-hero h2::after { display: none; }
+.dashboard-lead {
+  margin: 0 auto;
+  max-width: 520px;
+  color: var(--text-muted);
+  font-size: 1.02em;
+  line-height: 1.5;
+}
+body.dark-mode .dashboard-lead { color: #a8b8d4 !important; }
+body.dark-mode .dashboard-hero {
+  background: linear-gradient(135deg, rgba(43, 125, 233, 0.14), rgba(15, 30, 55, 0.5)) !important;
+  border-color: #2d3b58 !important;
+}
+
+/* Nav toggle polish */
+.nav-toggle {
+  border-radius: 12px;
+  transition: background 0.18s, border-color 0.18s;
+}
+.nav-toggle:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.75);
+}
+
+/* Dark mode toggle label */
+.dm-toggle {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.dm-toggle:hover {
+  background: rgba(255,255,255,0.14);
+}
