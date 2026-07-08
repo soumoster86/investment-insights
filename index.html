@@ -4,7 +4,20 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Investment Insights - Home</title>
+  <title>Investment Insights — Learn Investing in India</title>
+<!-- BEGIN SEO -->
+  <meta name="description" content="Free educational guides and calculators for stocks, mutual funds, SIPs, FDs, NPS, bonds, crypto, ETFs, and goal-based investing in India." />
+  <link rel="canonical" href="https://investment-insight.netlify.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Investment Insights" />
+  <meta property="og:title" content="Investment Insights — Learn Investing in India" />
+  <meta property="og:description" content="Free educational guides and calculators for stocks, mutual funds, SIPs, FDs, NPS, bonds, crypto, ETFs, and goal-based investing in India." />
+  <meta property="og:url" content="https://investment-insight.netlify.app/" />
+  <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Investment Insights — Learn Investing in India" />
+  <meta name="twitter:description" content="Free educational guides and calculators for stocks, mutual funds, SIPs, FDs, NPS, bonds, crypto, ETFs, and goal-based investing in India." />
+<!-- END SEO -->
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
@@ -26,27 +39,30 @@
 </nav>
 
     <!-- BEGIN SITE HEADER -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
   <div class="brand">
-    <img src="logo.png" width="46" height="46" alt="Investment Insights logo" />
-    <h1>💡 Investment Insights</h1>
+    <a href="index.html" class="brand-link">
+      <img src="logo.png" width="46" height="46" alt="" />
+      <h1>💡 Investment Insights</h1>
+    </a>
   </div>
-  <label class="dm-toggle">
+  <label class="dm-toggle" for="darkmode-toggle">
     <input type="checkbox" id="darkmode-toggle" />
     <span id="dm-label">🌙 Dark Mode</span>
   </label>
-  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false">☰</button>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false">☰</button>
   <nav class="main-nav" id="main-nav" aria-label="Primary">
-    <button class="nav-close" id="nav-close" aria-label="Close menu">×</button>
+    <button type="button" class="nav-close" id="nav-close" aria-label="Close menu">×</button>
     <a href="index.html">🏠 Home</a>
     <div class="dropdown">
-      <a href="stocks.html" class="dropdown-toggle">📊 Stocks ▾</a>
-      <div class="dropdown-menu">
-        <a href="stocks.html"><span>📊</span> Overview</a>
-        <a href="etf.html"><span>📈</span> ETF</a>
-        <a href="ipo.html"><span>🆕</span> IPO</a>
-        <a href="intraday.html"><span>⏱️</span> Intraday</a>
-        <a href="usstocks.html"><span>🇺🇸</span> US Stocks</a>
+      <a href="stocks.html" class="dropdown-toggle" aria-haspopup="true">📊 Stocks ▾</a>
+      <div class="dropdown-menu" role="menu">
+        <a href="stocks.html" role="menuitem"><span aria-hidden="true">📊</span> Overview</a>
+        <a href="etf.html" role="menuitem"><span aria-hidden="true">📈</span> ETF</a>
+        <a href="ipo.html" role="menuitem"><span aria-hidden="true">🆕</span> IPO</a>
+        <a href="intraday.html" role="menuitem"><span aria-hidden="true">⏱️</span> Intraday</a>
+        <a href="usstocks.html" role="menuitem"><span aria-hidden="true">🇺🇸</span> US Stocks</a>
       </div>
     </div>
     <a href="mutualfunds.html">📁 Mutual Funds</a>
@@ -60,7 +76,7 @@
 </header>
 <!-- END SITE HEADER -->
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section style="text-align:center; margin-top: 25px;">
       <h2>📊 Investment Dashboard</h2>
     </section>
@@ -126,7 +142,9 @@
 	  <div class="card" id="currency-card">
   <h3>💱 Currency Converter</h3>
   <div style="margin-bottom:10px;">
+    <label class="sr-only" for="amount">Amount</label>
     <input type="number" id="amount" placeholder="Amount" style="width:90px; display:inline-block;">
+    <label class="sr-only" for="from-currency">From currency</label>
     <select id="from-currency" style="width:80px;">
       <option value="USD">USD</option>
       <option value="INR">INR</option>
@@ -138,6 +156,7 @@
 	  
     </select>
     to
+    <label class="sr-only" for="to-currency">To currency</label>
     <select id="to-currency" style="width:80px;">
       <option value="INR">INR</option>
       <option value="USD">USD</option>
@@ -293,7 +312,6 @@
   
 
 
-
 <script>
   // Floating TOC scroll spy for active section highlighting
   document.querySelectorAll('.floating-toc a').forEach(link => {
@@ -325,8 +343,6 @@
     });
   });
 </script>
-
-
 
 
     <script src="js/calc-core.js"></script>

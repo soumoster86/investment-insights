@@ -14,8 +14,9 @@ https://investment-insight.netlify.app
 - [Chart.js](https://www.chartjs.org/) (via CDN) for calculator and IPO charts
 - TradingView embedded widgets for the live ticker on the home and US stocks pages
 - [Formspree](https://formspree.io/) for the contact form submission
-- Clearbit Logo API and local image files for company/coin logos
-- No bundler required for deploy; optional Node scripts for shell sync / logo tooling
+- Local coin logos + initials avatars for stocks/funds (no third-party logo API)
+- SEO: per-page meta descriptions, Open Graph, `robots.txt`, `sitemap.xml`
+- No bundler required for deploy; optional Node scripts for shell sync / SEO / logo tooling
 
 ## Project structure
 
@@ -24,18 +25,21 @@ https://investment-insight.netlify.app
 ├── index.html … contact.html   Page content (shared header/footer injected)
 ├── style.css                   All shared + component styles (single source of truth)
 ├── nav.js                      Dark mode, mobile nav, active link, back-to-top
-├── recommendations.js          Stocks / MF / Crypto cards + search (+ top picks API)
+├── recommendations.js          Cards + search/sort/filter (+ top picks API)
 ├── js/
 │   ├── calc-core.js            Pure calculator math (SIP, SWP, FD, NPS, goal, bond)
 │   ├── storage.js              lastCalculator + investmentGoal localStorage
 │   └── dashboard.js            Home: goal card, last calc, top picks, FX, metals
+├── robots.txt / sitemap.xml    Search engine discovery
 ├── logo.png / favicon.*        Compressed brand assets
 ├── partials/
-│   ├── header.html             Canonical site header + primary nav
+│   ├── header.html             Canonical site header + skip link + primary nav
 │   └── footer.html             Canonical footer + back-to-top button
 ├── tests/                      Jest unit tests for calc-core + storage
 └── scripts/
     ├── sync-shell.js           Inject partials into every *.html page
+    ├── apply-seo.js            Meta / Open Graph / canonical tags
+    ├── apply-a11y-main.js      Ensure main#main-content landmarks
     └── optimize-logo.py        Compress logo + generate favicons
 ```
 
@@ -45,7 +49,7 @@ https://investment-insight.netlify.app
 
 **`nav.js`** is loaded with `defer` on every page and is written defensively (every element lookup is null-checked). It handles dark mode, the mobile drawer, active-link highlighting, back-to-top, and `--header-h` sync for floating menus.
 
-**`recommendations.js`** is loaded on Stocks, Mutual Funds, Cryptocurrencies, and Home (for top picks). It renders cards from data arrays, wires search, and exposes `window.IIReco.topPicks()`.
+**`recommendations.js`** is loaded on Stocks, Mutual Funds, Cryptocurrencies, and Home (for top picks). It renders cards from data arrays, wires search/sort/filter toolbars, uses local logos or initials avatars, and exposes `window.IIReco.topPicks()`.
 
 **`js/calc-core.js`** holds pure math used by the calculators and unit tests (`window.IICalc` / `require`). **`js/storage.js`** writes `lastCalculator` and `investmentGoal` snapshots. **`js/dashboard.js`** hydrates the home dashboard from that storage.
 
@@ -63,17 +67,17 @@ The Stocks, Mutual Funds, and Cryptocurrency recommendation cards are generated 
 
 ```js
 { name: "TCS", sector: "IT", desc: "India’s IT giant…", rating: 4,
-  logo: "https://logo.clearbit.com/tcs.com",
   url: "https://finance.yahoo.com/quote/TCS.NS" }
+// optional: logo: "my-logo.png"  — otherwise an initials avatar is used
 ```
 
-`rating` is an integer from 0 to 5 (rendered as filled/hollow stars). The matching page must contain the container and search input the script targets:
+`rating` is an integer from 0 to 5 (rendered as filled/hollow stars). The matching page must contain the containers the script targets:
 
-| Page | List container id | Search input id |
-| --- | --- | --- |
-| stocks.html | `stock-list` | `stock-search` |
-| mutualfunds.html | `mf-list` | `mf-search` |
-| cryptocurrencies.html | `crypto-list` | `crypto-search` |
+| Page | List id | Search id | Toolbar id | Filters |
+| --- | --- | --- | --- | --- |
+| stocks.html | `stock-list` | `stock-search` | `stock-toolbar` | Sector + sort |
+| mutualfunds.html | `mf-list` | `mf-search` | `mf-toolbar` | Type, risk + sort |
+| cryptocurrencies.html | `crypto-list` | `crypto-search` | `crypto-toolbar` | Category, risk + sort |
 
 Each of those pages includes `<script src="recommendations.js" defer></script>` before `nav.js`.
 
@@ -95,8 +99,11 @@ Then open `http://localhost:8000` in a browser.
 
 ```bash
 npm run sync-shell      # re-inject header/footer partials into all pages
+npm run apply-seo       # refresh meta / OG / canonical tags
+npm run apply-a11y      # ensure main#main-content landmarks
 npm run optimize-logo   # recompress logo.png + regenerate favicons (needs Pillow)
 npm test                # Jest (install devDependencies first)
+npm run verify-phase3   # quick SEO / a11y / toolbar smoke checks
 ```
 
 ## Deployment
@@ -120,7 +127,7 @@ Ensure these ship with the HTML:
 
 ## Possible next steps
 
-- Add sort/filter controls (by rating, sector, or risk) to recommendation lists.
-- Proxy paid APIs behind serverless functions; rotate any keys that were ever exposed client-side (stocks ticker / metals).
-- SEO: meta descriptions, Open Graph tags, `sitemap.xml`.
+- Proxy paid APIs behind serverless functions for live metals/market data.
+- Rotate any API keys that were ever committed historically.
 - Move remaining page UI (charts/render) fully out of inline HTML into `js/`.
+- Structured data (FAQ/HowTo) for calculators; optional PWA offline calculators.

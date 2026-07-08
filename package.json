@@ -5,7 +5,10 @@
   "scripts": {
     "test": "jest",
     "sync-shell": "node scripts/sync-shell.js",
-    "optimize-logo": "python scripts/optimize-logo.py"
+    "optimize-logo": "python scripts/optimize-logo.py",
+    "apply-seo": "node scripts/apply-seo.js",
+    "apply-a11y": "node scripts/apply-a11y-main.js",
+    "verify-phase3": "node scripts/verify-phase3.js"
   },
   "devDependencies": {
     "jest": "^29.6.1",
