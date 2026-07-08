@@ -22,7 +22,10 @@ https://investment-insight.netlify.app
 
 ```
 .
-├── index.html … contact.html   Page content (shared header/footer injected)
+├── index.html                  Modern home (hero, KPI, topics)
+├── learn.html                  Learn hub (all educational topics)
+├── calculators.html            Calculators hub (SIP, SWP, FD, NPS, goal, bond)
+├── stocks.html … contact.html  Topic/tool pages (shared header/footer)
 ├── style.css                   All shared + component styles (single source of truth)
 ├── nav.js                      Dark mode, mobile nav, active link, back-to-top
 ├── recommendations.js          Cards + search/sort/filter (+ top picks API)
@@ -58,7 +61,7 @@ https://investment-insight.netlify.app
 
 **`js/calc-core.js`** holds pure math used by the calculators and unit tests (`window.IICalc` / `require`). **`js/storage.js`** writes `lastCalculator` and `investmentGoal` snapshots. **`js/dashboard.js`** hydrates the home dashboard and fetches metals via the Netlify function. **`js/site-config.js`** holds public runtime config (analytics opt-in, endpoints). **`js/analytics.js`** loads Plausible only when enabled and when DNT/GPC is off.
 
-**`partials/header.html` / `partials/footer.html`** are the single source of truth for the site chrome. After editing either file, run:
+**`partials/header.html` / `partials/footer.html`** are the single source of truth for the site chrome. Primary nav is **Home · Learn ▾ · Calculators ▾ · Contact** (topic pages live under Learn; tools under Calculators). After editing either file, run:
 
 ```bash
 npm run sync-shell

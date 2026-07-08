@@ -62,17 +62,22 @@
       });
     });
 
-    // The dropdown toggle expands inline on touch instead of navigating.
-    var ddToggle = nav.querySelector(".dropdown-toggle");
-    var dd = nav.querySelector(".dropdown");
-    if (ddToggle && dd) {
+    // Dropdown toggles expand inline on touch/mobile instead of navigating.
+    // Support multiple dropdowns (Learn, Calculators).
+    nav.querySelectorAll(".dropdown").forEach(function (dd) {
+      var ddToggle = dd.querySelector(".dropdown-toggle");
+      if (!ddToggle) return;
       ddToggle.addEventListener("click", function (e) {
         if (window.matchMedia("(max-width: 820px)").matches) {
           e.preventDefault();
+          // Close sibling dropdowns so only one is open
+          nav.querySelectorAll(".dropdown.open").forEach(function (other) {
+            if (other !== dd) other.classList.remove("open");
+          });
           dd.classList.toggle("open");
         }
       });
-    }
+    });
 
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeNav();
@@ -82,13 +87,39 @@
   /* ---------- Active link highlighting ---------- */
   function initActiveLink() {
     var path = window.location.pathname;
+    var file = path.split("/").pop() || "index.html";
+    if (!file || file === "/") file = "index.html";
+
     document.querySelectorAll(".main-nav a").forEach(function (link) {
       link.classList.remove("active");
-      var href = link.getAttribute("href") || "";
-      if (href && !href.startsWith("#") && path.endsWith(href)) {
+      var href = (link.getAttribute("href") || "").split("#")[0];
+      if (href && (path.endsWith(href) || file === href)) {
         link.classList.add("active");
       }
     });
+
+    // Highlight Learn / Calculators parents when on child pages
+    var learnFiles = {
+      "learn.html": 1,
+      "stocks.html": 1,
+      "etf.html": 1,
+      "ipo.html": 1,
+      "intraday.html": 1,
+      "usstocks.html": 1,
+      "mutualfunds.html": 1,
+      "fixeddeposit.html": 1,
+      "nps.html": 1,
+      "bonds.html": 1,
+      "cryptocurrencies.html": 1
+    };
+    var calcFiles = {
+      "calculators.html": 1,
+      "investmentgoal.html": 1
+    };
+    var learnToggle = document.querySelector('.dropdown-toggle[href="learn.html"]');
+    var calcToggle = document.querySelector('.dropdown-toggle[href="calculators.html"]');
+    if (learnToggle && learnFiles[file]) learnToggle.classList.add("active");
+    if (calcToggle && calcFiles[file]) calcToggle.classList.add("active");
   }
 
   /* ---------- Back to top ---------- */

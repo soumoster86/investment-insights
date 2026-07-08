@@ -73,6 +73,16 @@ const PAGES = {
     title: "Contact | Investment Insights",
     description:
       "Contact Investment Insights with questions or feedback about the educational content and calculators."
+  },
+  "learn.html": {
+    title: "Learn Investing | Investment Insights",
+    description:
+      "Browse educational guides on stocks, mutual funds, FDs, NPS, bonds, ETFs, IPOs, US stocks, and crypto for Indian investors."
+  },
+  "calculators.html": {
+    title: "Investment Calculators | Investment Insights",
+    description:
+      "Free SIP, SWP, FD, NPS, goal planner, and bond yield calculators with transparent assumptions for educational use."
   }
 };
 
