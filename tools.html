@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EMI, PPF, RD & More Calculators | Investment Insights</title>
+<!-- BEGIN SEO -->
+  <meta name="description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for educational planning in India." />
+  <link rel="canonical" href="https://investment-insight.netlify.app/tools.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Investment Insights" />
+  <meta property="og:title" content="EMI, PPF, RD & More Calculators | Investment Insights" />
+  <meta property="og:description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for educational planning in India." />
+  <meta property="og:url" content="https://investment-insight.netlify.app/tools.html" />
+  <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="EMI, PPF, RD & More Calculators | Investment Insights" />
+  <meta name="twitter:description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for educational planning in India." />
+<!-- END SEO -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body class="page-hub">
+<!-- BEGIN SITE HEADER -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="brand">
+    <a href="index.html" class="brand-link">
+      <img src="logo.png" width="46" height="46" alt="" />
+      <h1>Investment Insights</h1>
+    </a>
+  </div>
+  <label class="dm-toggle" for="darkmode-toggle">
+    <input type="checkbox" id="darkmode-toggle" />
+    <span id="dm-label">Dark mode</span>
+  </label>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false">☰</button>
+  <nav class="main-nav" id="main-nav" aria-label="Primary">
+    <button type="button" class="nav-close" id="nav-close" aria-label="Close menu">×</button>
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <a href="learn.html" class="dropdown-toggle" aria-haspopup="true">Learn ▾</a>
+      <div class="dropdown-menu" role="menu">
+        <a href="learn.html" role="menuitem">All topics</a>
+        <a href="stocks.html" role="menuitem">Stocks</a>
+        <a href="etf.html" role="menuitem">ETFs</a>
+        <a href="ipo.html" role="menuitem">IPOs</a>
+        <a href="intraday.html" role="menuitem">Intraday</a>
+        <a href="usstocks.html" role="menuitem">US stocks</a>
+        <a href="mutualfunds.html" role="menuitem">Mutual funds</a>
+        <a href="fixeddeposit.html" role="menuitem">Fixed deposits</a>
+        <a href="nps.html" role="menuitem">NPS</a>
+        <a href="bonds.html" role="menuitem">Bonds</a>
+        <a href="cryptocurrencies.html" role="menuitem">Crypto</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="calculators.html" class="dropdown-toggle" aria-haspopup="true">Calculators ▾</a>
+      <div class="dropdown-menu" role="menu">
+        <a href="calculators.html" role="menuitem">All calculators</a>
+        <a href="mutualfunds.html#sipcalc-mutual" role="menuitem">SIP</a>
+        <a href="mutualfunds.html#swpcalc-mutual" role="menuitem">SWP</a>
+        <a href="fixeddeposit.html" role="menuitem">FD maturity</a>
+        <a href="nps.html" role="menuitem">NPS</a>
+        <a href="investmentgoal.html" role="menuitem">Goal planner</a>
+        <a href="bonds.html" role="menuitem">Bond yield</a>
+        <a href="tools.html" role="menuitem">EMI · PPF · RD · more</a>
+      </div>
+    </div>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<!-- END SITE HEADER -->
+
+  <nav class="floating-toc" id="floating-toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul>
+      <li><a href="#emi">EMI</a></li>
+      <li><a href="#lumpsum">Lumpsum</a></li>
+      <li><a href="#cagr">CAGR</a></li>
+      <li><a href="#inflation">Inflation</a></li>
+      <li><a href="#target-sip">Target SIP</a></li>
+      <li><a href="#ppf">PPF</a></li>
+      <li><a href="#rd">RD</a></li>
+    </ul>
+  </nav>
+
+  <main  id="main-content" class="layout-wide" tabindex="-1">
+    <section class="hub-hero hub-hero-calc">
+      <p class="eyebrow">More calculators</p>
+      <h1 class="hub-title">EMI, PPF, RD, inflation &amp; more</h1>
+      <p class="hub-lead">
+        Everyday planning tools for Indian investors and borrowers. Educational estimates only —
+        not loan offers, tax advice, or guaranteed returns.
+      </p>
+      <div class="hub-hero-actions">
+        <a class="btn secondary" href="calculators.html">All calculators</a>
+        <a class="btn secondary" href="mutualfunds.html#sipcalc-mutual">SIP calculator</a>
+      </div>
+    </section>
+
+    <div class="tools-jump calc-grid" aria-label="Jump to tool">
+      <a class="calc-chip" href="#emi">EMI</a>
+      <a class="calc-chip" href="#lumpsum">Lumpsum</a>
+      <a class="calc-chip" href="#cagr">CAGR</a>
+      <a class="calc-chip" href="#inflation">Inflation</a>
+      <a class="calc-chip" href="#target-sip">Target SIP</a>
+      <a class="calc-chip" href="#ppf">PPF</a>
+      <a class="calc-chip" href="#rd">RD</a>
+    </div>
+
+    <!-- EMI -->
+    <section id="emi" class="tool-section">
+      <h2>Loan EMI calculator</h2>
+      <p class="tool-intro">Estimate monthly EMI for home, car, or personal loans (reducing-balance model).</p>
+      <form id="emi-form" class="tool-form" data-result="emi-result">
+        <div class="tool-fields">
+          <label>Loan amount (₹)
+            <input name="principal" type="number" min="1000" step="1000" required placeholder="e.g. 5000000" value="5000000" />
+          </label>
+          <label>Interest rate (% p.a.)
+            <input name="rate" type="number" min="0" step="0.05" required placeholder="e.g. 8.5" value="8.5" />
+          </label>
+          <label>Tenure (years)
+            <input name="years" type="number" min="0" max="40" required value="20" />
+          </label>
+          <label>Extra months
+            <input name="months" type="number" min="0" max="11" value="0" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate EMI</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="emi-result" class="calc-result-panel" hidden></div>
+    </section>
+
+    <!-- Lumpsum -->
+    <section id="lumpsum" class="tool-section">
+      <h2>Lumpsum growth calculator</h2>
+      <p class="tool-intro">Future value of a one-time investment at an assumed annual return.</p>
+      <form id="lumpsum-form" class="tool-form" data-result="lumpsum-result">
+        <div class="tool-fields">
+          <label>Investment (₹)
+            <input name="principal" type="number" min="1" step="1000" required value="100000" />
+          </label>
+          <label>Expected return (% p.a.)
+            <input name="rate" type="number" min="0" step="0.1" required value="12" />
+          </label>
+          <label>Years
+            <input name="years" type="number" min="1" step="1" required value="10" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="lumpsum-result" class="calc-result-panel" hidden></div>
+    </section>
+
+    <!-- CAGR -->
+    <section id="cagr" class="tool-section">
+      <h2>CAGR calculator</h2>
+      <p class="tool-intro">Find the compound annual growth rate between a start and end value.</p>
+      <form id="cagr-form" class="tool-form" data-result="cagr-result">
+        <div class="tool-fields">
+          <label>Start value (₹)
+            <input name="present" type="number" min="1" step="any" required value="100000" />
+          </label>
+          <label>End value (₹)
+            <input name="future" type="number" min="1" step="any" required value="250000" />
+          </label>
+          <label>Years
+            <input name="years" type="number" min="0.1" step="0.1" required value="5" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate CAGR</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="cagr-result" class="calc-result-panel" hidden></div>
+    </section>
+
+    <!-- Inflation -->
+    <section id="inflation" class="tool-section">
+      <h2>Inflation calculator</h2>
+      <p class="tool-intro">See how inflation raises future costs and erodes purchasing power.</p>
+      <form id="inflation-form" class="tool-form" data-result="inflation-result">
+        <div class="tool-fields">
+          <label>Amount today (₹)
+            <input name="amount" type="number" min="1" step="any" required value="100000" />
+          </label>
+          <label>Inflation (% p.a.)
+            <input name="rate" type="number" min="0" step="0.1" required value="6" />
+          </label>
+          <label>Years
+            <input name="years" type="number" min="1" step="1" required value="15" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="inflation-result" class="calc-result-panel" hidden></div>
+    </section>
+
+    <!-- Target SIP -->
+    <section id="target-sip" class="tool-section">
+      <h2>Target corpus → monthly SIP</h2>
+      <p class="tool-intro">Reverse SIP: how much to invest monthly to aim for a future goal amount.</p>
+      <form id="target-sip-form" class="tool-form" data-result="target-sip-result">
+        <div class="tool-fields">
+          <label>Target corpus (₹)
+            <input name="goal" type="number" min="1" step="1000" required value="10000000" />
+          </label>
+          <label>Expected return (% p.a.)
+            <input name="rate" type="number" min="0" step="0.1" required value="12" />
+          </label>
+          <label>Years
+            <input name="years" type="number" min="1" step="1" required value="15" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate SIP</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="target-sip-result" class="calc-result-panel" hidden></div>
+    </section>
+
+    <!-- PPF -->
+    <section id="ppf" class="tool-section">
+      <h2>PPF calculator (simplified)</h2>
+      <p class="tool-intro">Educational model of annual PPF-style deposits with yearly compounding. Official rates and rules change — verify before investing.</p>
+      <form id="ppf-form" class="tool-form" data-result="ppf-result">
+        <div class="tool-fields">
+          <label>Annual deposit (₹)
+            <input name="deposit" type="number" min="500" max="150000" step="500" required value="150000" />
+          </label>
+          <label>Interest rate (% p.a.)
+            <input name="rate" type="number" min="0" step="0.1" required value="7.1" />
+          </label>
+          <label>Years
+            <input name="years" type="number" min="1" max="50" required value="15" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate PPF</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="ppf-result" class="calc-result-panel" hidden></div>
+    </section>
+
+    <!-- RD -->
+    <section id="rd" class="tool-section">
+      <h2>Recurring deposit (RD) calculator</h2>
+      <p class="tool-intro">Monthly RD deposits with a simplified monthly compounding model.</p>
+      <form id="rd-form" class="tool-form" data-result="rd-result">
+        <div class="tool-fields">
+          <label>Monthly deposit (₹)
+            <input name="deposit" type="number" min="100" step="100" required value="5000" />
+          </label>
+          <label>Interest rate (% p.a.)
+            <input name="rate" type="number" min="0" step="0.05" required value="6.5" />
+          </label>
+          <label>Tenure (months)
+            <input name="months" type="number" min="6" max="120" required value="36" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate RD</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="rd-result" class="calc-result-panel" hidden></div>
+    </section>
+
+    <section class="trust-strip" aria-label="Disclaimer">
+      <div class="trust-item">
+        <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg></span>
+        <div>
+          <strong>Educational only</strong>
+          <p>Not a loan quote or advice</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6"/></svg></span>
+        <div>
+          <strong>Simplified models</strong>
+          <p>Fees &amp; tax may differ</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div>
+          <strong>Runs in your browser</strong>
+          <p>Inputs stay on your device</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span>
+        <div>
+          <strong>Always free</strong>
+          <p>No signup</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- BEGIN SITE FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-brand">💡 Investment Insights</p>
+    <p>&copy; 2026 Investment Insights. All rights reserved.</p>
+    <p class="footer-disclaimer">Educational content only — not financial advice. Not a SEBI-registered advisor. Verify figures independently before investing.</p>
+    <p class="footer-reviewed">Content last reviewed: <time datetime="2026-07-08">2026-07-08</time></p>
+  </div>
+</footer>
+<button id="back-to-top" aria-label="Back to top" type="button">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 4L12 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 10L12 4L18 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>Top</span>
+</button>
+<!-- END SITE FOOTER -->
+
+  <script>
+  document.querySelectorAll(".floating-toc a, .tools-jump a").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var id = this.getAttribute("href");
+      if (!id || id.charAt(0) !== "#") return;
+      var target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 70, behavior: "smooth" });
+      }
+    });
+  });
+  </script>
+  <script src="js/site-config.js"></script>
+  <script src="js/calc-core.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/tools-calcs.js" defer></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="nav.js" defer></script>
+</body>
+</html>

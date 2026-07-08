@@ -114,7 +114,8 @@
     };
     var calcFiles = {
       "calculators.html": 1,
-      "investmentgoal.html": 1
+      "investmentgoal.html": 1,
+      "tools.html": 1
     };
     var learnToggle = document.querySelector('.dropdown-toggle[href="learn.html"]');
     var calcToggle = document.querySelector('.dropdown-toggle[href="calculators.html"]');

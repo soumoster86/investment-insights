@@ -83,6 +83,11 @@ const PAGES = {
     title: "Investment Calculators | Investment Insights",
     description:
       "Free SIP, SWP, FD, NPS, goal planner, and bond yield calculators with transparent assumptions for educational use."
+  },
+  "tools.html": {
+    title: "EMI, PPF, RD & More Calculators | Investment Insights",
+    description:
+      "Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for educational planning in India."
   }
 };
 

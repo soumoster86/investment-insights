@@ -268,6 +268,195 @@
     return Number(amount) * Number(rate);
   }
 
+  /**
+   * Loan EMI (reducing balance).
+   * principal, annualRatePct, tenureYears (or pass months via tenureMonths).
+   */
+  function emi(principal, annualRatePct, tenureYears, tenureMonths) {
+    principal = Number(principal);
+    annualRatePct = Number(annualRatePct);
+    var years = parseInt(tenureYears, 10) || 0;
+    var monthsExtra = parseInt(tenureMonths, 10) || 0;
+    var n = years * 12 + monthsExtra;
+    if (!(principal > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(n > 0)) {
+      return { error: "Invalid EMI inputs" };
+    }
+    var r = annualRatePct / 100 / 12;
+    var monthly;
+    if (r === 0) monthly = principal / n;
+    else monthly = (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    var totalPayment = monthly * n;
+    var totalInterest = totalPayment - principal;
+    // Year-wise outstanding (end of each full year)
+    var schedule = [];
+    var bal = principal;
+    var m;
+    for (m = 1; m <= n; m++) {
+      var interest = bal * r;
+      var principalPart = monthly - interest;
+      bal = Math.max(0, bal - principalPart);
+      if (m % 12 === 0 || m === n) {
+        schedule.push({
+          period: m === n && m % 12 !== 0 ? "Month " + m : "Year " + Math.ceil(m / 12),
+          paid: monthly * m,
+          balance: bal
+        });
+      }
+    }
+    return {
+      monthlyEmi: monthly,
+      totalPayment: totalPayment,
+      totalInterest: totalInterest,
+      principal: principal,
+      months: n,
+      schedule: schedule
+    };
+  }
+
+  /** One-time lumpsum future value at annual rate, compounded yearly. */
+  function lumpsum(principal, annualRatePct, years) {
+    principal = Number(principal);
+    annualRatePct = Number(annualRatePct);
+    years = Number(years);
+    if (!(principal > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(years > 0)) {
+      return { error: "Invalid lumpsum inputs" };
+    }
+    var r = annualRatePct / 100;
+    var fv = principal * Math.pow(1 + r, years);
+    var gain = fv - principal;
+    var yearly = [];
+    var y;
+    for (y = 1; y <= Math.ceil(years); y++) {
+      var t = Math.min(y, years);
+      yearly.push({ year: y, value: principal * Math.pow(1 + r, t) });
+    }
+    return {
+      futureValue: fv,
+      gain: gain,
+      principal: principal,
+      years: years,
+      cagr: annualRatePct,
+      yearly: yearly
+    };
+  }
+
+  /** CAGR from present and future values over years. */
+  function cagr(presentValue, futureValue, years) {
+    presentValue = Number(presentValue);
+    futureValue = Number(futureValue);
+    years = Number(years);
+    if (!(presentValue > 0) || !(futureValue > 0) || !(years > 0)) {
+      return { error: "Invalid CAGR inputs" };
+    }
+    var rate = (Math.pow(futureValue / presentValue, 1 / years) - 1) * 100;
+    return { cagr: rate, presentValue: presentValue, futureValue: futureValue, years: years };
+  }
+
+  /**
+   * Inflation impact.
+   * futureCost of today's amount; realValue of a future nominal amount.
+   */
+  function inflation(amount, inflationPct, years) {
+    amount = Number(amount);
+    inflationPct = Number(inflationPct);
+    years = Number(years);
+    if (!(amount > 0) || isNaN(inflationPct) || inflationPct < 0 || !(years > 0)) {
+      return { error: "Invalid inflation inputs" };
+    }
+    var factor = Math.pow(1 + inflationPct / 100, years);
+    return {
+      amount: amount,
+      years: years,
+      inflationPct: inflationPct,
+      futureCost: amount * factor,
+      realValue: amount / factor,
+      purchasingPowerLossPct: (1 - 1 / factor) * 100
+    };
+  }
+
+  /**
+   * PPF-style annual deposit (simplified educational model).
+   * Deposit assumed at start of each year; interest compounded yearly.
+   * Default horizon often 15 years in India; rate is user-input.
+   */
+  function ppf(annualDeposit, annualRatePct, years) {
+    annualDeposit = Number(annualDeposit);
+    annualRatePct = Number(annualRatePct);
+    years = parseInt(years, 10);
+    if (!(annualDeposit > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(years > 0)) {
+      return { error: "Invalid PPF inputs" };
+    }
+    var r = annualRatePct / 100;
+    var balance = 0;
+    var invested = 0;
+    var yearly = [];
+    var y;
+    for (y = 1; y <= years; y++) {
+      balance = (balance + annualDeposit) * (1 + r);
+      invested += annualDeposit;
+      yearly.push({ year: y, invested: invested, balance: balance });
+    }
+    return {
+      maturity: balance,
+      invested: invested,
+      interest: balance - invested,
+      years: years,
+      yearly: yearly
+    };
+  }
+
+  /**
+   * Bank RD: monthly deposit for `months`, interest compounded quarterly (common in India).
+   * Simplified: monthly rate from annual, compound monthly (educational approximation).
+   */
+  function rd(monthlyDeposit, annualRatePct, months) {
+    monthlyDeposit = Number(monthlyDeposit);
+    annualRatePct = Number(annualRatePct);
+    months = parseInt(months, 10);
+    if (!(monthlyDeposit > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(months > 0)) {
+      return { error: "Invalid RD inputs" };
+    }
+    var r = annualRatePct / 100 / 12;
+    var balance = 0;
+    var invested = 0;
+    var m;
+    for (m = 1; m <= months; m++) {
+      balance = (balance + monthlyDeposit) * (1 + r);
+      invested += monthlyDeposit;
+    }
+    return {
+      maturity: balance,
+      invested: invested,
+      interest: balance - invested,
+      months: months,
+      monthlyDeposit: monthlyDeposit
+    };
+  }
+
+  /**
+   * Target corpus reverse SIP: monthly needed to reach goal.
+   * FV of annuity-due: P * (((1+r)^n - 1) / r) * (1+r) = goal
+   */
+  function sipForGoal(goalAmount, annualRatePct, years) {
+    goalAmount = Number(goalAmount);
+    annualRatePct = Number(annualRatePct);
+    years = parseInt(years, 10);
+    if (!(goalAmount > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(years > 0)) {
+      return { error: "Invalid target-SIP inputs" };
+    }
+    var r = annualRatePct / 100 / 12;
+    var n = years * 12;
+    var monthly;
+    if (r === 0) monthly = goalAmount / n;
+    else monthly = goalAmount / ((((Math.pow(1 + r, n) - 1) / r) * (1 + r)));
+    return {
+      monthlySip: monthly,
+      goalAmount: goalAmount,
+      years: years,
+      totalInvested: monthly * n
+    };
+  }
+
   var IICalc = {
     round: round,
     sip: sip,
@@ -278,7 +467,14 @@
     goalSip: goalSip,
     bondYield: bondYield,
     validateAmount: validateAmount,
-    convertWithRate: convertWithRate
+    convertWithRate: convertWithRate,
+    emi: emi,
+    lumpsum: lumpsum,
+    cagr: cagr,
+    inflation: inflation,
+    ppf: ppf,
+    rd: rd,
+    sipForGoal: sipForGoal
   };
 
   if (typeof module !== "undefined" && module.exports) {
