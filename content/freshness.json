@@ -1,0 +1,16 @@
+{
+  "lastReviewed": "2026-07-08",
+  "reviewedBy": "site-maintainer",
+  "scope": "Educational copy, recommendation lists, and calculator assumptions",
+  "nextReviewHint": "Re-check recommendation narratives and sample figures quarterly",
+  "changelog": [
+    {
+      "date": "2026-07-08",
+      "note": "Phase 4 initial review baseline"
+    },
+    {
+      "date": "2026-07-08",
+      "note": "Phase 4: metals proxy, freshness workflow, analytics opt-in, structured data"
+    }
+  ]
+}

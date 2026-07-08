@@ -185,7 +185,39 @@
       });
   }
 
-  // Metals: demo rates only (no client-side API keys)
+  function applyMetalDemo(reason) {
+    var gold1gEl = document.getElementById("gold1g");
+    var gold10gEl = document.getElementById("gold10g");
+    var silver1gEl = document.getElementById("silver1g");
+    var silver10gEl = document.getElementById("silver10g");
+    var updateEl = document.getElementById("metal-rate-update");
+    if (!gold1gEl) return;
+    gold1gEl.textContent = "₹9,134";
+    gold10gEl.textContent = "₹91,337";
+    silver1gEl.textContent = "₹100.54";
+    silver10gEl.textContent = "₹1,005.40";
+    if (updateEl) {
+      updateEl.textContent =
+        reason ||
+        "Demo rates (educational). Live prices need GOLDAPI_KEY on the server.";
+    }
+  }
+
+  function formatMetalInr(n, digits) {
+    if (n == null || isNaN(n)) return "—";
+    return (
+      "₹" +
+      Number(n).toLocaleString("en-IN", {
+        maximumFractionDigits: digits == null ? 0 : digits,
+        minimumFractionDigits: digits == null ? 0 : digits
+      })
+    );
+  }
+
+  /**
+   * Live metals via Netlify Function (/.netlify/functions/metals).
+   * Key stays server-side. Falls back to demo rates offline / without key.
+   */
   function fetchMetalRates() {
     var gold1gEl = document.getElementById("gold1g");
     var gold10gEl = document.getElementById("gold10g");
@@ -194,14 +226,48 @@
     var updateEl = document.getElementById("metal-rate-update");
     if (!gold1gEl) return;
 
-    // Placeholder educational rates — replace via serverless proxy later
-    gold1gEl.textContent = "₹9,134";
-    gold10gEl.textContent = "₹91,337";
-    silver1gEl.textContent = "₹100.54";
-    silver10gEl.textContent = "₹1,005.40";
-    if (updateEl) {
-      updateEl.textContent = "Demo rates (educational). Live metals API requires a secure proxy.";
-    }
+    gold1gEl.textContent =
+      silver1gEl.textContent =
+      gold10gEl.textContent =
+      silver10gEl.textContent =
+        "Loading…";
+
+    var endpoint =
+      (window.IIConfig && window.IIConfig.metalsEndpoint) ||
+      "/.netlify/functions/metals";
+
+    fetch(endpoint, { headers: { Accept: "application/json" } })
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var g = Number(data.goldPerGram);
+        var s = Number(data.silverPerGram);
+        if (!(g > 0) || !(s > 0)) throw new Error("invalid payload");
+
+        gold1gEl.textContent = formatMetalInr(g, 0);
+        gold10gEl.textContent = formatMetalInr(g * 10, 0);
+        silver1gEl.textContent = formatMetalInr(s, 2);
+        silver10gEl.textContent = formatMetalInr(s * 10, 2);
+
+        if (updateEl) {
+          var when = data.updatedAt
+            ? new Date(data.updatedAt).toLocaleString()
+            : new Date().toLocaleString();
+          if (data.demo) {
+            updateEl.textContent =
+              (data.note || "Demo rates (educational).") + " · " + when;
+          } else {
+            updateEl.textContent = "Live (server proxy) · Updated: " + when;
+          }
+        }
+      })
+      .catch(function () {
+        applyMetalDemo(
+          "Could not reach metals proxy — showing educational demo rates."
+        );
+      });
   }
 
   document.addEventListener("DOMContentLoaded", function () {

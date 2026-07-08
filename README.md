@@ -31,15 +31,20 @@ https://investment-insight.netlify.app
 │   ├── storage.js              lastCalculator + investmentGoal localStorage
 │   └── dashboard.js            Home: goal card, last calc, top picks, FX, metals
 ├── robots.txt / sitemap.xml    Search engine discovery
+├── content/freshness.json      Content review date + changelog
+├── netlify.toml                Headers, functions dir
+├── netlify/functions/
+│   └── metals.js               Gold/silver proxy (GOLDAPI_KEY server-side)
 ├── logo.png / favicon.*        Compressed brand assets
 ├── partials/
 │   ├── header.html             Canonical site header + skip link + primary nav
-│   └── footer.html             Canonical footer + back-to-top button
+│   └── footer.html             Canonical footer + review date + back-to-top
 ├── tests/                      Jest unit tests for calc-core + storage
 └── scripts/
     ├── sync-shell.js           Inject partials into every *.html page
     ├── apply-seo.js            Meta / Open Graph / canonical tags
-    ├── apply-a11y-main.js      Ensure main#main-content landmarks
+    ├── apply-jsonld.js         Schema.org JSON-LD blocks
+    ├── bump-freshness.js       Update content review date
     └── optimize-logo.py        Compress logo + generate favicons
 ```
 
@@ -51,7 +56,7 @@ https://investment-insight.netlify.app
 
 **`recommendations.js`** is loaded on Stocks, Mutual Funds, Cryptocurrencies, and Home (for top picks). It renders cards from data arrays, wires search/sort/filter toolbars, uses local logos or initials avatars, and exposes `window.IIReco.topPicks()`.
 
-**`js/calc-core.js`** holds pure math used by the calculators and unit tests (`window.IICalc` / `require`). **`js/storage.js`** writes `lastCalculator` and `investmentGoal` snapshots. **`js/dashboard.js`** hydrates the home dashboard from that storage.
+**`js/calc-core.js`** holds pure math used by the calculators and unit tests (`window.IICalc` / `require`). **`js/storage.js`** writes `lastCalculator` and `investmentGoal` snapshots. **`js/dashboard.js`** hydrates the home dashboard and fetches metals via the Netlify function. **`js/site-config.js`** holds public runtime config (analytics opt-in, endpoints). **`js/analytics.js`** loads Plausible only when enabled and when DNT/GPC is off.
 
 **`partials/header.html` / `partials/footer.html`** are the single source of truth for the site chrome. After editing either file, run:
 
@@ -98,36 +103,74 @@ Then open `http://localhost:8000` in a browser.
 ### Optional tooling
 
 ```bash
-npm run sync-shell      # re-inject header/footer partials into all pages
-npm run apply-seo       # refresh meta / OG / canonical tags
-npm run apply-a11y      # ensure main#main-content landmarks
-npm run optimize-logo   # recompress logo.png + regenerate favicons (needs Pillow)
-npm test                # Jest (install devDependencies first)
-npm run verify-phase3   # quick SEO / a11y / toolbar smoke checks
+npm run sync-shell       # re-inject header/footer partials into all pages
+npm run apply-seo        # refresh meta / OG / canonical tags
+npm run apply-a11y       # ensure main#main-content landmarks
+npm run apply-jsonld     # Schema.org JSON-LD on key pages
+npm run bump-freshness   # set content review date (then sync-shell)
+npm run optimize-logo    # recompress logo.png + regenerate favicons (needs Pillow)
+npm test                 # Jest (install devDependencies first)
+npm run verify-phase3    # SEO / a11y / toolbar smoke checks
+npm run verify-phase4    # functions, freshness, runtime scripts
 ```
 
-## Deployment
+## Deployment (Netlify)
 
-The site is a static bundle, so deployment is a drag-and-drop (or Git-connected) publish on Netlify, GitHub Pages, Vercel, or any static host. No build command is required for Netlify; the publish directory is the project root.
+Git-connected Netlify deploy from `main` is the intended path. Config lives in `netlify.toml` (publish = site root, functions = `netlify/functions`).
+
+### Live metals prices
+
+1. Create a free/paid key at [GoldAPI](https://www.goldapi.io/) (or your provider).
+2. In Netlify → Site settings → Environment variables, set:
+   - `GOLDAPI_KEY` = your secret
+3. Redeploy. The home dashboard calls `/.netlify/functions/metals` (no key in the browser).
+4. Without the env var, the function returns **demo rates** so the UI still works.
+
+See `.env.example` for the variable names (local reference only — do not commit real `.env` files).
+
+### Privacy-friendly analytics (optional)
+
+In `js/site-config.js`:
+
+```js
+analytics: {
+  provider: "plausible",  // or "none"
+  domain: "investment-insight.netlify.app",
+  scriptUrl: "https://plausible.io/js/script.js"
+}
+```
+
+Analytics stay off by default. When enabled, loading respects **Do Not Track** and **Global Privacy Control**.
+
+### Content freshness workflow
+
+```bash
+npm run bump-freshness -- --note "Q3 recommendation review"
+# or: node scripts/bump-freshness.js 2026-10-01 --note "..."
+npm run sync-shell
+```
+
+This updates `content/freshness.json`, `js/site-config.js`, and the footer “Content last reviewed” line.
 
 Ensure these ship with the HTML:
 
-- `style.css`, `nav.js`, `recommendations.js`
-- Logo / favicon assets (`logo.png`, `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`)
-- Local coin/exchange images used on the crypto page
+- `style.css`, `nav.js`, `recommendations.js`, `js/*`
+- Logo / favicon assets
+- Local coin/exchange images
+- `netlify/functions` (for Netlify)
 
-`partials/` and `scripts/` are for maintainers only — they are not required at runtime.
+`partials/`, `scripts/`, and `content/` are for maintainers; `content/freshness.json` is the source of truth for review dates.
 
 ## Notes & disclaimers
 
-- All recommendations, calculator outputs, and sample charts are for **educational illustration only** and are not financial advice. Figures such as IPO listing gains use placeholder data.
-- Some pages embed third-party widgets and call third-party logo/data services; those depend on the external services being reachable.
-- Market data shown via embedded widgets may be delayed.
-- **API keys must never be committed** in page source. Prefer server-side proxies (e.g. Netlify Functions) for any authenticated market/metals APIs.
+- All recommendations, calculator outputs, and sample charts are for **educational illustration only** and are not financial advice. Not a SEBI-registered advisor.
+- Figures such as IPO listing gains use placeholder/sample data.
+- Market data via TradingView widgets may be delayed.
+- **API keys must never be committed** in page source — only Netlify env + serverless functions.
 
 ## Possible next steps
 
-- Proxy paid APIs behind serverless functions for live metals/market data.
 - Rotate any API keys that were ever committed historically.
-- Move remaining page UI (charts/render) fully out of inline HTML into `js/`.
-- Structured data (FAQ/HowTo) for calculators; optional PWA offline calculators.
+- Move remaining calculator UI fully out of inline HTML into `js/`.
+- Optional PWA / offline calculators.
+- Additional Netlify proxies (e.g. FX) if free-tier APIs become unreliable.

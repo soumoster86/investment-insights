@@ -461,7 +461,28 @@
     topPicks: topPicks
   };
 
+  function injectFreshnessNote(toolbarId) {
+    var host = document.getElementById(toolbarId);
+    if (!host) return;
+    var reviewed =
+      (window.IIConfig && window.IIConfig.contentReviewed) || null;
+    if (!reviewed) return;
+    var p = document.createElement("p");
+    p.className = "rec-freshness";
+    p.innerHTML =
+      "Educational picks only · content reviewed <time datetime=\"" +
+      esc(reviewed) +
+      "\">" +
+      esc(reviewed) +
+      "</time>";
+    host.parentNode.insertBefore(p, host);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    injectFreshnessNote("stock-toolbar");
+    injectFreshnessNote("mf-toolbar");
+    injectFreshnessNote("crypto-toolbar");
+
     setupList({
       listId: "stock-list",
       searchId: "stock-search",

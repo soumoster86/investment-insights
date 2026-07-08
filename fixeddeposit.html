@@ -22,7 +22,34 @@
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
+    <!-- BEGIN JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Calculate fixed deposit maturity",
+  "description": "Educational FD calculator for principal, rate, compounding, and tenure.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Enter principal and rate",
+      "text": "Fill in deposit amount and annual interest rate."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Choose compounding and tenure",
+      "text": "Select compounding frequency and years, months, or days."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "View maturity",
+      "text": "See maturity amount, interest earned, and year-wise breakdown."
+    }
+  ]
+}
+  </script>
+<!-- END JSON-LD -->
+</head>
 <body>
 
 <!-- Floating Table of Contents OUTSIDE HEADER -->
@@ -320,7 +347,8 @@
   <!-- BEGIN SITE FOOTER -->
 <footer>
   <p>&copy; 2026 Investment Insights. All rights reserved.</p>
-  <p class="footer-disclaimer">Educational content only — not financial advice. Verify figures independently before investing.</p>
+  <p class="footer-disclaimer">Educational content only — not financial advice. Not a SEBI-registered advisor. Verify figures independently before investing.</p>
+  <p class="footer-reviewed">Content last reviewed: <time datetime="2026-07-08">2026-07-08</time></p>
 </footer>
 <button id="back-to-top" aria-label="Back to top" type="button">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -543,6 +571,8 @@ function hideTooltip(el) {
 </script>
   <script src="js/calc-core.js"></script>
   <script src="js/storage.js"></script>
+  <script src="js/site-config.js"></script>
+  <script src="js/analytics.js" defer></script>
 
 
   <script src="nav.js" defer></script>

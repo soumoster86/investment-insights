@@ -1570,3 +1570,21 @@ body.dark-mode .rec-controls-wrap .rec-search-label { color: #b8c9ec !important;
   outline: 3px solid #ffcf5c;
   outline-offset: 4px;
 }
+
+/* Phase 4 — content freshness footer line */
+footer .footer-reviewed {
+  margin: 8px 0 0;
+  font-size: 0.88em;
+  color: #888;
+}
+body.dark-mode footer .footer-reviewed {
+  color: #8a9bb8 !important;
+}
+
+/* Subtle badge on recommendation toolbars */
+.rec-freshness {
+  font-size: 0.88em;
+  color: #5b6b82;
+  margin: 0 0 10px;
+}
+body.dark-mode .rec-freshness { color: #9fb4d6 !important; }

@@ -21,6 +21,21 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <!-- BEGIN JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Investment Insights",
+  "url": "https://investment-insight.netlify.app/contact.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Investment Insights",
+    "url": "https://investment-insight.netlify.app/"
+  }
+}
+  </script>
+<!-- END JSON-LD -->
 </head>
 <body>
 <!-- BEGIN SITE HEADER -->
@@ -83,7 +98,8 @@
 <!-- BEGIN SITE FOOTER -->
 <footer>
   <p>&copy; 2026 Investment Insights. All rights reserved.</p>
-  <p class="footer-disclaimer">Educational content only — not financial advice. Verify figures independently before investing.</p>
+  <p class="footer-disclaimer">Educational content only — not financial advice. Not a SEBI-registered advisor. Verify figures independently before investing.</p>
+  <p class="footer-reviewed">Content last reviewed: <time datetime="2026-07-08">2026-07-08</time></p>
 </footer>
 <button id="back-to-top" aria-label="Back to top" type="button">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -138,6 +154,9 @@
     });
   })();
   </script>
+  <script src="js/site-config.js"></script>
+  <script src="js/analytics.js" defer></script>
+
   <script src="nav.js" defer></script>
 </body>
 </html>

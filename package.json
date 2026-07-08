@@ -8,7 +8,11 @@
     "optimize-logo": "python scripts/optimize-logo.py",
     "apply-seo": "node scripts/apply-seo.js",
     "apply-a11y": "node scripts/apply-a11y-main.js",
-    "verify-phase3": "node scripts/verify-phase3.js"
+    "apply-jsonld": "node scripts/apply-jsonld.js",
+    "bump-freshness": "node scripts/bump-freshness.js",
+    "inject-runtime": "node scripts/inject-runtime-scripts.js",
+    "verify-phase3": "node scripts/verify-phase3.js",
+    "verify-phase4": "node scripts/verify-phase4.js"
   },
   "devDependencies": {
     "jest": "^29.6.1",

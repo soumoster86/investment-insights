@@ -22,7 +22,44 @@
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
+    <!-- BEGIN JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Estimate SIP returns with a step-up calculator",
+  "description": "Educational SIP calculator showing invested amount, projected corpus, and gains based on assumed returns.",
+  "totalTime": "PT2M",
+  "tool": {
+    "@type": "HowToTool",
+    "name": "SIP Calculator on Investment Insights"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Enter monthly investment",
+      "text": "Provide the amount you plan to invest each month."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Set expected return and duration",
+      "text": "Choose an assumed annual return rate and investment period in years."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Optional step-up",
+      "text": "Add an annual increase percentage if you plan to raise SIPs over time."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Review projection",
+      "text": "Read the estimated corpus and yearly breakdown. Results are illustrative, not advice."
+    }
+  ]
+}
+  </script>
+<!-- END JSON-LD -->
+</head>
 <body>
 
 <!-- Floating Table of Contents -->
@@ -233,7 +270,8 @@
 <!-- BEGIN SITE FOOTER -->
 <footer>
   <p>&copy; 2026 Investment Insights. All rights reserved.</p>
-  <p class="footer-disclaimer">Educational content only — not financial advice. Verify figures independently before investing.</p>
+  <p class="footer-disclaimer">Educational content only — not financial advice. Not a SEBI-registered advisor. Verify figures independently before investing.</p>
+  <p class="footer-reviewed">Content last reviewed: <time datetime="2026-07-08">2026-07-08</time></p>
 </footer>
 <button id="back-to-top" aria-label="Back to top" type="button">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -601,6 +639,8 @@ window.addEventListener('scroll', () => {
   <script src="recommendations.js" defer></script>
   <script src="js/calc-core.js"></script>
   <script src="js/storage.js"></script>
+  <script src="js/site-config.js"></script>
+  <script src="js/analytics.js" defer></script>
 
 
   <script src="nav.js" defer></script>

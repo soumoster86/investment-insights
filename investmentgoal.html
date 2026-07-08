@@ -22,7 +22,34 @@
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
+    <!-- BEGIN JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Plan an investment goal with SIP projections",
+  "description": "Goal planner estimating future corpus with inflation adjustment for educational use.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Choose routes and amounts",
+      "text": "Select investment routes and monthly contribution amounts."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Set return, inflation, duration",
+      "text": "Enter expected return, inflation assumption, and time horizon."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Review and save",
+      "text": "Inspect nominal and inflation-adjusted corpus; snapshot can appear on the home dashboard."
+    }
+  ]
+}
+  </script>
+<!-- END JSON-LD -->
+</head>
 <body>
     <!-- BEGIN SITE HEADER -->
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -205,7 +232,8 @@
   <!-- BEGIN SITE FOOTER -->
 <footer>
   <p>&copy; 2026 Investment Insights. All rights reserved.</p>
-  <p class="footer-disclaimer">Educational content only — not financial advice. Verify figures independently before investing.</p>
+  <p class="footer-disclaimer">Educational content only — not financial advice. Not a SEBI-registered advisor. Verify figures independently before investing.</p>
+  <p class="footer-reviewed">Content last reviewed: <time datetime="2026-07-08">2026-07-08</time></p>
 </footer>
 <button id="back-to-top" aria-label="Back to top" type="button">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -804,6 +832,8 @@ function enableSuggestPortfolio() {
 </script>
   <script src="js/calc-core.js"></script>
   <script src="js/storage.js"></script>
+  <script src="js/site-config.js"></script>
+  <script src="js/analytics.js" defer></script>
 
 
   <script src="nav.js" defer></script>
