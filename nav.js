@@ -101,6 +101,9 @@
     // Highlight Learn / Calculators parents when on child pages
     var learnFiles = {
       "learn.html": 1,
+      "basics.html": 1,
+      "risk-allocation.html": 1,
+      "ppf-tax-saving.html": 1,
       "stocks.html": 1,
       "etf.html": 1,
       "ipo.html": 1,

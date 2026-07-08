@@ -88,6 +88,21 @@ const PAGES = {
     title: "EMI, PPF, RD & More Calculators | Investment Insights",
     description:
       "Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for educational planning in India."
+  },
+  "basics.html": {
+    title: "How to Start Investing in India | Investment Insights",
+    description:
+      "Beginner guide: emergency fund, KYC, Demat basics, and setting up your first SIP in India. Educational only."
+  },
+  "risk-allocation.html": {
+    title: "Risk & Asset Allocation Basics | Investment Insights",
+    description:
+      "Learn investment risk types, diversification, sample allocations by time horizon, and rebalancing — educational framework only."
+  },
+  "ppf-tax-saving.html": {
+    title: "PPF & Tax-Saving Basics | Investment Insights",
+    description:
+      "Educational overview of PPF and Section 80C-style options in India. Not tax advice — verify with official sources."
   }
 };
 
