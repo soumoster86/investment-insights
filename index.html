@@ -51,10 +51,11 @@
     <div class="toc-title">On this page</div>
     <ul>
       <li><a href="#hero">Overview</a></li>
+      <li><a href="#learn-path">Start here</a></li>
       <li><a href="#kpi">Markets &amp; tools</a></li>
       <li><a href="#explore">Explore</a></li>
       <li><a href="#calculators">Calculators</a></li>
-      <li><a href="#learn">Learn</a></li>
+      <li><a href="#learn">Learn more</a></li>
     </ul>
   </nav>
 
@@ -123,20 +124,21 @@
           Learn stocks, mutual funds, FDs, NPS, bonds, and more — then run SIP, SWP, FD, and goal planners with transparent assumptions.
         </p>
         <div class="home-hero-actions">
-          <a class="btn" href="investmentgoal.html">Plan a goal</a>
-          <a class="btn secondary" href="mutualfunds.html#sipcalc-mutual">Try SIP calculator</a>
+          <a class="btn" href="basics.html">How to start</a>
+          <a class="btn secondary" href="investmentgoal.html">Plan a goal</a>
+          <a class="btn secondary" href="calculators.html">Calculators</a>
         </div>
       </div>
       <div class="home-hero-panel" aria-hidden="true">
         <div class="hero-stat">
           <span class="hero-stat-label">Tools</span>
-          <span class="hero-stat-value">6+</span>
+          <span class="hero-stat-value">12+</span>
           <span class="hero-stat-hint">Calculators</span>
         </div>
         <div class="hero-stat">
           <span class="hero-stat-label">Topics</span>
-          <span class="hero-stat-value">10+</span>
-          <span class="hero-stat-hint">Asset classes</span>
+          <span class="hero-stat-value">13+</span>
+          <span class="hero-stat-hint">Guides</span>
         </div>
         <div class="hero-stat">
           <span class="hero-stat-label">Cost</span>
@@ -144,6 +146,50 @@
           <span class="hero-stat-hint">Always free</span>
         </div>
       </div>
+    </section>
+
+    <!-- Continuity with Learn-1 beginner path -->
+    <section id="learn-path" class="home-section learn-path-section">
+      <div class="section-heading">
+        <h2>New to investing? Follow this path</h2>
+        <p>Same “Start here” sequence as on the <a href="learn.html">Learn</a> hub — then explore products and tools.</p>
+      </div>
+      <ol class="learn-path">
+        <li class="learn-path-step">
+          <a href="basics.html" class="learn-path-card">
+            <span class="learn-path-num">1</span>
+            <span class="learn-path-body">
+              <strong>How to start</strong>
+              <span>KYC, Demat basics, emergency fund, first SIP</span>
+            </span>
+            <span class="learn-path-go" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li class="learn-path-step">
+          <a href="risk-allocation.html" class="learn-path-card">
+            <span class="learn-path-num">2</span>
+            <span class="learn-path-body">
+              <strong>Risk &amp; allocation</strong>
+              <span>Diversify, match assets to time horizon</span>
+            </span>
+            <span class="learn-path-go" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li class="learn-path-step">
+          <a href="ppf-tax-saving.html" class="learn-path-card">
+            <span class="learn-path-num">3</span>
+            <span class="learn-path-body">
+              <strong>PPF &amp; tax-saving basics</strong>
+              <span>Long-term savings sleeve (not tax advice)</span>
+            </span>
+            <span class="learn-path-go" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ol>
+      <p class="learn-path-footer">
+        <a class="btn btn-sm secondary" href="learn.html">All Learn topics</a>
+        <a class="btn btn-sm" href="mutualfunds.html#sipcalc-mutual">Try SIP calculator</a>
+      </p>
     </section>
 
     <!-- B: KPI strip -->
@@ -448,7 +494,7 @@
     });
   });
   window.addEventListener('scroll', function () {
-    var sections = ['hero', 'kpi', 'explore', 'calculators', 'learn'];
+    var sections = ['hero', 'learn-path', 'kpi', 'explore', 'calculators', 'learn'];
     var current = '';
     for (var i = 0; i < sections.length; i++) {
       var sec = document.getElementById(sections[i]);
