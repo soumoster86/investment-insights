@@ -1394,6 +1394,17 @@ body.dark-mode .error-box {
   vertical-align: middle;
 }
 
+/* Contact form honeypot — hidden from humans, traps bots */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

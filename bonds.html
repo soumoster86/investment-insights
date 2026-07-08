@@ -425,13 +425,11 @@ function calculateBondYield(event) {
   const years = parseInt(document.getElementById('yearsToMaturity').value, 10);
   const price = parseFloat(document.getElementById('marketPrice').value);
 
-  // Calculate Annual Coupon
-  const annualCoupon = face * coupon / 100;
-  // Current Yield = Annual Coupon / Market Price
-  const currentYield = (annualCoupon / price) * 100;
-
-  // Yield to Maturity (approximate formula)
-  const ytm = ((annualCoupon + (face - price) / years) / ((face + price) / 2)) * 100;
+  const by = window.IICalc.bondYield(face, coupon, years, price);
+  if (by.error) { alert(by.error); return; }
+  const annualCoupon = by.annualCoupon;
+  const currentYield = by.currentYield;
+  const ytm = by.ytm;
 
   // Call the chart function here!
   drawBondChart(face, annualCoupon, years);
@@ -446,6 +444,10 @@ function calculateBondYield(event) {
     </div>`;
 
    document.getElementById('bondYieldFaq').style.display = 'block';
+
+  if (window.IIStorage) {
+    window.IIStorage.rememberCalculator("Bond Yield Calculator", "bonds.html");
+  }
 }
 
 function resetBondYield() {
@@ -492,6 +494,10 @@ window.addEventListener('scroll', () => {
   });
 });
 </script>
+  <script src="js/calc-core.js"></script>
+  <script src="js/storage.js"></script>
+
+
   <script src="nav.js" defer></script>
 </body>
 </html>

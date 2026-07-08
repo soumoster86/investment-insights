@@ -253,22 +253,19 @@ function calculateNPS() {
     return;
   }
 
-  // ✅ STEP 3: Convert values
-  const rate = rateInput / 100 / 12;
-  const annuityRate = annuityInput / 100;
-
-  const months = years * 12;
-
-  // ✅ STEP 4: Calculation
-  const corpus = monthly * ((Math.pow(1 + rate, months) - 1) / rate) * (1 + rate);
-
-  const invested = monthly * months;
-  const gain = corpus - invested;
-
-  const lumpSum = corpus * 0.6;
-  const annuityCorpus = corpus * 0.4;
-
-  const monthlyPension = (annuityCorpus * annuityRate) / 12;
+  // ✅ STEP 3–4: Calculation via shared IICalc
+  const result = window.IICalc.nps(monthly, rateInput, years, annuityInput);
+  if (result.error) {
+    document.getElementById("nps-result").innerHTML = `
+      <div class="error-box">⚠️ ${result.error}</div>`;
+    return;
+  }
+  const corpus = result.corpus;
+  const invested = result.invested;
+  const gain = result.gain;
+  const lumpSum = result.lumpSum;
+  const annuityCorpus = result.annuityCorpus;
+  const monthlyPension = result.monthlyPension;
 
   // ✅ STEP 5: Render FULL UI (restored)
   document.getElementById("nps-result").innerHTML = `
@@ -356,6 +353,10 @@ function calculateNPS() {
       ${generateInsight(monthlyPension)}
     </div>
   `;
+
+  if (window.IIStorage) {
+    window.IIStorage.rememberCalculator("NPS Calculator", "nps.html");
+  }
 }
 </script>
 
@@ -446,6 +447,10 @@ window.addEventListener('scroll', () => {
   });
 });
 </script>
+  <script src="js/calc-core.js"></script>
+  <script src="js/storage.js"></script>
+
+
   <script src="nav.js" defer></script>
 </body>
 </html>

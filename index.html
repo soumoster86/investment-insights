@@ -96,26 +96,29 @@
   </p>
 </div>
 
-      <div class="card">
+      <div class="card" id="goal-summary-card">
         <h3>🎯 Your Investment Goal</h3>
-        <p><span class="highlight">Monthly SIP:</span> ₹10,000</p>
-        <p><span class="highlight">Target Duration:</span> 15 years</p>
-        <p><span class="highlight">Expected Corpus:</span> ₹50,00,000</p>
-        <a href="investmentgoal.html" class="btn">View or Edit</a>
+        <div id="goal-summary-empty">
+          <p>No goal saved yet. Run the Investment Goal calculator to personalize this card.</p>
+        </div>
+        <div id="goal-summary-filled" style="display:none;">
+          <p><span class="highlight">Monthly SIP:</span> <span id="goal-summary-sip">—</span></p>
+          <p><span class="highlight">Target Duration:</span> <span id="goal-summary-years">—</span></p>
+          <p><span class="highlight">Expected Corpus:</span> <span id="goal-summary-corpus">—</span></p>
+        </div>
+        <a href="investmentgoal.html" class="btn" id="goal-summary-btn">Plan a Goal</a>
       </div>
 
      <div class="card">
      <h3>🧮 Last Calculator Used</h3>
-     <p id="last-used-info">You last used the <strong>FD Calculator</strong> on <em>July 1</em>.</p>
+     <p id="last-used-info">No calculator used recently.</p>
      <a href="#" id="last-used-link" class="btn">Reopen Calculator</a>
      </div>
 
-      <div class="card">
+      <div class="card" id="top-picks-card">
         <h3>⭐ Top Picks Today</h3>
-        <ul>
-          <li><strong>Parag Parikh Flexi Cap</strong> – 5★ Rated</li>
-          <li><strong>TCS</strong> – IT Sector Leader</li>
-          <li><strong>HDFC Bank</strong> – Consistent Performer</li>
+        <ul id="top-picks-list">
+          <li>Loading recommendations…</li>
         </ul>
         <a href="stocks.html" class="btn">Explore More</a>
       </div>
@@ -289,21 +292,7 @@
   
   
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-  const lastCalc = localStorage.getItem("lastCalculator");
-  if (lastCalc) {
-    const obj = JSON.parse(lastCalc);
-    document.getElementById('last-used-info').innerHTML =
-      `You last used the <strong>${obj.name}</strong> on <em>${obj.date}</em>.`;
-    document.getElementById('last-used-link').setAttribute("href", obj.link);
-    document.getElementById('last-used-link').style.display = "";
-  } else {
-    document.getElementById('last-used-info').innerHTML = `No calculator used recently.`;
-    document.getElementById('last-used-link').style.display = "none";
-  }
-});
-</script>
+
 
 <script>
   // Floating TOC scroll spy for active section highlighting
@@ -337,103 +326,13 @@
   });
 </script>
 
-<script>
-// You can use "https://api.exchangerate-api.com/v4/latest/" or "https://open.er-api.com/v6/latest/"
-// We'll use a free, no-auth API (no key needed):
-const currencyApiBase = "https://open.er-api.com/v6/latest/";
 
-async function convertCurrency() {
-  const amount = parseFloat(document.getElementById('amount').value);
-  const from = document.getElementById('from-currency').value;
-  const to = document.getElementById('to-currency').value;
-  const resultDiv = document.getElementById('currency-result');
-  
-  if (isNaN(amount) || amount <= 0) {
-    resultDiv.textContent = "Please enter a valid amount.";
-    return;
-  }
-  if (from === to) {
-    resultDiv.textContent = `Result: ${amount.toLocaleString()} ${to}`;
-    return;
-  }
 
-  resultDiv.textContent = "Fetching live rates...";
 
-  try {
-    // Fetch the latest rates for the 'from' currency
-    const res = await fetch(currencyApiBase + from);
-    const data = await res.json();
-
-    if (data.result !== "success" || !data.rates[to]) {
-      resultDiv.textContent = "Failed to fetch rates.";
-      return;
-    }
-    const rate = data.rates[to];
-    const converted = amount * rate;
-
-    resultDiv.innerHTML = `
-      <b>${amount.toLocaleString()} ${from}</b> = <b>${converted.toLocaleString(undefined, {maximumFractionDigits: 2})} ${to}</b>
-      <br>
-      <span style="font-size:0.96em;color:#444;">Rate: 1 ${from} = ${rate.toLocaleString(undefined, {maximumFractionDigits: 4})} ${to}</span>
-    `;
-  } catch (e) {
-    resultDiv.textContent = "Error fetching conversion rate.";
-  }
-}
-</script>
-
-<script>
-async function fetchMetalRates() {
-  const gold1gEl = document.getElementById('gold1g');
-  const gold10gEl = document.getElementById('gold10g');
-  const silver1gEl = document.getElementById('silver1g');
-  const silver10gEl = document.getElementById('silver10g');
-  const updateEl = document.getElementById('metal-rate-update');
-
-  gold1gEl.textContent = silver1gEl.textContent = gold10gEl.textContent = silver10gEl.textContent = "Loading...";
-
-  // GoldAPI endpoint for INR
-  const GOLD_API_URL = 'https://www.goldapi.io/api/XAU/INR'; // Gold
-  const SILVER_API_URL = 'https://www.goldapi.io/api/XAG/INR'; // Silver
-  const API_KEY = 'goldapi-famx3smcpa8upb-io'; // <-- Insert your key here
-
-  try {
-    // Fetch gold and silver rates in parallel
-    const [goldRes, silverRes] = await Promise.all([
-      fetch(GOLD_API_URL, { headers: { 'x-access-token': API_KEY, 'Content-Type': 'application/json' } }),
-      fetch(SILVER_API_URL, { headers: { 'x-access-token': API_KEY, 'Content-Type': 'application/json' } })
-    ]);
-    if (!goldRes.ok || !silverRes.ok) throw new Error("API error");
-
-    const goldData = await goldRes.json();
-    const silverData = await silverRes.json();
-
-    // Prices per troy ounce
-    const goldPerOunce = goldData.price;   // in INR per ounce
-    const silverPerOunce = silverData.price; // in INR per ounce
-
-    // Convert ounce (oz t) to grams: 1 troy ounce = 31.1035 grams
-    const gram = 31.1035;
-    const goldPerGram = goldPerOunce / gram;
-    const silverPerGram = silverPerOunce / gram;
-
-    gold1gEl.textContent = '₹' + Math.round(goldPerGram).toLocaleString();
-    gold10gEl.textContent = '₹' + Math.round(goldPerGram * 10).toLocaleString();
-    silver1gEl.textContent = '₹' + silverPerGram.toFixed(2);
-    silver10gEl.textContent = '₹' + (silverPerGram * 10).toFixed(2);
-
-    const now = new Date();
-    updateEl.textContent = "Updated: " + now.toLocaleString();
-  } catch (e) {
-    gold1gEl.textContent = '₹9,133.76';
-    gold10gEl.textContent = '₹91,337.60';
-    silver1gEl.textContent = '₹100.54';
-    silver10gEl.textContent = '₹1005.40';
-    updateEl.textContent = "API error / demo rates shown.";
-  }
-}
-fetchMetalRates();
-</script>
-  <script src="nav.js" defer></script>
+    <script src="js/calc-core.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="recommendations.js" defer></script>
+  <script src="js/dashboard.js" defer></script>
+<script src="nav.js" defer></script>
 </body>
 </html>

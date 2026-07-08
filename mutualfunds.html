@@ -190,8 +190,8 @@
     type="text"
     id="mf-search"
     placeholder="Search fund or category..."
-    onkeyup="filterFunds()"
     style="margin-bottom:16px; width: 250px; padding: 7px; border-radius: 7px; border: 1.2px solid #e4eaf2;"
+    aria-label="Search mutual funds"
   />
   <div id="mf-list" style="display: flex; flex-wrap: wrap; gap: 18px;">
     <!-- Cards rendered from recommendations.js -->
@@ -274,25 +274,13 @@ const swpMaxFAQ = `
 function calculateSIP(event) {
   event.preventDefault();
   const P = parseFloat(document.getElementById('sip-amount').value);
-  const r = parseFloat(document.getElementById('sip-rate').value) / 100 / 12;
+  const annualRate = parseFloat(document.getElementById('sip-rate').value);
   const years = parseInt(document.getElementById('sip-years').value);
   const stepup = parseFloat(document.getElementById('sip-stepup').value || 0);
-
-  let totalInvested = 0, corpus = 0, currP = P;
-  const yearlyData = [], labels = [];
-
-  for (let year = 1; year <= years; year++) {
-    for (let m = 1; m <= 12; m++) {
-      corpus = (corpus + currP) * (1 + r);
-      totalInvested += currP;
-    }
-    yearlyData.push(corpus);
-    labels.push('Year ' + year);
-    currP *= (1 + stepup / 100);
-  }
-
-  const gain = corpus - totalInvested;
-  const cagr = (Math.pow(corpus / totalInvested, 1 / years) - 1) * 100;
+  const result = window.IICalc.sip(P, annualRate, years, stepup);
+  if (result.error) { alert(result.error); return; }
+  const totalInvested = result.totalInvested, corpus = result.corpus, gain = result.gain, cagr = result.cagr;
+  const yearlyData = result.yearlyData, labels = result.labels;
 
   document.getElementById('sip-result').innerHTML = `
     <strong>Total Invested:</strong> ₹${Math.round(totalInvested).toLocaleString('en-IN')}<br>
@@ -353,11 +341,10 @@ function calculateSIP(event) {
   });
 
   // Save last calculator
-  localStorage.setItem("lastCalculator", JSON.stringify({
-    name: "SIP Calculator",
-    date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }),
-    link: "mutualfunds.html"
-  }));
+  if (window.IIStorage) {
+    window.IIStorage.rememberCalculator("SIP Calculator", "mutualfunds.html#sipcalc-mutual");
+  }
+
 }
 
 function resetSIP() {
@@ -388,26 +375,14 @@ function showSWPTab(tab) {
 function calculateSWP(event) {
   event.preventDefault();
   const corpus = parseFloat(document.getElementById('swp-corpus').value);
-  const rate = parseFloat(document.getElementById('swp-rate').value) / 100 / 12;
+  const annualRate = parseFloat(document.getElementById('swp-rate').value);
   const withdraw = parseFloat(document.getElementById('swp-withdraw').value);
   const years = parseInt(document.getElementById('swp-years').value);
-
-  let balance = corpus, exhaustedAt = null, months = years * 12;
-  const data = [];
-  for (let i = 1; i <= months; i++) {
-    balance = balance * (1 + rate);
-    balance -= withdraw;
-    if (balance <= 0 && !exhaustedAt) exhaustedAt = i;
-    data.push(balance > 0 ? balance : 0);
-    if (balance <= 0) break;
-  }
-  // Create labels and yearly data
-  const yearlyData = [], labels = [];
-  for (let y = 1; y <= Math.floor(data.length / 12); y++) {
-    yearlyData.push(data[y * 12 - 1]);
-    labels.push('Year ' + y);
-  }
-  const endBalance = Math.max(0, data[data.length - 1]);
+  const result = window.IICalc.swp(corpus, annualRate, withdraw, years);
+  if (result.error) { alert(result.error); return; }
+  const exhaustedAt = result.exhaustedAt;
+  const yearlyData = result.yearlyData, labels = result.labels;
+  const endBalance = result.endBalance;
   const exhaustedText = exhaustedAt ? `<br><strong>Corpus will be exhausted in:</strong> <span style="color:#c12;">${Math.floor(exhaustedAt / 12)} yr ${exhaustedAt % 12} mo</span>` : '<br><strong>Corpus sustains for the projection period.</strong>';
 
   document.getElementById('swp-result').innerHTML = `
@@ -466,6 +441,10 @@ function calculateSWP(event) {
       }
     }
   });
+  if (window.IIStorage) {
+    window.IIStorage.rememberCalculator("SWP Calculator", "mutualfunds.html#swpcalc-mutual");
+  }
+
 }
 
 function resetSWP() {
@@ -483,29 +462,14 @@ function resetSWP() {
 function calculateMaxSWP(event) {
   event.preventDefault();
   const corpus = parseFloat(document.getElementById('swp-max-corpus').value);
-  const rate = parseFloat(document.getElementById('swp-max-rate').value) / 100 / 12;
+  const annualRate = parseFloat(document.getElementById('swp-max-rate').value);
   const years = parseInt(document.getElementById('swp-max-years').value);
-  const months = years * 12;
-  let maxSWP;
-  if (corpus <= 0 || rate < 0 || years <= 0) {
-    alert('Please enter valid inputs.');
-    return;
-  }
-  if (rate === 0) maxSWP = corpus / months;
-  else maxSWP = corpus * rate / (1 - Math.pow(1 + rate, -months));
-  let balance = corpus;
-  const data = [];
-  for (let i = 1; i <= months; i++) {
-    balance = balance * (1 + rate);
-    balance -= maxSWP;
-    data.push(balance > 0 ? balance : 0);
-  }
-  const yearlyData = [], labels = [];
-  for (let y = 1; y <= Math.floor(data.length / 12); y++) {
-    yearlyData.push(data[y * 12 - 1]);
-    labels.push('Year ' + y);
-  }
-  const endBalance = Math.max(0, data[data.length - 1]);
+  const result = window.IICalc.maxSwp(corpus, annualRate, years);
+  if (result.error) { alert('Please enter valid inputs.'); return; }
+  const maxSWP = result.maxMonthly;
+  const months = result.months;
+  const yearlyData = result.yearlyData, labels = result.labels;
+  const endBalance = result.endBalance;
   document.getElementById('swp-max-result').innerHTML = `
     <strong>Initial Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
     <strong>Expected Annual Return:</strong> ${document.getElementById('swp-max-rate').value}%<br>
@@ -562,6 +526,10 @@ function calculateMaxSWP(event) {
       }
     }
   });
+  if (window.IIStorage) {
+    window.IIStorage.rememberCalculator("Max SWP Calculator", "mutualfunds.html#swpcalc-mutual");
+  }
+
 }
 
 function resetSWPMax() {
@@ -612,6 +580,10 @@ window.addEventListener('scroll', () => {
 });
 </script>
   <script src="recommendations.js" defer></script>
+  <script src="js/calc-core.js"></script>
+  <script src="js/storage.js"></script>
+
+
   <script src="nav.js" defer></script>
 </body>
 </html>

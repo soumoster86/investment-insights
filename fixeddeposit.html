@@ -318,25 +318,22 @@
      <script>
 function calculateFD(event) {
   event.preventDefault();
-  // Gather inputs
   const P = parseFloat(document.getElementById('fd-principal').value);
-  const r = parseFloat(document.getElementById('fd-rate').value) / 100;
+  const annualRate = parseFloat(document.getElementById('fd-rate').value);
   const n = parseInt(document.getElementById('fd-compounding').value);
-
   const years = parseInt(document.getElementById('fd-years').value) || 0;
   const months = parseInt(document.getElementById('fd-months').value) || 0;
   const days = parseInt(document.getElementById('fd-days').value) || 0;
-  const totalYears = years + (months / 12) + (days / 365);
-
-  if (!P || !r || !n || totalYears <= 0) {
+  const result = window.IICalc.fd(P, annualRate, n, years, months, days);
+  if (result.error) {
     alert("Please fill all fields and provide a valid tenure.");
     return;
   }
-
-  // Compound interest calculation
-  const A = P * Math.pow(1 + r / n, n * totalYears);
-  const totalInterest = A - P;
-  const apy = (Math.pow(1 + r / n, n) - 1) * 100;
+  const A = result.maturity;
+  const totalInterest = result.totalInterest;
+  const apy = result.apy;
+  const totalYears = result.totalYears;
+  const r = annualRate / 100;
 
   // Show summary
   document.getElementById('fd-interest').innerText = totalInterest.toLocaleString('en-IN', {maximumFractionDigits: 2});
@@ -430,6 +427,10 @@ function calculateFD(event) {
 
   document.getElementById('fd-chart-container').style.display = 'block';
   document.getElementById('fd-result').style.display = 'block';
+
+  if (window.IIStorage) {
+    window.IIStorage.rememberCalculator("FD Calculator", "fixeddeposit.html");
+  }
 }
 
 // RESET function
@@ -524,6 +525,10 @@ function hideTooltip(el) {
     fdRateInfo.addEventListener('blur', () => { fdRateTooltip.style.display = 'none'; });
   }
 </script>
+  <script src="js/calc-core.js"></script>
+  <script src="js/storage.js"></script>
+
+
   <script src="nav.js" defer></script>
 </body>
 </html>

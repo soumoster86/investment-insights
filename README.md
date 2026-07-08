@@ -24,11 +24,16 @@ https://investment-insight.netlify.app
 ├── index.html … contact.html   Page content (shared header/footer injected)
 ├── style.css                   All shared + component styles (single source of truth)
 ├── nav.js                      Dark mode, mobile nav, active link, back-to-top
-├── recommendations.js          Stocks / MF / Crypto cards + search
+├── recommendations.js          Stocks / MF / Crypto cards + search (+ top picks API)
+├── js/
+│   ├── calc-core.js            Pure calculator math (SIP, SWP, FD, NPS, goal, bond)
+│   ├── storage.js              lastCalculator + investmentGoal localStorage
+│   └── dashboard.js            Home: goal card, last calc, top picks, FX, metals
 ├── logo.png / favicon.*        Compressed brand assets
 ├── partials/
 │   ├── header.html             Canonical site header + primary nav
 │   └── footer.html             Canonical footer + back-to-top button
+├── tests/                      Jest unit tests for calc-core + storage
 └── scripts/
     ├── sync-shell.js           Inject partials into every *.html page
     └── optimize-logo.py        Compress logo + generate favicons
@@ -40,7 +45,9 @@ https://investment-insight.netlify.app
 
 **`nav.js`** is loaded with `defer` on every page and is written defensively (every element lookup is null-checked). It handles dark mode, the mobile drawer, active-link highlighting, back-to-top, and `--header-h` sync for floating menus.
 
-**`recommendations.js`** is loaded only on Stocks, Mutual Funds, and Cryptocurrencies. It renders cards from data arrays and wires search.
+**`recommendations.js`** is loaded on Stocks, Mutual Funds, Cryptocurrencies, and Home (for top picks). It renders cards from data arrays, wires search, and exposes `window.IIReco.topPicks()`.
+
+**`js/calc-core.js`** holds pure math used by the calculators and unit tests (`window.IICalc` / `require`). **`js/storage.js`** writes `lastCalculator` and `investmentGoal` snapshots. **`js/dashboard.js`** hydrates the home dashboard from that storage.
 
 **`partials/header.html` / `partials/footer.html`** are the single source of truth for the site chrome. After editing either file, run:
 
@@ -113,8 +120,7 @@ Ensure these ship with the HTML:
 
 ## Possible next steps
 
-- Move calculators into shared `js/` modules and expand unit tests.
-- Wire the home dashboard to real goal / last-calculator localStorage data.
 - Add sort/filter controls (by rating, sector, or risk) to recommendation lists.
-- Proxy paid APIs behind serverless functions; rotate any keys that were ever exposed client-side.
+- Proxy paid APIs behind serverless functions; rotate any keys that were ever exposed client-side (stocks ticker / metals).
 - SEO: meta descriptions, Open Graph tags, `sitemap.xml`.
+- Move remaining page UI (charts/render) fully out of inline HTML into `js/`.

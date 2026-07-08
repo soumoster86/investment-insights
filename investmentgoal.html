@@ -456,17 +456,11 @@
         return;
       }
 
-      const r = rate / 100 / 12;
+      const goal = window.IICalc.goalSip(P, rate, n, inflation);
+      if (goal.error) { alert(goal.error); return; }
+      const FV = goal.futureValue;
+      const FVReal = goal.futureValueReal;
       const months = n * 12;
-      let FV;
-      if (r === 0) {
-        FV = P * months;
-      } else {
-        FV = P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
-      }
-      // Inflation-adjusted corpus
-      const inflationFactor = Math.pow(1 + inflation / 100, n);
-      const FVReal = FV / inflationFactor;
 
       // XIRR Calculation
       const cashFlows = [];
@@ -520,12 +514,18 @@
 	  // Show the Assumptions & Limitations section
       document.getElementById('assumptions-section').style.display = "block";
 
-      // Example for GoalSet Calculator page
-      localStorage.setItem("lastCalculator", JSON.stringify({
-        name: "Investment Goal Calculator",
-        date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }),
-        link: "investmentgoal.html"
-      }));
+      if (window.IIStorage) {
+        window.IIStorage.rememberCalculator("Investment Goal Calculator", "investmentgoal.html");
+        window.IIStorage.saveGoalSnapshot({
+          monthlySip: P,
+          years: n,
+          expectedCorpus: FV,
+          expectedCorpusReal: FVReal,
+          rate: rate,
+          inflation: inflation,
+          routes: routes
+        });
+      }
     }
   </script>
 
@@ -786,6 +786,10 @@ function enableSuggestPortfolio() {
   window.suggestApplied = false;
 }
 </script>
+  <script src="js/calc-core.js"></script>
+  <script src="js/storage.js"></script>
+
+
   <script src="nav.js" defer></script>
 </body>
 </html>

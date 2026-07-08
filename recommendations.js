@@ -9,7 +9,7 @@
    is generated automatically. Loaded with `defer` only on the three
    pages that need it; each page renders whichever lists are present.
    ============================================================ */
-(function () {
+(function (global) {
   "use strict";
 
   /* ---------- Data ---------- */
@@ -137,9 +137,66 @@
     });
   }
 
+  /** Highest-rated picks across stocks / funds / crypto for the home dashboard. */
+  function topPicks(limit) {
+    limit = limit || 3;
+    var pool = [];
+    STOCKS.forEach(function (s) {
+      pool.push({
+        name: s.name,
+        rating: s.rating,
+        detail: s.sector + " · " + s.rating + "★",
+        href: "stocks.html",
+        kind: "stock"
+      });
+    });
+    FUNDS.forEach(function (f) {
+      pool.push({
+        name: f.name,
+        rating: f.rating,
+        detail: f.type + " · " + f.rating + "★",
+        href: "mutualfunds.html",
+        kind: "fund"
+      });
+    });
+    CRYPTOS.forEach(function (c) {
+      pool.push({
+        name: c.name,
+        rating: c.rating,
+        detail: c.category + " · " + c.rating + "★",
+        href: "cryptocurrencies.html",
+        kind: "crypto"
+      });
+    });
+    pool.sort(function (a, b) {
+      return b.rating - a.rating || a.name.localeCompare(b.name);
+    });
+    // Prefer diversity: one of each kind when possible
+    var picked = [];
+    var usedKind = {};
+    var i;
+    for (i = 0; i < pool.length && picked.length < limit; i++) {
+      if (!usedKind[pool[i].kind]) {
+        picked.push(pool[i]);
+        usedKind[pool[i].kind] = true;
+      }
+    }
+    for (i = 0; i < pool.length && picked.length < limit; i++) {
+      if (picked.indexOf(pool[i]) === -1) picked.push(pool[i]);
+    }
+    return picked;
+  }
+
+  global.IIReco = {
+    STOCKS: STOCKS,
+    FUNDS: FUNDS,
+    CRYPTOS: CRYPTOS,
+    topPicks: topPicks
+  };
+
   document.addEventListener("DOMContentLoaded", function () {
     setupList("stock-list", "stock-search", STOCKS, stockCard, ["name", "sector", "desc"]);
     setupList("mf-list", "mf-search", FUNDS, fundCard, ["name", "type", "risk", "desc"]);
     setupList("crypto-list", "crypto-search", CRYPTOS, cryptoCard, ["name", "category", "risk", "desc"]);
   });
-})();
+})(typeof window !== "undefined" ? window : globalThis);
