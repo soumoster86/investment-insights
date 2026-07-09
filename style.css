@@ -4446,18 +4446,269 @@ body.dark-mode .goal-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(10, 25, 50, 0.52);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   padding: 16px;
 }
 .goal-modal[hidden] { display: none !important; }
+body.goal-modal-open { overflow: hidden; }
 .goal-modal-dialog {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 22px 20px 18px;
   width: min(420px, 100%);
   max-height: 90vh;
   overflow: auto;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(213, 222, 235, 0.9);
+}
+.portfolio-modal-dialog {
+  width: min(520px, 100%);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: min(92vh, 720px);
+}
+.goal-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 12px;
+  border-bottom: 1px solid var(--border-soft, #e2e8f0);
+  flex: 0 0 auto;
+}
+.goal-modal-head h3 {
+  margin: 0 0 6px !important;
+  color: var(--brand);
+  font-size: 1.2em;
+}
+.goal-modal-head .goal-hint {
+  margin: 0 !important;
+  font-size: 0.88em;
+  line-height: 1.45;
+  max-width: 40ch;
+}
+.goal-modal-x {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px !important;
+  border: 1.5px solid #d5deeb !important;
+  background: #f8fafc !important;
+  color: #334155 !important;
+  font-size: 1.4em !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.goal-modal-x:hover {
+  background: #eef2f8 !important;
+}
+.portfolio-modal-dialog .portfolio-risk-cards,
+.portfolio-modal-dialog .portfolio-profile-blurb,
+.portfolio-modal-dialog .portfolio-viz,
+.portfolio-modal-dialog .goal-suggestion-table,
+.portfolio-modal-dialog .portfolio-modal-fields {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.portfolio-risk-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 14px 0 10px;
+}
+.portfolio-risk-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: left;
+  padding: 10px 10px 12px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #d5e2f5 !important;
+  background: #f8fafc !important;
+  color: #1a2332 !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  min-height: 72px;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.portfolio-risk-card:hover {
+  border-color: #8abaff !important;
+  background: #f0f6ff !important;
+  transform: none !important;
+}
+.portfolio-risk-card.is-selected {
+  border-color: var(--brand, #0a4d8c) !important;
+  background: #e8f1fc !important;
+  box-shadow: 0 0 0 3px rgba(43, 125, 233, 0.18) !important;
+}
+.portfolio-risk-emoji { font-size: 1.15em; line-height: 1.2; }
+.portfolio-risk-name {
+  font-weight: 700;
+  font-size: 0.92em;
+  color: #0a4d8c;
+}
+.portfolio-risk-tag {
+  font-size: 0.75em;
+  color: #5b6b82;
+  font-weight: 500;
+}
+.portfolio-profile-blurb {
+  margin: 0 0 12px;
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: #3d4f66;
+  background: #f4f8ff;
+  border: 1px solid #d7e4f8;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.portfolio-viz { margin: 0 0 12px; }
+.portfolio-stack {
+  display: flex;
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e8eef6;
+}
+.portfolio-stack-seg { display: block; height: 100%; min-width: 2px; }
+.portfolio-stack-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 8px;
+}
+.portfolio-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8em;
+  color: #4a5568;
+  font-weight: 600;
+}
+.portfolio-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+.portfolio-alloc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.portfolio-alloc-row {
+  background: #fafbfd;
+  border: 1px solid #e6edf7;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.portfolio-alloc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.portfolio-alloc-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+  font-size: 0.95em;
+  color: #1a2332;
+}
+.portfolio-alloc-pct {
+  font-weight: 700;
+  color: #0a4d8c;
+  font-size: 0.95em;
+}
+.portfolio-alloc-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #e8eef6;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.portfolio-alloc-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+.portfolio-alloc-amt {
+  font-size: 0.92em;
+  font-weight: 600;
+  color: #1a2332;
+}
+.portfolio-alloc-amt-hint {
+  font-weight: 500;
+  color: #6b7c93;
+  font-size: 0.88em;
+}
+.portfolio-total-line {
+  margin: 12px 0 0;
+  font-size: 0.95em;
+  color: #3d4f66;
+}
+.portfolio-modal-fields {
+  margin: 4px 0 0;
+  padding-bottom: 8px;
+}
+.portfolio-modal-fields label:not(.portfolio-rate-opt) {
+  display: block;
+  margin: 8px 0 4px;
+  font-weight: 600;
+  font-size: 0.92em;
+}
+.portfolio-modal-fields input[type="number"] {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+.portfolio-rate-opt {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 12px 0 0 !important;
+  font-weight: 500 !important;
+  font-size: 0.9em !important;
+  line-height: 1.4;
+  color: #334155;
+  cursor: pointer;
+}
+.portfolio-rate-opt input {
+  margin-top: 3px;
+  width: auto !important;
+  flex: 0 0 auto;
+}
+.goal-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 18px 16px;
+  border-top: 1px solid var(--border-soft, #e2e8f0);
+  margin-top: 8px;
+  background: #f8fafc;
+  border-radius: 0 0 18px 18px;
+  flex: 0 0 auto;
+  position: sticky;
+  bottom: 0;
+}
+.goal-modal-actions .btn {
+  min-width: 120px;
 }
 .goal-modal-dialog h3 { margin-top: 0; color: var(--brand); }
 .goal-modal-dialog label {
@@ -4470,10 +4721,79 @@ body.dark-mode .goal-action-btn {
   width: 100%;
   max-width: none;
 }
-.goal-suggestion-table { margin: 10px 0; }
+.goal-suggestion-table {
+  margin: 0 0 8px;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+}
 body.dark-mode .goal-modal-dialog {
   background: #1c212b !important;
   color: #e7ecfa !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .goal-modal-head {
+  border-color: #2c3340 !important;
+}
+body.dark-mode .goal-modal-x {
+  background: #151a22 !important;
+  border-color: #3a4252 !important;
+  color: #e7ecfa !important;
+}
+body.dark-mode .portfolio-risk-card {
+  background: #151a22 !important;
+  border-color: #343b4a !important;
+  color: #e7ecfa !important;
+}
+body.dark-mode .portfolio-risk-card.is-selected {
+  background: #1a2a40 !important;
+  border-color: #2b7de9 !important;
+}
+body.dark-mode .portfolio-risk-name { color: #8abaff !important; }
+body.dark-mode .portfolio-risk-tag { color: #9aa8bc !important; }
+body.dark-mode .portfolio-profile-blurb {
+  background: #151a22 !important;
+  border-color: #2c3340 !important;
+  color: #b4bccb !important;
+}
+body.dark-mode .portfolio-alloc-row {
+  background: #151a22 !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .portfolio-alloc-name,
+body.dark-mode .portfolio-alloc-amt,
+body.dark-mode .portfolio-total-line {
+  color: #e7ecfa !important;
+}
+body.dark-mode .portfolio-alloc-pct { color: #8abaff !important; }
+body.dark-mode .portfolio-legend-item,
+body.dark-mode .portfolio-alloc-amt-hint {
+  color: #9aa8bc !important;
+}
+body.dark-mode .goal-modal-actions {
+  background: #151a22 !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .portfolio-rate-opt { color: #b4bccb !important; }
+
+@media (max-width: 520px) {
+  .portfolio-risk-cards {
+    grid-template-columns: 1fr;
+  }
+  .portfolio-risk-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+  }
+  .portfolio-risk-tag { margin-left: auto; }
+  .goal-modal-actions {
+    flex-direction: column-reverse;
+  }
+  .goal-modal-actions .btn {
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 @media (max-width: 800px) {

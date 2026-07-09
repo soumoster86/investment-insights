@@ -225,7 +225,7 @@
           <div class="goal-suggest-row">
             <button type="button" class="btn secondary" id="suggest-portfolio-btn">💡 Suggest portfolio split</button>
             <p id="suggest-portfolio-msg" class="goal-hint" hidden>
-              Portfolio split applied. Edit amounts or routes, then Reset to re-enable suggestions.
+              Portfolio model applied. You can open Suggest again anytime to change the mix.
             </p>
           </div>
         </div>
@@ -273,22 +273,57 @@
 
     <!-- Portfolio modal -->
     <div id="portfolio-modal" class="goal-modal" hidden>
-      <div class="goal-modal-dialog" role="dialog" aria-labelledby="portfolio-modal-title" aria-modal="true">
-        <h3 id="portfolio-modal-title">Portfolio model suggestion</h3>
-        <p class="goal-hint">Educational allocation only — not product recommendations to buy.</p>
-        <label for="risk-profile">Risk profile</label>
-        <select id="risk-profile">
-          <option value="moderate">Moderate (balanced)</option>
-          <option value="aggressive">Aggressive (growth)</option>
-          <option value="conservative">Conservative (safer)</option>
-        </select>
-        <div id="suggestion-table" class="goal-suggestion-table"></div>
-        <label for="modal-total-amt">Total monthly investment (₹)</label>
-        <input type="number" id="modal-total-amt" min="100" step="any" value="20000" />
-        <div class="btn-group">
-          <button type="button" class="btn" id="apply-portfolio">Apply</button>
-          <button type="button" class="btn secondary" id="close-portfolio">Cancel</button>
+      <div class="goal-modal-dialog portfolio-modal-dialog" role="dialog" aria-labelledby="portfolio-modal-title" aria-describedby="portfolio-modal-desc" aria-modal="true">
+        <header class="goal-modal-head">
+          <div>
+            <h3 id="portfolio-modal-title">Portfolio model</h3>
+            <p id="portfolio-modal-desc" class="goal-hint">Educational split for route labels only — not product picks to buy. Plan math still uses one blended return.</p>
+          </div>
+          <button type="button" class="goal-modal-x" id="close-portfolio-x" aria-label="Close portfolio model">×</button>
+        </header>
+
+        <div class="portfolio-risk-cards" id="portfolio-risk-cards" role="radiogroup" aria-label="Risk profile">
+          <button type="button" class="portfolio-risk-card" data-risk="conservative" aria-checked="false" role="radio">
+            <span class="portfolio-risk-emoji" aria-hidden="true">🛡️</span>
+            <span class="portfolio-risk-name">Conservative</span>
+            <span class="portfolio-risk-tag">Safer mix</span>
+          </button>
+          <button type="button" class="portfolio-risk-card is-selected" data-risk="moderate" aria-checked="true" role="radio">
+            <span class="portfolio-risk-emoji" aria-hidden="true">⚖️</span>
+            <span class="portfolio-risk-name">Moderate</span>
+            <span class="portfolio-risk-tag">Balanced</span>
+          </button>
+          <button type="button" class="portfolio-risk-card" data-risk="aggressive" aria-checked="false" role="radio">
+            <span class="portfolio-risk-emoji" aria-hidden="true">🚀</span>
+            <span class="portfolio-risk-name">Aggressive</span>
+            <span class="portfolio-risk-tag">Growth tilt</span>
+          </button>
         </div>
+        <!-- Keep select for fallback / JS sync -->
+        <select id="risk-profile" class="sr-only" tabindex="-1" aria-hidden="true">
+          <option value="conservative">Conservative</option>
+          <option value="moderate" selected>Moderate</option>
+          <option value="aggressive">Aggressive</option>
+        </select>
+
+        <p class="portfolio-profile-blurb" id="portfolio-profile-blurb"></p>
+
+        <div class="portfolio-viz" id="portfolio-viz" aria-hidden="true"></div>
+        <div id="suggestion-table" class="goal-suggestion-table"></div>
+
+        <div class="portfolio-modal-fields">
+          <label for="modal-total-amt">Total monthly investment (₹)</label>
+          <input type="number" id="modal-total-amt" min="100" step="100" value="20000" inputmode="decimal" />
+          <label class="portfolio-rate-opt">
+            <input type="checkbox" id="apply-suggested-rate" checked />
+            <span>Also set expected return to this model’s educational rate (<strong id="suggested-rate-label">11%</strong>)</span>
+          </label>
+        </div>
+
+        <footer class="goal-modal-actions">
+          <button type="button" class="btn secondary" id="close-portfolio">Cancel</button>
+          <button type="button" class="btn" id="apply-portfolio">Apply to planner</button>
+        </footer>
       </div>
     </div>
 
@@ -470,18 +505,33 @@
     }
   };
 
+  var ROUTE_META = {
+    "Mutual Funds": { short: "MF", color: "#2b7de9" },
+    "Stocks": { short: "Stocks", color: "#0a4d8c" },
+    "Bonds": { short: "Bonds", color: "#0d9488" },
+    "Fixed Deposits": { short: "FD", color: "#64748b" },
+    "Cryptocurrencies": { short: "Crypto", color: "#c026d3" },
+    "Gold": { short: "Gold", color: "#ca8a04" }
+  };
+
   var modelPortfolios = {
+    conservative: {
+      label: "Conservative (safer)",
+      blurb: "Emphasises debt-like sleeves (bonds, FDs) with a small equity sleeve. Suited to nearer goals or lower risk tolerance — still not risk-free.",
+      suggestedRate: 8,
+      allocation: { "Mutual Funds": 25, "Bonds": 35, "Fixed Deposits": 35, "Stocks": 5 }
+    },
     moderate: {
       label: "Moderate (balanced)",
+      blurb: "Growth via mutual funds and stocks, with bonds and FDs for ballast. A common long-horizon starting map for education only.",
+      suggestedRate: 11,
       allocation: { "Mutual Funds": 50, "Stocks": 30, "Bonds": 10, "Fixed Deposits": 10 }
     },
     aggressive: {
       label: "Aggressive (growth)",
+      blurb: "Heavy equity tilt; small crypto sleeve for illustration of high risk. Expect larger swings — not for money you need soon.",
+      suggestedRate: 12,
       allocation: { "Mutual Funds": 30, "Stocks": 50, "Bonds": 10, "Cryptocurrencies": 10 }
-    },
-    conservative: {
-      label: "Conservative (safer)",
-      allocation: { "Mutual Funds": 25, "Bonds": 35, "Fixed Deposits": 35, "Stocks": 5 }
     }
   };
 
@@ -940,55 +990,185 @@
     hideOutputs();
   }
 
-  function updateSuggestionTable() {
-    var risk = $("risk-profile").value;
-    var total = parseFloat($("modal-total-amt").value) || 0;
-    var alloc = modelPortfolios[risk].allocation;
-    var html =
-      "<div class=\"table-wrap table-scroll\"><table class=\"compare-table\"><thead><tr><th>Route</th><th>%</th><th>Amount</th></tr></thead><tbody>";
-    Object.keys(alloc).forEach(function (route) {
-      html +=
-        "<tr><td>" +
-        route +
-        "</td><td>" +
-        alloc[route] +
-        "%</td><td>" +
-        inr((total * alloc[route]) / 100) +
-        "</td></tr>";
+  function getSelectedRisk() {
+    var sel = $("risk-profile");
+    var v = sel && sel.value;
+    return modelPortfolios[v] ? v : "moderate";
+  }
+
+  function setSelectedRisk(risk) {
+    if (!modelPortfolios[risk]) risk = "moderate";
+    var sel = $("risk-profile");
+    if (sel) sel.value = risk;
+    document.querySelectorAll(".portfolio-risk-card").forEach(function (card) {
+      var on = card.getAttribute("data-risk") === risk;
+      card.classList.toggle("is-selected", on);
+      card.setAttribute("aria-checked", on ? "true" : "false");
     });
-    html += "</tbody></table></div>";
+  }
+
+  function updateSuggestionTable() {
+    var risk = getSelectedRisk();
+    var model = modelPortfolios[risk];
+    var total = parseFloat($("modal-total-amt").value) || 0;
+    var alloc = model.allocation;
+    var routes = Object.keys(alloc);
+
+    var blurb = $("portfolio-profile-blurb");
+    if (blurb) {
+      blurb.innerHTML =
+        "<strong>" +
+        model.label +
+        "</strong> · illustrative return often used educationally: <strong>" +
+        model.suggestedRate +
+        "% p.a.</strong>. " +
+        model.blurb;
+    }
+    var rateLabel = $("suggested-rate-label");
+    if (rateLabel) rateLabel.textContent = model.suggestedRate + "%";
+
+    // Stacked allocation bar
+    var viz = $("portfolio-viz");
+    if (viz) {
+      var barHtml = '<div class="portfolio-stack" role="img" aria-label="Allocation mix">';
+      routes.forEach(function (route) {
+        var pct = alloc[route];
+        var meta = ROUTE_META[route] || { short: route, color: "#64748b" };
+        barHtml +=
+          '<span class="portfolio-stack-seg" style="width:' +
+          pct +
+          "%;background:" +
+          meta.color +
+          '" title="' +
+          route +
+          " " +
+          pct +
+          '%"></span>';
+      });
+      barHtml += '</div><div class="portfolio-stack-legend">';
+      routes.forEach(function (route) {
+        var meta = ROUTE_META[route] || { short: route, color: "#64748b" };
+        barHtml +=
+          '<span class="portfolio-legend-item"><span class="portfolio-legend-dot" style="background:' +
+          meta.color +
+          '"></span>' +
+          meta.short +
+          " " +
+          alloc[route] +
+          "%</span>";
+      });
+      barHtml += "</div>";
+      viz.innerHTML = barHtml;
+    }
+
+    // Rows as cards (mobile-friendly)
+    var html = '<ul class="portfolio-alloc-list">';
+    routes.forEach(function (route) {
+      var pct = alloc[route];
+      var amt = (total * pct) / 100;
+      var meta = ROUTE_META[route] || { short: route, color: "#64748b" };
+      html +=
+        '<li class="portfolio-alloc-row">' +
+        '<div class="portfolio-alloc-top">' +
+        '<span class="portfolio-alloc-name"><span class="portfolio-legend-dot" style="background:' +
+        meta.color +
+        '"></span>' +
+        route +
+        "</span>" +
+        '<span class="portfolio-alloc-pct">' +
+        pct +
+        "%</span>" +
+        "</div>" +
+        '<div class="portfolio-alloc-track" aria-hidden="true"><span class="portfolio-alloc-fill" style="width:' +
+        pct +
+        "%;background:" +
+        meta.color +
+        '"></span></div>' +
+        '<div class="portfolio-alloc-amt">' +
+        inr(amt) +
+        ' <span class="portfolio-alloc-amt-hint">/ month</span></div>' +
+        "</li>";
+    });
+    html += "</ul>";
+    html +=
+      '<p class="portfolio-total-line">Total monthly · <strong>' +
+      inr(total) +
+      "</strong></p>";
     $("suggestion-table").innerHTML = html;
   }
 
+  var lastFocusBeforeModal = null;
+
   function openModal() {
     setMode("project");
-    $("portfolio-modal").hidden = false;
-    $("modal-total-amt").value = $("monthly-sip").value || 20000;
+    lastFocusBeforeModal = document.activeElement;
+    var sip = parseFloat($("monthly-sip").value);
+    $("modal-total-amt").value = sip > 0 ? Math.round(sip) : 20000;
+    // Smart default: short horizon → conservative, long → moderate/aggressive
+    var years = parseFloat($("duration").value) || 0;
+    if (!$("risk-profile").dataset.userPicked) {
+      if (years > 0 && years < 5) setSelectedRisk("conservative");
+      else if (years >= 15) setSelectedRisk("moderate");
+      else setSelectedRisk("moderate");
+    } else {
+      setSelectedRisk(getSelectedRisk());
+    }
     updateSuggestionTable();
+    $("portfolio-modal").hidden = false;
+    document.body.classList.add("goal-modal-open");
+    var applyBtn = $("apply-portfolio");
+    if (applyBtn) {
+      try { applyBtn.focus(); } catch (e) {}
+    }
   }
 
   function closeModal() {
     $("portfolio-modal").hidden = true;
+    document.body.classList.remove("goal-modal-open");
+    if (lastFocusBeforeModal && lastFocusBeforeModal.focus) {
+      try { lastFocusBeforeModal.focus(); } catch (e) {}
+    }
   }
 
   function applyPortfolio() {
-    var risk = $("risk-profile").value;
+    var risk = getSelectedRisk();
+    var model = modelPortfolios[risk];
     var total = parseFloat($("modal-total-amt").value) || 0;
-    var alloc = modelPortfolios[risk].allocation;
+    if (total < 100) {
+      $("modal-total-amt").focus();
+      return;
+    }
+    var alloc = model.allocation;
     setMode("project");
     $("monthly-sip").value = Math.round(total);
     setRoutes(Object.keys(alloc));
+    var applyRate = $("apply-suggested-rate");
+    if (applyRate && applyRate.checked) {
+      $("rate").value = model.suggestedRate;
+    }
     closeModal();
-    disableSuggest();
+    var msg = $("suggest-portfolio-msg");
+    if (msg) {
+      msg.hidden = false;
+      msg.textContent =
+        "Applied " +
+        model.label +
+        " labels" +
+        (applyRate && applyRate.checked ? " and " + model.suggestedRate + "% return" : "") +
+        ". Edit anytime, or open Suggest again.";
+    }
+    // Keep button usable so users can re-open and tweak
+    var btn = $("suggest-portfolio-btn");
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = "1";
+    }
+    $("planner").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
   function disableSuggest() {
-    var btn = $("suggest-portfolio-btn");
+    /* kept for reset compatibility — no longer permanently locks the button */
     var msg = $("suggest-portfolio-msg");
-    if (btn) {
-      btn.disabled = true;
-      btn.style.opacity = "0.55";
-    }
     if (msg) msg.hidden = false;
   }
 
@@ -999,7 +1179,11 @@
       btn.disabled = false;
       btn.style.opacity = "1";
     }
-    if (msg) msg.hidden = true;
+    if (msg) {
+      msg.hidden = true;
+      msg.textContent =
+        "Portfolio split applied. Edit amounts or routes, then Reset to clear the note.";
+    }
   }
 
   function restoreSnapshot() {
@@ -1038,12 +1222,29 @@
     $("download-csv-btn").addEventListener("click", downloadCSV);
     $("suggest-portfolio-btn").addEventListener("click", openModal);
     $("close-portfolio").addEventListener("click", closeModal);
+    var closeX = $("close-portfolio-x");
+    if (closeX) closeX.addEventListener("click", closeModal);
     $("apply-portfolio").addEventListener("click", applyPortfolio);
     $("risk-profile").addEventListener("change", updateSuggestionTable);
     $("modal-total-amt").addEventListener("input", updateSuggestionTable);
 
+    document.querySelectorAll(".portfolio-risk-card").forEach(function (card) {
+      card.addEventListener("click", function () {
+        var risk = card.getAttribute("data-risk");
+        $("risk-profile").dataset.userPicked = "1";
+        setSelectedRisk(risk);
+        updateSuggestionTable();
+      });
+    });
+
     $("portfolio-modal").addEventListener("click", function (e) {
       if (e.target === $("portfolio-modal")) closeModal();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && $("portfolio-modal") && !$("portfolio-modal").hidden) {
+        closeModal();
+      }
     });
 
     $("goal-result-actions").addEventListener("click", function (e) {
