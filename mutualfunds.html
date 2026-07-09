@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Mutual Funds, SIP & SWP Calculators | Investment Insights" />
   <meta name="twitter:description" content="India mutual funds guide: categories, SIP vs lumpsum, key terms, SIP & SWP calculators, browser shortlist, and sample schemes. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710b" />
+  <link rel="stylesheet" href="style.css?v=20260710e" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -449,63 +449,134 @@
    <section id="swpcalc-mutual" class="tool-section">
   <h2>SWP calculator</h2>
   <p class="tool-intro">Model regular withdrawals from a corpus, or find the max monthly withdrawal that empties the pot under your assumptions.</p>
-  <div id="swp-tabs" style="display: flex; gap: 0;">
-    <button class="swp-tab-btn active" id="swp-tab1-btn" type="button" onclick="showSWPTab(1)">Regular SWP Projection</button>
-    <button class="swp-tab-btn" id="swp-tab2-btn" type="button" onclick="showSWPTab(2)">Max Withdrawal (Corpus Exhausted)</button>
+  <div id="swp-tabs" class="swp-tabs-bar" role="tablist" aria-label="SWP modes">
+    <button class="swp-tab-btn active" id="swp-tab1-btn" type="button" onclick="showSWPTab(1)" role="tab" aria-selected="true">Regular projection</button>
+    <button class="swp-tab-btn" id="swp-tab2-btn" type="button" onclick="showSWPTab(2)" role="tab" aria-selected="false">Max withdrawal</button>
   </div>
 <div id="swp-tab1" class="swp-tab-content" style="display:block;">
-  <form id="swp-form" onsubmit="calculateSWP(event)">
-    <label for="swp-corpus">Initial Corpus (₹)
+  <form id="swp-form" class="tool-form" onsubmit="calculateSWP(event)">
+    <div class="tool-fields">
+    <label for="swp-corpus">Initial corpus (₹)
       <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Starting investment amount before withdrawals begin.</span></span>
-    </label>
     <input type="number" id="swp-corpus" min="1" step="any" required placeholder="e.g. 10,00,000">
-    <label for="swp-rate">Expected Return (% p.a.)
+    </label>
+    <label for="swp-rate">Expected return (% p.a.)
       <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Assumed annual growth on the remaining corpus.</span></span>
-    </label>
     <input type="number" id="swp-rate" step="any" min="0" required placeholder="e.g. 10">
-    <label for="swp-withdraw">Monthly Withdrawal (₹)
+    </label>
+    <label for="swp-withdraw">Monthly withdrawal (₹)
       <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Amount you withdraw every month.</span></span>
-    </label>
     <input type="number" id="swp-withdraw" min="1" step="any" required placeholder="e.g. 10,000">
-    <label for="swp-years">Projection Period (years)
-      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many years of withdrawals to project.</span></span>
     </label>
+    <label for="swp-years">Projection period (years)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many years of withdrawals to project.</span></span>
     <input type="number" id="swp-years" min="1" max="50" step="any" placeholder="e.g. 20" required>
-    <button class="btn" type="submit" style="margin-top:9px;">Calculate</button>
-    <button class="btn secondary" type="button" onclick="resetSWP()" style="margin-left:7px;">Reset</button>
+    </label>
+    </div>
+    <div class="btn-group">
+    <button class="btn" type="submit">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetSWP()">Reset</button>
+    </div>
   </form>
-  <div id="swp-result" style="margin-top:18px;"></div>
-  <div id="swpChart-container" style="width:100%; margin-top:20px; display:none;">
-    <canvas id="swpChart" style="max-width:100%;"></canvas>
-  </div>
+  <div id="swp-result" class="calc-result-panel" hidden></div>
+  <section id="swp-visual" class="illust-panel tool-section swp-visual-panel" hidden>
+    <div class="illust-top">
+      <div class="illust-header-text">
+        <p class="illust-eyebrow">Illustrative · from your inputs</p>
+        <h3 class="illust-chart-title" style="margin:0 0 6px;">Corpus while withdrawing</h3>
+        <p class="tool-intro">Year-end balance if the corpus earns a steady return and you take the same monthly amount. Not a forecast.</p>
+      </div>
+      <p class="sample-freshness illust-freshness">
+        <span class="sample-freshness-label">Model</span>
+        Constant return · educational only
+      </p>
+    </div>
+    <div class="illust-stats cols-3" id="swp-chart-stats" aria-live="polite"></div>
+    <div class="illust-chart-card">
+      <div class="illust-chart-head">
+        <div>
+          <h3 class="illust-chart-title">Balance path</h3>
+          <p class="illust-chart-sub">Corpus left at the end of each year</p>
+        </div>
+      </div>
+      <div class="illust-chart-wrap goal-corpus-chart-wrap" id="swpChart-container">
+        <canvas id="swpChart" aria-label="SWP corpus path chart"></canvas>
+      </div>
+    </div>
+    <h3 class="swp-year-heading">Yearly balance</h3>
+    <div id="swp-year-cards" class="goal-year-map" role="list"></div>
+    <div class="illust-notes">
+      <strong>How to read this</strong>
+      <ul>
+        <li>Balance can fall even when returns are positive, if withdrawals are larger than growth</li>
+        <li>If the pot runs out early, later years show near zero</li>
+        <li>Taxes, fees, and uneven markets are left out</li>
+      </ul>
+      <p class="illust-disclaimer">For learning only. Not advice on how much you can safely withdraw.</p>
+    </div>
+  </section>
   <div id="swp-faq" class="faq-box" style="display:none; margin-top:18px;"></div>
 </div>
 
   <div id="swp-tab2" class="swp-tab-content" style="display:none;">
-    <form id="swp-max-form" onsubmit="calculateMaxSWP(event)">
-      <label for="swp-max-corpus">Initial Corpus (₹)
+    <form id="swp-max-form" class="tool-form" onsubmit="calculateMaxSWP(event)">
+      <div class="tool-fields">
+      <label for="swp-max-corpus">Initial corpus (₹)
         <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Starting corpus you will draw down over the period.</span></span>
-      </label>
       <input type="number" id="swp-max-corpus" min="1" step="any" required placeholder="e.g. 10,00,000">
-      <label for="swp-max-rate">Expected Return (% p.a.)
+      </label>
+      <label for="swp-max-rate">Expected return (% p.a.)
         <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Assumed annual return while withdrawing.</span></span>
-      </label>
       <input type="number" id="swp-max-rate" step="any" min="0" required placeholder="e.g. 10">
-      <label for="swp-max-years">Withdrawal Duration (years)
-        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Years until corpus is exhausted under the model.</span></span>
       </label>
+      <label for="swp-max-years">Withdrawal duration (years)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Years until corpus is exhausted under the model.</span></span>
       <input type="number" id="swp-max-years" min="1" max="50" step="any" placeholder="e.g. 20" required>
-      <button class="btn" type="submit" style="margin-top:9px;">Calculate Max Withdrawal</button>
-	  <button class="btn secondary" type="button" onclick="resetSWPMax()" style="margin-left:7px;">Reset</button>
+      </label>
+      </div>
+      <div class="btn-group">
+      <button class="btn" type="submit">Calculate max withdrawal</button>
+	  <button class="btn secondary" type="button" onclick="resetSWPMax()">Reset</button>
+      </div>
     </form>
-	<div id="swp-max-result" style="margin-top:18px;"></div>
-    <div id="swpMaxChart-container" style="width:100%; margin-top:20px; display:none;">
-    <canvas id="swpMaxChart" style="max-width:100%;"></canvas>
-  </div>
+	<div id="swp-max-result" class="calc-result-panel" hidden></div>
+    <section id="swp-max-visual" class="illust-panel tool-section swp-visual-panel" hidden>
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · from your inputs</p>
+          <h3 class="illust-chart-title" style="margin:0 0 6px;">Drawdown to near zero</h3>
+          <p class="tool-intro">Path if you take the calculated max monthly amount for the full period. Teaching model only.</p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Model</span>
+          Exhaustion path · educational only
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="swp-max-chart-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Balance path</h3>
+            <p class="illust-chart-sub">Corpus left at the end of each year</p>
+          </div>
+        </div>
+        <div class="illust-chart-wrap goal-corpus-chart-wrap" id="swpMaxChart-container">
+          <canvas id="swpMaxChart" aria-label="Max SWP corpus path chart"></canvas>
+        </div>
+      </div>
+      <h3 class="swp-year-heading">Yearly balance</h3>
+      <div id="swp-max-year-cards" class="goal-year-map" role="list"></div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>This is the highest steady monthly amount that roughly empties the pot in the period</li>
+          <li>Live markets, fees, and taxes will change the real path</li>
+        </ul>
+        <p class="illust-disclaimer">For learning only. Not a safe-withdrawal recommendation.</p>
+      </div>
+    </section>
+    <div id="swp-max-faq" class="faq-box" style="display:none; margin-top:18px;"></div>
    </div>
-   
-   <div id="swp-max-faq" class="faq-box" style="display:none; margin-top:18px;"></div>
-   
 </section>
 
   <section id="mf-shortlist-section">
@@ -788,191 +859,335 @@ function resetSIP() {
 }
 
 /* --- Chart.js: SWP Tabbed Calculators --- */
+function swpInr(n) {
+  return "₹" + Math.round(Number(n) || 0).toLocaleString("en-IN");
+}
+
+function hideEl(el) {
+  if (!el) return;
+  el.hidden = true;
+  el.setAttribute("hidden", "");
+}
+
+function showEl(el) {
+  if (!el) return;
+  el.hidden = false;
+  el.removeAttribute("hidden");
+}
+
+function renderSwpYearCards(containerId, yearlyData, labels) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  var html = "";
+  for (var i = 0; i < yearlyData.length; i++) {
+    var val = yearlyData[i];
+    var isLast = i === yearlyData.length - 1;
+    var empty = val <= 0;
+    var yearLabel = labels[i] ? String(labels[i]).replace(/^Year\s*/i, "Y") : "Y" + (i + 1);
+    html +=
+      '<article class="goal-year-card' +
+      (isLast ? " is-final" : "") +
+      (empty ? " is-exhausted" : "") +
+      '" role="listitem">' +
+      '<span class="goal-year-badge" aria-hidden="true">' +
+      yearLabel +
+      "</span>" +
+      '<div class="goal-year-body">' +
+      '<div class="goal-year-row"><span class="goal-year-label">Corpus left</span><strong' +
+      (empty ? ' class="goal-year-real"' : "") +
+      ">" +
+      swpInr(val) +
+      "</strong></div>" +
+      "</div></article>";
+  }
+  el.innerHTML = html;
+}
+
+function swpChartOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: function (items) {
+            return items[0] ? items[0].label : "";
+          },
+          label: function (ctx) {
+            return "Corpus left: " + swpInr(ctx.parsed.y);
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: "rgba(148, 163, 184, 0.12)" },
+        ticks: { color: "#64748b", maxTicksLimit: 12, font: { size: 11, weight: "600" } }
+      },
+      y: {
+        beginAtZero: true,
+        grid: { color: "rgba(148, 163, 184, 0.15)" },
+        ticks: {
+          color: "#64748b",
+          font: { size: 11 },
+          callback: function (v) {
+            if (v >= 1e7) return "₹" + (v / 1e7).toFixed(1) + "Cr";
+            if (v >= 1e5) return "₹" + (v / 1e5).toFixed(1) + "L";
+            if (v >= 1e3) return "₹" + (v / 1e3).toFixed(0) + "k";
+            return "₹" + v;
+          }
+        }
+      }
+    }
+  };
+}
+
 function showSWPTab(tab) {
-  document.getElementById('swp-tab1').style.display = tab === 1 ? 'block' : 'none';
-  document.getElementById('swp-tab2').style.display = tab === 2 ? 'block' : 'none';
-  document.getElementById('swp-tab1-btn').classList.toggle('active', tab === 1);
-  document.getElementById('swp-tab2-btn').classList.toggle('active', tab === 2);
-  document.getElementById('swpChart-container').style.display = 'none';
-  document.getElementById('swpMaxChart-container').style.display = 'none';
-  document.getElementById('swp-faq').style.display = 'none';
-  document.getElementById('swp-max-faq').style.display = 'none';
+  document.getElementById("swp-tab1").style.display = tab === 1 ? "block" : "none";
+  document.getElementById("swp-tab2").style.display = tab === 2 ? "block" : "none";
+  document.getElementById("swp-tab1-btn").classList.toggle("active", tab === 1);
+  document.getElementById("swp-tab2-btn").classList.toggle("active", tab === 2);
+  document.getElementById("swp-tab1-btn").setAttribute("aria-selected", tab === 1 ? "true" : "false");
+  document.getElementById("swp-tab2-btn").setAttribute("aria-selected", tab === 2 ? "true" : "false");
+  document.getElementById("swp-faq").style.display = "none";
+  document.getElementById("swp-max-faq").style.display = "none";
 }
 
 // Regular SWP
 function calculateSWP(event) {
   event.preventDefault();
-  const corpus = parseFloat(document.getElementById('swp-corpus').value);
-  const annualRate = parseFloat(document.getElementById('swp-rate').value);
-  const withdraw = parseFloat(document.getElementById('swp-withdraw').value);
-  const years = parseInt(document.getElementById('swp-years').value);
-  const result = window.IICalc.swp(corpus, annualRate, withdraw, years);
-  if (result.error) { alert(result.error); return; }
-  const exhaustedAt = result.exhaustedAt;
-  const yearlyData = result.yearlyData, labels = result.labels;
-  const endBalance = result.endBalance;
-  const exhaustedText = exhaustedAt ? `<br><strong>Corpus will be exhausted in:</strong> <span style="color:#c12;">${Math.floor(exhaustedAt / 12)} yr ${exhaustedAt % 12} mo</span>` : '<br><strong>Corpus sustains for the projection period.</strong>';
+  var corpus = parseFloat(document.getElementById("swp-corpus").value);
+  var annualRate = parseFloat(document.getElementById("swp-rate").value);
+  var withdraw = parseFloat(document.getElementById("swp-withdraw").value);
+  var years = parseInt(document.getElementById("swp-years").value, 10);
+  var result = window.IICalc.swp(corpus, annualRate, withdraw, years);
+  if (result.error) {
+    alert(result.error);
+    return;
+  }
+  var exhaustedAt = result.exhaustedAt;
+  var yearlyData = result.yearlyData;
+  var labels = result.labels;
+  var endBalance = result.endBalance;
+  var monthsRun = result.monthsSimulated || yearlyData.length * 12;
+  var totalWithdrawn = withdraw * monthsRun;
+  var sustained = !exhaustedAt;
 
-  document.getElementById('swp-result').innerHTML = `
-    <strong>Initial Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
-    <strong>Monthly Withdrawal:</strong> ₹${Math.round(withdraw).toLocaleString('en-IN')}<br>
-    <strong>Expected Annual Return:</strong> ${document.getElementById('swp-rate').value}%<br>
-    <strong>Projection Period:</strong> ${years} years<br>
-    <strong>Corpus at End:</strong> ₹${Math.round(endBalance).toLocaleString('en-IN')}
-    ${exhaustedText}
-    <br>
-    <details style="margin-top:10px;"><summary>See year-wise balance</summary>
-      <div class="table-wrap table-scroll"><table class="product-table" style="width:100%;margin-top:7px;">
-        <thead><tr><th>Year</th><th>Corpus at Year End (₹)</th></tr></thead>
-        <tbody>
-        ${
-          yearlyData.map((val, i) => `<tr><td data-label="Year">${labels[i]}</td><td data-label="Corpus">₹${Math.round(val).toLocaleString('en-IN')}</td></tr>`).join('')
-        }
-        </tbody>
-      </table></div>
-    </details>
-  `;
-  document.getElementById('swpChart-container').style.display = 'block';
-  document.getElementById('swp-faq').innerHTML = swpFAQ;
-  document.getElementById('swp-faq').style.display = 'block';
+  var heroLabel = sustained ? "Corpus at end of period" : "Corpus runs out after";
+  var heroValue = sustained
+    ? swpInr(endBalance)
+    : Math.floor(exhaustedAt / 12) + " yr " + (exhaustedAt % 12) + " mo";
+
+  var panel = document.getElementById("swp-result");
+  panel.innerHTML =
+    '<div class="calc-result-grid">' +
+    '<div class="calc-result-item is-hero"><span class="calc-result-label">' +
+    heroLabel +
+    '</span><strong class="calc-result-value">' +
+    heroValue +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Starting corpus</span><strong class="calc-result-value">' +
+    swpInr(corpus) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Monthly withdrawal</span><strong class="calc-result-value">' +
+    swpInr(withdraw) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Total withdrawn (model)</span><strong class="calc-result-value">' +
+    swpInr(totalWithdrawn) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Assumed return</span><strong class="calc-result-value">' +
+    annualRate +
+    "%</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Horizon</span><strong class="calc-result-value">' +
+    years +
+    " years</strong></div>" +
+    "</div>" +
+    '<p class="calc-result-note">Steady monthly withdrawal and a constant yearly return. Fees, tax, and uneven markets are left out.</p>' +
+    (sustained
+      ? '<p class="goal-insight goal-insight-ok">Under these assumptions the corpus lasts the full projection period.</p>'
+      : '<p class="goal-insight goal-insight-warn">Under these assumptions the pot runs out before the end of the period. Try a smaller withdrawal, a longer horizon with less draw, or a higher assumed return (still not a guarantee).</p>');
+  showEl(panel);
+
+  var stats = document.getElementById("swp-chart-stats");
+  if (stats) {
+    stats.innerHTML =
+      '<div class="illust-stat"><div class="illust-stat-label">Start</div><div class="illust-stat-value">' +
+      swpInr(corpus) +
+      '</div><div class="illust-stat-hint">Initial corpus</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">End balance</div><div class="illust-stat-value' +
+      (endBalance <= 0 ? " is-down" : " is-up") +
+      '">' +
+      swpInr(endBalance) +
+      '</div><div class="illust-stat-hint">After ' +
+      years +
+      " years</div></div>" +
+      '<div class="illust-stat"><div class="illust-stat-label">Monthly take</div><div class="illust-stat-value is-purple">' +
+      swpInr(withdraw) +
+      '</div><div class="illust-stat-hint">Each month</div></div>';
+  }
+  renderSwpYearCards("swp-year-cards", yearlyData, labels);
+  showEl(document.getElementById("swp-visual"));
+
+  document.getElementById("swp-faq").innerHTML = swpFAQ;
+  document.getElementById("swp-faq").style.display = "block";
 
   if (window.swpChartInstance) window.swpChartInstance.destroy();
-  const ctx = document.getElementById('swpChart').getContext('2d');
-  window.swpChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: { labels, datasets: [{
-      label: "Corpus Value (₹)",
-      data: yearlyData,
-      borderWidth: 2.5,
-      borderColor: "#8f3ab6",
-      backgroundColor: "rgba(143,58,182,0.09)",
-      tension: 0.17,
-      pointRadius: 2,
-      fill: true,
-    }]},
-    options: {
-      plugins: {
-        legend: { display: true, position: 'bottom' },
-        tooltip: {
-          callbacks: {
-            title: ctx => ctx[0].label,
-            label: ctx => "Corpus: ₹" + Math.round(ctx.parsed.y).toLocaleString('en-IN')
+  var canvas = document.getElementById("swpChart");
+  if (canvas && typeof Chart !== "undefined") {
+    window.swpChartInstance = new Chart(canvas.getContext("2d"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Corpus left",
+            data: yearlyData,
+            borderWidth: 2.6,
+            borderColor: "#7c3aed",
+            backgroundColor: "rgba(124, 58, 237, 0.12)",
+            tension: 0.22,
+            pointRadius: yearlyData.length > 20 ? 0 : 3,
+            pointHoverRadius: 5,
+            fill: true
           }
-        }
+        ]
       },
-      scales: {
-        x: { title: { display: true, text: "Year" } },
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: v => '₹' + (v / 100000 >= 1 ? (v / 100000).toFixed(1) + 'L' : v.toLocaleString('en-IN'))
-          }
-        }
-      }
-    }
-  });
+      options: swpChartOptions()
+    });
+  }
   if (window.IIStorage) {
     window.IIStorage.rememberCalculator("SWP Calculator", "mutualfunds.html#swpcalc-mutual");
   }
-
 }
 
 function resetSWP() {
-  document.getElementById('swp-form').reset();
-  document.getElementById('swp-result').innerHTML = '';
-  document.getElementById('swp-faq').style.display = 'none';
+  document.getElementById("swp-form").reset();
+  var panel = document.getElementById("swp-result");
+  panel.innerHTML = "";
+  hideEl(panel);
+  hideEl(document.getElementById("swp-visual"));
+  var cards = document.getElementById("swp-year-cards");
+  if (cards) cards.innerHTML = "";
+  var stats = document.getElementById("swp-chart-stats");
+  if (stats) stats.innerHTML = "";
+  document.getElementById("swp-faq").style.display = "none";
   if (window.swpChartInstance) {
     window.swpChartInstance.destroy();
     window.swpChartInstance = null;
   }
-  document.getElementById('swpChart-container').style.display = 'none';
 }
 
 // Max Withdrawal SWP
 function calculateMaxSWP(event) {
   event.preventDefault();
-  const corpus = parseFloat(document.getElementById('swp-max-corpus').value);
-  const annualRate = parseFloat(document.getElementById('swp-max-rate').value);
-  const years = parseInt(document.getElementById('swp-max-years').value);
-  const result = window.IICalc.maxSwp(corpus, annualRate, years);
-  if (result.error) { alert('Please enter valid inputs.'); return; }
-  const maxSWP = result.maxMonthly;
-  const months = result.months;
-  const yearlyData = result.yearlyData, labels = result.labels;
-  const endBalance = result.endBalance;
-  document.getElementById('swp-max-result').innerHTML = `
-    <strong>Initial Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
-    <strong>Expected Annual Return:</strong> ${document.getElementById('swp-max-rate').value}%<br>
-    <strong>Withdrawal Duration:</strong> ${years} years (${months} months)<br>
-    <strong style="font-size:1.18em;">Maximum Monthly Withdrawal:</strong> <span style="color:#8f3ab6;font-weight:600;">₹${Math.round(maxSWP).toLocaleString('en-IN')}</span>
-    <br>
-    <strong>Corpus at End:</strong> ₹${Math.round(endBalance).toLocaleString('en-IN')}
-    <br>
-    <details style="margin-top:10px;"><summary>See year-wise balance</summary>
-      <div class="table-wrap table-scroll"><table class="product-table" style="width:100%;margin-top:7px;">
-        <thead><tr><th>Year</th><th>Corpus at Year End (₹)</th></tr></thead>
-        <tbody>
-        ${
-          yearlyData.map((val, i) => `<tr><td data-label="Year">${labels[i]}</td><td data-label="Corpus">₹${Math.round(val).toLocaleString('en-IN')}</td></tr>`).join('')
-        }
-        </tbody>
-      </table></div>
-    </details>
-  `;
-  document.getElementById('swpMaxChart-container').style.display = 'block';
-  document.getElementById('swp-max-faq').innerHTML = swpMaxFAQ;
-  document.getElementById('swp-max-faq').style.display = 'block';
+  var corpus = parseFloat(document.getElementById("swp-max-corpus").value);
+  var annualRate = parseFloat(document.getElementById("swp-max-rate").value);
+  var years = parseInt(document.getElementById("swp-max-years").value, 10);
+  var result = window.IICalc.maxSwp(corpus, annualRate, years);
+  if (result.error) {
+    alert("Please enter a valid corpus, return, and years.");
+    return;
+  }
+  var maxSWP = result.maxMonthly;
+  var months = result.months;
+  var yearlyData = result.yearlyData;
+  var labels = result.labels;
+  var endBalance = result.endBalance;
+  var totalWithdrawn = maxSWP * months;
+
+  var panel = document.getElementById("swp-max-result");
+  panel.innerHTML =
+    '<div class="calc-result-grid">' +
+    '<div class="calc-result-item is-hero"><span class="calc-result-label">Max monthly withdrawal</span><strong class="calc-result-value">' +
+    swpInr(maxSWP) +
+    '<span class="goal-per-mo"> / month</span></strong></div>' +
+    '<div class="calc-result-item"><span class="calc-result-label">Starting corpus</span><strong class="calc-result-value">' +
+    swpInr(corpus) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Total withdrawn (model)</span><strong class="calc-result-value">' +
+    swpInr(totalWithdrawn) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">End balance</span><strong class="calc-result-value">' +
+    swpInr(endBalance) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Assumed return</span><strong class="calc-result-value">' +
+    annualRate +
+    "%</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Duration</span><strong class="calc-result-value">' +
+    years +
+    " years (" +
+    months +
+    " mo)</strong></div>" +
+    "</div>" +
+    '<p class="calc-result-note">Highest steady monthly amount that roughly empties the pot over the period, at a constant return. Not a safe-withdrawal rule.</p>' +
+    '<p class="goal-insight goal-insight-ok">Use this as a ceiling sketch only. Live returns, fees, and tax will change what you can actually take.</p>';
+  showEl(panel);
+
+  var stats = document.getElementById("swp-max-chart-stats");
+  if (stats) {
+    stats.innerHTML =
+      '<div class="illust-stat"><div class="illust-stat-label">Start</div><div class="illust-stat-value">' +
+      swpInr(corpus) +
+      '</div><div class="illust-stat-hint">Initial corpus</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">Monthly max</div><div class="illust-stat-value is-amber">' +
+      swpInr(maxSWP) +
+      '</div><div class="illust-stat-hint">Model ceiling</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">End balance</div><div class="illust-stat-value">' +
+      swpInr(endBalance) +
+      '</div><div class="illust-stat-hint">Near zero by design</div></div>';
+  }
+  renderSwpYearCards("swp-max-year-cards", yearlyData, labels);
+  showEl(document.getElementById("swp-max-visual"));
+
+  document.getElementById("swp-max-faq").innerHTML = swpMaxFAQ;
+  document.getElementById("swp-max-faq").style.display = "block";
 
   if (window.swpMaxChartInstance) window.swpMaxChartInstance.destroy();
-  const ctx2 = document.getElementById('swpMaxChart').getContext('2d');
-  window.swpMaxChartInstance = new Chart(ctx2, {
-    type: 'line',
-    data: { labels, datasets: [{
-      label: "Corpus Value (₹)",
-      data: yearlyData,
-      borderWidth: 2.5,
-      borderColor: "#ff9800",
-      backgroundColor: "rgba(255,152,0,0.12)",
-      tension: 0.16,
-      pointRadius: 2,
-      fill: true,
-    }]},
-    options: {
-      plugins: {
-        legend: { display: true, position: 'bottom' },
-        tooltip: {
-          callbacks: {
-            title: ctx => ctx[0].label,
-            label: ctx => "Corpus: ₹" + Math.round(ctx.parsed.y).toLocaleString('en-IN')
+  var canvas2 = document.getElementById("swpMaxChart");
+  if (canvas2 && typeof Chart !== "undefined") {
+    window.swpMaxChartInstance = new Chart(canvas2.getContext("2d"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Corpus left",
+            data: yearlyData,
+            borderWidth: 2.6,
+            borderColor: "#d97706",
+            backgroundColor: "rgba(217, 119, 6, 0.12)",
+            tension: 0.22,
+            pointRadius: yearlyData.length > 20 ? 0 : 3,
+            pointHoverRadius: 5,
+            fill: true
           }
-        }
+        ]
       },
-      scales: {
-        x: { title: { display: true, text: "Year" } },
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: v => '₹' + (v / 100000 >= 1 ? (v / 100000).toFixed(1) + 'L' : v.toLocaleString('en-IN'))
-          }
-        }
-      }
-    }
-  });
+      options: swpChartOptions()
+    });
+  }
   if (window.IIStorage) {
     window.IIStorage.rememberCalculator("Max SWP Calculator", "mutualfunds.html#swpcalc-mutual");
   }
-
 }
 
 function resetSWPMax() {
-  document.getElementById('swp-max-form').reset();
-  document.getElementById('swp-max-result').innerHTML = '';
-  document.getElementById('swp-max-faq').style.display = 'none';
+  document.getElementById("swp-max-form").reset();
+  var panel = document.getElementById("swp-max-result");
+  panel.innerHTML = "";
+  hideEl(panel);
+  hideEl(document.getElementById("swp-max-visual"));
+  var cards = document.getElementById("swp-max-year-cards");
+  if (cards) cards.innerHTML = "";
+  var stats = document.getElementById("swp-max-chart-stats");
+  if (stats) stats.innerHTML = "";
+  document.getElementById("swp-max-faq").style.display = "none";
   if (window.swpMaxChartInstance) {
     window.swpMaxChartInstance.destroy();
     window.swpMaxChartInstance = null;
   }
-  document.getElementById('swpMaxChart-container').style.display = 'none';
 }
 
 document.addEventListener("DOMContentLoaded", function () {

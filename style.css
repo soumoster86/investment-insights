@@ -8675,8 +8675,54 @@ section.illust-panel {
 .illust-panel.tool-section[hidden],
 section.illust-panel[hidden],
 .goal-chart-section[hidden],
-#chart-section[hidden] {
+#chart-section[hidden],
+.swp-visual-panel[hidden],
+#swp-visual[hidden],
+#swp-max-visual[hidden] {
   display: none !important;
+}
+.calc-result-panel[hidden],
+#swp-result[hidden],
+#swp-max-result[hidden] {
+  display: none !important;
+}
+
+/* SWP calculator output polish */
+.swp-tabs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 12px 0 16px;
+}
+.swp-year-heading {
+  margin: 18px 0 4px;
+  font-size: 1.05em;
+  color: var(--text, #1a2332);
+}
+.goal-year-card.is-exhausted {
+  border-color: #fecdd3;
+  background: linear-gradient(165deg, #fff1f2 0%, #ffffff 55%);
+}
+.goal-year-card.is-exhausted::before { background: #e11d48; }
+.goal-year-card.is-exhausted .goal-year-badge {
+  color: #9f1239;
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+body.dark-mode .goal-year-card.is-exhausted {
+  background: linear-gradient(165deg, #2a1520 0%, #1c212b 60%) !important;
+  border-color: #5c2c3a !important;
+}
+body.dark-mode .goal-year-card.is-exhausted .goal-year-badge {
+  background: #2a1520 !important;
+  border-color: #5c2c3a !important;
+  color: #fda4af !important;
+}
+.goal-per-mo {
+  font-size: 0.55em;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+  margin-left: 4px;
 }
 .illust-panel .illust-top {
   display: flex !important;
