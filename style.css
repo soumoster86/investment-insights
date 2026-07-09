@@ -6173,8 +6173,9 @@ body.dark-mode .mistakes-list .mistake-emoji {
   border-color: #4a3d20 !important;
 }
 
-/* Practical tips / hygiene / limits — emoji cards (positive & boundary variants) */
+/* Practical tips / point lists / limits — emoji cards */
 .tips-list,
+.point-list,
 .limits-list {
   list-style: none;
   margin: 12px 0 0;
@@ -6183,6 +6184,7 @@ body.dark-mode .mistakes-list .mistake-emoji {
   gap: 10px;
 }
 .tips-list li,
+.point-list li,
 .limits-list li {
   display: flex;
   align-items: flex-start;
@@ -6194,6 +6196,45 @@ body.dark-mode .mistakes-list .mistake-emoji {
   color: #1a2332;
   font-size: 0.98em;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.point-list li {
+  border: 1.5px solid #d5e2f5;
+  background: linear-gradient(135deg, #f7faff 0%, #ffffff 55%);
+  box-shadow: 0 2px 8px rgba(10, 40, 90, 0.05);
+}
+.point-list li:hover {
+  transform: translateY(-1px);
+  border-color: #8abaff;
+  box-shadow: 0 6px 16px rgba(10, 40, 90, 0.08);
+}
+.point-list .tip-emoji {
+  flex: 0 0 auto;
+  width: 2em;
+  height: 2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15em;
+  line-height: 1;
+  border-radius: 10px;
+  background: #eef5ff;
+  border: 1px solid #d5e2f5;
+}
+.point-list .tip-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-top: 0.2em;
+}
+body.dark-mode .point-list li {
+  background: linear-gradient(135deg, #1a2230 0%, #1c212b 60%) !important;
+  border-color: #2c3340 !important;
+  color: #e7ecfa !important;
+  box-shadow: none;
+}
+body.dark-mode .point-list li:hover { border-color: #3b82f6 !important; }
+body.dark-mode .point-list .tip-emoji {
+  background: #1a2230 !important;
+  border-color: #2c3340 !important;
 }
 .tips-list li {
   border: 1.5px solid #a7f3d0;
