@@ -8971,6 +8971,20 @@ body.dark-mode .fund-map-risk {
 .fund-map.cols-5 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.fund-map.cols-1,
+.fund-map.gold-forms-stack {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.fund-map.gold-forms-stack .fund-map-card {
+  padding: 16px 18px 15px;
+}
+.fund-map.gold-forms-stack .fund-map-blurb {
+  margin-top: 2px;
+}
+.fund-map.gold-forms-stack .fund-map-blurb a {
+  font-weight: 600;
+}
 
 /* Shared accent tokens (reuse across pages) */
 .fund-map--tier1,
@@ -9082,10 +9096,12 @@ body.dark-mode .fund-map-risk {
   .fund-map { grid-template-columns: 1fr; }
   .fund-map.nps-tier-map,
   .fund-map.nps-asset-map,
+  .fund-map.cols-1,
   .fund-map.cols-2,
   .fund-map.cols-3,
   .fund-map.cols-4,
-  .fund-map.cols-5 { grid-template-columns: 1fr; }
+  .fund-map.cols-5,
+  .fund-map.gold-forms-stack { grid-template-columns: 1fr; }
 }
 
 /* ========== Parking options map (FD vs alternatives) ========== */
