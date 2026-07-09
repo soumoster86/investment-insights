@@ -2000,20 +2000,21 @@ body.dark-mode .etf-sip-assumptions ul { color: #c8d0dc !important; }
 /* ---------- IPO listing gains chart ---------- */
 .ipo-listing-section {
   margin-top: 28px !important;
-  background: linear-gradient(180deg, #f8fbff 0%, #fff 48%) !important;
+  background: #fff !important;
   border: 1.5px solid #d5e2f5 !important;
   border-radius: 18px !important;
   box-shadow: 0 4px 18px rgba(10, 40, 90, 0.05);
+  overflow: hidden;
 }
-.ipo-listing-header {
+.ipo-listing-top {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px 20px;
-  margin-bottom: 4px;
+  gap: 12px 18px;
+  margin-bottom: 14px;
 }
-.ipo-listing-header-text { flex: 1 1 260px; min-width: 0; }
+.ipo-listing-header-text { flex: 1 1 240px; min-width: 0; }
 .ipo-listing-eyebrow {
   margin: 0 0 6px;
   font-size: 0.72em;
@@ -2024,250 +2025,315 @@ body.dark-mode .etf-sip-assumptions ul { color: #c8d0dc !important; }
 }
 .ipo-listing-section h2 {
   margin-top: 0 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 6px !important;
 }
-.ipo-listing-section .tool-intro { margin-bottom: 8px; }
+.ipo-listing-section .tool-intro {
+  margin-bottom: 0;
+  max-width: 56ch;
+}
 .ipo-listing-freshness {
   margin: 0 !important;
   flex: 0 0 auto;
-  align-self: flex-start;
 }
 
-.ipo-listing-metrics {
+/* Compact stats strip */
+.ipo-listing-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin: 16px 0 14px;
-}
-.ipo-listing-metric {
-  background: #fff;
+  gap: 0;
+  margin: 0 0 16px;
   border: 1.5px solid #d5e2f5;
   border-radius: 14px;
-  padding: 12px 14px;
-  box-shadow: 0 2px 8px rgba(10, 40, 90, 0.04);
-  position: relative;
+  background: linear-gradient(180deg, #f7faff 0%, #eef4fc 100%);
   overflow: hidden;
 }
-.ipo-listing-metric::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  border-radius: 14px 0 0 14px;
-  background: linear-gradient(180deg, #2b7de9, #0a4d8c);
+.ipo-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border-right: 1px solid #d5e2f5;
+  min-width: 0;
 }
-.ipo-listing-metric-kicker {
+.ipo-stat:last-child { border-right: 0; }
+.ipo-stat-label {
   font-size: 0.7em;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #5b6b82;
-  margin-bottom: 4px;
+  color: #64748b;
 }
-.ipo-listing-metric-value {
-  font-size: 1.45em;
+.ipo-stat-value {
+  font-size: 1.4em;
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  color: #0a4d8c;
   font-variant-numeric: tabular-nums;
+  color: #0a4d8c;
 }
-.ipo-listing-metric-value.is-up { color: #047857; }
-.ipo-listing-metric-value.is-down { color: #b91c1c; }
-.ipo-listing-metric-value.is-mixed { color: #0a4d8c; font-size: 1.3em; }
-.ipo-listing-metric-sub {
-  margin-top: 4px;
-  font-size: 0.82em;
+.ipo-stat-value.is-up { color: #047857; }
+.ipo-stat-value.is-down { color: #b91c1c; }
+.ipo-stat-value.is-mixed {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 1em;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.ipo-stat-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.78em;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.ipo-stat-chip.is-up { background: #d1fae5; color: #047857; }
+.ipo-stat-chip.is-down { background: #fee2e2; color: #b91c1c; }
+.ipo-stat-chip.is-flat { background: #e2e8f0; color: #475569; }
+.ipo-stat-hint {
+  font-size: 0.8em;
   color: #6b7c93;
-  line-height: 1.35;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* Chart + rank side-by-side */
+.ipo-listing-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.9fr);
+  gap: 14px;
+  align-items: stretch;
+  margin-bottom: 12px;
+}
 .ipo-listing-chart-card {
-  background: #fff;
+  background: #fafcff;
   border: 1.5px solid #d5e2f5;
-  border-radius: 16px;
-  padding: 16px 16px 10px;
-  box-shadow: 0 2px 12px rgba(10, 40, 90, 0.05);
-  margin-bottom: 14px;
+  border-radius: 14px;
+  padding: 14px 14px 8px;
+  min-width: 0;
 }
 .ipo-listing-chart-head {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 8px 16px;
-  margin-bottom: 10px;
-  padding: 0 4px;
+  gap: 8px 12px;
+  margin-bottom: 6px;
+  padding: 0 2px;
 }
 .ipo-listing-chart-title {
-  margin: 0 0 4px !important;
-  font-size: 1.05em !important;
+  margin: 0 !important;
+  font-size: 1em !important;
   color: #0a4d8c !important;
 }
 .ipo-listing-chart-title::after { display: none !important; }
-.ipo-listing-chart-sub {
-  margin: 0;
-  font-size: 0.88em;
-  color: #5b6b82;
-  line-height: 1.4;
-}
-.ipo-listing-legend-hint {
+.ipo-listing-legend {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
-  font-size: 0.82em;
+  gap: 10px;
+  font-size: 0.78em;
   font-weight: 600;
-  color: #5b6b82;
-  white-space: nowrap;
+  color: #64748b;
 }
-.ipo-listing-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
+.ipo-listing-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.ipo-listing-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
   display: inline-block;
-  margin-left: 6px;
 }
-.ipo-listing-dot:first-child { margin-left: 0; }
-.ipo-listing-dot.is-up { background: #047857; box-shadow: 0 0 0 2px rgba(4, 120, 87, 0.18); }
-.ipo-listing-dot.is-down { background: #b91c1c; box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.18); }
+.ipo-listing-swatch.is-up { background: #10b981; }
+.ipo-listing-swatch.is-down { background: #ef4444; }
+.ipo-listing-swatch.is-flat { background: #94a3b8; }
 .ipo-listing-chart-wrap {
   position: relative;
   width: 100%;
-  height: min(340px, 58vw);
-  min-height: 260px;
+  height: 340px;
 }
 .ipo-listing-chart-wrap canvas {
   width: 100% !important;
   height: 100% !important;
 }
 
-.ipo-listing-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 0 14px;
-  font-size: 0.95em;
-  border: 1px solid #d5e2f5;
-  border-radius: 12px;
-  overflow: hidden;
+/* Rank list (right column) */
+.ipo-listing-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.ipo-listing-rank {
+  flex: 1;
   background: #fff;
+  border: 1.5px solid #d5e2f5;
+  border-radius: 14px;
+  padding: 12px 12px 8px;
+  min-height: 0;
 }
-.ipo-listing-table th,
-.ipo-listing-table td {
-  padding: 10px 14px;
+.ipo-rank-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  padding: 0 2px 8px;
   border-bottom: 1px solid #e8eef8;
-  text-align: left;
 }
-.ipo-listing-table th {
-  background: #eaf2ff;
-  color: #19427a;
-  font-weight: 700;
-  font-size: 0.88em;
-}
-.ipo-listing-table tbody tr:last-child td { border-bottom: 0; }
-.ipo-listing-table tbody tr:nth-child(even) td { background: #f7faff; }
-.ipo-listing-table th:nth-child(2),
-.ipo-listing-table td:nth-child(2),
-.ipo-listing-table th:nth-child(3),
-.ipo-listing-table td:nth-child(3) {
-  text-align: right;
-}
-.ipo-gain-pill {
-  display: inline-block;
-  min-width: 4.5em;
-  text-align: center;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+.ipo-rank-head strong {
   font-size: 0.92em;
+  color: #0a4d8c;
 }
-.ipo-gain-pill.is-up {
-  background: #d1fae5;
-  color: #047857;
+.ipo-rank-head span {
+  font-size: 0.75em;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
-.ipo-gain-pill.is-down {
-  background: #fee2e2;
-  color: #b91c1c;
+.ipo-rank-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.ipo-gain-pill.is-flat {
-  background: #e2e8f0;
-  color: #475569;
+.ipo-rank-item {
+  padding: 8px 2px;
+  border-bottom: 1px solid #f0f4fa;
 }
+.ipo-rank-item:last-child { border-bottom: 0; }
+.ipo-rank-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.ipo-rank-name {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ipo-rank-date {
+  font-size: 0.75em;
+  color: #94a3b8;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.ipo-rank-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ipo-rank-track {
+  flex: 1;
+  height: 6px;
+  background: #eef2f7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.ipo-rank-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  min-width: 4px;
+}
+.ipo-rank-fill.is-up { background: linear-gradient(90deg, #34d399, #059669); }
+.ipo-rank-fill.is-down { background: linear-gradient(90deg, #f87171, #dc2626); }
+.ipo-rank-fill.is-flat { background: #94a3b8; }
+.ipo-rank-pct {
+  flex: 0 0 3.6em;
+  text-align: right;
+  font-size: 0.82em;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.ipo-rank-pct.is-up { color: #047857; }
+.ipo-rank-pct.is-down { color: #b91c1c; }
+.ipo-rank-pct.is-flat { color: #64748b; }
 
 .ipo-listing-notes {
   background: linear-gradient(180deg, #f7faff 0%, #eef4fc 100%);
   border: 1.5px solid #d5e2f5;
   border-radius: 14px;
-  padding: 14px 16px 12px;
+  padding: 12px 14px 10px;
 }
 .ipo-listing-notes strong {
   display: block;
   color: #0a4d8c;
-  font-size: 0.95em;
-  margin-bottom: 8px;
+  font-size: 0.9em;
+  margin-bottom: 6px;
 }
 .ipo-listing-notes ul {
-  margin: 0 0 8px;
-  padding-left: 18px;
+  margin: 0;
+  padding-left: 16px;
   color: #3d4f66;
-  font-size: 0.92em;
-  line-height: 1.5;
+  font-size: 0.85em;
+  line-height: 1.45;
 }
-.ipo-listing-notes li { margin-bottom: 4px; }
+.ipo-listing-notes li { margin-bottom: 3px; }
 .ipo-listing-disclaimer {
   margin: 0;
-  font-size: 0.88em;
+  font-size: 0.84em;
   color: #6b7c93;
   font-style: italic;
+  text-align: center;
 }
 
+/* Dark mode */
 body.dark-mode .ipo-listing-section {
-  background: linear-gradient(180deg, #171c26 0%, #12161e 55%) !important;
+  background: #151a22 !important;
   border-color: #2c3340 !important;
   box-shadow: none;
 }
 body.dark-mode .ipo-listing-eyebrow { color: #8aa0c0 !important; }
-body.dark-mode .ipo-listing-metric,
-body.dark-mode .ipo-listing-chart-card,
-body.dark-mode .ipo-listing-table {
-  background: #1c212b !important;
+body.dark-mode .ipo-listing-stats {
+  background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
   border-color: #2c3340 !important;
 }
-body.dark-mode .ipo-listing-chart-title { color: #8abaff !important; }
-body.dark-mode .ipo-listing-metric-kicker,
-body.dark-mode .ipo-listing-metric-sub,
-body.dark-mode .ipo-listing-chart-sub,
-body.dark-mode .ipo-listing-legend-hint,
-body.dark-mode .ipo-listing-disclaimer { color: #9aa8bc !important; }
-body.dark-mode .ipo-listing-metric-value { color: #8abaff; }
-body.dark-mode .ipo-listing-metric-value.is-up { color: #34d399; }
-body.dark-mode .ipo-listing-metric-value.is-down { color: #f87171; }
-body.dark-mode .ipo-listing-table th {
-  background: #1a2740 !important;
-  color: #8abaff !important;
-  border-color: #2c3340 !important;
-}
-body.dark-mode .ipo-listing-table td {
-  border-color: #2c3340 !important;
-  color: #e7ecfa !important;
-}
-body.dark-mode .ipo-listing-table tbody tr:nth-child(even) td {
-  background: #181d27 !important;
-}
-body.dark-mode .ipo-gain-pill.is-up {
-  background: rgba(4, 120, 87, 0.25);
+body.dark-mode .ipo-stat { border-right-color: #2c3340 !important; }
+body.dark-mode .ipo-stat-label,
+body.dark-mode .ipo-stat-hint,
+body.dark-mode .ipo-listing-disclaimer,
+body.dark-mode .ipo-listing-legend { color: #9aa8bc !important; }
+body.dark-mode .ipo-stat-value { color: #8abaff; }
+body.dark-mode .ipo-stat-value.is-up { color: #34d399; }
+body.dark-mode .ipo-stat-value.is-down { color: #f87171; }
+body.dark-mode .ipo-stat-chip.is-up {
+  background: rgba(4, 120, 87, 0.28);
   color: #34d399;
 }
-body.dark-mode .ipo-gain-pill.is-down {
-  background: rgba(185, 28, 28, 0.25);
+body.dark-mode .ipo-stat-chip.is-down {
+  background: rgba(185, 28, 28, 0.28);
   color: #f87171;
 }
-body.dark-mode .ipo-gain-pill.is-flat {
+body.dark-mode .ipo-stat-chip.is-flat {
   background: #2c3340;
   color: #cbd5e1;
 }
+body.dark-mode .ipo-listing-chart-card,
+body.dark-mode .ipo-listing-rank {
+  background: #1c212b !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .ipo-listing-chart-title,
+body.dark-mode .ipo-rank-head strong { color: #8abaff !important; }
+body.dark-mode .ipo-rank-head { border-bottom-color: #2c3340 !important; }
+body.dark-mode .ipo-rank-item { border-bottom-color: #2c3340 !important; }
+body.dark-mode .ipo-rank-name { color: #e7ecfa !important; }
+body.dark-mode .ipo-rank-date { color: #7a879c !important; }
+body.dark-mode .ipo-rank-track { background: #2c3340 !important; }
+body.dark-mode .ipo-rank-pct.is-up { color: #34d399; }
+body.dark-mode .ipo-rank-pct.is-down { color: #f87171; }
 body.dark-mode .ipo-listing-notes {
   background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
   border-color: #2c3340 !important;
@@ -2275,18 +2341,37 @@ body.dark-mode .ipo-listing-notes {
 body.dark-mode .ipo-listing-notes strong { color: #8abaff !important; }
 body.dark-mode .ipo-listing-notes ul { color: #c8d0dc !important; }
 
-@media (max-width: 900px) {
-  .ipo-listing-metrics {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width: 520px) {
-  .ipo-listing-metrics {
+@media (max-width: 960px) {
+  .ipo-listing-body {
     grid-template-columns: 1fr;
   }
-  .ipo-listing-header {
-    flex-direction: column;
+  .ipo-listing-chart-wrap { height: 320px; }
+}
+@media (max-width: 720px) {
+  .ipo-listing-stats {
+    grid-template-columns: 1fr 1fr;
   }
+  .ipo-stat:nth-child(2) { border-right: 0; }
+  .ipo-stat:nth-child(1),
+  .ipo-stat:nth-child(2) {
+    border-bottom: 1px solid #d5e2f5;
+  }
+  body.dark-mode .ipo-stat:nth-child(1),
+  body.dark-mode .ipo-stat:nth-child(2) {
+    border-bottom-color: #2c3340 !important;
+  }
+}
+@media (max-width: 480px) {
+  .ipo-listing-stats {
+    grid-template-columns: 1fr;
+  }
+  .ipo-stat {
+    border-right: 0 !important;
+    border-bottom: 1px solid #d5e2f5;
+  }
+  .ipo-stat:last-child { border-bottom: 0; }
+  body.dark-mode .ipo-stat { border-bottom-color: #2c3340 !important; }
+  .ipo-listing-chart-wrap { height: 300px; }
 }
 
 /* ---------- IPO / ETF tables ---------- */
