@@ -527,6 +527,15 @@ form textarea:focus,
   transform: translateY(-3px);
   box-shadow: 0 12px 28px rgba(10, 50, 110, 0.34);
 }
+@media (max-width: 640px) {
+  #back-to-top {
+    right: 12px;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    padding: 10px 12px;
+    font-size: 0.85em;
+  }
+  #back-to-top span { display: none; } /* icon-only — less clutter over footer */
+}
 
 /* ============================================================
    Floating in-page navigation boxes
@@ -2054,6 +2063,8 @@ body.dark-mode h2::after {
   max-width: 1100px;
   margin: 0 auto;
   text-align: left;
+  width: 100%;
+  box-sizing: border-box;
 }
 .footer-grid {
   display: grid;
@@ -2094,6 +2105,7 @@ body.dark-mode h2::after {
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.95em;
+  line-height: 1.4;
 }
 .footer-links a:hover {
   color: var(--brand);
@@ -2103,6 +2115,8 @@ body.dark-mode h2::after {
   max-width: none !important;
   margin: 0 0 8px !important;
   text-align: left;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 .footer-copy {
   max-width: 1100px !important;
@@ -2112,18 +2126,131 @@ body.dark-mode h2::after {
   text-align: center;
   font-size: 0.9em;
   color: var(--text-muted);
+  line-height: 1.45;
 }
 body.dark-mode .footer-brand { color: #8abaff !important; }
 body.dark-mode .footer-heading { color: #eef1f6 !important; }
 body.dark-mode .footer-links a { color: #b4bccb !important; }
 body.dark-mode .footer-links a:hover { color: #8abaff !important; }
 body.dark-mode .footer-copy { border-color: #2c3340 !important; color: #8a9bb8 !important; }
+
+/* Tablet: about full width, link columns in a row/grid below */
 @media (max-width: 900px) {
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  footer {
+    padding: 24px 18px 28px;
+    text-align: left;
+  }
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px 18px;
+  }
+  .footer-about {
+    grid-column: 1 / -1;
+    padding-bottom: 18px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .footer-copy {
+    margin-top: 20px !important;
+  }
 }
-@media (max-width: 560px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 20px; }
-  footer { text-align: left; }
+
+/* Phone: about + 2-col link grid, larger tap targets, safe bottom space */
+@media (max-width: 640px) {
+  footer {
+    padding: 22px 14px calc(36px + env(safe-area-inset-bottom, 0px));
+    text-align: left;
+    overflow-x: hidden;
+  }
+  .footer-inner {
+    padding: 0;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 14px;
+  }
+  .footer-about {
+    grid-column: 1 / -1;
+    padding: 0 0 16px;
+    margin: 0 0 2px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .footer-brand {
+    font-size: 1.05em;
+    margin-bottom: 6px !important;
+  }
+  .footer-tagline {
+    font-size: 0.92em;
+    margin-bottom: 8px !important;
+  }
+  .footer-about .footer-disclaimer,
+  .footer-about .footer-reviewed {
+    font-size: 0.86em;
+    line-height: 1.5;
+  }
+  .footer-heading {
+    font-size: 0.8em;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px !important;
+    padding-bottom: 4px;
+  }
+  .footer-links li {
+    margin: 0;
+  }
+  .footer-links a {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 6px 0;
+    font-size: 0.92em;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Site column: full width under Learn/Calculators for cleaner balance */
+  .footer-grid > .footer-col:last-child {
+    grid-column: 1 / -1;
+    padding-top: 4px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .footer-grid > .footer-col:last-child .footer-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 14px;
+  }
+  .footer-copy {
+    margin: 18px auto 0 !important;
+    padding: 14px 4px 0;
+    font-size: 0.82em;
+    text-align: center;
+  }
+  body.dark-mode .footer-about,
+  body.dark-mode .footer-grid > .footer-col:last-child {
+    border-color: #2c3340 !important;
+  }
+}
+
+/* Very narrow: stack link columns fully */
+@media (max-width: 380px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .footer-grid > .footer-col:last-child {
+    grid-column: auto;
+    border-top: none;
+    padding-top: 0;
+  }
+  .footer-grid > .footer-col:last-child .footer-links {
+    display: block;
+  }
+  .footer-col:not(.footer-about) {
+    padding-top: 12px;
+    border-top: 1px solid var(--border-soft);
+  }
+  body.dark-mode .footer-col:not(.footer-about) {
+    border-color: #2c3340 !important;
+  }
 }
 
 /* Explicit dashboard hero (home) */
