@@ -11,6 +11,7 @@
   function setMode(dark) {
     var label = document.getElementById("dm-label");
     var toggle = document.getElementById("darkmode-toggle");
+    var wrap = document.querySelector(".dm-toggle");
     if (dark) {
       document.body.classList.add("dark-mode");
     } else {
@@ -19,6 +20,13 @@
     // Label always names the control; checked = dark mode is ON
     if (label) label.textContent = "Dark mode";
     if (toggle) toggle.checked = !!dark;
+    if (wrap) {
+      wrap.setAttribute(
+        "aria-label",
+        dark ? "Switch to light mode" : "Switch to dark mode"
+      );
+      wrap.setAttribute("title", dark ? "Switch to light mode" : "Switch to dark mode");
+    }
     try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
   }
 
@@ -45,14 +53,27 @@
       nav.classList.add("open");
       document.body.classList.add("nav-open");
       if (openBtn) openBtn.setAttribute("aria-expanded", "true");
+      // Move focus into drawer for keyboard users
+      if (closeBtn) {
+        try { closeBtn.focus(); } catch (e) {}
+      }
     }
     function closeNav() {
       nav.classList.remove("open");
       document.body.classList.remove("nav-open");
       if (openBtn) openBtn.setAttribute("aria-expanded", "false");
+      nav.querySelectorAll(".dropdown.open").forEach(function (dd) {
+        dd.classList.remove("open");
+      });
     }
 
-    if (openBtn) openBtn.addEventListener("click", openNav);
+    if (openBtn) {
+      openBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (nav.classList.contains("open")) closeNav();
+        else openNav();
+      });
+    }
     if (closeBtn) closeBtn.addEventListener("click", closeNav);
 
     // Tapping a normal link closes the drawer.
@@ -70,6 +91,7 @@
       ddToggle.addEventListener("click", function (e) {
         if (window.matchMedia("(max-width: 820px)").matches) {
           e.preventDefault();
+          e.stopPropagation();
           // Close sibling dropdowns so only one is open
           nav.querySelectorAll(".dropdown.open").forEach(function (other) {
             if (other !== dd) other.classList.remove("open");
@@ -77,6 +99,14 @@
           dd.classList.toggle("open");
         }
       });
+    });
+
+    // Tap scrim / outside drawer to close
+    document.addEventListener("click", function (e) {
+      if (!document.body.classList.contains("nav-open")) return;
+      if (nav.contains(e.target)) return;
+      if (openBtn && openBtn.contains(e.target)) return;
+      closeNav();
     });
 
     document.addEventListener("keydown", function (e) {

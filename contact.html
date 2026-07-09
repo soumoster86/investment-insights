@@ -41,19 +41,23 @@
 <!-- BEGIN SITE HEADER -->
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false">☰</button>
   <div class="brand">
     <a href="index.html" class="brand-link">
       <img src="logo.png" width="46" height="46" alt="" />
       <h1>Investment Insights</h1>
     </a>
   </div>
-  <label class="dm-toggle" for="darkmode-toggle">
+  <label class="dm-toggle" for="darkmode-toggle" title="Toggle colour theme">
     <input type="checkbox" id="darkmode-toggle" />
-    <span id="dm-label">Dark mode</span>
+    <span id="dm-label" class="dm-label-text">Dark mode</span>
+    <span class="dm-icon" aria-hidden="true"></span>
   </label>
-  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false">☰</button>
   <nav class="main-nav" id="main-nav" aria-label="Primary">
-    <button type="button" class="nav-close" id="nav-close" aria-label="Close menu">×</button>
+    <div class="nav-drawer-head">
+      <span class="nav-drawer-title">Menu</span>
+      <button type="button" class="nav-close" id="nav-close" aria-label="Close menu">×</button>
+    </div>
     <a href="index.html">Home</a>
     <div class="dropdown">
       <a href="learn.html" class="dropdown-toggle" aria-haspopup="true">Learn ▾</a>
