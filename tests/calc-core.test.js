@@ -20,6 +20,21 @@ describe("IICalc.sip", () => {
   test("rejects invalid inputs", () => {
     expect(IICalc.sip(0, 12, 10, 0).error).toBeTruthy();
   });
+
+  test("xirr is the effective annual rate, not the corpus/invested ratio", () => {
+    const r = IICalc.sip(10000, 12, 10, 0);
+    // 12% nominal, monthly compounding → (1.01)^12 - 1 ≈ 12.68% effective
+    expect(r.xirr).toBeCloseTo((Math.pow(1.01, 12) - 1) * 100, 6);
+    expect(r.absoluteReturnPct).toBeCloseTo((r.gain / r.totalInvested) * 100, 6);
+    // the misleading field is gone
+    expect(r.cagr).toBeUndefined();
+  });
+
+  test("xirr is independent of step-up (every rupee earns the same rate)", () => {
+    const flat = IICalc.sip(5000, 12, 5, 0);
+    const step = IICalc.sip(5000, 12, 5, 10);
+    expect(step.xirr).toBeCloseTo(flat.xirr, 8);
+  });
 });
 
 describe("IICalc.swp / maxSwp", () => {

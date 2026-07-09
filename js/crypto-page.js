@@ -27,18 +27,9 @@
     } catch (e) { /* ignore */ }
   }
 
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  function inr(n) {
-    if (n == null || isNaN(n)) return "—";
-    return "₹" + Math.round(n).toLocaleString("en-IN");
-  }
+  // Shared helpers (js/util.js must load first)
+  var escapeHtml = window.IIUtil.escapeHtml;
+  var inr = window.IIUtil.formatINR;
 
   function isOn(name) {
     return load().some(function (x) {

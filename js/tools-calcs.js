@@ -4,21 +4,9 @@
 (function () {
   "use strict";
 
-  function inr(n, digits) {
-    if (n == null || isNaN(n)) return "—";
-    return (
-      "₹" +
-      Number(n).toLocaleString("en-IN", {
-        maximumFractionDigits: digits == null ? 0 : digits,
-        minimumFractionDigits: 0
-      })
-    );
-  }
-
-  function pct(n, digits) {
-    if (n == null || isNaN(n)) return "—";
-    return Number(n).toFixed(digits == null ? 2 : digits) + "%";
-  }
+  // Shared helpers (js/util.js must load first)
+  var inr = window.IIUtil.formatINR;
+  var pct = window.IIUtil.formatPct;
 
   function show(el, html) {
     if (!el) return;

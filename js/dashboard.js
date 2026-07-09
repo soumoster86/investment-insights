@@ -5,10 +5,9 @@
 (function () {
   "use strict";
 
-  function formatINR(n) {
-    if (n == null || isNaN(n)) return "—";
-    return "₹" + Math.round(Number(n)).toLocaleString("en-IN");
-  }
+  // Shared helpers (js/util.js must load first)
+  var formatINR = window.IIUtil.formatINR;
+  var escapeHtml = window.IIUtil.escapeHtml;
 
   function fillLastCalculator() {
     var info = document.getElementById("last-used-info");
@@ -120,14 +119,6 @@
       .join("");
   }
 
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
   function convertCurrency() {
     var amountEl = document.getElementById("amount");
     var fromEl = document.getElementById("from-currency");
@@ -214,14 +205,8 @@
   }
 
   function formatMetalInr(n, digits) {
-    if (n == null || isNaN(n)) return "—";
-    return (
-      "₹" +
-      Number(n).toLocaleString("en-IN", {
-        maximumFractionDigits: digits == null ? 0 : digits,
-        minimumFractionDigits: digits == null ? 0 : digits
-      })
-    );
+    // Fixed decimals (min = max) so rates align in the card
+    return formatINR(n, digits == null ? 0 : digits, digits == null ? 0 : digits);
   }
 
   /**

@@ -43,15 +43,9 @@
     { name: "XRP (Ripple)", category: "Payment", risk: "High", desc: "Cross-border payments network, fast settlements", rating: 4, logo: "ripple-xrp-logo.png", url: "https://www.coingecko.com/en/coins/ripple" }
   ];
 
-  /* ---------- Helpers ---------- */
+  /* ---------- Helpers (shared: js/util.js must load first) ---------- */
 
-  function esc(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
+  var esc = global.IIUtil.escapeHtml;
 
   function stars(n) {
     n = Math.max(0, Math.min(5, n | 0));

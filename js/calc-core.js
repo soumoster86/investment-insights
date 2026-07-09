@@ -35,12 +35,18 @@
       currP *= 1 + stepupPct / 100;
     }
     var gain = corpus - totalInvested;
-    var cagr = totalInvested > 0 ? (Math.pow(corpus / totalInvested, 1 / years) - 1) * 100 : 0;
+    // Money-weighted annual return (XIRR). Every deposit compounds at the
+    // same monthly rate, so the XIRR equals the effective annual rate —
+    // independent of step-up. (The old corpus/invested "CAGR" understated
+    // returns because later deposits haven't been invested for `years`.)
+    var xirr = (Math.pow(1 + r, 12) - 1) * 100;
+    var absoluteReturnPct = totalInvested > 0 ? (gain / totalInvested) * 100 : 0;
     return {
       totalInvested: totalInvested,
       corpus: corpus,
       gain: gain,
-      cagr: cagr,
+      xirr: xirr,
+      absoluteReturnPct: absoluteReturnPct,
       yearlyData: yearlyData,
       labels: labels
     };

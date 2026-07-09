@@ -27,13 +27,8 @@
     } catch (e) { /* ignore */ }
   }
 
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
+  // Shared helper (js/util.js must load first)
+  var escapeHtml = window.IIUtil.escapeHtml;
 
   function isOn(name) {
     return load().some(function (x) {

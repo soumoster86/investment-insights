@@ -6,6 +6,13 @@
 
   var WATCH_KEY = "iiStockWatchlist";
 
+  // Shared helpers (js/util.js must load first)
+  var escapeHtml = window.IIUtil.escapeHtml;
+
+  function inr(n, d) {
+    return window.IIUtil.formatINR(n, d == null ? 2 : d);
+  }
+
   function $(id) {
     return document.getElementById(id);
   }
@@ -25,17 +32,6 @@
     try {
       localStorage.setItem(WATCH_KEY, JSON.stringify(list));
     } catch (e) { /* private mode */ }
-  }
-
-  function inr(n, d) {
-    if (n == null || isNaN(n)) return "—";
-    return (
-      "₹" +
-      Number(n).toLocaleString("en-IN", {
-        maximumFractionDigits: d == null ? 2 : d,
-        minimumFractionDigits: 0
-      })
-    );
   }
 
   function isWatched(name) {
@@ -101,14 +97,6 @@
         );
       })
       .join("");
-  }
-
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
   }
 
   function syncWatchButtons() {

@@ -30,6 +30,7 @@ https://investment-insight.netlify.app
 ├── nav.js                      Dark mode, mobile nav, active link, back-to-top
 ├── recommendations.js          Cards + search/sort/filter (+ top picks API)
 ├── js/
+│   ├── util.js                 Shared escapeHtml + INR/percent formatters
 │   ├── calc-core.js            Pure calculator math (SIP, SWP, FD, NPS, goal, bond)
 │   ├── storage.js              lastCalculator + investmentGoal localStorage
 │   └── dashboard.js            Home: goal card, last calc, top picks, FX, metals
@@ -58,6 +59,8 @@ https://investment-insight.netlify.app
 **`nav.js`** is loaded with `defer` on every page and is written defensively (every element lookup is null-checked). It handles dark mode, the mobile drawer, active-link highlighting, back-to-top, and `--header-h` sync for floating menus.
 
 **`recommendations.js`** is loaded on Stocks, Mutual Funds, Cryptocurrencies, and Home (for top picks). It renders cards from data arrays, wires search/sort/filter toolbars, uses local logos or initials avatars, and exposes `window.IIReco.topPicks()`.
+
+**`js/util.js`** exposes `window.IIUtil` (`escapeHtml`, `formatINR`, `formatPct`) — the single copy of the HTML escaper and number formatters. It must be included (plain `<script>`, no defer) before `recommendations.js`, `js/dashboard.js`, the `js/*-page.js` scripts, and `js/tools-calcs.js`.
 
 **`js/calc-core.js`** holds pure math used by the calculators and unit tests (`window.IICalc` / `require`). **`js/storage.js`** writes `lastCalculator` and `investmentGoal` snapshots. **`js/dashboard.js`** hydrates the home dashboard and fetches metals via the Netlify function. **`js/site-config.js`** holds public runtime config (analytics opt-in, endpoints). **`js/analytics.js`** loads Plausible only when enabled and when DNT/GPC is off.
 

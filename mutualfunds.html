@@ -604,14 +604,15 @@ function calculateSIP(event) {
   const stepup = parseFloat(document.getElementById('sip-stepup').value || 0);
   const result = window.IICalc.sip(P, annualRate, years, stepup);
   if (result.error) { alert(result.error); return; }
-  const totalInvested = result.totalInvested, corpus = result.corpus, gain = result.gain, cagr = result.cagr;
+  const totalInvested = result.totalInvested, corpus = result.corpus, gain = result.gain;
   const yearlyData = result.yearlyData, labels = result.labels;
 
   document.getElementById('sip-result').innerHTML = `
     <strong>Total Invested:</strong> ₹${Math.round(totalInvested).toLocaleString('en-IN')}<br>
     <strong>Final Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
     <strong>Total Gain:</strong> ₹${Math.round(gain).toLocaleString('en-IN')}<br>
-    <strong>CAGR:</strong> ${cagr.toFixed(2)}%
+    <strong>Total return:</strong> ${result.absoluteReturnPct.toFixed(1)}% &nbsp;·&nbsp;
+    <strong>XIRR (annualised):</strong> ${result.xirr.toFixed(2)}%
     <br>
     <details style="margin-top:10px;"><summary>See yearly projection</summary>
       <div class="table-wrap table-scroll"><table class="product-table" style="width:100%;margin-top:7px;">
@@ -909,6 +910,7 @@ window.addEventListener('scroll', () => {
   });
 });
 </script>
+  <script src="js/util.js"></script>
   <script src="js/calc-core.js"></script>
   <script src="js/storage.js"></script>
   <script src="recommendations.js" defer></script>
