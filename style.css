@@ -5994,14 +5994,47 @@ body.dark-mode .hub-lead { color: #b4bccb !important; }
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 14px 16px;
   margin-bottom: 8px;
+  align-items: start;
 }
-.tool-form label {
+/* Caption + ⓘ on one row; control always on the next full-width row */
+.tool-form label,
+.goal-form label,
+.calculator-box label {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  gap: 6px 6px;
   font-weight: 600;
   color: #2b3a52;
   font-size: 0.92em;
+  min-width: 0;
+}
+.tool-form label > input,
+.tool-form label > select,
+.tool-form label > textarea,
+.goal-form label > input,
+.goal-form label > select,
+.goal-form label > textarea,
+.calculator-box label > input,
+.calculator-box label > select,
+.calculator-box label > textarea {
+  flex: 1 0 100%;
+  order: 2;
+  width: 100%;
+  max-width: none;
+  font-weight: 500;
+  box-sizing: border-box;
+  min-height: 42px;
+}
+.tool-form label .tooltip,
+.goal-form label .tooltip,
+.calculator-box label .tooltip {
+  order: 1;
+  flex: 0 0 auto;
+  margin-left: 0;
+  align-self: center;
 }
 .tool-form input {
   font-weight: 500;
@@ -6525,12 +6558,16 @@ body.dark-mode .related-tools {
 label .tooltip {
   display: inline-flex;
   align-items: center;
-  margin-left: 4px;
+  justify-content: center;
+  margin-left: 2px;
   color: var(--brand);
   font-size: 0.95em;
+  line-height: 1;
   vertical-align: middle;
   position: relative;
   z-index: 20;
+  width: 1.25em;
+  height: 1.25em;
 }
 label .tooltip .tooltip-text {
   left: 0 !important;
@@ -8711,8 +8748,10 @@ section.illust-panel[hidden],
 #fo-opt-result[hidden] {
   display: none !important;
 }
-/* Select fields inside tool forms */
-.tool-form select {
+/* Select fields inside tool forms — match input height */
+.tool-form select,
+.calculator-box select,
+.goal-form select {
   width: 100%;
   max-width: none;
   font: inherit;
@@ -8722,11 +8761,22 @@ section.illust-panel[hidden],
   border: 1.5px solid var(--border-soft, #c5d0e0);
   background: #fff;
   color: var(--text, #1a2332);
+  min-height: 42px;
+  box-sizing: border-box;
+  appearance: auto;
 }
-body.dark-mode .tool-form select {
+body.dark-mode .tool-form select,
+body.dark-mode .calculator-box select,
+body.dark-mode .goal-form select {
   background: #151a22 !important;
   border-color: #2c3340 !important;
   color: #e7ecfa !important;
+}
+
+/* Forms that put inputs outside labels still need even rows */
+.tool-form .tool-fields > label,
+.calculator-box .tool-fields > label {
+  min-height: 0;
 }
 
 /* SWP calculator output polish */
