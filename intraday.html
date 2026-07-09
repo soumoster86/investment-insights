@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Intraday Trading Overview | Investment Insights</title>
 <!-- BEGIN SEO -->
-  <meta name="description" content="Educational overview of intraday trading concepts, risks, and terminology for Indian markets." />
+  <meta name="description" content="Intraday concepts, leverage risk, glossary, risk-capital sketch, and why long-term investing is often safer. Educational only." />
   <link rel="canonical" href="https://investment-insight.netlify.app/intraday.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Investment Insights" />
   <meta property="og:title" content="Intraday Trading Overview | Investment Insights" />
-  <meta property="og:description" content="Educational overview of intraday trading concepts, risks, and terminology for Indian markets." />
+  <meta property="og:description" content="Intraday concepts, leverage risk, glossary, risk-capital sketch, and why long-term investing is often safer. Educational only." />
   <meta property="og:url" content="https://investment-insight.netlify.app/intraday.html" />
   <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Intraday Trading Overview | Investment Insights" />
-  <meta name="twitter:description" content="Educational overview of intraday trading concepts, risks, and terminology for Indian markets." />
+  <meta name="twitter:description" content="Intraday concepts, leverage risk, glossary, risk-capital sketch, and why long-term investing is often safer. Educational only." />
 <!-- END SEO -->
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -96,26 +96,44 @@
     <div class="toc-title">On this page</div>
     <ul>
       <li><a href="#about-intraday">What is intraday?</a></li>
-      <li><a href="#chart-intraday">Sample chart</a></li>
       <li><a href="#how-intraday">How it works</a></li>
       <li><a href="#glossary-intraday">Glossary</a></li>
+      <li><a href="#risk-capital-intraday">Risk capital</a></li>
       <li><a href="#strategies-intraday">Strategies</a></li>
-      <li><a href="#tips-intraday">Tips</a></li>
+      <li><a href="#chart-intraday">Sample chart</a></li>
       <li><a href="#mistakes-intraday">Mistakes</a></li>
-      <li><a href="#active-stocks">Active stocks</a></li>
-      <li><a href="#faq-intraday">FAQs</a></li>
+      <li><a href="#active-stocks">Sample actives</a></li>
+      <li><a href="#related-intraday">Next steps</a></li>
     </ul>
   </nav>
 
 
   
   
-    <main    id="main-content" tabindex="-1">
-    <section id="about-intraday">
-      <h2>What is Intraday Trading?</h2>
-      <p>
-        <b>Intraday trading</b> refers to buying and selling stocks or other financial instruments within the same trading day—positions are squared off before market close. The aim is to profit from short-term price movements, rather than long-term investment growth.
+    <main id="main-content" tabindex="-1">
+    <section class="article-hero">
+      <p class="eyebrow">Trading · high risk</p>
+      <h1>Intraday trading overview</h1>
+      <p class="article-lead">
+        Educational guide to same-day trading concepts, leverage risk, and terminology.
+        Most beginners lose money with leverage — this page is not a trading system.
       </p>
+    </section>
+
+    <section id="about-intraday">
+      <h2>What is intraday trading?</h2>
+      <p>
+        <strong>Intraday trading</strong> means opening and closing positions in the same session (e.g. equity MIS products).
+        The goal is short-term price moves, not multi-year ownership. Brokers square off open intraday positions before close.
+      </p>
+      <div class="stocks-two-col">
+        <div class="callout callout-tip">
+          <strong>Why people try it:</strong> Potential for quick gains, use of margin products, full use of the trading day.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Why it is hard:</strong> Costs + taxes + leverage can erase small edges; emotional decisions; forced square-off.
+        </div>
+      </div>
     </section>
 
     <section id="chart-intraday">
@@ -127,17 +145,17 @@
     </section>
 
     <section id="how-intraday">
-      <h3>How Intraday Trading Works</h3>
-      <ol>
-        <li>You buy and sell stocks through your trading account, choosing the ‘Intraday’ or ‘MIS’ (Margin Intraday Square-off) option.</li>
-        <li>All open intraday positions are automatically squared off by the broker before market close (usually 3:15 PM IST).</li>
-        <li>You can trade with margin (leverage), meaning you can buy/sell more than your actual funds (but with higher risk).</li>
-        <li>Profits (or losses) are realized the same day, credited to your trading account.</li>
+      <h2>How it works</h2>
+      <ol class="steps-list">
+        <li>Choose an intraday product (often labelled MIS / intraday) on your broker.</li>
+        <li>Buy or sell with available margin — leverage amplifies both gains and losses.</li>
+        <li>Close the position yourself or face broker square-off near market close.</li>
+        <li>P&amp;L settles for the day (plus charges); overnight investment risk differs from MIS.</li>
       </ol>
     </section>
 
     <section id="glossary-intraday">
-      <h3>Glossary: Key Intraday Trading Terms</h3>
+      <h2>Glossary</h2>
       <ul>
         <li><b>Margin:</b> Borrowed funds from broker to trade larger positions than your balance allows.</li>
         <li><b>Square Off:</b> Closing an open position (buy/sell) within the same trading day.</li>
@@ -152,42 +170,62 @@
       </ul>
     </section>
 
+    <section id="risk-capital-intraday" class="tool-section">
+      <h2>Risk capital sketch</h2>
+      <p class="tool-intro">If you still experiment, cap the day’s risk. Educational only — not a strategy.</p>
+      <form id="intraday-risk-form" class="tool-form">
+        <div class="tool-fields">
+          <label>Trading capital (₹)
+            <input name="capital" type="number" min="1" step="any" required placeholder="e.g. 1,00,000" />
+          </label>
+          <label>Max loss % per day
+            <input name="pct" type="number" min="0.1" max="20" step="any" required placeholder="e.g. 1" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate max loss ₹</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="intraday-risk-result" class="calc-result-panel" hidden></div>
+    </section>
+
     <section id="strategies-intraday">
-      <h3>Popular Intraday Trading Strategies</h3>
+      <h2>Strategy names (concepts only)</h2>
+      <p class="tool-intro">Labels traders use — none are guaranteed edges after costs.</p>
       <ul>
-        <li><b>Momentum Trading:</b> Buy stocks showing strong upward momentum; sell if momentum fades.</li>
-        <li><b>Breakout Trading:</b> Enter trades when price breaks above resistance or below support with volume.</li>
-        <li><b>Reversal/Mean Reversion:</b> Trade against the trend, expecting a price reversal.</li>
-        <li><b>Scalping:</b> Make many small trades for tiny profits; requires very quick execution.</li>
-        <li><b>Gap Trading:</b> Trade based on stocks opening much higher/lower than the previous day’s close.</li>
+        <li><b>Momentum:</b> Follow strong short-term moves; exits when momentum fades.</li>
+        <li><b>Breakout:</b> Enter on range breaks with volume (false breaks are common).</li>
+        <li><b>Mean reversion:</b> Fade extremes — can fail in strong trends.</li>
+        <li><b>Scalping:</b> Many tiny trades; fees and speed dominate.</li>
       </ul>
     </section>
 
     <section id="tips-intraday">
-      <h3>Tips for Intraday Traders</h3>
+      <h3>Risk management tips</h3>
       <ul>
-        <li>Trade only with money you can afford to lose—risk management is critical.</li>
-        <li>Use stop-loss orders to limit potential losses.</li>
-        <li>Choose stocks with high liquidity and tight bid-ask spreads.</li>
-        <li>Don’t let emotions guide your trades—stick to your strategy.</li>
-        <li>Start small, practice on demo or with minimal capital before increasing size.</li>
-        <li>Track and analyze your trades to learn and improve.</li>
+        <li>Only risk capital you can lose without harming goals or rent.</li>
+        <li>Define stop-loss <em>before</em> entry; avoid revenge trading.</li>
+        <li>Prefer liquid names; watch total costs (brokerage, STT, GST, etc.).</li>
+        <li>Journal trades; if net expectancy is negative, stop.</li>
+        <li>Long-term wealth usually comes from investing, not day trading — <a href="stocks.html">Stocks guide</a>.</li>
       </ul>
     </section>
 
     <section id="mistakes-intraday">
-      <h3>Common Mistakes in Intraday Trading</h3>
+      <h2>Common mistakes</h2>
       <ul>
-        <li>Not setting stop-loss, leading to big losses.</li>
-        <li>Overtrading or chasing losses.</li>
-        <li>Ignoring transaction costs and taxes.</li>
-        <li>Trading illiquid or penny stocks.</li>
-        <li>Letting fear or greed override trading discipline.</li>
+        <li>No stop-loss; oversized leverage</li>
+        <li>Overtrading / chasing losses after a red day</li>
+        <li>Ignoring costs and taxes</li>
+        <li>Illiquid / penny stocks</li>
+        <li>Treating tips as research</li>
       </ul>
     </section>
 
     <section id="active-stocks">
-  <h3>Real-Time Most Active Stocks for Intraday Trading</h3>
+  <h2>Sample “active” names (static illustration)</h2>
+  <p class="tool-intro">Not live data. For real volumes open the NSE link below.</p>
   
   <div class="table-wrap table-scroll">
   <table class="active-stocks-table table-cards">
@@ -252,12 +290,12 @@
 </section>
 
 
-    <section id="faq-intraday">
-      <h3>FAQs about Intraday Trading</h3>
+    <section id="faq-intraday" class="faq-box">
+      <h3>FAQs</h3>
       <details>
-        <summary>Is intraday trading suitable for beginners?</summary>
+        <summary>Is intraday suitable for beginners?</summary>
         <div>
-          Intraday trading is challenging and risky, especially for beginners. Start small, learn with virtual accounts, and never risk money you can’t afford to lose.
+          Usually a poor first step. Most people should master basics and long-term investing first. Paper trade if you must experiment.
         </div>
       </details>
       <details>
@@ -269,7 +307,7 @@
       <details>
         <summary>Do I need to pay taxes on intraday profits?</summary>
         <div>
-          Yes. Intraday profits are considered speculative income and taxed as per your income slab. Keep detailed records for tax filing.
+          Often treated as speculative business income under tax discussions — confirm with a professional for your facts. Keep records. See <a href="tax-overview.html">Tax overview</a>.
         </div>
       </details>
       <details>
@@ -291,6 +329,37 @@
         </div>
       </details>
     </section>
+
+    <section id="related-intraday" class="related-tools">
+      <h2>Related tools &amp; guides</h2>
+      <div class="calc-grid">
+        <a class="calc-chip" href="stocks.html">Stocks (long-term)</a>
+        <a class="calc-chip" href="stocks.html#stock-pnl">Stock P&amp;L tool</a>
+        <a class="calc-chip" href="etf.html">ETFs</a>
+        <a class="calc-chip" href="risk-allocation.html">Risk &amp; allocation</a>
+        <a class="calc-chip" href="insurance-emergency.html">Emergency fund</a>
+        <a class="calc-chip" href="basics.html">How to start</a>
+      </div>
+      <nav class="topic-nav" aria-label="Continue learning">
+        <a class="topic-nav-link" href="stocks.html">
+          <span class="topic-nav-kicker">Better default</span>
+          <span class="topic-nav-title">Investing in stocks</span>
+        </a>
+        <a class="topic-nav-link topic-nav-next" href="ipo.html">
+          <span class="topic-nav-kicker">Related</span>
+          <span class="topic-nav-title">IPO guide</span>
+        </a>
+        <a class="topic-nav-link" href="learn.html">
+          <span class="topic-nav-kicker">Browse</span>
+          <span class="topic-nav-title">All Learn topics</span>
+        </a>
+      </nav>
+    </section>
+
+    <div class="callout callout-disclaimer">
+      <strong>Disclaimer:</strong> Educational only. Intraday trading with leverage can cause rapid losses.
+      Not a trading course or signal service. Not SEBI-registered advice.
+    </div>
   </main>
   <!-- BEGIN SITE FOOTER -->
 <footer>
@@ -422,7 +491,7 @@ document.querySelectorAll('.intraday-float-menu a').forEach(function(link) {
   
 <script>
 (function () {
-  var sections = ["about-intraday","chart-intraday","how-intraday","glossary-intraday","strategies-intraday","tips-intraday","mistakes-intraday","active-stocks","faq-intraday"];
+  var sections = ["about-intraday","how-intraday","glossary-intraday","risk-capital-intraday","strategies-intraday","chart-intraday","mistakes-intraday","active-stocks","related-intraday"];
   document.querySelectorAll(".floating-toc a").forEach(function (link) {
     link.addEventListener("click", function (e) {
       var target = document.querySelector(this.getAttribute("href"));
@@ -443,6 +512,44 @@ document.querySelectorAll('.intraday-float-menu a').forEach(function(link) {
     });
   });
 })();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.getElementById("intraday-risk-form");
+  var out = document.getElementById("intraday-risk-result");
+  if (!form || !out) return;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var capital = parseFloat(form.capital.value);
+    var pct = parseFloat(form.pct.value);
+    if (!(capital > 0) || !(pct > 0)) {
+      out.hidden = false;
+      out.innerHTML = '<p class="calc-error">Enter valid capital and max loss %.</p>';
+      return;
+    }
+    var maxLoss = capital * (pct / 100);
+    out.hidden = false;
+    out.innerHTML =
+      '<div class="calc-result-grid"><div class="calc-result-item is-hero"><span class="calc-result-label">Max loss for the day (cap)</span><strong class="calc-result-value pnl-neg">₹' +
+      Math.round(maxLoss).toLocaleString("en-IN") +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Capital</span><strong class="calc-result-value">₹' +
+      Math.round(capital).toLocaleString("en-IN") +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Risk %</span><strong class="calc-result-value">' +
+      pct +
+      "%</strong></div></div>" +
+      '<p class="calc-result-note">If you hit this loss, stop for the day. Leverage can blow through this cap quickly — educational only.</p>';
+  });
+  var reset = form.querySelector("[data-reset]");
+  if (reset) {
+    reset.addEventListener("click", function () {
+      form.reset();
+      out.innerHTML = "";
+      out.hidden = true;
+    });
+  }
+});
 </script>
 
 <script src="nav.js" defer></script>

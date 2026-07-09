@@ -22,22 +22,22 @@ const PAGES = {
   "etf.html": {
     title: "ETFs Explained | Investment Insights",
     description:
-      "Understand exchange-traded funds (ETFs), how they differ from mutual funds, and key benefits for Indian investors."
+      "India ETF guide: types, costs, tracking, ETF vs index mutual funds, and educational SIP illustration. Not advice."
   },
   "ipo.html": {
     title: "IPO Guide | Investment Insights",
     description:
-      "How IPOs work in India, listing process basics, and illustrative listing-gains charts for educational use."
+      "How IPOs work in India, apply flow, checklist, risks, and illustrative listing-gains chart. Educational only."
   },
   "intraday.html": {
     title: "Intraday Trading Overview | Investment Insights",
     description:
-      "Educational overview of intraday trading concepts, risks, and terminology for Indian markets."
+      "Intraday concepts, leverage risk, glossary, risk-capital sketch, and why long-term investing is often safer. Educational only."
   },
   "usstocks.html": {
     title: "US Stocks for Indian Investors | Investment Insights",
     description:
-      "Introduction to US equity markets for Indian investors, with sample names and live market widgets."
+      "US equities from India: access routes, LRS notes, currency risk, sample names, and tax cautions. Educational only."
   },
   "mutualfunds.html": {
     title: "Mutual Funds, SIP & SWP Calculators | Investment Insights",
