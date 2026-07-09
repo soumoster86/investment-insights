@@ -6172,6 +6172,107 @@ body.dark-mode .mistakes-list .mistake-emoji {
   background: #2a2414 !important;
   border-color: #4a3d20 !important;
 }
+
+/* Practical tips / hygiene / limits — emoji cards (positive & boundary variants) */
+.tips-list,
+.limits-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.tips-list li,
+.limits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0;
+  padding: 13px 14px;
+  border-radius: 14px;
+  line-height: 1.45;
+  color: #1a2332;
+  font-size: 0.98em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.tips-list li {
+  border: 1.5px solid #a7f3d0;
+  background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 55%);
+  box-shadow: 0 2px 8px rgba(4, 120, 87, 0.06);
+}
+.tips-list li:hover {
+  transform: translateY(-1px);
+  border-color: #34d399;
+  box-shadow: 0 6px 16px rgba(4, 120, 87, 0.1);
+}
+.limits-list li {
+  border: 1.5px solid #bfdbfe;
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 55%);
+  box-shadow: 0 2px 8px rgba(10, 77, 140, 0.06);
+}
+.limits-list li:hover {
+  transform: translateY(-1px);
+  border-color: #60a5fa;
+  box-shadow: 0 6px 16px rgba(10, 77, 140, 0.1);
+}
+.tips-list .tip-emoji,
+.limits-list .tip-emoji {
+  flex: 0 0 auto;
+  width: 2em;
+  height: 2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15em;
+  line-height: 1;
+  border-radius: 10px;
+}
+.tips-list .tip-emoji {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+.limits-list .tip-emoji {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+.tips-list .tip-text,
+.limits-list .tip-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-top: 0.2em;
+}
+/* check-list with emoji badges (optional override of checkmark) */
+.check-list.tips-list li,
+ul.tips-list.check-list li {
+  padding: 13px 14px;
+}
+.check-list.tips-list li::before,
+ul.tips-list.check-list li::before {
+  display: none;
+  content: none;
+}
+body.dark-mode .tips-list li {
+  background: linear-gradient(135deg, #14241c 0%, #1c212b 60%) !important;
+  border-color: #1f4d38 !important;
+  color: #e7ecfa !important;
+  box-shadow: none;
+}
+body.dark-mode .tips-list li:hover { border-color: #059669 !important; }
+body.dark-mode .limits-list li {
+  background: linear-gradient(135deg, #152033 0%, #1c212b 60%) !important;
+  border-color: #2c3d5c !important;
+  color: #e7ecfa !important;
+  box-shadow: none;
+}
+body.dark-mode .limits-list li:hover { border-color: #3b82f6 !important; }
+body.dark-mode .tips-list .tip-emoji {
+  background: #14241c !important;
+  border-color: #1f4d38 !important;
+}
+body.dark-mode .limits-list .tip-emoji {
+  background: #152033 !important;
+  border-color: #2c3d5c !important;
+}
 .related-tools {
   background: linear-gradient(180deg, #f7faff, #f3f7fd) !important;
 }
