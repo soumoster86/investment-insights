@@ -4127,6 +4127,96 @@ body.dark-mode .watch-card {
   border-color: #2c3340 !important;
 }
 
+/* Bonds page */
+.bond-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.bond-cards-grid .bond-card {
+  max-width: none;
+  flex: none;
+  min-width: 0;
+}
+.ladder-visual-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0;
+}
+.ladder-visual-card {
+  background: #f4f7fa;
+  border-radius: 16px;
+  padding: 20px 16px;
+  box-shadow: 0 2px 14px rgba(0, 64, 128, 0.08);
+  max-width: min(540px, 100%);
+  width: 100%;
+  box-sizing: border-box;
+}
+.ladder-visual-title {
+  font-weight: 700;
+  color: #226b4a;
+  font-size: 1.1em;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.ladder-rungs {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(10px, 4vw, 26px);
+  flex-wrap: wrap;
+}
+.ladder-rung {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.ladder-rung span {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background: #bee4d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #226b4a;
+  font-size: 0.85em;
+}
+.ladder-rung i {
+  display: block;
+  width: 6px;
+  height: var(--h, 40px);
+  background: #57bba7;
+  border-radius: 3px;
+}
+.ladder-rung em {
+  font-style: normal;
+  font-size: 0.9em;
+  color: #226b4a;
+  font-weight: 600;
+}
+.ladder-visual-note {
+  font-size: 0.95em;
+  color: #28587c;
+  margin: 16px 0 0;
+  text-align: center;
+  line-height: 1.45;
+}
+body.dark-mode .ladder-visual-card {
+  background: #1c212b !important;
+  box-shadow: none !important;
+  border: 1px solid #2c3340;
+}
+body.dark-mode .ladder-visual-title,
+body.dark-mode .ladder-rung em { color: #86efac !important; }
+body.dark-mode .ladder-visual-note { color: #9fc2ff !important; }
+body.dark-mode .ladder-rung span {
+  background: #14352a !important;
+  color: #86efac !important;
+}
+
 /* Mobile Learn menu: keep curriculum + hub link; hide long product list */
 .nav-learn-mobile-more { display: none; }
 @media (max-width: 820px) {

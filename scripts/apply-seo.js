@@ -62,7 +62,7 @@ const PAGES = {
   "bonds.html": {
     title: "Bonds Guide & Yield Calculator | Investment Insights",
     description:
-      "Bond investing basics for India plus a simple current yield and approximate YTM calculator."
+      "India bonds guide: G-Secs, corporates, ratings, yield & YTM calculator, bond ladder planner, and educational product notes. Not advice."
   },
   "investmentgoal.html": {
     title: "Investment Goal Planner | Investment Insights",
