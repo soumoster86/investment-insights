@@ -3177,57 +3177,100 @@ body.dark-mode .intraday-chart-notes ul { color: #c8d0dc !important; }
   text-align: center;
 }
 
-/* Dark mode */
+/* Dark mode — high contrast for listing gains illustration */
 body.dark-mode .ipo-listing-section {
-  background: #151a22 !important;
-  border-color: #2c3340 !important;
+  background: #151c28 !important;
+  border-color: #3a4a63 !important;
   box-shadow: none;
+  color: #e8eef8 !important;
 }
-body.dark-mode .ipo-listing-eyebrow { color: #8aa0c0 !important; }
+body.dark-mode .ipo-listing-section h2 {
+  color: #d6e8ff !important;
+}
+body.dark-mode .ipo-listing-section .tool-intro,
+body.dark-mode .ipo-listing-section .tool-intro strong {
+  color: #d5dee9 !important;
+}
+body.dark-mode .ipo-listing-eyebrow { color: #a8bdd8 !important; }
 body.dark-mode .ipo-listing-stats {
-  background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
-  border-color: #2c3340 !important;
+  background: linear-gradient(180deg, #222b3c 0%, #1a2230 100%) !important;
+  border-color: #3d4d66 !important;
 }
-body.dark-mode .ipo-stat { border-right-color: #2c3340 !important; }
-body.dark-mode .ipo-stat-label,
+body.dark-mode .ipo-stat { border-right-color: #3d4d66 !important; }
+body.dark-mode .ipo-stat-label {
+  color: #b4c0d4 !important;
+}
 body.dark-mode .ipo-stat-hint,
-body.dark-mode .ipo-listing-disclaimer,
-body.dark-mode .ipo-listing-legend { color: #9aa8bc !important; }
-body.dark-mode .ipo-stat-value { color: #8abaff; }
-body.dark-mode .ipo-stat-value.is-up { color: #34d399; }
-body.dark-mode .ipo-stat-value.is-down { color: #f87171; }
+body.dark-mode .ipo-listing-disclaimer {
+  color: #b0bccf !important;
+}
+body.dark-mode .ipo-listing-legend {
+  color: #c5d0e0 !important;
+}
+body.dark-mode .ipo-stat-value { color: #bfdbfe !important; }
+body.dark-mode .ipo-stat-value.is-up { color: #6ee7b7 !important; }
+body.dark-mode .ipo-stat-value.is-down { color: #fca5a5 !important; }
 body.dark-mode .ipo-stat-chip.is-up {
-  background: rgba(4, 120, 87, 0.28);
-  color: #34d399;
+  background: rgba(16, 185, 129, 0.22);
+  color: #6ee7b7;
 }
 body.dark-mode .ipo-stat-chip.is-down {
-  background: rgba(185, 28, 28, 0.28);
-  color: #f87171;
+  background: rgba(248, 113, 113, 0.22);
+  color: #fca5a5;
 }
 body.dark-mode .ipo-stat-chip.is-flat {
-  background: #2c3340;
-  color: #cbd5e1;
+  background: #334155;
+  color: #e2e8f0;
 }
 body.dark-mode .ipo-listing-chart-card,
 body.dark-mode .ipo-listing-rank {
-  background: #1c212b !important;
-  border-color: #2c3340 !important;
+  background: #1e2738 !important;
+  border-color: #3d4d66 !important;
 }
 body.dark-mode .ipo-listing-chart-title,
-body.dark-mode .ipo-rank-head strong { color: #8abaff !important; }
-body.dark-mode .ipo-rank-head { border-bottom-color: #2c3340 !important; }
-body.dark-mode .ipo-rank-item { border-bottom-color: #2c3340 !important; }
-body.dark-mode .ipo-rank-name { color: #e7ecfa !important; }
-body.dark-mode .ipo-rank-date { color: #7a879c !important; }
-body.dark-mode .ipo-rank-track { background: #2c3340 !important; }
-body.dark-mode .ipo-rank-pct.is-up { color: #34d399; }
-body.dark-mode .ipo-rank-pct.is-down { color: #f87171; }
-body.dark-mode .ipo-listing-notes {
-  background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
-  border-color: #2c3340 !important;
+body.dark-mode .ipo-rank-head strong {
+  color: #d6e8ff !important;
 }
-body.dark-mode .ipo-listing-notes strong { color: #8abaff !important; }
-body.dark-mode .ipo-listing-notes ul { color: #c8d0dc !important; }
+body.dark-mode .ipo-rank-head {
+  border-bottom-color: #3d4d66 !important;
+}
+body.dark-mode .ipo-rank-head span {
+  color: #a8b6c9 !important;
+}
+body.dark-mode .ipo-rank-item { border-bottom-color: #334155 !important; }
+body.dark-mode .ipo-rank-name { color: #f1f5f9 !important; }
+body.dark-mode .ipo-rank-date { color: #a8b6c9 !important; }
+body.dark-mode .ipo-rank-track { background: #334155 !important; }
+body.dark-mode .ipo-rank-pct.is-up { color: #6ee7b7 !important; }
+body.dark-mode .ipo-rank-pct.is-down { color: #fca5a5 !important; }
+body.dark-mode .ipo-rank-pct.is-flat { color: #cbd5e1 !important; }
+body.dark-mode .ipo-listing-notes {
+  background: linear-gradient(180deg, #222b3c 0%, #1a2230 100%) !important;
+  border-color: #3d4d66 !important;
+}
+body.dark-mode .ipo-listing-notes strong {
+  color: #d6e8ff !important;
+}
+body.dark-mode .ipo-listing-notes ul,
+body.dark-mode .ipo-listing-notes li {
+  color: #e2e8f0 !important;
+}
+body.dark-mode .ipo-listing-notes a {
+  color: #93c5fd !important;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+body.dark-mode .ipo-listing-notes a:hover {
+  color: #bfdbfe !important;
+}
+body.dark-mode .ipo-listing-section .sample-freshness,
+body.dark-mode .ipo-listing-freshness {
+  color: #b0bccf !important;
+}
+body.dark-mode .ipo-listing-section .sample-freshness-label {
+  color: #d6e8ff !important;
+}
 
 @media (max-width: 960px) {
   .ipo-listing-body {
@@ -3792,7 +3835,7 @@ section[id^="faq-"] details > div a,
   line-height: 1.35;
 }
 
-/* Dark mode FAQ */
+/* Dark mode FAQ — high contrast (overrides light-only !important rules) */
 body.dark-mode .faq-box,
 body.dark-mode section[id^="faq-"],
 body.dark-mode section[id*="-faq"],
@@ -3800,86 +3843,165 @@ body.dark-mode #sip-faq-etf,
 body.dark-mode #swp-faq,
 body.dark-mode #swp-max-faq,
 body.dark-mode #bondYieldFaq {
-  background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
-  border-color: #2c3a52 !important;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+  background: linear-gradient(180deg, #1b2434 0%, #141a24 100%) !important;
+  border-color: #3a4a63 !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+  color: #e8eef8 !important;
 }
 body.dark-mode .faq-box > h2,
 body.dark-mode .faq-box > h3,
 body.dark-mode section[id^="faq-"] > h2,
 body.dark-mode section[id^="faq-"] > h3,
+body.dark-mode section[id*="-faq"] > h2,
 body.dark-mode section[id*="-faq"] > h3,
 body.dark-mode #sip-faq-etf > h3,
+body.dark-mode #swp-faq > h3,
+body.dark-mode #swp-max-faq > h3,
 body.dark-mode #bondYieldFaq > h3 {
-  color: #9ec9ff !important;
-  border-bottom-color: #2c3a52 !important;
-  background: linear-gradient(180deg, rgba(30, 42, 64, 0.95) 0%, rgba(22, 28, 40, 0.4) 100%) !important;
+  color: #d6e8ff !important;
+  border-bottom-color: #334155 !important;
+  background: linear-gradient(180deg, #243247 0%, #1a2332 100%) !important;
 }
 body.dark-mode .faq-box details,
 body.dark-mode section[id^="faq-"] details,
 body.dark-mode section[id*="-faq"] details,
 body.dark-mode #sip-faq-etf details,
 body.dark-mode #swp-faq details,
-body.dark-mode #swp-max-faq details {
-  background: #1c212b !important;
-  border-color: #343b4a !important;
+body.dark-mode #swp-max-faq details,
+body.dark-mode #bondYieldFaq details {
+  background: #222b3c !important;
+  border-color: #3d4d66 !important;
+  color: #e8eef8 !important;
 }
 body.dark-mode .faq-box details[open],
 body.dark-mode section[id^="faq-"] details[open],
-body.dark-mode #sip-faq-etf details[open] {
-  border-color: #3d6aa8 !important;
-  background: linear-gradient(180deg, #1e2838 0%, #1a222e 100%) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+body.dark-mode section[id*="-faq"] details[open],
+body.dark-mode #sip-faq-etf details[open],
+body.dark-mode #swp-faq details[open],
+body.dark-mode #swp-max-faq details[open],
+body.dark-mode #bondYieldFaq details[open] {
+  border-color: #5b8fd4 !important;
+  background: linear-gradient(180deg, #273449 0%, #1e2838 100%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
 }
 body.dark-mode .faq-box summary,
 body.dark-mode section[id^="faq-"] summary,
 body.dark-mode section[id*="-faq"] summary,
 body.dark-mode #sip-faq-etf summary,
 body.dark-mode #swp-faq summary,
-body.dark-mode #swp-max-faq summary {
-  color: #c5dcff !important;
+body.dark-mode #swp-max-faq summary,
+body.dark-mode #bondYieldFaq summary {
+  color: #f0f6ff !important;
 }
 body.dark-mode .faq-box summary::after,
 body.dark-mode section[id^="faq-"] summary::after,
-body.dark-mode #sip-faq-etf summary::after {
-  background: #243044 !important;
-  color: #8abaff !important;
+body.dark-mode section[id*="-faq"] summary::after,
+body.dark-mode #sip-faq-etf summary::after,
+body.dark-mode #swp-faq summary::after,
+body.dark-mode #swp-max-faq summary::after,
+body.dark-mode #bondYieldFaq summary::after {
+  background: #334155 !important;
+  color: #c7dcff !important;
 }
 body.dark-mode .faq-box details[open] > summary::after,
 body.dark-mode section[id^="faq-"] details[open] > summary::after,
-body.dark-mode #sip-faq-etf details[open] > summary::after {
-  background: #2b7de9 !important;
-  color: #fff !important;
+body.dark-mode section[id*="-faq"] details[open] > summary::after,
+body.dark-mode #sip-faq-etf details[open] > summary::after,
+body.dark-mode #swp-faq details[open] > summary::after,
+body.dark-mode #swp-max-faq details[open] > summary::after,
+body.dark-mode #bondYieldFaq details[open] > summary::after {
+  background: #3b82f6 !important;
+  color: #ffffff !important;
 }
 body.dark-mode .faq-box summary:hover,
 body.dark-mode section[id^="faq-"] summary:hover,
-body.dark-mode #sip-faq-etf summary:hover {
-  background: rgba(43, 125, 233, 0.12) !important;
-  color: #e8f1ff !important;
+body.dark-mode section[id*="-faq"] summary:hover,
+body.dark-mode #sip-faq-etf summary:hover,
+body.dark-mode #swp-faq summary:hover,
+body.dark-mode #swp-max-faq summary:hover,
+body.dark-mode #bondYieldFaq summary:hover {
+  background: rgba(59, 130, 246, 0.18) !important;
+  color: #ffffff !important;
 }
 body.dark-mode .faq-box details[open] > summary,
 body.dark-mode section[id^="faq-"] details[open] > summary,
-body.dark-mode #sip-faq-etf details[open] > summary {
-  border-bottom-color: #2c3a52 !important;
-  background: rgba(43, 125, 233, 0.1) !important;
+body.dark-mode section[id*="-faq"] details[open] > summary,
+body.dark-mode #sip-faq-etf details[open] > summary,
+body.dark-mode #swp-faq details[open] > summary,
+body.dark-mode #swp-max-faq details[open] > summary,
+body.dark-mode #bondYieldFaq details[open] > summary {
+  border-bottom-color: #3d4d66 !important;
+  background: rgba(59, 130, 246, 0.14) !important;
+  color: #f0f6ff !important;
 }
+/* Answer body — light text on dark panels */
 body.dark-mode .faq-box details > div,
 body.dark-mode .faq-box details > p,
+body.dark-mode .faq-box details > ul,
+body.dark-mode .faq-box details > ol,
+body.dark-mode .faq-box details li,
 body.dark-mode section[id^="faq-"] details > div,
-body.dark-mode #sip-faq-etf details > div {
-  color: #c8d0dc !important;
+body.dark-mode section[id^="faq-"] details > p,
+body.dark-mode section[id^="faq-"] details > ul,
+body.dark-mode section[id^="faq-"] details > ol,
+body.dark-mode section[id^="faq-"] details li,
+body.dark-mode section[id*="-faq"] details > div,
+body.dark-mode section[id*="-faq"] details > p,
+body.dark-mode section[id*="-faq"] details > ul,
+body.dark-mode section[id*="-faq"] details > ol,
+body.dark-mode section[id*="-faq"] details li,
+body.dark-mode #sip-faq-etf details > div,
+body.dark-mode #sip-faq-etf details > p,
+body.dark-mode #sip-faq-etf details li,
+body.dark-mode #swp-faq details > div,
+body.dark-mode #swp-faq details > p,
+body.dark-mode #swp-max-faq details > div,
+body.dark-mode #swp-max-faq details > p,
+body.dark-mode #bondYieldFaq details > div,
+body.dark-mode #bondYieldFaq details > p {
+  color: #e2e8f0 !important;
 }
+body.dark-mode .faq-box details strong,
+body.dark-mode .faq-box details b,
+body.dark-mode section[id^="faq-"] details strong,
+body.dark-mode section[id*="-faq"] details strong,
+body.dark-mode #sip-faq-etf details strong,
+body.dark-mode #bondYieldFaq details strong {
+  color: #f8fafc !important;
+}
+/* Links: light blue, not brand navy (unreadable on dark) */
+body.dark-mode .faq-box details a,
+body.dark-mode section[id^="faq-"] details a,
+body.dark-mode section[id*="-faq"] details a,
+body.dark-mode #sip-faq-etf details a,
+body.dark-mode #swp-faq details a,
+body.dark-mode #swp-max-faq details a,
+body.dark-mode #bondYieldFaq details a,
+body.dark-mode .faq-box a,
+body.dark-mode #bondYieldFaq a {
+  color: #93c5fd !important;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+body.dark-mode .faq-box details a:hover,
+body.dark-mode section[id^="faq-"] details a:hover,
+body.dark-mode section[id*="-faq"] details a:hover,
+body.dark-mode #sip-faq-etf details a:hover {
+  color: #bfdbfe !important;
+}
+/* List-style FAQs */
 body.dark-mode .faq-box > ul > li,
 body.dark-mode #bondYieldFaq > ul > li {
-  background: #1c212b !important;
-  border-color: #343b4a !important;
-  color: #c8d0dc !important;
+  background: #222b3c !important;
+  border-color: #3d4d66 !important;
+  color: #e2e8f0 !important;
 }
 body.dark-mode .faq-box > ul > li > strong,
 body.dark-mode .faq-box > ul > li > b,
 body.dark-mode #bondYieldFaq > ul > li > strong,
 body.dark-mode #bondYieldFaq > ul > li > b {
-  color: #8abaff !important;
+  color: #bfdbfe !important;
 }
 
 /* Generic content tables */
