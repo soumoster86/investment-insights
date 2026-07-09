@@ -52,16 +52,18 @@
         <a href="tax-overview.html" role="menuitem">Tax overview</a>
         <a href="gold.html" role="menuitem">Gold</a>
         <a href="index-vs-active.html" role="menuitem">Index vs active</a>
-        <a href="stocks.html" role="menuitem">Stocks</a>
-        <a href="etf.html" role="menuitem">ETFs</a>
-        <a href="ipo.html" role="menuitem">IPOs</a>
-        <a href="intraday.html" role="menuitem">Intraday</a>
-        <a href="usstocks.html" role="menuitem">US stocks</a>
         <a href="mutualfunds.html" role="menuitem">Mutual funds</a>
-        <a href="fixeddeposit.html" role="menuitem">Fixed deposits</a>
-        <a href="nps.html" role="menuitem">NPS</a>
-        <a href="bonds.html" role="menuitem">Bonds</a>
-        <a href="cryptocurrencies.html" role="menuitem">Crypto</a>
+        <!-- Full product list on desktop; mobile uses All topics hub -->
+        <a href="stocks.html" role="menuitem" class="nav-learn-extra">Stocks</a>
+        <a href="etf.html" role="menuitem" class="nav-learn-extra">ETFs</a>
+        <a href="ipo.html" role="menuitem" class="nav-learn-extra">IPOs</a>
+        <a href="intraday.html" role="menuitem" class="nav-learn-extra">Intraday</a>
+        <a href="usstocks.html" role="menuitem" class="nav-learn-extra">US stocks</a>
+        <a href="fixeddeposit.html" role="menuitem" class="nav-learn-extra">Fixed deposits</a>
+        <a href="nps.html" role="menuitem" class="nav-learn-extra">NPS</a>
+        <a href="bonds.html" role="menuitem" class="nav-learn-extra">Bonds</a>
+        <a href="cryptocurrencies.html" role="menuitem" class="nav-learn-extra">Crypto</a>
+        <a href="learn.html" role="menuitem" class="nav-learn-mobile-more">Browse all guides →</a>
       </div>
     </div>
     <div class="dropdown">
@@ -187,7 +189,8 @@
     <section id="active-stocks">
   <h3>Real-Time Most Active Stocks for Intraday Trading</h3>
   
-  <table class="active-stocks-table">
+  <div class="table-wrap table-scroll">
+  <table class="active-stocks-table table-cards">
   <thead>
     <tr>
       <th>Stock</th>
@@ -197,13 +200,39 @@
     </tr>
   </thead>
   <tbody>
-    <tr><td>RELIANCE</td><td>1,539.20</td><td>51,90,150</td><td>1,513.7</td></tr>
-    <tr><td>HDFC BANK</td><td>1,990.25</td><td>40,05,800</td><td>659.8</td></tr>
-    <tr><td>ICICI BANK</td><td>1,462.50</td><td>28,14,200</td><td>312.1</td></tr>
-    <tr><td>INFY</td><td>1,635.30</td><td>25,00,400</td><td>202.8</td></tr>
-    <tr><td>TATA MOTORS</td><td>690.90</td><td>22,85,100</td><td>197.3</td></tr>
+    <tr>
+      <td data-label="Stock">RELIANCE</td>
+      <td data-label="Last Price (₹)">1,539.20</td>
+      <td data-label="Volume">51,90,150</td>
+      <td data-label="Value (₹ Cr)">1,513.7</td>
+    </tr>
+    <tr>
+      <td data-label="Stock">HDFC BANK</td>
+      <td data-label="Last Price (₹)">1,990.25</td>
+      <td data-label="Volume">40,05,800</td>
+      <td data-label="Value (₹ Cr)">659.8</td>
+    </tr>
+    <tr>
+      <td data-label="Stock">ICICI BANK</td>
+      <td data-label="Last Price (₹)">1,462.50</td>
+      <td data-label="Volume">28,14,200</td>
+      <td data-label="Value (₹ Cr)">312.1</td>
+    </tr>
+    <tr>
+      <td data-label="Stock">INFY</td>
+      <td data-label="Last Price (₹)">1,635.30</td>
+      <td data-label="Volume">25,00,400</td>
+      <td data-label="Value (₹ Cr)">202.8</td>
+    </tr>
+    <tr>
+      <td data-label="Stock">TATA MOTORS</td>
+      <td data-label="Last Price (₹)">690.90</td>
+      <td data-label="Volume">22,85,100</td>
+      <td data-label="Value (₹ Cr)">197.3</td>
+    </tr>
   </tbody>
 </table>
+  </div>
 
 
   

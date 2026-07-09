@@ -76,16 +76,18 @@
         <a href="tax-overview.html" role="menuitem">Tax overview</a>
         <a href="gold.html" role="menuitem">Gold</a>
         <a href="index-vs-active.html" role="menuitem">Index vs active</a>
-        <a href="stocks.html" role="menuitem">Stocks</a>
-        <a href="etf.html" role="menuitem">ETFs</a>
-        <a href="ipo.html" role="menuitem">IPOs</a>
-        <a href="intraday.html" role="menuitem">Intraday</a>
-        <a href="usstocks.html" role="menuitem">US stocks</a>
         <a href="mutualfunds.html" role="menuitem">Mutual funds</a>
-        <a href="fixeddeposit.html" role="menuitem">Fixed deposits</a>
-        <a href="nps.html" role="menuitem">NPS</a>
-        <a href="bonds.html" role="menuitem">Bonds</a>
-        <a href="cryptocurrencies.html" role="menuitem">Crypto</a>
+        <!-- Full product list on desktop; mobile uses All topics hub -->
+        <a href="stocks.html" role="menuitem" class="nav-learn-extra">Stocks</a>
+        <a href="etf.html" role="menuitem" class="nav-learn-extra">ETFs</a>
+        <a href="ipo.html" role="menuitem" class="nav-learn-extra">IPOs</a>
+        <a href="intraday.html" role="menuitem" class="nav-learn-extra">Intraday</a>
+        <a href="usstocks.html" role="menuitem" class="nav-learn-extra">US stocks</a>
+        <a href="fixeddeposit.html" role="menuitem" class="nav-learn-extra">Fixed deposits</a>
+        <a href="nps.html" role="menuitem" class="nav-learn-extra">NPS</a>
+        <a href="bonds.html" role="menuitem" class="nav-learn-extra">Bonds</a>
+        <a href="cryptocurrencies.html" role="menuitem" class="nav-learn-extra">Crypto</a>
+        <a href="learn.html" role="menuitem" class="nav-learn-mobile-more">Browse all guides →</a>
       </div>
     </div>
     <div class="dropdown">
@@ -289,7 +291,8 @@ document.getElementById('currency-toggle').addEventListener('change', function (
 
     <section id="us-indices-etfs">
   <h3>Major US Indices & Popular ETFs</h3>
-  <table style="width:100%;background:#f9faff;border-radius:10px;overflow:hidden;margin-top:12px;">
+  <div class="table-wrap table-scroll">
+  <table class="product-table table-cards" style="width:100%;background:#f9faff;border-radius:10px;margin-top:12px;">
     <thead>
       <tr style="background:#eaf2ff;">
         <th>Index/ETF</th>
@@ -300,43 +303,44 @@ document.getElementById('currency-toggle').addEventListener('change', function (
     </thead>
     <tbody>
       <tr>
-        <td>S&P 500</td>
-        <td>^GSPC</td>
-        <td>500 largest US companies</td>
-        <td>13.7%</td>
+        <td data-label="Index/ETF">S&P 500</td>
+        <td data-label="Symbol">^GSPC</td>
+        <td data-label="Description">500 largest US companies</td>
+        <td data-label="5Y CAGR*">13.7%</td>
       </tr>
       <tr>
-        <td>Nasdaq 100</td>
-        <td>^NDX</td>
-        <td>Top 100 non-financial tech-heavy stocks</td>
-        <td>18.2%</td>
+        <td data-label="Index/ETF">Nasdaq 100</td>
+        <td data-label="Symbol">^NDX</td>
+        <td data-label="Description">Top 100 non-financial tech-heavy stocks</td>
+        <td data-label="5Y CAGR*">18.2%</td>
       </tr>
       <tr>
-        <td>Dow Jones</td>
-        <td>^DJI</td>
-        <td>30 blue-chip US companies</td>
-        <td>9.6%</td>
+        <td data-label="Index/ETF">Dow Jones</td>
+        <td data-label="Symbol">^DJI</td>
+        <td data-label="Description">30 blue-chip US companies</td>
+        <td data-label="5Y CAGR*">9.6%</td>
       </tr>
       <tr>
-        <td>Vanguard S&P 500 ETF</td>
-        <td>VOO</td>
-        <td>Low-cost S&P 500 index fund</td>
-        <td>13.6%</td>
+        <td data-label="Index/ETF">Vanguard S&P 500 ETF</td>
+        <td data-label="Symbol">VOO</td>
+        <td data-label="Description">Low-cost S&P 500 index fund</td>
+        <td data-label="5Y CAGR*">13.6%</td>
       </tr>
       <tr>
-        <td>Invesco QQQ ETF</td>
-        <td>QQQ</td>
-        <td>Tracks Nasdaq 100</td>
-        <td>18.1%</td>
+        <td data-label="Index/ETF">Invesco QQQ ETF</td>
+        <td data-label="Symbol">QQQ</td>
+        <td data-label="Description">Tracks Nasdaq 100</td>
+        <td data-label="5Y CAGR*">18.1%</td>
       </tr>
       <tr>
-        <td>iShares Core S&P 500 ETF</td>
-        <td>IVV</td>
-        <td>Another S&P 500 option</td>
-        <td>13.6%</td>
+        <td data-label="Index/ETF">iShares Core S&P 500 ETF</td>
+        <td data-label="Symbol">IVV</td>
+        <td data-label="Description">Another S&P 500 option</td>
+        <td data-label="5Y CAGR*">13.6%</td>
       </tr>
     </tbody>
   </table>
+  </div>
   <div style="font-size:0.97em;color:#888;margin-top:5px;">
     *5Y CAGR as of June 2025 (USD, before taxes). Source: Yahoo Finance.
   </div>
@@ -453,7 +457,8 @@ document.getElementById('currency-toggle').addEventListener('change', function (
 
      <section id="us-dividend-stocks">
   <h3>Top US Dividend Stocks</h3>
-  <table style="width:100%;background:#f9faff;border-radius:10px;overflow:hidden;margin-top:12px;">
+  <div class="table-wrap table-scroll">
+  <table class="product-table table-cards" style="width:100%;background:#f9faff;border-radius:10px;margin-top:12px;">
     <thead>
       <tr style="background:#eaf2ff;">
         <th>Company</th>
@@ -464,55 +469,56 @@ document.getElementById('currency-toggle').addEventListener('change', function (
     </thead>
     <tbody>
       <tr>
-        <td>Johnson & Johnson</td>
-        <td>JNJ</td>
-        <td>3.4%</td>
-        <td>Healthcare</td>
+        <td data-label="Company">Johnson &amp; Johnson</td>
+        <td data-label="Symbol">JNJ</td>
+        <td data-label="Dividend Yield">3.4%</td>
+        <td data-label="Sector">Healthcare</td>
       </tr>
       <tr>
-        <td>Procter & Gamble</td>
-        <td>PG</td>
-        <td>2.5%</td>
-        <td>Consumer</td>
+        <td data-label="Company">Procter &amp; Gamble</td>
+        <td data-label="Symbol">PG</td>
+        <td data-label="Dividend Yield">2.5%</td>
+        <td data-label="Sector">Consumer</td>
       </tr>
       <tr>
-        <td>Coca-Cola</td>
-        <td>KO</td>
-        <td>3.1%</td>
-        <td>Beverages</td>
+        <td data-label="Company">Coca-Cola</td>
+        <td data-label="Symbol">KO</td>
+        <td data-label="Dividend Yield">3.1%</td>
+        <td data-label="Sector">Beverages</td>
       </tr>
       <tr>
-        <td>PepsiCo</td>
-        <td>PEP</td>
-        <td>2.9%</td>
-        <td>Beverages</td>
+        <td data-label="Company">PepsiCo</td>
+        <td data-label="Symbol">PEP</td>
+        <td data-label="Dividend Yield">2.9%</td>
+        <td data-label="Sector">Beverages</td>
       </tr>
       <tr>
-        <td>Exxon Mobil</td>
-        <td>XOM</td>
-        <td>3.6%</td>
-        <td>Energy</td>
+        <td data-label="Company">Exxon Mobil</td>
+        <td data-label="Symbol">XOM</td>
+        <td data-label="Dividend Yield">3.6%</td>
+        <td data-label="Sector">Energy</td>
       </tr>
       <tr>
-        <td>3M Company</td>
-        <td>MMM</td>
-        <td>5.6%</td>
-        <td>Industrials</td>
+        <td data-label="Company">3M Company</td>
+        <td data-label="Symbol">MMM</td>
+        <td data-label="Dividend Yield">5.6%</td>
+        <td data-label="Sector">Industrials</td>
       </tr>
       <tr>
-        <td>Chevron</td>
-        <td>CVX</td>
-        <td>4.2%</td>
-        <td>Energy</td>
+        <td data-label="Company">Chevron</td>
+        <td data-label="Symbol">CVX</td>
+        <td data-label="Dividend Yield">4.2%</td>
+        <td data-label="Sector">Energy</td>
       </tr>
       <tr>
-        <td>IBM</td>
-        <td>IBM</td>
-        <td>4.1%</td>
-        <td>Tech</td>
+        <td data-label="Company">IBM</td>
+        <td data-label="Symbol">IBM</td>
+        <td data-label="Dividend Yield">4.1%</td>
+        <td data-label="Sector">Tech</td>
       </tr>
     </tbody>
   </table>
+  </div>
   <div style="font-size:0.97em;color:#888;margin-top:5px;">
     Yields as of July 2025 (approximate). Source: Yahoo Finance/SeekingAlpha.
   </div>

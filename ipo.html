@@ -53,16 +53,18 @@
         <a href="tax-overview.html" role="menuitem">Tax overview</a>
         <a href="gold.html" role="menuitem">Gold</a>
         <a href="index-vs-active.html" role="menuitem">Index vs active</a>
-        <a href="stocks.html" role="menuitem">Stocks</a>
-        <a href="etf.html" role="menuitem">ETFs</a>
-        <a href="ipo.html" role="menuitem">IPOs</a>
-        <a href="intraday.html" role="menuitem">Intraday</a>
-        <a href="usstocks.html" role="menuitem">US stocks</a>
         <a href="mutualfunds.html" role="menuitem">Mutual funds</a>
-        <a href="fixeddeposit.html" role="menuitem">Fixed deposits</a>
-        <a href="nps.html" role="menuitem">NPS</a>
-        <a href="bonds.html" role="menuitem">Bonds</a>
-        <a href="cryptocurrencies.html" role="menuitem">Crypto</a>
+        <!-- Full product list on desktop; mobile uses All topics hub -->
+        <a href="stocks.html" role="menuitem" class="nav-learn-extra">Stocks</a>
+        <a href="etf.html" role="menuitem" class="nav-learn-extra">ETFs</a>
+        <a href="ipo.html" role="menuitem" class="nav-learn-extra">IPOs</a>
+        <a href="intraday.html" role="menuitem" class="nav-learn-extra">Intraday</a>
+        <a href="usstocks.html" role="menuitem" class="nav-learn-extra">US stocks</a>
+        <a href="fixeddeposit.html" role="menuitem" class="nav-learn-extra">Fixed deposits</a>
+        <a href="nps.html" role="menuitem" class="nav-learn-extra">NPS</a>
+        <a href="bonds.html" role="menuitem" class="nav-learn-extra">Bonds</a>
+        <a href="cryptocurrencies.html" role="menuitem" class="nav-learn-extra">Crypto</a>
+        <a href="learn.html" role="menuitem" class="nav-learn-mobile-more">Browse all guides →</a>
       </div>
     </div>
     <div class="dropdown">
@@ -171,7 +173,8 @@
 
     <section id="recent-ipo">
       <h3>Upcoming & Recent IPOs (2025)</h3>
-      <table class="ipo-table">
+      <div class="table-wrap table-scroll">
+      <table class="ipo-table table-cards">
   <thead>
     <tr>
       <th style="width:28%;">Company</th>
@@ -183,28 +186,29 @@
   </thead>
   <tbody>
     <tr>
-      <td>TVS Infrastructure Trust</td>
-      <td>8–11 July 2025</td>
-      <td>320–340</td>
-      <td>₹2,000 Cr</td>
-      <td>Upcoming</td>
+      <td data-label="Company">TVS Infrastructure Trust</td>
+      <td data-label="IPO Dates">8–11 July 2025</td>
+      <td data-label="Price Band (₹)">320–340</td>
+      <td data-label="Issue Size">₹2,000 Cr</td>
+      <td data-label="Status"><span class="status-pill status-upcoming">Upcoming</span></td>
     </tr>
     <tr>
-      <td>Cryogenic OGS Ltd</td>
-      <td>3–7 July 2025</td>
-      <td>94–100</td>
-      <td>₹18 Cr</td>
-      <td>Closed</td>
+      <td data-label="Company">Cryogenic OGS Ltd</td>
+      <td data-label="IPO Dates">3–7 July 2025</td>
+      <td data-label="Price Band (₹)">94–100</td>
+      <td data-label="Issue Size">₹18 Cr</td>
+      <td data-label="Status"><span class="status-pill status-closed">Closed</span></td>
     </tr>
     <tr>
-      <td>Glen Industries Ltd</td>
-      <td>8–10 July 2025</td>
-      <td>92–97</td>
-      <td>₹63 Cr</td>
-      <td>Listed</td>
+      <td data-label="Company">Glen Industries Ltd</td>
+      <td data-label="IPO Dates">8–10 July 2025</td>
+      <td data-label="Price Band (₹)">92–97</td>
+      <td data-label="Issue Size">₹63 Cr</td>
+      <td data-label="Status"><span class="status-pill status-listed">Listed</span></td>
     </tr>
   </tbody>
 </table>
+      </div>
 
       <div style="font-size:0.97em;color:#777;margin-top:6px;">
         <i>Tip: Check your broker’s platform or <a href="https://www.nseindia.com/market-data/new-stock-exchange-listings-today" target="_blank">NSE India IPO page</a> for live updates.</i>

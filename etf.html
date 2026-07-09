@@ -53,16 +53,18 @@
         <a href="tax-overview.html" role="menuitem">Tax overview</a>
         <a href="gold.html" role="menuitem">Gold</a>
         <a href="index-vs-active.html" role="menuitem">Index vs active</a>
-        <a href="stocks.html" role="menuitem">Stocks</a>
-        <a href="etf.html" role="menuitem">ETFs</a>
-        <a href="ipo.html" role="menuitem">IPOs</a>
-        <a href="intraday.html" role="menuitem">Intraday</a>
-        <a href="usstocks.html" role="menuitem">US stocks</a>
         <a href="mutualfunds.html" role="menuitem">Mutual funds</a>
-        <a href="fixeddeposit.html" role="menuitem">Fixed deposits</a>
-        <a href="nps.html" role="menuitem">NPS</a>
-        <a href="bonds.html" role="menuitem">Bonds</a>
-        <a href="cryptocurrencies.html" role="menuitem">Crypto</a>
+        <!-- Full product list on desktop; mobile uses All topics hub -->
+        <a href="stocks.html" role="menuitem" class="nav-learn-extra">Stocks</a>
+        <a href="etf.html" role="menuitem" class="nav-learn-extra">ETFs</a>
+        <a href="ipo.html" role="menuitem" class="nav-learn-extra">IPOs</a>
+        <a href="intraday.html" role="menuitem" class="nav-learn-extra">Intraday</a>
+        <a href="usstocks.html" role="menuitem" class="nav-learn-extra">US stocks</a>
+        <a href="fixeddeposit.html" role="menuitem" class="nav-learn-extra">Fixed deposits</a>
+        <a href="nps.html" role="menuitem" class="nav-learn-extra">NPS</a>
+        <a href="bonds.html" role="menuitem" class="nav-learn-extra">Bonds</a>
+        <a href="cryptocurrencies.html" role="menuitem" class="nav-learn-extra">Crypto</a>
+        <a href="learn.html" role="menuitem" class="nav-learn-mobile-more">Browse all guides →</a>
       </div>
     </div>
     <div class="dropdown">
@@ -163,38 +165,44 @@
 
     <section id="compare-etf">
       <h3>ETF vs Index Mutual Fund: A Quick Comparison</h3>
-<table class="etf-compare-table">
+      <div class="table-wrap table-scroll">
+<table class="etf-compare-table table-cards">
+  <thead>
   <tr>
     <th style="width:33%;">Feature</th>
     <th style="width:33%;">ETF</th>
     <th style="width:34%;">Index Mutual Fund</th>
   </tr>
+  </thead>
+  <tbody>
   <tr>
-    <td>How to Buy</td>
-    <td>On stock exchange (requires Demat account)</td>
-    <td>Directly from AMC/platform (no Demat needed)</td>
+    <td data-label="Feature">How to Buy</td>
+    <td data-label="ETF">On stock exchange (requires Demat account)</td>
+    <td data-label="Index Mutual Fund">Directly from AMC/platform (no Demat needed)</td>
   </tr>
   <tr>
-    <td>Pricing</td>
-    <td>Real-time, like shares</td>
-    <td>Once daily (end-of-day NAV)</td>
+    <td data-label="Feature">Pricing</td>
+    <td data-label="ETF">Real-time, like shares</td>
+    <td data-label="Index Mutual Fund">Once daily (end-of-day NAV)</td>
   </tr>
   <tr>
-    <td>Expense Ratio</td>
-    <td>Very low (0.05–0.2%)</td>
-    <td>Low (0.1–0.5%)</td>
+    <td data-label="Feature">Expense Ratio</td>
+    <td data-label="ETF">Very low (0.05–0.2%)</td>
+    <td data-label="Index Mutual Fund">Low (0.1–0.5%)</td>
   </tr>
   <tr>
-    <td>Liquidity</td>
-    <td>High (depends on trading volume)</td>
-    <td>Always redeemable at NAV</td>
+    <td data-label="Feature">Liquidity</td>
+    <td data-label="ETF">High (depends on trading volume)</td>
+    <td data-label="Index Mutual Fund">Always redeemable at NAV</td>
   </tr>
   <tr>
-    <td>SIP Option</td>
-    <td>No (but you can manually invest monthly)</td>
-    <td>Yes, automated SIPs</td>
+    <td data-label="Feature">SIP Option</td>
+    <td data-label="ETF">No (but you can manually invest monthly)</td>
+    <td data-label="Index Mutual Fund">Yes, automated SIPs</td>
   </tr>
+  </tbody>
 </table>
+      </div>
     </section>
 
     <!-- Interactive Chart -->

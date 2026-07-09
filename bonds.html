@@ -68,16 +68,18 @@
         <a href="tax-overview.html" role="menuitem">Tax overview</a>
         <a href="gold.html" role="menuitem">Gold</a>
         <a href="index-vs-active.html" role="menuitem">Index vs active</a>
-        <a href="stocks.html" role="menuitem">Stocks</a>
-        <a href="etf.html" role="menuitem">ETFs</a>
-        <a href="ipo.html" role="menuitem">IPOs</a>
-        <a href="intraday.html" role="menuitem">Intraday</a>
-        <a href="usstocks.html" role="menuitem">US stocks</a>
         <a href="mutualfunds.html" role="menuitem">Mutual funds</a>
-        <a href="fixeddeposit.html" role="menuitem">Fixed deposits</a>
-        <a href="nps.html" role="menuitem">NPS</a>
-        <a href="bonds.html" role="menuitem">Bonds</a>
-        <a href="cryptocurrencies.html" role="menuitem">Crypto</a>
+        <!-- Full product list on desktop; mobile uses All topics hub -->
+        <a href="stocks.html" role="menuitem" class="nav-learn-extra">Stocks</a>
+        <a href="etf.html" role="menuitem" class="nav-learn-extra">ETFs</a>
+        <a href="ipo.html" role="menuitem" class="nav-learn-extra">IPOs</a>
+        <a href="intraday.html" role="menuitem" class="nav-learn-extra">Intraday</a>
+        <a href="usstocks.html" role="menuitem" class="nav-learn-extra">US stocks</a>
+        <a href="fixeddeposit.html" role="menuitem" class="nav-learn-extra">Fixed deposits</a>
+        <a href="nps.html" role="menuitem" class="nav-learn-extra">NPS</a>
+        <a href="bonds.html" role="menuitem" class="nav-learn-extra">Bonds</a>
+        <a href="cryptocurrencies.html" role="menuitem" class="nav-learn-extra">Crypto</a>
+        <a href="learn.html" role="menuitem" class="nav-learn-mobile-more">Browse all guides →</a>
       </div>
     </div>
     <div class="dropdown">
@@ -142,8 +144,9 @@
   </div>
   <div style="margin-bottom:10px;">
     <b>Recent Notable Bond Rating Changes (India)</b>
-    <div style="overflow-x:auto;">
-      <table style="width:100%; border-collapse:collapse; background:#f8faff; border-radius:8px;">
+    <div class="table-wrap table-scroll">
+      <table class="product-table table-cards" style="width:100%; border-collapse:collapse; background:#f8faff; border-radius:8px;">
+  <thead>
   <tr style="background:#eaf2ff; color:#204a80;">
     <th style="padding:7px 10px; text-align:left;">Issuer</th>
     <th style="padding:7px 10px; text-align:left;">Old Rating</th>
@@ -151,34 +154,37 @@
     <th style="padding:7px 10px; text-align:left;">Date</th>
     <th style="padding:7px 10px; text-align:left;">Remarks</th>
   </tr>
+  </thead>
+  <tbody>
   <tr>
-    <td style="padding:7px 10px; text-align:left;">Adani Ports</td>
-    <td style="padding:7px 10px; text-align:left;">AA+</td>
-    <td style="padding:7px 10px; text-align:left;">AAA</td>
-    <td style="padding:7px 10px; text-align:left;">May 2024</td>
-    <td style="padding:7px 10px; text-align:left;">Upgrade (business profile improved)</td>
+    <td data-label="Issuer" style="padding:7px 10px; text-align:left;">Adani Ports</td>
+    <td data-label="Old Rating" style="padding:7px 10px; text-align:left;">AA+</td>
+    <td data-label="New Rating" style="padding:7px 10px; text-align:left;">AAA</td>
+    <td data-label="Date" style="padding:7px 10px; text-align:left;">May 2024</td>
+    <td data-label="Remarks" style="padding:7px 10px; text-align:left;">Upgrade (business profile improved)</td>
   </tr>
   <tr>
-    <td style="padding:7px 10px; text-align:left;">Vodafone Idea</td>
-    <td style="padding:7px 10px; text-align:left;">BBB-</td>
-    <td style="padding:7px 10px; text-align:left;">BB+</td>
-    <td style="padding:7px 10px; text-align:left;">Jan 2024</td>
-    <td style="padding:7px 10px; text-align:left;">Downgrade (liquidity concerns)</td>
+    <td data-label="Issuer" style="padding:7px 10px; text-align:left;">Vodafone Idea</td>
+    <td data-label="Old Rating" style="padding:7px 10px; text-align:left;">BBB-</td>
+    <td data-label="New Rating" style="padding:7px 10px; text-align:left;">BB+</td>
+    <td data-label="Date" style="padding:7px 10px; text-align:left;">Jan 2024</td>
+    <td data-label="Remarks" style="padding:7px 10px; text-align:left;">Downgrade (liquidity concerns)</td>
   </tr>
   <tr>
-    <td style="padding:7px 10px; text-align:left;">JSW Steel</td>
-    <td style="padding:7px 10px; text-align:left;">AA-</td>
-    <td style="padding:7px 10px; text-align:left;">AA</td>
-    <td style="padding:7px 10px; text-align:left;">Nov 2023</td>
-    <td style="padding:7px 10px; text-align:left;">Upgrade (debt reduction)</td>
+    <td data-label="Issuer" style="padding:7px 10px; text-align:left;">JSW Steel</td>
+    <td data-label="Old Rating" style="padding:7px 10px; text-align:left;">AA-</td>
+    <td data-label="New Rating" style="padding:7px 10px; text-align:left;">AA</td>
+    <td data-label="Date" style="padding:7px 10px; text-align:left;">Nov 2023</td>
+    <td data-label="Remarks" style="padding:7px 10px; text-align:left;">Upgrade (debt reduction)</td>
   </tr>
   <tr>
-    <td style="padding:7px 10px; text-align:left;">IL&amp;FS</td>
-    <td style="padding:7px 10px; text-align:left;">BBB+</td>
-    <td style="padding:7px 10px; text-align:left;">D</td>
-    <td style="padding:7px 10px; text-align:left;">2023</td>
-    <td style="padding:7px 10px; text-align:left;">Downgrade (defaulted)</td>
+    <td data-label="Issuer" style="padding:7px 10px; text-align:left;">IL&amp;FS</td>
+    <td data-label="Old Rating" style="padding:7px 10px; text-align:left;">BBB+</td>
+    <td data-label="New Rating" style="padding:7px 10px; text-align:left;">D</td>
+    <td data-label="Date" style="padding:7px 10px; text-align:left;">2023</td>
+    <td data-label="Remarks" style="padding:7px 10px; text-align:left;">Downgrade (defaulted)</td>
   </tr>
+  </tbody>
 </table>
 
     </div>

@@ -106,16 +106,18 @@
         <a href="tax-overview.html" role="menuitem">Tax overview</a>
         <a href="gold.html" role="menuitem">Gold</a>
         <a href="index-vs-active.html" role="menuitem">Index vs active</a>
-        <a href="stocks.html" role="menuitem">Stocks</a>
-        <a href="etf.html" role="menuitem">ETFs</a>
-        <a href="ipo.html" role="menuitem">IPOs</a>
-        <a href="intraday.html" role="menuitem">Intraday</a>
-        <a href="usstocks.html" role="menuitem">US stocks</a>
         <a href="mutualfunds.html" role="menuitem">Mutual funds</a>
-        <a href="fixeddeposit.html" role="menuitem">Fixed deposits</a>
-        <a href="nps.html" role="menuitem">NPS</a>
-        <a href="bonds.html" role="menuitem">Bonds</a>
-        <a href="cryptocurrencies.html" role="menuitem">Crypto</a>
+        <!-- Full product list on desktop; mobile uses All topics hub -->
+        <a href="stocks.html" role="menuitem" class="nav-learn-extra">Stocks</a>
+        <a href="etf.html" role="menuitem" class="nav-learn-extra">ETFs</a>
+        <a href="ipo.html" role="menuitem" class="nav-learn-extra">IPOs</a>
+        <a href="intraday.html" role="menuitem" class="nav-learn-extra">Intraday</a>
+        <a href="usstocks.html" role="menuitem" class="nav-learn-extra">US stocks</a>
+        <a href="fixeddeposit.html" role="menuitem" class="nav-learn-extra">Fixed deposits</a>
+        <a href="nps.html" role="menuitem" class="nav-learn-extra">NPS</a>
+        <a href="bonds.html" role="menuitem" class="nav-learn-extra">Bonds</a>
+        <a href="cryptocurrencies.html" role="menuitem" class="nav-learn-extra">Crypto</a>
+        <a href="learn.html" role="menuitem" class="nav-learn-mobile-more">Browse all guides →</a>
       </div>
     </div>
     <div class="dropdown">
@@ -425,14 +427,14 @@ function calculateSIP(event) {
     <strong>CAGR:</strong> ${cagr.toFixed(2)}%
     <br>
     <details style="margin-top:10px;"><summary>See yearly projection</summary>
-      <table style="width:100%;margin-top:7px;">
+      <div class="table-wrap table-scroll"><table class="product-table" style="width:100%;margin-top:7px;">
         <thead>
           <tr><th>Year</th><th>Corpus (₹)</th></tr>
         </thead>
         <tbody>
-          ${yearlyData.map((amt, i) => `<tr><td>${labels[i]}</td><td>₹${Math.round(amt).toLocaleString('en-IN')}</td></tr>`).join('')}
+          ${yearlyData.map((amt, i) => `<tr><td data-label="Year">${labels[i]}</td><td data-label="Corpus (₹)">₹${Math.round(amt).toLocaleString('en-IN')}</td></tr>`).join('')}
         </tbody>
-      </table>
+      </table></div>
     </details>
 	
 	
@@ -530,12 +532,14 @@ function calculateSWP(event) {
     ${exhaustedText}
     <br>
     <details style="margin-top:10px;"><summary>See year-wise balance</summary>
-      <table style="width:100%;margin-top:7px;">
-        <tr><th>Year</th><th>Corpus at Year End (₹)</th></tr>
+      <div class="table-wrap table-scroll"><table class="product-table" style="width:100%;margin-top:7px;">
+        <thead><tr><th>Year</th><th>Corpus at Year End (₹)</th></tr></thead>
+        <tbody>
         ${
-          yearlyData.map((val, i) => `<tr><td>${labels[i]}</td><td>₹${Math.round(val).toLocaleString('en-IN')}</td></tr>`).join('')
+          yearlyData.map((val, i) => `<tr><td data-label="Year">${labels[i]}</td><td data-label="Corpus">₹${Math.round(val).toLocaleString('en-IN')}</td></tr>`).join('')
         }
-      </table>
+        </tbody>
+      </table></div>
     </details>
   `;
   document.getElementById('swpChart-container').style.display = 'block';
@@ -615,12 +619,14 @@ function calculateMaxSWP(event) {
     <strong>Corpus at End:</strong> ₹${Math.round(endBalance).toLocaleString('en-IN')}
     <br>
     <details style="margin-top:10px;"><summary>See year-wise balance</summary>
-      <table style="width:100%;margin-top:7px;">
-        <tr><th>Year</th><th>Corpus at Year End (₹)</th></tr>
+      <div class="table-wrap table-scroll"><table class="product-table" style="width:100%;margin-top:7px;">
+        <thead><tr><th>Year</th><th>Corpus at Year End (₹)</th></tr></thead>
+        <tbody>
         ${
-          yearlyData.map((val, i) => `<tr><td>${labels[i]}</td><td>₹${Math.round(val).toLocaleString('en-IN')}</td></tr>`).join('')
+          yearlyData.map((val, i) => `<tr><td data-label="Year">${labels[i]}</td><td data-label="Corpus">₹${Math.round(val).toLocaleString('en-IN')}</td></tr>`).join('')
         }
-      </table>
+        </tbody>
+      </table></div>
     </details>
   `;
   document.getElementById('swpMaxChart-container').style.display = 'block';
