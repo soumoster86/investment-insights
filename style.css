@@ -1997,6 +1997,252 @@ body.dark-mode .etf-sip-assumptions ul { color: #c8d0dc !important; }
   }
 }
 
+/* ---------- Intraday sample volatility chart ---------- */
+.intraday-chart-section {
+  margin-top: 28px !important;
+  background: #fff !important;
+  border: 1.5px solid #d5e2f5 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 18px rgba(10, 40, 90, 0.05);
+}
+.intraday-chart-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 18px;
+  margin-bottom: 14px;
+}
+.intraday-chart-header-text { flex: 1 1 240px; min-width: 0; }
+.intraday-chart-eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5b7aa5;
+}
+.intraday-chart-section h2 {
+  margin-top: 0 !important;
+  margin-bottom: 6px !important;
+}
+.intraday-chart-section .tool-intro {
+  margin-bottom: 0;
+  max-width: 58ch;
+}
+.intraday-chart-freshness {
+  margin: 0 !important;
+  flex: 0 0 auto;
+}
+
+.intraday-chart-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 0 16px;
+  border: 1.5px solid #d5e2f5;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f7faff 0%, #eef4fc 100%);
+  overflow: hidden;
+}
+.intraday-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 14px;
+  border-right: 1px solid #d5e2f5;
+  min-width: 0;
+}
+.intraday-stat:last-child { border-right: 0; }
+.intraday-stat-label {
+  font-size: 0.68em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+.intraday-stat-value {
+  font-size: 1.28em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  color: #0a4d8c;
+}
+.intraday-stat-value.is-up { color: #047857; }
+.intraday-stat-value.is-down { color: #b91c1c; }
+.intraday-stat-value.is-flat { color: #475569; }
+.intraday-stat-value.is-range { color: #0a4d8c; }
+.intraday-stat-hint {
+  font-size: 0.78em;
+  color: #6b7c93;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.intraday-chart-card {
+  background: #fafcff;
+  border: 1.5px solid #d5e2f5;
+  border-radius: 14px;
+  padding: 14px 14px 8px;
+  margin-bottom: 14px;
+}
+.intraday-chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 14px;
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+.intraday-chart-title {
+  margin: 0 0 3px !important;
+  font-size: 1em !important;
+  color: #0a4d8c !important;
+}
+.intraday-chart-title::after { display: none !important; }
+.intraday-chart-sub {
+  margin: 0;
+  font-size: 0.85em;
+  color: #5b6b82;
+  line-height: 1.35;
+}
+.intraday-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: #64748b;
+}
+.intraday-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.intraday-swatch {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.intraday-swatch.is-price { background: #0a4d8c; height: 3px; }
+.intraday-swatch.is-open {
+  background: transparent;
+  border-top: 2px dashed #64748b;
+  height: 0;
+  width: 16px;
+}
+.intraday-chart-wrap {
+  position: relative;
+  width: 100%;
+  height: min(340px, 55vw);
+  min-height: 260px;
+}
+.intraday-chart-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.intraday-chart-notes {
+  background: linear-gradient(180deg, #f7faff 0%, #eef4fc 100%);
+  border: 1.5px solid #d5e2f5;
+  border-radius: 14px;
+  padding: 12px 14px 10px;
+}
+.intraday-chart-notes strong {
+  display: block;
+  color: #0a4d8c;
+  font-size: 0.9em;
+  margin-bottom: 6px;
+}
+.intraday-chart-notes ul {
+  margin: 0 0 6px;
+  padding-left: 16px;
+  color: #3d4f66;
+  font-size: 0.88em;
+  line-height: 1.45;
+}
+.intraday-chart-notes li { margin-bottom: 3px; }
+.intraday-chart-disclaimer {
+  margin: 0;
+  font-size: 0.84em;
+  color: #6b7c93;
+  font-style: italic;
+}
+
+body.dark-mode .intraday-chart-section {
+  background: #151a22 !important;
+  border-color: #2c3340 !important;
+  box-shadow: none;
+}
+body.dark-mode .intraday-chart-eyebrow { color: #8aa0c0 !important; }
+body.dark-mode .intraday-chart-stats {
+  background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .intraday-stat { border-right-color: #2c3340 !important; }
+body.dark-mode .intraday-stat-label,
+body.dark-mode .intraday-stat-hint,
+body.dark-mode .intraday-chart-sub,
+body.dark-mode .intraday-chart-legend,
+body.dark-mode .intraday-chart-disclaimer { color: #9aa8bc !important; }
+body.dark-mode .intraday-stat-value { color: #8abaff; }
+body.dark-mode .intraday-stat-value.is-up { color: #34d399; }
+body.dark-mode .intraday-stat-value.is-down { color: #f87171; }
+body.dark-mode .intraday-stat-value.is-flat,
+body.dark-mode .intraday-stat-value.is-range { color: #cbd5e1; }
+body.dark-mode .intraday-chart-card {
+  background: #1c212b !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .intraday-chart-title { color: #8abaff !important; }
+body.dark-mode .intraday-chart-notes {
+  background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .intraday-chart-notes strong { color: #8abaff !important; }
+body.dark-mode .intraday-chart-notes ul { color: #c8d0dc !important; }
+
+@media (max-width: 900px) {
+  .intraday-chart-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .intraday-stat:nth-child(3) { border-right: 0; }
+  .intraday-stat:nth-child(1),
+  .intraday-stat:nth-child(2),
+  .intraday-stat:nth-child(3) {
+    border-bottom: 1px solid #d5e2f5;
+  }
+  body.dark-mode .intraday-stat:nth-child(1),
+  body.dark-mode .intraday-stat:nth-child(2),
+  body.dark-mode .intraday-stat:nth-child(3) {
+    border-bottom-color: #2c3340 !important;
+  }
+}
+@media (max-width: 520px) {
+  .intraday-chart-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .intraday-stat {
+    border-right: 1px solid #d5e2f5;
+    border-bottom: 1px solid #d5e2f5;
+  }
+  .intraday-stat:nth-child(2n) { border-right: 0; }
+  .intraday-stat:last-child {
+    grid-column: 1 / -1;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  body.dark-mode .intraday-stat {
+    border-right-color: #2c3340 !important;
+    border-bottom-color: #2c3340 !important;
+  }
+}
+
 /* ---------- IPO listing gains chart ---------- */
 .ipo-listing-section {
   margin-top: 28px !important;

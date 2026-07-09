@@ -146,11 +146,52 @@
       </div>
     </section>
 
-    <section id="chart-intraday">
-      <h3>Sample Intraday Volatility Chart</h3>
-      <canvas id="intradayChart" style="max-width:100%;min-height:250px;"></canvas>
-      <div style="font-size:0.97em;color:#888;margin-top:4px;">
-        <i>Example: Simulated price movement of a stock during a single trading day.</i>
+    <section id="chart-intraday" class="intraday-chart-section tool-section">
+      <div class="intraday-chart-top">
+        <div class="intraday-chart-header-text">
+          <p class="intraday-chart-eyebrow">Sample · simulated · educational only</p>
+          <h2>Sample intraday volatility</h2>
+          <p class="tool-intro">
+            Illustrative same-session price path for a fictional stock. Shows how
+            <strong>intraday high / low / open / close</strong> can swing even when the day ends near flat.
+            Not a live chart and not a trade idea.
+          </p>
+        </div>
+        <p class="sample-freshness intraday-chart-freshness">
+          <span class="sample-freshness-label">Simulated</span>
+          Single session example · last reviewed
+          <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+
+      <div class="intraday-chart-stats" id="intraday-chart-stats" aria-live="polite">
+        <!-- Filled by script -->
+      </div>
+
+      <div class="intraday-chart-card">
+        <div class="intraday-chart-head">
+          <div>
+            <h3 class="intraday-chart-title">Price through the session</h3>
+            <p class="intraday-chart-sub">Market hours sketch · dashed line = open price</p>
+          </div>
+          <div class="intraday-chart-legend" aria-hidden="true">
+            <span><i class="intraday-swatch is-price"></i> Price</span>
+            <span><i class="intraday-swatch is-open"></i> Open</span>
+          </div>
+        </div>
+        <div class="intraday-chart-wrap">
+          <canvas id="intradayChart" aria-label="Sample intraday price volatility chart"></canvas>
+        </div>
+      </div>
+
+      <div class="intraday-chart-notes">
+        <strong>What this is meant to show</strong>
+        <ul>
+          <li>Intraday charts can look “busy” even when day P&amp;L is small — noise vs edge</li>
+          <li>High/low range is where stop-losses and leverage risk often show up first</li>
+          <li>Real charts need volume, spreads, and costs; this is price path only</li>
+        </ul>
+        <p class="intraday-chart-disclaimer">Simulated data for education. Past or sample moves do not predict live markets.</p>
       </div>
     </section>
 
@@ -424,62 +465,208 @@
 <!-- END SITE FOOTER -->
   
   
-  <script>
-  // Simulated Intraday Chart Example (replace with real API if desired)
+<script>
+(function () {
+  "use strict";
+
+  // Simulated single-session path (educational only — not a real ticker)
+  var labels = [
+    "09:15", "09:30", "09:45", "10:00", "10:30", "11:00", "11:30",
+    "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:15", "15:30"
+  ];
+  var price = [
+    250.0, 252.4, 251.1, 253.8, 255.6, 254.2, 252.0,
+    250.5, 248.2, 246.9, 245.4, 247.1, 248.8, 250.2, 249.1, 249.5
+  ];
+
+  function inr(n) {
+    return "₹" + n.toFixed(2);
+  }
+  function pct(n) {
+    var sign = n > 0 ? "+" : "";
+    return sign + n.toFixed(2) + "%";
+  }
+
+  function renderStats() {
+    var el = document.getElementById("intraday-chart-stats");
+    if (!el) return;
+    var open = price[0];
+    var close = price[price.length - 1];
+    var high = Math.max.apply(null, price);
+    var low = Math.min.apply(null, price);
+    var dayPct = ((close - open) / open) * 100;
+    var rangePct = ((high - low) / open) * 100;
+    var dayCls = dayPct > 0 ? "is-up" : dayPct < 0 ? "is-down" : "is-flat";
+
+    el.innerHTML =
+      '<div class="intraday-stat">' +
+      '<span class="intraday-stat-label">Open</span>' +
+      '<span class="intraday-stat-value">' +
+      inr(open) +
+      "</span>" +
+      '<span class="intraday-stat-hint">Session start</span>' +
+      "</div>" +
+      '<div class="intraday-stat">' +
+      '<span class="intraday-stat-label">High</span>' +
+      '<span class="intraday-stat-value is-up">' +
+      inr(high) +
+      "</span>" +
+      '<span class="intraday-stat-hint">Intraday peak</span>' +
+      "</div>" +
+      '<div class="intraday-stat">' +
+      '<span class="intraday-stat-label">Low</span>' +
+      '<span class="intraday-stat-value is-down">' +
+      inr(low) +
+      "</span>" +
+      '<span class="intraday-stat-hint">Intraday trough</span>' +
+      "</div>" +
+      '<div class="intraday-stat">' +
+      '<span class="intraday-stat-label">Close</span>' +
+      '<span class="intraday-stat-value ' +
+      dayCls +
+      '">' +
+      inr(close) +
+      "</span>" +
+      '<span class="intraday-stat-hint">' +
+      pct(dayPct) +
+      " vs open</span>" +
+      "</div>" +
+      '<div class="intraday-stat">' +
+      '<span class="intraday-stat-label">Day range</span>' +
+      '<span class="intraday-stat-value is-range">' +
+      pct(rangePct) +
+      "</span>" +
+      '<span class="intraday-stat-hint">' +
+      inr(low) +
+      " – " +
+      inr(high) +
+      "</span>" +
+      "</div>";
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    const ctx = document.getElementById('intradayChart').getContext('2d');
-    const labels = [
-      "09:15", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",
-      "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:15"
-    ];
-    // Simulated price (₹)
-    const price = [
-      250.0, 251.8, 249.6, 252.2, 254.0, 253.1, 251.3,
-      252.5, 250.7, 248.9, 247.3, 246.8, 247.9, 249.5
-    ];
+    renderStats();
+
+    var canvas = document.getElementById("intradayChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    var ctx = canvas.getContext("2d");
+    var open = price[0];
+    var close = price[price.length - 1];
+    var up = close >= open;
+
+    var grad = ctx.createLinearGradient(0, 0, 0, 300);
+    if (up) {
+      grad.addColorStop(0, "rgba(16, 185, 129, 0.28)");
+      grad.addColorStop(1, "rgba(16, 185, 129, 0.02)");
+    } else {
+      grad.addColorStop(0, "rgba(43, 125, 233, 0.28)");
+      grad.addColorStop(1, "rgba(43, 125, 233, 0.02)");
+    }
+
+    var lineColor = up ? "#059669" : "#0a4d8c";
+    var openLine = labels.map(function () {
+      return open;
+    });
+
     new Chart(ctx, {
       type: "line",
       data: {
-        labels,
-        datasets: [{
-          label: "Price (₹)",
-          data: price,
-          borderColor: "#004080",
-          backgroundColor: "rgba(0,64,128,0.08)",
-          borderWidth: 2.3,
-          pointRadius: 2.5,
-          tension: 0.15,
-          fill: false,
-        }]
+        labels: labels,
+        datasets: [
+          {
+            label: "Price",
+            data: price,
+            borderColor: lineColor,
+            backgroundColor: grad,
+            borderWidth: 2.6,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            pointBackgroundColor: lineColor,
+            pointBorderColor: "#fff",
+            pointBorderWidth: 2,
+            tension: 0.32,
+            fill: true,
+            order: 1
+          },
+          {
+            label: "Open",
+            data: openLine,
+            borderColor: "rgba(100, 116, 139, 0.85)",
+            borderWidth: 1.6,
+            borderDash: [6, 4],
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            fill: false,
+            tension: 0,
+            order: 2
+          }
+        ]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.94)",
+            titleFont: { weight: "600", size: 13 },
+            bodyFont: { size: 12 },
+            padding: 12,
+            cornerRadius: 8,
             callbacks: {
-              label: ctx =>
-                "₹" + ctx.parsed.y.toFixed(2)
+              label: function (c) {
+                if (c.dataset.label === "Open") {
+                  return " Open  " + inr(c.parsed.y);
+                }
+                var chg = ((c.parsed.y - open) / open) * 100;
+                return " Price  " + inr(c.parsed.y) + "  (" + pct(chg) + " vs open)";
+              }
             }
           }
         },
         scales: {
-          y: {
-            beginAtZero: false,
-            title: { display: true, text: "Price (₹)" },
+          x: {
+            grid: { display: false },
             ticks: {
-              callback: val =>
-                '₹' + val.toFixed(1)
+              color: "#64748b",
+              font: { size: 11, weight: "600" },
+              maxRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: 8
+            },
+            title: {
+              display: true,
+              text: "Time (session)",
+              color: "#64748b",
+              font: { size: 11, weight: "600" }
             }
           },
-          x: {
-            title: { display: true, text: "Time" }
+          y: {
+            beginAtZero: false,
+            grace: "8%",
+            grid: { color: "rgba(148, 163, 184, 0.2)" },
+            border: { display: false },
+            ticks: {
+              color: "#64748b",
+              font: { size: 11, weight: "600" },
+              callback: function (val) {
+                return "₹" + Number(val).toFixed(0);
+              }
+            },
+            title: {
+              display: true,
+              text: "Price (₹)",
+              color: "#64748b",
+              font: { size: 11, weight: "600" }
+            }
           }
         }
       }
     });
   });
-  </script>
+})();
+</script>
   
   <!-- dark mode handled by shared nav.js -->
 
