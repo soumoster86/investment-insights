@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Bonds Guide & Yield Calculator | Investment Insights" />
   <meta name="twitter:description" content="India bonds guide: G-Secs, corporates, ratings, yield & YTM calculator, bond ladder planner, and educational product notes. Not advice." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710h" />
+  <link rel="stylesheet" href="style.css?v=20260710i" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -236,49 +236,96 @@
     <li><span class="tip-emoji" aria-hidden="true">⚠️</span><span class="tip-text"><strong>Not a buy signal:</strong> AAA still carries interest-rate and reinvestment risk.</span></li>
   </ul>
   <h3>Example rating moves (for learning)</h3>
-  <p class="tool-intro">These are sample stories for education. Always check current ratings with the agencies before you act.</p>
-  <div class="table-wrap table-scroll">
-    <table class="product-table table-cards">
-      <thead>
-        <tr>
-          <th>Issuer</th>
-          <th>Old Rating</th>
-          <th>New Rating</th>
-          <th>Period (illustrative)</th>
-          <th>Remarks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-label="Issuer">Adani Ports</td>
-          <td data-label="Old">AA+</td>
-          <td data-label="New">AAA</td>
-          <td data-label="Period">2024</td>
-          <td data-label="Remarks">Sample upgrade</td>
-        </tr>
-        <tr>
-          <td data-label="Issuer">Vodafone Idea</td>
-          <td data-label="Old">BBB-</td>
-          <td data-label="New">BB+</td>
-          <td data-label="Period">2024</td>
-          <td data-label="Remarks">Sample downgrade / liquidity concerns</td>
-        </tr>
-        <tr>
-          <td data-label="Issuer">JSW Steel</td>
-          <td data-label="Old">AA-</td>
-          <td data-label="New">AA</td>
-          <td data-label="Period">2023</td>
-          <td data-label="Remarks">Sample upgrade</td>
-        </tr>
-        <tr>
-          <td data-label="Issuer">IL&amp;FS</td>
-          <td data-label="Old">Investment grade era</td>
-          <td data-label="New">Default (D)</td>
-          <td data-label="Period">Stress episode</td>
-          <td data-label="Remarks">Shows that ratings are not guarantees</td>
-        </tr>
-      </tbody>
-    </table>
+  <p class="tool-intro">Sample stories only — not current research. Always check the latest rating with the agencies before you act.</p>
+  <div class="rating-move-map" role="list">
+    <article class="rating-move-card is-upgrade" role="listitem">
+      <header class="rating-move-head">
+        <span class="rating-move-icon" aria-hidden="true">📈</span>
+        <div class="rating-move-titles">
+          <h4 class="rating-move-issuer">Adani Ports</h4>
+          <span class="rating-move-period">Illustrative · 2024</span>
+        </div>
+        <span class="rating-move-badge is-up">Upgrade</span>
+      </header>
+      <div class="rating-move-grades" aria-label="Rating change from AA+ to AAA">
+        <div class="rating-grade">
+          <span class="rating-grade-label">Old</span>
+          <strong class="rating-grade-value">AA+</strong>
+        </div>
+        <span class="rating-move-arrow" aria-hidden="true">→</span>
+        <div class="rating-grade is-new">
+          <span class="rating-grade-label">New</span>
+          <strong class="rating-grade-value">AAA</strong>
+        </div>
+      </div>
+      <p class="rating-move-note">Sample upgrade path. Not a recommendation to buy or sell.</p>
+    </article>
+    <article class="rating-move-card is-downgrade" role="listitem">
+      <header class="rating-move-head">
+        <span class="rating-move-icon" aria-hidden="true">📉</span>
+        <div class="rating-move-titles">
+          <h4 class="rating-move-issuer">Vodafone Idea</h4>
+          <span class="rating-move-period">Illustrative · 2024</span>
+        </div>
+        <span class="rating-move-badge is-down">Downgrade</span>
+      </header>
+      <div class="rating-move-grades" aria-label="Rating change from BBB- to BB+">
+        <div class="rating-grade">
+          <span class="rating-grade-label">Old</span>
+          <strong class="rating-grade-value">BBB−</strong>
+        </div>
+        <span class="rating-move-arrow" aria-hidden="true">→</span>
+        <div class="rating-grade is-new">
+          <span class="rating-grade-label">New</span>
+          <strong class="rating-grade-value">BB+</strong>
+        </div>
+      </div>
+      <p class="rating-move-note">Sample downgrade / liquidity concerns. Credit risk rose in the story.</p>
+    </article>
+    <article class="rating-move-card is-upgrade" role="listitem">
+      <header class="rating-move-head">
+        <span class="rating-move-icon" aria-hidden="true">📈</span>
+        <div class="rating-move-titles">
+          <h4 class="rating-move-issuer">JSW Steel</h4>
+          <span class="rating-move-period">Illustrative · 2023</span>
+        </div>
+        <span class="rating-move-badge is-up">Upgrade</span>
+      </header>
+      <div class="rating-move-grades" aria-label="Rating change from AA- to AA">
+        <div class="rating-grade">
+          <span class="rating-grade-label">Old</span>
+          <strong class="rating-grade-value">AA−</strong>
+        </div>
+        <span class="rating-move-arrow" aria-hidden="true">→</span>
+        <div class="rating-grade is-new">
+          <span class="rating-grade-label">New</span>
+          <strong class="rating-grade-value">AA</strong>
+        </div>
+      </div>
+      <p class="rating-move-note">Sample one-notch upgrade. Small steps still matter for price and access.</p>
+    </article>
+    <article class="rating-move-card is-default" role="listitem">
+      <header class="rating-move-head">
+        <span class="rating-move-icon" aria-hidden="true">⚠️</span>
+        <div class="rating-move-titles">
+          <h4 class="rating-move-issuer">IL&amp;FS</h4>
+          <span class="rating-move-period">Stress episode · teaching</span>
+        </div>
+        <span class="rating-move-badge is-fail">Default</span>
+      </header>
+      <div class="rating-move-grades" aria-label="From investment grade era to default">
+        <div class="rating-grade">
+          <span class="rating-grade-label">Old</span>
+          <strong class="rating-grade-value rating-grade-value--sm">Inv. grade era</strong>
+        </div>
+        <span class="rating-move-arrow" aria-hidden="true">→</span>
+        <div class="rating-grade is-new">
+          <span class="rating-grade-label">New</span>
+          <strong class="rating-grade-value">D</strong>
+        </div>
+      </div>
+      <p class="rating-move-note">Shows that ratings are opinions, not guarantees of repayment.</p>
+    </article>
   </div>
   <p class="table-note">Even high-rated bonds can be downgraded. Read the latest agency report and issuer disclosures.</p>
 </section>

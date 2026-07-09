@@ -9419,6 +9419,234 @@ body.dark-mode .fund-map-risk {
   .fund-map.gold-forms-stack { grid-template-columns: 1fr; }
 }
 
+/* ========== Bond rating-move story cards ========== */
+.rating-move-map {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 14px 0 10px;
+}
+.rating-move-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 14px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border-soft);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  min-width: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.rating-move-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--rm-accent, #64748b);
+}
+.rating-move-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.rating-move-card.is-upgrade {
+  --rm-accent: #059669;
+  --rm-soft: #ecfdf5;
+  --rm-border: #a7f3d0;
+  --rm-badge-bg: #d1fae5;
+  --rm-badge-text: #065f46;
+  --rm-new-bg: #ecfdf5;
+  --rm-new-border: #6ee7b7;
+  --rm-new-text: #047857;
+}
+.rating-move-card.is-downgrade {
+  --rm-accent: #d97706;
+  --rm-soft: #fffbeb;
+  --rm-border: #fde68a;
+  --rm-badge-bg: #fef3c7;
+  --rm-badge-text: #92400e;
+  --rm-new-bg: #fff7ed;
+  --rm-new-border: #fdba74;
+  --rm-new-text: #c2410c;
+}
+.rating-move-card.is-default {
+  --rm-accent: #e11d48;
+  --rm-soft: #fff1f2;
+  --rm-border: #fecdd3;
+  --rm-badge-bg: #ffe4e6;
+  --rm-badge-text: #9f1239;
+  --rm-new-bg: #fff1f2;
+  --rm-new-border: #fda4af;
+  --rm-new-text: #be123c;
+}
+.rating-move-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+.rating-move-icon {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--rm-soft, #f1f5f9);
+  border: 1px solid var(--rm-border, #e2e8f0);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.rating-move-titles {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.rating-move-issuer {
+  margin: 0 0 2px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #1a2332;
+  line-height: 1.25;
+}
+.rating-move-period {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+.rating-move-badge {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--rm-badge-bg, #e2e8f0);
+  color: var(--rm-badge-text, #334155);
+  white-space: nowrap;
+}
+.rating-move-grades {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  min-width: 0;
+}
+.rating-grade {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  min-width: 0;
+}
+.rating-grade.is-new {
+  background: var(--rm-new-bg, #f8fafc);
+  border-color: var(--rm-new-border, #e2e8f0);
+}
+.rating-grade-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.rating-grade-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1e293b;
+  line-height: 1.15;
+  word-break: break-word;
+}
+.rating-grade-value--sm {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.rating-grade.is-new .rating-grade-value {
+  color: var(--rm-new-text, #1e293b);
+}
+.rating-move-arrow {
+  flex: 0 0 auto;
+  align-self: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--rm-accent, #64748b);
+  line-height: 1;
+}
+.rating-move-note {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  padding-top: 2px;
+  border-top: 1px dashed var(--border-soft);
+}
+body.dark-mode .rating-move-card {
+  background: #151d2c !important;
+  border-color: #2a3548 !important;
+}
+body.dark-mode .rating-move-issuer { color: #f0f3f8 !important; }
+body.dark-mode .rating-move-period { color: #94a3b8 !important; }
+body.dark-mode .rating-grade {
+  background: #0f172a !important;
+  border-color: #334155 !important;
+}
+body.dark-mode .rating-grade-value { color: #e2e8f0 !important; }
+body.dark-mode .rating-grade.is-new .rating-grade-value {
+  color: var(--rm-new-text) !important;
+}
+body.dark-mode .rating-move-note {
+  color: #94a3b8 !important;
+  border-top-color: #2a3548 !important;
+}
+body.dark-mode .rating-move-card.is-upgrade {
+  --rm-soft: #052e1c;
+  --rm-border: #065f46;
+  --rm-badge-bg: #064e3b;
+  --rm-badge-text: #6ee7b7;
+  --rm-new-bg: #052e1c;
+  --rm-new-border: #059669;
+  --rm-new-text: #6ee7b7;
+}
+body.dark-mode .rating-move-card.is-downgrade {
+  --rm-soft: #2a1a05;
+  --rm-border: #92400e;
+  --rm-badge-bg: #78350f;
+  --rm-badge-text: #fcd34d;
+  --rm-new-bg: #2a1a05;
+  --rm-new-border: #c2410c;
+  --rm-new-text: #fdba74;
+}
+body.dark-mode .rating-move-card.is-default {
+  --rm-soft: #2a0a14;
+  --rm-border: #9f1239;
+  --rm-badge-bg: #881337;
+  --rm-badge-text: #fda4af;
+  --rm-new-bg: #2a0a14;
+  --rm-new-border: #e11d48;
+  --rm-new-text: #fda4af;
+}
+@media (max-width: 720px) {
+  .rating-move-map { grid-template-columns: 1fr; }
+}
+@media (min-width: 1100px) {
+  .rating-move-map { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 /* ========== Parking options map (FD vs alternatives) ========== */
 .park-map {
   display: grid;
