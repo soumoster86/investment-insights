@@ -258,6 +258,16 @@
         sectionKeys: { calculators: 1, tools: 1 }
       },
       {
+        // Home KPI strip: metals, crude, currency converter, goal snapshot
+        href: "index.html#kpi",
+        label: "Live tools",
+        hint: "Gold · crude · currency",
+        icon: "🛠️",
+        // Never treat hash target as “current page” for hiding — only hide on home
+        // (Explore is already disabled on index entirely)
+        sectionKeys: {}
+      },
+      {
         href: "investmentgoal.html",
         label: "Goal planner",
         hint: "SIP for a target",
@@ -298,6 +308,7 @@
     for (var i = 0; i < links.length; i++) {
       var item = links[i];
       // Hide the shortcut for the page the user is already on
+      // (hash-only destinations like index.html#kpi still match page "index")
       if (isSamePage(item.href, file)) continue;
       var a = document.createElement("a");
       a.className = "site-explore-link";
