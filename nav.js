@@ -172,6 +172,179 @@
     });
   }
 
+  /* ---------- Site explore (Learn + Calculators hub) ----------
+     Floating shortcuts on every page except the home page. Injected
+     once so we do not hand-edit 25+ HTML files. Docks bottom-right
+     above back-to-top; product Quick Access stays bottom-left. */
+  function currentPageFile() {
+    var path = window.location.pathname || "";
+    var file = path.split("/").pop() || "index.html";
+    if (!file || file === "/") file = "index.html";
+    return file;
+  }
+
+  function initSiteExplore() {
+    var file = currentPageFile();
+    if (file === "index.html" || file === "") return;
+    if (document.getElementById("site-explore")) return;
+
+    var links = [
+      {
+        href: "learn.html",
+        label: "Learn hub",
+        hint: "All guides",
+        icon: "📚",
+        match: function (f) {
+          return (
+            f === "learn.html" ||
+            f === "basics.html" ||
+            f === "risk-allocation.html" ||
+            f === "ppf-tax-saving.html" ||
+            f === "postoffice.html" ||
+            f === "insurance-emergency.html" ||
+            f === "tax-overview.html" ||
+            f === "gold.html" ||
+            f === "realestate.html" ||
+            f === "index-vs-active.html" ||
+            f === "mutualfunds.html" ||
+            f === "stocks.html" ||
+            f === "etf.html" ||
+            f === "ipo.html" ||
+            f === "intraday.html" ||
+            f === "futures-options.html" ||
+            f === "usstocks.html" ||
+            f === "fixeddeposit.html" ||
+            f === "nps.html" ||
+            f === "bonds.html" ||
+            f === "cryptocurrencies.html"
+          );
+        }
+      },
+      {
+        href: "calculators.html",
+        label: "All calculators",
+        hint: "SIP · FD · more",
+        icon: "🧮",
+        match: function (f) {
+          return f === "calculators.html" || f === "tools.html";
+        }
+      },
+      {
+        href: "investmentgoal.html",
+        label: "Goal planner",
+        hint: "SIP for a target",
+        icon: "🎯",
+        match: function (f) {
+          return f === "investmentgoal.html";
+        }
+      }
+    ];
+
+    var root = document.createElement("div");
+    root.id = "site-explore";
+    root.className = "site-explore";
+    root.setAttribute("data-collapsed", "true");
+
+    var panel = document.createElement("nav");
+    panel.className = "site-explore-panel";
+    panel.id = "site-explore-panel";
+    panel.setAttribute("aria-label", "Site shortcuts");
+    panel.hidden = true;
+
+    var title = document.createElement("p");
+    title.className = "site-explore-title";
+    title.textContent = "Explore";
+    panel.appendChild(title);
+
+    for (var i = 0; i < links.length; i++) {
+      var item = links[i];
+      var a = document.createElement("a");
+      a.className = "site-explore-link";
+      a.href = item.href;
+      if (item.match(file)) a.classList.add("is-active");
+      a.innerHTML =
+        '<span class="site-explore-icon" aria-hidden="true">' +
+        item.icon +
+        "</span>" +
+        '<span class="site-explore-text">' +
+        '<span class="site-explore-label">' +
+        item.label +
+        "</span>" +
+        '<span class="site-explore-hint">' +
+        item.hint +
+        "</span>" +
+        "</span>";
+      panel.appendChild(a);
+    }
+
+    var toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "site-explore-toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", "site-explore-panel");
+    toggle.setAttribute("aria-label", "Open explore shortcuts");
+    toggle.innerHTML =
+      '<span class="site-explore-toggle-icon" aria-hidden="true">✦</span>' +
+      '<span class="site-explore-toggle-label">Explore</span>';
+
+    function setOpen(open) {
+      root.setAttribute("data-collapsed", open ? "false" : "true");
+      panel.hidden = !open;
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute(
+        "aria-label",
+        open ? "Close explore shortcuts" : "Open explore shortcuts"
+      );
+      if (open) {
+        toggle.innerHTML =
+          '<span class="site-explore-toggle-icon" aria-hidden="true">×</span>' +
+          '<span class="site-explore-toggle-label">Close</span>';
+      } else {
+        toggle.innerHTML =
+          '<span class="site-explore-toggle-icon" aria-hidden="true">✦</span>' +
+          '<span class="site-explore-toggle-label">Explore</span>';
+      }
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(panel.hidden);
+    });
+
+    // Desktop wide screens: keep expanded for discoverability
+    function syncLayout() {
+      var wide = window.matchMedia && window.matchMedia("(min-width: 1100px)").matches;
+      if (wide) {
+        setOpen(true);
+        root.classList.add("is-always-open");
+      } else {
+        root.classList.remove("is-always-open");
+        // leave current open state; default closed on first load for small screens
+      }
+    }
+
+    root.appendChild(panel);
+    root.appendChild(toggle);
+    document.body.appendChild(root);
+
+    syncLayout();
+    if (window.matchMedia) {
+      var mq = window.matchMedia("(min-width: 1100px)");
+      if (mq.addEventListener) mq.addEventListener("change", syncLayout);
+      else if (mq.addListener) mq.addListener(syncLayout);
+    }
+
+    // Close when clicking outside (mobile/tablet collapsed mode)
+    document.addEventListener("click", function (e) {
+      if (root.classList.contains("is-always-open")) return;
+      if (!panel.hidden && !root.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !panel.hidden && !root.classList.contains("is-always-open")) {
+        setOpen(false);
+      }
+    });
+  }
+
   /* ---------- Mobile in-page jump chips ----------
      Side floating-toc is hidden ≤1180px. Clone its links into a sticky
      horizontal chip bar inside <main> so long guides stay navigable. */
@@ -454,6 +627,7 @@
     initNav();
     initActiveLink();
     initBackToTop();
+    initSiteExplore();
     initMobilePageJump();
     initFloatingTocSpy();
     initContentReviewed();

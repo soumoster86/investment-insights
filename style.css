@@ -605,6 +605,202 @@ form textarea:focus,
 }
 
 /* ============================================================
+   Site Explore — floating Learn / Calculators / Goal shortcuts
+   Injected by nav.js on every page except index. Bottom-right,
+   stacked above #back-to-top so left-side product Quick Access
+   menus are undisturbed.
+   ============================================================ */
+.site-explore {
+  position: fixed;
+  right: 20px;
+  bottom: 22px;
+  z-index: 1490;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: min(260px, calc(100vw - 28px));
+  font-family: var(--font);
+  pointer-events: none; /* only children receive clicks */
+}
+.site-explore > * {
+  pointer-events: auto;
+}
+/* Lift above back-to-top when that button is present and shown */
+body:has(#back-to-top) .site-explore {
+  bottom: 78px;
+}
+.site-explore-panel {
+  width: 100%;
+  min-width: 200px;
+  padding: 10px 10px 8px;
+  border-radius: 16px;
+  border: 1px solid rgba(180, 200, 230, 0.55);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 255, 0.96) 100%);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow:
+    0 4px 6px rgba(10, 40, 90, 0.04),
+    0 12px 28px rgba(10, 40, 90, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
+.site-explore-panel::before {
+  content: "";
+  display: block;
+  height: 3px;
+  margin: -10px -10px 10px;
+  background: linear-gradient(90deg, #0a4d8c 0%, #2b7de9 55%, #6ec8ff 100%);
+  border-radius: 16px 16px 0 0;
+}
+.site-explore-title {
+  margin: 0 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5b7aa5;
+}
+.site-explore-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  text-decoration: none !important;
+  color: #1a2332 !important;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.site-explore-link:last-child { margin-bottom: 0; }
+.site-explore-link:hover,
+.site-explore-link:focus-visible {
+  background: #eef5ff;
+  border-color: #c5d8f0;
+  outline: none;
+  transform: translateX(-2px);
+}
+.site-explore-link.is-active {
+  background: linear-gradient(180deg, #e8f1fc 0%, #dfeaf8 100%);
+  border-color: #b6cce8;
+}
+.site-explore-icon {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #eef5ff;
+  border: 1px solid #d5e2f5;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.site-explore-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.site-explore-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0a4d8c;
+}
+.site-explore-hint {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #6b7c93;
+  line-height: 1.2;
+}
+.site-explore-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 16px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff !important;
+  background: linear-gradient(180deg, var(--brand-accent), var(--brand));
+  box-shadow: 0 8px 24px rgba(10, 50, 110, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.site-explore-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(10, 50, 110, 0.34);
+}
+.site-explore-toggle:focus-visible {
+  outline: 2px solid #6ec8ff;
+  outline-offset: 3px;
+}
+.site-explore-toggle-icon {
+  font-size: 1em;
+  line-height: 1;
+}
+/* Wide desktop: panel always open; hide the toggle chrome */
+.site-explore.is-always-open .site-explore-toggle {
+  display: none;
+}
+.site-explore.is-always-open .site-explore-panel {
+  display: block !important;
+}
+
+/* Dark mode */
+body.dark-mode .site-explore-panel {
+  background: linear-gradient(180deg, #1e2738 0%, #151c28 100%) !important;
+  border-color: #3a4a63 !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35) !important;
+}
+body.dark-mode .site-explore-title { color: #a8bdd8 !important; }
+body.dark-mode .site-explore-link {
+  color: #e8eef8 !important;
+}
+body.dark-mode .site-explore-link:hover,
+body.dark-mode .site-explore-link:focus-visible {
+  background: rgba(59, 130, 246, 0.16) !important;
+  border-color: #3d4d66 !important;
+}
+body.dark-mode .site-explore-link.is-active {
+  background: rgba(59, 130, 246, 0.22) !important;
+  border-color: #5b8fd4 !important;
+}
+body.dark-mode .site-explore-icon {
+  background: #243247 !important;
+  border-color: #3d4d66 !important;
+}
+body.dark-mode .site-explore-label { color: #d6e8ff !important; }
+body.dark-mode .site-explore-hint { color: #a8b6c9 !important; }
+body.dark-mode .site-explore-toggle {
+  background: linear-gradient(180deg, #3b82f6, #1d4ed8) !important;
+}
+
+@media (max-width: 640px) {
+  .site-explore {
+    right: 12px;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+  body:has(#back-to-top) .site-explore {
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+  .site-explore-toggle {
+    padding: 10px 14px;
+    font-size: 0.85em;
+  }
+  .site-explore-panel {
+    min-width: 180px;
+  }
+}
+/* When product Quick Access is also on-screen bottom-left, no collision — Explore is right */
+
+/* ============================================================
    Floating in-page navigation boxes
    Two kinds exist, each under several class names:
      1. "On this page" section index ... .floating-toc

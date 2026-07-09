@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="IPO Guide | Investment Insights" />
   <meta name="twitter:description" content="How IPOs work in India, apply flow, checklist, risks, and illustrative listing-gains chart. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710n" />
+  <link rel="stylesheet" href="style.css?v=20260710p" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -610,7 +610,7 @@
   }
 
   /**
-   * Dark mode can be applied by nav.js after this script's DOMContentLoaded
+   * Dark mode can be applied by nav.js?v=20260710p after this script's DOMContentLoaded
    * runs. Detect via class, checkbox, localStorage, or chart-card luminance.
    */
   function isDarkMode() {
@@ -815,7 +815,7 @@
       listingChart.update();
     }
 
-    // nav.js also uses DOMContentLoaded and may apply dark-mode *after* this chart
+    // nav.js?v=20260710p also uses DOMContentLoaded and may apply dark-mode *after* this chart
     [0, 50, 150, 400].forEach(function (ms) {
       setTimeout(applyListingChartTheme, ms);
     });
@@ -877,7 +877,7 @@ document.querySelectorAll('.ipo-float-menu a').forEach(function(link) {
 })();
 </script>
 
-<script src="nav.js" defer></script>
+<script src="nav.js?v=20260710p" defer></script>
 
 <!-- Search Modal -->
 <div id="search-modal" class="search-modal" aria-hidden="true">
