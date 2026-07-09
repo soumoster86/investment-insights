@@ -203,7 +203,9 @@ button.nav-close:hover {
   min-width: 0;
   margin-top: 0;
   margin-left: 4px;
-  justify-content: flex-end;
+  margin-right: 4px;
+  /* Center Home → Contact between brand and search/theme controls */
+  justify-content: center;
   background: none;
 }
 .site-header .nav-search-btn {
@@ -5918,10 +5920,10 @@ button.nav-search-btn:hover,
   margin-left: 0;
 }
 
-/* Mid-width: keep controls aligned; allow nav to use less space */
+/* Mid-width: keep nav centered; tighten link padding */
 @media (max-width: 1100px) and (min-width: 821px) {
   .site-header .main-nav {
-    justify-content: flex-end;
+    justify-content: center;
     gap: 2px;
   }
   .main-nav a {
