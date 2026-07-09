@@ -167,6 +167,36 @@
           <strong>Retirement corpus</strong>
           <span>Long horizon · growth-oriented</span>
         </button>
+        <button type="button" class="goal-template-card" data-template="wedding">
+          <span class="goal-template-icon" aria-hidden="true">💍</span>
+          <strong>Wedding fund</strong>
+          <span>Medium horizon · mixed routes</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="car">
+          <span class="goal-template-icon" aria-hidden="true">🚗</span>
+          <strong>Car purchase</strong>
+          <span>3–5 years · lower volatility</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="vacation">
+          <span class="goal-template-icon" aria-hidden="true">✈️</span>
+          <strong>Dream vacation</strong>
+          <span>Short goal · simple SIP</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="wealth">
+          <span class="goal-template-icon" aria-hidden="true">📈</span>
+          <strong>Wealth building SIP</strong>
+          <span>Project mode · step-up habit</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="beginner">
+          <span class="goal-template-icon" aria-hidden="true">🌱</span>
+          <strong>First SIP (beginner)</strong>
+          <span>Small start · project corpus</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="gold">
+          <span class="goal-template-icon" aria-hidden="true">🪙</span>
+          <strong>Gold savings sleeve</strong>
+          <span>Diversifier · moderate horizon</span>
+        </button>
       </div>
     </section>
 
@@ -507,6 +537,78 @@
       routes: ["Mutual Funds", "Stocks", "Bonds"],
       monthly: 25000,
       stepUp: 8
+    },
+    wedding: {
+      name: "Wedding fund",
+      mode: "target",
+      target: 1500000,
+      years: 5,
+      rate: 9,
+      inflation: 6,
+      inflateTarget: true,
+      routes: ["Mutual Funds", "Bonds", "Fixed Deposits", "Gold"],
+      monthly: 20000,
+      stepUp: 8
+    },
+    car: {
+      name: "Car purchase",
+      mode: "target",
+      target: 800000,
+      years: 4,
+      rate: 8,
+      inflation: 5.5,
+      inflateTarget: true,
+      routes: ["Mutual Funds", "Fixed Deposits", "Bonds"],
+      monthly: 15000,
+      stepUp: 5
+    },
+    vacation: {
+      name: "Dream vacation",
+      mode: "target",
+      target: 250000,
+      years: 2,
+      rate: 7.5,
+      inflation: 5.5,
+      inflateTarget: true,
+      routes: ["Mutual Funds", "Fixed Deposits"],
+      monthly: 10000,
+      stepUp: 0
+    },
+    wealth: {
+      name: "Wealth building SIP",
+      mode: "project",
+      target: 0,
+      years: 15,
+      rate: 11,
+      inflation: 6,
+      inflateTarget: false,
+      routes: ["Mutual Funds", "Stocks", "Bonds"],
+      monthly: 15000,
+      stepUp: 10
+    },
+    beginner: {
+      name: "First SIP (beginner)",
+      mode: "project",
+      target: 0,
+      years: 10,
+      rate: 10,
+      inflation: 6,
+      inflateTarget: false,
+      routes: ["Mutual Funds"],
+      monthly: 5000,
+      stepUp: 10
+    },
+    gold: {
+      name: "Gold savings sleeve",
+      mode: "target",
+      target: 500000,
+      years: 7,
+      rate: 8,
+      inflation: 5.5,
+      inflateTarget: true,
+      routes: ["Gold", "Mutual Funds", "Fixed Deposits"],
+      monthly: 5000,
+      stepUp: 5
     }
   };
 
