@@ -171,6 +171,8 @@
       esc(f.type) +
       '" data-risk="' +
       esc(f.risk) +
+      '" data-name="' +
+      esc(f.name) +
       '" data-rating="' +
       f.rating +
       '">' +
@@ -181,7 +183,18 @@
       ' of 5">' +
       stars(f.rating) +
       "</div>" +
+      '<div class="rec-card-actions">' +
       detailsLink(f.url) +
+      '<button type="button" class="btn secondary btn-sm mf-watch-btn" data-name="' +
+      esc(f.name) +
+      '" data-type="' +
+      esc(f.type) +
+      '" data-risk="' +
+      esc(f.risk) +
+      '" data-url="' +
+      esc(f.url) +
+      '">☆ Shortlist</button>' +
+      "</div>" +
       "</article>"
     );
   }

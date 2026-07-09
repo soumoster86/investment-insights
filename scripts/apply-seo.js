@@ -42,7 +42,7 @@ const PAGES = {
   "mutualfunds.html": {
     title: "Mutual Funds, SIP & SWP Calculators | Investment Insights",
     description:
-      "Mutual fund basics plus SIP and SWP calculators. Search and filter educational fund recommendations by type and risk."
+      "India mutual funds guide: categories, SIP vs lumpsum, key terms, SIP & SWP calculators, browser shortlist, and sample schemes. Educational only."
   },
   "fixeddeposit.html": {
     title: "Fixed Deposit Guide & FD Calculator | Investment Insights",
