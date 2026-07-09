@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Bonds Guide & Yield Calculator | Investment Insights" />
   <meta name="twitter:description" content="India bonds guide: G-Secs, corporates, ratings, yield & YTM calculator, bond ladder planner, and educational product notes. Not advice." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260709b" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -726,9 +726,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var stats = document.getElementById('bond-yield-stats');
   if (stats) {
     stats.innerHTML =
-      '<div class="illust-stat"><span class="illust-stat-label">G-Sec sample</span><span class="illust-stat-value">6.9%</span><span class="illust-stat-hint">Teaching mid-curve</span></div>' +
-      '<div class="illust-stat"><span class="illust-stat-label">AAA sample</span><span class="illust-stat-value is-amber">7.4%</span><span class="illust-stat-hint">Modest spread</span></div>' +
-      '<div class="illust-stat"><span class="illust-stat-label">BBB sample</span><span class="illust-stat-value is-down">10.5%</span><span class="illust-stat-hint">Higher risk priced</span></div>';
+      '<div class="illust-stat"><div class="illust-stat-label">G-Sec sample</div><div class="illust-stat-value">6.9%</div><div class="illust-stat-hint">Teaching mid-curve</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">AAA sample</div><div class="illust-stat-value is-amber">7.4%</div><div class="illust-stat-hint">Modest spread</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">BBB sample</div><div class="illust-stat-value is-down">10.5%</div><div class="illust-stat-hint">Higher risk priced</div></div>';
   }
   new Chart(canvas.getContext('2d'), {
     type: 'bar',

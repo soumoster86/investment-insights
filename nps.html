@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="NPS (National Pension System) Calculator | Investment Insights" />
   <meta name="twitter:description" content="NPS guide: Tier I/II, asset classes, careful tax notes, exit/annuity concepts, and corpus/pension calculator. Educational only — not advice." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260709b" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -495,14 +495,14 @@
     var stats = document.getElementById("nps-mix-stats");
     if (stats) {
       stats.innerHTML =
-        '<div class="illust-stat"><span class="illust-stat-label">Sample mix</span><span class="illust-stat-value">50/30/20</span><span class="illust-stat-hint">E / C / G</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">SIP</span><span class="illust-stat-value">₹5,000</span><span class="illust-stat-hint">Per month</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">Invested</span><span class="illust-stat-value">₹' +
+        '<div class="illust-stat"><div class="illust-stat-label">Sample mix</div><div class="illust-stat-value">50/30/20</div><div class="illust-stat-hint">E / C / G</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">SIP</div><div class="illust-stat-value">₹5,000</div><div class="illust-stat-hint">Per month</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Invested</div><div class="illust-stat-value">₹' +
         invested.toLocaleString("en-IN") +
-        '</span><span class="illust-stat-hint">20 years</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">Corpus @10%</span><span class="illust-stat-value is-up">₹' +
+        '</div><div class="illust-stat-hint">20 years</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Corpus @10%</div><div class="illust-stat-value is-up">₹' +
         finalC.toLocaleString("en-IN") +
-        '</span><span class="illust-stat-hint">Constant return model</span></div>';
+        '</div><div class="illust-stat-hint">Constant return model</div></div>';
     }
     var mixEl = document.getElementById("npsMixChart");
     if (mixEl) {

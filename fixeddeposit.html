@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Fixed Deposit Guide & FD Calculator | Investment Insights" />
   <meta name="twitter:description" content="FD guide for India: types, DICGC safety notes, maturity calculator, FD ladder planner, tax notes, and comparisons. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260709b" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -590,18 +590,18 @@
         return "₹" + Math.round(n).toLocaleString("en-IN");
       }
       stats.innerHTML =
-        '<div class="illust-stat"><span class="illust-stat-label">Start</span><span class="illust-stat-value">' +
+        '<div class="illust-stat"><div class="illust-stat-label">Start</div><div class="illust-stat-value">' +
         inr(principal) +
-        '</span><span class="illust-stat-hint">Lump sum</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">10y @ 5.5%</span><span class="illust-stat-value">' +
+        '</div><div class="illust-stat-hint">Lump sum</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">10y @ 5.5%</div><div class="illust-stat-value">' +
         inr(p55[p55.length - 1]) +
-        '</span><span class="illust-stat-hint">Maturity sketch</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">10y @ 6.5%</span><span class="illust-stat-value">' +
+        '</div><div class="illust-stat-hint">Maturity sketch</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">10y @ 6.5%</div><div class="illust-stat-value">' +
         inr(p65[p65.length - 1]) +
-        '</span><span class="illust-stat-hint">Maturity sketch</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">10y @ 7.5%</span><span class="illust-stat-value is-up">' +
+        '</div><div class="illust-stat-hint">Maturity sketch</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">10y @ 7.5%</div><div class="illust-stat-value is-up">' +
         inr(p75[p75.length - 1]) +
-        '</span><span class="illust-stat-hint">Maturity sketch</span></div>';
+        '</div><div class="illust-stat-hint">Maturity sketch</div></div>';
     }
     var ctx = canvas.getContext("2d");
     new Chart(ctx, {

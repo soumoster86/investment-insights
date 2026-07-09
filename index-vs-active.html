@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Index Funds vs Active Funds | Investment Insights" />
   <meta name="twitter:description" content="Learn the difference between index (passive) and active mutual funds/ETFs: costs, tracking, and how investors compare them. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260709b" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -396,15 +396,15 @@
     var stats = document.getElementById("fee-drag-stats");
     if (stats) {
       stats.innerHTML =
-        '<div class="illust-stat"><span class="illust-stat-label">0.20% ER</span><span class="illust-stat-value is-up">₹' +
+        '<div class="illust-stat"><div class="illust-stat-label">0.20% ER</div><div class="illust-stat-value is-up">₹' +
         low[low.length - 1].toLocaleString("en-IN") +
-        '</span><span class="illust-stat-hint">After 20 years</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">1.50% ER</span><span class="illust-stat-value is-amber">₹' +
+        '</div><div class="illust-stat-hint">After 20 years</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">1.50% ER</div><div class="illust-stat-value is-amber">₹' +
         high[high.length - 1].toLocaleString("en-IN") +
-        '</span><span class="illust-stat-hint">After 20 years</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">Gap</span><span class="illust-stat-value is-down">₹' +
+        '</div><div class="illust-stat-hint">After 20 years</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Gap</div><div class="illust-stat-value is-down">₹' +
         gap.toLocaleString("en-IN") +
-        '</span><span class="illust-stat-hint">Cost of extra fees (model)</span></div>';
+        '</div><div class="illust-stat-hint">Cost of extra fees (model)</div></div>';
     }
     var ctx = canvas.getContext("2d");
     new Chart(ctx, {

@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Cryptocurrency Overview | Investment Insights" />
   <meta name="twitter:description" content="High-risk crypto guide for Indian learners: categories, risks, India tax notes, sizing & P&L tools, watchlist, sample assets. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260709b" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -532,18 +532,18 @@ document.addEventListener('DOMContentLoaded', function () {
   var stats = document.getElementById('crypto-vol-stats');
   if (stats) {
     stats.innerHTML =
-      '<div class="illust-stat"><span class="illust-stat-label">Peak</span><span class="illust-stat-value is-up">' +
+      '<div class="illust-stat"><div class="illust-stat-label">Peak</div><div class="illust-stat-value is-up">' +
       peak +
-      '</span><span class="illust-stat-hint">Index high</span></div>' +
-      '<div class="illust-stat"><span class="illust-stat-label">Trough</span><span class="illust-stat-value is-down">' +
+      '</div><div class="illust-stat-hint">Index high</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">Trough</div><div class="illust-stat-value is-down">' +
       trough +
-      '</span><span class="illust-stat-hint">After crash leg</span></div>' +
-      '<div class="illust-stat"><span class="illust-stat-label">Max drawdown</span><span class="illust-stat-value is-down">' +
+      '</div><div class="illust-stat-hint">After crash leg</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">Max drawdown</div><div class="illust-stat-value is-down">' +
       dd.toFixed(0) +
-      '%</span><span class="illust-stat-hint">Peak → low</span></div>' +
-      '<div class="illust-stat"><span class="illust-stat-label">End vs start</span><span class="illust-stat-value is-up">+' +
+      '%</div><div class="illust-stat-hint">Peak → low</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">End vs start</div><div class="illust-stat-value is-up">+' +
       endRet.toFixed(0) +
-      '%</span><span class="illust-stat-hint">Still volatile path</span></div>';
+      '%</div><div class="illust-stat-hint">Still volatile path</div></div>';
   }
   var ctx = canvas.getContext('2d');
   var g = ctx.createLinearGradient(0, 0, 0, 280);

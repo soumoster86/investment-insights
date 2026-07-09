@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Gold Investing in India | Investment Insights" />
   <meta name="twitter:description" content="Educational guide to gold as an asset: physical jewellery vs coins, gold ETFs, sovereign gold bonds, and portfolio role for Indian investors." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260709b" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -389,13 +389,13 @@
     var stats = document.getElementById("gold-path-stats");
     if (stats) {
       stats.innerHTML =
-        '<div class="illust-stat"><span class="illust-stat-label">Start</span><span class="illust-stat-value">100</span><span class="illust-stat-hint">Indexed 2015</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">End sketch</span><span class="illust-stat-value is-amber">' +
+        '<div class="illust-stat"><div class="illust-stat-label">Start</div><div class="illust-stat-value">100</div><div class="illust-stat-hint">Indexed 2015</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">End sketch</div><div class="illust-stat-value is-amber">' +
         levels[levels.length - 1] +
-        '</span><span class="illust-stat-hint">Growth of 100</span></div>' +
-        '<div class="illust-stat"><span class="illust-stat-label">Total path</span><span class="illust-stat-value is-up">+' +
+        '</div><div class="illust-stat-hint">Growth of 100</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Total path</div><div class="illust-stat-value is-up">+' +
         total.toFixed(0) +
-        '%</span><span class="illust-stat-hint">Illustrative only</span></div>';
+        '%</div><div class="illust-stat-hint">Illustrative only</div></div>';
     }
     var ctx = canvas.getContext("2d");
     var g = ctx.createLinearGradient(0, 0, 0, 280);
