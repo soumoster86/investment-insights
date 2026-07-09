@@ -8766,3 +8766,199 @@ body.dark-mode .illust-panel .illust-notes ul { color: #c8d0dc !important; }
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ========== Fund category map (mutual funds) ========== */
+.fund-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0 8px;
+}
+.fund-map-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 16px 16px 14px;
+  border-radius: 16px;
+  border: 1.5px solid var(--border-soft, #d5e0f0);
+  background: var(--surface, #fff);
+  box-shadow: 0 2px 10px rgba(10, 40, 90, 0.06);
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.fund-map-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--fund-accent, #2b7de9);
+}
+.fund-map-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(10, 40, 90, 0.1);
+  border-color: color-mix(in srgb, var(--fund-accent, #2b7de9) 45%, #d5e0f0);
+}
+.fund-map-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.fund-map-icon {
+  flex: 0 0 auto;
+  width: 2.55em;
+  height: 2.55em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  line-height: 1;
+  border-radius: 12px;
+  background: var(--fund-icon-bg, #eef4ff);
+  border: 1px solid var(--fund-icon-border, #d0e0fb);
+}
+.fund-map-head h3 {
+  margin: 0;
+  font-size: 1.08em;
+  font-weight: 700;
+  color: var(--text, #1a2332);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.fund-map-meta {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  flex: 1;
+}
+.fund-map-meta > div {
+  margin: 0;
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: #f6f9fd;
+  border: 1px solid #e8eef6;
+}
+.fund-map-meta dt {
+  margin: 0 0 3px;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+.fund-map-meta dd {
+  margin: 0;
+  font-size: 0.94em;
+  line-height: 1.4;
+  color: var(--text, #1a2332);
+}
+.fund-map-risk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  margin-top: auto;
+  padding: 8px 11px;
+  border-radius: 999px;
+  font-size: 0.86em;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--fund-risk-text, #334155);
+  background: var(--fund-risk-bg, #f1f5f9);
+  border: 1px solid var(--fund-risk-border, #e2e8f0);
+}
+.fund-risk-dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fund-accent, #2b7de9);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--fund-accent, #2b7de9) 22%, transparent);
+}
+
+/* Category accents */
+.fund-map--equity {
+  --fund-accent: #2563eb;
+  --fund-icon-bg: #eff6ff;
+  --fund-icon-border: #bfdbfe;
+  --fund-risk-bg: #eff6ff;
+  --fund-risk-border: #bfdbfe;
+  --fund-risk-text: #1e40af;
+}
+.fund-map--debt {
+  --fund-accent: #0d9488;
+  --fund-icon-bg: #f0fdfa;
+  --fund-icon-border: #99f6e4;
+  --fund-risk-bg: #f0fdfa;
+  --fund-risk-border: #99f6e4;
+  --fund-risk-text: #115e59;
+}
+.fund-map--hybrid {
+  --fund-accent: #7c3aed;
+  --fund-icon-bg: #f5f3ff;
+  --fund-icon-border: #ddd6fe;
+  --fund-risk-bg: #f5f3ff;
+  --fund-risk-border: #ddd6fe;
+  --fund-risk-text: #5b21b6;
+}
+.fund-map--index {
+  --fund-accent: #4f46e5;
+  --fund-icon-bg: #eef2ff;
+  --fund-icon-border: #c7d2fe;
+  --fund-risk-bg: #eef2ff;
+  --fund-risk-border: #c7d2fe;
+  --fund-risk-text: #3730a3;
+}
+.fund-map--sector {
+  --fund-accent: #e11d48;
+  --fund-icon-bg: #fff1f2;
+  --fund-icon-border: #fecdd3;
+  --fund-risk-bg: #fff1f2;
+  --fund-risk-border: #fecdd3;
+  --fund-risk-text: #9f1239;
+}
+.fund-map--elss {
+  --fund-accent: #d97706;
+  --fund-icon-bg: #fffbeb;
+  --fund-icon-border: #fde68a;
+  --fund-risk-bg: #fffbeb;
+  --fund-risk-border: #fde68a;
+  --fund-risk-text: #92400e;
+}
+
+body.dark-mode .fund-map-card {
+  background: #1c212b !important;
+  border-color: #2c3340 !important;
+  box-shadow: none;
+}
+body.dark-mode .fund-map-card:hover {
+  border-color: color-mix(in srgb, var(--fund-accent, #2b7de9) 55%, #2c3340) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+body.dark-mode .fund-map-head h3 { color: #f0f3f8 !important; }
+body.dark-mode .fund-map-meta > div {
+  background: #151a22 !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .fund-map-meta dt { color: #94a3b8 !important; }
+body.dark-mode .fund-map-meta dd { color: #e2e8f0 !important; }
+body.dark-mode .fund-map-icon {
+  background: color-mix(in srgb, var(--fund-accent, #2b7de9) 16%, #151a22) !important;
+  border-color: color-mix(in srgb, var(--fund-accent, #2b7de9) 35%, #2c3340) !important;
+}
+body.dark-mode .fund-map-risk {
+  background: color-mix(in srgb, var(--fund-accent, #2b7de9) 12%, #151a22) !important;
+  border-color: color-mix(in srgb, var(--fund-accent, #2b7de9) 28%, #2c3340) !important;
+  color: #e2e8f0 !important;
+}
+
+@media (max-width: 960px) {
+  .fund-map { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .fund-map { grid-template-columns: 1fr; }
+}

@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Mutual Funds, SIP & SWP Calculators | Investment Insights" />
   <meta name="twitter:description" content="India mutual funds guide: categories, SIP vs lumpsum, key terms, SIP & SWP calculators, browser shortlist, and sample schemes. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260709b" />
+  <link rel="stylesheet" href="style.css?v=20260709c" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -187,55 +187,109 @@
   <section id="types-mutual">
     <h2>Main fund categories (map)</h2>
     <p class="tool-intro">Labels follow common SEBI-style conversations. Always read the scheme document for the real mandate.</p>
-    <div class="table-wrap table-scroll">
-      <table class="compare-table table-cards product-table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Primarily invests in</th>
-            <th>Often used for</th>
-            <th>Risk tone</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Category">Equity</td>
-            <td data-label="Invests in">Stocks (large / mid / small / flexi, etc.)</td>
-            <td data-label="Used for">Long-horizon growth</td>
-            <td data-label="Risk">Medium–high (market risk)</td>
-          </tr>
-          <tr>
-            <td data-label="Category">Debt</td>
-            <td data-label="Invests in">Bonds, money-market, government securities</td>
-            <td data-label="Used for">Stability / short–medium goals</td>
-            <td data-label="Risk">Lower than equity (rate &amp; credit risk remain)</td>
-          </tr>
-          <tr>
-            <td data-label="Category">Hybrid</td>
-            <td data-label="Invests in">Mix of equity and debt</td>
-            <td data-label="Used for">Balanced risk sleeve</td>
-            <td data-label="Risk">Varies by equity share</td>
-          </tr>
-          <tr>
-            <td data-label="Category">Index / passive</td>
-            <td data-label="Invests in">Tracks a published index</td>
-            <td data-label="Used for">Low-cost market exposure</td>
-            <td data-label="Risk">Market risk of the index</td>
-          </tr>
-          <tr>
-            <td data-label="Category">Sector / thematic</td>
-            <td data-label="Invests in">One sector or theme</td>
-            <td data-label="Used for">Satellite bets</td>
-            <td data-label="Risk">High concentration</td>
-          </tr>
-          <tr>
-            <td data-label="Category">ELSS</td>
-            <td data-label="Invests in">Equity with lock-in (tax-saving discussions)</td>
-            <td data-label="Used for">Long equity + 80C-style talk</td>
-            <td data-label="Risk">Equity risk + lock-in</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="fund-map" role="list">
+      <article class="fund-map-card fund-map--equity" role="listitem">
+        <header class="fund-map-head">
+          <span class="fund-map-icon" aria-hidden="true">📈</span>
+          <h3>Equity</h3>
+        </header>
+        <dl class="fund-map-meta">
+          <div>
+            <dt>Primarily invests in</dt>
+            <dd>Stocks (large / mid / small / flexi, etc.)</dd>
+          </div>
+          <div>
+            <dt>Often used for</dt>
+            <dd>Long-horizon growth</dd>
+          </div>
+        </dl>
+        <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Medium–high · market risk</p>
+      </article>
+      <article class="fund-map-card fund-map--debt" role="listitem">
+        <header class="fund-map-head">
+          <span class="fund-map-icon" aria-hidden="true">🏦</span>
+          <h3>Debt</h3>
+        </header>
+        <dl class="fund-map-meta">
+          <div>
+            <dt>Primarily invests in</dt>
+            <dd>Bonds, money-market, government securities</dd>
+          </div>
+          <div>
+            <dt>Often used for</dt>
+            <dd>Stability / short–medium goals</dd>
+          </div>
+        </dl>
+        <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Lower than equity · rate &amp; credit risk remain</p>
+      </article>
+      <article class="fund-map-card fund-map--hybrid" role="listitem">
+        <header class="fund-map-head">
+          <span class="fund-map-icon" aria-hidden="true">⚖️</span>
+          <h3>Hybrid</h3>
+        </header>
+        <dl class="fund-map-meta">
+          <div>
+            <dt>Primarily invests in</dt>
+            <dd>Mix of equity and debt</dd>
+          </div>
+          <div>
+            <dt>Often used for</dt>
+            <dd>Balanced risk sleeve</dd>
+          </div>
+        </dl>
+        <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Varies by equity share</p>
+      </article>
+      <article class="fund-map-card fund-map--index" role="listitem">
+        <header class="fund-map-head">
+          <span class="fund-map-icon" aria-hidden="true">📊</span>
+          <h3>Index / passive</h3>
+        </header>
+        <dl class="fund-map-meta">
+          <div>
+            <dt>Primarily invests in</dt>
+            <dd>Tracks a published index</dd>
+          </div>
+          <div>
+            <dt>Often used for</dt>
+            <dd>Low-cost market exposure</dd>
+          </div>
+        </dl>
+        <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Market risk of the index</p>
+      </article>
+      <article class="fund-map-card fund-map--sector" role="listitem">
+        <header class="fund-map-head">
+          <span class="fund-map-icon" aria-hidden="true">🎯</span>
+          <h3>Sector / thematic</h3>
+        </header>
+        <dl class="fund-map-meta">
+          <div>
+            <dt>Primarily invests in</dt>
+            <dd>One sector or theme</dd>
+          </div>
+          <div>
+            <dt>Often used for</dt>
+            <dd>Satellite bets</dd>
+          </div>
+        </dl>
+        <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> High concentration</p>
+      </article>
+      <article class="fund-map-card fund-map--elss" role="listitem">
+        <header class="fund-map-head">
+          <span class="fund-map-icon" aria-hidden="true">🔒</span>
+          <h3>ELSS</h3>
+        </header>
+        <dl class="fund-map-meta">
+          <div>
+            <dt>Primarily invests in</dt>
+            <dd>Equity with lock-in (tax-saving discussions)</dd>
+          </div>
+          <div>
+            <dt>Often used for</dt>
+            <dd>Long equity + 80C-style talk</dd>
+          </div>
+        </dl>
+        <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Equity risk + lock-in</p>
+      </article>
     </div>
     <p class="table-note">
       Passive vs active trade-offs: <a href="index-vs-active.html">Index vs active funds</a>.
