@@ -2092,6 +2092,16 @@ body.dark-mode .rec-controls-wrap .rec-search-label { color: #b8c9ec !important;
   border: 1.4px solid var(--border-soft, #e1e6f2);
   background: #131722;
 }
+/* Full-width under header (mirrors US stocks tape placement) */
+.live-ticker-wrap.india-ticker-top {
+  margin: 0;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  width: 100%;
+  max-width: none;
+}
 .live-ticker-wrap .ticker-note {
   margin: 0;
   padding: 6px 12px 8px;

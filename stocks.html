@@ -119,9 +119,23 @@
   </label>
 </header>
 <!-- END SITE HEADER -->
-  
-  
-      <main id="main-content" tabindex="-1">
+
+  <!-- NSE stock ticker at top (same placement as US stocks TradingView tape) -->
+  <div id="live-ticker" class="live-ticker-wrap india-ticker india-ticker-top is-loading" aria-label="NSE stock ticker" aria-live="polite">
+    <div class="india-ticker-bar">
+      <div class="india-ticker-label">
+        <span class="india-ticker-badge">NSE</span>
+        <span class="india-ticker-label-text">Market tape</span>
+        <button type="button" class="india-ticker-refresh" data-ticker-refresh aria-label="Refresh quotes">↻</button>
+      </div>
+      <div class="india-ticker-viewport">
+        <div class="india-ticker-track" role="list"></div>
+      </div>
+    </div>
+    <p class="ticker-note">Loading quotes… Educational use only — not for trading decisions.</p>
+  </div>
+
+  <main id="main-content" tabindex="-1">
     <section class="article-hero">
       <p class="eyebrow">Equities · India</p>
       <h1>Stocks guide &amp; tools</h1>
@@ -130,21 +144,6 @@
         and keep an educational watchlist — all in your browser. Not personalised advice.
       </p>
     </section>
-
-    <!-- NSE stock ticker via free India Stock Market API (proxied; see netlify/functions/india-stocks.js) -->
-    <div id="live-ticker" class="live-ticker-wrap india-ticker is-loading" aria-label="NSE stock ticker" aria-live="polite">
-      <div class="india-ticker-bar">
-        <div class="india-ticker-label">
-          <span class="india-ticker-badge">NSE</span>
-          <span class="india-ticker-label-text">Market tape</span>
-          <button type="button" class="india-ticker-refresh" data-ticker-refresh aria-label="Refresh quotes">↻</button>
-        </div>
-        <div class="india-ticker-viewport">
-          <div class="india-ticker-track" role="list"></div>
-        </div>
-      </div>
-      <p class="ticker-note">Loading quotes… Educational use only — not for trading decisions.</p>
-    </div>
 
     <section id="about-stocks">
       <h2>What is a stock?</h2>
