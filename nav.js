@@ -357,12 +357,105 @@
     });
   }
 
+  /* ---------- Floating TOC: smooth scroll + active section (all pages) ----------
+     Some pages only wired click handlers (e.g. gold.html). Home/stocks also
+     highlight the current section on scroll. Do both once here so every page
+     with #floating-toc behaves the same. */
+  function initFloatingTocSpy() {
+    var toc = document.getElementById("floating-toc");
+    if (!toc) return;
+
+    var links = toc.querySelectorAll('a[href^="#"]');
+    if (!links.length) return;
+
+    var sectionIds = [];
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute("href") || "";
+      if (href.length > 1) sectionIds.push(href.slice(1));
+    }
+    if (!sectionIds.length) return;
+
+    function tocHeaderOffset() {
+      var raw = getComputedStyle(document.documentElement).getPropertyValue("--header-h");
+      var n = parseInt(raw, 10);
+      return (isNaN(n) ? 64 : n) + 16;
+    }
+
+    function sectionTop(id) {
+      var el = document.getElementById(id);
+      if (!el) return null;
+      return el.getBoundingClientRect().top + window.pageYOffset;
+    }
+
+    // Smooth scroll (works even if page already attached its own handler)
+    for (var L = 0; L < links.length; L++) {
+      (function (link) {
+        link.addEventListener("click", function (e) {
+          var id = (link.getAttribute("href") || "").slice(1);
+          var top = sectionTop(id);
+          if (top == null) return;
+          e.preventDefault();
+          window.scrollTo({
+            top: Math.max(0, top - tocHeaderOffset()),
+            behavior: "smooth"
+          });
+          if (history && history.replaceState) {
+            try {
+              history.replaceState(null, "", "#" + id);
+            } catch (err) {}
+          }
+        });
+      })(links[L]);
+    }
+
+    function setActiveToc() {
+      var offset = tocHeaderOffset() + 20;
+      var pos = window.pageYOffset + offset;
+      var current = sectionIds[0];
+      var s;
+
+      for (s = 0; s < sectionIds.length; s++) {
+        var top = sectionTop(sectionIds[s]);
+        if (top != null && top <= pos) current = sectionIds[s];
+      }
+
+      // Near page bottom → highlight last section
+      var doc = document.documentElement;
+      if (window.innerHeight + window.pageYOffset >= doc.scrollHeight - 48) {
+        current = sectionIds[sectionIds.length - 1];
+      }
+
+      for (var c = 0; c < links.length; c++) {
+        var a = links[c];
+        a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+      }
+    }
+
+    var scrollTick = null;
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (scrollTick) return;
+        scrollTick = requestAnimationFrame(function () {
+          scrollTick = null;
+          setActiveToc();
+        });
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", setActiveToc);
+    setActiveToc();
+    // After header height measurement / fonts
+    window.addEventListener("load", setActiveToc);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initDarkMode();
     initNav();
     initActiveLink();
     initBackToTop();
     initMobilePageJump();
+    initFloatingTocSpy();
     initContentReviewed();
     syncHeaderHeight();
     window.addEventListener("resize", syncHeaderHeight);
