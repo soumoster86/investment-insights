@@ -183,9 +183,39 @@
     return file;
   }
 
+  /** Normalize "investmentgoal.html", "investmentgoal", "/foo/bar/" → comparable key */
+  function pageKey(name) {
+    if (!name) return "index";
+    name = String(name).split("?")[0].split("#")[0];
+    name = name.replace(/\\/g, "/");
+    // Drop trailing slash segments
+    while (name.length > 1 && name.charAt(name.length - 1) === "/") {
+      name = name.slice(0, -1);
+    }
+    var base = name.split("/").pop() || "index";
+    base = base.toLowerCase();
+    if (!base || base === "index.html" || base === "index") return "index";
+    return base.replace(/\.html$/i, "");
+  }
+
+  function isSamePage(href, currentFile) {
+    var key = pageKey(href);
+    if (key === pageKey(currentFile)) return true;
+    if (key === pageKey(window.location.pathname || "")) return true;
+    // pathname ends with href (handles subpaths / folder deploys)
+    var path = (window.location.pathname || "").toLowerCase();
+    var h = String(href || "").toLowerCase().replace(/^\.\//, "");
+    if (h && (path.endsWith("/" + h) || path.endsWith(h))) return true;
+    // bare name without extension
+    if (h && path.endsWith("/" + key)) return true;
+    if (h && path.endsWith("/" + key + ".html")) return true;
+    return false;
+  }
+
   function initSiteExplore() {
     var file = currentPageFile();
-    if (file === "index.html" || file === "") return;
+    var here = pageKey(file);
+    if (here === "index") return;
     if (document.getElementById("site-explore")) return;
 
     var STORAGE_KEY = "ii-explore-open";
@@ -195,30 +225,29 @@
         label: "Learn hub",
         hint: "All guides",
         icon: "📚",
-        match: function (f) {
-          return (
-            f === "learn.html" ||
-            f === "basics.html" ||
-            f === "risk-allocation.html" ||
-            f === "ppf-tax-saving.html" ||
-            f === "postoffice.html" ||
-            f === "insurance-emergency.html" ||
-            f === "tax-overview.html" ||
-            f === "gold.html" ||
-            f === "realestate.html" ||
-            f === "index-vs-active.html" ||
-            f === "mutualfunds.html" ||
-            f === "stocks.html" ||
-            f === "etf.html" ||
-            f === "ipo.html" ||
-            f === "intraday.html" ||
-            f === "futures-options.html" ||
-            f === "usstocks.html" ||
-            f === "fixeddeposit.html" ||
-            f === "nps.html" ||
-            f === "bonds.html" ||
-            f === "cryptocurrencies.html"
-          );
+        // highlight when browsing any guide (not when we hid the link on learn.html)
+        sectionKeys: {
+          learn: 1,
+          basics: 1,
+          "risk-allocation": 1,
+          "ppf-tax-saving": 1,
+          postoffice: 1,
+          "insurance-emergency": 1,
+          "tax-overview": 1,
+          gold: 1,
+          realestate: 1,
+          "index-vs-active": 1,
+          mutualfunds: 1,
+          stocks: 1,
+          etf: 1,
+          ipo: 1,
+          intraday: 1,
+          "futures-options": 1,
+          usstocks: 1,
+          fixeddeposit: 1,
+          nps: 1,
+          bonds: 1,
+          cryptocurrencies: 1
         }
       },
       {
@@ -226,18 +255,14 @@
         label: "All calculators",
         hint: "SIP · FD · more",
         icon: "🧮",
-        match: function (f) {
-          return f === "calculators.html" || f === "tools.html";
-        }
+        sectionKeys: { calculators: 1, tools: 1 }
       },
       {
         href: "investmentgoal.html",
         label: "Goal planner",
         hint: "SIP for a target",
         icon: "🎯",
-        match: function (f) {
-          return f === "investmentgoal.html";
-        }
+        sectionKeys: { investmentgoal: 1 }
       }
     ];
 
@@ -269,14 +294,17 @@
     head.appendChild(closeBtn);
     panel.appendChild(head);
 
+    var added = 0;
     for (var i = 0; i < links.length; i++) {
       var item = links[i];
-      // Don't link to the page the user is already on
-      if (item.href === file) continue;
+      // Hide the shortcut for the page the user is already on
+      if (isSamePage(item.href, file)) continue;
       var a = document.createElement("a");
       a.className = "site-explore-link";
       a.href = item.href;
-      if (item.match(file)) a.classList.add("is-active");
+      if (item.sectionKeys && item.sectionKeys[here]) {
+        a.classList.add("is-active");
+      }
       a.innerHTML =
         '<span class="site-explore-icon" aria-hidden="true">' +
         item.icon +
@@ -290,7 +318,10 @@
         "</span>" +
         "</span>";
       panel.appendChild(a);
+      added++;
     }
+    // Nothing left to show (shouldn't happen often)
+    if (!added) return;
 
     var openBtn = document.createElement("button");
     openBtn.type = "button";

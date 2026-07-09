@@ -610,7 +610,7 @@
   }
 
   /**
-   * Dark mode can be applied by nav.js?v=20260710r after this script's DOMContentLoaded
+   * Dark mode can be applied by nav.js?v=20260710s after this script's DOMContentLoaded
    * runs. Detect via class, checkbox, localStorage, or chart-card luminance.
    */
   function isDarkMode() {
@@ -815,7 +815,7 @@
       listingChart.update();
     }
 
-    // nav.js?v=20260710r also uses DOMContentLoaded and may apply dark-mode *after* this chart
+    // nav.js?v=20260710s also uses DOMContentLoaded and may apply dark-mode *after* this chart
     [0, 50, 150, 400].forEach(function (ms) {
       setTimeout(applyListingChartTheme, ms);
     });
@@ -877,7 +877,7 @@ document.querySelectorAll('.ipo-float-menu a').forEach(function(link) {
 })();
 </script>
 
-<script src="nav.js?v=20260710r" defer></script>
+<script src="nav.js?v=20260710s" defer></script>
 
 <!-- Search Modal -->
 <div id="search-modal" class="search-modal" aria-hidden="true">
