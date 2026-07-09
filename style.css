@@ -1249,6 +1249,43 @@ body.dark-mode .swp-tab-btn.active {
 .ipo-table td:nth-child(4) { text-align: right; }
 .ipo-table td:last-child,
 .ipo-table th:last-child { text-align: center; }
+
+/* ETF compare: equal 3-column grid, clear cell borders */
+.etf-compare-table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  overflow: visible;
+  border: 1px solid #d5e2f5;
+}
+.etf-compare-table col.etf-col-feature,
+.etf-compare-table col.etf-col-etf,
+.etf-compare-table col.etf-col-index {
+  width: 33.333%;
+}
+.etf-compare-table th,
+.etf-compare-table td {
+  width: 33.333%;
+  vertical-align: top;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  border: 1px solid #d5e2f5;
+  line-height: 1.45;
+}
+.etf-compare-table thead th {
+  text-align: center;
+  vertical-align: middle;
+}
+.etf-compare-table tbody th[scope="row"] {
+  background: #f4f8ff;
+  color: #19427a;
+  font-weight: 600;
+  text-align: left;
+}
+.etf-compare-table tbody td {
+  background: #fff;
+}
 @media (max-width: 700px) {
   .etf-compare-table th,
   .etf-compare-table td {
@@ -1912,12 +1949,20 @@ main table,
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
+/* Fixed layout + cell borders need visible overflow (collapse handles radius via outer border) */
+.etf-compare-table {
+  overflow: visible;
+  border-radius: 12px;
+}
 main th,
 .ipo-table th,
 .etf-compare-table th {
   background: linear-gradient(180deg, #eaf2ff, #e2ecfb) !important;
    font-weight: 600; 
   letter-spacing: 0.01em;
+}
+.etf-compare-table tbody th[scope="row"] {
+  background: #f4f8ff !important;
 }
 
 /* Footer */
@@ -2905,6 +2950,17 @@ body.dark-mode .ipo-table th,
 body.dark-mode .etf-compare-table th {
   background: #222833 !important;
   color: #f0f3f8 !important;
+}
+body.dark-mode .etf-compare-table {
+  border-color: #2c3340 !important;
+}
+body.dark-mode .etf-compare-table th,
+body.dark-mode .etf-compare-table td {
+  border-color: #2c3340 !important;
+}
+body.dark-mode .etf-compare-table tbody th[scope="row"] {
+  background: #1a222e !important;
+  color: #8abaff !important;
 }
 body.dark-mode main td,
 body.dark-mode section td {
@@ -4352,20 +4408,38 @@ body.dark-mode .status-listed { background: #14241c; color: #b6f0c8; }
     color: #5b6b82;
     line-height: 1.35;
   }
-  /* ETF compare: first cell is the feature title */
+  /* ETF compare: first cell is the feature title (th or td) */
+  table.etf-compare-table.table-cards th[scope="row"],
   table.etf-compare-table.table-cards td:first-child {
+    display: flex !important;
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
+    width: 100% !important;
     text-align: left !important;
-    padding-bottom: 10px !important;
+    padding: 8px 0 10px !important;
     margin-bottom: 4px;
+    border: none !important;
     border-bottom: 1px solid #d7e4f8 !important;
+    background: transparent !important;
+    font-weight: 700;
+    color: #0a4d8c !important;
+    font-size: 1.02em;
   }
+  table.etf-compare-table.table-cards th[scope="row"]::before,
   table.etf-compare-table.table-cards td:first-child::before {
     content: "Feature";
     flex: none;
     max-width: none;
+    font-weight: 700;
+    font-size: 0.78em;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #5b6b82;
+  }
+  table.etf-compare-table.table-cards td {
+    border: none !important;
+    border-bottom: 1px solid #eef2f8 !important;
   }
   body.dark-mode table.table-cards tr {
     background: #1c212b !important;
@@ -4375,10 +4449,12 @@ body.dark-mode .status-listed { background: #14241c; color: #b6f0c8; }
     border-bottom-color: #2c3340 !important;
     color: #e7ecfa !important;
   }
-  body.dark-mode table.table-cards td:first-child {
+  body.dark-mode table.table-cards td:first-child,
+  body.dark-mode table.etf-compare-table.table-cards th[scope="row"] {
     color: #8abaff !important;
   }
-  body.dark-mode table.table-cards td::before {
+  body.dark-mode table.table-cards td::before,
+  body.dark-mode table.etf-compare-table.table-cards th[scope="row"]::before {
     color: #9aa8bc !important;
   }
 }
