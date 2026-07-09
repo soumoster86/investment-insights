@@ -896,25 +896,36 @@ body.dark-mode .floating-toc ul {
 .page-jump {
   display: none; /* only ≤1180px */
   margin: 0 0 18px;
-  padding: 12px 12px 10px;
-  background: linear-gradient(180deg, #f4f8ff 0%, #eef4fc 100%);
-  border: 1.5px solid var(--border-soft, #d5deeb);
+  padding: 0 0 10px;
+  background: linear-gradient(180deg, #f7faff 0%, #eef4fc 100%);
+  border: 1.5px solid #d5e2f5;
   border-radius: 14px;
-  box-shadow: 0 2px 10px rgba(10, 40, 90, 0.05);
+  box-shadow:
+    0 2px 8px rgba(10, 40, 90, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
   position: sticky;
   top: calc(var(--header-h, 56px) + 6px);
   z-index: 40;
+  overflow: hidden;
+}
+.page-jump::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #0a4d8c 0%, #2b7de9 55%, #6ec8ff 100%);
 }
 .page-jump-label {
-  font-size: 0.72em;
+  font-size: 0.7em;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #5b6b82;
-  margin: 0 0 8px;
+  color: #0a4d8c;
+  margin: 10px 12px 8px;
 }
 .page-jump-label-secondary {
   margin-top: 10px;
+  margin-left: 12px;
+  margin-right: 12px;
 }
 .page-jump-scroller {
   display: flex;
@@ -923,38 +934,38 @@ body.dark-mode .floating-toc ul {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  padding-bottom: 2px;
-  margin: 0 -2px;
-  padding-left: 2px;
-  padding-right: 2px;
+  padding: 0 12px 2px;
 }
 .page-jump-chip {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
-  padding: 7px 12px;
+  min-height: 34px;
+  padding: 6px 12px;
   border-radius: 999px;
   background: #fff;
   border: 1.5px solid #d5e2f5;
   color: #0a4d8c !important;
-  font-size: 0.88em;
+  font-size: 0.86em;
   font-weight: 600;
   text-decoration: none !important;
   white-space: nowrap;
   line-height: 1.2;
   -webkit-tap-highlight-color: transparent;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  box-shadow: 0 1px 2px rgba(10, 40, 90, 0.04);
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
 }
 .page-jump-chip:hover,
 .page-jump-chip:focus-visible {
   background: #e8f1fc;
   border-color: #8abaff;
+  box-shadow: 0 2px 6px rgba(43, 125, 233, 0.12);
 }
 .page-jump-chip.active {
-  background: var(--brand, #0a4d8c);
-  border-color: var(--brand, #0a4d8c);
+  background: linear-gradient(180deg, #1a5fa8, #0a4d8c);
+  border-color: #0a4d8c;
   color: #fff !important;
+  box-shadow: 0 2px 8px rgba(10, 77, 140, 0.25);
 }
 .page-jump-chip-related {
   background: #f8fafc;
