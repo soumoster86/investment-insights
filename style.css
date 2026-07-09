@@ -3455,7 +3455,7 @@ body.dark-mode .related-tools {
 .tools-row-single .tools-card {
   max-width: 100%;
 }
-/* Tooltips inside form labels */
+/* Tooltips inside form labels — open below the ⓘ (avoids far-right / off-screen) */
 label .tooltip {
   display: inline-flex;
   align-items: center;
@@ -3463,9 +3463,42 @@ label .tooltip {
   color: var(--brand);
   font-size: 0.95em;
   vertical-align: middle;
+  position: relative;
+  z-index: 20;
+}
+label .tooltip .tooltip-text {
+  left: 0 !important;
+  right: auto !important;
+  top: calc(100% + 8px) !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: min(280px, calc(100vw - 48px));
+  max-width: min(280px, 80vw);
+  white-space: normal;
+  line-height: 1.45;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(10, 40, 90, 0.22);
+  z-index: 500;
+  pointer-events: none;
+}
+/* Full-width fields (e.g. Goal name): keep tip under the label start */
+.goal-field-full .tooltip .tooltip-text,
+label.goal-field-full .tooltip .tooltip-text {
+  left: 0 !important;
+  width: min(320px, 92vw);
+  max-width: min(320px, 92vw);
+}
+.goal-form label,
+.tool-form label,
+.calculator-box label,
+.goal-planner-section,
+.goal-form .tool-fields,
+.tool-form .tool-fields {
+  overflow: visible !important;
 }
 label .tooltip:focus .tooltip-text,
-label .tooltip:focus-within .tooltip-text {
+label .tooltip:focus-within .tooltip-text,
+label .tooltip:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
 }
