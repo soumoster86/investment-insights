@@ -356,7 +356,7 @@ main a:not(.btn):not(.learn-more):hover {
 .learn-more,
 .primary-btn,
 button[type="submit"],
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):not(.nav-search-btn):not(.search-close):not(.india-ticker-refresh) {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):not(.nav-search-btn):not(.search-close):not(.india-ticker-refresh):not(.sp-nifty-btn) {
   background: #0a4d8c;
   color: #fff !important;
   border: 1.5px solid #0a4d8c;
@@ -375,7 +375,7 @@ button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.seco
 .learn-more:hover,
 .primary-btn:hover,
 button[type="submit"]:hover,
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):not(.nav-search-btn):not(.search-close):not(.india-ticker-refresh):hover {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):not(.nav-search-btn):not(.search-close):not(.india-ticker-refresh):not(.sp-nifty-btn):hover {
   background: #063566;
   border-color: #063566;
   transform: translateY(-2px);
@@ -2068,25 +2068,44 @@ body.dark-mode .etf-sip-assumptions ul { color: #c8d0dc !important; }
   border: 1px solid #d0dceb;
   gap: 2px;
 }
+button.sp-nifty-btn,
 .sp-nifty-btn {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  color: #475569;
-  font: inherit;
-  font-size: 0.88em;
-  font-weight: 700;
-  padding: 7px 16px;
-  border-radius: 999px;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+  font: inherit !important;
+  font-size: 0.88em !important;
+  font-weight: 700 !important;
+  padding: 7px 16px !important;
+  border-radius: 999px !important;
   cursor: pointer;
-  line-height: 1.2;
+  line-height: 1.2 !important;
+  display: inline-block !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transform: none !important;
+  opacity: 1 !important;
   transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
-.sp-nifty-btn:hover { color: #0a4d8c; }
+button.sp-nifty-btn:hover,
+.sp-nifty-btn:hover {
+  color: #0a4d8c !important;
+  -webkit-text-fill-color: #0a4d8c !important;
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+button.sp-nifty-btn.is-active,
 .sp-nifty-btn.is-active {
-  background: #fff;
-  color: #0a4d8c;
-  box-shadow: 0 1px 4px rgba(10, 40, 90, 0.12);
+  background: #fff !important;
+  color: #0a4d8c !important;
+  -webkit-text-fill-color: #0a4d8c !important;
+  box-shadow: 0 1px 4px rgba(10, 40, 90, 0.12) !important;
+  transform: none !important;
 }
 .sp-nifty-toolbar-hint {
   margin: 0;
@@ -2314,10 +2333,17 @@ body.dark-mode .sp-nifty-toggle {
   background: #12161e !important;
   border-color: #2c3340 !important;
 }
-body.dark-mode .sp-nifty-btn { color: #9aa8bc; }
+body.dark-mode button.sp-nifty-btn,
+body.dark-mode .sp-nifty-btn {
+  color: #9aa8bc !important;
+  -webkit-text-fill-color: #9aa8bc !important;
+  background: transparent !important;
+}
+body.dark-mode button.sp-nifty-btn.is-active,
 body.dark-mode .sp-nifty-btn.is-active {
   background: #1c212b !important;
   color: #8abaff !important;
+  -webkit-text-fill-color: #8abaff !important;
 }
 body.dark-mode .sp-nifty-stat,
 body.dark-mode .sp-nifty-chart-card {
