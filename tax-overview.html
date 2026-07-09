@@ -21,6 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <!-- BEGIN SITE HEADER -->
@@ -98,6 +99,7 @@
     <ul>
       <li><a href="#purpose">Purpose of this page</a></li>
       <li><a href="#map">Mental map</a></li>
+      <li><a href="#tax-map-chart">Map sketch</a></li>
       <li><a href="#regimes">Tax regimes (idea)</a></li>
       <li><a href="#gains">Capital gains concepts</a></li>
       <li><a href="#income">Other investment income</a></li>
@@ -145,6 +147,49 @@
         <li><strong>Capital gains</strong> — when you sell (or sometimes transfer) a capital asset for more than its cost base (with rules on holding period, indexation history, exemptions, etc.).</li>
         <li><strong>TDS / TCS and reporting</strong> — amounts deducted at source or reported in AIS/Form 26AS that you still need to reconcile in a return.</li>
       </ol>
+    </section>
+
+    <section id="tax-map-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Where tax conversations sit</h2>
+          <p class="tool-intro">
+            A teaching doughnut of the <strong>topics investors often discuss</strong> — not your
+            actual tax split, not rates, and not a filing recipe.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Illustrative</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="tax-map-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Topic weight (teaching sample)</h3>
+            <p class="illust-chart-sub">Share of “attention” in investor tax literacy — not liability %</p>
+          </div>
+        </div>
+        <div class="illust-dual-grid">
+          <div class="illust-chart-wrap is-sm">
+            <canvas id="taxMapChart" aria-label="Tax topics educational doughnut"></canvas>
+          </div>
+          <div class="illust-chart-wrap is-sm">
+            <canvas id="taxDragChart" aria-label="Pre-tax versus after-cost return sketch"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Left: conversation buckets (salary / gains / interest / TDS) — weights are teaching only</li>
+          <li>Right: why costs &amp; taxes matter over time (smooth 12% vs net-of-drag sketch)</li>
+          <li>Never use social-media rate tables — use official law for your year</li>
+        </ul>
+        <p class="illust-disclaimer">Not tax advice. Not a rate card. Confirm with Income Tax materials or a professional.</p>
+      </div>
     </section>
 
     <section id="regimes">
@@ -330,6 +375,96 @@
   <span>Top</span>
 </button>
 <!-- END SITE FOOTER -->
+
+<script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof Chart === "undefined") return;
+    var stats = document.getElementById("tax-map-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><div class="illust-stat-label">Map type</div><div class="illust-stat-value">Topics</div><div class="illust-stat-hint">Not your liability</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Gross path</div><div class="illust-stat-value">12%</div><div class="illust-stat-hint">Smooth model</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">After-drag path</div><div class="illust-stat-value is-amber">~10%</div><div class="illust-stat-hint">Fees + tax sketch</div></div>';
+    }
+    var pie = document.getElementById("taxMapChart");
+    if (pie) {
+      new Chart(pie.getContext("2d"), {
+        type: "doughnut",
+        data: {
+          labels: ["Salary / main income", "Capital gains", "Interest & dividends", "TDS / reporting"],
+          datasets: [{
+            data: [40, 30, 20, 10],
+            backgroundColor: ["#0a4d8c", "#2b7de9", "#d97706", "#64748b"],
+            borderWidth: 2,
+            borderColor: "#fff"
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: "bottom", labels: { usePointStyle: true, padding: 10, font: { size: 10, weight: "600" } } },
+            tooltip: { callbacks: { label: function (c) { return " " + c.label + ": " + c.parsed + "% of attention (sample)"; } } }
+          },
+          cutout: "55%"
+        }
+      });
+    }
+    var line = document.getElementById("taxDragChart");
+    if (line) {
+      var years = [], gross = [], net = [];
+      var g = 100000, n = 100000;
+      for (var y = 0; y <= 15; y++) {
+        years.push(y === 0 ? "Start" : y + "y");
+        gross.push(Math.round(g));
+        net.push(Math.round(n));
+        if (y < 15) {
+          g *= 1.12;
+          n *= 1.1;
+        }
+      }
+      new Chart(line.getContext("2d"), {
+        type: "line",
+        data: {
+          labels: years,
+          datasets: [
+            { label: "Gross 12%", data: gross, borderColor: "#0a4d8c", borderWidth: 2.4, tension: 0.28, pointRadius: 0, fill: false },
+            { label: "After-drag ~10%", data: net, borderColor: "#d97706", borderWidth: 2.4, tension: 0.28, pointRadius: 0, fill: false }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: {
+            legend: { position: "bottom", labels: { usePointStyle: true, padding: 10, font: { size: 11, weight: "600" } } },
+            tooltip: {
+              callbacks: {
+                label: function (c) {
+                  return " " + c.dataset.label + ": ₹" + Math.round(c.parsed.y).toLocaleString("en-IN");
+                }
+              }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { maxTicksLimit: 6, color: "#64748b", font: { weight: "600" } } },
+            y: {
+              beginAtZero: false,
+              grid: { color: "rgba(148,163,184,0.2)" },
+              ticks: {
+                color: "#64748b",
+                callback: function (v) { return "₹" + (v / 100000).toFixed(1) + "L"; }
+              }
+            }
+          }
+        }
+      });
+    }
+  });
+})();
+</script>
 
   <script>
   document.querySelectorAll(".floating-toc a").forEach(function (link) {

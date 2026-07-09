@@ -69,6 +69,7 @@
     <li><a href="#about-mutual">About</a></li>
     <li><a href="#types-mutual">Fund types</a></li>
     <li><a href="#sip-vs-lumpsum">SIP vs lumpsum</a></li>
+    <li><a href="#sip-path-chart">SIP path sketch</a></li>
     <li><a href="#invest-mutual">How to invest</a></li>
     <li><a href="#mf-glossary">Key terms</a></li>
     <li><a href="#sipcalc-mutual">SIP calculator</a></li>
@@ -277,6 +278,48 @@
     </div>
   </section>
 
+  <section id="sip-path-chart" class="illust-panel tool-section">
+    <div class="illust-top">
+      <div class="illust-header-text">
+        <p class="illust-eyebrow">Illustrative · educational only</p>
+        <h2>SIP path sketch (₹5,000 / month)</h2>
+        <p class="tool-intro">
+          Monthly SIP of <strong>₹5,000</strong> for 15 years at a constant <strong>12% p.a.</strong> assumed return.
+          Shows invested amount vs corpus — not any scheme’s past or future returns.
+        </p>
+      </div>
+      <p class="sample-freshness illust-freshness">
+        <span class="sample-freshness-label">Illustrative</span>
+        Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+      </p>
+    </div>
+    <div class="illust-stats cols-3" id="sip-path-stats" aria-live="polite"></div>
+    <div class="illust-chart-card">
+      <div class="illust-chart-head">
+        <div>
+          <h3 class="illust-chart-title">Invested vs estimated corpus</h3>
+          <p class="illust-chart-sub">Smooth 12% model · real NAVs bounce</p>
+        </div>
+        <div class="illust-legend" aria-hidden="true">
+          <span><i class="illust-swatch" style="background:#94a3b8"></i> Invested</span>
+          <span><i class="illust-swatch" style="background:#0a4d8c"></i> Corpus</span>
+        </div>
+      </div>
+      <div class="illust-chart-wrap">
+        <canvas id="sipPathChart" aria-label="SIP invested versus corpus growth chart"></canvas>
+      </div>
+    </div>
+    <div class="illust-notes">
+      <strong>How to read this</strong>
+      <ul>
+        <li>Most of the gap at the end is compounding — early SIPs matter</li>
+        <li>Expense ratios and taxes reduce real take-home vs this smooth line</li>
+        <li>Use the SIP calculator below with your own inputs</li>
+      </ul>
+      <p class="illust-disclaimer">Educational only. Past fund performance does not guarantee future results.</p>
+    </div>
+  </section>
+
   <section id="invest-mutual">
     <h2>How to invest (practical path)</h2>
     <ol class="steps-list">
@@ -343,8 +386,16 @@
   <strong>Disclaimer:</strong> Estimate based on your assumed rate. Actual returns vary. Not financial advice.
 </div>
  
-  <div id="sipChart-container" style="width:100%; margin-top:20px; display:none;">
-  <canvas id="sipChart" style="max-width:100%;"></canvas>
+  <div id="sipChart-container" class="calc-chart-card" style="display:none;">
+    <div class="illust-chart-head">
+      <div>
+        <h3 class="illust-chart-title">Your SIP projection</h3>
+        <p class="illust-chart-sub">From calculator inputs</p>
+      </div>
+    </div>
+    <div class="illust-chart-wrap is-sm">
+      <canvas id="sipChart" aria-label="SIP calculator projection chart"></canvas>
+    </div>
    </div>
 </section>
 
@@ -875,6 +926,101 @@ function resetSWPMax() {
   }
   document.getElementById('swpMaxChart-container').style.display = 'none';
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  var canvas = document.getElementById("sipPathChart");
+  if (!canvas || typeof Chart === "undefined") return;
+  var monthly = 5000;
+  var years = 15;
+  var r = 0.12 / 12;
+  var labels = [];
+  var invested = [];
+  var corpus = [];
+  var bal = 0;
+  var put = 0;
+  for (var y = 0; y <= years; y++) {
+    labels.push(y === 0 ? "Start" : y + "y");
+    if (y > 0) {
+      for (var m = 0; m < 12; m++) {
+        bal = (bal + monthly) * (1 + r);
+        put += monthly;
+      }
+    }
+    invested.push(Math.round(put));
+    corpus.push(Math.round(bal));
+  }
+  var stats = document.getElementById("sip-path-stats");
+  if (stats) {
+    stats.innerHTML =
+      '<div class="illust-stat"><div class="illust-stat-label">Invested</div><div class="illust-stat-value">₹' +
+      invested[years].toLocaleString("en-IN") +
+      '</div><div class="illust-stat-hint">15 years of SIPs</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">Corpus @12%</div><div class="illust-stat-value is-up">₹' +
+      corpus[years].toLocaleString("en-IN") +
+      '</div><div class="illust-stat-hint">Smooth model</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">Gain sketch</div><div class="illust-stat-value is-up">₹' +
+      (corpus[years] - invested[years]).toLocaleString("en-IN") +
+      '</div><div class="illust-stat-hint">Not guaranteed</div></div>';
+  }
+  new Chart(canvas.getContext("2d"), {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Invested",
+          data: invested,
+          borderColor: "#94a3b8",
+          borderWidth: 2.2,
+          borderDash: [5, 4],
+          tension: 0.2,
+          pointRadius: 0,
+          fill: false
+        },
+        {
+          label: "Corpus",
+          data: corpus,
+          borderColor: "#0a4d8c",
+          backgroundColor: "rgba(10,77,140,0.12)",
+          borderWidth: 2.6,
+          tension: 0.28,
+          pointRadius: 0,
+          fill: true
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "bottom", labels: { usePointStyle: true, pointStyle: "circle", padding: 14, font: { size: 12, weight: "600" } } },
+        tooltip: {
+          backgroundColor: "rgba(15,23,42,0.94)",
+          padding: 12,
+          callbacks: {
+            label: function (c) {
+              return " " + c.dataset.label + ": ₹" + Math.round(c.parsed.y).toLocaleString("en-IN");
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { maxTicksLimit: 8, color: "#64748b", font: { weight: "600" } } },
+        y: {
+          beginAtZero: true,
+          grid: { color: "rgba(148,163,184,0.2)" },
+          ticks: {
+            color: "#64748b",
+            callback: function (v) {
+              return v >= 100000 ? "₹" + (v / 100000).toFixed(1) + "L" : "₹" + v;
+            }
+          }
+        }
+      }
+    }
+  });
+});
 </script>
 
   
@@ -894,6 +1040,7 @@ window.addEventListener('scroll', () => {
     'about-mutual',
     'types-mutual',
     'sip-vs-lumpsum',
+    'sip-path-chart',
     'invest-mutual',
     'mf-glossary',
     'sipcalc-mutual',

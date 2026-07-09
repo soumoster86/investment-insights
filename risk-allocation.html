@@ -21,6 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <!-- BEGIN SITE HEADER -->
@@ -100,6 +101,7 @@
       <li><a href="#types">Types of risk</a></li>
       <li><a href="#allocation">Asset allocation</a></li>
       <li><a href="#examples">Example mixes</a></li>
+      <li><a href="#alloc-chart">Mix sketch</a></li>
       <li><a href="#rebalance">Rebalancing</a></li>
       <li><a href="#behaviour">Behaviour traps</a></li>
       <li><a href="#related">Tools</a></li>
@@ -197,6 +199,54 @@
       <div class="callout callout-warn">
         <strong>Not personalised:</strong> Percentages above are teaching examples only.
         Age, income stability, dependents, and goals all change what is appropriate.
+      </div>
+    </section>
+
+    <section id="alloc-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Horizon mix sketch</h2>
+          <p class="tool-intro">
+            How equity / debt / cash shares often shift with goal horizon — teaching doughnuts only,
+            not your personal plan.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Illustrative</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="alloc-chart-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Near-term vs long-term sample</h3>
+            <p class="illust-chart-sub">Left: 0–3 years · Right: 7+ years (teaching examples)</p>
+          </div>
+          <div class="illust-legend" aria-hidden="true">
+            <span><i class="illust-swatch" style="background:#0a4d8c"></i> Equity</span>
+            <span><i class="illust-swatch" style="background:#d97706"></i> Debt</span>
+            <span><i class="illust-swatch" style="background:#64748b"></i> Cash</span>
+          </div>
+        </div>
+        <div class="illust-dual-grid">
+          <div class="illust-chart-wrap is-sm">
+            <canvas id="allocNearChart" aria-label="Near-term allocation doughnut"></canvas>
+          </div>
+          <div class="illust-chart-wrap is-sm">
+            <canvas id="allocLongChart" aria-label="Long-term allocation doughnut"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Shorter horizons usually prioritise stability; longer horizons can tolerate more equity swings</li>
+          <li>Rebalance as markets and goals move — see the rebalancing section below</li>
+          <li>Your mix depends on income stability, dependents, and behaviour — not just age</li>
+        </ul>
+        <p class="illust-disclaimer">Educational only. Not a recommendation of any percentage mix.</p>
       </div>
     </section>
 
@@ -307,6 +357,46 @@
   <span>Top</span>
 </button>
 <!-- END SITE FOOTER -->
+
+<script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof Chart === "undefined") return;
+    var labels = ["Equity-like", "Debt / fixed", "Cash / liquid"];
+    var colors = ["#0a4d8c", "#d97706", "#64748b"];
+    var near = [20, 50, 30];
+    var longM = [70, 25, 5];
+    var stats = document.getElementById("alloc-chart-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><div class="illust-stat-label">Near-term equity</div><div class="illust-stat-value">20%</div><div class="illust-stat-hint">0–3 year sketch</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Long-term equity</div><div class="illust-stat-value is-up">70%</div><div class="illust-stat-hint">7+ year sketch</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Cash in near-term</div><div class="illust-stat-value is-amber">30%</div><div class="illust-stat-hint">Liquidity priority</div></div>';
+    }
+    function doughnut(id, data, title) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      new Chart(el.getContext("2d"), {
+        type: "doughnut",
+        data: { labels: labels, datasets: [{ data: data, backgroundColor: colors, borderWidth: 2, borderColor: "#fff", hoverOffset: 5 }] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: { display: true, text: title, color: "#5b6b82", font: { size: 12, weight: "600" } },
+            legend: { display: false },
+            tooltip: { callbacks: { label: function (c) { return " " + c.label + ": " + c.parsed + "%"; } } }
+          },
+          cutout: "58%"
+        }
+      });
+    }
+    doughnut("allocNearChart", near, "Near-term (0–3y)");
+    doughnut("allocLongChart", longM, "Long-term (7y+)");
+  });
+})();
+</script>
 
   <script>
   document.querySelectorAll(".floating-toc a").forEach(function (link) {

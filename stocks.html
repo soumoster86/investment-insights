@@ -21,6 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 <body>
 
@@ -40,6 +41,7 @@
     <ul>
       <li><a href="#about-stocks">About stocks</a></li>
       <li><a href="#market-caps">Market caps</a></li>
+      <li><a href="#diversify-chart">Diversify sketch</a></li>
       <li><a href="#orders-metrics">Orders &amp; metrics</a></li>
       <li><a href="#invest-stocks">How to invest</a></li>
       <li><a href="#stock-pnl">P&amp;L calculator</a></li>
@@ -201,6 +203,48 @@
         </table>
       </div>
       <p class="table-note">Prefer diversified funds/ETFs if picking individual small-caps feels overwhelming — see <a href="index-vs-active.html">Index vs active</a> and <a href="etf.html">ETFs</a>.</p>
+    </section>
+
+    <section id="diversify-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Concentration vs diversification sketch</h2>
+          <p class="tool-intro">
+            Two simulated paths for a starting <strong>100</strong>: one “single-stock style” rollercoaster
+            vs a smoother “basket / index style” path. Not real prices.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Simulated</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="diversify-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Index paths (start = 100)</h3>
+            <p class="illust-chart-sub">Why beginners often prefer broad funds before a long single-stock list</p>
+          </div>
+          <div class="illust-legend" aria-hidden="true">
+            <span><i class="illust-swatch" style="background:#b91c1c"></i> Single-name style</span>
+            <span><i class="illust-swatch" style="background:#0a4d8c"></i> Basket style</span>
+          </div>
+        </div>
+        <div class="illust-chart-wrap">
+          <canvas id="diversifyChart" aria-label="Concentration versus diversification path chart"></canvas>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Single names can crash hard even if “the market” recovers</li>
+          <li>Diversification does not remove risk — it spreads company-specific risk</li>
+          <li>Index funds / ETFs are a simple way to own a basket — see <a href="etf.html">ETFs</a></li>
+        </ul>
+        <p class="illust-disclaimer">Simulated paths for education. Not advice to buy or avoid any stock.</p>
+      </div>
     </section>
 
     <section id="orders-metrics">
@@ -423,6 +467,90 @@
 </button>
 <!-- END SITE FOOTER -->
 
+<script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("diversifyChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    var labels = ["Y0", "Y1", "Y2", "Y3", "Y4", "Y5", "Y6", "Y7", "Y8"];
+    var single = [100, 145, 95, 70, 110, 55, 80, 125, 140];
+    var basket = [100, 112, 105, 118, 125, 115, 130, 142, 155];
+    var sMin = Math.min.apply(null, single);
+    var bMin = Math.min.apply(null, basket);
+    var stats = document.getElementById("diversify-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><div class="illust-stat-label">Single-name low</div><div class="illust-stat-value is-down">' +
+        sMin +
+        '</div><div class="illust-stat-hint">Deep drawdown sketch</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Basket low</div><div class="illust-stat-value">' +
+        bMin +
+        '</div><div class="illust-stat-hint">Shallower dip sketch</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">End (basket)</div><div class="illust-stat-value is-up">' +
+        basket[basket.length - 1] +
+        '</div><div class="illust-stat-hint">Still market risk</div></div>';
+    }
+    new Chart(canvas.getContext("2d"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Single-name style",
+            data: single,
+            borderColor: "#b91c1c",
+            backgroundColor: "rgba(185,28,28,0.08)",
+            borderWidth: 2.5,
+            tension: 0.35,
+            pointRadius: 3,
+            pointBackgroundColor: "#b91c1c",
+            pointBorderColor: "#fff",
+            pointBorderWidth: 2,
+            fill: false
+          },
+          {
+            label: "Basket / index style",
+            data: basket,
+            borderColor: "#0a4d8c",
+            backgroundColor: "rgba(10,77,140,0.1)",
+            borderWidth: 2.5,
+            tension: 0.3,
+            pointRadius: 3,
+            pointBackgroundColor: "#0a4d8c",
+            pointBorderColor: "#fff",
+            pointBorderWidth: 2,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { position: "bottom", labels: { usePointStyle: true, pointStyle: "circle", padding: 14, font: { size: 12, weight: "600" } } },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.94)",
+            padding: 12,
+            callbacks: { label: function (c) { return " " + c.dataset.label + ": " + c.parsed.y; } }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: "#64748b", font: { weight: "600" } } },
+          y: {
+            beginAtZero: false,
+            grid: { color: "rgba(148,163,184,0.2)" },
+            ticks: { color: "#64748b" },
+            title: { display: true, text: "Index (start 100)", color: "#64748b", font: { size: 11, weight: "600" } }
+          }
+        }
+      }
+    });
+  });
+})();
+</script>
+
   <script>
     document.querySelectorAll(".floating-toc a").forEach(function (link) {
       link.addEventListener("click", function (e) {
@@ -437,6 +565,7 @@
       var sections = [
         "about-stocks",
         "market-caps",
+        "diversify-chart",
         "orders-metrics",
         "invest-stocks",
         "stock-pnl",

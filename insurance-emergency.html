@@ -21,6 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <!-- BEGIN SITE HEADER -->
@@ -98,6 +99,7 @@
     <ul>
       <li><a href="#why">Why protect first</a></li>
       <li><a href="#emergency">Emergency fund</a></li>
+      <li><a href="#buffer-chart">Buffer sketch</a></li>
       <li><a href="#term">Term life</a></li>
       <li><a href="#health">Health cover</a></li>
       <li><a href="#vs-invest">Insurance vs investing</a></li>
@@ -169,6 +171,44 @@
         <a href="tools.html#target-sip">Target SIP</a> with a short horizon and conservative assumptions —
         treat results as sketches only.
       </p>
+    </section>
+
+    <section id="buffer-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Emergency buffer target sketch</h2>
+          <p class="tool-intro">
+            For essentials of <strong>₹50,000 / month</strong>, how large a cash buffer looks at
+            3, 6, and 12 months — teaching sizes only.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Illustrative</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="buffer-chart-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Target corpus by months of essentials</h3>
+            <p class="illust-chart-sub">₹50k/month example · keep this liquid, not in equities</p>
+          </div>
+        </div>
+        <div class="illust-chart-wrap">
+          <canvas id="bufferChart" aria-label="Emergency fund target sizes bar chart"></canvas>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Higher targets suit freelancers, single-income homes, or high fixed costs</li>
+          <li>Core buffer belongs in cash / liquid options — not SIPs or crypto</li>
+          <li>Refill after use before increasing market risk</li>
+        </ul>
+        <p class="illust-disclaimer">Educational only. Your essentials and risk tolerance differ.</p>
+      </div>
     </section>
 
     <section id="term">
@@ -339,6 +379,63 @@
   <span>Top</span>
 </button>
 <!-- END SITE FOOTER -->
+
+<script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("bufferChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    var monthly = 50000;
+    var months = [3, 6, 9, 12];
+    var values = months.map(function (m) { return monthly * m; });
+    var stats = document.getElementById("buffer-chart-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><div class="illust-stat-label">Monthly essentials</div><div class="illust-stat-value">₹50,000</div><div class="illust-stat-hint">Example only</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">6-month buffer</div><div class="illust-stat-value">₹3,00,000</div><div class="illust-stat-hint">Common teaching target</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">12-month buffer</div><div class="illust-stat-value is-up">₹6,00,000</div><div class="illust-stat-hint">Higher stability cushion</div></div>';
+    }
+    new Chart(canvas.getContext("2d"), {
+      type: "bar",
+      data: {
+        labels: months.map(function (m) { return m + " months"; }),
+        datasets: [{
+          label: "Buffer target (₹)",
+          data: values,
+          backgroundColor: ["rgba(100,116,139,0.8)", "rgba(10,77,140,0.85)", "rgba(43,125,233,0.85)", "rgba(4,120,87,0.85)"],
+          borderRadius: 8,
+          borderSkipped: false,
+          maxBarThickness: 56
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.94)",
+            padding: 12,
+            callbacks: { label: function (c) { return " ₹" + Math.round(c.parsed.y).toLocaleString("en-IN"); } }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: "#64748b", font: { weight: "600" } } },
+          y: {
+            beginAtZero: true,
+            grid: { color: "rgba(148,163,184,0.2)" },
+            ticks: {
+              color: "#64748b",
+              callback: function (v) { return "₹" + (v / 100000).toFixed(1) + "L"; }
+            }
+          }
+        }
+      }
+    });
+  });
+})();
+</script>
 
   <script>
   document.querySelectorAll(".floating-toc a").forEach(function (link) {
