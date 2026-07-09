@@ -1707,10 +1707,93 @@ body.dark-mode .swp-tab-btn.active {
   background: #fff;
   color: #222;
 }
-.ipo-table td:nth-child(3),
-.ipo-table td:nth-child(4) { text-align: right; }
-.ipo-table td:last-child,
-.ipo-table th:last-child { text-align: center; }
+
+/* IPO sample table: fixed columns, matching header/cell alignment */
+.ipo-table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  overflow: visible;
+  border: 1px solid #d5e2f5;
+  width: 100%;
+  min-width: 0;
+}
+.ipo-table col.ipo-col-company { width: 30%; }
+.ipo-table col.ipo-col-dates { width: 20%; }
+.ipo-table col.ipo-col-band { width: 18%; }
+.ipo-table col.ipo-col-size { width: 16%; }
+.ipo-table col.ipo-col-status { width: 16%; }
+.ipo-table th,
+.ipo-table td {
+  border: 1px solid #d5e2f5;
+  vertical-align: middle;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 1.4;
+}
+.ipo-table thead th {
+  text-align: left;
+  vertical-align: middle;
+  padding: 12px 14px;
+  font-size: 0.92em;
+  letter-spacing: 0.01em;
+}
+.ipo-table tbody td {
+  padding: 12px 14px;
+  background: #fff;
+}
+.ipo-table tbody tr:nth-child(even) td {
+  background: #f7faff;
+}
+/* Column alignment: company left; dates/band center; size right; status center */
+.ipo-table th:nth-child(1),
+.ipo-table td:nth-child(1) {
+  text-align: left;
+  font-weight: 600;
+  color: #0a4d8c;
+}
+.ipo-table th:nth-child(2),
+.ipo-table td:nth-child(2),
+.ipo-table th:nth-child(3),
+.ipo-table td:nth-child(3) {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.ipo-table th:nth-child(4),
+.ipo-table td:nth-child(4) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ipo-table th:nth-child(5),
+.ipo-table td:nth-child(5) {
+  text-align: center;
+}
+.ipo-table td:nth-child(5) {
+  white-space: nowrap;
+}
+.ipo-table .status-pill {
+  vertical-align: middle;
+}
+body.dark-mode .ipo-table {
+  border-color: #2c3340 !important;
+}
+body.dark-mode .ipo-table th,
+body.dark-mode .ipo-table td {
+  border-color: #2c3340 !important;
+}
+body.dark-mode .ipo-table tbody td {
+  background: #171b22 !important;
+  color: var(--dm-text, #e7ecfa) !important;
+}
+body.dark-mode .ipo-table tbody tr:nth-child(even) td {
+  background: #1a1f28 !important;
+}
+body.dark-mode .ipo-table th:nth-child(1),
+body.dark-mode .ipo-table td:nth-child(1) {
+  color: #8abaff !important;
+}
 
 /* ETF compare: equal 3-column grid, clear cell borders */
 .etf-compare-table {
@@ -2597,7 +2680,8 @@ main table,
   box-shadow: var(--shadow-sm);
 }
 /* Fixed layout + cell borders need visible overflow (collapse handles radius via outer border) */
-.etf-compare-table {
+.etf-compare-table,
+.ipo-table {
   overflow: visible;
   border-radius: 12px;
 }
@@ -5603,6 +5687,31 @@ body.dark-mode .status-listed { background: #14241c; color: #b6f0c8; }
     color: #5b6b82;
     line-height: 1.35;
   }
+  /* IPO cards: reset desktop column text-align so flex rows stay clean */
+  table.ipo-table.table-cards th,
+  table.ipo-table.table-cards td,
+  table.ipo-table.table-cards td:nth-child(1),
+  table.ipo-table.table-cards td:nth-child(2),
+  table.ipo-table.table-cards td:nth-child(3),
+  table.ipo-table.table-cards td:nth-child(4),
+  table.ipo-table.table-cards td:nth-child(5) {
+    text-align: right !important;
+    border: none !important;
+    white-space: normal !important;
+  }
+  table.ipo-table.table-cards td:first-child {
+    text-align: right !important;
+  }
+  table.ipo-table.table-cards {
+    border: 0 !important;
+    min-width: 0 !important;
+  }
+  table.ipo-table.table-cards tbody tr:nth-child(even) td {
+    background: transparent !important;
+  }
+  table.ipo-table.table-cards td:last-child {
+    align-items: center;
+  }
   /* ETF compare: first cell is the feature title (th or td) */
   table.etf-compare-table.table-cards th[scope="row"],
   table.etf-compare-table.table-cards td:first-child {
@@ -6274,6 +6383,4 @@ button.nav-search-btn:hover,
   }
   .main-nav a {
     padding: 8px 10px;
-    font-size: 0.92em;
-  }
-}
+    font-size: 0.92
