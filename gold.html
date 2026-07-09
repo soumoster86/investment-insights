@@ -21,6 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <!-- BEGIN SITE HEADER -->
@@ -100,6 +101,7 @@
       <li><a href="#forms">Ways to hold gold</a></li>
       <li><a href="#compare">Quick comparison</a></li>
       <li><a href="#portfolio">Role in a portfolio</a></li>
+      <li><a href="#gold-path-chart">Price path</a></li>
       <li><a href="#risks">Risks &amp; costs</a></li>
       <li><a href="#mistakes">Mistakes</a></li>
       <li><a href="#related">Next</a></li>
@@ -228,6 +230,47 @@
       </div>
     </section>
 
+    <section id="gold-path-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Gold price path (INR sketch)</h2>
+          <p class="tool-intro">
+            Growth of <strong>100</strong> invested in a simplified India gold price path (year-end style).
+            Not live spot, not jewellery returns, and not an ETF NAV.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Illustrative</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="gold-path-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Growth of 100 (gold · INR path)</h3>
+            <p class="illust-chart-sub">Rebased sketch · ignores making charges, GST, and ETF costs</p>
+          </div>
+          <div class="illust-legend" aria-hidden="true">
+            <span><i class="illust-swatch" style="background:#ca8a04"></i> Gold path</span>
+          </div>
+        </div>
+        <div class="illust-chart-wrap">
+          <canvas id="goldPathChart" aria-label="Illustrative gold price growth chart"></canvas>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Gold can rally hard and also stay flat or fall for years in real terms</li>
+          <li>Jewellery with high making charges will lag this metal path</li>
+          <li>Use as context for allocation debates — not a trading signal</li>
+        </ul>
+        <p class="illust-disclaimer">Educational only. Past gold moves do not guarantee future prices.</p>
+      </div>
+    </section>
+
     <section id="risks">
       <h2>Risks and costs to respect</h2>
       <ul>
@@ -332,6 +375,80 @@
   <span>Top</span>
 </button>
 <!-- END SITE FOOTER -->
+
+<script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("goldPathChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    // Simplified year-end style INR gold index (educational)
+    var labels = ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"];
+    var levels = [100, 112, 108, 118, 145, 185, 175, 195, 220, 260, 310];
+    var total = ((levels[levels.length - 1] / levels[0]) - 1) * 100;
+    var stats = document.getElementById("gold-path-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><span class="illust-stat-label">Start</span><span class="illust-stat-value">100</span><span class="illust-stat-hint">Indexed 2015</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">End sketch</span><span class="illust-stat-value is-amber">' +
+        levels[levels.length - 1] +
+        '</span><span class="illust-stat-hint">Growth of 100</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">Total path</span><span class="illust-stat-value is-up">+' +
+        total.toFixed(0) +
+        '%</span><span class="illust-stat-hint">Illustrative only</span></div>';
+    }
+    var ctx = canvas.getContext("2d");
+    var g = ctx.createLinearGradient(0, 0, 0, 280);
+    g.addColorStop(0, "rgba(202,138,4,0.32)");
+    g.addColorStop(1, "rgba(202,138,4,0.02)");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Gold (INR path)",
+          data: levels,
+          borderColor: "#ca8a04",
+          backgroundColor: g,
+          borderWidth: 2.6,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3.5,
+          pointBackgroundColor: "#ca8a04",
+          pointBorderColor: "#fff",
+          pointBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.94)",
+            padding: 12,
+            callbacks: {
+              label: function (c) {
+                return " Index " + c.parsed.y.toFixed(0) + "  (" + (c.parsed.y - 100 >= 0 ? "+" : "") + (c.parsed.y - 100).toFixed(0) + "% vs start)";
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: "#64748b", font: { weight: "600" } } },
+          y: {
+            beginAtZero: false,
+            grid: { color: "rgba(148,163,184,0.2)" },
+            ticks: { color: "#64748b" },
+            title: { display: true, text: "Growth of 100", color: "#64748b", font: { size: 11, weight: "600" } }
+          }
+        }
+      }
+    });
+  });
+})();
+</script>
 
   <script>
   document.querySelectorAll(".floating-toc a").forEach(function (link) {

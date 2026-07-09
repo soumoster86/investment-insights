@@ -21,6 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <!-- BEGIN SITE HEADER -->
@@ -99,6 +100,7 @@
       <li><a href="#defs">Definitions</a></li>
       <li><a href="#compare">Side-by-side</a></li>
       <li><a href="#costs">Why costs matter</a></li>
+      <li><a href="#fee-drag-chart">Fee drag sketch</a></li>
       <li><a href="#when">When people choose which</a></li>
       <li><a href="#check">Checklist</a></li>
       <li><a href="#mistakes">Mistakes</a></li>
@@ -201,6 +203,48 @@
         <strong>Myth check:</strong> “Active always beats the market in India” or “index always wins”
         are both slogans. Evidence varies by category, period, and methodology. Prefer multi-year data
         and category-appropriate benchmarks over last-year rankings.
+      </div>
+    </section>
+
+    <section id="fee-drag-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Fee drag on a ₹1 lakh start</h2>
+          <p class="tool-intro">
+            Same <strong>12% gross return</strong> path for 20 years — with <strong>0.20%</strong> vs
+            <strong>1.50%</strong> annual expense. Shows why costs compound; not a claim that low-fee funds always win.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Illustrative</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="fee-drag-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Corpus over 20 years</h3>
+            <p class="illust-chart-sub">Lump sum ₹1L · constant returns · fees deducted annually (model)</p>
+          </div>
+          <div class="illust-legend" aria-hidden="true">
+            <span><i class="illust-swatch" style="background:#0a4d8c"></i> 0.20% ER</span>
+            <span><i class="illust-swatch" style="background:#d97706"></i> 1.50% ER</span>
+          </div>
+        </div>
+        <div class="illust-chart-wrap">
+          <canvas id="feeDragChart" aria-label="Expense ratio fee drag illustration"></canvas>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Higher fees need extra alpha just to break even with a cheaper peer</li>
+          <li>Active funds may still earn their fee in some periods — this chart isolates cost only</li>
+          <li>Compare expense ratios within the same category and plan (direct vs regular)</li>
+        </ul>
+        <p class="illust-disclaimer">Educational model only. Real fund returns and taxes differ from a constant 12% path.</p>
       </div>
     </section>
 
@@ -325,6 +369,107 @@
   <span>Top</span>
 </button>
 <!-- END SITE FOOTER -->
+
+<script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("feeDragChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    var start = 100000;
+    var gross = 0.12;
+    var years = [];
+    var low = [];
+    var high = [];
+    var a = start;
+    var b = start;
+    for (var y = 0; y <= 20; y++) {
+      years.push(y === 0 ? "Start" : y + "y");
+      low.push(Math.round(a));
+      high.push(Math.round(b));
+      if (y < 20) {
+        a = a * (1 + gross - 0.002);
+        b = b * (1 + gross - 0.015);
+      }
+    }
+    var gap = low[low.length - 1] - high[high.length - 1];
+    var stats = document.getElementById("fee-drag-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><span class="illust-stat-label">0.20% ER</span><span class="illust-stat-value is-up">₹' +
+        low[low.length - 1].toLocaleString("en-IN") +
+        '</span><span class="illust-stat-hint">After 20 years</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">1.50% ER</span><span class="illust-stat-value is-amber">₹' +
+        high[high.length - 1].toLocaleString("en-IN") +
+        '</span><span class="illust-stat-hint">After 20 years</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">Gap</span><span class="illust-stat-value is-down">₹' +
+        gap.toLocaleString("en-IN") +
+        '</span><span class="illust-stat-hint">Cost of extra fees (model)</span></div>';
+    }
+    var ctx = canvas.getContext("2d");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "0.20% expense",
+            data: low,
+            borderColor: "#0a4d8c",
+            backgroundColor: "rgba(10,77,140,0.12)",
+            borderWidth: 2.6,
+            tension: 0.28,
+            fill: false,
+            pointRadius: 0,
+            pointHoverRadius: 5
+          },
+          {
+            label: "1.50% expense",
+            data: high,
+            borderColor: "#d97706",
+            backgroundColor: "rgba(217,119,6,0.12)",
+            borderWidth: 2.6,
+            tension: 0.28,
+            fill: false,
+            pointRadius: 0,
+            pointHoverRadius: 5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { position: "bottom", labels: { usePointStyle: true, pointStyle: "circle", padding: 14, font: { size: 12, weight: "600" } } },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.94)",
+            padding: 12,
+            callbacks: {
+              label: function (c) {
+                return " " + c.dataset.label + ": ₹" + Math.round(c.parsed.y).toLocaleString("en-IN");
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { maxTicksLimit: 8, color: "#64748b", font: { weight: "600" } } },
+          y: {
+            beginAtZero: false,
+            grid: { color: "rgba(148,163,184,0.2)" },
+            ticks: {
+              color: "#64748b",
+              callback: function (v) {
+                return v >= 100000 ? "₹" + (v / 100000).toFixed(1) + "L" : "₹" + v;
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+})();
+</script>
 
   <script>
   document.querySelectorAll(".floating-toc a").forEach(function (link) {

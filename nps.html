@@ -21,7 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
 <body>
@@ -32,6 +32,7 @@
     <li><a href="#about-nps">About NPS</a></li>
     <li><a href="#nps-accounts">Tier I &amp; II</a></li>
     <li><a href="#nps-assets">Asset classes</a></li>
+    <li><a href="#nps-mix-chart">Mix sketch</a></li>
     <li><a href="#nps-tax">Tax notes</a></li>
     <li><a href="#invest-nps">How to invest</a></li>
     <li><a href="#calculator-nps">Calculator</a></li>
@@ -210,6 +211,49 @@
   </div>
   <p class="table-note">Equity caps and lifecycle auto-rebalancing depend on your choice mode and age rules — check the official NPS / CRA materials.</p>
 </section>
+
+    <section id="nps-mix-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Sample NPS mix &amp; corpus path</h2>
+          <p class="tool-intro">
+            A teaching sketch of one <strong>Active choice</strong>-style mix and how monthly contributions
+            might grow at a constant assumed return. Not your PRAN allocation and not a pension promise.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Illustrative</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats" id="nps-mix-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Allocation doughnut · corpus line</h3>
+            <p class="illust-chart-sub">Left: sample E/C/G mix · Right: ₹5,000/mo @ 10% for 20 years</p>
+          </div>
+        </div>
+        <div class="illust-dual-grid">
+          <div class="illust-chart-wrap is-sm">
+            <canvas id="npsMixChart" aria-label="Sample NPS asset mix doughnut"></canvas>
+          </div>
+          <div class="illust-chart-wrap is-sm">
+            <canvas id="npsCorpusChart" aria-label="Sample NPS corpus growth line"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Equity share drives long-run growth potential and short-run volatility</li>
+          <li>Auto choice / lifecycle modes shift E/C/G with age — this doughnut is one static sample</li>
+          <li>Exit rules (lump sum vs annuity) are not modelled here — use the calculator section</li>
+        </ul>
+        <p class="illust-disclaimer">Educational only. Returns and mixes are not guaranteed by PFRDA or any pension fund.</p>
+      </div>
+    </section>
 
 <section id="nps-tax">
   <h2>Tax notes (very high level)</h2>
@@ -421,6 +465,126 @@
 <!-- END SITE FOOTER -->
 
 <script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof Chart === "undefined") return;
+    var mix = [50, 30, 20];
+    var labels = ["Equity (E)", "Corporate (C)", "G-Secs (G)"];
+    var colors = ["#0a4d8c", "#d97706", "#047857"];
+    var monthly = 5000;
+    var years = 20;
+    var r = 0.1;
+    var corpusPts = [];
+    var yearLabels = [];
+    var bal = 0;
+    var iRate = r / 12;
+    for (var y = 0; y <= years; y++) {
+      yearLabels.push(y === 0 ? "Start" : y + "y");
+      if (y === 0) {
+        corpusPts.push(0);
+        continue;
+      }
+      for (var m = 0; m < 12; m++) {
+        bal = (bal + monthly) * (1 + iRate);
+      }
+      corpusPts.push(Math.round(bal));
+    }
+    var finalC = corpusPts[corpusPts.length - 1];
+    var invested = monthly * 12 * years;
+    var stats = document.getElementById("nps-mix-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><span class="illust-stat-label">Sample mix</span><span class="illust-stat-value">50/30/20</span><span class="illust-stat-hint">E / C / G</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">SIP</span><span class="illust-stat-value">₹5,000</span><span class="illust-stat-hint">Per month</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">Invested</span><span class="illust-stat-value">₹' +
+        invested.toLocaleString("en-IN") +
+        '</span><span class="illust-stat-hint">20 years</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">Corpus @10%</span><span class="illust-stat-value is-up">₹' +
+        finalC.toLocaleString("en-IN") +
+        '</span><span class="illust-stat-hint">Constant return model</span></div>';
+    }
+    var mixEl = document.getElementById("npsMixChart");
+    if (mixEl) {
+      new Chart(mixEl.getContext("2d"), {
+        type: "doughnut",
+        data: {
+          labels: labels,
+          datasets: [{ data: mix, backgroundColor: colors, borderWidth: 2, borderColor: "#fff", hoverOffset: 6 }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: "bottom", labels: { usePointStyle: true, padding: 12, font: { size: 11, weight: "600" } } },
+            tooltip: {
+              callbacks: {
+                label: function (c) {
+                  return " " + c.label + ": " + c.parsed + "%";
+                }
+              }
+            }
+          },
+          cutout: "62%"
+        }
+      });
+    }
+    var corEl = document.getElementById("npsCorpusChart");
+    if (corEl) {
+      var ctx = corEl.getContext("2d");
+      var g = ctx.createLinearGradient(0, 0, 0, 240);
+      g.addColorStop(0, "rgba(10,77,140,0.28)");
+      g.addColorStop(1, "rgba(10,77,140,0.02)");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: yearLabels,
+          datasets: [{
+            label: "Corpus",
+            data: corpusPts,
+            borderColor: "#0a4d8c",
+            backgroundColor: g,
+            borderWidth: 2.5,
+            tension: 0.3,
+            fill: true,
+            pointRadius: 0,
+            pointHoverRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function (c) {
+                  return " ₹" + Math.round(c.parsed.y).toLocaleString("en-IN");
+                }
+              }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { maxTicksLimit: 6, color: "#64748b", font: { weight: "600" } } },
+            y: {
+              beginAtZero: true,
+              grid: { color: "rgba(148,163,184,0.2)" },
+              ticks: {
+                color: "#64748b",
+                callback: function (v) {
+                  return v >= 100000 ? "₹" + (v / 100000).toFixed(1) + "L" : "₹" + v;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+  });
+})();
+</script>
+
+<script>
 function calculateNPS() {
   const monthly = parseFloat(document.getElementById("monthly").value);
   const rateInput = parseFloat(document.getElementById("rate").value);
@@ -569,6 +733,7 @@ window.addEventListener('scroll', () => {
     'about-nps',
     'nps-accounts',
     'nps-assets',
+    'nps-mix-chart',
     'nps-tax',
     'invest-nps',
     'calculator-nps',

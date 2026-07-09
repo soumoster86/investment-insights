@@ -21,6 +21,7 @@
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 <body>
 
@@ -31,6 +32,7 @@
     <li><a href="#about-crypto">About crypto</a></li>
     <li><a href="#crypto-types">Categories</a></li>
     <li><a href="#risks-crypto">Risks</a></li>
+    <li><a href="#crypto-vol-chart">Volatility sketch</a></li>
     <li><a href="#india-crypto">India context</a></li>
     <li><a href="#buy-crypto">How to access</a></li>
     <li><a href="#crypto-risk-tool">Risk capital</a></li>
@@ -197,6 +199,44 @@
         <strong>Position sizing rule of thumb (educational):</strong> only capital you can afford to lose entirely.
         Complete core goals (emergency fund, boring equity/debt SIPs) before speculative sleeves —
         <a href="insurance-emergency.html">Emergency fund</a> · <a href="risk-allocation.html">Risk &amp; allocation</a>.
+      </div>
+    </section>
+
+    <section id="crypto-vol-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Volatility sketch: boom, crash, recovery</h2>
+          <p class="tool-intro">
+            A fictional asset path that rises hard, then loses most of its peak, then partially recovers.
+            Mirrors the <strong>shape</strong> of many crypto cycles — not any specific coin’s price.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Simulated</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats" id="crypto-vol-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Index path (start = 100)</h3>
+            <p class="illust-chart-sub">Peak-to-trough drawdown highlighted in the stats · not a forecast</p>
+          </div>
+        </div>
+        <div class="illust-chart-wrap">
+          <canvas id="cryptoVolChart" aria-label="Simulated crypto volatility path"></canvas>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Buying near peaks can mean multi-year underwater periods even if the asset “comes back”</li>
+          <li>50–80% drawdowns have been common historically across many crypto names</li>
+          <li>Size positions as speculative risk capital — not rent money</li>
+        </ul>
+        <p class="illust-disclaimer">Simulated path for education. Not live prices and not a recommendation to buy or sell crypto.</p>
       </div>
     </section>
 
@@ -460,6 +500,7 @@ window.addEventListener('scroll', () => {
     'about-crypto',
     'crypto-types',
     'risks-crypto',
+    'crypto-vol-chart',
     'india-crypto',
     'buy-crypto',
     'crypto-risk-tool',
@@ -476,6 +517,82 @@ window.addEventListener('scroll', () => {
   }
   document.querySelectorAll('.floating-toc a').forEach(a => {
     a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  var canvas = document.getElementById('cryptoVolChart');
+  if (!canvas || typeof Chart === 'undefined') return;
+  var labels = ['Y0', 'Y1', 'Y2', 'Y3', 'Y4', 'Y5', 'Y6', 'Y7', 'Y8'];
+  var path = [100, 180, 420, 900, 350, 180, 220, 310, 400];
+  var peak = Math.max.apply(null, path);
+  var trough = Math.min.apply(null, path.slice(3));
+  var dd = ((trough - peak) / peak) * 100;
+  var endRet = ((path[path.length - 1] / path[0]) - 1) * 100;
+  var stats = document.getElementById('crypto-vol-stats');
+  if (stats) {
+    stats.innerHTML =
+      '<div class="illust-stat"><span class="illust-stat-label">Peak</span><span class="illust-stat-value is-up">' +
+      peak +
+      '</span><span class="illust-stat-hint">Index high</span></div>' +
+      '<div class="illust-stat"><span class="illust-stat-label">Trough</span><span class="illust-stat-value is-down">' +
+      trough +
+      '</span><span class="illust-stat-hint">After crash leg</span></div>' +
+      '<div class="illust-stat"><span class="illust-stat-label">Max drawdown</span><span class="illust-stat-value is-down">' +
+      dd.toFixed(0) +
+      '%</span><span class="illust-stat-hint">Peak → low</span></div>' +
+      '<div class="illust-stat"><span class="illust-stat-label">End vs start</span><span class="illust-stat-value is-up">+' +
+      endRet.toFixed(0) +
+      '%</span><span class="illust-stat-hint">Still volatile path</span></div>';
+  }
+  var ctx = canvas.getContext('2d');
+  var g = ctx.createLinearGradient(0, 0, 0, 280);
+  g.addColorStop(0, 'rgba(109,40,217,0.28)');
+  g.addColorStop(1, 'rgba(109,40,217,0.02)');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Simulated path',
+        data: path,
+        borderColor: '#6d28d9',
+        backgroundColor: g,
+        borderWidth: 2.6,
+        tension: 0.35,
+        fill: true,
+        pointRadius: 4,
+        pointBackgroundColor: '#6d28d9',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,23,42,0.94)',
+          padding: 12,
+          callbacks: {
+            label: function (c) {
+              return ' Index ' + c.parsed.y;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#64748b', font: { weight: '600' } } },
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(148,163,184,0.2)' },
+          ticks: { color: '#64748b' },
+          title: { display: true, text: 'Index (start 100)', color: '#64748b', font: { size: 11, weight: '600' } }
+        }
+      }
+    }
   });
 });
 </script>

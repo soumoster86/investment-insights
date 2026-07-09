@@ -38,6 +38,7 @@
     <li><a href="#bond-ladder-tool">Ladder planner</a></li>
 	<li><a href="#bond-laddering">Laddering strategy</a></li>
     <li><a href="#sample-bonds">Sample products</a></li>
+    <li><a href="#bond-yield-map">Yield map</a></li>
     <li><a href="#mistakes-bonds">Mistakes</a></li>
     <li><a href="#related-bonds">Next steps</a></li>
 	   </ul>
@@ -342,9 +343,16 @@
     <div>Assumes annual coupons and a fixed maturity — not for every exotic structure.</div>
   </details>
 </div>
-  <div id="bondChart-container" style="width:100%; margin-top:20px; display:none;">
-    <h3>Illustrative cash-flow timeline</h3>
-    <canvas id="bondChart" style="max-width:100%; min-height:260px;"></canvas>
+  <div id="bondChart-container" class="calc-chart-card" style="display:none;">
+    <div class="illust-chart-head">
+      <div>
+        <h3 class="illust-chart-title">Illustrative cash-flow timeline</h3>
+        <p class="illust-chart-sub">Annual coupon model · last year includes face repayment</p>
+      </div>
+    </div>
+    <div class="illust-chart-wrap is-sm">
+      <canvas id="bondChart" aria-label="Bond cash flow chart"></canvas>
+    </div>
   </div>
 </section>
 
@@ -456,6 +464,45 @@
     </article>
   </div>
 </section>
+
+    <section id="bond-yield-map" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>Sample yield ladder by credit risk</h2>
+          <p class="tool-intro">
+            Teaching sketch of how <strong>indicative yields</strong> often step up with credit risk.
+            Not live market quotes — real G-Sec and corporate yields move every day.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Illustrative</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="bond-yield-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Indicative yield (% p.a.)</h3>
+            <p class="illust-chart-sub">Higher bars ≈ more credit risk in this teaching sample</p>
+          </div>
+        </div>
+        <div class="illust-chart-wrap">
+          <canvas id="bondYieldMapChart" aria-label="Sample bond yield by credit risk"></canvas>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Extra yield over G-Secs is not free — it prices default and liquidity risk</li>
+          <li>Duration / rate risk can still hurt AAA bonds when rates rise</li>
+          <li>Verify live yields on exchange / RBI Retail Direct before acting</li>
+        </ul>
+        <p class="illust-disclaimer">Educational only. Not a recommendation to buy any issuer or rating bucket.</p>
+      </div>
+    </section>
+
 
 <section id="mistakes-bonds">
   <h2>Common mistakes</h2>
@@ -601,43 +648,136 @@ function drawBondChart(face, annualCoupon, years) {
       labels: labels,
       datasets: [
         {
-          label: 'Cash Received Each Year (₹)',
+          label: 'Cash each year (₹)',
           data: coupons,
           borderWidth: 1,
-          backgroundColor: 'rgba(34, 139, 34, 0.25)',
-          borderColor: 'rgba(34, 139, 34, 1)'
+          backgroundColor: 'rgba(4, 120, 87, 0.72)',
+          borderColor: '#047857',
+          borderRadius: 6,
+          borderSkipped: false
         },
         {
-          label: 'Total Cash Accumulated (₹)',
+          label: 'Cumulative (₹)',
           data: cumulative,
           type: 'line',
-          borderColor: 'rgba(45, 91, 219, 0.85)',
-          backgroundColor: 'rgba(45, 91, 219, 0.1)',
+          borderColor: '#0a4d8c',
+          backgroundColor: 'rgba(10, 77, 140, 0.12)',
+          borderWidth: 2.4,
+          tension: 0.25,
           fill: false,
+          pointRadius: 3,
+          pointBackgroundColor: '#0a4d8c',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 2,
           yAxisID: 'y2'
         }
       ]
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
       plugins: {
-        legend: { position: 'top' }
+        legend: {
+          position: 'bottom',
+          labels: { usePointStyle: true, pointStyle: 'circle', padding: 14, font: { size: 12, weight: '600' } }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(15,23,42,0.94)',
+          padding: 12,
+          callbacks: {
+            label: function (c) {
+              return ' ' + c.dataset.label + ': ₹' + Math.round(c.parsed.y).toLocaleString('en-IN');
+            }
+          }
+        }
       },
       scales: {
-        y: { 
-          beginAtZero: true, 
-          title: { display: true, text: 'Yearly Cash (₹)' }
+        x: { grid: { display: false }, ticks: { color: '#64748b', font: { weight: '600' } } },
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(148,163,184,0.2)' },
+          title: { display: true, text: 'Yearly cash (₹)', color: '#64748b', font: { size: 11, weight: '600' } },
+          ticks: {
+            color: '#64748b',
+            callback: function (v) { return '₹' + Number(v).toLocaleString('en-IN'); }
+          }
         },
         y2: {
           position: 'right',
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          title: { display: true, text: 'Total Accumulated (₹)' }
+          title: { display: true, text: 'Cumulative (₹)', color: '#64748b', font: { size: 11, weight: '600' } },
+          ticks: {
+            color: '#64748b',
+            callback: function (v) { return '₹' + Number(v).toLocaleString('en-IN'); }
+          }
         }
       }
     }
   });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var canvas = document.getElementById('bondYieldMapChart');
+  if (!canvas || typeof Chart === 'undefined') return;
+  var names = ['G-Sec\n~5y', 'AAA\ncorp', 'AA\ncorp', 'A\ncorp', 'BBB\ncorp'];
+  var yields = [6.9, 7.4, 8.1, 9.2, 10.5];
+  var stats = document.getElementById('bond-yield-stats');
+  if (stats) {
+    stats.innerHTML =
+      '<div class="illust-stat"><span class="illust-stat-label">G-Sec sample</span><span class="illust-stat-value">6.9%</span><span class="illust-stat-hint">Teaching mid-curve</span></div>' +
+      '<div class="illust-stat"><span class="illust-stat-label">AAA sample</span><span class="illust-stat-value is-amber">7.4%</span><span class="illust-stat-hint">Modest spread</span></div>' +
+      '<div class="illust-stat"><span class="illust-stat-label">BBB sample</span><span class="illust-stat-value is-down">10.5%</span><span class="illust-stat-hint">Higher risk priced</span></div>';
+  }
+  new Chart(canvas.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'Indicative yield %',
+        data: yields,
+        backgroundColor: [
+          'rgba(10,77,140,0.85)',
+          'rgba(43,125,233,0.8)',
+          'rgba(217,119,6,0.82)',
+          'rgba(234,88,12,0.82)',
+          'rgba(185,28,28,0.82)'
+        ],
+        borderRadius: 8,
+        borderSkipped: false,
+        maxBarThickness: 48
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,23,42,0.94)',
+          padding: 12,
+          callbacks: {
+            label: function (c) { return ' ~' + c.parsed.y.toFixed(1) + '% p.a. (illustrative)'; }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#64748b', font: { weight: '600', size: 11 } } },
+        y: {
+          beginAtZero: true,
+          max: 12,
+          grid: { color: 'rgba(148,163,184,0.2)' },
+          ticks: {
+            color: '#64748b',
+            callback: function (v) { return v + '%'; }
+          },
+          title: { display: true, text: 'Yield % p.a.', color: '#64748b', font: { size: 11, weight: '600' } }
+        }
+      }
+    }
+  });
+});
 
 function calculateBondYield(event) {
   event.preventDefault();
@@ -704,6 +844,7 @@ window.addEventListener('scroll', () => {
     'bond-ladder-tool',
     'bond-laddering',
     'sample-bonds',
+    'bond-yield-map',
     'mistakes-bonds',
     'related-bonds'
   ];

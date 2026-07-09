@@ -64,6 +64,7 @@
 	<li><a href="#taxation">Tax notes</a></li>
 	<li><a href="#comparison">Compare</a></li>
     <li><a href="#rates-fd">Sample rates</a></li>
+    <li><a href="#fd-growth-chart">Growth sketch</a></li>
     <li><a href="#mistakes-fd">Mistakes</a></li>
     <li><a href="#related-fd">Next steps</a></li>
    </ul>
@@ -270,8 +271,16 @@
       <div class="calc-result-item"><span class="calc-result-label">Approx. APY</span><strong class="calc-result-value"><span id="fd-apy"></span>%</strong></div>
     </div>
     <div id="fd-breakdown-table-container"></div>
-    <div id="fd-chart-container" style="width:100%;margin:20px 0 0 0;display:none;">
-      <canvas id="fdChart" style="max-width:100%;"></canvas>
+    <div id="fd-chart-container" class="calc-chart-card" style="display:none;">
+      <div class="illust-chart-head">
+        <div>
+          <h3 class="illust-chart-title">Principal vs interest</h3>
+          <p class="illust-chart-sub">From your calculator inputs · stacked year-wise sketch</p>
+        </div>
+      </div>
+      <div class="illust-chart-wrap is-sm">
+        <canvas id="fdChart" aria-label="FD principal versus interest chart"></canvas>
+      </div>
     </div>
   </div>
    </section>
@@ -390,6 +399,49 @@
   </div>
   <p class="table-note">Use the calculator above with the exact rate from your deposit confirmation.</p>
 </section>
+
+    <section id="fd-growth-chart" class="illust-panel tool-section">
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · educational only</p>
+          <h2>FD growth sketch (₹1 lakh lump sum)</h2>
+          <p class="tool-intro">
+            How a fixed deposit of <strong>₹1,00,000</strong> might grow at three constant rates with annual compounding.
+            Not a bank offer — use the calculator with your real rate and tenure.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Illustrative</span>
+          Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="fd-growth-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Maturity value over years</h3>
+            <p class="illust-chart-sub">Annual compounding · no premature withdrawal · pre-tax</p>
+          </div>
+          <div class="illust-legend" aria-hidden="true">
+            <span><i class="illust-swatch" style="background:#64748b"></i> 5.5%</span>
+            <span><i class="illust-swatch" style="background:#0a4d8c"></i> 6.5%</span>
+            <span><i class="illust-swatch" style="background:#047857"></i> 7.5%</span>
+          </div>
+        </div>
+        <div class="illust-chart-wrap">
+          <canvas id="fdGrowthChart" aria-label="FD growth at different rates"></canvas>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Higher rates compound visibly over long tenures; short tenures look flatter</li>
+          <li>Tax on interest and TDS can shrink take-home vs this pre-tax sketch</li>
+          <li>Real banks quote period-specific rates; DICGC cover is separate from return</li>
+        </ul>
+        <p class="illust-disclaimer">Educational only. Past or sample rates do not guarantee your deposit terms.</p>
+      </div>
+    </section>
 
 <section id="mistakes-fd">
   <h2>Common mistakes</h2>
@@ -516,6 +568,87 @@
 </button>
 <!-- END SITE FOOTER -->
 
+<script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("fdGrowthChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    var years = [0, 1, 2, 3, 4, 5, 7, 10];
+    var principal = 100000;
+    function path(rate) {
+      return years.map(function (y) {
+        return Math.round(principal * Math.pow(1 + rate, y));
+      });
+    }
+    var p55 = path(0.055);
+    var p65 = path(0.065);
+    var p75 = path(0.075);
+    var stats = document.getElementById("fd-growth-stats");
+    if (stats) {
+      function inr(n) {
+        return "₹" + Math.round(n).toLocaleString("en-IN");
+      }
+      stats.innerHTML =
+        '<div class="illust-stat"><span class="illust-stat-label">Start</span><span class="illust-stat-value">' +
+        inr(principal) +
+        '</span><span class="illust-stat-hint">Lump sum</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">10y @ 5.5%</span><span class="illust-stat-value">' +
+        inr(p55[p55.length - 1]) +
+        '</span><span class="illust-stat-hint">Maturity sketch</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">10y @ 6.5%</span><span class="illust-stat-value">' +
+        inr(p65[p65.length - 1]) +
+        '</span><span class="illust-stat-hint">Maturity sketch</span></div>' +
+        '<div class="illust-stat"><span class="illust-stat-label">10y @ 7.5%</span><span class="illust-stat-value is-up">' +
+        inr(p75[p75.length - 1]) +
+        '</span><span class="illust-stat-hint">Maturity sketch</span></div>';
+    }
+    var ctx = canvas.getContext("2d");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years.map(function (y) { return y === 0 ? "Start" : y + "y"; }),
+        datasets: [
+          { label: "5.5% p.a.", data: p55, borderColor: "#64748b", backgroundColor: "rgba(100,116,139,0.12)", borderWidth: 2.2, tension: 0.28, fill: false, pointRadius: 3, pointBackgroundColor: "#64748b", pointBorderColor: "#fff", pointBorderWidth: 2 },
+          { label: "6.5% p.a.", data: p65, borderColor: "#0a4d8c", backgroundColor: "rgba(10,77,140,0.12)", borderWidth: 2.5, tension: 0.28, fill: false, pointRadius: 3.5, pointBackgroundColor: "#0a4d8c", pointBorderColor: "#fff", pointBorderWidth: 2 },
+          { label: "7.5% p.a.", data: p75, borderColor: "#047857", backgroundColor: "rgba(4,120,87,0.12)", borderWidth: 2.5, tension: 0.28, fill: false, pointRadius: 3.5, pointBackgroundColor: "#047857", pointBorderColor: "#fff", pointBorderWidth: 2 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: true, position: "bottom", labels: { usePointStyle: true, pointStyle: "circle", padding: 14, font: { size: 12, weight: "600" } } },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.94)",
+            padding: 12,
+            callbacks: {
+              label: function (c) {
+                return " " + c.dataset.label + ": ₹" + Math.round(c.parsed.y).toLocaleString("en-IN");
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: "#64748b", font: { weight: "600" } } },
+          y: {
+            beginAtZero: false,
+            grid: { color: "rgba(148,163,184,0.2)" },
+            ticks: {
+              color: "#64748b",
+              callback: function (v) {
+                return "₹" + (v >= 100000 ? (v / 100000).toFixed(1) + "L" : Number(v).toLocaleString("en-IN"));
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+})();
+</script>
+
      <script>
 function calculateFD(event) {
   event.preventDefault();
@@ -603,25 +736,51 @@ function calculateFD(event) {
         {
           label: 'Principal (₹)',
           data: principalData,
-          backgroundColor: 'rgba(52,152,219,0.35)'
+          backgroundColor: 'rgba(10, 77, 140, 0.75)',
+          borderRadius: 6,
+          borderSkipped: false
         },
         {
-          label: 'Interest Earned (₹)',
+          label: 'Interest earned (₹)',
           data: interestData,
-          backgroundColor: 'rgba(46,204,113,0.35)'
+          backgroundColor: 'rgba(4, 120, 87, 0.75)',
+          borderRadius: 6,
+          borderSkipped: false
         }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
       plugins: {
-        legend: {position: 'top'},
-        title: {display: true, text: 'Principal vs Interest Growth'}
+        legend: {
+          position: 'bottom',
+          labels: { usePointStyle: true, pointStyle: 'circle', padding: 14, font: { size: 12, weight: '600' } }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(15, 23, 42, 0.94)',
+          padding: 12,
+          callbacks: {
+            label: function (c) {
+              return ' ' + c.dataset.label + ': ₹' + Math.round(c.parsed.y).toLocaleString('en-IN');
+            }
+          }
+        }
       },
       scales: {
-        x: {stacked:true},
-        y: {stacked:true, beginAtZero:true, ticks: {callback: value => value.toLocaleString('en-IN')}}
+        x: { stacked: true, grid: { display: false }, ticks: { color: '#64748b', font: { weight: '600' } } },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          grid: { color: 'rgba(148,163,184,0.2)' },
+          ticks: {
+            color: '#64748b',
+            callback: function (value) {
+              return '₹' + Number(value).toLocaleString('en-IN');
+            }
+          }
+        }
       }
     }
   });
@@ -670,6 +829,7 @@ window.addEventListener('scroll', () => {
     'taxation',
     'comparison',
     'rates-fd',
+    'fd-growth-chart',
     'mistakes-fd',
     'related-fd'
   ];
