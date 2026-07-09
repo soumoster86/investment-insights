@@ -3614,10 +3614,12 @@ body.page-hub main.layout-wide {
   }
 }
 
-/* Dropdown menus: taller for Learn list */
-.main-nav .dropdown-menu {
-  max-height: min(70vh, 420px);
-  overflow-y: auto;
+/* Dropdown menus: full height on desktop (no inner scrollbar on hover) */
+@media (min-width: 821px) {
+  .main-nav .dropdown-menu {
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 body.dark-mode .hub-hero,
