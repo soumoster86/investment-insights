@@ -7042,6 +7042,139 @@ body.dark-mode .goal-chart-wrap {
   background: #1c212b !important;
   border-color: #2c3340 !important;
 }
+
+/* Goal planner — corpus chart (illust-panel) + year cards */
+.goal-chart-section.illust-panel {
+  margin-top: 18px;
+}
+.goal-corpus-chart-wrap {
+  height: 300px;
+  position: relative;
+}
+@media (max-width: 640px) {
+  .goal-corpus-chart-wrap { height: 240px; }
+}
+.goal-projection-section {
+  margin: 18px 0 10px;
+}
+.goal-year-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 12px;
+  margin: 14px 0 12px;
+  max-height: min(420px, 55vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2px 4px 6px 2px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(43, 125, 233, 0.45) rgba(10, 40, 90, 0.06);
+}
+.goal-year-map::-webkit-scrollbar { width: 8px; }
+.goal-year-map::-webkit-scrollbar-thumb {
+  background: rgba(43, 125, 233, 0.4);
+  border-radius: 8px;
+}
+.goal-year-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 14px 12px;
+  border-radius: 14px;
+  border: 1.5px solid #d5e2f5;
+  background: linear-gradient(165deg, #f7faff 0%, #ffffff 55%);
+  box-shadow: 0 2px 8px rgba(10, 40, 90, 0.05);
+  overflow: hidden;
+  transition: transform 0.15s ease, border-color 0.15s, box-shadow 0.15s;
+}
+.goal-year-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #2563eb;
+}
+.goal-year-card:hover {
+  transform: translateY(-2px);
+  border-color: #8abaff;
+  box-shadow: 0 8px 18px rgba(10, 40, 90, 0.08);
+}
+.goal-year-card.is-final {
+  border-color: #a7f3d0;
+  background: linear-gradient(165deg, #ecfdf5 0%, #ffffff 55%);
+}
+.goal-year-card.is-final::before { background: #059669; }
+.goal-year-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-width: 2.4em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #1e40af;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+.goal-year-card.is-final .goal-year-badge {
+  color: #065f46;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+.goal-year-body {
+  display: grid;
+  gap: 6px;
+}
+.goal-year-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.goal-year-label {
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+.goal-year-row strong {
+  font-size: 0.98em;
+  font-weight: 700;
+  color: #1a2332;
+  letter-spacing: -0.01em;
+}
+.goal-year-row strong.goal-year-real {
+  color: #5b21b6;
+}
+body.dark-mode .goal-year-card {
+  background: linear-gradient(165deg, #1a2230 0%, #1c212b 60%) !important;
+  border-color: #2c3340 !important;
+  box-shadow: none;
+}
+body.dark-mode .goal-year-card.is-final {
+  background: linear-gradient(165deg, #14241c 0%, #1c212b 60%) !important;
+  border-color: #1f4d38 !important;
+}
+body.dark-mode .goal-year-badge {
+  background: #152033 !important;
+  border-color: #2c3d5c !important;
+  color: #8abaff !important;
+}
+body.dark-mode .goal-year-card.is-final .goal-year-badge {
+  background: #14241c !important;
+  border-color: #1f4d38 !important;
+  color: #6ee7b7 !important;
+}
+body.dark-mode .goal-year-label { color: #94a3b8 !important; }
+body.dark-mode .goal-year-row strong { color: #e2e8f0 !important; }
+body.dark-mode .goal-year-row strong.goal-year-real { color: #c4b5fd !important; }
 body.dark-mode .route-chip {
   background: #1c212b !important;
   border-color: #2c3340 !important;

@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Investment Goal Planner | Investment Insights" />
   <meta name="twitter:description" content="Work out a SIP for a target amount, or project how a monthly SIP might grow. Templates, inflation, scenarios, and an optional home-page snapshot. For learning only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710b" />
+  <link rel="stylesheet" href="style.css?v=20260710c" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -387,16 +387,52 @@
       <div id="scenario-grid" class="scenario-grid"></div>
     </section>
 
-    <section id="chart-section" class="goal-chart-section" hidden>
-      <h2>Corpus over time</h2>
-      <div class="goal-chart-wrap">
-        <canvas id="plotSIPCorpusChart"></canvas>
+    <section id="chart-section" class="illust-panel tool-section goal-chart-section" hidden>
+      <div class="illust-top">
+        <div class="illust-header-text">
+          <p class="illust-eyebrow">Illustrative · from your inputs</p>
+          <h2>Corpus over time</h2>
+          <p class="tool-intro">
+            How the plan’s corpus might grow year by year at a <strong>steady assumed return</strong>.
+            The dashed line shows the same path after inflation. Not a forecast.
+          </p>
+        </div>
+        <p class="sample-freshness illust-freshness">
+          <span class="sample-freshness-label">Model</span>
+          Constant return · educational only
+        </p>
+      </div>
+      <div class="illust-stats cols-3" id="goal-chart-stats" aria-live="polite"></div>
+      <div class="illust-chart-card">
+        <div class="illust-chart-head">
+          <div>
+            <h3 class="illust-chart-title">Growth path</h3>
+            <p class="illust-chart-sub">Nominal corpus vs inflation-adjusted · end of each year</p>
+          </div>
+          <div class="illust-legend" aria-hidden="true">
+            <span><i class="illust-swatch" style="background:#2563eb"></i> Nominal</span>
+            <span><i class="illust-swatch" style="background:#7c3aed"></i> After inflation</span>
+          </div>
+        </div>
+        <div class="illust-chart-wrap goal-corpus-chart-wrap">
+          <canvas id="plotSIPCorpusChart" aria-label="Corpus over time chart"></canvas>
+        </div>
+      </div>
+      <div class="illust-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Solid line = rupee balance in the model (before inflation)</li>
+          <li>Dashed line = same balance in today’s buying power</li>
+          <li>Taxes, fund costs, and uneven returns are left out</li>
+        </ul>
+        <p class="illust-disclaimer">For learning only. Change the return or SIP above to redraw the path.</p>
       </div>
     </section>
 
-    <section id="projection-wrap" hidden>
+    <section id="projection-wrap" class="goal-projection-section" hidden>
       <h2>Yearly projection</h2>
-      <div id="projection-table-container" class="table-wrap"></div>
+      <p class="tool-intro">End-of-year snapshots from the same model. Scroll the cards on long horizons.</p>
+      <div id="projection-table-container" class="goal-year-map" role="list"></div>
       <button type="button" id="download-csv-btn" class="download-btn" hidden>⬇️ Download projection CSV</button>
     </section>
 
@@ -779,10 +815,32 @@
     }
   }
 
-  function plotChart(seriesNominal, seriesReal, years) {
+  function plotChart(seriesNominal, seriesReal, years, totalInvested) {
     var labels = [];
-    for (var i = 1; i <= years; i++) labels.push("Year " + i);
-    var ctx = $("plotSIPCorpusChart").getContext("2d");
+    for (var i = 1; i <= years; i++) labels.push("Y" + i);
+    var endNom = seriesNominal[seriesNominal.length - 1] || 0;
+    var endReal = seriesReal[seriesReal.length - 1] || 0;
+    var stats = $("goal-chart-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><div class="illust-stat-label">End corpus (nominal)</div><div class="illust-stat-value is-up">' +
+        inr(endNom) +
+        '</div><div class="illust-stat-hint">Year ' +
+        years +
+        "</div></div>" +
+        '<div class="illust-stat"><div class="illust-stat-label">After inflation</div><div class="illust-stat-value">' +
+        inr(endReal) +
+        '</div><div class="illust-stat-hint">Today’s buying power</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Total invested</div><div class="illust-stat-value">' +
+        inr(totalInvested || 0) +
+        '</div><div class="illust-stat-hint">Your contributions</div></div>';
+    }
+    var canvas = $("plotSIPCorpusChart");
+    if (!canvas || typeof Chart === "undefined") {
+      $("chart-section").hidden = false;
+      return;
+    }
+    var ctx = canvas.getContext("2d");
     if (window.corpusChartInstance) window.corpusChartInstance.destroy();
     window.corpusChartInstance = new Chart(ctx, {
       type: "line",
@@ -790,22 +848,25 @@
         labels: labels,
         datasets: [
           {
-            label: "Corpus (nominal ₹)",
+            label: "Nominal corpus",
             data: seriesNominal,
-            borderWidth: 2.5,
-            borderColor: "#004080",
-            backgroundColor: "rgba(0,64,128,0.08)",
-            tension: 0.15,
-            pointRadius: 2,
-            fill: false
+            borderWidth: 2.6,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            tension: 0.22,
+            pointRadius: years > 20 ? 0 : 3,
+            pointHoverRadius: 5,
+            fill: true
           },
           {
-            label: "Corpus (inflation-adjusted ₹)",
+            label: "After inflation",
             data: seriesReal,
             borderWidth: 2.2,
-            borderColor: "#6c93db",
-            tension: 0.18,
-            pointRadius: 2,
+            borderColor: "#7c3aed",
+            backgroundColor: "rgba(124, 58, 237, 0.06)",
+            tension: 0.22,
+            pointRadius: years > 20 ? 0 : 2.5,
+            pointHoverRadius: 5,
             fill: false,
             borderDash: [6, 4]
           }
@@ -813,10 +874,15 @@
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
         plugins: {
-          legend: { display: true, position: "bottom" },
+          legend: { display: false },
           tooltip: {
             callbacks: {
+              title: function (items) {
+                return items[0] ? "Year " + String(items[0].label).replace(/^Y/, "") : "";
+              },
               label: function (ctx) {
                 return ctx.dataset.label + ": " + inr(ctx.parsed.y);
               }
@@ -824,11 +890,19 @@
           }
         },
         scales: {
+          x: {
+            grid: { color: "rgba(148, 163, 184, 0.12)" },
+            ticks: { color: "#64748b", maxTicksLimit: 12, font: { size: 11, weight: "600" } }
+          },
           y: {
+            grid: { color: "rgba(148, 163, 184, 0.15)" },
             ticks: {
+              color: "#64748b",
+              font: { size: 11 },
               callback: function (v) {
                 if (v >= 1e7) return "₹" + (v / 1e7).toFixed(1) + "Cr";
                 if (v >= 1e5) return "₹" + (v / 1e5).toFixed(1) + "L";
+                if (v >= 1e3) return "₹" + (v / 1e3).toFixed(0) + "k";
                 return "₹" + v;
               }
             }
@@ -840,15 +914,29 @@
   }
 
   function showTable(seriesNominal, inflation, years) {
-    var html = "<div class=\"table-wrap table-scroll\"><table class=\"compare-table\"><thead><tr><th>Year</th><th>Nominal corpus</th><th>Inflation-adjusted</th></tr></thead><tbody>";
+    var html = "";
     var tableData = [];
     for (var y = 1; y <= years; y++) {
       var fv = seriesNominal[y - 1];
       var fvReal = fv / Math.pow(1 + inflation / 100, y);
-      html += "<tr><td>" + y + "</td><td>" + inr(fv) + "</td><td>" + inr(fvReal) + "</td></tr>";
+      var isLast = y === years;
+      html +=
+        '<article class="goal-year-card' +
+        (isLast ? " is-final" : "") +
+        '" role="listitem">' +
+        '<span class="goal-year-badge" aria-hidden="true">Y' +
+        y +
+        "</span>" +
+        '<div class="goal-year-body">' +
+        '<div class="goal-year-row"><span class="goal-year-label">Nominal</span><strong>' +
+        inr(fv) +
+        "</strong></div>" +
+        '<div class="goal-year-row"><span class="goal-year-label">After inflation</span><strong class="goal-year-real">' +
+        inr(fvReal) +
+        "</strong></div>" +
+        "</div></article>";
       tableData.push({ year: y, FV: fv, FVReal: fvReal });
     }
-    html += "</tbody></table></div>";
     $("projection-table-container").innerHTML = html;
     window.projectionTableData = tableData;
     $("download-csv-btn").hidden = false;
@@ -1108,7 +1196,7 @@
       inflation,
       plan.mode === "project" ? stepUp : 0
     );
-    plotChart(plan.seriesNominal, plan.seriesReal, years);
+    plotChart(plan.seriesNominal, plan.seriesReal, years, plan.totalInvested);
     showTable(plan.seriesNominal, inflation, years);
     $("assumptions-section").hidden = false;
 
