@@ -173,9 +173,9 @@
   }
 
   /* ---------- Site explore (Learn + Calculators hub) ----------
-     Floating shortcuts on every page except the home page. Injected
-     once so we do not hand-edit 25+ HTML files. Docks bottom-right
-     above back-to-top; product Quick Access stays bottom-left. */
+     Floating shortcuts on every page except home. Top-left under the
+     header so the empty left margin is used; "On this page" stays right.
+     Close lives in the panel header (always works). Preference stored. */
   function currentPageFile() {
     var path = window.location.pathname || "";
     var file = path.split("/").pop() || "index.html";
@@ -188,6 +188,7 @@
     if (file === "index.html" || file === "") return;
     if (document.getElementById("site-explore")) return;
 
+    var STORAGE_KEY = "ii-explore-open";
     var links = [
       {
         href: "learn.html",
@@ -243,18 +244,27 @@
     var root = document.createElement("div");
     root.id = "site-explore";
     root.className = "site-explore";
-    root.setAttribute("data-collapsed", "true");
 
     var panel = document.createElement("nav");
     panel.className = "site-explore-panel";
     panel.id = "site-explore-panel";
     panel.setAttribute("aria-label", "Site shortcuts");
-    panel.hidden = true;
+
+    var head = document.createElement("div");
+    head.className = "site-explore-head";
 
     var title = document.createElement("p");
     title.className = "site-explore-title";
     title.textContent = "Explore";
-    panel.appendChild(title);
+    head.appendChild(title);
+
+    var closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "site-explore-close";
+    closeBtn.setAttribute("aria-label", "Close explore panel");
+    closeBtn.innerHTML = '<span aria-hidden="true">×</span>';
+    head.appendChild(closeBtn);
+    panel.appendChild(head);
 
     for (var i = 0; i < links.length; i++) {
       var item = links[i];
@@ -277,70 +287,71 @@
       panel.appendChild(a);
     }
 
-    var toggle = document.createElement("button");
-    toggle.type = "button";
-    toggle.className = "site-explore-toggle";
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-controls", "site-explore-panel");
-    toggle.setAttribute("aria-label", "Open explore shortcuts");
-    toggle.innerHTML =
-      '<span class="site-explore-toggle-icon" aria-hidden="true">✦</span>' +
-      '<span class="site-explore-toggle-label">Explore</span>';
+    var openBtn = document.createElement("button");
+    openBtn.type = "button";
+    openBtn.className = "site-explore-open";
+    openBtn.setAttribute("aria-expanded", "false");
+    openBtn.setAttribute("aria-controls", "site-explore-panel");
+    openBtn.setAttribute("aria-label", "Open explore shortcuts");
+    openBtn.innerHTML =
+      '<span class="site-explore-open-icon" aria-hidden="true">✦</span>' +
+      '<span class="site-explore-open-label">Explore</span>';
+
+    function isOpen() {
+      return root.getAttribute("data-open") === "true";
+    }
 
     function setOpen(open) {
-      root.setAttribute("data-collapsed", open ? "false" : "true");
-      panel.hidden = !open;
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute(
-        "aria-label",
-        open ? "Close explore shortcuts" : "Open explore shortcuts"
-      );
+      open = !!open;
+      root.setAttribute("data-open", open ? "true" : "false");
       if (open) {
-        toggle.innerHTML =
-          '<span class="site-explore-toggle-icon" aria-hidden="true">×</span>' +
-          '<span class="site-explore-toggle-label">Close</span>';
+        panel.removeAttribute("hidden");
+        openBtn.hidden = true;
+        openBtn.setAttribute("aria-expanded", "true");
       } else {
-        toggle.innerHTML =
-          '<span class="site-explore-toggle-icon" aria-hidden="true">✦</span>' +
-          '<span class="site-explore-toggle-label">Explore</span>';
+        panel.setAttribute("hidden", "");
+        openBtn.hidden = false;
+        openBtn.setAttribute("aria-expanded", "false");
       }
+      try {
+        sessionStorage.setItem(STORAGE_KEY, open ? "1" : "0");
+      } catch (e) {}
     }
 
-    toggle.addEventListener("click", function () {
-      setOpen(panel.hidden);
+    closeBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(false);
+      openBtn.focus();
     });
-
-    // Desktop wide screens: keep expanded for discoverability
-    function syncLayout() {
-      var wide = window.matchMedia && window.matchMedia("(min-width: 1100px)").matches;
-      if (wide) {
-        setOpen(true);
-        root.classList.add("is-always-open");
-      } else {
-        root.classList.remove("is-always-open");
-        // leave current open state; default closed on first load for small screens
-      }
-    }
+    openBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(true);
+      closeBtn.focus();
+    });
 
     root.appendChild(panel);
-    root.appendChild(toggle);
+    root.appendChild(openBtn);
     document.body.appendChild(root);
 
-    syncLayout();
-    if (window.matchMedia) {
-      var mq = window.matchMedia("(min-width: 1100px)");
-      if (mq.addEventListener) mq.addEventListener("change", syncLayout);
-      else if (mq.addListener) mq.addListener(syncLayout);
+    // Prefer saved preference; otherwise open on wide desktops, closed on small screens
+    var saved = null;
+    try {
+      saved = sessionStorage.getItem(STORAGE_KEY);
+    } catch (e) {}
+    if (saved === "0") setOpen(false);
+    else if (saved === "1") setOpen(true);
+    else {
+      var wide =
+        window.matchMedia && window.matchMedia("(min-width: 900px)").matches;
+      setOpen(wide);
     }
 
-    // Close when clicking outside (mobile/tablet collapsed mode)
-    document.addEventListener("click", function (e) {
-      if (root.classList.contains("is-always-open")) return;
-      if (!panel.hidden && !root.contains(e.target)) setOpen(false);
-    });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !panel.hidden && !root.classList.contains("is-always-open")) {
+      if (e.key === "Escape" && isOpen()) {
         setOpen(false);
+        openBtn.focus();
       }
     });
   }

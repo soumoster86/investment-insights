@@ -606,34 +606,33 @@ form textarea:focus,
 
 /* ============================================================
    Site Explore — floating Learn / Calculators / Goal shortcuts
-   Injected by nav.js on every page except index. Bottom-right,
-   stacked above #back-to-top so left-side product Quick Access
-   menus are undisturbed.
+   Injected by nav.js on every page except index.
+   Top-left under the header (uses empty left margin).
+   "On this page" TOC stays top-right.
    ============================================================ */
 .site-explore {
   position: fixed;
-  right: 20px;
-  bottom: 22px;
+  left: 20px;
+  right: auto;
+  top: calc(var(--header-h, 64px) + 16px);
+  bottom: auto;
   z-index: 1490;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 8px;
-  max-width: min(260px, calc(100vw - 28px));
+  width: min(240px, calc(100vw - 40px));
+  max-width: min(240px, calc(100vw - 40px));
   font-family: var(--font);
-  pointer-events: none; /* only children receive clicks */
+  pointer-events: none;
 }
 .site-explore > * {
   pointer-events: auto;
 }
-/* Lift above back-to-top when that button is present and shown */
-body:has(#back-to-top) .site-explore {
-  bottom: 78px;
-}
 .site-explore-panel {
   width: 100%;
-  min-width: 200px;
-  padding: 10px 10px 8px;
+  min-width: 0;
+  padding: 0 10px 10px;
   border-radius: 16px;
   border: 1px solid rgba(180, 200, 230, 0.55);
   background:
@@ -646,21 +645,59 @@ body:has(#back-to-top) .site-explore {
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
   overflow: hidden;
 }
+.site-explore-panel[hidden] {
+  display: none !important;
+}
 .site-explore-panel::before {
   content: "";
   display: block;
   height: 3px;
-  margin: -10px -10px 10px;
+  margin: 0 -10px 0;
   background: linear-gradient(90deg, #0a4d8c 0%, #2b7de9 55%, #6ec8ff 100%);
   border-radius: 16px 16px 0 0;
 }
+.site-explore-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 2px 8px;
+}
 .site-explore-title {
-  margin: 0 4px 8px;
+  margin: 0;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #5b7aa5;
+}
+.site-explore-close {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #d5e2f5;
+  border-radius: 8px;
+  background: #f4f8ff;
+  color: #0a4d8c;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.site-explore-close:hover,
+.site-explore-close:focus-visible {
+  background: #e8f1fc;
+  border-color: #8abaff;
+  color: #063566;
+  outline: none;
+}
+.site-explore-close:focus-visible {
+  box-shadow: 0 0 0 3px rgba(43, 125, 233, 0.25);
 }
 .site-explore-link {
   display: flex;
@@ -680,7 +717,7 @@ body:has(#back-to-top) .site-explore {
   background: #eef5ff;
   border-color: #c5d8f0;
   outline: none;
-  transform: translateX(-2px);
+  transform: translateX(2px);
 }
 .site-explore-link.is-active {
   background: linear-gradient(180deg, #e8f1fc 0%, #dfeaf8 100%);
@@ -716,7 +753,8 @@ body:has(#back-to-top) .site-explore {
   color: #6b7c93;
   line-height: 1.2;
 }
-.site-explore-toggle {
+/* Compact reopen pill (shown only when panel is closed) */
+.site-explore-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -733,24 +771,20 @@ body:has(#back-to-top) .site-explore {
   box-shadow: 0 8px 24px rgba(10, 50, 110, 0.28);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.site-explore-toggle:hover {
+.site-explore-open[hidden] {
+  display: none !important;
+}
+.site-explore-open:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(10, 50, 110, 0.34);
 }
-.site-explore-toggle:focus-visible {
+.site-explore-open:focus-visible {
   outline: 2px solid #6ec8ff;
   outline-offset: 3px;
 }
-.site-explore-toggle-icon {
+.site-explore-open-icon {
   font-size: 1em;
   line-height: 1;
-}
-/* Wide desktop: panel always open; hide the toggle chrome */
-.site-explore.is-always-open .site-explore-toggle {
-  display: none;
-}
-.site-explore.is-always-open .site-explore-panel {
-  display: block !important;
 }
 
 /* Dark mode */
@@ -760,6 +794,17 @@ body.dark-mode .site-explore-panel {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35) !important;
 }
 body.dark-mode .site-explore-title { color: #a8bdd8 !important; }
+body.dark-mode .site-explore-close {
+  background: #243247 !important;
+  border-color: #3d4d66 !important;
+  color: #d6e8ff !important;
+}
+body.dark-mode .site-explore-close:hover,
+body.dark-mode .site-explore-close:focus-visible {
+  background: #2c3b52 !important;
+  border-color: #5b8fd4 !important;
+  color: #fff !important;
+}
 body.dark-mode .site-explore-link {
   color: #e8eef8 !important;
 }
@@ -778,27 +823,31 @@ body.dark-mode .site-explore-icon {
 }
 body.dark-mode .site-explore-label { color: #d6e8ff !important; }
 body.dark-mode .site-explore-hint { color: #a8b6c9 !important; }
-body.dark-mode .site-explore-toggle {
+body.dark-mode .site-explore-open {
   background: linear-gradient(180deg, #3b82f6, #1d4ed8) !important;
 }
 
+@media (max-width: 900px) {
+  .site-explore {
+    left: 12px;
+    top: calc(var(--header-h, 64px) + 10px);
+    width: min(220px, calc(100vw - 24px));
+  }
+}
 @media (max-width: 640px) {
   .site-explore {
-    right: 12px;
+    left: 10px;
+    top: auto;
     bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    /* Keep clear of back-to-top on the right */
+    width: auto;
+    max-width: min(240px, calc(100vw - 80px));
   }
-  body:has(#back-to-top) .site-explore {
-    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
-  }
-  .site-explore-toggle {
+  .site-explore-open {
     padding: 10px 14px;
     font-size: 0.85em;
   }
-  .site-explore-panel {
-    min-width: 180px;
-  }
 }
-/* When product Quick Access is also on-screen bottom-left, no collision — Explore is right */
 
 /* ============================================================
    Floating in-page navigation boxes
