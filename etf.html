@@ -270,15 +270,44 @@
       </div>
     </section>
 
-    <!-- Interactive Chart -->
-    <section id="sip-returns-etf" style="margin-top:36px;">
-  <h3>ETF SIP Returns (2019–2024): Growth & XIRR</h3>
-  <canvas id="etfChart" style="max-width:100%;min-height:280px;"></canvas>
-  <div id="etf-xirr-summary" style="margin-top:10px;font-size:1.09em;font-weight:500;color:#004080;"></div>
-  <div style="font-size:0.97em;color:#888;margin-top:4px;">
-    <i>SIP of ₹10,000 per month in each ETF at each year’s average price. Past returns do not guarantee future performance.</i>
-  </div>
-</section>
+    <!-- Illustrative SIP growth chart -->
+    <section id="sip-returns-etf" class="etf-sip-section tool-section">
+      <h2>ETF SIP returns (2019–2026): growth &amp; XIRR</h2>
+      <p class="tool-intro">
+        Educational simulation of a <strong>₹10,000 / month</strong> SIP into two popular India-listed ETFs using
+        approximate yearly average prices. Not live NAVs, not advice, and not a prediction.
+      </p>
+      <p class="sample-freshness">
+        <span class="sample-freshness-label">Illustrative</span>
+        Prices are simplified yearly averages · last reviewed
+        <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+      </p>
+
+      <div class="etf-sip-metrics" id="etf-xirr-summary" aria-live="polite">
+        <!-- Filled by script -->
+      </div>
+
+      <div class="etf-sip-chart-card">
+        <div class="etf-sip-chart-head">
+          <h3 class="etf-sip-chart-title">Corpus over time</h3>
+          <p class="etf-sip-chart-sub">Year-end style snapshot of invested units × that year’s average price</p>
+        </div>
+        <div class="etf-sip-chart-wrap">
+          <canvas id="etfChart" aria-label="ETF SIP corpus growth chart"></canvas>
+        </div>
+      </div>
+
+      <div class="etf-sip-assumptions">
+        <strong>How this is built</strong>
+        <ul>
+          <li>Monthly SIP ₹10,000 from Jan 2019 through Dec 2025 (7 years · 84 instalments)</li>
+          <li>Units bought each year at that year’s approximate average price (simplified)</li>
+          <li>Final corpus valued at 2026 average price; XIRR includes all SIP cash flows</li>
+          <li>Ignores brokerage, STT, tracking error, expense drag beyond price path, and taxes</li>
+        </ul>
+        <p class="etf-sip-disclaimer">Past performance does not guarantee future results. Educational only.</p>
+      </div>
+    </section>
 
     <section id="sip-faq-etf" class="faq-box" style="margin-top:26px;">
   <h3>ETF SIP Returns Calculator – FAQs</h3>
