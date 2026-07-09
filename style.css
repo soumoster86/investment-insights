@@ -6980,7 +6980,7 @@ body.dark-mode .related-tools {
   .start-here-grid { grid-template-columns: 1fr; }
 }
 
-/* ---------- Term + quote of the day (home) ---------- */
+/* ---------- Term + quote + fact of the day (home) ---------- */
 /* Always visible — do not use .fade-in-section (stays opacity:0 until observed). */
 .daily-learn-pair {
   display: grid;
@@ -6989,8 +6989,12 @@ body.dark-mode .related-tools {
   margin: 0 0 28px;
   align-items: stretch;
 }
+.daily-learn-trio {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 #term-of-day.tod-section,
 #quote-of-day.tod-section,
+#fact-of-day.tod-section,
 .tod-section {
   display: block !important;
   opacity: 1 !important;
@@ -7005,7 +7009,8 @@ body.dark-mode .related-tools {
   height: 100%;
 }
 body.page-home #term-of-day.tod-section,
-body.page-home #quote-of-day.tod-section {
+body.page-home #quote-of-day.tod-section,
+body.page-home #fact-of-day.tod-section {
   background: transparent !important;
 }
 .tod-section:hover {
@@ -7206,8 +7211,9 @@ body.dark-mode .tod-why {
   color: #d5dee9 !important;
 }
 body.dark-mode .tod-why strong { color: #bfdbfe !important; }
+.tod-card .tod-actions { margin-top: auto; }
 @media (max-width: 560px) {
-  .tod-card { padding: 16px 14px 14px; }
+  .tod-card { padding: 16px 14px 14px; min-height: 0; }
   .tod-date { white-space: normal; }
 }
 
