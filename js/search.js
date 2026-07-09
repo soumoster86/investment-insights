@@ -161,6 +161,22 @@
       blurb: "Futures P&L and option expiry P&L with lot size."
     },
     {
+      url: "postoffice.html#po-calc",
+      title: "Post Office deposit calculator",
+      type: "Calculator",
+      keywords:
+        "post office savings schemes rd td mis scss nsc kvp posa india post small savings deposit calculator",
+      blurb: "RD, Time Deposit, MIS, NSC and KVP-style maturity sketches."
+    },
+    {
+      url: "postoffice.html",
+      title: "Post Office savings schemes",
+      type: "Guide",
+      keywords:
+        "post office savings schemes india post rd recurring deposit time deposit mis scss nsc kvp small savings",
+      blurb: "Map of India Post savings products and a simple calculator."
+    },
+    {
       url: "calculators.html",
       title: "All calculators",
       type: "Hub",

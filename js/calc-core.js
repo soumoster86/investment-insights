@@ -638,6 +638,81 @@
     };
   }
 
+  /**
+   * Post Office–style schemes (educational). Rates and rules are user inputs;
+   * not official India Post quotes. Tax treatment ignored.
+   * scheme: "rd" | "td" | "mis" | "nsc" | "kvp"
+   */
+  function postOffice(scheme, amount, annualRatePct, years, months) {
+    scheme = String(scheme || "rd").toLowerCase();
+    amount = Number(amount);
+    annualRatePct = Number(annualRatePct);
+    years = parseInt(years, 10) || 0;
+    months = parseInt(months, 10) || 0;
+    if (!(amount > 0) || isNaN(annualRatePct) || annualRatePct < 0) {
+      return { error: "Please enter a valid amount and interest rate." };
+    }
+    var totalMonths = years * 12 + months;
+    if (!(totalMonths > 0) && scheme !== "mis") {
+      return { error: "Please enter a valid tenure." };
+    }
+
+    if (scheme === "rd") {
+      if (!(totalMonths > 0)) return { error: "Please enter RD tenure in years or months." };
+      var rdRes = rd(amount, annualRatePct, totalMonths);
+      if (rdRes.error) return rdRes;
+      return {
+        scheme: "rd",
+        label: "Recurring Deposit",
+        maturity: rdRes.maturity,
+        invested: rdRes.invested,
+        interest: rdRes.interest,
+        months: totalMonths,
+        monthlyPayout: 0
+      };
+    }
+
+    if (scheme === "td" || scheme === "nsc" || scheme === "kvp") {
+      // Lump sum compounded yearly (educational; real products may use half-yearly)
+      if (!(years > 0) && totalMonths > 0) years = Math.max(1, Math.round(totalMonths / 12));
+      if (!(years > 0)) return { error: "Please enter tenure in years for this scheme." };
+      var r = annualRatePct / 100;
+      var maturity = amount * Math.pow(1 + r, years);
+      var label =
+        scheme === "td" ? "Time Deposit" : scheme === "nsc" ? "NSC-style" : "KVP-style";
+      return {
+        scheme: scheme,
+        label: label,
+        maturity: maturity,
+        invested: amount,
+        interest: maturity - amount,
+        years: years,
+        monthlyPayout: 0
+      };
+    }
+
+    if (scheme === "mis") {
+      // Monthly income: interest only each month; principal returned at end
+      if (!(years > 0) && totalMonths > 0) years = Math.max(1, Math.round(totalMonths / 12));
+      if (!(years > 0)) return { error: "Please enter MIS tenure in years." };
+      var monthlyRate = annualRatePct / 100 / 12;
+      var monthlyInterest = amount * monthlyRate;
+      var totalInterest = monthlyInterest * years * 12;
+      return {
+        scheme: "mis",
+        label: "Monthly Income Scheme",
+        maturity: amount,
+        invested: amount,
+        interest: totalInterest,
+        years: years,
+        monthlyPayout: monthlyInterest,
+        totalPayout: totalInterest + amount
+      };
+    }
+
+    return { error: "Unknown scheme type." };
+  }
+
   var IICalc = {
     round: round,
     sip: sip,
@@ -659,7 +734,8 @@
     stockPnL: stockPnL,
     homeBuy: homeBuy,
     optionExpiryPnL: optionExpiryPnL,
-    futuresPnL: futuresPnL
+    futuresPnL: futuresPnL,
+    postOffice: postOffice
   };
 
   if (typeof module !== "undefined" && module.exports) {

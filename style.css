@@ -8696,7 +8696,11 @@ section.illust-panel[hidden],
 #swp-visual[hidden],
 #swp-max-visual[hidden],
 #re-buy-visual[hidden],
-#fo-opt-visual[hidden] {
+#fo-opt-visual[hidden],
+#po-visual[hidden] {
+  display: none !important;
+}
+#po-result[hidden] {
   display: none !important;
 }
 .calc-result-panel[hidden],
