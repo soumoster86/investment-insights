@@ -4402,10 +4402,21 @@ body.dark-mode main a.learn-path-card {
 .goal-chart-section {
   margin-bottom: 8px;
 }
+/* 3 rows × 4 columns on desktop; responsive collapse below */
 .goal-template-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
+}
+@media (max-width: 960px) {
+  .goal-template-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 720px) {
+  .goal-template-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 button.goal-template-card,
 .goal-template-card {
@@ -5629,7 +5640,7 @@ main table,
 }
 @media (max-width: 560px) {
   .goal-template-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
   .goal-mode-tabs {
     flex-direction: column;

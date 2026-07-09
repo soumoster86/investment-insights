@@ -197,6 +197,16 @@
           <strong>Gold savings sleeve</strong>
           <span>Diversifier · moderate horizon</span>
         </button>
+        <button type="button" class="goal-template-card" data-template="renovation">
+          <span class="goal-template-icon" aria-hidden="true">🔧</span>
+          <strong>Home renovation</strong>
+          <span>Medium horizon · steady SIP</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="parents">
+          <span class="goal-template-icon" aria-hidden="true">👨‍👩‍👧</span>
+          <strong>Parents’ care fund</strong>
+          <span>Health buffer · careful mix</span>
+        </button>
       </div>
     </section>
 
@@ -608,6 +618,30 @@
       inflateTarget: true,
       routes: ["Gold", "Mutual Funds", "Fixed Deposits"],
       monthly: 5000,
+      stepUp: 5
+    },
+    renovation: {
+      name: "Home renovation",
+      mode: "target",
+      target: 1000000,
+      years: 5,
+      rate: 9,
+      inflation: 6,
+      inflateTarget: true,
+      routes: ["Mutual Funds", "Bonds", "Fixed Deposits"],
+      monthly: 14000,
+      stepUp: 5
+    },
+    parents: {
+      name: "Parents’ care fund",
+      mode: "target",
+      target: 1200000,
+      years: 6,
+      rate: 8.5,
+      inflation: 6,
+      inflateTarget: true,
+      routes: ["Mutual Funds", "Bonds", "Fixed Deposits", "Gold"],
+      monthly: 15000,
       stepUp: 5
     }
   };
