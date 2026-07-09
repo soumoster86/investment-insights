@@ -262,12 +262,17 @@
     closeBtn.type = "button";
     closeBtn.className = "site-explore-close";
     closeBtn.setAttribute("aria-label", "Close explore panel");
-    closeBtn.innerHTML = '<span aria-hidden="true">×</span>';
+    closeBtn.innerHTML =
+      '<svg class="site-explore-close-icon" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false">' +
+      '<path d="M3 3l8 8M11 3L3 11" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>' +
+      "</svg>";
     head.appendChild(closeBtn);
     panel.appendChild(head);
 
     for (var i = 0; i < links.length; i++) {
       var item = links[i];
+      // Don't link to the page the user is already on
+      if (item.href === file) continue;
       var a = document.createElement("a");
       a.className = "site-explore-link";
       a.href = item.href;
