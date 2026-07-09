@@ -5545,56 +5545,63 @@ body.dark-mode .contact-form-card {
   position: relative;
   margin-bottom: 24px;
 }
-.floating-input {
-  width: 100%;
-  padding: 16px 14px 4px;
-  background: var(--surface);
-  border: 1.5px solid var(--border-soft);
-  border-radius: 12px;
-  font-size: 1em;
-  color: var(--text);
+form .floating-input,
+form textarea.floating-input {
+  width: 100% !important;
+  padding: 22px 14px 8px !important;
+  background: var(--surface) !important;
+  border: 1.5px solid var(--border-soft) !important;
+  border-radius: 12px !important;
+  font-size: 1em !important;
+  color: var(--text) !important;
   font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  box-sizing: border-box !important;
 }
-body.dark-mode .floating-input {
-  background: #12161d;
-  border-color: #3a4252;
+body.dark-mode form .floating-input,
+body.dark-mode form textarea.floating-input {
+  background: #12161d !important;
+  border-color: #3a4252 !important;
+  color: #eef1f6 !important;
 }
-.floating-input:focus {
+form .floating-input:focus,
+form textarea.floating-input:focus {
   outline: none;
-  border-color: var(--brand-accent);
-  box-shadow: 0 0 0 4px var(--brand-glow);
-  background: var(--surface);
+  border-color: var(--brand-accent) !important;
+  box-shadow: 0 0 0 4px var(--brand-glow) !important;
+  background: var(--surface) !important;
 }
-.floating-label {
-  position: absolute;
-  top: 16px;
-  left: 14px;
-  font-size: 1em;
-  color: var(--text-muted);
+form .floating-label {
+  position: absolute !important;
+  top: 18px !important;
+  left: 14px !important;
+  margin: 0 !important;
+  font-size: 1em !important;
+  color: var(--text-muted) !important;
   pointer-events: none;
   transition: 0.2s var(--ease);
   transform-origin: left top;
 }
 /* When input is focused OR has value, float the label */
-.floating-input:focus ~ .floating-label,
-.floating-input:not(:placeholder-shown) ~ .floating-label {
-  transform: translateY(-10px) scale(0.75);
-  color: var(--brand-accent);
+form .floating-input:focus ~ .floating-label,
+form .floating-input:not(:placeholder-shown) ~ .floating-label {
+  transform: translateY(-12px) scale(0.75) !important;
+  color: var(--brand-accent) !important;
 }
-textarea.floating-input {
+form textarea.floating-input {
   resize: vertical;
-  min-height: 120px;
+  min-height: 120px !important;
 }
 
-.contact-submit-btn {
-  width: 100%;
-  padding: 14px;
-  font-size: 1.1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+#contact-submit.contact-submit-btn {
+  width: 100% !important;
+  padding: 14px !important;
+  font-size: 1.1em !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  box-sizing: border-box !important;
 }
 
 @media (max-width: 768px) {
