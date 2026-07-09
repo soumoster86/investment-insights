@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Goal Planner | Investment Insights</title>
 <!-- BEGIN SEO -->
-  <meta name="description" content="Plan to a target SIP or project corpus from monthly investing. Templates, inflation adjust, scenarios, and a home dashboard snapshot. Educational only." />
+  <meta name="description" content="Work out a SIP for a target amount, or project how a monthly SIP might grow. Templates, inflation, scenarios, and an optional home-page snapshot. For learning only." />
   <link rel="canonical" href="https://investment-insight.netlify.app/investmentgoal.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Investment Insights" />
   <meta property="og:title" content="Investment Goal Planner | Investment Insights" />
-  <meta property="og:description" content="Plan to a target SIP or project corpus from monthly investing. Templates, inflation adjust, scenarios, and a home dashboard snapshot. Educational only." />
+  <meta property="og:description" content="Work out a SIP for a target amount, or project how a monthly SIP might grow. Templates, inflation, scenarios, and an optional home-page snapshot. For learning only." />
   <meta property="og:url" content="https://investment-insight.netlify.app/investmentgoal.html" />
   <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Investment Goal Planner | Investment Insights" />
-  <meta name="twitter:description" content="Plan to a target SIP or project corpus from monthly investing. Templates, inflation adjust, scenarios, and a home dashboard snapshot. Educational only." />
+  <meta name="twitter:description" content="Work out a SIP for a target amount, or project how a monthly SIP might grow. Templates, inflation, scenarios, and an optional home-page snapshot. For learning only." />
 <!-- END SEO -->
   <link rel="stylesheet" href="style.css?v=20260709h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -28,22 +28,22 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Plan an investment goal with SIP projections",
-  "description": "Goal planner estimating future corpus with inflation adjustment for educational use.",
+  "description": "Estimate a SIP for a goal or project future corpus, with optional inflation adjustment. For learning only.",
   "step": [
     {
       "@type": "HowToStep",
       "name": "Choose a mode",
-      "text": "Plan to a target amount or project from a monthly SIP."
+      "text": "Either work out a SIP for a target amount, or project growth from a monthly SIP you already have in mind."
     },
     {
       "@type": "HowToStep",
       "name": "Set return, inflation, duration",
-      "text": "Enter expected return, inflation assumption, and time horizon."
+      "text": "Enter an assumed yearly return, an inflation rate, and how many years you have."
     },
     {
       "@type": "HowToStep",
       "name": "Review scenarios and save",
-      "text": "Compare conservative/base/optimistic outcomes; snapshot can appear on the home dashboard."
+      "text": "Compare lower, base, and higher return cases. You can save a snapshot for the home page if you want."
     }
   ]
 }
@@ -138,75 +138,75 @@
       <p class="eyebrow">Calculators</p>
       <h1>Investment goal planner</h1>
       <p class="article-lead">
-        Answer the two questions that matter: <strong>what SIP do I need for a target?</strong>
-        or <strong>what corpus might a SIP grow into?</strong>
-        Educational estimates only — not personalised advice.
+        Two modes: <strong>how much SIP for a target?</strong>
+        or <strong>what might this monthly SIP grow into?</strong>
+        The answers are rough estimates for learning, not personal advice.
       </p>
     </section>
 
     <section id="templates" class="goal-templates-section">
       <h2>Quick start templates</h2>
-      <p class="tool-intro">One click fills sensible defaults. Edit anything after applying.</p>
+      <p class="tool-intro">Click a card to load sample defaults. Change any field after that.</p>
       <div class="goal-template-grid" role="group" aria-label="Goal templates">
         <button type="button" class="goal-template-card" data-template="emergency">
           <span class="goal-template-icon" aria-hidden="true">🛡️</span>
           <strong>Emergency fund</strong>
-          <span>6–12 months buffer · short horizon</span>
+          <span>6–12 months of expenses · short timeline</span>
         </button>
         <button type="button" class="goal-template-card" data-template="house">
           <span class="goal-template-icon" aria-hidden="true">🏠</span>
           <strong>House down payment</strong>
-          <span>Medium horizon · balanced return</span>
+          <span>A few years out · mixed return assumption</span>
         </button>
         <button type="button" class="goal-template-card" data-template="education">
           <span class="goal-template-icon" aria-hidden="true">🎓</span>
           <strong>Child education</strong>
-          <span>Long horizon · inflation matters</span>
+          <span>Long timeline · inflation matters a lot</span>
         </button>
         <button type="button" class="goal-template-card" data-template="retirement">
           <span class="goal-template-icon" aria-hidden="true">🌅</span>
           <strong>Retirement corpus</strong>
-          <span>Long horizon · growth-oriented</span>
+          <span>Many years · higher growth assumption</span>
         </button>
         <button type="button" class="goal-template-card" data-template="wedding">
           <span class="goal-template-icon" aria-hidden="true">💍</span>
           <strong>Wedding fund</strong>
-          <span>Medium horizon · mixed routes</span>
+          <span>Mid-length goal · mixed products</span>
         </button>
         <button type="button" class="goal-template-card" data-template="car">
           <span class="goal-template-icon" aria-hidden="true">🚗</span>
           <strong>Car purchase</strong>
-          <span>3–5 years · lower volatility</span>
+          <span>3–5 years · steadier return assumption</span>
         </button>
         <button type="button" class="goal-template-card" data-template="vacation">
           <span class="goal-template-icon" aria-hidden="true">✈️</span>
           <strong>Dream vacation</strong>
-          <span>Short goal · simple SIP</span>
+          <span>Short goal · simple monthly SIP</span>
         </button>
         <button type="button" class="goal-template-card" data-template="wealth">
           <span class="goal-template-icon" aria-hidden="true">📈</span>
           <strong>Wealth building SIP</strong>
-          <span>Project mode · step-up habit</span>
+          <span>Project mode · yearly SIP step-up</span>
         </button>
         <button type="button" class="goal-template-card" data-template="beginner">
           <span class="goal-template-icon" aria-hidden="true">🌱</span>
           <strong>First SIP (beginner)</strong>
-          <span>Small start · project corpus</span>
+          <span>Small start · see how a corpus can grow</span>
         </button>
         <button type="button" class="goal-template-card" data-template="gold">
           <span class="goal-template-icon" aria-hidden="true">🪙</span>
-          <strong>Gold savings sleeve</strong>
-          <span>Diversifier · moderate horizon</span>
+          <strong>Gold savings slice</strong>
+          <span>Side holding · medium timeline</span>
         </button>
         <button type="button" class="goal-template-card" data-template="renovation">
           <span class="goal-template-icon" aria-hidden="true">🔧</span>
           <strong>Home renovation</strong>
-          <span>Medium horizon · steady SIP</span>
+          <span>Mid-length goal · steady SIP</span>
         </button>
         <button type="button" class="goal-template-card" data-template="parents">
           <span class="goal-template-icon" aria-hidden="true">👨‍👩‍👧</span>
           <strong>Parents’ care fund</strong>
-          <span>Health buffer · careful mix</span>
+          <span>Health buffer · cautious mix</span>
         </button>
       </div>
     </section>
@@ -225,7 +225,7 @@
         <div class="tool-fields">
           <label class="goal-field-full">Goal name
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Optional label shown in results and on the home dashboard snapshot.</span>
+              <span class="tooltip-text">Optional name shown in the results and on a home-page snapshot if you save one.</span>
             </span>
             <input type="text" id="goal-name" name="goalName" placeholder="e.g. House down payment 2035" maxlength="80" />
           </label>
@@ -236,7 +236,7 @@
           <div class="tool-fields">
             <label>Target amount today (₹)
               <span class="tooltip" tabindex="0">ⓘ
-                <span class="tooltip-text">What the goal would cost in today’s rupees (or the nominal amount you want if you turn off inflation adjust).</span>
+                <span class="tooltip-text">What the goal would cost in today’s rupees. If you leave inflation on, the planner grows this number into future rupees.</span>
               </span>
               <input type="number" id="target-amount" min="1" step="any" placeholder="e.g. 50,00,000" />
             </label>
@@ -244,7 +244,7 @@
               <input type="checkbox" id="inflate-target" checked />
               Grow target with inflation
               <span class="tooltip" tabindex="0">ⓘ
-                <span class="tooltip-text">If checked, the planner multiplies your target by inflation so the SIP aims at future purchasing power.</span>
+                <span class="tooltip-text">When checked, the target is raised with inflation so the SIP aims at similar buying power later.</span>
               </span>
             </label>
           </div>
@@ -255,13 +255,13 @@
           <div class="tool-fields">
             <label>Monthly SIP (₹)
               <span class="tooltip" tabindex="0">ⓘ
-                <span class="tooltip-text">Total amount you invest every month across all routes.</span>
+                <span class="tooltip-text">How much you put in every month in total.</span>
               </span>
               <input type="number" id="monthly-sip" min="1" step="any" placeholder="e.g. 15,000" />
             </label>
             <label>Annual SIP step-up (%)
               <span class="tooltip" tabindex="0">ⓘ
-                <span class="tooltip-text">Optional yearly increase in SIP (e.g. 10). Use 0 for a flat SIP. Target mode always uses flat SIP.</span>
+                <span class="tooltip-text">Optional yearly rise in the SIP (for example 10). Use 0 for a flat amount. Target mode always uses a flat SIP.</span>
               </span>
               <input type="number" id="step-up" min="0" step="any" placeholder="e.g. 0 or 10" />
             </label>
@@ -269,7 +269,7 @@
           <div class="goal-suggest-row">
             <button type="button" class="btn secondary" id="suggest-portfolio-btn">💡 Suggest portfolio split</button>
             <p id="suggest-portfolio-msg" class="goal-hint" hidden>
-              Portfolio model applied. You can open Suggest again anytime to change the mix.
+              Sample mix applied. Open Suggest again anytime to change it.
             </p>
           </div>
         </div>
@@ -277,19 +277,19 @@
         <div class="tool-fields">
           <label>Years
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Investment horizon until you need the money.</span>
+              <span class="tooltip-text">How many years until you need the money.</span>
             </span>
             <input type="number" id="duration" min="1" max="50" step="1" required placeholder="e.g. 15" />
           </label>
           <label>Expected return (% p.a.)
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Assumed annual return for the plan. Markets vary — not a guarantee. Typical long-term equity-heavy mixes are often discussed around 10–12% educationally.</span>
+              <span class="tooltip-text">Assumed yearly return for the whole plan. Markets go up and down; this is not a guarantee. Long-term equity-heavy examples are often discussed around 10–12% for teaching only.</span>
             </span>
             <input type="number" id="rate" min="0" step="any" required placeholder="e.g. 11" />
           </label>
           <label>Inflation (% p.a.)
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Long-term India CPI planning often uses ~5–6%. Affects real corpus and optional target growth.</span>
+              <span class="tooltip-text">Many long-term plans in India use about 5–6%. This feeds the real-corpus figure and optional target growth.</span>
             </span>
             <input type="number" id="inflation" min="0" step="any" required placeholder="e.g. 6" />
           </label>
@@ -297,7 +297,7 @@
 
         <fieldset class="goal-routes">
           <legend>Investment mix <span class="goal-optional">(labels only · optional)</span></legend>
-          <p class="goal-hint">Tag routes for your plan. Math uses one blended return above — not separate returns per route.</p>
+          <p class="goal-hint">Tag products if you like. The math still uses the single blended return above, not a separate rate per tag.</p>
           <div class="route-chips" id="route-chips">
             <label class="route-chip"><input type="checkbox" name="route" value="Mutual Funds" checked /> Mutual funds</label>
             <label class="route-chip"><input type="checkbox" name="route" value="Stocks" /> Stocks</label>
@@ -320,8 +320,8 @@
       <div class="goal-modal-dialog portfolio-modal-dialog" role="dialog" aria-labelledby="portfolio-modal-title" aria-describedby="portfolio-modal-desc" aria-modal="true">
         <header class="goal-modal-head">
           <div>
-            <h3 id="portfolio-modal-title">Portfolio model</h3>
-            <p id="portfolio-modal-desc" class="goal-hint">Educational split for route labels only — not product picks to buy. Plan math still uses one blended return.</p>
+            <h3 id="portfolio-modal-title">Sample portfolio mix</h3>
+            <p id="portfolio-modal-desc" class="goal-hint">A teaching split for the route labels only. It is not a buy list. The plan still uses one blended return.</p>
           </div>
           <button type="button" class="goal-modal-x" id="close-portfolio-x" aria-label="Close portfolio model">×</button>
         </header>
@@ -331,17 +331,17 @@
             <button type="button" class="portfolio-risk-card" data-risk="conservative" aria-checked="false" role="radio">
               <span class="portfolio-risk-emoji" aria-hidden="true">🛡️</span>
               <span class="portfolio-risk-name">Conservative</span>
-              <span class="portfolio-risk-tag">Safer mix</span>
+              <span class="portfolio-risk-tag">More debt-like</span>
             </button>
             <button type="button" class="portfolio-risk-card is-selected" data-risk="moderate" aria-checked="true" role="radio">
               <span class="portfolio-risk-emoji" aria-hidden="true">⚖️</span>
               <span class="portfolio-risk-name">Moderate</span>
-              <span class="portfolio-risk-tag">Balanced</span>
+              <span class="portfolio-risk-tag">In the middle</span>
             </button>
             <button type="button" class="portfolio-risk-card" data-risk="aggressive" aria-checked="false" role="radio">
               <span class="portfolio-risk-emoji" aria-hidden="true">🚀</span>
               <span class="portfolio-risk-name">Aggressive</span>
-              <span class="portfolio-risk-tag">Growth tilt</span>
+              <span class="portfolio-risk-tag">More equity</span>
             </button>
           </div>
           <!-- Keep select for fallback / JS sync -->
@@ -361,7 +361,7 @@
             <input type="number" id="modal-total-amt" min="100" step="100" value="20000" inputmode="decimal" />
             <label class="portfolio-rate-opt">
               <input type="checkbox" id="apply-suggested-rate" checked />
-              <span>Also set expected return to this model’s educational rate (<strong id="suggested-rate-label">11%</strong>)</span>
+              <span>Also set expected return to this sample’s teaching rate (<strong id="suggested-rate-label">11%</strong>)</span>
             </label>
           </div>
         </div>
@@ -374,15 +374,15 @@
     </div>
 
     <section id="results" class="goal-results-section" hidden>
-      <h2>Your plan snapshot</h2>
+      <h2>Your plan results</h2>
       <div id="goal-result" class="calc-result-panel"></div>
       <div id="goal-result-actions" class="goal-actions calc-grid"></div>
-      <p id="goal-saved-note" class="goal-hint" hidden>Saved to your browser — appears under “Your goal” on the home page.</p>
+      <p id="goal-saved-note" class="goal-hint" hidden>Saved in this browser. It can show under “Your goal” on the home page.</p>
     </section>
 
     <section id="scenarios" class="goal-scenarios-section" hidden>
       <h2>What if returns differ?</h2>
-      <p class="tool-intro">Same inputs, three assumed annual returns (base ±2 percentage points). Not a forecast.</p>
+      <p class="tool-intro">Same inputs, three assumed yearly returns (your rate, plus and minus 2 points). Not a forecast.</p>
       <div id="scenario-grid" class="scenario-grid"></div>
     </section>
 
@@ -402,11 +402,11 @@
     <section class="assumptions-box" id="assumptions-section" hidden>
       <h3>⚠️ Assumptions &amp; limitations</h3>
       <ul class="point-list">
-    <li><span class="tip-emoji" aria-hidden="true">🌱</span><span class="tip-text">Flat SIP unless you set a step-up in “Project from SIP” mode.</span></li>
-    <li><span class="tip-emoji" aria-hidden="true">💡</span><span class="tip-text">One blended return for the whole plan — not separate modelling per route.</span></li>
-    <li><span class="tip-emoji" aria-hidden="true">⚠️</span><span class="tip-text">Does not include taxes, expense ratios, exit loads, or sequence-of-returns risk.</span></li>
-    <li><span class="tip-emoji" aria-hidden="true">💱</span><span class="tip-text">Scenarios only shift the return assumption; inflation is held constant.</span></li>
-    <li><span class="tip-emoji" aria-hidden="true">⭐</span><span class="tip-text">Educational only — not SEBI-registered advice.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">🌱</span><span class="tip-text">SIP stays flat unless you set a step-up in “Project from SIP” mode.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">💡</span><span class="tip-text">One blended return for the whole plan, not a different rate for each product tag.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">⚠️</span><span class="tip-text">Taxes, fund fees, exit loads, and bad return sequences are left out.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">💱</span><span class="tip-text">Scenarios only change the return rate; inflation stays the same.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">⭐</span><span class="tip-text">For learning only. We are not a SEBI-registered advisor.</span></li>
   </ul>
     </section>
 
@@ -414,35 +414,35 @@
       <h3>Goal planner FAQ</h3>
       <details>
         <summary>Target mode vs project mode?</summary>
-        <div>Target mode answers “how much SIP for a goal.” Project mode answers “what might this SIP become.”</div>
+        <div>Target mode answers “how much SIP for this goal.” Project mode answers “what might this SIP grow into.”</div>
       </details>
       <details>
         <summary>Why grow the target with inflation?</summary>
-        <div>₹50 lakh in 15 years buys less than ₹50 lakh today. Inflating the target aims at similar purchasing power.</div>
+        <div>₹50 lakh in 15 years usually buys less than ₹50 lakh today. Raising the target with inflation aims at similar buying power later.</div>
       </details>
       <details>
         <summary>What is the inflation-adjusted corpus?</summary>
-        <div>Nominal corpus divided by cumulative inflation — a rough view of real purchasing power.</div>
+        <div>The nominal end amount divided down by cumulative inflation. It is a rough view of real buying power.</div>
       </details>
       <details>
         <summary>Why only one return rate?</summary>
-        <div>Keeps the model transparent. Use scenarios to stress-test higher or lower outcomes.</div>
+        <div>It keeps the model easy to follow. Use the three scenarios if you want to see higher or lower outcomes.</div>
       </details>
     </section>
 
     <section class="tips-box">
       <h3>Practical tips</h3>
       <ul class="tips-list">
-        <li><span class="tip-emoji" aria-hidden="true">🛟</span><span class="tip-text">Protect with an <a href="insurance-emergency.html">emergency fund</a> before stretching SIPs.</span></li>
-        <li><span class="tip-emoji" aria-hidden="true">🎯</span><span class="tip-text">Match equity share to your horizon — see <a href="risk-allocation.html">risk &amp; allocation</a>.</span></li>
-        <li><span class="tip-emoji" aria-hidden="true">📶</span><span class="tip-text">Raise SIPs when income grows (step-up in project mode).</span></li>
-        <li><span class="tip-emoji" aria-hidden="true">🏠</span><span class="tip-text">Pair long goals with simple cores like diversified funds — <a href="index-vs-active.html">index vs active</a>.</span></li>
+        <li><span class="tip-emoji" aria-hidden="true">🛟</span><span class="tip-text">Build an <a href="insurance-emergency.html">emergency fund</a> before you push SIPs hard.</span></li>
+        <li><span class="tip-emoji" aria-hidden="true">🎯</span><span class="tip-text">Match how much equity you hold to your timeline. See <a href="risk-allocation.html">risk &amp; allocation</a>.</span></li>
+        <li><span class="tip-emoji" aria-hidden="true">📶</span><span class="tip-text">Raise SIPs when income rises (step-up in project mode).</span></li>
+        <li><span class="tip-emoji" aria-hidden="true">🏠</span><span class="tip-text">For long goals, many people keep a simple diversified core. Read <a href="index-vs-active.html">index vs active</a>.</span></li>
       </ul>
     </section>
 
     <div class="callout callout-disclaimer">
-      <strong>Disclaimer:</strong> Educational estimates only. Not tax, investment, or financial advice.
-      Verify assumptions independently. Past returns do not predict future results.
+      <strong>Disclaimer:</strong> These figures are educational estimates only. They are not tax, investment, or financial advice.
+      Check assumptions yourself. Past returns do not predict future results.
     </div>
   </main>
 
@@ -621,7 +621,7 @@
       stepUp: 10
     },
     gold: {
-      name: "Gold savings sleeve",
+      name: "Gold savings slice",
       mode: "target",
       target: 500000,
       years: 7,
@@ -670,19 +670,19 @@
   var modelPortfolios = {
     conservative: {
       label: "Conservative (safer)",
-      blurb: "Emphasises debt-like sleeves (bonds, FDs) with a small equity sleeve. Suited to nearer goals or lower risk tolerance — still not risk-free.",
+      blurb: "Mostly bonds and FDs, with a small equity share. Closer goals or lower risk comfort. Still not risk-free.",
       suggestedRate: 8,
       allocation: { "Mutual Funds": 25, "Bonds": 35, "Fixed Deposits": 35, "Stocks": 5 }
     },
     moderate: {
       label: "Moderate (balanced)",
-      blurb: "Growth via mutual funds and stocks, with bonds and FDs for ballast. A common long-horizon starting map for education only.",
+      blurb: "Growth mainly from mutual funds and stocks, with bonds and FDs as a buffer. A common long-timeline teaching example only.",
       suggestedRate: 11,
       allocation: { "Mutual Funds": 50, "Stocks": 30, "Bonds": 10, "Fixed Deposits": 10 }
     },
     aggressive: {
       label: "Aggressive (growth)",
-      blurb: "Heavy equity tilt; small crypto sleeve for illustration of high risk. Expect larger swings — not for money you need soon.",
+      blurb: "Heavy on equity, with a small crypto slice only to show high risk. Expect bigger swings. Not for money you need soon.",
       suggestedRate: 12,
       allocation: { "Mutual Funds": 30, "Stocks": 50, "Bonds": 10, "Cryptocurrencies": 10 }
     }

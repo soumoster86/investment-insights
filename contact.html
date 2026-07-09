@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact | Investment Insights</title>
 <!-- BEGIN SEO -->
-  <meta name="description" content="Contact Investment Insights with questions or feedback about the educational content and calculators." />
+  <meta name="description" content="Questions or feedback about Investment Insights guides and calculators? Send a message here." />
   <link rel="canonical" href="https://investment-insight.netlify.app/contact.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Investment Insights" />
   <meta property="og:title" content="Contact | Investment Insights" />
-  <meta property="og:description" content="Contact Investment Insights with questions or feedback about the educational content and calculators." />
+  <meta property="og:description" content="Questions or feedback about Investment Insights guides and calculators? Send a message here." />
   <meta property="og:url" content="https://investment-insight.netlify.app/contact.html" />
   <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Contact | Investment Insights" />
-  <meta name="twitter:description" content="Contact Investment Insights with questions or feedback about the educational content and calculators." />
+  <meta name="twitter:description" content="Questions or feedback about Investment Insights guides and calculators? Send a message here." />
 <!-- END SEO -->
   <link rel="stylesheet" href="style.css?v=20260709h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -111,8 +111,8 @@
 
   <main id="main-content" tabindex="-1">
     <section class="contact-hero fade-in-section">
-      <h2>Get in Touch</h2>
-      <p>Have questions or feedback about our educational content? We’d love to hear from you. Drop us a message or connect on social media.</p>
+      <h2>Contact</h2>
+      <p>Spotted a mistake, have a question about a guide or calculator, or just want to say hello? Use the form or find us on X.</p>
     </section>
 
     <section class="contact-grid fade-in-section">
@@ -236,7 +236,7 @@
       if (form.querySelector('[name="_gotcha"]').value) {
         response.style.display = "block";
         response.style.color = "green";
-        response.textContent = "Thank you for reaching out! We will get back to you soon.";
+        response.textContent = "Thanks. Your message was sent.";
         form.reset();
         return;
       }
@@ -254,12 +254,12 @@
         .then(function (res) {
           if (!res.ok) throw new Error("submit failed");
           response.style.color = "green";
-          response.textContent = "Thank you for reaching out! We will get back to you soon.";
+          response.textContent = "Thanks. Your message was sent.";
           form.reset();
         })
         .catch(function () {
           response.style.color = "#b30000";
-          response.textContent = "Something went wrong. Please try again or email us directly.";
+          response.textContent = "That did not go through. Try again, or message us on X.";
         })
         .finally(function () {
           submitBtn.disabled = false;

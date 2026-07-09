@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EMI, PPF, RD & More Calculators | Investment Insights</title>
 <!-- BEGIN SEO -->
-  <meta name="description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for educational planning in India." />
+  <meta name="description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for rough planning in India. Learning tools only." />
   <link rel="canonical" href="https://investment-insight.netlify.app/tools.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Investment Insights" />
   <meta property="og:title" content="EMI, PPF, RD & More Calculators | Investment Insights" />
-  <meta property="og:description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for educational planning in India." />
+  <meta property="og:description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for rough planning in India. Learning tools only." />
   <meta property="og:url" content="https://investment-insight.netlify.app/tools.html" />
   <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="EMI, PPF, RD & More Calculators | Investment Insights" />
-  <meta name="twitter:description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for educational planning in India." />
+  <meta name="twitter:description" content="Free EMI, lumpsum, CAGR, inflation, target SIP, PPF, and recurring deposit calculators for rough planning in India. Learning tools only." />
 <!-- END SEO -->
   <link rel="stylesheet" href="style.css?v=20260709h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -112,8 +112,8 @@
       <p class="eyebrow">More calculators</p>
       <h1 class="hub-title">EMI, PPF, RD, inflation &amp; more</h1>
       <p class="hub-lead">
-        Everyday planning tools for Indian investors and borrowers. Educational estimates only —
-        not loan offers, tax advice, or guaranteed returns.
+        Everyday tools for loans, deposits, inflation, and goal SIPs. The results are rough
+        estimates for learning. They are not loan offers, tax advice, or guaranteed returns.
       </p>
       <div class="hub-hero-actions">
         <a class="btn secondary" href="calculators.html">All calculators</a>
@@ -134,12 +134,12 @@
     <!-- EMI -->
     <section id="emi" class="tool-section">
       <h2>Loan EMI calculator</h2>
-      <p class="tool-intro">Estimate monthly EMI for home, car, or personal loans (reducing-balance model).</p>
+      <p class="tool-intro">Monthly EMI for a home, car, or personal loan using a standard reducing-balance formula.</p>
       <form id="emi-form" class="tool-form" data-result="emi-result">
         <div class="tool-fields">
           <label>Loan amount (₹)
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Principal amount you plan to borrow. Educational estimate only.</span>
+              <span class="tooltip-text">How much you plan to borrow. This is a rough estimate only.</span>
             </span>
             <input name="principal" type="number" min="1000" step="any" required placeholder="e.g. 50,00,000" />
           </label>
@@ -151,7 +151,7 @@
           </label>
           <label>Tenure (years)
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Full loan tenure in whole years. Add extra months next.</span>
+              <span class="tooltip-text">Loan length in whole years. Use the next field for leftover months.</span>
             </span>
             <input name="years" type="number" min="0" max="40" step="1" required placeholder="e.g. 20" />
           </label>
@@ -173,7 +173,7 @@
     <!-- Lumpsum -->
     <section id="lumpsum" class="tool-section">
       <h2>Lumpsum growth calculator</h2>
-      <p class="tool-intro">Future value of a one-time investment at an assumed annual return.</p>
+      <p class="tool-intro">What a single investment today might be worth later at a return rate you pick.</p>
       <form id="lumpsum-form" class="tool-form" data-result="lumpsum-result">
         <div class="tool-fields">
           <label>Investment (₹)
@@ -184,7 +184,7 @@
           </label>
           <label>Expected return (% p.a.)
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Assumed annual return. Markets vary — this is not a guarantee.</span>
+              <span class="tooltip-text">Assumed yearly return. Real markets go up and down; this is not a guarantee.</span>
             </span>
             <input name="rate" type="number" min="0" step="any" required placeholder="e.g. 12" />
           </label>
@@ -206,7 +206,7 @@
     <!-- CAGR -->
     <section id="cagr" class="tool-section">
       <h2>CAGR calculator</h2>
-      <p class="tool-intro">Find the compound annual growth rate between a start and end value.</p>
+      <p class="tool-intro">Work out the average yearly growth rate between a starting value and an ending value.</p>
       <form id="cagr-form" class="tool-form" data-result="cagr-result">
         <div class="tool-fields">
           <label>Start value (₹)
@@ -239,7 +239,7 @@
     <!-- Inflation -->
     <section id="inflation" class="tool-section">
       <h2>Inflation calculator</h2>
-      <p class="tool-intro">See how inflation raises future costs and erodes purchasing power.</p>
+      <p class="tool-intro">How rising prices can lift future costs and shrink what today’s money buys.</p>
       <form id="inflation-form" class="tool-form" data-result="inflation-result">
         <div class="tool-fields">
           <label>Amount today (₹)
@@ -272,7 +272,7 @@
     <!-- Target SIP -->
     <section id="target-sip" class="tool-section">
       <h2>Target corpus → monthly SIP</h2>
-      <p class="tool-intro">Reverse SIP: how much to invest monthly to aim for a future goal amount.</p>
+      <p class="tool-intro">Start from a future goal amount and work back to a monthly SIP that aims at it.</p>
       <form id="target-sip-form" class="tool-form" data-result="target-sip-result">
         <div class="tool-fields">
           <label>Target corpus (₹)
@@ -283,13 +283,13 @@
           </label>
           <label>Expected return (% p.a.)
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Assumed annual return on the SIP. Not a guarantee.</span>
+              <span class="tooltip-text">Assumed yearly return on the SIP. Not a guarantee.</span>
             </span>
             <input name="rate" type="number" min="0" step="any" required placeholder="e.g. 12" />
           </label>
           <label>Years
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Investment horizon until the goal date.</span>
+              <span class="tooltip-text">How many years until you need the money.</span>
             </span>
             <input name="years" type="number" min="1" step="any" required placeholder="e.g. 15" />
           </label>
@@ -305,7 +305,7 @@
     <!-- PPF -->
     <section id="ppf" class="tool-section">
       <h2>PPF calculator (simplified)</h2>
-      <p class="tool-intro">Educational model of annual PPF-style deposits with yearly compounding. Official rates and rules change — verify before investing.</p>
+      <p class="tool-intro">A simple model of yearly PPF-style deposits with yearly compounding. Official rates and rules change, so check current figures before you invest.</p>
       <form id="ppf-form" class="tool-form" data-result="ppf-result">
         <div class="tool-fields">
           <label>Annual deposit (₹)
@@ -322,7 +322,7 @@
           </label>
           <label>Years
             <span class="tooltip" tabindex="0">ⓘ
-              <span class="tooltip-text">Investment period (classic PPF is often discussed as 15 years).</span>
+              <span class="tooltip-text">How many years you plan to keep depositing (many people use 15 for classic PPF).</span>
             </span>
             <input name="years" type="number" min="1" max="50" step="1" required placeholder="e.g. 15" />
           </label>
@@ -338,7 +338,7 @@
     <!-- RD -->
     <section id="rd" class="tool-section">
       <h2>Recurring deposit (RD) calculator</h2>
-      <p class="tool-intro">Monthly RD deposits with a simplified monthly compounding model.</p>
+      <p class="tool-intro">Monthly bank RD deposits using a simple monthly compounding model.</p>
       <form id="rd-form" class="tool-form" data-result="rd-result">
         <div class="tool-fields">
           <label>Monthly deposit (₹)
@@ -372,29 +372,29 @@
       <div class="trust-item">
         <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg></span>
         <div>
-          <strong>Educational only</strong>
-          <p>Not a loan quote or advice</p>
+          <strong>For learning only</strong>
+          <p>Not a loan quote or personal advice</p>
         </div>
       </div>
       <div class="trust-item">
         <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6"/></svg></span>
         <div>
-          <strong>Simplified models</strong>
-          <p>Fees &amp; tax may differ</p>
+          <strong>Simplified math</strong>
+          <p>Fees and tax can change the real figure</p>
         </div>
       </div>
       <div class="trust-item">
         <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
         <div>
           <strong>Runs in your browser</strong>
-          <p>Inputs stay on your device</p>
+          <p>Your inputs stay on this device</p>
         </div>
       </div>
       <div class="trust-item">
         <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span>
         <div>
-          <strong>Always free</strong>
-          <p>No signup</p>
+          <strong>Free to use</strong>
+          <p>No signup needed</p>
         </div>
       </div>
     </section>
