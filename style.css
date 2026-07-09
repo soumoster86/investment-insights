@@ -4216,6 +4216,17 @@ body.dark-mode .ladder-rung span {
   background: #14352a !important;
   color: #86efac !important;
 }
+.fd-tenure-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+.fd-tenure-row input {
+  flex: 1 1 90px;
+  min-width: 80px;
+  max-width: 140px;
+}
 
 /* Mobile Learn menu: keep curriculum + hub link; hide long product list */
 .nav-learn-mobile-more { display: none; }

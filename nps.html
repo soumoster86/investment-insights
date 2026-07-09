@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NPS (National Pension System) Calculator | Investment Insights</title>
 <!-- BEGIN SEO -->
-  <meta name="description" content="Learn about NPS for retirement planning in India and estimate corpus, lump sum, and pension with the NPS calculator." />
+  <meta name="description" content="NPS guide: Tier I/II, asset classes, careful tax notes, exit/annuity concepts, and corpus/pension calculator. Educational only — not advice." />
   <link rel="canonical" href="https://investment-insight.netlify.app/nps.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Investment Insights" />
   <meta property="og:title" content="NPS (National Pension System) Calculator | Investment Insights" />
-  <meta property="og:description" content="Learn about NPS for retirement planning in India and estimate corpus, lump sum, and pension with the NPS calculator." />
+  <meta property="og:description" content="NPS guide: Tier I/II, asset classes, careful tax notes, exit/annuity concepts, and corpus/pension calculator. Educational only — not advice." />
   <meta property="og:url" content="https://investment-insight.netlify.app/nps.html" />
   <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="NPS (National Pension System) Calculator | Investment Insights" />
-  <meta name="twitter:description" content="Learn about NPS for retirement planning in India and estimate corpus, lump sum, and pension with the NPS calculator." />
+  <meta name="twitter:description" content="NPS guide: Tier I/II, asset classes, careful tax notes, exit/annuity concepts, and corpus/pension calculator. Educational only — not advice." />
 <!-- END SEO -->
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -26,17 +26,18 @@
 
 <body>
 
-<nav class="floating-toc">
+<nav class="floating-toc" id="floating-toc" aria-label="On this page">
   <div class="toc-title">On this page</div>
   <ul>
     <li><a href="#about-nps">About NPS</a></li>
-    <li><a href="#features-nps">Features</a></li>
-    <li><a href="#benefits-nps">Benefits</a></li>
-    <li><a href="#limitations-nps">Limitations</a></li>
-    <li><a href="#invest-nps">How to Invest</a></li>
-    <li><a href="#who-nps">Who should Invest</a></li>
-    <li><a href="#tips-nps">Tips</a></li>
-	<li><a href="#calculator-nps">Calculator</a></li>
+    <li><a href="#nps-accounts">Tier I &amp; II</a></li>
+    <li><a href="#nps-assets">Asset classes</a></li>
+    <li><a href="#nps-tax">Tax notes</a></li>
+    <li><a href="#invest-nps">How to invest</a></li>
+    <li><a href="#calculator-nps">Calculator</a></li>
+    <li><a href="#nps-exit">Exit &amp; annuity</a></li>
+    <li><a href="#mistakes-nps">Mistakes</a></li>
+    <li><a href="#related-nps">Next steps</a></li>
   </ul>
 </nav>
 
@@ -100,154 +101,260 @@
 </header>
 <!-- END SITE HEADER -->
 
-<main    id="main-content" tabindex="-1">
+<main id="main-content" tabindex="-1">
+
+  <section class="article-hero">
+    <p class="eyebrow">Retirement · India</p>
+    <h1>NPS guide &amp; calculator</h1>
+    <p class="article-lead">
+      Understand the National Pension System structure, Tier accounts, asset classes, and exit rules —
+      then estimate corpus and a simplified pension. Educational model only; not tax or product advice.
+    </p>
+  </section>
 
 <section id="about-nps">
   <h2>What is NPS?</h2>
   <p>
-    <strong>National Pension Scheme (NPS)</strong> is a government-backed retirement savings scheme in India that helps individuals build a retirement corpus through disciplined long-term investing.
+    The <strong>National Pension System (NPS)</strong> is a voluntary, long-term retirement savings framework
+    regulated by the <strong>PFRDA</strong>. Contributions are invested across asset classes (equity, corporate
+    debt, government securities, and alternatives under scheme rules) by pension fund managers you choose.
+    Returns are <strong>market-linked</strong> — not guaranteed like a traditional bank FD.
   </p>
-  <p>
-    It is regulated by the Pension Fund Regulatory and Development Authority (PFRDA) and offers a mix of equity, corporate bonds, and government securities.
-  </p>
-</section>
-
-<section id="features-nps">
-  <h2>Key Features</h2>
-  <ul>
-    <li>Low-cost retirement investment</li>
-    <li>Market-linked returns (Equity + Debt)</li>
-    <li>Flexible asset allocation</li>
-    <li>Long-term wealth creation</li>
-    <li>Available to all Indian citizens (18–70 years)</li>
-  </ul>
-</section>
-
-<section id="benefits-nps">
-  <h2>Tax Benefits</h2>
-  <div class="highlight-box">
-    <ul>
-      <li>₹1.5L deduction under Section 80C</li>
-      <li>Additional ₹50,000 under Section 80CCD(1B)</li>
-      <li>Employer contribution benefit under 80CCD(2)</li>
-    </ul>
+  <div class="stocks-two-col">
+    <div class="callout callout-tip">
+      <strong>Strengths:</strong> Low costs vs many products, diversification, equity participation for long horizons,
+      and structured retirement discipline.
+    </div>
+    <div class="callout callout-warn">
+      <strong>Constraints:</strong> Tier I lock-in until retirement age (with limited partial withdrawals),
+      mandatory annuity purchase rules on exit for many subscribers, and market risk on the corpus.
+    </div>
   </div>
 </section>
 
-<section id="limitations-nps">
-  <h2>Types of NPS Accounts</h2>
+<section id="nps-accounts">
+  <h2>Tier I vs Tier II</h2>
+  <div class="table-wrap table-scroll">
+    <table class="compare-table table-cards product-table">
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Role</th>
+          <th>Liquidity</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Account">Tier I</td>
+          <td data-label="Role">Core retirement account</td>
+          <td data-label="Liquidity">Restricted until exit age / rules</td>
+          <td data-label="Notes">Main tax discussions usually attach here</td>
+        </tr>
+        <tr>
+          <td data-label="Account">Tier II</td>
+          <td data-label="Role">Optional flexible account</td>
+          <td data-label="Liquidity">Generally more flexible withdrawals</td>
+          <td data-label="Notes">Tax treatment differs — verify current law</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="nps-assets">
+  <h2>Asset classes (idea)</h2>
+  <p class="tool-intro">Exact limits and auto-choice / active choice rules are set by PFRDA and can change. Treat this as a map.</p>
+  <div class="table-wrap table-scroll">
+    <table class="compare-table table-cards product-table">
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th>Typical holdings</th>
+          <th>Risk tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Class">Equity (E)</td>
+          <td data-label="Holdings">Equity-oriented instruments</td>
+          <td data-label="Risk">Higher volatility; growth engine</td>
+        </tr>
+        <tr>
+          <td data-label="Class">Corporate debt (C)</td>
+          <td data-label="Holdings">Corporate bonds / debt</td>
+          <td data-label="Risk">Credit &amp; rate risk</td>
+        </tr>
+        <tr>
+          <td data-label="Class">Government securities (G)</td>
+          <td data-label="Holdings">G-Secs / similar</td>
+          <td data-label="Risk">Rate risk; high credit quality</td>
+        </tr>
+        <tr>
+          <td data-label="Class">Alternatives (A)</td>
+          <td data-label="Holdings">As permitted under scheme</td>
+          <td data-label="Risk">Varies; usually limited allocation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note">Equity caps and lifecycle auto-rebalancing depend on your choice mode and age rules — check the official NPS / CRA materials.</p>
+</section>
+
+<section id="nps-tax">
+  <h2>Tax notes (very high level)</h2>
+  <div class="callout callout-warn">
+    <strong>Not tax advice.</strong> Deduction limits, employer contributions, and exit taxation have changed over years
+    and depend on the tax regime you use. Confirm with official Income Tax materials or a qualified professional.
+  </div>
   <ul>
-    <li><strong>Tier I:</strong> Mandatory retirement account (lock-in till 60)</li>
-    <li><strong>Tier II:</strong> Optional, flexible withdrawal account</li>
+    <li>Employee / self contributions are often discussed under <strong>80CCD</strong> (alongside overall 80C landscape).</li>
+    <li>An additional self-contribution amount is frequently discussed under <strong>80CCD(1B)</strong> — limits are statute-specific.</li>
+    <li>Employer contributions may have separate treatment under <strong>80CCD(2)</strong> (conditions apply).</li>
+    <li>At exit, lump sum vs annuity taxation depends on prevailing law — do not rely on old blog posts.</li>
   </ul>
+  <p>Broader context: <a href="tax-overview.html">Tax overview</a> · <a href="ppf-tax-saving.html">PPF &amp; tax-saving</a>.</p>
 </section>
 
 <section id="invest-nps">
-  <h2>Benefits of Investing in NPS</h2>
-  <ul>
-    <li>Disciplined retirement savings</li>
-    <li>Very low fund management cost</li>
-    <li>Tax-efficient investment</li>
-    <li>Diversified portfolio</li>
-    <li>Long-term compounding benefits</li>
+  <h2>How to open &amp; contribute</h2>
+  <ol class="steps-list">
+    <li>Register for a Permanent Retirement Account Number (PRAN) via a Point of Presence (bank / broker) or eNPS portals.</li>
+    <li>Complete KYC and choose Tier I (and Tier II if desired).</li>
+    <li>Select pension fund manager(s) and Active or Auto choice allocation.</li>
+    <li>Contribute regularly (monthly SIP-style habits help).</li>
+    <li>Review allocation as you age; rebalance only with a plan.</li>
+  </ol>
+  <ul class="check-list">
+    <li>Build an emergency fund first — <a href="insurance-emergency.html">Emergency &amp; insurance</a></li>
+    <li>Don’t put 100% of retirement into NPS if you need more flexibility — blend with mutual funds / EPF as suitable</li>
+    <li>Match equity share to years until retirement — <a href="risk-allocation.html">Risk &amp; allocation</a></li>
   </ul>
 </section>
 
-<section>
-  <h2>Limitations</h2>
-  <ul>
-    <li>Lock-in till retirement age (60 years)</li>
-    <li>Partial withdrawal restrictions</li>
-    <li>Mandatory annuity purchase at maturity</li>
-    <li>Returns are market-dependent</li>
-  </ul>
+<section id="calculator-nps" class="tool-section">
+  <h2>NPS corpus &amp; pension calculator</h2>
+  <p class="tool-intro">
+    Simplified model: monthly contributions grow at a constant assumed return; at retirement the tool splits
+    <strong>60% lump sum</strong> and <strong>40% annuity corpus</strong>, then estimates monthly pension from the annuity
+    rate. Real NPS exit rules, annuity products, and taxes differ — educational only.
+  </p>
+
+  <form id="nps-form" class="tool-form calculator-box" onsubmit="event.preventDefault(); calculateNPS();">
+    <div class="tool-fields">
+      <label for="monthly">Monthly contribution (₹)
+        <span class="tooltip" tabindex="0">ⓘ
+          <span class="tooltip-text">Amount you invest every month in NPS (Tier I style contribution).</span>
+        </span>
+        <input type="number" id="monthly" min="1" step="any" placeholder="e.g. 5,000" required />
+      </label>
+      <label for="rate">Expected return (% p.a.)
+        <span class="tooltip" tabindex="0">ⓘ
+          <span class="tooltip-text">Blended assumed annual return across your allocation. Not a guarantee.</span>
+        </span>
+        <input type="number" id="rate" min="0" step="any" placeholder="e.g. 10" required />
+      </label>
+      <label for="years">Years to retirement
+        <span class="tooltip" tabindex="0">ⓘ
+          <span class="tooltip-text">How many years you will keep contributing.</span>
+        </span>
+        <input type="number" id="years" min="1" step="1" placeholder="e.g. 25" required />
+      </label>
+      <label for="annuity">Annuity return (% p.a.)
+        <span class="tooltip" tabindex="0">ⓘ
+          <span class="tooltip-text">Assumed rate used only to convert the annuity portion into a monthly pension estimate.</span>
+        </span>
+        <input type="number" id="annuity" min="0" step="any" placeholder="e.g. 6" required />
+      </label>
+    </div>
+    <div class="btn-group">
+      <button type="submit" class="btn">Calculate</button>
+      <button type="button" class="btn secondary" onclick="resetNPS()">Reset</button>
+    </div>
+    <div id="nps-result" class="result-box" style="margin-top:16px;"></div>
+  </form>
 </section>
 
-<section>
-  <h2>How to Invest in NPS</h2>
+<section id="nps-exit">
+  <h2>Exit &amp; annuity (concept)</h2>
+  <p>
+    At superannuation / exit, many subscribers must use a portion of the corpus to buy an <strong>annuity</strong>
+    from an IRDAI-registered insurer, while a portion may be taken as lump sum — subject to age, corpus size,
+    and rules in force. Our calculator uses a fixed 60/40 educational split; your actual options may differ.
+  </p>
   <ul>
-    <li>Register online via NSDL or Karvy portal</li>
-    <li>Open NPS account through banks or brokers</li>
-    <li>Select fund manager and asset allocation</li>
-    <li>Start contributing regularly</li>
+    <li>Annuity income is generally taxable as per current law (verify).</li>
+    <li>Annuity rates vary by insurer, age, and product type.</li>
+    <li>Premature exit and partial withdrawals have specific conditions.</li>
   </ul>
 </section>
 
 <section id="who-nps">
-  <h2>Who Should Invest?</h2>
+  <h2>Who often considers NPS?</h2>
   <ul>
-    <li>Salaried individuals looking for tax savings</li>
-    <li>Long-term retirement planners</li>
-    <li>Investors seeking low-cost diversified exposure</li>
+    <li>Long-horizon savers building a retirement core</li>
+    <li>Salaried people exploring low-cost market-linked retirement vehicles</li>
+    <li>Those already using EPF / PPF / SIPs who want an extra sleeve</li>
+  </ul>
+  <div class="callout callout-tip">
+    <strong>Tip:</strong> Use NPS for retirement discipline — not as your only investment if you need medium-term liquidity.
+    Pair with SIPs and an emergency fund.
+  </div>
+</section>
+
+<section id="mistakes-nps">
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>Assuming returns are guaranteed like an FD</li>
+    <li>Ignoring the annuity / exit structure until age 59</li>
+    <li>Choosing 100% equity without understanding drawdowns near retirement</li>
+    <li>Stopping contributions after a market dip despite a long horizon</li>
+    <li>Treating old tax-blog numbers as current law</li>
   </ul>
 </section>
 
-<section id="tips-nps" class="highlight-box">
-  <h3>💡 Pro Tip</h3>
-  <p>
-    Use NPS mainly for <strong>tax saving + retirement discipline</strong>, not as your only investment. Combine it with mutual funds for better flexibility.
-  </p>
+<section id="tips-nps">
+  <h3>Practical tips</h3>
+  <ul>
+    <li>Increase contributions when income grows (like a SIP step-up).</li>
+    <li>Review fund manager and allocation yearly, not daily.</li>
+    <li>Model goals with <a href="investmentgoal.html">Goal planner</a> and flexible equity via <a href="mutualfunds.html#sipcalc-mutual">SIP</a>.</li>
+    <li>Keep short-term money outside Tier I lock-in.</li>
+  </ul>
 </section>
 
-<section id="calculator-nps">
-  <h2>📊 NPS Calculator</h2>
-
-  <div class="calculator-box">
-
-    <label>
-  Monthly Investment (₹)
-  <span class="tooltip">
-     ⓘ
-    <span class="tooltip-text">
-      Amount you invest every month in NPS.
-    </span>
-  </span>
-</label>
-<input type="number" id="monthly" placeholder="e.g. 5,000" />
-
-<label>
-  Expected Return (%)
-  <span class="tooltip">
-     ⓘ
-    <span class="tooltip-text">
-      Average annual return. Typically 8–12% for NPS.
-    </span>
-  </span>
-</label>
-<input type="number" id="rate" placeholder="e.g. 10" />
-
-<label>
-  Years to Retirement
-  <span class="tooltip">
-     ⓘ
-    <span class="tooltip-text">
-      Number of years you will keep investing.
-    </span>
-  </span>
-</label>
-<input type="number" id="years" placeholder="e.g. 25" />
-
-<label>
-  Annuity Return (%)
-  <span class="tooltip">
-     ⓘ
-    <span class="tooltip-text">
-      Expected pension return rate (usually 5–7%).
-    </span>
-  </span>
-</label>
-<input type="number" id="annuity" placeholder="e.g. 6" />
-
-    <div class="btn-group">
-	<button onclick="calculateNPS()" class="btn primary-btn">Calculate</button>
-	<button onclick="resetNPS()" class="btn outline-btn">Reset</button>
-	</div>
-
-    <div id="nps-result" class="result-box"></div>
-
+<section id="related-nps" class="related-tools">
+  <h2>Related tools &amp; guides</h2>
+  <div class="calc-grid">
+    <a class="calc-chip" href="mutualfunds.html#sipcalc-mutual">SIP calculator</a>
+    <a class="calc-chip" href="mutualfunds.html#swpcalc-mutual">SWP calculator</a>
+    <a class="calc-chip" href="investmentgoal.html">Goal planner</a>
+    <a class="calc-chip" href="tools.html#ppf">PPF</a>
+    <a class="calc-chip" href="fixeddeposit.html">FD calculator</a>
+    <a class="calc-chip" href="ppf-tax-saving.html">PPF &amp; tax-saving</a>
+    <a class="calc-chip" href="tax-overview.html">Tax overview</a>
+    <a class="calc-chip" href="risk-allocation.html">Risk &amp; allocation</a>
   </div>
-
+  <nav class="topic-nav" aria-label="Continue learning">
+    <a class="topic-nav-link" href="fixeddeposit.html">
+      <span class="topic-nav-kicker">Previous</span>
+      <span class="topic-nav-title">Fixed deposits</span>
+    </a>
+    <a class="topic-nav-link topic-nav-next" href="mutualfunds.html">
+      <span class="topic-nav-kicker">Next</span>
+      <span class="topic-nav-title">Mutual funds</span>
+    </a>
+    <a class="topic-nav-link" href="learn.html">
+      <span class="topic-nav-kicker">Browse</span>
+      <span class="topic-nav-title">All Learn topics</span>
+    </a>
+  </nav>
 </section>
+
+<div class="callout callout-disclaimer">
+  <strong>Disclaimer:</strong> Educational content only. NPS rules, tax provisions, and annuity products change.
+  The calculator uses simplified assumptions (constant returns, 60/40 split). Not SEBI/PFRDA advice. Verify with official CRA / PFRDA / tax sources.
+</div>
 
 </main>
 
@@ -305,20 +412,16 @@
 
 <script>
 function calculateNPS() {
-
-  // ✅ STEP 1: Get values
   const monthly = parseFloat(document.getElementById("monthly").value);
   const rateInput = parseFloat(document.getElementById("rate").value);
   const years = parseFloat(document.getElementById("years").value);
   const annuityInput = parseFloat(document.getElementById("annuity").value);
 
-  // ✅ STEP 2: Validation
   const errors = [];
-
-  if (!monthly || monthly <= 0) errors.push("Monthly Investment");
-  if (!rateInput || rateInput <= 0) errors.push("Expected Return");
-  if (!years || years <= 0) errors.push("Years to Retirement");
-  if (!annuityInput || annuityInput <= 0) errors.push("Annuity Return");
+  if (!monthly || monthly <= 0) errors.push("Monthly contribution");
+  if (isNaN(rateInput) || rateInput < 0) errors.push("Expected return");
+  if (!years || years <= 0) errors.push("Years to retirement");
+  if (!annuityInput || annuityInput <= 0) errors.push("Annuity return");
 
   if (errors.length > 0) {
     document.getElementById("nps-result").innerHTML = `
@@ -329,7 +432,6 @@ function calculateNPS() {
     return;
   }
 
-  // ✅ STEP 3–4: Calculation via shared IICalc
   const result = window.IICalc.nps(monthly, rateInput, years, annuityInput);
   if (result.error) {
     document.getElementById("nps-result").innerHTML = `
@@ -343,175 +445,126 @@ function calculateNPS() {
   const annuityCorpus = result.annuityCorpus;
   const monthlyPension = result.monthlyPension;
 
-  // ✅ STEP 5: Render FULL UI (restored)
   document.getElementById("nps-result").innerHTML = `
     <div class="result-cards">
       <div class="card small">
-        <span>Total Invested</span>
+        <span>Total invested</span>
         <b>₹${formatINR(invested)}</b>
       </div>
       <div class="card small">
-        <span>Wealth Gained</span>
+        <span>Wealth gained</span>
         <b>₹${formatINR(gain)}</b>
       </div>
       <div class="card highlight">
-        <span>Total Corpus</span>
+        <span>Total corpus</span>
         <b>₹${formatINR(corpus)}</b>
       </div>
     </div>
 
-    <h3>📊 Investment vs Returns</h3>
-
-<div class="progress-bar-wrapper">
-
-  <!-- BAR -->
-  <div class="progress-bar">
-    <div class="invested" style="width:${(invested/corpus)*100}%"></div>
-    <div class="gain" style="width:${(gain/corpus)*100}%"></div>
-  </div>
-
-  <!-- LABELS aligned with bar -->
-  <div class="progress-labels">
-    <div class="label invested-label" style="width:${(invested/corpus)*100}%">
-      💼 ₹${formatINR(invested)} <br>
-      <span>(${((invested/corpus)*100).toFixed(0)}%) Invested</span>
+    <h3>Investment vs returns</h3>
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar">
+        <div class="invested" style="width:${(invested/corpus)*100}%"></div>
+        <div class="gain" style="width:${(gain/corpus)*100}%"></div>
+      </div>
+      <div class="progress-labels">
+        <div class="label invested-label" style="width:${(invested/corpus)*100}%">
+          💼 ₹${formatINR(invested)} <br>
+          <span>(${((invested/corpus)*100).toFixed(0)}%) Invested</span>
+        </div>
+        <div class="label gain-label" style="width:${(gain/corpus)*100}%">
+          📈 ₹${formatINR(gain)} <br>
+          <span>(${((gain/corpus)*100).toFixed(0)}%) Returns</span>
+        </div>
+      </div>
     </div>
+    <p class="context-text">
+      You invested ₹${formatINR(invested)} and earned ₹${formatINR(gain)} —
+      that’s <b>${(gain/invested).toFixed(1)}x growth</b> under your assumptions.
+    </p>
 
-    <div class="label gain-label" style="width:${(gain/corpus)*100}%">
-      📈 ₹${formatINR(gain)} <br>
-      <span>(${((gain/corpus)*100).toFixed(0)}%) Returns</span>
+    <h3>Educational exit split (60% / 40%)</h3>
+    <div class="split-wrapper">
+      <div class="split-bar">
+        <div class="lump" style="width:60%"></div>
+        <div class="pension" style="width:40%"></div>
+      </div>
+      <div class="split-labels">
+        <div class="label lump-label" style="width:60%">
+          💰 ₹${formatINR(lumpSum)} <br>
+          <span>60% lump sum (model)</span>
+        </div>
+        <div class="label pension-label" style="width:40%">
+          🏦 ₹${formatINR(annuityCorpus)} <br>
+          <span>40% annuity corpus (model)</span>
+        </div>
+      </div>
     </div>
-  </div>
-
-</div>
-
-<p class="context-text">
-  You invested ₹${formatINR(invested)} and earned ₹${formatINR(gain)} — 
-  that’s <b>${(gain/invested).toFixed(1)}x growth</b> on your money.
-</p>
-
-    <h3>💰 Withdrawal Split</h3>
-
-<div class="split-wrapper">
-
-  <!-- BAR ONLY -->
-  <div class="split-bar">
-    <div class="lump" style="width:60%"></div>
-    <div class="pension" style="width:40%"></div>
-  </div>
-
-  <!-- LABELS BELOW (aligned like investment section) -->
-  <div class="split-labels">
-    <div class="label lump-label" style="width:60%">
-      💰 ₹${formatINR(lumpSum)} <br>
-      <span>60% Lump Sum</span>
-    </div>
-
-    <div class="label pension-label" style="width:40%">
-      🏦 ₹${formatINR(annuityCorpus)} <br>
-      <span>40% Pension</span>
-    </div>
-  </div>
-
-</div>
-
-<p class="context-text">
-  You can withdraw <b>₹${formatINR(lumpSum)}</b> at retirement, 
-  while <b>₹${formatINR(annuityCorpus)}</b> will generate your monthly pension.
-</p>
+    <p class="context-text">
+      Model lump sum <b>₹${formatINR(lumpSum)}</b>; annuity corpus <b>₹${formatINR(annuityCorpus)}</b>
+      for the pension estimate below. Real rules may differ.
+    </p>
 
     <div class="pension-box">
-      <h3>📅 Monthly Pension</h3>
+      <h3>Estimated monthly pension</h3>
       <div class="pension-value">₹${formatINR(monthlyPension, 0)}</div>
     </div>
 
     <div class="insight-box">
       ${generateInsight(monthlyPension)}
     </div>
+    <p class="calc-result-note">Constant returns assumed. Annuity products, fees, and taxes are not fully modeled.</p>
   `;
 
   if (window.IIStorage) {
-    window.IIStorage.rememberCalculator("NPS Calculator", "nps.html");
+    window.IIStorage.rememberCalculator("NPS Calculator", "nps.html#calculator-nps");
   }
 }
-</script>
 
-<script>
 function formatINR(num, digits = 0) {
   return num.toLocaleString('en-IN', {
     maximumFractionDigits: digits
   });
 }
-</script>
 
-<script>
 function generateInsight(pension) {
   if (pension < 20000) {
-    return "⚠️ Your projected pension is quite low. Consider increasing your monthly contribution or extending your investment duration.";
+    return "Your modeled pension is modest. Raising contributions or extending years (if possible) increases the estimate — still only an educational scenario.";
   } else if (pension < 50000) {
-    return "👍 You are on a moderate track. Increasing contributions slightly can significantly improve retirement comfort.";
+    return "Moderate modeled pension. Stress-test with a lower assumed return and higher inflation for your real plan.";
   } else {
-    return "🎯 Great! Your retirement plan looks strong with a healthy projected pension.";
+    return "Strong modeled outcome under these assumptions. Still diversify and verify NPS exit / tax rules closer to retirement.";
   }
 }
-</script>
 
-<script>
-window.addEventListener('scroll', () => {
-  const sections = [
-    'about-nps',
-    'features-nps',
-    'benefits-nps',
-    'limitations-nps',
-    'invest-nps',
-    'tips-nps'
-  ];
-
-  let current = '';
-  for (const id of sections) {
-    const sec = document.getElementById(id);
-    if (sec && window.scrollY + 120 >= sec.offsetTop) {
-      current = id;
-    }
-  }
-
-  document.querySelectorAll('.floating-toc a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-  });
-});
-</script>
-
-<script>
 function resetNPS() {
   document.getElementById("monthly").value = "";
   document.getElementById("rate").value = "";
   document.getElementById("years").value = "";
   document.getElementById("annuity").value = "";
-
-  // Clear result
   document.getElementById("nps-result").innerHTML = "";
 }
-</script>
 
-<script>
 document.querySelectorAll('.floating-toc a').forEach(link => {
   link.addEventListener('click', function(e) {
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      window.scrollTo({top: target.offsetTop - 65, behavior: 'smooth'});
+      window.scrollTo({top: target.offsetTop - 70, behavior: 'smooth'});
     }
   });
 });
 window.addEventListener('scroll', () => {
   const sections = [
     'about-nps',
-    'features-nps',
-	'benefits-nps',
-    'limitations-nps',
-	'invest-nps',
-    'who-nps',
-    'tips-nps'
+    'nps-accounts',
+    'nps-assets',
+    'nps-tax',
+    'invest-nps',
+    'calculator-nps',
+    'nps-exit',
+    'mistakes-nps',
+    'related-nps'
   ];
   let current = '';
   for (const id of sections) {
@@ -527,8 +580,6 @@ window.addEventListener('scroll', () => {
   <script src="js/storage.js"></script>
   <script src="js/site-config.js"></script>
   <script src="js/analytics.js" defer></script>
-
-
   <script src="nav.js" defer></script>
 </body>
 </html>

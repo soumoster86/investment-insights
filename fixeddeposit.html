@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fixed Deposit Guide & FD Calculator | Investment Insights</title>
 <!-- BEGIN SEO -->
-  <meta name="description" content="How bank FDs work, compounding choices, and an FD maturity calculator with year-wise breakdown." />
+  <meta name="description" content="FD guide for India: types, DICGC safety notes, maturity calculator, FD ladder planner, tax notes, and comparisons. Educational only." />
   <link rel="canonical" href="https://investment-insight.netlify.app/fixeddeposit.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Investment Insights" />
   <meta property="og:title" content="Fixed Deposit Guide & FD Calculator | Investment Insights" />
-  <meta property="og:description" content="How bank FDs work, compounding choices, and an FD maturity calculator with year-wise breakdown." />
+  <meta property="og:description" content="FD guide for India: types, DICGC safety notes, maturity calculator, FD ladder planner, tax notes, and comparisons. Educational only." />
   <meta property="og:url" content="https://investment-insight.netlify.app/fixeddeposit.html" />
   <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Fixed Deposit Guide & FD Calculator | Investment Insights" />
-  <meta name="twitter:description" content="How bank FDs work, compounding choices, and an FD maturity calculator with year-wise breakdown." />
+  <meta name="twitter:description" content="FD guide for India: types, DICGC safety notes, maturity calculator, FD ladder planner, tax notes, and comparisons. Educational only." />
 <!-- END SEO -->
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -53,18 +53,19 @@
 <body>
 
 <!-- Floating Table of Contents OUTSIDE HEADER -->
-  	<nav class="floating-toc" id="floating-toc">
+  	<nav class="floating-toc" id="floating-toc" aria-label="On this page">
   <div class="toc-title">On this page</div>
   <ul>
     <li><a href="#about-fd">About FDs</a></li>
-    <li><a href="#benefits-fd">Benefits</a></li>
 	<li><a href="#types-fd">Types</a></li>
-    <li><a href="#rates-fd">Top Rates</a></li>
-    <li><a href="#fd-calculator">FD Calculator</a></li>
-	<li><a href="#taxation">Taxation</a></li>
-	<li><a href="#comparison">Comparison</a></li>
-    <li><a href="#tips-fd">Tips</a></li>
-    <li><a href="#faq-fd">FAQs</a></li>
+    <li><a href="#fd-safety">Safety &amp; DICGC</a></li>
+    <li><a href="#fd-calculator">FD calculator</a></li>
+    <li><a href="#fd-ladder-tool">Ladder planner</a></li>
+	<li><a href="#taxation">Tax notes</a></li>
+	<li><a href="#comparison">Compare</a></li>
+    <li><a href="#rates-fd">Sample rates</a></li>
+    <li><a href="#mistakes-fd">Mistakes</a></li>
+    <li><a href="#related-fd">Next steps</a></li>
    </ul>
    </nav>
   
@@ -128,244 +129,318 @@
 </header>
 <!-- END SITE HEADER -->
 
-  <main    id="main-content" tabindex="-1">
+  <main id="main-content" tabindex="-1">
+    <section class="article-hero">
+      <p class="eyebrow">Cash &amp; deposits · India</p>
+      <h1>Fixed deposits guide &amp; calculator</h1>
+      <p class="article-lead">
+        Learn how bank FDs work, what DICGC covers, estimate maturity with compounding choices,
+        and sketch a simple FD ladder — educational only, not a rate offer from any bank.
+      </p>
+    </section>
+
    <section id="about-fd">
-    <h2>About Fixed Deposits (FDs)</h2>
+    <h2>What is a fixed deposit?</h2>
     <p>
-      Fixed Deposits (FDs) are one of the safest and most popular investment options in India.
-      You deposit a lump sum amount with a bank or financial institution for a fixed tenure at a predetermined interest rate.
-      FDs provide guaranteed returns and capital protection, making them ideal for conservative investors.
+      A <strong>fixed deposit (FD)</strong> is a deposit with a bank or NBFC for a chosen tenure at a
+      <strong>stated interest rate</strong>. You typically know the maturity amount up front (for that rate and
+      compounding), which makes FDs popular for short-to-medium goals and conservative sleeves —
+      though interest is usually taxable and may lag long-run equity returns after inflation.
     </p>
+    <div class="stocks-two-col">
+      <div class="callout callout-tip">
+        <strong>Strengths:</strong> Predictable rate for the tenure, simple product, optional premature break
+        (often with penalty), senior-citizen and tax-saving variants at many banks.
+      </div>
+      <div class="callout callout-warn">
+        <strong>Limits:</strong> Rate may not beat inflation after tax; early exit costs; NBFC/bank credit risk
+        differs; DICGC insurance has a per-bank cap (see below).
+      </div>
+    </div>
     </section>
 
-    <section id="benefits-fd">
-      <h3>Benefits of Fixed Deposits</h3>
-      <ul>
-        <li><strong>Safety:</strong> Principal amount is secure, especially with reputed banks and institutions.</li>
-        <li><strong>Guaranteed Returns:</strong> Fixed interest rates ensure predictable earnings over the tenure.</li>
-        <li><strong>Flexible Tenure:</strong> Choose from short-term (7 days) to long-term (up to 10 years).</li>
-        <li><strong>Liquidity Options:</strong> Premature withdrawal facility (subject to penalties).</li>
-        <li><strong>Tax Benefits:</strong> Tax-saving FDs offer deductions under Section 80C with a 5-year lock-in.</li>
-        <li><strong>Interest Payment Options:</strong> Monthly, quarterly, cumulative, or payout at maturity.</li>
-      </ul>
-    </section>
-	
 	<section id="types-fd">
-  <h3>Types of Fixed Deposits</h3>
-  <ul>
-    <li><strong>Regular FD:</strong> Standard fixed deposit for all investors.</li>
-    <li><strong>Tax-saving FD:</strong> 5-year lock-in, eligible for tax benefits under Section 80C.</li>
-    <li><strong>Senior Citizen FD:</strong> Higher interest rates for investors above 60 years.</li>
-    <li><strong>Flexi/Auto-sweep FD:</strong> Automatically sweeps excess savings into FD for higher returns with liquidity.</li>
-  </ul>
-</section>
-
-    <section id="rates-fd">
-  <h3>Recommended Fixed Deposit Rates from Leading Banks (as of 2025)</h3>
+  <h2>Common FD types</h2>
   <div class="table-wrap table-scroll">
-  <table class="product-table table-cards" style="width:100%; border-collapse:collapse; min-width:540px;">
-    <thead>
-      <tr style="background:#eaf2ff;">
-        <th style="text-align:left; padding:8px 12px;">Bank</th>
-        <th style="text-align:center; padding:8px 12px;">Interest Rate<br>(Regular FD)</th>
-        <th style="text-align:center; padding:8px 12px;">Interest Rate<br>(Senior Citizens)</th>
-        <th style="text-align:center; padding:8px 12px;">Tenure Range</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Bank" style="padding:8px 12px;">State Bank of India (SBI)</td>
-        <td data-label="Regular FD" style="text-align:center;">5.40% – 6.10%</td>
-        <td data-label="Senior Citizens" style="text-align:center;">5.90% – 6.60%</td>
-        <td data-label="Tenure" style="text-align:center;">7 days to 10 years</td>
-      </tr>
-      <tr>
-        <td data-label="Bank" style="padding:8px 12px;">HDFC Bank</td>
-        <td data-label="Regular FD" style="text-align:center;">5.50% – 6.25%</td>
-        <td data-label="Senior Citizens" style="text-align:center;">6.00% – 6.75%</td>
-        <td data-label="Tenure" style="text-align:center;">7 days to 10 years</td>
-      </tr>
-      <tr>
-        <td data-label="Bank" style="padding:8px 12px;">ICICI Bank</td>
-        <td data-label="Regular FD" style="text-align:center;">5.50% – 6.20%</td>
-        <td data-label="Senior Citizens" style="text-align:center;">6.00% – 6.75%</td>
-        <td data-label="Tenure" style="text-align:center;">7 days to 10 years</td>
-      </tr>
-      <tr>
-        <td data-label="Bank" style="padding:8px 12px;">Axis Bank</td>
-        <td data-label="Regular FD" style="text-align:center;">5.75% – 6.25%</td>
-        <td data-label="Senior Citizens" style="text-align:center;">6.25% – 6.75%</td>
-        <td data-label="Tenure" style="text-align:center;">7 days to 10 years</td>
-      </tr>
-      <tr>
-        <td data-label="Bank" style="padding:8px 12px;">Punjab National Bank (PNB)</td>
-        <td data-label="Regular FD" style="text-align:center;">5.40% – 6.00%</td>
-        <td data-label="Senior Citizens" style="text-align:center;">5.90% – 6.50%</td>
-        <td data-label="Tenure" style="text-align:center;">7 days to 10 years</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-  <small style="display:block;margin-top:7px; color:#5370a2;">
-    *Interest rates vary by tenure and are subject to change. Check the bank websites for latest rates.
-  </small>
-</section>
-
-    <section id="fd-calculator">
-  <h3>FD Calculator</h3>
-  <form id="fd-form" onsubmit="calculateFD(event)">
-    <label for="fd-principal">Principal Amount (₹)
-      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Amount you deposit in the fixed deposit.</span></span>
-    </label>
-    <input type="number" id="fd-principal" min="1000" step="any" required placeholder="e.g. 1,00,000" />
-
-    <label for="fd-rate" style="display:flex;align-items:center;gap:7px;">
-  Interest Rate (% p.a.):
-  <span id="fd-rate-info" tabindex="0" style="cursor:pointer; color:#004080; font-size:1.1em; display:inline-block; position:relative;">
-    <svg width="18" height="18" style="vertical-align:-2px;">
-      <circle cx="9" cy="9" r="8" fill="#eaf2ff" stroke="#004080" stroke-width="1.5"/>
-      <text x="9" y="13" text-anchor="middle" font-size="12" fill="#004080" font-family="Segoe UI,Arial" font-weight="bold">i</text>
-    </svg>
-    <span id="fd-rate-tooltip" style="
-      display:none;
-      position:absolute;
-      left:24px;
-      top:-8px;
-      z-index:1000;
-      background:#fff;
-      border:1.5px solid #e1e6f2;
-      box-shadow:0 3px 12px #00408022;
-      padding:13px 17px 11px 13px;
-      border-radius:8px;
-      font-size:0.97em;
-      color:#1a2c4b;
-      min-width:220px;
-      max-width:350px;
-      white-space:normal;">
-      Enter the annual fixed deposit interest rate offered by your bank.<br>
-      Example: If your bank offers 7% for your chosen tenure, enter 7.<br>
-      <b>Tip:</b> Senior citizens may enter the special rate offered to them.
-    </span>
-  </span>
-</label>
-    <input type="number" id="fd-rate" min="0" step="any" required placeholder="e.g. 6.5" />
-
-    <label>Tenure:</label>
-    <div style="display:flex;gap:10px;align-items:center;">
-     <input type="number" id="fd-years" min="0" placeholder="Years" style="width:80px;" />
-     <input type="number" id="fd-months" min="0" max="11" placeholder="Months" style="width:80px;" />
-     <input type="number" id="fd-days" min="0" max="31" placeholder="Days" style="width:80px;" />
-    </div>
-
-    <label for="fd-compounding">Compounding Frequency:</label>
-    <select id="fd-compounding" required>
-      <option value="1" >Yearly</option>
-      <option value="2">Half-Yearly</option>
-      <option value="4" selected>Quarterly</option>
-      <option value="12">Monthly</option>
-    </select>
-
-    <button class="btn" type="submit" style="margin-top:12px;">Calculate</button>
-	<button class="btn secondary" type="button" onclick="resetFDCalculator()" style="margin-top:12px;margin-left:8px;">Reset</button>
-  </form>
-     
-
-  <div id="fd-result" style="margin-top:20px; display:none;">
-    <h4>FD Summary</h4>
-    <ul>
-      <li><b>Total Interest Earned:</b> ₹<span id="fd-interest"></span></li>
-      <li><b>Maturity Amount:</b> ₹<span id="fd-maturity"></span></li>
-      <li><b>Effective Annual Yield (APY):</b> <span id="fd-apy"></span>%</li>
-    </ul>
-    <div id="fd-breakdown-table-container"></div>
-    <!-- Place this inside a main container that has at least 90vw or 100% width -->
-    <div id="fd-chart-container" style="width:100%;margin:20px 0 0 0;display:none;">
-      <canvas id="fdChart"></canvas>
-    </div>
-
-  </div>
-   </section>
-
-	
-	<section id="taxation">
-  <h3>Taxation on FD Interest</h3>
-  <ul>
-    <li>Interest earned is fully taxable as per your income tax slab.</li>
-    <li>Banks deduct TDS if annual interest exceeds ₹40,000 (₹50,000 for seniors).</li>
-    <li>Submit Form 15G/15H if your total income is below taxable limits to avoid TDS.</li>
-  </ul>
-</section>
-
-    <section id="comparison">
-  <h3>FD vs Other Safe Investments</h3>
-  <div class="table-wrap table-scroll">
-    <table class="product-table table-cards" style="width:100%; border-collapse:collapse; min-width:440px;">
+    <table class="compare-table table-cards product-table">
       <thead>
-        <tr style="background:#eaf2ff;">
-          <th style="text-align:left; padding:8px 12px;">Instrument</th>
-          <th style="text-align:center; padding:8px 12px;">Interest Rate<br>(approx.)</th>
-          <th style="text-align:center; padding:8px 12px;">Lock-in</th>
-          <th style="text-align:center; padding:8px 12px;">Risk</th>
+        <tr>
+          <th>Type</th>
+          <th>Idea</th>
+          <th>Often used for</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td data-label="Instrument" style="padding:8px 12px;">Fixed Deposit</td>
-          <td data-label="Interest Rate" style="text-align:center;">5.5–6.5%</td>
-          <td data-label="Lock-in" style="text-align:center;">Flexible</td>
-          <td data-label="Risk" style="text-align:center;">Low</td>
+          <td data-label="Type">Regular / cumulative</td>
+          <td data-label="Idea">Lump sum; interest compounded and paid at maturity (or as per payout choice)</td>
+          <td data-label="Used for">General savings goals</td>
         </tr>
         <tr>
-          <td data-label="Instrument" style="padding:8px 12px;">Recurring Deposit</td>
-          <td data-label="Interest Rate" style="text-align:center;">5.5–6.5%</td>
-          <td data-label="Lock-in" style="text-align:center;">Flexible</td>
-          <td data-label="Risk" style="text-align:center;">Low</td>
+          <td data-label="Type">Tax-saving FD</td>
+          <td data-label="Idea">Typically 5-year lock-in; discussed under Section 80C-style options</td>
+          <td data-label="Used for">Tax + forced lock-in (not advice)</td>
         </tr>
         <tr>
-          <td data-label="Instrument" style="padding:8px 12px;">Post Office Time Deposit</td>
-          <td data-label="Interest Rate" style="text-align:center;">6–7%</td>
-          <td data-label="Lock-in" style="text-align:center;">1–5 yrs</td>
-          <td data-label="Risk" style="text-align:center;">Very Low</td>
+          <td data-label="Type">Senior citizen FD</td>
+          <td data-label="Idea">Higher rate bands for eligible seniors (bank rules apply)</td>
+          <td data-label="Used for">Retirement cash flow sleeves</td>
         </tr>
         <tr>
-          <td data-label="Instrument" style="padding:8px 12px;">Senior Citizen Saving Scheme</td>
-          <td data-label="Interest Rate" style="text-align:center;">6-7%</td>
-          <td data-label="Lock-in" style="text-align:center;">5 yrs</td>
-          <td data-label="Risk" style="text-align:center;">Very Low</td>
+          <td data-label="Type">Flexi / sweep</td>
+          <td data-label="Idea">Links savings balance to auto FDs</td>
+          <td data-label="Used for">Idle cash with some liquidity</td>
+        </tr>
+        <tr>
+          <td data-label="Type">Recurring deposit (RD)</td>
+          <td data-label="Idea">Monthly deposits instead of one lump sum</td>
+          <td data-label="Used for">Salary savers — try <a href="tools.html#rd">RD calculator</a></td>
         </tr>
       </tbody>
     </table>
   </div>
-  
-  <small style="display:block;margin-top:7px; color:#5370a2;">
-    *Interest rates vary by tenure and are subject to change. Check the bank websites for latest rates.
-  </small>
-  
 </section>
 
-    <section id="tips-fd">
-  <h3>Tips for Maximizing FD Returns</h3>
-  <ul>
-    <li>Ladder your FDs with different tenures to access liquidity and get better rates.</li>
-    <li>Compare rates across banks and NBFCs for the best deal.</li>
-    <li>Consider senior citizen FDs or tax-saving FDs for higher returns or tax benefits.</li>
-    <li>Use cumulative FDs if you don’t need regular interest payouts, for the power of compounding.</li>
+<section id="fd-safety">
+  <h2>Safety &amp; DICGC (high level)</h2>
+  <p>
+    Deposits with insured banks are covered by the <strong>Deposit Insurance and Credit Guarantee Corporation (DICGC)</strong>
+    up to a notified limit <strong>per bank per depositor</strong> (commonly discussed as ₹5 lakh including principal and interest —
+    <em>confirm current limit on official RBI/DICGC sources</em>). Coverage does not make every NBFC deposit equivalent to a bank FD.
+  </p>
+  <ul class="check-list">
+    <li>Prefer regulated banks/NBFCs you understand</li>
+    <li>Don’t put more than the insured limit in one bank if insurance is your safety model</li>
+    <li>Read premature-withdrawal and auto-renewal terms</li>
   </ul>
 </section>
 
-    <section id="faq-fd">
-      <h3>Frequently Asked Questions (FAQs)</h3>
+    <section id="fd-calculator" class="tool-section">
+  <h2>FD maturity calculator</h2>
+  <p class="tool-intro">Estimate maturity, interest, and approximate APY from principal, rate, tenure, and compounding. Not a bank quote.</p>
+  <form id="fd-form" class="tool-form" onsubmit="calculateFD(event)">
+    <div class="tool-fields">
+    <label for="fd-principal">Principal Amount (₹)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Amount you deposit in the fixed deposit.</span></span>
+      <input type="number" id="fd-principal" min="1000" step="any" required placeholder="e.g. 1,00,000" />
+    </label>
+    <label for="fd-rate">Interest Rate (% p.a.)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Annual rate your bank quotes for the chosen tenure. Senior rates may be higher.</span></span>
+      <input type="number" id="fd-rate" min="0" step="any" required placeholder="e.g. 6.5" />
+    </label>
+    <label for="fd-compounding">Compounding frequency
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How often interest is compounded. Quarterly is common at many banks.</span></span>
+      <select id="fd-compounding" required>
+        <option value="1">Yearly</option>
+        <option value="2">Half-yearly</option>
+        <option value="4" selected>Quarterly</option>
+        <option value="12">Monthly</option>
+      </select>
+    </label>
+    </div>
+    <label>Tenure
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Enter any mix of years, months, and days (at least one positive).</span></span>
+    </label>
+    <div class="fd-tenure-row">
+     <input type="number" id="fd-years" min="0" placeholder="Years" />
+     <input type="number" id="fd-months" min="0" max="11" placeholder="Months" />
+     <input type="number" id="fd-days" min="0" max="31" placeholder="Days" />
+    </div>
+    <div class="btn-group">
+    <button class="btn" type="submit">Calculate</button>
+	<button class="btn secondary" type="button" onclick="resetFDCalculator()">Reset</button>
+    </div>
+  </form>
+
+  <div id="fd-result" class="calc-result-panel" style="margin-top:20px; display:none;">
+    <h3>FD summary</h3>
+    <div class="calc-result-grid">
+      <div class="calc-result-item is-hero"><span class="calc-result-label">Maturity amount</span><strong class="calc-result-value">₹<span id="fd-maturity"></span></strong></div>
+      <div class="calc-result-item"><span class="calc-result-label">Total interest</span><strong class="calc-result-value">₹<span id="fd-interest"></span></strong></div>
+      <div class="calc-result-item"><span class="calc-result-label">Approx. APY</span><strong class="calc-result-value"><span id="fd-apy"></span>%</strong></div>
+    </div>
+    <div id="fd-breakdown-table-container"></div>
+    <div id="fd-chart-container" style="width:100%;margin:20px 0 0 0;display:none;">
+      <canvas id="fdChart" style="max-width:100%;"></canvas>
+    </div>
+  </div>
+   </section>
+
+<section id="fd-ladder-tool" class="tool-section">
+  <h2>Simple FD ladder sketch</h2>
+  <p class="tool-intro">Split a total amount across staggered maturities so cash becomes available in steps. Educational only.</p>
+  <form id="fd-ladder-form" class="tool-form">
+    <div class="tool-fields">
+      <label>Total amount (₹)
+        <input name="total" type="number" min="1000" step="any" required placeholder="e.g. 3,00,000" />
+      </label>
+      <label>Number of FDs (rungs)
+        <input name="rungs" type="number" min="2" max="12" step="1" required placeholder="e.g. 3" />
+      </label>
+      <label>First maturity (months)
+        <input name="start" type="number" min="1" max="120" step="1" required placeholder="e.g. 12" />
+      </label>
+      <label>Gap between FDs (months)
+        <input name="step" type="number" min="1" max="60" step="1" required placeholder="e.g. 12" />
+      </label>
+    </div>
+    <div class="btn-group">
+      <button type="submit" class="btn">Build ladder</button>
+      <button type="button" class="btn secondary" id="fd-ladder-reset">Reset</button>
+    </div>
+  </form>
+  <div id="fd-ladder-result" class="calc-result-panel" hidden></div>
+</section>
+
+	<section id="taxation">
+  <h2>Tax notes on FD interest (high level)</h2>
+  <div class="callout callout-warn">
+    <strong>Not tax advice.</strong> Rules, TDS thresholds, and forms change. Confirm with the Income Tax Department or a qualified professional.
+  </div>
+  <ul>
+    <li>Interest is generally taxable under the head applicable to you (often as income from other sources).</li>
+    <li>Banks may deduct <strong>TDS</strong> when interest exceeds notified thresholds (figures change — verify for the year).</li>
+    <li>Form 15G/15H is discussed when total income is below taxable limits — eligibility is personal.</li>
+    <li>Tax-saving FDs and Section 80C interactions depend on regime and law for that year — see <a href="tax-overview.html">Tax overview</a> and <a href="ppf-tax-saving.html">PPF &amp; tax-saving</a>.</li>
+  </ul>
+</section>
+
+    <section id="comparison">
+  <h2>FD vs other parking options (idea)</h2>
+  <div class="table-wrap table-scroll">
+    <table class="product-table table-cards compare-table">
+      <thead>
+        <tr>
+          <th>Instrument</th>
+          <th>Return style</th>
+          <th>Liquidity</th>
+          <th>Risk tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Instrument">Bank FD</td>
+          <td data-label="Return">Fixed for tenure (bank quote)</td>
+          <td data-label="Liquidity">Breakable with conditions</td>
+          <td data-label="Risk">Low (DICGC for insured banks up to limit)</td>
+        </tr>
+        <tr>
+          <td data-label="Instrument">Recurring deposit</td>
+          <td data-label="Return">Similar rate bands to FDs</td>
+          <td data-label="Liquidity">Monthly contribution style</td>
+          <td data-label="Risk">Low</td>
+        </tr>
+        <tr>
+          <td data-label="Instrument">Liquid / overnight funds</td>
+          <td data-label="Return">Market-linked (usually low vol)</td>
+          <td data-label="Liquidity">High (T+ rules apply)</td>
+          <td data-label="Risk">Low–moderate market risk</td>
+        </tr>
+        <tr>
+          <td data-label="Instrument">G-Secs / high-grade bonds</td>
+          <td data-label="Return">Yield varies; price can move</td>
+          <td data-label="Liquidity">Varies</td>
+          <td data-label="Risk">Rate risk; credit risk if corporate</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note">Rates change daily. Compare live bank / post-office quotes; see also <a href="bonds.html">Bonds</a> and <a href="tools.html#rd">RD calculator</a>.</p>
+</section>
+
+    <section id="rates-fd">
+  <h2>Illustrative bank rate ranges</h2>
+  <p class="tool-intro">Example bands for teaching the calculator — <strong>not live offers</strong>. Always check your bank’s website.</p>
+  <div class="table-wrap table-scroll">
+  <table class="product-table table-cards" style="width:100%; border-collapse:collapse; min-width:540px;">
+    <thead>
+      <tr style="background:#eaf2ff;">
+        <th style="text-align:left; padding:8px 12px;">Bank (example)</th>
+        <th style="text-align:center; padding:8px 12px;">Illustrative regular band</th>
+        <th style="text-align:center; padding:8px 12px;">Illustrative senior band</th>
+        <th style="text-align:center; padding:8px 12px;">Typical tenure span</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Bank">Large public / private banks</td>
+        <td data-label="Regular">Often mid–high 5% to mid–6% p.a. range historically</td>
+        <td data-label="Senior">Often ~0.25–0.75% higher than regular</td>
+        <td data-label="Tenure">7 days – 10 years (common)</td>
+      </tr>
+      <tr>
+        <td data-label="Bank">Small finance / some NBFCs</td>
+        <td data-label="Regular">May quote higher — credit &amp; insurance differ</td>
+        <td data-label="Senior">Product-specific</td>
+        <td data-label="Tenure">Check terms carefully</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="table-note">Use the calculator above with the exact rate from your deposit confirmation.</p>
+</section>
+
+<section id="mistakes-fd">
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>Locking emergency money in long FDs without a break plan</li>
+    <li>Ignoring tax and comparing pre-tax FD rates to equity returns</li>
+    <li>Auto-renewing forever without matching goals</li>
+    <li>Chasing the highest NBFC rate without understanding risk and insurance</li>
+  </ul>
+</section>
+
+    <section id="tips-fd">
+  <h3>Practical tips</h3>
+  <ul>
+    <li>Ladder maturities so cash becomes available every year or quarter.</li>
+    <li>Prefer cumulative FDs if you do not need periodic interest payouts.</li>
+    <li>Keep some money liquid for true emergencies — <a href="insurance-emergency.html">Emergency fund guide</a>.</li>
+    <li>For long-horizon growth, pair FDs with diversified equity/funds — <a href="risk-allocation.html">Risk &amp; allocation</a>.</li>
+  </ul>
+</section>
+
+    <section id="faq-fd" class="faq-box">
+      <h3>FAQs</h3>
       <ul>
-        <li><strong>Can I break my FD before maturity?</strong>  
-          Yes, but banks may charge a penalty and offer lower interest.</li>
-        <li><strong>Is FD interest taxable?</strong>  
-          Yes, interest earned on FDs is taxable as per your income slab.</li>
-        <li><strong>Can I open an FD online?</strong>  
-          Yes, most banks and NBFCs offer online FD account opening and management.</li>
-        <li><strong>What is a cumulative FD?</strong>  
-          Interest is compounded and paid at maturity rather than periodically.</li>
+        <li><strong>Can I break an FD early?</strong> Usually yes, often with a penalty and reduced rate — check your bank.</li>
+        <li><strong>Is interest taxable?</strong> Generally yes, as per your status and current law.</li>
+        <li><strong>Cumulative vs non-cumulative?</strong> Cumulative compounds to maturity; non-cumulative pays interest periodically.</li>
+        <li><strong>FD vs debt fund?</strong> FD rate is contractual for the deposit; debt fund NAV can move with markets.</li>
       </ul>
     </section>
+
+<section id="related-fd" class="related-tools">
+  <h2>Related tools &amp; guides</h2>
+  <div class="calc-grid">
+    <a class="calc-chip" href="tools.html#rd">RD calculator</a>
+    <a class="calc-chip" href="tools.html#ppf">PPF</a>
+    <a class="calc-chip" href="bonds.html">Bonds / ladder</a>
+    <a class="calc-chip" href="nps.html">NPS</a>
+    <a class="calc-chip" href="investmentgoal.html">Goal planner</a>
+    <a class="calc-chip" href="tools.html#inflation">Inflation</a>
+    <a class="calc-chip" href="mutualfunds.html#sipcalc-mutual">SIP</a>
+  </div>
+  <nav class="topic-nav" aria-label="Continue learning">
+    <a class="topic-nav-link" href="bonds.html">
+      <span class="topic-nav-kicker">Related</span>
+      <span class="topic-nav-title">Bonds guide</span>
+    </a>
+    <a class="topic-nav-link topic-nav-next" href="nps.html">
+      <span class="topic-nav-kicker">Next</span>
+      <span class="topic-nav-title">NPS guide</span>
+    </a>
+    <a class="topic-nav-link" href="learn.html">
+      <span class="topic-nav-kicker">Browse</span>
+      <span class="topic-nav-title">All Learn topics</span>
+    </a>
+  </nav>
+</section>
+
+<div class="callout callout-disclaimer">
+  <strong>Disclaimer:</strong> Educational estimates only. Not a bank offer or interest-rate guarantee. Not tax or investment advice.
+  Verify rates, DICGC coverage, and tax rules with official sources before depositing.
+</div>
   </main>
 
   <!-- BEGIN SITE FOOTER -->
@@ -567,11 +642,15 @@ document.querySelectorAll('.floating-toc a').forEach(link => {
 window.addEventListener('scroll', () => {
   const sections = [
     'about-fd',
-    'benefits-fd',
-    'rates-fd',
+    'types-fd',
+    'fd-safety',
     'fd-calculator',
-    'tips-fd',
-    'faq-fd'
+    'fd-ladder-tool',
+    'taxation',
+    'comparison',
+    'rates-fd',
+    'mistakes-fd',
+    'related-fd'
   ];
   let current = '';
   for (const id of sections) {
@@ -581,6 +660,54 @@ window.addEventListener('scroll', () => {
   document.querySelectorAll('.floating-toc a').forEach(a => {
     a.classList.toggle('active', a.getAttribute('href') === '#' + current);
   });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  var form = document.getElementById('fd-ladder-form');
+  var out = document.getElementById('fd-ladder-result');
+  var reset = document.getElementById('fd-ladder-reset');
+  if (!form || !out) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var total = parseFloat(form.total.value);
+    var rungs = parseInt(form.rungs.value, 10);
+    var start = parseInt(form.start.value, 10);
+    var step = parseInt(form.step.value, 10);
+    if (!(total > 0) || !(rungs >= 2) || !(start >= 1) || !(step >= 1)) {
+      out.hidden = false;
+      out.innerHTML = '<p class="calc-error">Enter valid total, rungs, first maturity, and gap.</p>';
+      return;
+    }
+    var each = total / rungs;
+    var rows = '';
+    for (var i = 0; i < rungs; i++) {
+      var m = start + i * step;
+      var y = Math.floor(m / 12);
+      var mo = m % 12;
+      var label = (y ? y + 'y ' : '') + (mo ? mo + 'm' : (y ? '' : m + 'm'));
+      label = label.trim() || m + 'm';
+      rows += '<tr><td data-label="FD #">' + (i + 1) + '</td><td data-label="Matures after">' + label + '</td><td data-label="Amount">₹' + Math.round(each).toLocaleString('en-IN') + '</td></tr>';
+    }
+    out.hidden = false;
+    out.innerHTML =
+      '<div class="calc-result-grid"><div class="calc-result-item is-hero"><span class="calc-result-label">Per FD (equal split)</span><strong class="calc-result-value">₹' +
+      Math.round(each).toLocaleString('en-IN') +
+      '</strong></div></div>' +
+      '<div class="table-wrap table-scroll" style="margin-top:12px"><table class="compare-table table-cards product-table"><thead><tr><th>FD #</th><th>Matures after</th><th>Amount</th></tr></thead><tbody>' +
+      rows +
+      '</tbody></table></div>' +
+      '<p class="calc-result-note">Equal split is a teaching default. Rates differ by tenure — open each FD at the bank’s quoted rate for that maturity.</p>';
+    if (window.IIStorage) {
+      window.IIStorage.rememberCalculator('FD ladder planner', 'fixeddeposit.html#fd-ladder-tool');
+    }
+  });
+  if (reset) {
+    reset.addEventListener('click', function () {
+      form.reset();
+      out.innerHTML = '';
+      out.hidden = true;
+    });
+  }
 });
 </script>
 

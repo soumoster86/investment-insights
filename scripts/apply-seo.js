@@ -47,12 +47,12 @@ const PAGES = {
   "fixeddeposit.html": {
     title: "Fixed Deposit Guide & FD Calculator | Investment Insights",
     description:
-      "How bank FDs work, compounding choices, and an FD maturity calculator with year-wise breakdown."
+      "FD guide for India: types, DICGC safety notes, maturity calculator, FD ladder planner, tax notes, and comparisons. Educational only."
   },
   "nps.html": {
     title: "NPS (National Pension System) Calculator | Investment Insights",
     description:
-      "Learn about NPS for retirement planning in India and estimate corpus, lump sum, and pension with the NPS calculator."
+      "NPS guide: Tier I/II, asset classes, careful tax notes, exit/annuity concepts, and corpus/pension calculator. Educational only — not advice."
   },
   "cryptocurrencies.html": {
     title: "Cryptocurrency Overview | Investment Insights",
