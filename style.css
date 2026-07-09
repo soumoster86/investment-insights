@@ -6739,16 +6739,22 @@ body.dark-mode .feature-badge {
   flex-direction: column;
   gap: 3px;
   min-width: 0;
-  flex: 1;
+  flex: 1 1 auto;
+  justify-content: center;
 }
 .learn-path-body strong {
   font-size: 1.02em;
   color: var(--text);
+  line-height: 1.3;
 }
 .learn-path-body span {
   font-size: 0.9em;
   color: var(--text-muted);
   line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .learn-path-go {
   color: var(--brand-accent);
