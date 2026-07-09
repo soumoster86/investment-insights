@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Fixed Deposit Guide & FD Calculator | Investment Insights" />
   <meta name="twitter:description" content="FD guide for India: types, DICGC safety notes, maturity calculator, FD ladder planner, tax notes, and comparisons. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260709e" />
+  <link rel="stylesheet" href="style.css?v=20260709f" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -173,43 +173,48 @@
 
 	<section id="types-fd">
   <h2>Common FD types</h2>
-  <div class="table-wrap table-scroll">
-    <table class="compare-table table-cards product-table">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Idea</th>
-          <th>Often used for</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-label="Type">Regular / cumulative</td>
-          <td data-label="Idea">Lump sum; interest compounded and paid at maturity (or as per payout choice)</td>
-          <td data-label="Used for">General savings goals</td>
-        </tr>
-        <tr>
-          <td data-label="Type">Tax-saving FD</td>
-          <td data-label="Idea">Typically 5-year lock-in; discussed under Section 80C-style options</td>
-          <td data-label="Used for">Tax + forced lock-in (not advice)</td>
-        </tr>
-        <tr>
-          <td data-label="Type">Senior citizen FD</td>
-          <td data-label="Idea">Higher rate bands for eligible seniors (bank rules apply)</td>
-          <td data-label="Used for">Retirement cash flow sleeves</td>
-        </tr>
-        <tr>
-          <td data-label="Type">Flexi / sweep</td>
-          <td data-label="Idea">Links savings balance to auto FDs</td>
-          <td data-label="Used for">Idle cash with some liquidity</td>
-        </tr>
-        <tr>
-          <td data-label="Type">Recurring deposit (RD)</td>
-          <td data-label="Idea">Monthly deposits instead of one lump sum</td>
-          <td data-label="Used for">Salary savers — try <a href="tools.html#rd">RD calculator</a></td>
-        </tr>
-      </tbody>
-    </table>
+  <p class="tool-intro">Same “fixed deposit” label, different locks, rates, and cash-flow shapes. Product rules always beat the label.</p>
+  <div class="fd-type-map" role="list">
+    <article class="fd-type-card fd-type--regular" role="listitem">
+      <header class="fd-type-head">
+        <span class="fd-type-icon" aria-hidden="true">💰</span>
+        <h3>Regular / cumulative</h3>
+      </header>
+      <p class="fd-type-idea">Lump sum; interest compounded and paid at maturity (or as per payout choice).</p>
+      <p class="fd-type-use"><span class="fd-type-use-label">Often used for</span> General savings goals</p>
+    </article>
+    <article class="fd-type-card fd-type--tax" role="listitem">
+      <header class="fd-type-head">
+        <span class="fd-type-icon" aria-hidden="true">🧾</span>
+        <h3>Tax-saving FD</h3>
+      </header>
+      <p class="fd-type-idea">Typically 5-year lock-in; discussed under Section 80C-style options.</p>
+      <p class="fd-type-use"><span class="fd-type-use-label">Often used for</span> Tax + forced lock-in (not advice)</p>
+    </article>
+    <article class="fd-type-card fd-type--senior" role="listitem">
+      <header class="fd-type-head">
+        <span class="fd-type-icon" aria-hidden="true">🧓</span>
+        <h3>Senior citizen FD</h3>
+      </header>
+      <p class="fd-type-idea">Higher rate bands for eligible seniors (bank rules apply).</p>
+      <p class="fd-type-use"><span class="fd-type-use-label">Often used for</span> Retirement cash flow sleeves</p>
+    </article>
+    <article class="fd-type-card fd-type--flexi" role="listitem">
+      <header class="fd-type-head">
+        <span class="fd-type-icon" aria-hidden="true">🔄</span>
+        <h3>Flexi / sweep</h3>
+      </header>
+      <p class="fd-type-idea">Links savings balance to auto FDs.</p>
+      <p class="fd-type-use"><span class="fd-type-use-label">Often used for</span> Idle cash with some liquidity</p>
+    </article>
+    <article class="fd-type-card fd-type--rd" role="listitem">
+      <header class="fd-type-head">
+        <span class="fd-type-icon" aria-hidden="true">📅</span>
+        <h3>Recurring deposit (RD)</h3>
+      </header>
+      <p class="fd-type-idea">Monthly deposits instead of one lump sum.</p>
+      <p class="fd-type-use"><span class="fd-type-use-label">Often used for</span> Salary savers — try <a href="tools.html#rd">RD calculator</a></p>
+    </article>
   </div>
 </section>
 
@@ -405,31 +410,51 @@
   <h2>Illustrative bank rate ranges</h2>
   <p class="sample-freshness"><span class="sample-freshness-label">Sample data</span> Last reviewed <time data-content-reviewed datetime="2026-07-09">2026-07-09</time> · bands for teaching only, not live bank offers.</p>
   <p class="tool-intro">Example bands for teaching the calculator — <strong>not live offers</strong>. Always check your bank’s website.</p>
-  <div class="table-wrap table-scroll">
-  <table class="product-table table-cards" style="width:100%; border-collapse:collapse; min-width:540px;">
-    <thead>
-      <tr style="background:#eaf2ff;">
-        <th style="text-align:left; padding:8px 12px;">Bank (example)</th>
-        <th style="text-align:center; padding:8px 12px;">Illustrative regular band</th>
-        <th style="text-align:center; padding:8px 12px;">Illustrative senior band</th>
-        <th style="text-align:center; padding:8px 12px;">Typical tenure span</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Bank">Large public / private banks</td>
-        <td data-label="Regular">Often mid–high 5% to mid–6% p.a. range historically</td>
-        <td data-label="Senior">Often ~0.25–0.75% higher than regular</td>
-        <td data-label="Tenure">7 days – 10 years (common)</td>
-      </tr>
-      <tr>
-        <td data-label="Bank">Small finance / some NBFCs</td>
-        <td data-label="Regular">May quote higher — credit &amp; insurance differ</td>
-        <td data-label="Senior">Product-specific</td>
-        <td data-label="Tenure">Check terms carefully</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="rate-band-map" role="list">
+    <article class="rate-band-card rate-band--large" role="listitem">
+      <header class="rate-band-head">
+        <span class="rate-band-icon" aria-hidden="true">🏛️</span>
+        <div>
+          <h3>Large public / private banks</h3>
+          <p class="rate-band-tag">Common retail FD path</p>
+        </div>
+      </header>
+      <div class="rate-band-stats">
+        <div class="rate-band-stat">
+          <span class="rate-band-stat-label">Regular (illustrative)</span>
+          <span class="rate-band-stat-value">mid–high 5% → mid–6%</span>
+          <span class="rate-band-stat-note">p.a. range historically</span>
+        </div>
+        <div class="rate-band-stat">
+          <span class="rate-band-stat-label">Senior (illustrative)</span>
+          <span class="rate-band-stat-value">+0.25% – 0.75%</span>
+          <span class="rate-band-stat-note">often above regular band</span>
+        </div>
+      </div>
+      <p class="rate-band-tenure"><span class="rate-band-tenure-label">Typical tenure</span> 7 days – 10 years (common)</p>
+    </article>
+    <article class="rate-band-card rate-band--small" role="listitem">
+      <header class="rate-band-head">
+        <span class="rate-band-icon" aria-hidden="true">⚡</span>
+        <div>
+          <h3>Small finance / some NBFCs</h3>
+          <p class="rate-band-tag">Higher quote ≠ same safety</p>
+        </div>
+      </header>
+      <div class="rate-band-stats">
+        <div class="rate-band-stat">
+          <span class="rate-band-stat-label">Regular (illustrative)</span>
+          <span class="rate-band-stat-value">May quote higher</span>
+          <span class="rate-band-stat-note">credit &amp; insurance differ</span>
+        </div>
+        <div class="rate-band-stat">
+          <span class="rate-band-stat-label">Senior (illustrative)</span>
+          <span class="rate-band-stat-value">Product-specific</span>
+          <span class="rate-band-stat-note">check eligibility rules</span>
+        </div>
+      </div>
+      <p class="rate-band-tenure"><span class="rate-band-tenure-label">Typical tenure</span> Check terms carefully</p>
+    </article>
   </div>
   <p class="table-note">Use the calculator above with the exact rate from your deposit confirmation.</p>
 </section>
