@@ -6383,4 +6383,6 @@ button.nav-search-btn:hover,
   }
   .main-nav a {
     padding: 8px 10px;
-    font-size: 0.92
+    font-size: 0.92em;
+  }
+}
