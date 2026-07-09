@@ -597,6 +597,7 @@ form textarea:focus,
 
 /* Shared shell for both kinds of floating box */
 body .floating-toc,
+body .home-float-menu,
 body .stock-float-menu,
 body .etf-float-menu,
 body .ipo-float-menu,
@@ -617,9 +618,7 @@ body .intraday-float-menu {
   display: block;
 }
 
-/* Quick Access ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ docked bottom-left, so it never collides with the
-   header or with top-of-page content (the live ticker on US Stocks,
-   charts on Intraday). */
+/* Quick Access — docked bottom-left (product pages) */
 body .stock-float-menu,
 body .etf-float-menu,
 body .ipo-float-menu,
@@ -631,7 +630,16 @@ body .intraday-float-menu {
   max-height: calc(100vh - 48px);
 }
 
-/* On this page ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ top-right (short index, safe below the header) */
+/* Home left rail — top-left, mirrors On this page on the right */
+body .home-float-menu {
+  left: 24px;
+  right: auto;
+  bottom: auto;
+  top: calc(var(--header-h) + 24px);
+  max-height: calc(100vh - var(--header-h) - 48px);
+}
+
+/* On this page — top-right */
 body .floating-toc {
   right: 24px;
   left: auto;
@@ -642,6 +650,7 @@ body .floating-toc {
 
 /* Titles */
 body .floating-toc .toc-title,
+body .home-float-menu .float-title,
 body .stock-float-menu .float-title,
 body .etf-float-menu .float-title,
 body .ipo-float-menu .float-title,
@@ -653,13 +662,27 @@ body .intraday-float-menu .float-title {
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border-soft);
 }
+body .home-float-menu .float-subtitle {
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #5b6b82;
+  margin: 4px 0 6px;
+}
+body .home-float-menu .float-divider {
+  height: 1px;
+  background: var(--border-soft, #d5deeb);
+  margin: 10px 0 8px;
+}
 
 /* Reset list styling for the TOC so it reads cleanly */
 body .floating-toc ul { margin: 0; padding: 0; list-style: none; }
 body .floating-toc li { margin: 0; }
 
-/* Links ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â consistent spacing, upright (override inline italic), readable */
+/* Links — consistent spacing */
 body .floating-toc a,
+body .home-float-menu a,
 body .stock-float-menu a,
 body .etf-float-menu a,
 body .ipo-float-menu a,
@@ -676,6 +699,7 @@ body .intraday-float-menu a {
 }
 body .floating-toc a:hover,
 body .floating-toc a.active,
+body .home-float-menu a:hover,
 body .stock-float-menu a:hover,
 body .etf-float-menu a:hover,
 body .ipo-float-menu a:hover,
@@ -687,6 +711,7 @@ body .intraday-float-menu a:hover {
 
 /* Dark mode */
 body.dark-mode .floating-toc,
+body.dark-mode .home-float-menu,
 body.dark-mode .stock-float-menu,
 body.dark-mode .etf-float-menu,
 body.dark-mode .ipo-float-menu,
@@ -696,6 +721,8 @@ body.dark-mode .intraday-float-menu {
 }
 body.dark-mode .floating-toc .toc-title,
 body.dark-mode .floating-toc a,
+body.dark-mode .home-float-menu .float-title,
+body.dark-mode .home-float-menu a,
 body.dark-mode .stock-float-menu .float-title,
 body.dark-mode .stock-float-menu a,
 body.dark-mode .etf-float-menu .float-title,
@@ -704,7 +731,14 @@ body.dark-mode .ipo-float-menu .float-title,
 body.dark-mode .ipo-float-menu a,
 body.dark-mode .intraday-float-menu .float-title,
 body.dark-mode .intraday-float-menu a { color: #8abaff; }
+body.dark-mode .home-float-menu .float-subtitle {
+  color: #9aa8bc !important;
+}
+body.dark-mode .home-float-menu .float-divider {
+  background: #2c3340 !important;
+}
 body.dark-mode .floating-toc a:hover,
+body.dark-mode .home-float-menu a:hover,
 body.dark-mode .stock-float-menu a:hover,
 body.dark-mode .etf-float-menu a:hover,
 body.dark-mode .ipo-float-menu a:hover,
@@ -714,6 +748,7 @@ body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; 
    Mobile/tablet get .page-jump chips injected into main (see nav.js). */
 @media (max-width: 1180px) {
   body .floating-toc,
+  body .home-float-menu,
   body .stock-float-menu,
   body .etf-float-menu,
   body .ipo-float-menu,
@@ -2466,6 +2501,7 @@ body.dark-mode .dashboard-section .card {
   background: linear-gradient(180deg, #1c2538 0%, #171f2e 100%) !important;
 }
 body.dark-mode .floating-toc,
+body.dark-mode .home-float-menu,
 body.dark-mode .stock-float-menu,
 body.dark-mode .etf-float-menu,
 body.dark-mode .ipo-float-menu,
@@ -2833,7 +2869,10 @@ body.dark-mode #bondYieldResult {
 }
 
 /* ----- Home layout ----- */
-body.page-home .floating-toc { top: calc(var(--header-h) + 20px); }
+body.page-home .floating-toc,
+body.page-home .home-float-menu {
+  top: calc(var(--header-h) + 20px);
+}
 
 .home-hero {
   display: grid;
@@ -3587,6 +3626,7 @@ body.dark-mode footer {
 body.dark-mode .footer-brand { color: #eef1f6 !important; }
 
 body.dark-mode .floating-toc,
+body.dark-mode .home-float-menu,
 body.dark-mode .stock-float-menu,
 body.dark-mode .etf-float-menu,
 body.dark-mode .ipo-float-menu,
@@ -3596,6 +3636,7 @@ body.dark-mode .intraday-float-menu {
   color: var(--dm-text) !important;
 }
 body.dark-mode .floating-toc a,
+body.dark-mode .home-float-menu a,
 body.dark-mode .stock-float-menu a,
 body.dark-mode .etf-float-menu a,
 body.dark-mode .ipo-float-menu a,
@@ -3603,6 +3644,7 @@ body.dark-mode .intraday-float-menu a {
   color: #d5deec !important;
 }
 body.dark-mode .floating-toc .toc-title,
+body.dark-mode .home-float-menu .float-title,
 body.dark-mode .stock-float-menu .float-title,
 body.dark-mode .etf-float-menu .float-title,
 body.dark-mode .ipo-float-menu .float-title,
