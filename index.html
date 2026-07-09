@@ -229,8 +229,8 @@
       </p>
     </section>
 
-    <!-- B: KPI strip (Markets ticker removed — unreliable on home) -->
-    <section id="kpi" class="kpi-strip kpi-strip-3" aria-label="Your tools snapshot">
+    <!-- B: KPI strip — goal, last calc, metals, currency -->
+    <section id="kpi" class="kpi-strip kpi-strip-4" aria-label="Your tools snapshot">
       <article class="kpi-card" id="goal-summary-card">
         <header class="kpi-head">
           <span class="ii-icon" aria-hidden="true">
@@ -276,6 +276,42 @@
         </div>
         <p id="metal-rate-update" class="kpi-meta"></p>
         <button type="button" class="btn btn-sm secondary" onclick="fetchMetalRates()">Refresh</button>
+      </article>
+
+      <article class="kpi-card kpi-currency" id="currency-card">
+        <header class="kpi-head">
+          <span class="ii-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5c.7-.7 1.6-1 3-1s2.3.3 3 1M9 14.5c.7.7 1.6 1 3 1s2.3-.3 3-1"/></svg>
+          </span>
+          <h2>Currency</h2>
+        </header>
+        <div class="currency-row currency-row-kpi">
+          <label class="sr-only" for="amount">Amount</label>
+          <input type="number" id="amount" placeholder="e.g. 10000" min="0" step="any" />
+          <label class="sr-only" for="from-currency">From</label>
+          <select id="from-currency">
+            <option value="USD">USD</option>
+            <option value="INR" selected>INR</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="SGD">SGD</option>
+            <option value="CHF">CHF</option>
+          </select>
+          <span class="currency-to">to</span>
+          <label class="sr-only" for="to-currency">To</label>
+          <select id="to-currency">
+            <option value="INR">INR</option>
+            <option value="USD" selected>USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="SGD">SGD</option>
+            <option value="CHF">CHF</option>
+          </select>
+          <button type="button" class="btn btn-sm" onclick="convertCurrency()">Convert</button>
+        </div>
+        <div id="currency-result" class="calc-result-inline" role="status"></div>
       </article>
     </section>
 
@@ -392,43 +428,6 @@
           <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h16v8H4z"/></svg></span>
           Bond yield
         </a>
-      </div>
-    </section>
-
-    <!-- Currency converter -->
-    <section class="home-section tools-row tools-row-single">
-      <div class="card tools-card" id="currency-card">
-        <h3>
-          <span class="ii-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5c.7-.7 1.6-1 3-1s2.3.3 3 1M9 14.5c.7.7 1.6 1 3 1s2.3-.3 3-1"/></svg></span>
-          Currency converter
-        </h3>
-        <div class="currency-row">
-          <label class="sr-only" for="amount">Amount</label>
-          <input type="number" id="amount" placeholder="e.g. 10000" min="0" step="any" />
-          <label class="sr-only" for="from-currency">From</label>
-          <select id="from-currency">
-            <option value="USD">USD</option>
-            <option value="INR" selected>INR</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="JPY">JPY</option>
-            <option value="SGD">SGD</option>
-            <option value="CHF">CHF</option>
-          </select>
-          <span class="currency-to">to</span>
-          <label class="sr-only" for="to-currency">To</label>
-          <select id="to-currency">
-            <option value="INR">INR</option>
-            <option value="USD" selected>USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="JPY">JPY</option>
-            <option value="SGD">SGD</option>
-            <option value="CHF">CHF</option>
-          </select>
-          <button type="button" class="btn btn-sm" onclick="convertCurrency()">Convert</button>
-        </div>
-        <div id="currency-result" class="calc-result-inline" role="status"></div>
       </div>
     </section>
 
