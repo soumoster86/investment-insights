@@ -330,7 +330,7 @@ main a:not(.btn):not(.learn-more):hover {
 .learn-more,
 .primary-btn,
 button[type="submit"],
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x) {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn) {
   background: #0a4d8c;
   color: #fff !important;
   border: 1.5px solid #0a4d8c;
@@ -349,7 +349,7 @@ button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.seco
 .learn-more:hover,
 .primary-btn:hover,
 button[type="submit"]:hover,
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):hover {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):hover {
   background: #063566;
   border-color: #063566;
   transform: translateY(-2px);
