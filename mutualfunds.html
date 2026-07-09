@@ -380,7 +380,7 @@
   <div id="swpChart-container" style="width:100%; margin-top:20px; display:none;">
     <canvas id="swpChart" style="max-width:100%;"></canvas>
   </div>
-  <div id="swp-faq" style="display:none; margin-top:18px;"></div>
+  <div id="swp-faq" class="faq-box" style="display:none; margin-top:18px;"></div>
 </div>
 
   <div id="swp-tab2" class="swp-tab-content" style="display:none;">
@@ -406,7 +406,7 @@
   </div>
    </div>
    
-   <div id="swp-max-faq" style="display:none; margin-top:18px;"></div>
+   <div id="swp-max-faq" class="faq-box" style="display:none; margin-top:18px;"></div>
    
 </section>
 
@@ -555,44 +555,44 @@
 
 <script>
 const swpFAQ = `
+  <h3>SWP calculator FAQs</h3>
   <details open>
-    <summary style="font-size:1.07em; font-weight:600; color:#004080;">SWP Calculator FAQs</summary>
-    <ul style="margin:13px 0 0 0; padding:0 0 0 22px;">
-      <li><strong>Q:</strong> What is a Systematic Withdrawal Plan (SWP)?<br>
-        <strong>A:</strong> An SWP lets you withdraw a fixed amount from your mutual fund investment at regular intervals (monthly, quarterly, etc.) while the rest of your money remains invested and continues to earn returns.
-      </li>
-      <li><strong>Q:</strong> Will my corpus last for the full period?<br>
-        <strong>A:</strong> That depends on your withdrawal amount and the returns generated. If your withdrawals exceed growth, your corpus will reduce and may run out.
-      </li>
-      <li><strong>Q:</strong> Is SWP income taxed?<br>
-        <strong>A:</strong> Yes, each withdrawal is subject to mutual fund capital gains tax based on the type of fund and holding period.
-      </li>
-      <li><strong>Q:</strong> Can I change the withdrawal amount later?<br>
-        <strong>A:</strong> Yes, most AMCs let you modify or stop SWP at any time.
-      </li>
-    </ul>
+    <summary>What is a Systematic Withdrawal Plan (SWP)?</summary>
+    <div>An SWP lets you withdraw a fixed amount from your mutual fund investment at regular intervals (monthly, quarterly, etc.) while the rest of your money remains invested and continues to earn returns.</div>
+  </details>
+  <details>
+    <summary>Will my corpus last for the full period?</summary>
+    <div>That depends on your withdrawal amount and the returns generated. If your withdrawals exceed growth, your corpus will reduce and may run out.</div>
+  </details>
+  <details>
+    <summary>Is SWP income taxed?</summary>
+    <div>Yes, each withdrawal is subject to mutual fund capital gains tax based on the type of fund and holding period. Not tax advice.</div>
+  </details>
+  <details>
+    <summary>Can I change the withdrawal amount later?</summary>
+    <div>Yes, most AMCs let you modify or stop SWP at any time.</div>
   </details>
 `;
 </script>
 
 <script>
 const swpMaxFAQ = `
+  <h3>Max withdrawal SWP FAQs</h3>
   <details open>
-    <summary style="font-size:1.07em; font-weight:600; color:#004080;">Max Withdrawal SWP Calculator FAQs</summary>
-    <ul style="margin:13px 0 0 0; padding:0 0 0 22px;">
-      <li><strong>Q:</strong> How is the maximum withdrawal calculated?<br>
-        <strong>A:</strong> It’s calculated so your corpus is fully exhausted after your chosen number of years, based on expected returns.
-      </li>
-      <li><strong>Q:</strong> What happens if returns are lower than expected?<br>
-        <strong>A:</strong> Your corpus may run out earlier, so be conservative with your assumptions.
-      </li>
-      <li><strong>Q:</strong> Can I use this for retirement planning?<br>
-        <strong>A:</strong> Yes! It’s widely used for retirement, education, and goal-based withdrawals.
-      </li>
-      <li><strong>Q:</strong> Is this the same as an annuity?<br>
-        <strong>A:</strong> SWP is similar to a self-managed annuity using mutual funds, but with more flexibility and market risk.
-      </li>
-    </ul>
+    <summary>How is the maximum withdrawal calculated?</summary>
+    <div>It’s calculated so your corpus is fully exhausted after your chosen number of years, based on expected returns.</div>
+  </details>
+  <details>
+    <summary>What happens if returns are lower than expected?</summary>
+    <div>Your corpus may run out earlier, so be conservative with your assumptions.</div>
+  </details>
+  <details>
+    <summary>Can I use this for retirement planning?</summary>
+    <div>Yes — it’s often used for retirement, education, and goal-based withdrawals. Educational estimate only.</div>
+  </details>
+  <details>
+    <summary>Is this the same as an annuity?</summary>
+    <div>SWP is similar to a self-managed annuity using mutual funds, but with more flexibility and market risk.</div>
   </details>
 `;
 </script>

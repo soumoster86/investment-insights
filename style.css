@@ -1975,6 +1975,324 @@ body.dark-mode .assumptions-box {
   border-color: #2d3752 !important;
 }
 
+/* ========== FAQ accordion (site-wide) ========== */
+.faq-box,
+section[id^="faq-"],
+section[id*="-faq"],
+#sip-faq-etf,
+#swp-faq,
+#swp-max-faq,
+#bondYieldFaq {
+  margin-top: 28px;
+  padding: 0 0 14px !important;
+  border-radius: 16px !important;
+  border: 1.5px solid #d5e2f5 !important;
+  background:
+    linear-gradient(180deg, #f7faff 0%, #f0f6ff 100%) !important;
+  box-shadow:
+    0 2px 10px rgba(10, 40, 90, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
+.faq-box::before,
+section[id^="faq-"]::before,
+section[id*="-faq"]::before,
+#sip-faq-etf::before,
+#swp-faq::before,
+#swp-max-faq::before,
+#bondYieldFaq::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #0a4d8c 0%, #2b7de9 55%, #6ec8ff 100%);
+}
+.faq-box > h2,
+.faq-box > h3,
+section[id^="faq-"] > h2,
+section[id^="faq-"] > h3,
+section[id*="-faq"] > h2,
+section[id*="-faq"] > h3,
+#sip-faq-etf > h3,
+#swp-faq > h3,
+#swp-max-faq > h3,
+#bondYieldFaq > h3 {
+  margin: 0 !important;
+  padding: 14px 18px 12px !important;
+  font-size: 1.05em !important;
+  font-weight: 700 !important;
+  color: #0a4d8c !important;
+  letter-spacing: 0.01em;
+  border-bottom: 1px solid rgba(200, 215, 235, 0.9);
+  background: linear-gradient(180deg, #eef5ff 0%, rgba(247, 250, 255, 0.5) 100%);
+}
+.faq-box > h2::after,
+.faq-box > h3::after,
+section[id^="faq-"] > h2::after,
+section[id^="faq-"] > h3::after {
+  display: none !important; /* kill global h2 underline accent inside FAQ shell */
+}
+
+/* Accordion items */
+.faq-box details,
+section[id^="faq-"] details,
+section[id*="-faq"] details,
+#sip-faq-etf details,
+#swp-faq details,
+#swp-max-faq details {
+  margin: 10px 14px 0 !important;
+  border: 1.5px solid #d5e2f5 !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.faq-box details:last-child,
+section[id^="faq-"] details:last-child,
+section[id*="-faq"] details:last-child,
+#sip-faq-etf details:last-child {
+  margin-bottom: 4px !important;
+}
+.faq-box details[open],
+section[id^="faq-"] details[open],
+section[id*="-faq"] details[open],
+#sip-faq-etf details[open],
+#swp-faq details[open],
+#swp-max-faq details[open] {
+  border-color: #8abaff !important;
+  box-shadow: 0 4px 14px rgba(43, 125, 233, 0.1);
+  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%) !important;
+}
+.faq-box summary,
+section[id^="faq-"] summary,
+section[id*="-faq"] summary,
+#sip-faq-etf summary,
+#swp-faq summary,
+#swp-max-faq summary {
+  list-style: none !important;
+  cursor: pointer;
+  position: relative;
+  padding: 13px 44px 13px 16px !important;
+  font-size: 0.98em !important;
+  font-weight: 600 !important;
+  color: #0a4d8c !important;
+  line-height: 1.4 !important;
+  user-select: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.faq-box summary::-webkit-details-marker,
+section[id^="faq-"] summary::-webkit-details-marker,
+section[id*="-faq"] summary::-webkit-details-marker,
+#sip-faq-etf summary::-webkit-details-marker,
+#swp-faq summary::-webkit-details-marker,
+#swp-max-faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq-box summary::marker,
+section[id^="faq-"] summary::marker,
+section[id*="-faq"] summary::marker,
+#sip-faq-etf summary::marker,
+#swp-faq summary::marker,
+#swp-max-faq summary::marker {
+  content: "" !important;
+}
+/* + / − toggle control */
+.faq-box summary::after,
+section[id^="faq-"] summary::after,
+section[id*="-faq"] summary::after,
+#sip-faq-etf summary::after,
+#swp-faq summary::after,
+#swp-max-faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #e8f1fc;
+  color: #0a4d8c;
+  font-size: 1.15em;
+  font-weight: 700;
+  line-height: 26px;
+  text-align: center;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+.faq-box details[open] > summary::after,
+section[id^="faq-"] details[open] > summary::after,
+section[id*="-faq"] details[open] > summary::after,
+#sip-faq-etf details[open] > summary::after,
+#swp-faq details[open] > summary::after,
+#swp-max-faq details[open] > summary::after {
+  content: "−";
+  background: #0a4d8c;
+  color: #fff;
+}
+.faq-box summary:hover,
+section[id^="faq-"] summary:hover,
+section[id*="-faq"] summary:hover,
+#sip-faq-etf summary:hover,
+#swp-faq summary:hover,
+#swp-max-faq summary:hover {
+  background: #f4f8ff !important;
+  color: #063566 !important;
+}
+.faq-box details[open] > summary,
+section[id^="faq-"] details[open] > summary,
+section[id*="-faq"] details[open] > summary,
+#sip-faq-etf details[open] > summary {
+  border-bottom: 1px solid #e2ecf8;
+  background: #f0f6ff !important;
+}
+/* Answer body */
+.faq-box details > div,
+.faq-box details > p,
+.faq-box details > ul,
+section[id^="faq-"] details > div,
+section[id^="faq-"] details > p,
+section[id*="-faq"] details > div,
+section[id*="-faq"] details > p,
+#sip-faq-etf details > div,
+#sip-faq-etf details > p,
+#swp-faq details > div,
+#swp-max-faq details > div {
+  padding: 12px 16px 14px !important;
+  margin: 0 !important;
+  font-size: 0.95em !important;
+  line-height: 1.55 !important;
+  color: #2a3548 !important;
+  font-weight: 400 !important;
+}
+.faq-box details > div a,
+section[id^="faq-"] details > div a,
+#sip-faq-etf details a {
+  color: #0a4d8c !important;
+  font-weight: 600;
+}
+
+/* List-style FAQs (goal, bond calc) as card stack */
+.faq-box > ul,
+#bondYieldFaq > ul {
+  list-style: none !important;
+  margin: 12px 14px 4px !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.faq-box > ul > li,
+#bondYieldFaq > ul > li {
+  margin: 0 !important;
+  padding: 12px 14px !important;
+  background: #fff !important;
+  border: 1.5px solid #d5e2f5 !important;
+  border-radius: 12px !important;
+  line-height: 1.5;
+  color: #2a3548 !important;
+  font-size: 0.95em;
+}
+.faq-box > ul > li > strong,
+.faq-box > ul > li > b,
+#bondYieldFaq > ul > li > strong,
+#bondYieldFaq > ul > li > b {
+  display: block;
+  color: #0a4d8c !important;
+  font-weight: 700 !important;
+  margin-bottom: 6px;
+  font-size: 0.98em;
+  line-height: 1.35;
+}
+
+/* Dark mode FAQ */
+body.dark-mode .faq-box,
+body.dark-mode section[id^="faq-"],
+body.dark-mode section[id*="-faq"],
+body.dark-mode #sip-faq-etf,
+body.dark-mode #swp-faq,
+body.dark-mode #swp-max-faq,
+body.dark-mode #bondYieldFaq {
+  background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
+  border-color: #2c3a52 !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+}
+body.dark-mode .faq-box > h2,
+body.dark-mode .faq-box > h3,
+body.dark-mode section[id^="faq-"] > h2,
+body.dark-mode section[id^="faq-"] > h3,
+body.dark-mode section[id*="-faq"] > h3,
+body.dark-mode #sip-faq-etf > h3,
+body.dark-mode #bondYieldFaq > h3 {
+  color: #9ec9ff !important;
+  border-bottom-color: #2c3a52 !important;
+  background: linear-gradient(180deg, rgba(30, 42, 64, 0.95) 0%, rgba(22, 28, 40, 0.4) 100%) !important;
+}
+body.dark-mode .faq-box details,
+body.dark-mode section[id^="faq-"] details,
+body.dark-mode section[id*="-faq"] details,
+body.dark-mode #sip-faq-etf details,
+body.dark-mode #swp-faq details,
+body.dark-mode #swp-max-faq details {
+  background: #1c212b !important;
+  border-color: #343b4a !important;
+}
+body.dark-mode .faq-box details[open],
+body.dark-mode section[id^="faq-"] details[open],
+body.dark-mode #sip-faq-etf details[open] {
+  border-color: #3d6aa8 !important;
+  background: linear-gradient(180deg, #1e2838 0%, #1a222e 100%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+}
+body.dark-mode .faq-box summary,
+body.dark-mode section[id^="faq-"] summary,
+body.dark-mode section[id*="-faq"] summary,
+body.dark-mode #sip-faq-etf summary,
+body.dark-mode #swp-faq summary,
+body.dark-mode #swp-max-faq summary {
+  color: #c5dcff !important;
+}
+body.dark-mode .faq-box summary::after,
+body.dark-mode section[id^="faq-"] summary::after,
+body.dark-mode #sip-faq-etf summary::after {
+  background: #243044 !important;
+  color: #8abaff !important;
+}
+body.dark-mode .faq-box details[open] > summary::after,
+body.dark-mode section[id^="faq-"] details[open] > summary::after,
+body.dark-mode #sip-faq-etf details[open] > summary::after {
+  background: #2b7de9 !important;
+  color: #fff !important;
+}
+body.dark-mode .faq-box summary:hover,
+body.dark-mode section[id^="faq-"] summary:hover,
+body.dark-mode #sip-faq-etf summary:hover {
+  background: rgba(43, 125, 233, 0.12) !important;
+  color: #e8f1ff !important;
+}
+body.dark-mode .faq-box details[open] > summary,
+body.dark-mode section[id^="faq-"] details[open] > summary,
+body.dark-mode #sip-faq-etf details[open] > summary {
+  border-bottom-color: #2c3a52 !important;
+  background: rgba(43, 125, 233, 0.1) !important;
+}
+body.dark-mode .faq-box details > div,
+body.dark-mode .faq-box details > p,
+body.dark-mode section[id^="faq-"] details > div,
+body.dark-mode #sip-faq-etf details > div {
+  color: #c8d0dc !important;
+}
+body.dark-mode .faq-box > ul > li,
+body.dark-mode #bondYieldFaq > ul > li {
+  background: #1c212b !important;
+  border-color: #343b4a !important;
+  color: #c8d0dc !important;
+}
+body.dark-mode .faq-box > ul > li > strong,
+body.dark-mode .faq-box > ul > li > b,
+body.dark-mode #bondYieldFaq > ul > li > strong,
+body.dark-mode #bondYieldFaq > ul > li > b {
+  color: #8abaff !important;
+}
+
 /* Generic content tables */
 main table {
   border-collapse: collapse;
