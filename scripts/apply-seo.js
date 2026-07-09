@@ -57,7 +57,7 @@ const PAGES = {
   "cryptocurrencies.html": {
     title: "Cryptocurrency Overview | Investment Insights",
     description:
-      "Educational intro to crypto assets, risks, and sample coins you can search by category."
+      "High-risk crypto guide for Indian learners: categories, risks, India tax notes, sizing & P&L tools, watchlist, sample assets. Educational only."
   },
   "bonds.html": {
     title: "Bonds Guide & Yield Calculator | Investment Insights",

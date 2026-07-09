@@ -210,6 +210,8 @@
       esc(c.category) +
       '" data-risk="' +
       esc(c.risk) +
+      '" data-name="' +
+      esc(c.name) +
       '" data-rating="' +
       c.rating +
       '">' +
@@ -220,7 +222,16 @@
       ' of 5">' +
       stars(c.rating) +
       "</div>" +
+      '<div class="rec-card-actions">' +
       detailsLink(c.url) +
+      '<button type="button" class="btn secondary btn-sm crypto-watch-btn" data-name="' +
+      esc(c.name) +
+      '" data-category="' +
+      esc(c.category) +
+      '" data-url="' +
+      esc(c.url) +
+      '">☆ Watch</button>' +
+      "</div>" +
       "</article>"
     );
   }
