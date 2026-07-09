@@ -17,6 +17,7 @@
   <url><loc>https://investment-insight.netlify.app/etf.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://investment-insight.netlify.app/ipo.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://investment-insight.netlify.app/intraday.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://investment-insight.netlify.app/futures-options.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://investment-insight.netlify.app/usstocks.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://investment-insight.netlify.app/mutualfunds.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://investment-insight.netlify.app/fixeddeposit.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

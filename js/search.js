@@ -300,6 +300,14 @@
       keywords: "intraday day trading margin leverage stop loss risk"
     },
     {
+      url: "futures-options.html",
+      title: "Futures & Options (F&O)",
+      type: "Guide",
+      keywords:
+        "futures options f&o derivatives call put premium strike expiry margin leverage nifty bank nifty hedging payoff",
+      blurb: "How futures and options work, risks, and a simple payoff sketch."
+    },
+    {
       url: "usstocks.html",
       title: "US stocks",
       type: "Guide",
