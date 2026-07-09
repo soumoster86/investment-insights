@@ -172,6 +172,157 @@
     });
   }
 
+  /* ---------- Mobile in-page jump chips ----------
+     Side floating-toc is hidden ≤1180px. Clone its links into a sticky
+     horizontal chip bar inside <main> so long guides stay navigable. */
+  function headerOffset() {
+    var raw = getComputedStyle(document.documentElement).getPropertyValue("--header-h");
+    var n = parseInt(raw, 10);
+    return (isNaN(n) ? 56 : n) + 10;
+  }
+
+  function initMobilePageJump() {
+    if (document.querySelector(".page-jump")) return;
+    var toc = document.getElementById("floating-toc");
+    var main = document.getElementById("main-content");
+    if (!toc || !main) return;
+
+    var links = toc.querySelectorAll('a[href^="#"]');
+    if (!links.length) return;
+
+    var bar = document.createElement("nav");
+    bar.className = "page-jump";
+    bar.setAttribute("aria-label", "On this page");
+
+    var label = document.createElement("div");
+    label.className = "page-jump-label";
+    label.textContent = "On this page";
+    bar.appendChild(label);
+
+    var scroller = document.createElement("div");
+    scroller.className = "page-jump-scroller";
+    bar.appendChild(scroller);
+
+    var chips = [];
+    for (var i = 0; i < links.length; i++) {
+      var src = links[i];
+      var href = src.getAttribute("href") || "";
+      if (href.length < 2) continue;
+      var chip = document.createElement("a");
+      chip.className = "page-jump-chip";
+      chip.href = href;
+      chip.textContent = (src.textContent || "").replace(/\s+/g, " ").trim();
+      scroller.appendChild(chip);
+      chips.push(chip);
+    }
+    if (!chips.length) return;
+
+    // Optional quick-access strip (stocks family) as secondary chips
+    var quick = document.querySelector(
+      ".stock-float-menu, .etf-float-menu, .ipo-float-menu, .intraday-float-menu"
+    );
+    if (quick) {
+      var qLinks = quick.querySelectorAll('a[href]');
+      if (qLinks.length) {
+        var qLabel = document.createElement("div");
+        qLabel.className = "page-jump-label page-jump-label-secondary";
+        qLabel.textContent = "Related";
+        bar.appendChild(qLabel);
+        var qScroll = document.createElement("div");
+        qScroll.className = "page-jump-scroller";
+        bar.appendChild(qScroll);
+        for (var q = 0; q < qLinks.length; q++) {
+          var qa = qLinks[q];
+          var qChip = document.createElement("a");
+          qChip.className = "page-jump-chip page-jump-chip-related";
+          qChip.href = qa.getAttribute("href");
+          qChip.textContent = (qa.textContent || "").replace(/\s+/g, " ").trim();
+          qScroll.appendChild(qChip);
+        }
+      }
+    }
+
+    var hero = null;
+    var kids = main.children;
+    for (var hi = 0; hi < kids.length; hi++) {
+      var cn = kids[hi].className || "";
+      if (
+        cn.indexOf("article-hero") !== -1 ||
+        cn.indexOf("hub-hero") !== -1 ||
+        cn.indexOf("home-hero") !== -1 ||
+        cn.indexOf("dashboard-hero") !== -1
+      ) {
+        hero = kids[hi];
+        break;
+      }
+    }
+    if (hero) {
+      hero.insertAdjacentElement("afterend", bar);
+    } else {
+      main.insertBefore(bar, main.firstChild);
+    }
+
+    function scrollToId(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+      window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    }
+
+    bar.addEventListener("click", function (e) {
+      var t = e.target.closest("a.page-jump-chip");
+      if (!t) return;
+      var href = t.getAttribute("href") || "";
+      if (href.charAt(0) !== "#") return; // external/related pages navigate normally
+      e.preventDefault();
+      scrollToId(href.slice(1));
+      if (history && history.replaceState) {
+        try { history.replaceState(null, "", href); } catch (err) {}
+      }
+    });
+
+    var sectionIds = [];
+    for (var s = 0; s < chips.length; s++) {
+      var h = chips[s].getAttribute("href") || "";
+      if (h.charAt(0) === "#") sectionIds.push(h.slice(1));
+    }
+
+    var lastCurrent = "";
+    function setActiveChip() {
+      if (!sectionIds.length) return;
+      var pos = window.pageYOffset + headerOffset() + 24;
+      var current = sectionIds[0];
+      for (var i = 0; i < sectionIds.length; i++) {
+        var sec = document.getElementById(sectionIds[i]);
+        if (sec && sec.offsetTop <= pos) current = sectionIds[i];
+      }
+      for (var c = 0; c < chips.length; c++) {
+        var ch = chips[c];
+        var on = ch.getAttribute("href") === "#" + current;
+        ch.classList.toggle("active", on);
+      }
+      if (current === lastCurrent) return;
+      lastCurrent = current;
+      // Keep newly active chip visible in the horizontal scroller
+      var active = scroller.querySelector(".page-jump-chip.active");
+      if (active && active.scrollIntoView) {
+        try {
+          active.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+        } catch (err2) {}
+      }
+    }
+
+    var scrollTick = null;
+    window.addEventListener("scroll", function () {
+      if (scrollTick) return;
+      scrollTick = requestAnimationFrame(function () {
+        scrollTick = null;
+        setActiveChip();
+      });
+    }, { passive: true });
+    setActiveChip();
+  }
+
   /* ---------- Keep --header-h in sync with the real header ----------
      The header wraps to two rows at most widths, so a hardcoded height
      is wrong and the floating side boxes ride up under it. Measure the
@@ -189,6 +340,7 @@
     initNav();
     initActiveLink();
     initBackToTop();
+    initMobilePageJump();
     syncHeaderHeight();
     window.addEventListener("resize", syncHeaderHeight);
     // Re-measure once fonts/emoji settle, which can change wrap height.
