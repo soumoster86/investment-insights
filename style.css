@@ -4049,6 +4049,84 @@ body.dark-mode .goal-modal-dialog {
   .scenario-grid { grid-template-columns: 1fr; }
 }
 
+/* ========== Stocks page extras ========== */
+.stocks-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+@media (max-width: 720px) {
+  .stocks-two-col { grid-template-columns: 1fr; }
+}
+.stock-list-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.rec-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  align-items: center;
+}
+.rec-card-actions .btn { margin-top: 0; }
+.stock-watch-btn.is-watching {
+  border-color: #0a4d8c !important;
+  color: #0a4d8c !important;
+  font-weight: 700 !important;
+}
+.stock-watch-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5em;
+  padding: 2px 8px;
+  margin-left: 6px;
+  border-radius: 999px;
+  background: #eaf2ff;
+  color: #0a4d8c;
+  font-size: 0.75em;
+  font-weight: 700;
+  vertical-align: middle;
+}
+body.dark-mode .stock-watch-badge {
+  background: #1a2a40 !important;
+  color: #8abaff !important;
+}
+.watchlist-toolbar { margin: 0 0 12px; }
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.watch-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border-soft);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.watch-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+.watch-card-actions .btn { margin-top: 0; }
+.pnl-pos { color: #15803d !important; }
+.pnl-neg { color: #b91c1c !important; }
+body.dark-mode .pnl-pos { color: #86efac !important; }
+body.dark-mode .pnl-neg { color: #fca5a5 !important; }
+body.dark-mode .watch-card {
+  background: #1c212b !important;
+  border-color: #2c3340 !important;
+}
+
 /* Mobile Learn menu: keep curriculum + hub link; hide long product list */
 .nav-learn-mobile-more { display: none; }
 @media (max-width: 820px) {

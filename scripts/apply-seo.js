@@ -17,7 +17,7 @@ const PAGES = {
   "stocks.html": {
     title: "Stocks Guide & Recommendations | Investment Insights",
     description:
-      "Learn how stock investing works in India, risks and benefits, plus educational stock picks you can search and filter by sector."
+      "India stocks guide: market caps, orders & metrics, how to start, trade P&L calculator, browser watchlist, and sample names. Educational only."
   },
   "etf.html": {
     title: "ETFs Explained | Investment Insights",

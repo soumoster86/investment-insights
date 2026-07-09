@@ -134,6 +134,8 @@
     return (
       '<article class="stock-card" data-sector="' +
       esc(s.sector) +
+      '" data-name="' +
+      esc(s.name) +
       '" data-rating="' +
       s.rating +
       '">' +
@@ -144,7 +146,16 @@
       ' of 5">' +
       stars(s.rating) +
       "</div>" +
+      '<div class="rec-card-actions">' +
       detailsLink(s.url) +
+      '<button type="button" class="btn secondary btn-sm stock-watch-btn" data-name="' +
+      esc(s.name) +
+      '" data-sector="' +
+      esc(s.sector) +
+      '" data-url="' +
+      esc(s.url) +
+      '">☆ Watch</button>' +
+      "</div>" +
       "</article>"
     );
   }

@@ -457,6 +457,33 @@
     };
   }
 
+  /**
+   * Simple stock trade P&amp;L (educational). Fees are a single total for both legs.
+   * buyPrice, sellPrice, qty &gt; 0; fees &gt;= 0 optional.
+   */
+  function stockPnL(buyPrice, qty, sellPrice, fees) {
+    buyPrice = Number(buyPrice);
+    qty = Number(qty);
+    sellPrice = Number(sellPrice);
+    fees = Number(fees) || 0;
+    if (!(buyPrice > 0) || !(qty > 0) || !(sellPrice > 0) || fees < 0 || isNaN(fees)) {
+      return { error: "Invalid trade inputs" };
+    }
+    var invested = buyPrice * qty;
+    var proceeds = sellPrice * qty;
+    var gross = proceeds - invested;
+    var net = gross - fees;
+    var retPct = invested > 0 ? (net / invested) * 100 : 0;
+    return {
+      invested: invested,
+      proceeds: proceeds,
+      grossPnL: gross,
+      fees: fees,
+      netPnL: net,
+      returnPct: retPct
+    };
+  }
+
   var IICalc = {
     round: round,
     sip: sip,
@@ -474,7 +501,8 @@
     inflation: inflation,
     ppf: ppf,
     rd: rd,
-    sipForGoal: sipForGoal
+    sipForGoal: sipForGoal,
+    stockPnL: stockPnL
   };
 
   if (typeof module !== "undefined" && module.exports) {

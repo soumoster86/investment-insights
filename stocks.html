@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stocks Guide & Recommendations | Investment Insights</title>
 <!-- BEGIN SEO -->
-  <meta name="description" content="Learn how stock investing works in India, risks and benefits, plus educational stock picks you can search and filter by sector." />
+  <meta name="description" content="India stocks guide: market caps, orders & metrics, how to start, trade P&L calculator, browser watchlist, and sample names. Educational only." />
   <link rel="canonical" href="https://investment-insight.netlify.app/stocks.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Investment Insights" />
   <meta property="og:title" content="Stocks Guide & Recommendations | Investment Insights" />
-  <meta property="og:description" content="Learn how stock investing works in India, risks and benefits, plus educational stock picks you can search and filter by sector." />
+  <meta property="og:description" content="India stocks guide: market caps, orders & metrics, how to start, trade P&L calculator, browser watchlist, and sample names. Educational only." />
   <meta property="og:url" content="https://investment-insight.netlify.app/stocks.html" />
   <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Stocks Guide & Recommendations | Investment Insights" />
-  <meta name="twitter:description" content="Learn how stock investing works in India, risks and benefits, plus educational stock picks you can search and filter by sector." />
+  <meta name="twitter:description" content="India stocks guide: market caps, orders & metrics, how to start, trade P&L calculator, browser watchlist, and sample names. Educational only." />
 <!-- END SEO -->
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -35,15 +35,18 @@
 </nav>
 
   <!-- Floating Table of Contents OUTSIDE HEADER -->
-  <nav class="floating-toc" id="floating-toc">
+  <nav class="floating-toc" id="floating-toc" aria-label="On this page">
     <div class="toc-title">On this page</div>
     <ul>
-      <li><a href="#about-stocks"><i>About Stocks</i></a></li>
-      <li><a href="#benefits-stocks"><i>Benefits</i></a></li>
-      <li><a href="#risks-stocks"><i>Risks</i></a></li>
-      <li><a href="#invest-stocks"><i>How to Invest</i></a></li>
-      <li><a href="#top-stocks"><i>Top Picks</i></a></li>
-      <li><a href="#tips-stocks"><i>Investment Tips</i></a></li>
+      <li><a href="#about-stocks">About stocks</a></li>
+      <li><a href="#market-caps">Market caps</a></li>
+      <li><a href="#orders-metrics">Orders &amp; metrics</a></li>
+      <li><a href="#invest-stocks">How to invest</a></li>
+      <li><a href="#stock-pnl">P&amp;L calculator</a></li>
+      <li><a href="#watchlist">Watchlist</a></li>
+      <li><a href="#top-stocks">Sample names</a></li>
+      <li><a href="#mistakes-stocks">Mistakes</a></li>
+      <li><a href="#related-stocks">Next steps</a></li>
     </ul>
   </nav>
 
@@ -108,7 +111,16 @@
 <!-- END SITE HEADER -->
   
   
-      <main    id="main-content" tabindex="-1">
+      <main id="main-content" tabindex="-1">
+    <section class="article-hero">
+      <p class="eyebrow">Equities · India</p>
+      <h1>Stocks guide &amp; tools</h1>
+      <p class="article-lead">
+        Learn how shares work, how to start on NSE/BSE, practise with a simple trade P&amp;L calculator,
+        and keep an educational watchlist — all in your browser. Not personalised advice.
+      </p>
+    </section>
+
     <!-- NSE & BSE live ticker (TradingView — no API keys) -->
     <div id="live-ticker" class="live-ticker-wrap" aria-label="Live market ticker">
       <div class="tradingview-widget-container">
@@ -134,74 +146,231 @@
       </div>
       <p class="ticker-note">Live tape via TradingView (may be delayed). Educational use only.</p>
     </div>
-<section id="about-stocks">
-      <h2>About Stocks</h2>
+
+    <section id="about-stocks">
+      <h2>What is a stock?</h2>
       <p>
-        Stocks represent ownership in a company. When you buy shares, you become a part-owner and
-        can benefit from the company's profits through dividends and price appreciation.
+        A <strong>stock</strong> (share) is a unit of ownership in a company. When you buy shares listed on
+        exchanges like the <strong>NSE</strong> or <strong>BSE</strong>, you can benefit if the business grows
+        (price appreciation) and, for some companies, from <strong>dividends</strong>. Prices move every trading day —
+        sometimes a lot — so equities suit money you can leave invested for years, not emergency cash.
       </p>
+      <div class="stocks-two-col">
+        <div class="callout callout-tip">
+          <strong>Upside (why people invest):</strong>
+          Long-term growth potential, liquidity on exchanges, and participation in Indian (and global) businesses.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Downside (risks):</strong>
+          Market and company risk, no guaranteed returns, and possible permanent loss if a business fails.
+        </div>
+      </div>
     </section>
 
-   <section id="benefits-stocks">
-      <h3>Benefits of Investing in Stocks</h3>
-      <ul>
-        <li>Potential for high returns over the long term</li>
-        <li>Dividend income in addition to capital gains</li>
-        <li>Liquidity: Stocks can be bought and sold easily</li>
-        <li>Ownership in businesses you believe in</li>
-      </ul>
+    <section id="market-caps">
+      <h2>Large, mid &amp; small caps (idea)</h2>
+      <p class="tool-intro">SEBI and index providers classify companies by size. Labels change over time — treat this as a map, not a ranking.</p>
+      <div class="table-wrap table-scroll">
+        <table class="compare-table table-cards product-table">
+          <thead>
+            <tr>
+              <th>Bucket</th>
+              <th>Typical traits</th>
+              <th>Often used for</th>
+              <th>Risk tone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Bucket">Large-cap</td>
+              <td data-label="Traits">Bigger, more established names (e.g. many Nifty 50 members)</td>
+              <td data-label="Used for">Core long-term equity</td>
+              <td data-label="Risk">Relatively lower vs smaller peers (still volatile)</td>
+            </tr>
+            <tr>
+              <td data-label="Bucket">Mid-cap</td>
+              <td data-label="Traits">Growing companies between large and small</td>
+              <td data-label="Used for">Growth sleeve</td>
+              <td data-label="Risk">Medium–high</td>
+            </tr>
+            <tr>
+              <td data-label="Bucket">Small-cap</td>
+              <td data-label="Traits">Smaller businesses, thinner liquidity at times</td>
+              <td data-label="Used for">Satellite / high-risk sleeve</td>
+              <td data-label="Risk">High</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">Prefer diversified funds/ETFs if picking individual small-caps feels overwhelming — see <a href="index-vs-active.html">Index vs active</a> and <a href="etf.html">ETFs</a>.</p>
     </section>
 
-    <section id="risks-stocks">
-      <h3>Risks of Investing in Stocks</h3>
-      <ul>
-        <li>Market volatility can cause price fluctuations</li>
-        <li>Company-specific risks, including poor management or performance</li>
-        <li>Economic downturns can impact overall market performance</li>
-      </ul>
+    <section id="orders-metrics">
+      <h2>Orders &amp; metrics beginners hear about</h2>
+      <div class="stocks-two-col">
+        <div>
+          <h3>Order types (simplified)</h3>
+          <ul>
+            <li><strong>Market order</strong> — buy/sell at the best available price now (speed over price control).</li>
+            <li><strong>Limit order</strong> — you set a max buy or min sell price; may not fill.</li>
+            <li><strong>Stop-loss (concept)</strong> — an order style meant to limit losses if price moves against you (exact product names vary by broker).</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Ratios (glossary, not magic numbers)</h3>
+          <ul>
+            <li><strong>Market cap</strong> — share price × shares outstanding (size proxy).</li>
+            <li><strong>P/E</strong> — price relative to earnings; high/low alone is incomplete without growth and peers.</li>
+            <li><strong>EPS</strong> — earnings per share; can be noisy year to year.</li>
+            <li><strong>Dividend yield</strong> — dividend ÷ price; past yields can fall if price rises or dividends are cut.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout callout-tip">
+        <strong>Practice:</strong> Read a company’s annual report / exchange filings and compare with peers before acting.
+        Screeners and social tips are starting points, not conclusions.
+      </div>
     </section>
 
     <section id="invest-stocks">
-      <h3>How to Invest in Stocks</h3>
-      <p>
-        To invest in stocks, you need a Demat and trading account with a brokerage. You can choose
-        between online brokers like Zerodha, Upstox, or Angel One. Research companies, track their
-        performance, and invest gradually.
-      </p>
-      <p>
-        Consider diversification and avoid putting all your money into one stock. Use tools like SIPs
-        (Systematic Investment Plans) or set alerts to manage investments better.
-      </p>
+      <h2>How to invest in stocks in India</h2>
+      <ol class="steps-list">
+        <li><strong>PAN + bank account</strong> ready for KYC.</li>
+        <li>Open a <strong>Demat + trading</strong> account with a SEBI-registered broker.</li>
+        <li>Complete KYC (eSign / video KYC as offered).</li>
+        <li>Fund the account and place a small practice order you understand.</li>
+        <li>Prefer a written plan: goal, horizon, max loss you can tolerate, and diversification rules.</li>
+      </ol>
+      <div class="check-list-wrap">
+        <h3>Starter checklist</h3>
+        <ul class="check-list">
+          <li>Emergency fund and high-interest debt handled first — see <a href="insurance-emergency.html">Emergency &amp; insurance</a></li>
+          <li>Know the difference between investing and intraday speculation — <a href="intraday.html">Intraday overview</a></li>
+          <li>Consider broad index ETFs/funds before a long list of single stocks — <a href="etf.html">ETFs</a></li>
+          <li>Understand tax basics at a high level — <a href="tax-overview.html">Tax overview</a></li>
+        </ul>
+      </div>
     </section>
 
-  <section id="top-stocks">
-  <h3>Top Stock Recommendations</h3>
-  <div class="rec-controls-wrap">
-  <label class="rec-search-label" for="stock-search">Search stocks</label>
-  <input
-    type="text"
-    id="stock-search"
-    placeholder="Search stocks or sectors..."
-    style="margin-bottom:16px;"
-    aria-label="Search stocks or sectors" />
-</div>
-  <div id="stock-toolbar" class="rec-toolbar-host"></div>
-  <div id="stock-list" style="display: flex; flex-wrap: wrap; gap: 16px;">
-    <!-- Cards rendered from recommendations.js -->
-  </div>
-  <p id="stock-list-empty" style="display:none; color:#777; margin-top:10px;">No matching stocks found.</p>
-</section>
+    <section id="stock-pnl" class="tool-section">
+      <h2>Stock trade P&amp;L calculator</h2>
+      <p class="tool-intro">
+        Estimate profit or loss on a completed (or hypothetical) round-trip trade. Fees are a single combined estimate —
+        real bills include brokerage, STT, GST, stamp duty, and more.
+      </p>
+      <form id="stock-pnl-form" class="tool-form">
+        <div class="tool-fields">
+          <label>Buy price (₹)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Average price you paid per share.</span></span>
+            <input name="buy" type="number" min="0.01" step="any" required placeholder="e.g. 1,500" />
+          </label>
+          <label>Quantity (shares)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Number of shares bought (and sold in this example).</span></span>
+            <input name="qty" type="number" min="1" step="1" required placeholder="e.g. 10" />
+          </label>
+          <label>Sell price (₹)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price at which you sold (or plan to sell) per share.</span></span>
+            <input name="sell" type="number" min="0.01" step="any" required placeholder="e.g. 1,650" />
+          </label>
+          <label>Total fees (₹)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional combined costs for buy + sell. Leave 0 to ignore.</span></span>
+            <input name="fees" type="number" min="0" step="any" placeholder="e.g. 40" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate P&amp;L</button>
+          <button type="button" class="btn secondary" data-reset>Reset</button>
+        </div>
+      </form>
+      <div id="stock-pnl-result" class="calc-result-panel" hidden></div>
+    </section>
 
-<section id="tips-stocks">
-      <h3>Investment Tips</h3>
+    <section id="watchlist">
+      <h2>My watchlist <span class="stock-watch-badge" id="stock-watch-count">0</span></h2>
+      <p class="tool-intro">
+        Save sample names from the list below (stored only in this browser). Not live prices — open the quote link when you need data.
+      </p>
+      <div class="watchlist-toolbar">
+        <button type="button" class="btn secondary btn-sm" id="stock-watch-clear">Clear watchlist</button>
+      </div>
+      <div id="stock-watchlist" class="watchlist-grid"></div>
+      <p id="stock-watchlist-empty" class="kpi-empty">No names saved yet. Tap <strong>☆ Watch</strong> on a card below.</p>
+    </section>
+
+    <section id="top-stocks">
+      <h3>Sample stock names (educational)</h3>
+      <p class="tool-intro">
+        Illustrative large-cap style names by sector — <strong>not a buy list</strong>. Search, filter, open quotes, or add to your watchlist.
+      </p>
+      <div class="rec-controls-wrap">
+        <label class="rec-search-label" for="stock-search">Search stocks</label>
+        <input
+          type="text"
+          id="stock-search"
+          placeholder="Search stocks or sectors..."
+          style="margin-bottom:16px;"
+          aria-label="Search stocks or sectors" />
+      </div>
+      <div id="stock-toolbar" class="rec-toolbar-host"></div>
+      <div id="stock-list" class="stock-list-grid">
+        <!-- Cards rendered from recommendations.js -->
+      </div>
+      <p id="stock-list-empty" style="display:none; color:#777; margin-top:10px;">No matching stocks found.</p>
+    </section>
+
+    <section id="mistakes-stocks">
+      <h2>Common mistakes</h2>
       <ul>
-        <li>Invest for the long term to ride out volatility.</li>
-        <li>Diversify across sectors and company sizes.</li>
-        <li>Regularly review your portfolio and rebalance as needed.</li>
-        <li>Stay informed about market news and company performance.</li>
-        <li>Avoid emotional decisions based on short-term market movements.</li>
+        <li>Buying tips without understanding the business or your time horizon</li>
+        <li>Concentrating most savings in one stock or one sector</li>
+        <li>Using leverage / F&amp;O without experience (high ruin risk)</li>
+        <li>Checking prices every hour and panic-selling long-term holdings</li>
+        <li>Ignoring costs, taxes, and the need for an emergency fund</li>
       </ul>
     </section>
+
+    <section id="tips-stocks">
+      <h3>Practical tips</h3>
+      <ul>
+        <li>Match equity exposure to years until you need the money — <a href="risk-allocation.html">Risk &amp; allocation</a>.</li>
+        <li>Prefer a simple diversified core; use single stocks only for amounts you can research.</li>
+        <li>Review yearly, not daily; rebalance if weights drift far from your plan.</li>
+        <li>Write rules before market stress (what you’ll buy, hold, or sell).</li>
+      </ul>
+    </section>
+
+    <section id="related-stocks" class="related-tools">
+      <h2>Related tools &amp; guides</h2>
+      <div class="calc-grid">
+        <a class="calc-chip" href="mutualfunds.html#sipcalc-mutual">SIP calculator</a>
+        <a class="calc-chip" href="tools.html#lumpsum">Lumpsum</a>
+        <a class="calc-chip" href="tools.html#cagr">CAGR</a>
+        <a class="calc-chip" href="investmentgoal.html">Goal planner</a>
+        <a class="calc-chip" href="etf.html">ETFs</a>
+        <a class="calc-chip" href="index-vs-active.html">Index vs active</a>
+        <a class="calc-chip" href="ipo.html">IPOs</a>
+        <a class="calc-chip" href="intraday.html">Intraday</a>
+      </div>
+      <nav class="topic-nav" aria-label="Continue learning">
+        <a class="topic-nav-link" href="basics.html">
+          <span class="topic-nav-kicker">Start</span>
+          <span class="topic-nav-title">How to start investing</span>
+        </a>
+        <a class="topic-nav-link topic-nav-next" href="etf.html">
+          <span class="topic-nav-kicker">Next</span>
+          <span class="topic-nav-title">ETFs guide</span>
+        </a>
+        <a class="topic-nav-link" href="learn.html">
+          <span class="topic-nav-kicker">Browse</span>
+          <span class="topic-nav-title">All Learn topics</span>
+        </a>
+      </nav>
+    </section>
+
+    <div class="callout callout-disclaimer">
+      <strong>Disclaimer:</strong> Educational content only. Sample stock names and ratings are not recommendations to buy or sell.
+      Markets involve risk of loss. Not SEBI-registered advice. Verify data independently.
+    </div>
   </main>
   <!-- BEGIN SITE FOOTER -->
 <footer>
@@ -256,46 +425,48 @@
 <!-- END SITE FOOTER -->
 
   <script>
-    document.querySelectorAll('.floating-toc a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
+    document.querySelectorAll(".floating-toc a").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var target = document.querySelector(this.getAttribute("href"));
         if (target) {
           e.preventDefault();
-          window.scrollTo({top: target.offsetTop - 65, behavior: 'smooth'});
+          window.scrollTo({ top: target.offsetTop - 70, behavior: "smooth" });
         }
       });
     });
-    window.addEventListener('scroll', () => {
-      const sections = [
-        'about-stocks',
-        'benefits-stocks',
-        'risks-stocks',
-        'invest-stocks',
-        'top-stocks',
-        'tips-stocks'
+    window.addEventListener("scroll", function () {
+      var sections = [
+        "about-stocks",
+        "market-caps",
+        "orders-metrics",
+        "invest-stocks",
+        "stock-pnl",
+        "watchlist",
+        "top-stocks",
+        "mistakes-stocks",
+        "related-stocks"
       ];
-      let current = '';
-      for (const id of sections) {
-        const sec = document.getElementById(id);
-        if (sec && window.scrollY + 120 >= sec.offsetTop) current = id;
+      var current = "";
+      for (var i = 0; i < sections.length; i++) {
+        var sec = document.getElementById(sections[i]);
+        if (sec && window.scrollY + 120 >= sec.offsetTop) current = sections[i];
       }
-      document.querySelectorAll('.floating-toc a').forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      document.querySelectorAll(".floating-toc a").forEach(function (a) {
+        a.classList.toggle("active", a.getAttribute("href") === "#" + current);
       });
     });
+    document.querySelectorAll(".stock-float-menu a").forEach(function (link) {
+      if (window.location.pathname.endsWith(link.getAttribute("href"))) {
+        link.classList.add("active");
+      }
+    });
   </script>
-  
-<script>
-document.querySelectorAll('.stock-float-menu a').forEach(function(link) {
-  if (window.location.pathname.endsWith(link.getAttribute('href'))) {
-    link.classList.add('active');
-  }
-});
-</script>
+  <script src="js/calc-core.js"></script>
+  <script src="js/storage.js"></script>
   <script src="recommendations.js" defer></script>
+  <script src="js/stocks-page.js" defer></script>
   <script src="js/site-config.js"></script>
   <script src="js/analytics.js" defer></script>
-
   <script src="nav.js" defer></script>
 </body>
 </html>
