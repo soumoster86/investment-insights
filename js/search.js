@@ -94,10 +94,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let html = "";
     results.forEach(res => {
-      html += <a href="" class="search-result-item">
-                 <div class="search-result-title"></div>
-                 <div class="search-result-url"></div>
-               </a>;
+      html += `<a href="${res.url}" class="search-result-item">
+                 <div class="search-result-title">${res.title}</div>
+                 <div class="search-result-url">${res.url}</div>
+               </a>`;
     });
     searchResults.innerHTML = html;
   }
