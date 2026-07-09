@@ -83,7 +83,7 @@
         form.principal.value,
         form.rate.value,
         form.years.value,
-        form.months.value
+        form.months.value || 0
       );
       var out = document.getElementById("emi-result");
       if (r.error) {

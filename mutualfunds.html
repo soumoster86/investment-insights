@@ -189,14 +189,22 @@
   <section id="sipcalc-mutual" style="margin-top:34px;">
   <h3>📈 SIP Calculator</h3>
   <form id="sip-form" onsubmit="calculateSIP(event)">
-    <label for="sip-amount">Monthly Investment (₹):</label>
-    <input type="number" id="sip-amount" min="1" step="0.01" required placeholder="e.g. 5000">
-    <label for="sip-rate">Expected Return (% p.a.):</label>
-    <input type="number" id="sip-rate" step="0.01" min="1" required placeholder="e.g. 12">
-    <label for="sip-years">Investment Duration (years):</label>
-    <input type="number" id="sip-years" min="1" required placeholder="e.g. 15">
-    <label for="sip-stepup">Annual SIP Increase (%): <span style="font-weight:normal;">(can be decimal, e.g. 1.5)</span></label>
-    <input type="number" id="sip-stepup" min="0" step="0.01" value="0" placeholder="e.g. 2.5">
+    <label for="sip-amount">Monthly Investment (₹)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Amount you plan to invest every month via SIP.</span></span>
+    </label>
+    <input type="number" id="sip-amount" min="1" step="any" required placeholder="e.g. 5,000">
+    <label for="sip-rate">Expected Return (% p.a.)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Assumed annual return. Markets vary — not a guarantee.</span></span>
+    </label>
+    <input type="number" id="sip-rate" step="any" min="0" required placeholder="e.g. 12">
+    <label for="sip-years">Investment Duration (years)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many years you will continue the SIP.</span></span>
+    </label>
+    <input type="number" id="sip-years" min="1" step="any" required placeholder="e.g. 15">
+    <label for="sip-stepup">Annual SIP Increase (%)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional yearly step-up in SIP amount (e.g. 10 = +10% each year). Use 0 for flat SIP.</span></span>
+    </label>
+    <input type="number" id="sip-stepup" min="0" step="any" placeholder="e.g. 0 or 10">
     <button class="btn" type="submit" style="margin-top:9px;">Calculate</button>
 	<button class="btn secondary" type="button" onclick="resetSIP()" style="margin-left:7px;">Reset</button>	
    </form>
@@ -218,14 +226,22 @@
   </div>
 <div id="swp-tab1" class="swp-tab-content" style="display:block;">
   <form id="swp-form" onsubmit="calculateSWP(event)">
-    <label for="swp-corpus">Initial Corpus (₹):</label>
-    <input type="number" id="swp-corpus" min="1" step="0.01" required placeholder="e.g. 10,00,000">
-    <label for="swp-rate">Expected Return (% p.a.):</label>
-    <input type="number" id="swp-rate" step="0.01" min="0" required placeholder="e.g. 10">
-    <label for="swp-withdraw">Monthly Withdrawal (₹):</label>
-    <input type="number" id="swp-withdraw" min="1" step="0.01" required placeholder="e.g. 10,000">
-    <label for="swp-years">Projection Period (years):</label>
-    <input type="number" id="swp-years" min="1" max="50" placeholder="e.g. 20" required>
+    <label for="swp-corpus">Initial Corpus (₹)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Starting investment amount before withdrawals begin.</span></span>
+    </label>
+    <input type="number" id="swp-corpus" min="1" step="any" required placeholder="e.g. 10,00,000">
+    <label for="swp-rate">Expected Return (% p.a.)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Assumed annual growth on the remaining corpus.</span></span>
+    </label>
+    <input type="number" id="swp-rate" step="any" min="0" required placeholder="e.g. 10">
+    <label for="swp-withdraw">Monthly Withdrawal (₹)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Amount you withdraw every month.</span></span>
+    </label>
+    <input type="number" id="swp-withdraw" min="1" step="any" required placeholder="e.g. 10,000">
+    <label for="swp-years">Projection Period (years)
+      <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many years of withdrawals to project.</span></span>
+    </label>
+    <input type="number" id="swp-years" min="1" max="50" step="any" placeholder="e.g. 20" required>
     <button class="btn" type="submit" style="margin-top:9px;">Calculate</button>
     <button class="btn secondary" type="button" onclick="resetSWP()" style="margin-left:7px;">Reset</button>
   </form>
@@ -238,12 +254,18 @@
 
   <div id="swp-tab2" class="swp-tab-content" style="display:none;">
     <form id="swp-max-form" onsubmit="calculateMaxSWP(event)">
-      <label for="swp-max-corpus">Initial Corpus (₹):</label>
-      <input type="number" id="swp-max-corpus" min="1" step="0.01" required placeholder="e.g. 10,00,000">
-      <label for="swp-max-rate">Expected Return (% p.a.):</label>
-      <input type="number" id="swp-max-rate" step="0.01" min="0" required placeholder="e.g. 10">
-      <label for="swp-max-years">Withdrawal Duration (years):</label>
-      <input type="number" id="swp-max-years" min="1" max="50" placeholder="e.g. 20" required>
+      <label for="swp-max-corpus">Initial Corpus (₹)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Starting corpus you will draw down over the period.</span></span>
+      </label>
+      <input type="number" id="swp-max-corpus" min="1" step="any" required placeholder="e.g. 10,00,000">
+      <label for="swp-max-rate">Expected Return (% p.a.)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Assumed annual return while withdrawing.</span></span>
+      </label>
+      <input type="number" id="swp-max-rate" step="any" min="0" required placeholder="e.g. 10">
+      <label for="swp-max-years">Withdrawal Duration (years)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Years until corpus is exhausted under the model.</span></span>
+      </label>
+      <input type="number" id="swp-max-years" min="1" max="50" step="any" placeholder="e.g. 20" required>
       <button class="btn" type="submit" style="margin-top:9px;">Calculate Max Withdrawal</button>
 	  <button class="btn secondary" type="button" onclick="resetSWPMax()" style="margin-left:7px;">Reset</button>
     </form>
@@ -289,12 +311,46 @@
 
 <!-- BEGIN SITE FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <p class="footer-brand">💡 Investment Insights</p>
-    <p>&copy; 2026 Investment Insights. All rights reserved.</p>
-    <p class="footer-disclaimer">Educational content only — not financial advice. Not a SEBI-registered advisor. Verify figures independently before investing.</p>
-    <p class="footer-reviewed">Content last reviewed: <time datetime="2026-07-08">2026-07-08</time></p>
+  <div class="footer-inner footer-grid">
+    <div class="footer-col footer-about">
+      <p class="footer-brand">💡 Investment Insights</p>
+      <p class="footer-tagline">Free educational guides and calculators for investing in India.</p>
+      <p class="footer-disclaimer">Educational content only — not financial advice. Not a SEBI-registered advisor. Verify figures independently before investing.</p>
+      <p class="footer-reviewed">Content last reviewed: <time datetime="2026-07-09">2026-07-09</time></p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-heading">Learn</p>
+      <ul class="footer-links">
+        <li><a href="learn.html">All topics</a></li>
+        <li><a href="basics.html">How to start</a></li>
+        <li><a href="risk-allocation.html">Risk &amp; allocation</a></li>
+        <li><a href="insurance-emergency.html">Emergency &amp; insurance</a></li>
+        <li><a href="tax-overview.html">Tax overview</a></li>
+        <li><a href="gold.html">Gold</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-heading">Calculators</p>
+      <ul class="footer-links">
+        <li><a href="calculators.html">All calculators</a></li>
+        <li><a href="mutualfunds.html#sipcalc-mutual">SIP</a></li>
+        <li><a href="fixeddeposit.html">FD maturity</a></li>
+        <li><a href="nps.html">NPS</a></li>
+        <li><a href="investmentgoal.html">Goal planner</a></li>
+        <li><a href="tools.html">EMI · PPF · RD · more</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-heading">Site</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="index-vs-active.html">Index vs active</a></li>
+        <li><a href="ppf-tax-saving.html">PPF basics</a></li>
+      </ul>
+    </div>
   </div>
+  <p class="footer-copy">&copy; 2026 Investment Insights. All rights reserved.</p>
 </footer>
 <button id="back-to-top" aria-label="Back to top" type="button">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
