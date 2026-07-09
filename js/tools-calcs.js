@@ -83,12 +83,12 @@
         panel(
           [
             { label: "Monthly EMI", value: inr(r.monthlyEmi), hero: true },
-            { label: "Principal", value: inr(r.principal) },
+            { label: "Loan amount", value: inr(r.principal) },
             { label: "Total interest", value: inr(r.totalInterest) },
-            { label: "Total payment", value: inr(r.totalPayment) },
-            { label: "Tenure", value: r.months + " months" }
+            { label: "Total you pay back", value: inr(r.totalPayment) },
+            { label: "Loan length", value: r.months + " months" }
           ],
-          "Reducing-balance EMI model. Fees, prepayment, and rate resets are not included."
+          "Uses a standard reducing-balance EMI formula. Bank fees, prepayments, and rate changes are not included."
         )
       );
       remember("EMI Calculator");
@@ -106,11 +106,11 @@
         panel(
           [
             { label: "Future value", value: inr(r.futureValue), hero: true },
-            { label: "Invested", value: inr(r.principal) },
+            { label: "Amount invested", value: inr(r.principal) },
             { label: "Estimated gain", value: inr(r.gain) },
-            { label: "Assumed CAGR", value: pct(r.cagr) }
+            { label: "Return you assumed", value: pct(r.cagr) }
           ],
-          "Yearly compounding for illustration. Markets do not grow in a straight line."
+          "Assumes the same return every year. Real markets go up and down; this is not a forecast."
         )
       );
       remember("Lumpsum Calculator");
@@ -127,12 +127,12 @@
         out,
         panel(
           [
-            { label: "CAGR", value: pct(r.cagr), hero: true },
-            { label: "Start value", value: inr(r.presentValue) },
-            { label: "End value", value: inr(r.futureValue) },
+            { label: "Average yearly growth (CAGR)", value: pct(r.cagr), hero: true },
+            { label: "Starting value", value: inr(r.presentValue) },
+            { label: "Ending value", value: inr(r.futureValue) },
             { label: "Years", value: String(r.years) }
           ],
-          "Compound annual growth rate between two values over the period."
+          "This is the smooth yearly rate that would take you from start to end over that many years."
         )
       );
       remember("CAGR Calculator");
@@ -149,12 +149,12 @@
         out,
         panel(
           [
-            { label: "Future cost (same lifestyle)", value: inr(r.futureCost), hero: true },
-            { label: "Today's amount", value: inr(r.amount) },
-            { label: "Real value of that amount later", value: inr(r.realValue) },
-            { label: "Purchasing power lost", value: pct(r.purchasingPowerLossPct) }
+            { label: "What it may cost later", value: inr(r.futureCost), hero: true },
+            { label: "Amount today", value: inr(r.amount) },
+            { label: "What that money is worth later", value: inr(r.realValue) },
+            { label: "Buying power lost", value: pct(r.purchasingPowerLossPct) }
           ],
-          "Simple inflation model. Actual CPI baskets and personal spending differ."
+          "Simple model with a steady inflation rate. Your own spending and official price indexes can differ."
         )
       );
       remember("Inflation Calculator");
@@ -176,7 +176,7 @@
             { label: "Interest earned", value: inr(r.interest) },
             { label: "Years", value: String(r.years) }
           ],
-          "Simplified educational PPF model (annual deposit, yearly compound). Official PPF rules, rate resets, and tax treatment may differ — verify with a bank/post office."
+          "Simple model: one deposit each year, interest added yearly. Real PPF rules, rate changes, and tax treatment can differ. Check with a bank or post office for current terms."
         )
       );
       remember("PPF Calculator");
@@ -196,9 +196,9 @@
             { label: "Maturity value", value: inr(r.maturity), hero: true },
             { label: "Total deposited", value: inr(r.invested) },
             { label: "Interest earned", value: inr(r.interest) },
-            { label: "Tenure", value: r.months + " months" }
+            { label: "Length", value: r.months + " months" }
           ],
-          "Educational RD approximation with monthly compounding. Bank RD formulas (often quarterly) can differ slightly."
+          "Rough model with monthly compounding. Many banks use quarterly interest, so their figure can be a little different."
         )
       );
       remember("RD Calculator");
@@ -215,12 +215,12 @@
         out,
         panel(
           [
-            { label: "Required monthly SIP", value: inr(r.monthlySip), hero: true },
-            { label: "Target corpus", value: inr(r.goalAmount) },
-            { label: "Total invested (if held)", value: inr(r.totalInvested) },
+            { label: "Monthly SIP needed", value: inr(r.monthlySip), hero: true },
+            { label: "Goal amount", value: inr(r.goalAmount) },
+            { label: "Total you would invest", value: inr(r.totalInvested) },
             { label: "Years", value: String(r.years) }
           ],
-          "Reverse SIP estimate assuming constant monthly contributions and the stated return."
+          "Works backwards from your goal, assuming a steady monthly SIP and the return you entered. Not a guarantee."
         )
       );
       remember("Target SIP Calculator");

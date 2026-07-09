@@ -285,7 +285,7 @@
     var monthsExtra = parseInt(tenureMonths, 10) || 0;
     var n = years * 12 + monthsExtra;
     if (!(principal > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(n > 0)) {
-      return { error: "Invalid EMI inputs" };
+      return { error: "Please enter a valid loan amount, rate, and tenure." };
     }
     var r = annualRatePct / 100 / 12;
     var monthly;
@@ -325,7 +325,7 @@
     annualRatePct = Number(annualRatePct);
     years = Number(years);
     if (!(principal > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(years > 0)) {
-      return { error: "Invalid lumpsum inputs" };
+      return { error: "Please enter a valid investment amount, return, and years." };
     }
     var r = annualRatePct / 100;
     var fv = principal * Math.pow(1 + r, years);
@@ -352,7 +352,7 @@
     futureValue = Number(futureValue);
     years = Number(years);
     if (!(presentValue > 0) || !(futureValue > 0) || !(years > 0)) {
-      return { error: "Invalid CAGR inputs" };
+      return { error: "Please enter valid start and end values and years." };
     }
     var rate = (Math.pow(futureValue / presentValue, 1 / years) - 1) * 100;
     return { cagr: rate, presentValue: presentValue, futureValue: futureValue, years: years };
@@ -367,7 +367,7 @@
     inflationPct = Number(inflationPct);
     years = Number(years);
     if (!(amount > 0) || isNaN(inflationPct) || inflationPct < 0 || !(years > 0)) {
-      return { error: "Invalid inflation inputs" };
+      return { error: "Please enter a valid amount, inflation rate, and years." };
     }
     var factor = Math.pow(1 + inflationPct / 100, years);
     return {
@@ -390,7 +390,7 @@
     annualRatePct = Number(annualRatePct);
     years = parseInt(years, 10);
     if (!(annualDeposit > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(years > 0)) {
-      return { error: "Invalid PPF inputs" };
+      return { error: "Please enter a valid yearly deposit, rate, and years." };
     }
     var r = annualRatePct / 100;
     var balance = 0;
@@ -420,7 +420,7 @@
     annualRatePct = Number(annualRatePct);
     months = parseInt(months, 10);
     if (!(monthlyDeposit > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(months > 0)) {
-      return { error: "Invalid RD inputs" };
+      return { error: "Please enter a valid monthly deposit, rate, and months." };
     }
     var r = annualRatePct / 100 / 12;
     var balance = 0;
@@ -448,7 +448,7 @@
     annualRatePct = Number(annualRatePct);
     years = parseInt(years, 10);
     if (!(goalAmount > 0) || isNaN(annualRatePct) || annualRatePct < 0 || !(years > 0)) {
-      return { error: "Invalid target-SIP inputs" };
+      return { error: "Please enter a valid goal amount, return, and years." };
     }
     var r = annualRatePct / 100 / 12;
     var n = years * 12;
