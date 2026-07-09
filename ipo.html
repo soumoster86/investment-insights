@@ -269,14 +269,69 @@
       </div>
     </section>
 	
-	<section id="listing-gains" style="margin-top:36px;">
-  <h2>Listing gains chart (dummy data)</h2>
-  <p class="tool-intro">Educational illustration of listing-day % moves — <strong>not real IPO results</strong> and not a forecast.</p>
-  <canvas id="ipoListingChart" style="max-width:100%;min-height:260px;"></canvas>
-  <div style="font-size:0.97em;color:#888;margin-top:6px;">
-    <i>Replace with your own researched series if you maintain this page with live samples.</i>
-  </div>
-</section>
+    <section id="listing-gains" class="ipo-listing-section tool-section">
+      <div class="ipo-listing-header">
+        <div class="ipo-listing-header-text">
+          <p class="ipo-listing-eyebrow">Sample · educational only</p>
+          <h2>Listing gains (recent mainboard)</h2>
+          <p class="tool-intro">
+            Approximate <strong>listing-day % vs issue price</strong> for a recent mainboard sample.
+            Not live prices, not advice, and not a forecast of future IPOs.
+          </p>
+        </div>
+        <p class="sample-freshness ipo-listing-freshness">
+          <span class="sample-freshness-label">Sample data</span>
+          Listing day vs issue · last reviewed
+          <time data-content-reviewed datetime="2026-07-09">2026-07-09</time>
+        </p>
+      </div>
+
+      <div class="ipo-listing-metrics" id="ipo-listing-metrics" aria-live="polite">
+        <!-- Filled by script -->
+      </div>
+
+      <div class="ipo-listing-chart-card">
+        <div class="ipo-listing-chart-head">
+          <div>
+            <h3 class="ipo-listing-chart-title">Listing-day move</h3>
+            <p class="ipo-listing-chart-sub">Green = premium to issue · Red = discount · Zero line = issue price</p>
+          </div>
+          <div class="ipo-listing-legend-hint" aria-hidden="true">
+            <span class="ipo-listing-dot is-up"></span> Gain
+            <span class="ipo-listing-dot is-down"></span> Loss
+          </div>
+        </div>
+        <div class="ipo-listing-chart-wrap">
+          <canvas id="ipoListingChart" aria-label="IPO listing gains bar chart"></canvas>
+        </div>
+      </div>
+
+      <div class="table-wrap table-scroll">
+        <table class="ipo-listing-table table-cards" id="ipo-listing-table">
+          <thead>
+            <tr>
+              <th scope="col">Company</th>
+              <th scope="col">Listed</th>
+              <th scope="col">Listing gain</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Filled by script -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ipo-listing-notes">
+        <strong>How to read this</strong>
+        <ul>
+          <li>Gain/loss is approximate listing-day move vs issue price (as commonly reported by market trackers)</li>
+          <li>Mainboard sample only — SME IPOs can show much larger swings</li>
+          <li>Subscription, GMP, and market mood on listing day all differ; past pops do not predict the next IPO</li>
+          <li>Cross-check live figures on <a href="https://www.nseindia.com/market-data/new-stock-exchange-listings-recent" target="_blank" rel="noopener">NSE recent listings</a></li>
+        </ul>
+        <p class="ipo-listing-disclaimer">Past listing performance does not guarantee future results. Educational only.</p>
+      </div>
+    </section>
 
     <section id="faq-ipo" class="faq-box">
       <h3>FAQs about IPOs</h3>
@@ -339,7 +394,7 @@
     </section>
 
     <div class="callout callout-disclaimer">
-      <strong>Disclaimer:</strong> Educational content only. Sample IPO rows and listing-gain charts are illustrative.
+      <strong>Disclaimer:</strong> Educational content only. Sample IPO rows and listing-gain figures are approximate snapshots for learning — not live quotes or recommendations.
       Not a recommendation to apply for any IPO. Not SEBI-registered advice.
     </div>
   </main>
@@ -404,73 +459,199 @@
  
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const ctx = document.getElementById('ipoListingChart').getContext('2d');
-  // Replace this data with real listing gain/loss values if available
-  const ipoNames = [
-    "ABC Tech Ltd",
-    "Global Fashions",
-    "NextGen Infra",
-    "SmartRetail",
-    "Innovate Fin",
-    "MediCare Health"
-  ];
-  const ipoGains = [
-    22.5,    // e.g., 22.5% above IPO price
-    9.7,
-    -5.2,    // e.g., 5.2% below IPO price
-    12.1,
-    37.0,
-    4.9
+(function () {
+  "use strict";
+
+  // Approximate listing-day % vs issue price (mainboard sample). Educational — not live quotes.
+  // Sources: market trackers reporting listing open/debut vs upper issue price (reviewed 2026-07-09).
+  var listings = [
+    { name: "CMR Green Tech", short: "CMR Green", listed: "10 Jun 2026", gain: 39.6 },
+    { name: "Hexagon Nutrition", short: "Hexagon", listed: "12 Jun 2026", gain: 7.2 },
+    { name: "Turtlemint Fintech", short: "Turtlemint", listed: "29 Jun 2026", gain: -11.3 },
+    { name: "Advit Jewels", short: "Advit Jewels", listed: "01 Jul 2026", gain: 36.9 },
+    { name: "Waterways Leisure", short: "Waterways", listed: "01 Jul 2026", gain: -15.7 },
+    { name: "CSM Technologies", short: "CSM Tech", listed: "02 Jul 2026", gain: 0.0 },
+    { name: "Aastha Spintex", short: "Aastha", listed: "06 Jul 2026", gain: -4.4 },
+    { name: "Knack Packaging", short: "Knack", listed: "08 Jul 2026", gain: 10.6 }
   ];
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ipoNames,
-      datasets: [{
-        label: 'Listing Gain (%)',
-        data: ipoGains,
-        backgroundColor: ipoGains.map(gain =>
-          gain >= 0 ? "rgba(67,160,71,0.80)" : "rgba(220,44,44,0.78)"
-        ),
-        borderRadius: 7,
-        borderSkipped: false,
-        maxBarThickness: 38
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx =>
-              ctx.parsed.y >= 0
-                ? '+' + ctx.parsed.y.toFixed(1) + '%'
-                : ctx.parsed.y.toFixed(1) + '%'
+  function fmtGain(g) {
+    var sign = g > 0 ? "+" : "";
+    return sign + g.toFixed(1) + "%";
+  }
+
+  function renderMetrics() {
+    var el = document.getElementById("ipo-listing-metrics");
+    if (!el) return;
+    var gains = listings.map(function (r) { return r.gain; });
+    var sum = gains.reduce(function (a, b) { return a + b; }, 0);
+    var avg = sum / gains.length;
+    var winners = gains.filter(function (g) { return g > 0; }).length;
+    var losers = gains.filter(function (g) { return g < 0; }).length;
+    var flats = gains.filter(function (g) { return g === 0; }).length;
+    var best = listings.reduce(function (a, b) { return a.gain >= b.gain ? a : b; });
+    var worst = listings.reduce(function (a, b) { return a.gain <= b.gain ? a : b; });
+
+    el.innerHTML =
+      '<article class="ipo-listing-metric">' +
+      '<div class="ipo-listing-metric-kicker">Sample avg</div>' +
+      '<div class="ipo-listing-metric-value ' +
+      (avg >= 0 ? "is-up" : "is-down") +
+      '">' +
+      fmtGain(avg) +
+      "</div>" +
+      '<div class="ipo-listing-metric-sub">' +
+      listings.length +
+      " mainboard IPOs</div>" +
+      "</article>" +
+      '<article class="ipo-listing-metric">' +
+      '<div class="ipo-listing-metric-kicker">Up / flat / down</div>' +
+      '<div class="ipo-listing-metric-value is-mixed">' +
+      winners +
+      " · " +
+      flats +
+      " · " +
+      losers +
+      "</div>" +
+      '<div class="ipo-listing-metric-sub">Count of listing outcomes</div>' +
+      "</article>" +
+      '<article class="ipo-listing-metric">' +
+      '<div class="ipo-listing-metric-kicker">Best in sample</div>' +
+      '<div class="ipo-listing-metric-value is-up">' +
+      fmtGain(best.gain) +
+      "</div>" +
+      '<div class="ipo-listing-metric-sub">' +
+      best.name +
+      "</div>" +
+      "</article>" +
+      '<article class="ipo-listing-metric">' +
+      '<div class="ipo-listing-metric-kicker">Weakest in sample</div>' +
+      '<div class="ipo-listing-metric-value is-down">' +
+      fmtGain(worst.gain) +
+      "</div>" +
+      '<div class="ipo-listing-metric-sub">' +
+      worst.name +
+      "</div>" +
+      "</article>";
+  }
+
+  function renderTable() {
+    var tbody = document.querySelector("#ipo-listing-table tbody");
+    if (!tbody) return;
+    // Newest first in the table
+    var rows = listings.slice().reverse();
+    tbody.innerHTML = rows
+      .map(function (r) {
+        var cls = r.gain > 0 ? "is-up" : r.gain < 0 ? "is-down" : "is-flat";
+        return (
+          "<tr>" +
+          '<td data-label="Company">' +
+          r.name +
+          "</td>" +
+          '<td data-label="Listed">' +
+          r.listed +
+          "</td>" +
+          '<td data-label="Listing gain"><span class="ipo-gain-pill ' +
+          cls +
+          '">' +
+          fmtGain(r.gain) +
+          "</span></td>" +
+          "</tr>"
+        );
+      })
+      .join("");
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMetrics();
+    renderTable();
+
+    var canvas = document.getElementById("ipoListingChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    var ctx = canvas.getContext("2d");
+    var gains = listings.map(function (r) { return r.gain; });
+    var labels = listings.map(function (r) { return r.short; });
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Listing gain (%)",
+            data: gains,
+            backgroundColor: gains.map(function (g) {
+              if (g > 0) return "rgba(4, 120, 87, 0.82)";
+              if (g < 0) return "rgba(185, 28, 28, 0.8)";
+              return "rgba(100, 116, 139, 0.55)";
+            }),
+            borderColor: gains.map(function (g) {
+              if (g > 0) return "#047857";
+              if (g < 0) return "#b91c1c";
+              return "#64748b";
+            }),
+            borderWidth: 1.5,
+            borderRadius: 8,
+            borderSkipped: false,
+            maxBarThickness: 42
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            titleFont: { weight: "600" },
+            padding: 12,
+            callbacks: {
+              title: function (items) {
+                var i = items[0].dataIndex;
+                return listings[i].name;
+              },
+              label: function (c) {
+                var g = c.parsed.y;
+                var listed = listings[c.dataIndex].listed;
+                return " " + fmtGain(g) + "  ·  listed " + listed;
+              }
+            }
           }
         },
-        title: {
-          display: false
-        }
-      },
-      scales: {
-        x: {
-          title: { display: false },
-          ticks: { font: { size: 13, weight: 500 } }
-        },
-        y: {
-          beginAtZero: true,
-          title: { display: true, text: 'Listing Gain (%)' },
-          ticks: {
-            callback: val => (val > 0 ? '+' : '') + val + '%'
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              font: { size: 11, weight: "600" },
+              color: "#5b6b82",
+              maxRotation: 45,
+              minRotation: 0
+            }
+          },
+          y: {
+            grid: { color: "rgba(148, 163, 184, 0.22)" },
+            border: { dash: [4, 4] },
+            ticks: {
+              color: "#5b6b82",
+              font: { weight: "600" },
+              callback: function (val) {
+                return (val > 0 ? "+" : "") + val + "%";
+              }
+            },
+            title: {
+              display: true,
+              text: "Listing gain vs issue (%)",
+              color: "#5b6b82",
+              font: { size: 12, weight: "600" }
+            }
           }
         }
       }
-    }
+    });
   });
-});
+})();
 </script>
 
 <script>
