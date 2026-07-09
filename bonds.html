@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Bonds Guide & Yield Calculator | Investment Insights" />
   <meta name="twitter:description" content="India bonds guide: G-Secs, corporates, ratings, yield & YTM calculator, bond ladder planner, and educational product notes. Not advice." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710i" />
+  <link rel="stylesheet" href="style.css?v=20260710j" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -416,21 +416,29 @@
   </p>
   <form id="bond-ladder-form" class="tool-form">
     <div class="tool-fields">
-      <label>Total amount (₹)
-        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How much you might allocate across the ladder.</span></span>
-        <input name="total" type="number" min="1000" step="any" required placeholder="e.g. 5,00,000" />
+      <label for="bond-ladder-total">
+        <span class="field-caption">Total amount (₹)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How much you might allocate across the ladder.</span></span>
+        </span>
+        <input id="bond-ladder-total" name="total" type="number" min="1000" step="any" required placeholder="e.g. 5,00,000" />
       </label>
-      <label>Number of rungs
-        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many maturities (e.g. 5 → years 1 through 5).</span></span>
-        <input name="rungs" type="number" min="2" max="15" step="1" required placeholder="e.g. 5" />
+      <label for="bond-ladder-rungs">
+        <span class="field-caption">Number of rungs
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many maturities (e.g. 5 → years 1 through 5).</span></span>
+        </span>
+        <input id="bond-ladder-rungs" name="rungs" type="number" min="2" max="15" step="1" required placeholder="e.g. 5" />
       </label>
-      <label>First maturity (years)
-        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Shortest rung (e.g. 1 year).</span></span>
-        <input name="start" type="number" min="1" max="30" step="1" required placeholder="e.g. 1" />
+      <label for="bond-ladder-start">
+        <span class="field-caption">First maturity (years)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Shortest rung (e.g. 1 year).</span></span>
+        </span>
+        <input id="bond-ladder-start" name="start" type="number" min="1" max="30" step="1" required placeholder="e.g. 1" />
       </label>
-      <label>Step between rungs (years)
-        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Gap between maturities (usually 1).</span></span>
-        <input name="step" type="number" min="1" max="10" step="1" required placeholder="e.g. 1" />
+      <label for="bond-ladder-step">
+        <span class="field-caption">Step between rungs (years)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Gap between maturities (usually 1).</span></span>
+        </span>
+        <input id="bond-ladder-step" name="step" type="number" min="1" max="10" step="1" required placeholder="e.g. 1" />
       </label>
     </div>
     <div class="btn-group">
