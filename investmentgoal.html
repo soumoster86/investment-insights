@@ -805,10 +805,26 @@
   function hideOutputs() {
     ["results", "scenarios", "chart-section", "projection-wrap", "assumptions-section"].forEach(function (id) {
       var el = $(id);
-      if (el) el.hidden = true;
+      if (el) {
+        el.hidden = true;
+        el.setAttribute("hidden", "");
+      }
     });
-    $("download-csv-btn").hidden = true;
-    $("goal-saved-note").hidden = true;
+    var dl = $("download-csv-btn");
+    if (dl) {
+      dl.hidden = true;
+      dl.setAttribute("hidden", "");
+    }
+    var note = $("goal-saved-note");
+    if (note) {
+      note.hidden = true;
+      note.setAttribute("hidden", "");
+    }
+    var stats = $("goal-chart-stats");
+    if (stats) stats.innerHTML = "";
+    var proj = $("projection-table-container");
+    if (proj) proj.innerHTML = "";
+    window.projectionTableData = null;
     if (window.corpusChartInstance) {
       window.corpusChartInstance.destroy();
       window.corpusChartInstance = null;
