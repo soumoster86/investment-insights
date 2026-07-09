@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Index Funds vs Active Funds | Investment Insights" />
   <meta name="twitter:description" content="Learn the difference between index (passive) and active mutual funds/ETFs: costs, tracking, and how investors compare them. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260709b" />
+  <link rel="stylesheet" href="style.css?v=20260709h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -146,43 +146,27 @@
 
     <section id="compare">
       <h2>Side-by-side (simplified)</h2>
-      <div class="table-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Aspect</th>
-              <th>Index / passive</th>
-              <th>Active</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Goal</td>
-              <td>Match index (minus costs)</td>
-              <td>Beat benchmark or style mandate</td>
-            </tr>
-            <tr>
-              <td>Typical costs</td>
-              <td>Often lower expense ratio</td>
-              <td>Often higher expense ratio</td>
-            </tr>
-            <tr>
-              <td>Transparency</td>
-              <td>Index rules are public</td>
-              <td>Depends on disclosures &amp; style</td>
-            </tr>
-            <tr>
-              <td>Key risk beyond markets</td>
-              <td>Tracking difference, concentration of the index itself</td>
-              <td>Manager risk, style drift, higher fee drag</td>
-            </tr>
-            <tr>
-              <td>What “good” looks like</td>
-              <td>Tight tracking, low cost, adequate liquidity (ETFs)</td>
-              <td>Consistent process; past alpha may not repeat</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="fund-map cols-2" role="list">
+        <article class="fund-map-card fund-map--blue" role="listitem">
+          <header class="fund-map-head"><span class="fund-map-icon" aria-hidden="true">📊</span><h3>Index / passive</h3></header>
+          <dl class="fund-map-meta aspect-grid">
+            <div><dt>Goal</dt><dd>Match index (minus costs)</dd></div>
+            <div><dt>Typical costs</dt><dd>Often lower expense ratio</dd></div>
+            <div><dt>Transparency</dt><dd>Index rules are public</dd></div>
+            <div><dt>Key risk beyond markets</dt><dd>Tracking difference, index concentration</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Good looks like: tight tracking, low cost, liquidity</p>
+        </article>
+        <article class="fund-map-card fund-map--purple" role="listitem">
+          <header class="fund-map-head"><span class="fund-map-icon" aria-hidden="true">🧭</span><h3>Active</h3></header>
+          <dl class="fund-map-meta aspect-grid">
+            <div><dt>Goal</dt><dd>Beat benchmark or style mandate</dd></div>
+            <div><dt>Typical costs</dt><dd>Often higher expense ratio</dd></div>
+            <div><dt>Transparency</dt><dd>Depends on disclosures &amp; style</dd></div>
+            <div><dt>Key risk beyond markets</dt><dd>Manager risk, style drift, fee drag</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Good looks like: consistent process; past alpha may not repeat</p>
+        </article>
       </div>
       <p class="table-note">Illustrative. Always read the scheme information document (SID) / KIM.</p>
     </section>

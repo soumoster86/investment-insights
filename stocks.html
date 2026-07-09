@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Stocks Guide & Recommendations | Investment Insights" />
   <meta name="twitter:description" content="India stocks guide: market caps, orders & metrics, how to start, trade P&L calculator, browser watchlist, and sample names. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260709d" />
+  <link rel="stylesheet" href="style.css?v=20260709h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -171,37 +171,31 @@
     <section id="market-caps">
       <h2>Large, mid &amp; small caps (idea)</h2>
       <p class="tool-intro">SEBI and index providers classify companies by size. Labels change over time — treat this as a map, not a ranking.</p>
-      <div class="table-wrap table-scroll">
-        <table class="compare-table table-cards product-table">
-          <thead>
-            <tr>
-              <th>Bucket</th>
-              <th>Typical traits</th>
-              <th>Often used for</th>
-              <th>Risk tone</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="Bucket">Large-cap</td>
-              <td data-label="Traits">Bigger, more established names (e.g. many Nifty 50 members)</td>
-              <td data-label="Used for">Core long-term equity</td>
-              <td data-label="Risk">Relatively lower vs smaller peers (still volatile)</td>
-            </tr>
-            <tr>
-              <td data-label="Bucket">Mid-cap</td>
-              <td data-label="Traits">Growing companies between large and small</td>
-              <td data-label="Used for">Growth sleeve</td>
-              <td data-label="Risk">Medium–high</td>
-            </tr>
-            <tr>
-              <td data-label="Bucket">Small-cap</td>
-              <td data-label="Traits">Smaller businesses, thinner liquidity at times</td>
-              <td data-label="Used for">Satellite / high-risk sleeve</td>
-              <td data-label="Risk">High</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="fund-map cols-3" role="list">
+        <article class="fund-map-card fund-map--blue" role="listitem">
+          <header class="fund-map-head"><span class="fund-map-icon" aria-hidden="true">🏛️</span><h3>Large-cap</h3></header>
+          <dl class="fund-map-meta">
+            <div><dt>Typical traits</dt><dd>Bigger, more established names (e.g. many Nifty 50 members)</dd></div>
+            <div><dt>Often used for</dt><dd>Core long-term equity</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Relatively lower vs smaller peers · still volatile</p>
+        </article>
+        <article class="fund-map-card fund-map--purple" role="listitem">
+          <header class="fund-map-head"><span class="fund-map-icon" aria-hidden="true">🚀</span><h3>Mid-cap</h3></header>
+          <dl class="fund-map-meta">
+            <div><dt>Typical traits</dt><dd>Growing companies between large and small</dd></div>
+            <div><dt>Often used for</dt><dd>Growth sleeve</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Medium–high</p>
+        </article>
+        <article class="fund-map-card fund-map--rose" role="listitem">
+          <header class="fund-map-head"><span class="fund-map-icon" aria-hidden="true">⚡</span><h3>Small-cap</h3></header>
+          <dl class="fund-map-meta">
+            <div><dt>Typical traits</dt><dd>Smaller businesses, thinner liquidity at times</dd></div>
+            <div><dt>Often used for</dt><dd>Satellite / high-risk sleeve</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> High</p>
+        </article>
       </div>
       <p class="table-note">Prefer diversified funds/ETFs if picking individual small-caps feels overwhelming — see <a href="index-vs-active.html">Index vs active</a> and <a href="etf.html">ETFs</a>.</p>
     </section>

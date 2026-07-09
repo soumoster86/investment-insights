@@ -8956,47 +8956,25 @@ body.dark-mode .fund-map-risk {
   color: #e2e8f0 !important;
 }
 
-/* NPS tier comparison — 2 columns */
-.fund-map.nps-tier-map {
+/* Column helpers for category maps */
+.fund-map.nps-tier-map,
+.fund-map.cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-/* NPS asset classes — 4 equal cards */
-.fund-map.nps-asset-map {
+.fund-map.nps-asset-map,
+.fund-map.cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
+.fund-map.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.fund-map.cols-5 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
-.fund-map--tier1 {
-  --fund-accent: #0d9488;
-  --fund-icon-bg: #f0fdfa;
-  --fund-icon-border: #99f6e4;
-  --fund-risk-bg: #f0fdfa;
-  --fund-risk-border: #99f6e4;
-  --fund-risk-text: #115e59;
-}
-.fund-map--tier2 {
-  --fund-accent: #2563eb;
-  --fund-icon-bg: #eff6ff;
-  --fund-icon-border: #bfdbfe;
-  --fund-risk-bg: #eff6ff;
-  --fund-risk-border: #bfdbfe;
-  --fund-risk-text: #1e40af;
-}
-.fund-map--nps-e {
-  --fund-accent: #2563eb;
-  --fund-icon-bg: #eff6ff;
-  --fund-icon-border: #bfdbfe;
-  --fund-risk-bg: #eff6ff;
-  --fund-risk-border: #bfdbfe;
-  --fund-risk-text: #1e40af;
-}
-.fund-map--nps-c {
-  --fund-accent: #7c3aed;
-  --fund-icon-bg: #f5f3ff;
-  --fund-icon-border: #ddd6fe;
-  --fund-risk-bg: #f5f3ff;
-  --fund-risk-border: #ddd6fe;
-  --fund-risk-text: #5b21b6;
-}
+/* Shared accent tokens (reuse across pages) */
+.fund-map--tier1,
+.fund-map--teal,
 .fund-map--nps-g {
   --fund-accent: #0d9488;
   --fund-icon-bg: #f0fdfa;
@@ -9005,6 +8983,26 @@ body.dark-mode .fund-map-risk {
   --fund-risk-border: #99f6e4;
   --fund-risk-text: #115e59;
 }
+.fund-map--tier2,
+.fund-map--blue,
+.fund-map--nps-e {
+  --fund-accent: #2563eb;
+  --fund-icon-bg: #eff6ff;
+  --fund-icon-border: #bfdbfe;
+  --fund-risk-bg: #eff6ff;
+  --fund-risk-border: #bfdbfe;
+  --fund-risk-text: #1e40af;
+}
+.fund-map--purple,
+.fund-map--nps-c {
+  --fund-accent: #7c3aed;
+  --fund-icon-bg: #f5f3ff;
+  --fund-icon-border: #ddd6fe;
+  --fund-risk-bg: #f5f3ff;
+  --fund-risk-border: #ddd6fe;
+  --fund-risk-text: #5b21b6;
+}
+.fund-map--amber,
 .fund-map--nps-a {
   --fund-accent: #d97706;
   --fund-icon-bg: #fffbeb;
@@ -9013,9 +9011,69 @@ body.dark-mode .fund-map-risk {
   --fund-risk-border: #fde68a;
   --fund-risk-text: #92400e;
 }
+.fund-map--rose {
+  --fund-accent: #e11d48;
+  --fund-icon-bg: #fff1f2;
+  --fund-icon-border: #fecdd3;
+  --fund-risk-bg: #fff1f2;
+  --fund-risk-border: #fecdd3;
+  --fund-risk-text: #9f1239;
+}
+.fund-map--indigo {
+  --fund-accent: #4f46e5;
+  --fund-icon-bg: #eef2ff;
+  --fund-icon-border: #c7d2fe;
+  --fund-risk-bg: #eef2ff;
+  --fund-risk-border: #c7d2fe;
+  --fund-risk-text: #3730a3;
+}
+.fund-map--slate {
+  --fund-accent: #475569;
+  --fund-icon-bg: #f1f5f9;
+  --fund-icon-border: #cbd5e1;
+  --fund-risk-bg: #f1f5f9;
+  --fund-risk-border: #cbd5e1;
+  --fund-risk-text: #334155;
+}
+.fund-map--green {
+  --fund-accent: #059669;
+  --fund-icon-bg: #ecfdf5;
+  --fund-icon-border: #a7f3d0;
+  --fund-risk-bg: #ecfdf5;
+  --fund-risk-border: #a7f3d0;
+  --fund-risk-text: #065f46;
+}
+.fund-map--pink {
+  --fund-accent: #db2777;
+  --fund-icon-bg: #fdf2f8;
+  --fund-icon-border: #fbcfe8;
+  --fund-risk-bg: #fdf2f8;
+  --fund-risk-border: #fbcfe8;
+  --fund-risk-text: #9d174d;
+}
+.fund-map--orange {
+  --fund-accent: #c2410c;
+  --fund-icon-bg: #fff7ed;
+  --fund-icon-border: #fed7aa;
+  --fund-risk-bg: #fff7ed;
+  --fund-risk-border: #fed7aa;
+  --fund-risk-text: #9a3412;
+}
+
+/* Product vs product mini-compare inside cards */
+.fund-map-meta.aspect-grid {
+  display: grid;
+  gap: 8px;
+}
+.fund-map-meta.aspect-grid > div {
+  display: grid;
+  gap: 2px;
+}
 
 @media (max-width: 1100px) {
-  .fund-map.nps-asset-map { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fund-map.nps-asset-map,
+  .fund-map.cols-4,
+  .fund-map.cols-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 960px) {
   .fund-map { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -9023,7 +9081,11 @@ body.dark-mode .fund-map-risk {
 @media (max-width: 560px) {
   .fund-map { grid-template-columns: 1fr; }
   .fund-map.nps-tier-map,
-  .fund-map.nps-asset-map { grid-template-columns: 1fr; }
+  .fund-map.nps-asset-map,
+  .fund-map.cols-2,
+  .fund-map.cols-3,
+  .fund-map.cols-4,
+  .fund-map.cols-5 { grid-template-columns: 1fr; }
 }
 
 /* ========== Parking options map (FD vs alternatives) ========== */
@@ -9542,3 +9604,12 @@ body.dark-mode .rate-band-tenure {
 @media (max-width: 480px) {
   .rate-band-stats { grid-template-columns: 1fr; }
 }
+
+.fund-map-blurb {
+  margin: 0;
+  flex: 1;
+  font-size: 0.94em;
+  line-height: 1.45;
+  color: var(--text-muted, #475569);
+}
+body.dark-mode .fund-map-blurb { color: #b4bccb !important; }
