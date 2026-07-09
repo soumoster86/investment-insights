@@ -41,12 +41,40 @@
   var IIUtil = {
     escapeHtml: escapeHtml,
     formatINR: formatINR,
-    formatPct: formatPct
+    formatPct: formatPct,
+    initScrollAnimations: function() {
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: just show them immediately
+        document.querySelectorAll('.fade-in-section').forEach(function(el) {
+          el.classList.add('is-visible');
+        });
+        return;
+      }
+      var observer = new IntersectionObserver(function(entries, obs) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -50px 0px" });
+      
+      document.querySelectorAll('.fade-in-section').forEach(function(el) {
+        observer.observe(el);
+      });
+    }
   };
 
   if (typeof module !== "undefined" && module.exports) {
     module.exports = IIUtil;
   } else {
     global.IIUtil = IIUtil;
+    
+    // Auto-init client side
+    if (typeof document !== "undefined") {
+      document.addEventListener("DOMContentLoaded", function() {
+        IIUtil.initScrollAnimations();
+      });
+    }
   }
 })(typeof window !== "undefined" ? window : globalThis);

@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    Investment Insights ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â shared stylesheet
    Loaded by every page. Owns shell, components, and visual system.
    ============================================================ */
@@ -2845,9 +2845,9 @@ body.page-home .floating-toc { top: calc(var(--header-h) + 20px); }
   min-height: 180px;
 }
 .feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(43, 125, 233, 0.35);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(43, 125, 233, 0.15);
+  border-color: rgba(43, 125, 233, 0.5);
   color: inherit !important;
 }
 .feature-card h3 {
@@ -2889,9 +2889,9 @@ body.page-home .floating-toc { top: calc(var(--header-h) + 20px); }
   transition: transform 0.18s var(--ease), border-color 0.18s, box-shadow 0.18s;
 }
 .calc-chip:hover {
-  transform: translateY(-2px);
-  border-color: rgba(43, 125, 233, 0.4);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px) scale(1.03);
+  border-color: rgba(43, 125, 233, 0.5);
+  box-shadow: 0 8px 24px rgba(43, 125, 233, 0.18);
   color: var(--brand) !important;
 }
 .calc-chip .ii-icon { width: 1.2em; height: 1.2em; }
@@ -4114,9 +4114,9 @@ body.dark-mode section a.topic-nav-link {
   transition: transform 0.18s var(--ease), box-shadow 0.18s, border-color 0.18s;
 }
 .learn-path-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: rgba(43, 125, 233, 0.35);
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 16px 32px rgba(43, 125, 233, 0.12);
+  border-color: rgba(43, 125, 233, 0.5);
   color: inherit !important;
 }
 .learn-path-num {
@@ -5425,3 +5425,18 @@ main table,
   }
 }
 
+/* ============================================================
+   Animations & Micro-interactions
+   ============================================================ */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), visibility 0.6s;
+  will-change: opacity, visibility, transform;
+}
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
