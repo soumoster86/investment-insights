@@ -64,11 +64,21 @@
     if (snap && snap.monthlySip > 0) {
       if (emptyEl) emptyEl.style.display = "none";
       if (filledEl) filledEl.style.display = "";
+      var nameEl = document.getElementById("goal-summary-name");
+      var nameRow = document.getElementById("goal-summary-name-row");
+      if (nameEl && nameRow) {
+        if (snap.goalName) {
+          nameEl.textContent = String(snap.goalName);
+          nameRow.style.display = "";
+        } else {
+          nameRow.style.display = "none";
+        }
+      }
       if (sipEl) sipEl.textContent = formatINR(snap.monthlySip);
       if (yearsEl) yearsEl.textContent = snap.years + " years";
       if (corpusEl) corpusEl.textContent = formatINR(snap.expectedCorpus);
       if (btn) {
-        btn.textContent = "View or Edit";
+        btn.textContent = "View or edit";
         btn.setAttribute("href", "investmentgoal.html");
       }
     } else {

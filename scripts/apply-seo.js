@@ -67,7 +67,7 @@ const PAGES = {
   "investmentgoal.html": {
     title: "Investment Goal Planner | Investment Insights",
     description:
-      "Plan a goal-based SIP, project corpus with inflation adjustment, and save a snapshot to your dashboard."
+      "Plan to a target SIP or project corpus from monthly investing. Templates, inflation adjust, scenarios, and a home dashboard snapshot. Educational only."
   },
   "contact.html": {
     title: "Contact | Investment Insights",

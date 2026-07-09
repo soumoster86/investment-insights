@@ -5,24 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investment Goal Planner | Investment Insights</title>
 <!-- BEGIN SEO -->
-  <meta name="description" content="Plan a goal-based SIP, project corpus with inflation adjustment, and save a snapshot to your dashboard." />
+  <meta name="description" content="Plan to a target SIP or project corpus from monthly investing. Templates, inflation adjust, scenarios, and a home dashboard snapshot. Educational only." />
   <link rel="canonical" href="https://investment-insight.netlify.app/investmentgoal.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Investment Insights" />
   <meta property="og:title" content="Investment Goal Planner | Investment Insights" />
-  <meta property="og:description" content="Plan a goal-based SIP, project corpus with inflation adjustment, and save a snapshot to your dashboard." />
+  <meta property="og:description" content="Plan to a target SIP or project corpus from monthly investing. Templates, inflation adjust, scenarios, and a home dashboard snapshot. Educational only." />
   <meta property="og:url" content="https://investment-insight.netlify.app/investmentgoal.html" />
   <meta property="og:image" content="https://investment-insight.netlify.app/logo.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Investment Goal Planner | Investment Insights" />
-  <meta name="twitter:description" content="Plan a goal-based SIP, project corpus with inflation adjustment, and save a snapshot to your dashboard." />
+  <meta name="twitter:description" content="Plan to a target SIP or project corpus from monthly investing. Templates, inflation adjust, scenarios, and a home dashboard snapshot. Educational only." />
 <!-- END SEO -->
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- BEGIN JSON-LD -->
+  <!-- BEGIN JSON-LD -->
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -32,8 +32,8 @@
   "step": [
     {
       "@type": "HowToStep",
-      "name": "Choose routes and amounts",
-      "text": "Select investment routes and monthly contribution amounts."
+      "name": "Choose a mode",
+      "text": "Plan to a target amount or project from a monthly SIP."
     },
     {
       "@type": "HowToStep",
@@ -42,8 +42,8 @@
     },
     {
       "@type": "HowToStep",
-      "name": "Review and save",
-      "text": "Inspect nominal and inflation-adjusted corpus; snapshot can appear on the home dashboard."
+      "name": "Review scenarios and save",
+      "text": "Compare conservative/base/optimistic outcomes; snapshot can appear on the home dashboard."
     }
   ]
 }
@@ -51,7 +51,7 @@
 <!-- END JSON-LD -->
 </head>
 <body>
-    <!-- BEGIN SITE HEADER -->
+<!-- BEGIN SITE HEADER -->
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
   <div class="brand">
@@ -108,148 +108,245 @@
   </nav>
 </header>
 <!-- END SITE HEADER -->
-  <main    id="main-content" tabindex="-1">
-    <section>
-      <h2>Set Your Investment Goal</h2>
-      <form id="goal-form" onsubmit="calculateGoal(event)">
-        <label for="routes">Select Investment Routes:</label>
-		<select id="routes" multiple required style="height: 110px;" onchange="generateAmountFields(); updateTotalAmount();">
-  <option value="Stocks">Stocks</option>
-  <option value="Mutual Funds">Mutual Funds</option>
-  <option value="Bonds">Bonds</option>
-  <option value="Fixed Deposits">Fixed Deposits</option>
-  <option value="Cryptocurrencies">Cryptocurrencies</option>
-</select>
 
-<small style="color:#555;display:block;margin-top:5px;margin-bottom:12px;">(Hold Ctrl/Cmd to select multiple options)</small>
+  <nav class="floating-toc" id="floating-toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul>
+      <li><a href="#planner">Planner</a></li>
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#scenarios">Scenarios</a></li>
+      <li><a href="#faq-goal">FAQ</a></li>
+    </ul>
+  </nav>
 
-<button type="button" class="btn secondary" id="suggest-portfolio-btn" onclick="showPortfolioModal()" style="margin-bottom:7px;">
-  💡 Suggest Portfolio
-</button>
-<div id="suggest-portfolio-msg" style="font-size:0.97em; color:#ca7500; margin-bottom:10px; display:none;">
-  * This button is disabled after manual selection. Click on the Reset button below to enable again.
-</div>
+  <main id="main-content" tabindex="-1">
+    <section class="article-hero">
+      <p class="eyebrow">Calculators</p>
+      <h1>Investment goal planner</h1>
+      <p class="article-lead">
+        Answer the two questions that matter: <strong>what SIP do I need for a target?</strong>
+        or <strong>what corpus might a SIP grow into?</strong>
+        Educational estimates only — not personalised advice.
+      </p>
+    </section>
 
-<!-- Modal for Portfolio Suggestion -->
-<div id="portfolio-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.33); z-index:5000; justify-content:center; align-items:center;">
-  <div style="background:#fff; padding:28px 20px 18px 20px; border-radius:13px; min-width:340px; max-width:92vw; box-shadow:0 4px 22px #0013;">
-    <h3 style="margin-top:0; color:#004080;">Portfolio Model Suggestion</h3>
-    <label for="risk-profile"><b>Select Risk Profile:</b></label>
-    <select id="risk-profile" style="margin-bottom:14px; width:100%;">
-      <option value="moderate">Moderate (Balanced)</option>
-      <option value="aggressive">Aggressive (Growth)</option>
-      <option value="conservative">Conservative (Safe)</option>
-    </select>
-    <div id="suggestion-table" style="margin-bottom:12px;">
-      <!-- Model allocations appear here -->
-    </div>
-    <label><b>Total Monthly Investment (₹):</b></label>
-    <input type="number" id="modal-total-amt" min="100" value="20000" style="width:90%; margin-bottom:10px;" />
-    <div style="text-align:right;">
-      <button type="button" class="btn" onclick="applySuggestedPortfolio()">Apply</button>
-      <button type="button" class="btn secondary" onclick="closePortfolioModal()">Cancel</button>
-    </div>
-  </div>
-</div>
+    <section id="templates" class="goal-templates-section">
+      <h2>Quick start templates</h2>
+      <p class="tool-intro">One click fills sensible defaults. Edit anything after applying.</p>
+      <div class="goal-template-grid" role="group" aria-label="Goal templates">
+        <button type="button" class="goal-template-card" data-template="emergency">
+          <span class="goal-template-icon" aria-hidden="true">🛡️</span>
+          <strong>Emergency fund</strong>
+          <span>6–12 months buffer · short horizon</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="house">
+          <span class="goal-template-icon" aria-hidden="true">🏠</span>
+          <strong>House down payment</strong>
+          <span>Medium horizon · balanced return</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="education">
+          <span class="goal-template-icon" aria-hidden="true">🎓</span>
+          <strong>Child education</strong>
+          <span>Long horizon · inflation matters</span>
+        </button>
+        <button type="button" class="goal-template-card" data-template="retirement">
+          <span class="goal-template-icon" aria-hidden="true">🌅</span>
+          <strong>Retirement corpus</strong>
+          <span>Long horizon · growth-oriented</span>
+        </button>
+      </div>
+    </section>
 
-		
-<!-- Dynamic input fields for amounts -->
-<div id="route-amount-fields" style="margin-bottom: 10px;"></div>
+    <section id="planner" class="goal-planner-section">
+      <div class="goal-mode-tabs" role="tablist" aria-label="Planner mode">
+        <button type="button" class="goal-mode-tab is-active" role="tab" aria-selected="true" data-mode="target" id="tab-target">
+          Plan to a target
+        </button>
+        <button type="button" class="goal-mode-tab" role="tab" aria-selected="false" data-mode="project" id="tab-project">
+          Project from SIP
+        </button>
+      </div>
 
-        <div id="monthly-investment-total" style="margin:8px 0 18px 0; font-weight: 500; font-size:1.14em; color: #0a3965; display:none;">
-        Total Monthly Investment: ₹<span id="total-amount-value">0</span>
+      <form id="goal-form" class="tool-form goal-form" novalidate>
+        <div class="tool-fields">
+          <label class="goal-field-full">Goal name
+            <span class="tooltip" tabindex="0">ⓘ
+              <span class="tooltip-text">Optional label shown in results and on the home dashboard snapshot.</span>
+            </span>
+            <input type="text" id="goal-name" name="goalName" placeholder="e.g. House down payment 2035" maxlength="80" />
+          </label>
         </div>
-		
-		<label for="rate" style="display:flex;align-items:center;gap:7px;">
-  Expected Rate of Return (% per year):
-  <span id="return-info" tabindex="0" style="cursor:pointer; color:#004080; font-size:1.1em; display:inline-block; position:relative;">
-    <svg width="18" height="18" style="vertical-align:-2px;"><circle cx="9" cy="9" r="8" fill="#eaf2ff" stroke="#004080" stroke-width="1.5"/><text x="9" y="13" text-anchor="middle" font-size="12" fill="#004080" font-family="Segoe UI,Arial" font-weight="bold">i</text></svg>
-    <span id="rate-tooltip" style="display:none;position:absolute;left:24px;top:-8px;z-index:1000;background:#fff;border:1.5px solid #e1e6f2;box-shadow:0 3px 12px #00408022;padding:13px 17px 11px 13px;border-radius:8px;font-size:0.97em;color:#1a2c4b;min-width:200px;max-width:350px;white-space:normal;">
-      <!-- Dynamic content goes here -->
-    </span>
-  </span>
-</label>
-        <input type="number" id="rate" step="0.01" min="0" required placeholder="e.g. 11">
 
-        <label for="inflation" style="display:flex;align-items:center;gap:7px;">
-  Expected Inflation Rate (% per year):
-  <span id="inflation-info" tabindex="0" style="cursor:pointer; color:#004080; font-size:1.1em; display:inline-block; position:relative;">
-    <svg width="18" height="18" style="vertical-align:-2px;"><circle cx="9" cy="9" r="8" fill="#eaf2ff" stroke="#004080" stroke-width="1.5"/><text x="9" y="13" text-anchor="middle" font-size="12" fill="#004080" font-family="Segoe UI,Arial" font-weight="bold">i</text></svg>
-    <span id="inflation-tooltip" style="
-  display:none;
-  position:absolute;
-  left:0;
-  top:90%;
-  z-index:1000;
-  background:#fff;
-  border:1.5px solid #e1e6f2;
-  box-shadow:0 3px 12px #00408022;
-  padding:13px 17px 11px 13px;
-  border-radius:8px;
-  font-size:0.97em;
-  color:#1a2c4b;
-  min-width:220px;
-  max-width:380px;
-  max-height:300px;
-  overflow:auto;
-  white-space:normal;
-">
-      <!-- Historic inflation data will be loaded here -->
-    </span>
-  </span>
-</label>
-<input type="number" id="inflation" step="0.01" min="0" required placeholder="e.g. 6">
+        <!-- TARGET MODE -->
+        <div id="fields-target" class="goal-mode-fields">
+          <div class="tool-fields">
+            <label>Target amount today (₹)
+              <span class="tooltip" tabindex="0">ⓘ
+                <span class="tooltip-text">What the goal would cost in today’s rupees (or the nominal amount you want if you turn off inflation adjust).</span>
+              </span>
+              <input type="number" id="target-amount" min="1" step="any" placeholder="e.g. 50,00,000" />
+            </label>
+            <label class="goal-check-label">
+              <input type="checkbox" id="inflate-target" checked />
+              Grow target with inflation
+              <span class="tooltip" tabindex="0">ⓘ
+                <span class="tooltip-text">If checked, the planner multiplies your target by inflation so the SIP aims at future purchasing power.</span>
+              </span>
+            </label>
+          </div>
+        </div>
 
-        <label for="duration">Investment Duration (years):</label>
-        <input type="number" id="duration" min="1" required placeholder="e.g. 15">
+        <!-- PROJECT MODE -->
+        <div id="fields-project" class="goal-mode-fields" hidden>
+          <div class="tool-fields">
+            <label>Monthly SIP (₹)
+              <span class="tooltip" tabindex="0">ⓘ
+                <span class="tooltip-text">Total amount you invest every month across all routes.</span>
+              </span>
+              <input type="number" id="monthly-sip" min="1" step="any" placeholder="e.g. 15,000" />
+            </label>
+            <label>Annual SIP step-up (%)
+              <span class="tooltip" tabindex="0">ⓘ
+                <span class="tooltip-text">Optional yearly increase in SIP (e.g. 10). Use 0 for a flat SIP. Target mode always uses flat SIP.</span>
+              </span>
+              <input type="number" id="step-up" min="0" step="any" placeholder="e.g. 0 or 10" />
+            </label>
+          </div>
+          <div class="goal-suggest-row">
+            <button type="button" class="btn secondary" id="suggest-portfolio-btn">💡 Suggest portfolio split</button>
+            <p id="suggest-portfolio-msg" class="goal-hint" hidden>
+              Portfolio split applied. Edit amounts or routes, then Reset to re-enable suggestions.
+            </p>
+          </div>
+        </div>
 
-        <div style="display: flex; gap: 14px;">
-        <button type="submit" onclick="calculateGoal(event)">Calculate Future Corpus</button>
-        <button type="button" class="btn secondary" onclick="resetGoalForm()">Reset</button>
+        <div class="tool-fields">
+          <label>Years
+            <span class="tooltip" tabindex="0">ⓘ
+              <span class="tooltip-text">Investment horizon until you need the money.</span>
+            </span>
+            <input type="number" id="duration" min="1" max="50" step="1" required placeholder="e.g. 15" />
+          </label>
+          <label>Expected return (% p.a.)
+            <span class="tooltip" tabindex="0">ⓘ
+              <span class="tooltip-text">Assumed annual return for the plan. Markets vary — not a guarantee. Typical long-term equity-heavy mixes are often discussed around 10–12% educationally.</span>
+            </span>
+            <input type="number" id="rate" min="0" step="any" required placeholder="e.g. 11" />
+          </label>
+          <label>Inflation (% p.a.)
+            <span class="tooltip" tabindex="0">ⓘ
+              <span class="tooltip-text">Long-term India CPI planning often uses ~5–6%. Affects real corpus and optional target growth.</span>
+            </span>
+            <input type="number" id="inflation" min="0" step="any" required placeholder="e.g. 6" />
+          </label>
+        </div>
+
+        <fieldset class="goal-routes">
+          <legend>Investment mix <span class="goal-optional">(labels only · optional)</span></legend>
+          <p class="goal-hint">Tag routes for your plan. Math uses one blended return above — not separate returns per route.</p>
+          <div class="route-chips" id="route-chips">
+            <label class="route-chip"><input type="checkbox" name="route" value="Mutual Funds" checked /> Mutual funds</label>
+            <label class="route-chip"><input type="checkbox" name="route" value="Stocks" /> Stocks</label>
+            <label class="route-chip"><input type="checkbox" name="route" value="Bonds" /> Bonds</label>
+            <label class="route-chip"><input type="checkbox" name="route" value="Fixed Deposits" /> Fixed deposits</label>
+            <label class="route-chip"><input type="checkbox" name="route" value="Cryptocurrencies" /> Crypto</label>
+            <label class="route-chip"><input type="checkbox" name="route" value="Gold" /> Gold</label>
+          </div>
+        </fieldset>
+
+        <div class="btn-group">
+          <button type="submit" class="btn" id="goal-submit">Calculate plan</button>
+          <button type="button" class="btn secondary" id="goal-reset">Reset</button>
         </div>
       </form>
-      <div id="goal-result" style="margin-top:18px;font-size:1.13em;color:#004080;font-weight:500;"></div>
-      <!-- Chart Container -->
-      <div id="chart-section" style="margin:24px 0 0 0; background:#fff; border-radius:12px; padding:12px 6px; display:none;">
-      <canvas id="plotSIPCorpusChart" style="max-width:100%;"></canvas>
+    </section>
+
+    <!-- Portfolio modal -->
+    <div id="portfolio-modal" class="goal-modal" hidden>
+      <div class="goal-modal-dialog" role="dialog" aria-labelledby="portfolio-modal-title" aria-modal="true">
+        <h3 id="portfolio-modal-title">Portfolio model suggestion</h3>
+        <p class="goal-hint">Educational allocation only — not product recommendations to buy.</p>
+        <label for="risk-profile">Risk profile</label>
+        <select id="risk-profile">
+          <option value="moderate">Moderate (balanced)</option>
+          <option value="aggressive">Aggressive (growth)</option>
+          <option value="conservative">Conservative (safer)</option>
+        </select>
+        <div id="suggestion-table" class="goal-suggestion-table"></div>
+        <label for="modal-total-amt">Total monthly investment (₹)</label>
+        <input type="number" id="modal-total-amt" min="100" step="any" value="20000" />
+        <div class="btn-group">
+          <button type="button" class="btn" id="apply-portfolio">Apply</button>
+          <button type="button" class="btn secondary" id="close-portfolio">Cancel</button>
+        </div>
       </div>
-      <!-- Projection Table and Download -->
-      <div id="projection-table-container" style="margin-top:30px;"></div>
-      <button id="download-csv-btn" class="download-btn" style="display:none;" onclick="downloadProjectionCSV()">⬇️ Download Projection Table as CSV</button>
+    </div>
+
+    <section id="results" class="goal-results-section" hidden>
+      <h2>Your plan snapshot</h2>
+      <div id="goal-result" class="calc-result-panel"></div>
+      <div id="goal-result-actions" class="goal-actions calc-grid"></div>
+      <p id="goal-saved-note" class="goal-hint" hidden>Saved to your browser — appears under “Your goal” on the home page.</p>
     </section>
-	
-	    <section class="assumptions-box" id="assumptions-section" style="display:none;">
-  <h3>⚠️ Assumptions & Limitations</h3>
-  <ul>
-    <li>Assumes fixed monthly investment throughout the period.</li>
-    <li>Does not include taxes, transaction costs, or step-up SIPs.</li>
-    <li>Projected rates are not guaranteed—returns depend on market performance.</li>
-    <li>Inflation and return rates are user-entered and may differ from actuals.</li>
-  </ul>
-</section>
-	
-    <!-- FAQ, Assumptions, Tips sections -->
-    <section class="faq-box">
-      <h3>📚 Investment Goal FAQs & Guidance</h3>
+
+    <section id="scenarios" class="goal-scenarios-section" hidden>
+      <h2>What if returns differ?</h2>
+      <p class="tool-intro">Same inputs, three assumed annual returns (base ±2 percentage points). Not a forecast.</p>
+      <div id="scenario-grid" class="scenario-grid"></div>
+    </section>
+
+    <section id="chart-section" class="goal-chart-section" hidden>
+      <h2>Corpus over time</h2>
+      <div class="goal-chart-wrap">
+        <canvas id="plotSIPCorpusChart"></canvas>
+      </div>
+    </section>
+
+    <section id="projection-wrap" hidden>
+      <h2>Yearly projection</h2>
+      <div id="projection-table-container" class="table-wrap"></div>
+      <button type="button" id="download-csv-btn" class="download-btn" hidden>⬇️ Download projection CSV</button>
+    </section>
+
+    <section class="assumptions-box" id="assumptions-section" hidden>
+      <h3>⚠️ Assumptions &amp; limitations</h3>
       <ul>
-        <li><b>What is XIRR?</b> XIRR (Extended Internal Rate of Return) gives your true annualized return, accounting for all cash flows and timing, making it the gold standard for comparing different investments.</li>
-        <li><b>Why consider inflation?</b> Inflation reduces your money’s buying power over time. Always look at the <b>inflation-adjusted corpus</b> to see your real wealth growth.</li>
-        <li><b>What does “Future Corpus” mean?</b> This is the total wealth you’ll accumulate, assuming all your planned investments and expected returns hold true.</li>
-        <li><b>What’s the benefit of investing monthly?</b> Monthly SIPs smooth out market ups and downs, help you save consistently, and build wealth through compounding.</li>
+        <li>Flat SIP unless you set a step-up in “Project from SIP” mode.</li>
+        <li>One blended return for the whole plan — not separate modelling per route.</li>
+        <li>Does not include taxes, expense ratios, exit loads, or sequence-of-returns risk.</li>
+        <li>Scenarios only shift the return assumption; inflation is held constant.</li>
+        <li>Educational only — not SEBI-registered advice.</li>
       </ul>
     </section>
-	
+
+    <section id="faq-goal" class="faq-box">
+      <h3>📚 Goal planner FAQ</h3>
+      <ul>
+        <li><b>Target vs project?</b> Target mode answers “how much SIP for a goal.” Project mode answers “what might this SIP become.”</li>
+        <li><b>Why grow the target with inflation?</b> ₹50 lakh in 15 years buys less than ₹50 lakh today. Inflating the target aims at similar purchasing power.</li>
+        <li><b>What is the inflation-adjusted corpus?</b> Nominal corpus divided by cumulative inflation — a rough view of real purchasing power.</li>
+        <li><b>Why one return rate?</b> Keeps the model transparent. Use scenarios to stress-test higher or lower outcomes.</li>
+      </ul>
+    </section>
+
     <section class="tips-box">
-      <h3>💡 Tips for Smart Investing</h3>
+      <h3>💡 Practical tips</h3>
       <ul>
-        <li>Start early—even small investments grow big over time.</li>
-        <li>Review your investments every year and rebalance if needed.</li>
-        <li>Increase your SIP amount as your income grows.</li>
-        <li>Consult a financial advisor for personalized advice.</li>
+        <li>Protect with an <a href="insurance-emergency.html">emergency fund</a> before stretching SIPs.</li>
+        <li>Match equity share to your horizon — see <a href="risk-allocation.html">risk &amp; allocation</a>.</li>
+        <li>Raise SIPs when income grows (step-up in project mode).</li>
+        <li>Pair long goals with simple cores like diversified funds — <a href="index-vs-active.html">index vs active</a>.</li>
       </ul>
     </section>
+
+    <div class="callout callout-disclaimer">
+      <strong>Disclaimer:</strong> Educational estimates only. Not tax, investment, or financial advice.
+      Verify assumptions independently. Past returns do not predict future results.
+    </div>
   </main>
-  <!-- BEGIN SITE FOOTER -->
+
+<!-- BEGIN SITE FOOTER -->
 <footer>
   <div class="footer-inner footer-grid">
     <div class="footer-col footer-about">
@@ -301,598 +398,663 @@
 </button>
 <!-- END SITE FOOTER -->
 
-  <script>
-  
-  const historicReturns = {
-  "Stocks": "11-13% p.a.",
-  "Mutual Funds": "10-13% p.a.",
-  "Bonds": "6.5-7.5% p.a.",
-  "Fixed Deposits": "6-7% p.a.",
-  "Cryptocurrencies": "Highly volatile, varies widely"
-};
-
-  const indiaInflationHistory = [
-  { year: 2024, rate: 5.4 },
-  { year: 2023, rate: 5.7 },
-  { year: 2022, rate: 6.7 },
-  { year: 2021, rate: 5.1 },
-  { year: 2020, rate: 6.6 },
-  { year: 2019, rate: 3.7 },
-  { year: 2018, rate: 3.4 },
-  { year: 2017, rate: 3.3 },
-  { year: 2016, rate: 4.9 },
-  { year: 2015, rate: 4.9 },
-  { year: 2014, rate: 6.7 },
-  { year: 2013, rate: 9.4 },
-  { year: 2012, rate: 10.0 },
-  { year: 2011, rate: 8.9 },
-  { year: 2010, rate: 11.9 }
-  // Source: RBI, World Bank, Trading Economics
-];
-  
-  
-    // Reset Button functionality
-    function resetGoalForm() {
-  document.getElementById('goal-form').reset();
-  document.getElementById('route-amount-fields').innerHTML = '';
-  document.getElementById('total-amount-value').textContent = '0';
-  document.getElementById('monthly-investment-total').style.display = 'none';
-  document.getElementById('goal-result').innerHTML = '';
-  document.getElementById('projection-table-container').innerHTML = '';
-  document.getElementById('download-csv-btn').style.display = 'none';
-  document.getElementById('assumptions-section').style.display = "none";
-  document.getElementById('chart-section').style.display = "none";
-  if (window.corpusChartInstance) window.corpusChartInstance.destroy();
-  enableSuggestPortfolio(); // <--- This MUST be called
-}
-
-  
-    // Generate Total Amount Dynamically
-    function generateAmountFields() {
-      const selected = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
-      const container = document.getElementById('route-amount-fields');
-      container.innerHTML = ''; // clear previous
-
-      selected.forEach(route => {
-        const inputId = `amount-${route.replace(/\s+/g, '').toLowerCase()}`;
-        container.innerHTML += `
-          <label for="${inputId}">Monthly Investment in ${route} (₹):</label>
-          <input type="number" min="0" id="${inputId}" class="route-amount" placeholder="Amount for ${route}" oninput="updateTotalAmount()" required>
-        `;
-      });
-
-      updateTotalAmount(); // reset total when selection changes
-    }
-	
-    // Calculate and update total monthly investment
-    function updateTotalAmount() {
-  const inputs = document.querySelectorAll('.route-amount');
-  let total = 0;
-  inputs.forEach(input => {
-    const val = parseFloat(input.value);
-    if (!isNaN(val) && val > 0) total += val;
-  });
-  document.getElementById('total-amount-value').textContent = total.toLocaleString('en-IN');
-  // Show the total only if there are route inputs (fields are present)
-  document.getElementById('monthly-investment-total').style.display = inputs.length > 0 ? 'block' : 'none';
-}
-
-    // XIRR Helper Function
-    function xirr(cashFlows, dates, guess = 0.1) {
-      const tol = 1e-7, maxIter = 100;
-      const dayMs = 1000 * 60 * 60 * 24;
-      const xnpv = (rate) => cashFlows.reduce((sum, c, i) =>
-        sum + c / Math.pow(1 + rate, (dates[i] - dates[0]) / dayMs / 365), 0);
-
-      let rate = guess;
-      for (let iter = 0; iter < maxIter; iter++) {
-        const npv = xnpv(rate);
-        const dRate = rate * 1.0001 || 1e-6;
-        const dNpv = (xnpv(dRate) - npv) / (dRate - rate);
-        const newRate = rate - npv / dNpv;
-        if (Math.abs(newRate - rate) < tol) return newRate;
-        rate = newRate;
-      }
-      return rate;
-    }
-
-    // Chart Drawing Function
-    function plotSIPCorpusChart({ P, rate, inflation, years, canvasId = "plotSIPCorpusChart" }) {
-      const yearlyCorpus = [];
-      const yearlyCorpusReal = [];
-      const labels = [];
-      const r = rate / 100 / 12;
-      for (let year = 1; year <= years; year++) {
-        const months = year * 12;
-        const FV = r === 0
-          ? P * months
-          : P * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
-        const inflationFactor = Math.pow(1 + inflation / 100, year);
-        yearlyCorpus.push(FV);
-        yearlyCorpusReal.push(FV / inflationFactor);
-        labels.push('Year ' + year);
-      }
-      const ctx = document.getElementById(canvasId).getContext('2d');
-      if (window.corpusChartInstance) window.corpusChartInstance.destroy();
-      window.corpusChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels,
-          datasets: [
-            {
-              label: 'Corpus (Nominal ₹)',
-              data: yearlyCorpus,
-              borderWidth: 2.5,
-              borderColor: '#004080',
-              backgroundColor: 'rgba(0,64,128,0.08)',
-              tension: 0.15,
-              pointRadius: 2,
-              fill: false,
-            },
-            {
-              label: 'Corpus (Inflation-Adjusted ₹)',
-              data: yearlyCorpusReal,
-              borderWidth: 2.2,
-              borderColor: '#6c93db',
-              backgroundColor: 'rgba(108,147,219,0.09)',
-              tension: 0.18,
-              pointRadius: 2,
-              fill: false,
-              borderDash: [6, 4],
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { display: true, position: 'bottom' },
-            tooltip: {
-              callbacks: {
-                title: function(ctx) {
-                  return ctx[0].label;
-                },
-                label: function(ctx) {
-                  const value = ctx.parsed.y;
-                  const label = ctx.dataset.label;
-                  return label + ': ₹' + Math.round(value).toLocaleString('en-IN');
-                },
-                afterBody: function(ctx) {
-                  if (ctx.length === 1 && ctx[0].datasetIndex === 0 && ctx[0].chart.data.datasets.length > 1) {
-                    const yearIndex = ctx[0].dataIndex;
-                    const realValue = ctx[0].chart.data.datasets[1].data[yearIndex];
-                    return 'Corpus (Inflation-Adjusted ₹): ₹' + Math.round(realValue).toLocaleString('en-IN');
-                  } else if (ctx.length === 1 && ctx[0].datasetIndex === 1 && ctx[0].chart.data.datasets.length > 0) {
-                    const yearIndex = ctx[0].dataIndex;
-                    const nominalValue = ctx[0].chart.data.datasets[0].data[yearIndex];
-                    return 'Corpus (Nominal ₹): ₹' + Math.round(nominalValue).toLocaleString('en-IN');
-                  }
-                  return '';
-                }
-              }
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: {
-                callback: function(val) {
-                  // Show in Lakhs if value >= 1L, else in Indian grouping
-                  return '₹' + (val / 100000 >= 1
-                    ? (val / 100000).toFixed(1) + 'L'
-                    : val.toLocaleString('en-IN'));
-                }
-              }
-            }
-          }
-        }
-      });
-    }
-
-    // Generate and display yearly projection table
-    function showProjectionTable(P, rate, inflation, years) {
-      let html = `<h3 style="color:#004080;">Yearly Corpus Projection</h3>
-      <table>
-        <tr>
-          <th>Year</th>
-          <th>Nominal Corpus (₹)</th>
-          <th>Inflation-Adjusted (₹)</th>
-        </tr>`;
-      const r = rate/100/12;
-      let tableData = [];
-      for (let year=1; year<=years; year++) {
-        const months = year*12;
-        const FV = r===0 ? P*months : P*(((Math.pow(1+r,months)-1)/r)*(1+r));
-        const FVReal = FV / Math.pow(1+inflation/100, year);
-        html += `<tr>
-          <td>${year}</td>
-          <td>₹${Math.round(FV).toLocaleString('en-IN')}</td>
-          <td>₹${Math.round(FVReal).toLocaleString('en-IN')}</td>
-        </tr>`;
-        tableData.push({year, FV, FVReal});
-      }
-      html += `</table>`;
-      document.getElementById('projection-table-container').innerHTML = html;
-      document.getElementById('download-csv-btn').style.display = 'inline-block';
-      window.projectionTableData = tableData; // for download
-    }
-
-    // Download CSV logic
-    function downloadProjectionCSV() {
-      if (!window.projectionTableData) return;
-      let csv = "Year,Nominal Corpus (INR),Inflation-Adjusted (INR)\n";
-      window.projectionTableData.forEach(row => {
-        csv += `${row.year},${Math.round(row.FV)},${Math.round(row.FVReal)}\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = "investment_projection.csv";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-
-    // Main Calculation Function
-    function calculateGoal(event) {
-      event.preventDefault();
-	  let P = 0;
-      document.querySelectorAll('.route-amount').forEach(input => {
-        const val = parseFloat(input.value);
-        if (!isNaN(val) && val > 0) P += val;
-      });
-      const rate = parseFloat(document.getElementById('rate').value);
-      const inflation = parseFloat(document.getElementById('inflation').value);
-      const n = parseInt(document.getElementById('duration').value);
-      const routes = Array.from(document.getElementById('routes').selectedOptions).map(opt => opt.value);
-
-      if (P <= 0) {
-        alert('Please enter at least one investment amount.');
-        return;
-      }
-
-      if (isNaN(P) || P <= 0 || isNaN(rate) || rate < 0 || isNaN(inflation) || inflation < 0 || isNaN(n) || n <= 0 || routes.length === 0) {
-        alert('Please fill all fields correctly.');
-        return;
-      }
-
-      const goal = window.IICalc.goalSip(P, rate, n, inflation);
-      if (goal.error) { alert(goal.error); return; }
-      const FV = goal.futureValue;
-      const FVReal = goal.futureValueReal;
-      const months = n * 12;
-
-      // XIRR Calculation
-      const cashFlows = [];
-      const dates = [];
-      const startDate = new Date();
-      for (let i = 0; i < months; i++) {
-        const d = new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate());
-        cashFlows.push(-P);
-        dates.push(d);
-      }
-      const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + months, startDate.getDate());
-      cashFlows.push(FV);
-      dates.push(endDate);
-
-      const irr = xirr(cashFlows, dates) * 100;
-      const realIRR = irr - inflation;
-
-      let inflationMsg;
-      if (realIRR > 0) {
-        inflationMsg = `🎉 Your investment is projected to beat inflation by <b>${realIRR.toFixed(2)}%</b> per year (XIRR).`;
-      } else if (realIRR === 0) {
-        inflationMsg = `⚖️ Your investment is projected to match inflation.`;
-      } else {
-        inflationMsg = `⚠️ Your investment may <b>not</b> keep up with inflation and could lose value in real terms.`;
-      }
-
-      document.getElementById('goal-result').innerHTML = `
-  <strong>Future Corpus (Nominal):</strong> ₹${FV.toLocaleString('en-IN', {maximumFractionDigits:0})}<br>
-  <strong>Future Corpus (Inflation-Adjusted):</strong> ₹${FVReal.toLocaleString('en-IN', {maximumFractionDigits:0})}<br>
-  <strong>Total Invested:</strong> ₹${(P*months).toLocaleString('en-IN', {maximumFractionDigits:0})}<br>
-  <strong>XIRR (Annualized Return):</strong> ${irr.toFixed(2)}%<br>
-  <strong>Inflation-adjusted (Real) XIRR:</strong> ${realIRR.toFixed(2)}%<br>
-  <strong>Selected Routes:</strong> ${routes.join(', ')}<br>
-  <div style="margin-top:14px;font-size:1.11em;">${inflationMsg}</div>
-      `;
-
-      // Draw chart
-      plotSIPCorpusChart({
-        P: P,
-        rate: rate,
-        inflation: inflation,
-        years: n,
-        canvasId: "plotSIPCorpusChart"
-      });
-
-      // Show projection table and enable download
-      showProjectionTable(P, rate, inflation, n);
-	  document.getElementById('assumptions-section').style.display = "block";
-      document.getElementById('chart-section').style.display = "block";
-	  
-	  // Show the Assumptions & Limitations section
-      document.getElementById('assumptions-section').style.display = "block";
-
-      if (window.IIStorage) {
-        window.IIStorage.rememberCalculator("Investment Goal Calculator", "investmentgoal.html");
-        window.IIStorage.saveGoalSnapshot({
-          monthlySip: P,
-          years: n,
-          expectedCorpus: FV,
-          expectedCorpusReal: FVReal,
-          rate: rate,
-          inflation: inflation,
-          routes: routes
-        });
-      }
-    }
-  </script>
-
-  
-
-  
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // --- 1. Model Portfolio Definitions ---
-  const modelPortfolios = {
-  moderate: {
-    label: "Moderate (Balanced)",
-    allocation: { "Mutual Funds": 50, "Stocks": 30, "Bonds": 10, "Fixed Deposits": 10 },
-    recommendations: {
-      "Stocks": ["HDFC Bank", "Infosys", "Asian Paints"],
-      "Mutual Funds": ["Axis Bluechip Fund", "HDFC Hybrid Equity"],
-      "Bonds": ["REC Ltd NCD", "HDFC Ltd Bond"],
-      "Fixed Deposits": ["SBI FD @ 6.7%", "HDFC Bank FD @ 7%"],
-      "Cryptocurrencies": []
-    }
-  },
-  aggressive: {
-    label: "Aggressive (Growth)",
-    allocation: { "Mutual Funds": 30, "Stocks": 50, "Bonds": 10, "Cryptocurrencies": 10 },
-    recommendations: {
-      "Stocks": ["Bharat Electronics", "Bharti Airtel", "Adani Enterprise"],
-      "Mutual Funds": ["Quant Small Cap Fund", "Mirae Asset Emerging Bluechip"],
-      "Bonds": ["Bharat Bond ETF"],
-      "Fixed Deposits": [],
-      "Cryptocurrencies": ["Bitcoin", "Ethereum", "Solana"]
-    }
-  },
-  conservative: {
-    label: "Conservative (Safe)",
-    allocation: { "Mutual Funds": 25, "Bonds": 35, "Fixed Deposits": 35, "Stocks": 5 },
-    recommendations: {
-      "Stocks": ["ITC"],
-      "Mutual Funds": ["ICICI Prudential Balanced Advantage"],
-      "Bonds": ["PFC Bond", "ICICI NCD"],
-      "Fixed Deposits": ["Post Office Time Deposit", "ICICI FD @ 7.25%"],
-      "Cryptocurrencies": []
-    }
-  }
-};
-
-  let suggestApplied = false;
-
-  // --- 2. Modal Show/Hide & Table Update ---
-  window.showPortfolioModal = function() {
-    document.getElementById('portfolio-modal').style.display = 'flex';
-    document.getElementById('modal-total-amt').value = document.getElementById('total-amount-value').textContent.replace(/,/g, '') || 20000;
-    updateSuggestionTable();
-  }
-  window.closePortfolioModal = function() {
-    document.getElementById('portfolio-modal').style.display = 'none';
-  }
-
-  document.getElementById('risk-profile').addEventListener('change', updateSuggestionTable);
-  document.getElementById('modal-total-amt').addEventListener('input', updateSuggestionTable);
-
-  function updateSuggestionTable() {
-  const risk = document.getElementById('risk-profile').value;
-  const total = parseFloat(document.getElementById('modal-total-amt').value) || 0;
-  const alloc = modelPortfolios[risk].allocation;
-  const recs = modelPortfolios[risk].recommendations;
-
-  let html = `<table style="width:100%;margin:7px 0 10px 0;">
-    <tr><th>Route</th><th>Suggested %</th><th>Amount (₹)</th></tr>`;
-  for (let route in alloc) {
-    html += `<tr>
-      <td>${route}</td>
-      <td>${alloc[route]}%</td>
-      <td>₹${Math.round((total * alloc[route]) / 100).toLocaleString('en-IN')}</td>
-    </tr>`;
-  }
-  html += "</table>";
-
-  html += `<div style="margin-top:10px;"><h4 style="color:#004080;">🔍 Top Investment Picks</h4><ul style="padding-left:20px;">`;
-  for (let route in recs) {
-    if (recs[route] && recs[route].length > 0) {
-      html += `<li><b>${route}:</b> ${recs[route].join(', ')}</li>`;
-    }
-  }
-  html += "</ul></div>";
-
-  document.getElementById('suggestion-table').innerHTML = html;
-}
-
-  // --- 3. Apply Portfolio: Autofill & Flag ---
-  window.applySuggestedPortfolio = function() {
-    const risk = document.getElementById('risk-profile').value;
-    const total = parseFloat(document.getElementById('modal-total-amt').value) || 0;
-    const alloc = modelPortfolios[risk].allocation;
-    const select = document.getElementById('routes');
-    // Select relevant options
-    for (let i = 0; i < select.options.length; i++) {
-      select.options[i].selected = alloc.hasOwnProperty(select.options[i].value);
-    }
-    // Generate fields and fill values
-    generateAmountFields();
-    for (let route in alloc) {
-      const inputId = `amount-${route.replace(/\s+/g, '').toLowerCase()}`;
-      const field = document.getElementById(inputId);
-      if (field) field.value = Math.round((total * alloc[route]) / 100);
-    }
-    updateTotalAmount();
-    closePortfolioModal();
-    suggestApplied = true;
-  }
-
-    // --- 6. Detect Manual User Change & Disable ---
-  document.getElementById('route-amount-fields').addEventListener('input', function() {
-    if (suggestApplied) disableSuggestPortfolio();
-  });
-  document.getElementById('routes').addEventListener('change', function() {
-    if (suggestApplied) disableSuggestPortfolio();
-  });
-
-});
-
-// Tooltip logic for the info icon
-document.addEventListener('DOMContentLoaded', function() {
-  const info = document.getElementById('return-info');
-  const tip = document.getElementById('rate-tooltip');
-  const routesSelect = document.getElementById('routes');
-  
-  function updateRateTooltip() {
-    const selected = Array.from(routesSelect.selectedOptions).map(opt => opt.value);
-    let html = `<strong>Historic Average Returns:</strong><br><span style="display:block;margin-top:5px;">`;
-    let shown = 0;
-    selected.forEach(route => {
-      if (historicReturns[route]) {
-        html += `<b>${route}:</b> ${historicReturns[route]}<br>`;
-        shown++;
-      }
-    });
-    if (!shown) {
-      html += `<span style="color:#be3636;">Select a route to see reference returns.</span>`;
-    }
-    html += `</span><span style="display:block;margin-top:7px;font-size:0.95em;color:#a17512;">Tip: Use these as a starting point. Check latest rates for accuracy.</span>`;
-    tip.innerHTML = html;
-  }
-
-  // --- Always update tooltip *before* showing it
-  function showTooltip() {
-    updateRateTooltip();
-    tip.style.display = 'block';
-  }
-  function hideTooltip() {
-    tip.style.display = 'none';
-  }
-
-  if (info && tip) {
-    info.addEventListener('mouseenter', showTooltip);
-    info.addEventListener('focus', showTooltip);
-    info.addEventListener('mouseleave', hideTooltip);
-    info.addEventListener('blur', hideTooltip);
-
-    info.addEventListener('click', function(e) {
-      // Toggle tooltip
-      if (tip.style.display === 'block') {
-        hideTooltip();
-      } else {
-        showTooltip();
-      }
-      e.stopPropagation();
-    });
-    document.body.addEventListener('click', hideTooltip);
-  }
-
-  // Update tooltip when routes selection changes (with slight delay to ensure selectedOptions is updated)
-  routesSelect.addEventListener('change', function() {
-    setTimeout(updateRateTooltip, 10);
-  });
-
-  // Show the correct info on first page load too
-  updateRateTooltip();
-});
-
-//Inflation Tooltip
-
-document.addEventListener('DOMContentLoaded', function() {
-  const inflInfo = document.getElementById('inflation-info');
-  const inflTip = document.getElementById('inflation-tooltip');
-
-  function inflationTooltipHtml() {
-    let avg = (indiaInflationHistory.reduce((sum, row) => sum + row.rate, 0) / indiaInflationHistory.length).toFixed(1);
-    let html = `<strong>India's CPI Inflation (YoY, %):</strong><br>
-      <table style="font-size:0.98em;margin-top:5px;">
-        <tr><th style="text-align:left;">Year</th><th style="text-align:right;">Inflation</th></tr>
-        ${indiaInflationHistory.map(row =>
-          `<tr><td style="text-align:left;">${row.year}</td><td style="text-align:right;">${row.rate}%</td></tr>`
-        ).join('')}
-      </table>
-      <div style="margin-top:8px;font-size:0.97em;">
-        <b>15-yr Average:</b> <span style="color:#004080;">${avg}%</span>
-        <br><span style="color:#a17512;">Tip: You may use an average of 5.5-6% for long-term planning.</span>
-      </div>
-      <div style="font-size:0.93em;margin-top:5px;color:#888;">Source: RBI, MOSPI, World Bank, TradingEconomics</div>
-    `;
-    return html;
-  }
-
-  if (inflInfo && inflTip) {
-    inflInfo.addEventListener('mouseenter', function() {
-      inflTip.innerHTML = inflationTooltipHtml();
-      inflTip.style.display = 'block';
-    });
-    inflInfo.addEventListener('focus', function() {
-      inflTip.innerHTML = inflationTooltipHtml();
-      inflTip.style.display = 'block';
-    });
-    inflInfo.addEventListener('mouseleave', function() { inflTip.style.display = 'none'; });
-    inflInfo.addEventListener('blur', function() { inflTip.style.display = 'none'; });
-    inflInfo.addEventListener('click', function(e) {
-      if (inflTip.style.display === 'block') {
-        inflTip.style.display = 'none';
-      } else {
-        inflTip.innerHTML = inflationTooltipHtml();
-        inflTip.style.display = 'block';
-      }
-      e.stopPropagation();
-    });
-    document.body.addEventListener('click', function() { inflTip.style.display = 'none'; });
-  }
-});
-
-</script>
-
-<script>
-// Place this outside any DOMContentLoaded or function
-
-window.suggestApplied = false;
-
-function disableSuggestPortfolio() {
-  const btn = document.getElementById('suggest-portfolio-btn');
-  const msg = document.getElementById('suggest-portfolio-msg');
-  if (btn) {
-    btn.disabled = true;
-    btn.style.opacity = 0.55;
-  }
-  if (msg) {
-    msg.style.display = 'block';
-  }
-}
-
-function enableSuggestPortfolio() {
-  const btn = document.getElementById('suggest-portfolio-btn');
-  const msg = document.getElementById('suggest-portfolio-msg');
-  if (btn) {
-    btn.disabled = false;
-    btn.style.opacity = 1;
-  }
-  if (msg) {
-    msg.style.display = 'none';
-  }
-  window.suggestApplied = false;
-}
-</script>
   <script src="js/calc-core.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/site-config.js"></script>
   <script src="js/analytics.js" defer></script>
-
-
   <script src="nav.js" defer></script>
+  <script>
+(function () {
+  "use strict";
+
+  var currentMode = "target";
+  var lastPlan = null;
+
+  var TEMPLATES = {
+    emergency: {
+      name: "Emergency fund",
+      mode: "target",
+      target: 300000,
+      years: 2,
+      rate: 6.5,
+      inflation: 5.5,
+      inflateTarget: false,
+      routes: ["Fixed Deposits", "Mutual Funds"],
+      monthly: 12000,
+      stepUp: 0
+    },
+    house: {
+      name: "House down payment",
+      mode: "target",
+      target: 2500000,
+      years: 8,
+      rate: 10,
+      inflation: 6,
+      inflateTarget: true,
+      routes: ["Mutual Funds", "Stocks", "Bonds"],
+      monthly: 20000,
+      stepUp: 10
+    },
+    education: {
+      name: "Child education",
+      mode: "target",
+      target: 3000000,
+      years: 12,
+      rate: 11,
+      inflation: 6.5,
+      inflateTarget: true,
+      routes: ["Mutual Funds", "Stocks"],
+      monthly: 15000,
+      stepUp: 10
+    },
+    retirement: {
+      name: "Retirement corpus",
+      mode: "target",
+      target: 20000000,
+      years: 25,
+      rate: 11,
+      inflation: 6,
+      inflateTarget: true,
+      routes: ["Mutual Funds", "Stocks", "Bonds"],
+      monthly: 25000,
+      stepUp: 8
+    }
+  };
+
+  var modelPortfolios = {
+    moderate: {
+      label: "Moderate (balanced)",
+      allocation: { "Mutual Funds": 50, "Stocks": 30, "Bonds": 10, "Fixed Deposits": 10 }
+    },
+    aggressive: {
+      label: "Aggressive (growth)",
+      allocation: { "Mutual Funds": 30, "Stocks": 50, "Bonds": 10, "Cryptocurrencies": 10 }
+    },
+    conservative: {
+      label: "Conservative (safer)",
+      allocation: { "Mutual Funds": 25, "Bonds": 35, "Fixed Deposits": 35, "Stocks": 5 }
+    }
+  };
+
+  function $(id) { return document.getElementById(id); }
+
+  function inr(n) {
+    if (n == null || isNaN(n)) return "—";
+    return "₹" + Math.round(n).toLocaleString("en-IN");
+  }
+
+  function selectedRoutes() {
+    return Array.prototype.map.call(
+      document.querySelectorAll('#route-chips input[name="route"]:checked'),
+      function (el) { return el.value; }
+    );
+  }
+
+  function setRoutes(list) {
+    document.querySelectorAll('#route-chips input[name="route"]').forEach(function (el) {
+      el.checked = list.indexOf(el.value) !== -1;
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode === "project" ? "project" : "target";
+    var isTarget = currentMode === "target";
+    $("fields-target").hidden = !isTarget;
+    $("fields-project").hidden = isTarget;
+    $("tab-target").classList.toggle("is-active", isTarget);
+    $("tab-project").classList.toggle("is-active", !isTarget);
+    $("tab-target").setAttribute("aria-selected", isTarget ? "true" : "false");
+    $("tab-project").setAttribute("aria-selected", isTarget ? "false" : "true");
+    $("goal-submit").textContent = isTarget ? "Calculate SIP needed" : "Calculate future corpus";
+  }
+
+  function applyTemplate(key) {
+    var t = TEMPLATES[key];
+    if (!t) return;
+    setMode(t.mode);
+    $("goal-name").value = t.name;
+    $("target-amount").value = t.target;
+    $("inflate-target").checked = !!t.inflateTarget;
+    $("monthly-sip").value = t.monthly;
+    $("step-up").value = t.stepUp;
+    $("duration").value = t.years;
+    $("rate").value = t.rate;
+    $("inflation").value = t.inflation;
+    setRoutes(t.routes);
+    document.querySelectorAll(".goal-template-card").forEach(function (btn) {
+      btn.classList.toggle("is-selected", btn.getAttribute("data-template") === key);
+    });
+  }
+
+  /** Year-by-year SIP with optional annual step-up; returns yearly nominal FV series. */
+  function projectWithStepUp(monthlyStart, annualRatePct, years, stepUpPct) {
+    var r = annualRatePct / 100 / 12;
+    var step = (Number(stepUpPct) || 0) / 100;
+    var corpus = 0;
+    var currP = monthlyStart;
+    var series = [];
+    var totalInvested = 0;
+    for (var year = 1; year <= years; year++) {
+      for (var m = 0; m < 12; m++) {
+        corpus = (corpus + currP) * (1 + r);
+        totalInvested += currP;
+      }
+      series.push(corpus);
+      currP *= 1 + step;
+    }
+    return { series: series, futureValue: corpus, totalInvested: totalInvested };
+  }
+
+  function flatGoal(monthly, rate, years, inflation) {
+    return window.IICalc.goalSip(monthly, rate, years, inflation);
+  }
+
+  function sipNeeded(goalAmount, rate, years) {
+    return window.IICalc.sipForGoal(goalAmount, rate, years);
+  }
+
+  function hideOutputs() {
+    ["results", "scenarios", "chart-section", "projection-wrap", "assumptions-section"].forEach(function (id) {
+      var el = $(id);
+      if (el) el.hidden = true;
+    });
+    $("download-csv-btn").hidden = true;
+    $("goal-saved-note").hidden = true;
+    if (window.corpusChartInstance) {
+      window.corpusChartInstance.destroy();
+      window.corpusChartInstance = null;
+    }
+  }
+
+  function plotChart(seriesNominal, seriesReal, years) {
+    var labels = [];
+    for (var i = 1; i <= years; i++) labels.push("Year " + i);
+    var ctx = $("plotSIPCorpusChart").getContext("2d");
+    if (window.corpusChartInstance) window.corpusChartInstance.destroy();
+    window.corpusChartInstance = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Corpus (nominal ₹)",
+            data: seriesNominal,
+            borderWidth: 2.5,
+            borderColor: "#004080",
+            backgroundColor: "rgba(0,64,128,0.08)",
+            tension: 0.15,
+            pointRadius: 2,
+            fill: false
+          },
+          {
+            label: "Corpus (inflation-adjusted ₹)",
+            data: seriesReal,
+            borderWidth: 2.2,
+            borderColor: "#6c93db",
+            tension: 0.18,
+            pointRadius: 2,
+            fill: false,
+            borderDash: [6, 4]
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true, position: "bottom" },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return ctx.dataset.label + ": " + inr(ctx.parsed.y);
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              callback: function (v) {
+                if (v >= 1e7) return "₹" + (v / 1e7).toFixed(1) + "Cr";
+                if (v >= 1e5) return "₹" + (v / 1e5).toFixed(1) + "L";
+                return "₹" + v;
+              }
+            }
+          }
+        }
+      }
+    });
+    $("chart-section").hidden = false;
+  }
+
+  function showTable(seriesNominal, inflation, years) {
+    var html = "<table class=\"compare-table\"><thead><tr><th>Year</th><th>Nominal corpus</th><th>Inflation-adjusted</th></tr></thead><tbody>";
+    var tableData = [];
+    for (var y = 1; y <= years; y++) {
+      var fv = seriesNominal[y - 1];
+      var fvReal = fv / Math.pow(1 + inflation / 100, y);
+      html += "<tr><td>" + y + "</td><td>" + inr(fv) + "</td><td>" + inr(fvReal) + "</td></tr>";
+      tableData.push({ year: y, FV: fv, FVReal: fvReal });
+    }
+    html += "</tbody></table>";
+    $("projection-table-container").innerHTML = html;
+    window.projectionTableData = tableData;
+    $("download-csv-btn").hidden = false;
+    $("projection-wrap").hidden = false;
+  }
+
+  function downloadCSV() {
+    if (!window.projectionTableData) return;
+    var csv = "Year,Nominal Corpus (INR),Inflation-Adjusted (INR)\n";
+    window.projectionTableData.forEach(function (row) {
+      csv += row.year + "," + Math.round(row.FV) + "," + Math.round(row.FVReal) + "\n";
+    });
+    var blob = new Blob([csv], { type: "text/csv" });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "investment_projection.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  function buildSeriesForMonthly(monthly, rate, years, inflation, stepUp) {
+    var seriesNominal;
+    var totalInvested;
+    var fv;
+    if (stepUp > 0) {
+      var p = projectWithStepUp(monthly, rate, years, stepUp);
+      seriesNominal = p.series;
+      totalInvested = p.totalInvested;
+      fv = p.futureValue;
+    } else {
+      seriesNominal = [];
+      var r = rate / 100 / 12;
+      for (var year = 1; year <= years; year++) {
+        var months = year * 12;
+        var FVy = r === 0 ? monthly * months : monthly * (((Math.pow(1 + r, months) - 1) / r) * (1 + r));
+        seriesNominal.push(FVy);
+      }
+      fv = seriesNominal[years - 1];
+      totalInvested = monthly * years * 12;
+    }
+    var seriesReal = seriesNominal.map(function (v, idx) {
+      return v / Math.pow(1 + inflation / 100, idx + 1);
+    });
+    var fvReal = fv / Math.pow(1 + inflation / 100, years);
+    return {
+      seriesNominal: seriesNominal,
+      seriesReal: seriesReal,
+      futureValue: fv,
+      futureValueReal: fvReal,
+      totalInvested: totalInvested,
+      monthly: monthly
+    };
+  }
+
+  function renderScenarios(mode, baseMonthly, targetNominal, rate, years, inflation, stepUp) {
+    var deltas = [
+      { key: "low", label: "Conservative", rate: Math.max(0, rate - 2) },
+      { key: "base", label: "Base", rate: rate },
+      { key: "high", label: "Optimistic", rate: rate + 2 }
+    ];
+    var html = "";
+    deltas.forEach(function (d) {
+      var body;
+      if (mode === "target") {
+        var s = sipNeeded(targetNominal, d.rate, years);
+        body =
+          "<span class=\"scenario-kicker\">" + d.rate.toFixed(1) + "% p.a.</span>" +
+          "<strong class=\"scenario-value\">" + inr(s.monthlySip) + "<span>/mo</span></strong>" +
+          "<span class=\"scenario-meta\">to aim for " + inr(targetNominal) + "</span>";
+      } else {
+        var p = buildSeriesForMonthly(baseMonthly, d.rate, years, inflation, stepUp);
+        body =
+          "<span class=\"scenario-kicker\">" + d.rate.toFixed(1) + "% p.a.</span>" +
+          "<strong class=\"scenario-value\">" + inr(p.futureValue) + "</strong>" +
+          "<span class=\"scenario-meta\">real ~ " + inr(p.futureValueReal) + "</span>";
+      }
+      html +=
+        "<article class=\"scenario-card scenario-" + d.key + "\">" +
+        "<h3>" + d.label + "</h3>" + body + "</article>";
+    });
+    $("scenario-grid").innerHTML = html;
+    $("scenarios").hidden = false;
+  }
+
+  function renderActions(mode) {
+    var links = [
+      { href: "mutualfunds.html#sipcalc-mutual", label: "SIP calculator" },
+      { href: "tools.html#target-sip", label: "Target SIP tool" },
+      { href: "tools.html#inflation", label: "Inflation calculator" },
+      { href: "risk-allocation.html", label: "Risk & allocation" },
+      { href: "insurance-emergency.html", label: "Emergency fund guide" },
+      { href: "basics.html", label: "How to start" }
+    ];
+    if (mode === "target") {
+      links.unshift({ href: "#", label: "Switch to project mode", action: "project" });
+    } else {
+      links.unshift({ href: "#", label: "Switch to target mode", action: "target" });
+    }
+    $("goal-result-actions").innerHTML = links
+      .map(function (l) {
+        if (l.action) {
+          return (
+            "<button type=\"button\" class=\"calc-chip goal-action-btn\" data-switch=\"" +
+            l.action +
+            "\">" +
+            l.label +
+            "</button>"
+          );
+        }
+        return "<a class=\"calc-chip\" href=\"" + l.href + "\">" + l.label + "</a>";
+      })
+      .join("");
+  }
+
+  function calculate(e) {
+    if (e) e.preventDefault();
+    if (!window.IICalc) {
+      alert("Calculator library failed to load. Please refresh.");
+      return;
+    }
+
+    var years = parseInt($("duration").value, 10);
+    var rate = parseFloat($("rate").value);
+    var inflation = parseFloat($("inflation").value);
+    var name = ($("goal-name").value || "").trim() || "My investment goal";
+    var routes = selectedRoutes();
+    var stepUp = parseFloat($("step-up").value) || 0;
+
+    if (!(years > 0) || isNaN(rate) || rate < 0 || isNaN(inflation) || inflation < 0) {
+      alert("Please enter valid years, return, and inflation.");
+      return;
+    }
+
+    var monthly;
+    var targetToday = null;
+    var targetNominal = null;
+    var plan;
+
+    if (currentMode === "target") {
+      targetToday = parseFloat($("target-amount").value);
+      if (!(targetToday > 0)) {
+        alert("Enter a target amount.");
+        return;
+      }
+      var inflate = $("inflate-target").checked;
+      targetNominal = inflate
+        ? targetToday * Math.pow(1 + inflation / 100, years)
+        : targetToday;
+      var need = sipNeeded(targetNominal, rate, years);
+      if (need.error) {
+        alert(need.error);
+        return;
+      }
+      monthly = need.monthlySip;
+      plan = buildSeriesForMonthly(monthly, rate, years, inflation, 0);
+      plan.mode = "target";
+      plan.targetToday = targetToday;
+      plan.targetNominal = targetNominal;
+      plan.inflateTarget = inflate;
+    } else {
+      monthly = parseFloat($("monthly-sip").value);
+      if (!(monthly > 0)) {
+        alert("Enter a monthly SIP amount.");
+        return;
+      }
+      plan = buildSeriesForMonthly(monthly, rate, years, inflation, stepUp);
+      plan.mode = "project";
+      plan.stepUp = stepUp;
+    }
+
+    plan.name = name;
+    plan.rate = rate;
+    plan.inflation = inflation;
+    plan.years = years;
+    plan.routes = routes;
+    lastPlan = plan;
+
+    var growth = plan.futureValue - plan.totalInvested;
+    var html =
+      "<div class=\"calc-result-grid\">" +
+      "<div class=\"calc-result-item is-hero\"><span class=\"calc-result-label\">" +
+      (plan.mode === "target" ? "Monthly SIP needed (base case)" : "Projected corpus (nominal)") +
+      "</span><strong class=\"calc-result-value\">" +
+      (plan.mode === "target" ? inr(plan.monthly) + "<span class=\"goal-per-mo\"> / month</span>" : inr(plan.futureValue)) +
+      "</strong></div>";
+
+    if (plan.mode === "target") {
+      html +=
+        "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Target (today)</span><strong class=\"calc-result-value\">" +
+        inr(plan.targetToday) +
+        "</strong></div>" +
+        "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Target at horizon" +
+        (plan.inflateTarget ? " (inflated)" : "") +
+        "</span><strong class=\"calc-result-value\">" +
+        inr(plan.targetNominal) +
+        "</strong></div>" +
+        "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Projected corpus @ base return</span><strong class=\"calc-result-value\">" +
+        inr(plan.futureValue) +
+        "</strong></div>";
+    } else {
+      html +=
+        "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Monthly SIP</span><strong class=\"calc-result-value\">" +
+        inr(plan.monthly) +
+        "</strong></div>" +
+        "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Inflation-adjusted corpus</span><strong class=\"calc-result-value\">" +
+        inr(plan.futureValueReal) +
+        "</strong></div>";
+    }
+
+    html +=
+      "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Total invested</span><strong class=\"calc-result-value\">" +
+      inr(plan.totalInvested) +
+      "</strong></div>" +
+      "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Estimated growth</span><strong class=\"calc-result-value\">" +
+      inr(growth) +
+      "</strong></div>" +
+      "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Horizon</span><strong class=\"calc-result-value\">" +
+      years +
+      " years</strong></div>" +
+      "<div class=\"calc-result-item\"><span class=\"calc-result-label\">Assumed return</span><strong class=\"calc-result-value\">" +
+      rate +
+      "%</strong></div>" +
+      "</div>";
+
+    html +=
+      "<p class=\"calc-result-note\"><strong>" +
+      name +
+      "</strong>" +
+      (routes.length ? " · Mix: " + routes.join(", ") : "") +
+      (plan.mode === "project" && stepUp > 0 ? " · Step-up " + stepUp + "% / yr" : "") +
+      "</p>";
+
+    var realEdge = rate - inflation;
+    if (realEdge > 0) {
+      html +=
+        "<p class=\"goal-insight goal-insight-ok\">Base assumed return is about <b>" +
+        realEdge.toFixed(1) +
+        "%</b> above inflation (rough real return before costs/tax).</p>";
+    } else {
+      html +=
+        "<p class=\"goal-insight goal-insight-warn\">Base return may not beat inflation — consider a longer horizon, higher savings rate, or different mix (educational note only).</p>";
+    }
+
+    $("goal-result").innerHTML = html;
+    $("goal-result").hidden = false;
+    $("results").hidden = false;
+    renderActions(plan.mode);
+    renderScenarios(
+      plan.mode,
+      plan.monthly,
+      plan.targetNominal || plan.futureValue,
+      rate,
+      years,
+      inflation,
+      plan.mode === "project" ? stepUp : 0
+    );
+    plotChart(plan.seriesNominal, plan.seriesReal, years);
+    showTable(plan.seriesNominal, inflation, years);
+    $("assumptions-section").hidden = false;
+
+    if (window.IIStorage) {
+      window.IIStorage.rememberCalculator("Investment Goal Planner", "investmentgoal.html");
+      window.IIStorage.saveGoalSnapshot({
+        goalName: name,
+        mode: plan.mode,
+        monthlySip: plan.monthly,
+        years: years,
+        expectedCorpus: plan.futureValue,
+        expectedCorpusReal: plan.futureValueReal,
+        rate: rate,
+        inflation: inflation,
+        routes: routes,
+        targetAmount: plan.targetNominal || null
+      });
+      $("goal-saved-note").hidden = false;
+    }
+
+    $("results").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function resetAll() {
+    $("goal-form").reset();
+    $("inflate-target").checked = true;
+    setRoutes(["Mutual Funds"]);
+    setMode("target");
+    document.querySelectorAll(".goal-template-card").forEach(function (b) {
+      b.classList.remove("is-selected");
+    });
+    enableSuggest();
+    hideOutputs();
+  }
+
+  function updateSuggestionTable() {
+    var risk = $("risk-profile").value;
+    var total = parseFloat($("modal-total-amt").value) || 0;
+    var alloc = modelPortfolios[risk].allocation;
+    var html =
+      "<table class=\"compare-table\"><thead><tr><th>Route</th><th>%</th><th>Amount</th></tr></thead><tbody>";
+    Object.keys(alloc).forEach(function (route) {
+      html +=
+        "<tr><td>" +
+        route +
+        "</td><td>" +
+        alloc[route] +
+        "%</td><td>" +
+        inr((total * alloc[route]) / 100) +
+        "</td></tr>";
+    });
+    html += "</tbody></table>";
+    $("suggestion-table").innerHTML = html;
+  }
+
+  function openModal() {
+    setMode("project");
+    $("portfolio-modal").hidden = false;
+    $("modal-total-amt").value = $("monthly-sip").value || 20000;
+    updateSuggestionTable();
+  }
+
+  function closeModal() {
+    $("portfolio-modal").hidden = true;
+  }
+
+  function applyPortfolio() {
+    var risk = $("risk-profile").value;
+    var total = parseFloat($("modal-total-amt").value) || 0;
+    var alloc = modelPortfolios[risk].allocation;
+    setMode("project");
+    $("monthly-sip").value = Math.round(total);
+    setRoutes(Object.keys(alloc));
+    closeModal();
+    disableSuggest();
+  }
+
+  function disableSuggest() {
+    var btn = $("suggest-portfolio-btn");
+    var msg = $("suggest-portfolio-msg");
+    if (btn) {
+      btn.disabled = true;
+      btn.style.opacity = "0.55";
+    }
+    if (msg) msg.hidden = false;
+  }
+
+  function enableSuggest() {
+    var btn = $("suggest-portfolio-btn");
+    var msg = $("suggest-portfolio-msg");
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = "1";
+    }
+    if (msg) msg.hidden = true;
+  }
+
+  function restoreSnapshot() {
+    if (!window.IIStorage) return;
+    var snap = window.IIStorage.getGoalSnapshot();
+    if (!snap) return;
+    if (snap.goalName) $("goal-name").value = snap.goalName;
+    if (snap.years) $("duration").value = snap.years;
+    if (snap.rate != null) $("rate").value = snap.rate;
+    if (snap.inflation != null) $("inflation").value = snap.inflation;
+    if (snap.monthlySip) $("monthly-sip").value = Math.round(snap.monthlySip);
+    if (snap.routes && snap.routes.length) setRoutes(snap.routes);
+    if (snap.mode === "project") setMode("project");
+    if (snap.targetAmount) $("target-amount").value = Math.round(snap.targetAmount);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setMode("target");
+    hideOutputs();
+    restoreSnapshot();
+
+    document.querySelectorAll(".goal-mode-tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        setMode(tab.getAttribute("data-mode"));
+      });
+    });
+
+    document.querySelectorAll(".goal-template-card").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyTemplate(btn.getAttribute("data-template"));
+      });
+    });
+
+    $("goal-form").addEventListener("submit", calculate);
+    $("goal-reset").addEventListener("click", resetAll);
+    $("download-csv-btn").addEventListener("click", downloadCSV);
+    $("suggest-portfolio-btn").addEventListener("click", openModal);
+    $("close-portfolio").addEventListener("click", closeModal);
+    $("apply-portfolio").addEventListener("click", applyPortfolio);
+    $("risk-profile").addEventListener("change", updateSuggestionTable);
+    $("modal-total-amt").addEventListener("input", updateSuggestionTable);
+
+    $("portfolio-modal").addEventListener("click", function (e) {
+      if (e.target === $("portfolio-modal")) closeModal();
+    });
+
+    $("goal-result-actions").addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-switch]");
+      if (!btn) return;
+      setMode(btn.getAttribute("data-switch"));
+      $("planner").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.querySelectorAll(".floating-toc a").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var t = document.querySelector(link.getAttribute("href"));
+        if (t) {
+          e.preventDefault();
+          window.scrollTo({ top: t.offsetTop - 70, behavior: "smooth" });
+        }
+      });
+    });
+  });
+})();
+  </script>
 </body>
 </html>
