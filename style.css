@@ -6686,11 +6686,17 @@ body.dark-mode .feature-badge {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
+  align-items: stretch;
 }
 @media (max-width: 1000px) {
   .learn-path { grid-template-columns: repeat(2, 1fr); }
 }
-.learn-path-step { margin: 0; }
+.learn-path-step {
+  margin: 0;
+  display: flex;
+  min-height: 100%;
+  height: 100%;
+}
 .learn-path-card {
   display: flex;
   align-items: center;
@@ -6702,7 +6708,11 @@ body.dark-mode .feature-badge {
   box-shadow: var(--shadow-sm);
   text-decoration: none !important;
   color: inherit !important;
-  min-height: 96px;
+  /* Equal card height across the grid (2-line titles stay even) */
+  min-height: 112px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
   transition: transform 0.18s var(--ease), box-shadow 0.18s, border-color 0.18s;
 }
 .learn-path-card:hover {
