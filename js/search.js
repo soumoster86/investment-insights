@@ -5,10 +5,10 @@
 const searchIndex = [
   { url: "index.html", title: "Home", keywords: "home start overview explore" },
   { url: "learn.html", title: "All Learn Topics", keywords: "learn hub guides tutorials topics" },
-  { url: "calculators.html", title: "Calculators Hub", keywords: "calculators sip swp fd nps goal tools" },
-  { url: "tools.html", title: "Tools Hub", keywords: "tools calculators p&l watchlist" },
+  { url: "calculators.html", title: "Calculators Hub", keywords: "calculators sip swp fd nps goal tools lumpsum target" },
+  { url: "tools.html", title: "Tools Hub", keywords: "tools calculators p&l watchlist lumpsum" },
   { url: "contact.html", title: "Contact Us", feedback: "contact message feedback support" },
-  { url: "investmentgoal.html", title: "Investment Goal Planner", keywords: "goal planner target planning future corpus" },
+  { url: "investmentgoal.html", title: "Investment Goal Planner", keywords: "goal planner target planning future corpus sip lumpsum" },
   { url: "basics.html", title: "How to start investing", keywords: "basics beginner start compounding inflation" },
   { url: "risk-allocation.html", title: "Risk & allocation", keywords: "risk asset allocation portfolio diversification" },
   { url: "ppf-tax-saving.html", title: "PPF & tax-saving", keywords: "ppf 80c tax saving elss provident fund" },
