@@ -258,6 +258,12 @@
       keywords: "gold sgb sovereign bonds etf physical jewellery"
     },
     {
+      url: "realestate.html",
+      title: "Real estate investing",
+      type: "Guide",
+      keywords: "real estate property home loan emi reit flat residential commercial stamp duty rera"
+    },
+    {
       url: "index-vs-active.html",
       title: "Index vs active funds",
       type: "Guide",
