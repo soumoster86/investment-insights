@@ -282,42 +282,44 @@
           <button type="button" class="goal-modal-x" id="close-portfolio-x" aria-label="Close portfolio model">×</button>
         </header>
 
-        <div class="portfolio-risk-cards" id="portfolio-risk-cards" role="radiogroup" aria-label="Risk profile">
-          <button type="button" class="portfolio-risk-card" data-risk="conservative" aria-checked="false" role="radio">
-            <span class="portfolio-risk-emoji" aria-hidden="true">🛡️</span>
-            <span class="portfolio-risk-name">Conservative</span>
-            <span class="portfolio-risk-tag">Safer mix</span>
-          </button>
-          <button type="button" class="portfolio-risk-card is-selected" data-risk="moderate" aria-checked="true" role="radio">
-            <span class="portfolio-risk-emoji" aria-hidden="true">⚖️</span>
-            <span class="portfolio-risk-name">Moderate</span>
-            <span class="portfolio-risk-tag">Balanced</span>
-          </button>
-          <button type="button" class="portfolio-risk-card" data-risk="aggressive" aria-checked="false" role="radio">
-            <span class="portfolio-risk-emoji" aria-hidden="true">🚀</span>
-            <span class="portfolio-risk-name">Aggressive</span>
-            <span class="portfolio-risk-tag">Growth tilt</span>
-          </button>
-        </div>
-        <!-- Keep select for fallback / JS sync -->
-        <select id="risk-profile" class="sr-only" tabindex="-1" aria-hidden="true">
-          <option value="conservative">Conservative</option>
-          <option value="moderate" selected>Moderate</option>
-          <option value="aggressive">Aggressive</option>
-        </select>
+        <div class="portfolio-modal-body">
+          <div class="portfolio-risk-cards" id="portfolio-risk-cards" role="radiogroup" aria-label="Risk profile">
+            <button type="button" class="portfolio-risk-card" data-risk="conservative" aria-checked="false" role="radio">
+              <span class="portfolio-risk-emoji" aria-hidden="true">🛡️</span>
+              <span class="portfolio-risk-name">Conservative</span>
+              <span class="portfolio-risk-tag">Safer mix</span>
+            </button>
+            <button type="button" class="portfolio-risk-card is-selected" data-risk="moderate" aria-checked="true" role="radio">
+              <span class="portfolio-risk-emoji" aria-hidden="true">⚖️</span>
+              <span class="portfolio-risk-name">Moderate</span>
+              <span class="portfolio-risk-tag">Balanced</span>
+            </button>
+            <button type="button" class="portfolio-risk-card" data-risk="aggressive" aria-checked="false" role="radio">
+              <span class="portfolio-risk-emoji" aria-hidden="true">🚀</span>
+              <span class="portfolio-risk-name">Aggressive</span>
+              <span class="portfolio-risk-tag">Growth tilt</span>
+            </button>
+          </div>
+          <!-- Keep select for fallback / JS sync -->
+          <select id="risk-profile" class="sr-only" tabindex="-1" aria-hidden="true">
+            <option value="conservative">Conservative</option>
+            <option value="moderate" selected>Moderate</option>
+            <option value="aggressive">Aggressive</option>
+          </select>
 
-        <p class="portfolio-profile-blurb" id="portfolio-profile-blurb"></p>
+          <p class="portfolio-profile-blurb" id="portfolio-profile-blurb"></p>
 
-        <div class="portfolio-viz" id="portfolio-viz" aria-hidden="true"></div>
-        <div id="suggestion-table" class="goal-suggestion-table"></div>
+          <div class="portfolio-viz" id="portfolio-viz" aria-hidden="true"></div>
+          <div id="suggestion-table" class="goal-suggestion-table"></div>
 
-        <div class="portfolio-modal-fields">
-          <label for="modal-total-amt">Total monthly investment (₹)</label>
-          <input type="number" id="modal-total-amt" min="100" step="100" value="20000" inputmode="decimal" />
-          <label class="portfolio-rate-opt">
-            <input type="checkbox" id="apply-suggested-rate" checked />
-            <span>Also set expected return to this model’s educational rate (<strong id="suggested-rate-label">11%</strong>)</span>
-          </label>
+          <div class="portfolio-modal-fields">
+            <label for="modal-total-amt">Total monthly investment (₹)</label>
+            <input type="number" id="modal-total-amt" min="100" step="100" value="20000" inputmode="decimal" />
+            <label class="portfolio-rate-opt">
+              <input type="checkbox" id="apply-suggested-rate" checked />
+              <span>Also set expected return to this model’s educational rate (<strong id="suggested-rate-label">11%</strong>)</span>
+            </label>
+          </div>
         </div>
 
         <footer class="goal-modal-actions">

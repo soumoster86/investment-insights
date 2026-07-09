@@ -330,7 +330,7 @@ main a:not(.btn):not(.learn-more):hover {
 .learn-more,
 .primary-btn,
 button[type="submit"],
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn) {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x) {
   background: #0a4d8c;
   color: #fff !important;
   border: 1.5px solid #0a4d8c;
@@ -349,7 +349,7 @@ button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.seco
 .learn-more:hover,
 .primary-btn:hover,
 button[type="submit"]:hover,
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):hover {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):hover {
   background: #063566;
   border-color: #063566;
   transform: translateY(-2px);
@@ -4464,11 +4464,12 @@ body.goal-modal-open { overflow: hidden; }
   border: 1px solid rgba(213, 222, 235, 0.9);
 }
 .portfolio-modal-dialog {
-  width: min(520px, 100%);
-  padding: 0;
+  width: min(540px, 100%);
+  padding: 0 !important;
   display: flex;
   flex-direction: column;
-  max-height: min(92vh, 720px);
+  max-height: min(92vh, 760px);
+  overflow: hidden; /* body scrolls; footer stays put */
 }
 .goal-modal-head {
   display: flex;
@@ -4488,17 +4489,22 @@ body.goal-modal-open { overflow: hidden; }
   margin: 0 !important;
   font-size: 0.88em;
   line-height: 1.45;
-  max-width: 40ch;
+  max-width: 42ch;
 }
+button.goal-modal-x,
 .goal-modal-x {
   flex: 0 0 auto;
-  width: 40px;
-  height: 40px;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
   border-radius: 12px !important;
   border: 1.5px solid #d5deeb !important;
   background: #f8fafc !important;
+  background-image: none !important;
   color: #334155 !important;
+  -webkit-text-fill-color: #334155 !important;
   font-size: 1.4em !important;
+  font-weight: 500 !important;
   line-height: 1 !important;
   cursor: pointer;
   display: inline-flex !important;
@@ -4506,9 +4512,25 @@ body.goal-modal-open { overflow: hidden; }
   justify-content: center;
   box-shadow: none !important;
   padding: 0 !important;
+  transform: none !important;
+  text-shadow: none !important;
 }
+button.goal-modal-x:hover,
 .goal-modal-x:hover {
   background: #eef2f8 !important;
+  background-image: none !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  border-color: #c5d0e0 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+.portfolio-modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 0 8px;
 }
 .portfolio-modal-dialog .portfolio-risk-cards,
 .portfolio-modal-dialog .portfolio-profile-blurb,
@@ -4519,47 +4541,80 @@ body.goal-modal-open { overflow: hidden; }
   padding-right: 18px;
 }
 .portfolio-risk-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   margin: 14px 0 10px;
 }
+button.portfolio-risk-card,
 .portfolio-risk-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  text-align: left;
-  padding: 10px 10px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 2px !important;
+  text-align: left !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 12px 10px !important;
   border-radius: 12px !important;
   border: 1.5px solid #d5e2f5 !important;
   background: #f8fafc !important;
+  background-image: none !important;
   color: #1a2332 !important;
+  -webkit-text-fill-color: #1a2332 !important;
   cursor: pointer;
   box-shadow: none !important;
-  min-height: 72px;
+  min-height: 78px !important;
+  font-family: inherit !important;
+  font-size: 1em !important;
+  font-weight: 500 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  transform: none !important;
   transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
 }
+button.portfolio-risk-card:hover,
 .portfolio-risk-card:hover {
   border-color: #8abaff !important;
   background: #f0f6ff !important;
+  background-image: none !important;
+  color: #1a2332 !important;
+  -webkit-text-fill-color: #1a2332 !important;
   transform: none !important;
+  box-shadow: none !important;
 }
+button.portfolio-risk-card.is-selected,
 .portfolio-risk-card.is-selected {
   border-color: var(--brand, #0a4d8c) !important;
   background: #e8f1fc !important;
+  background-image: none !important;
   box-shadow: 0 0 0 3px rgba(43, 125, 233, 0.18) !important;
+  color: #1a2332 !important;
+  -webkit-text-fill-color: #1a2332 !important;
 }
-.portfolio-risk-emoji { font-size: 1.15em; line-height: 1.2; }
+.portfolio-risk-emoji {
+  font-size: 1.15em;
+  line-height: 1.2;
+  color: inherit !important;
+  -webkit-text-fill-color: initial !important;
+}
 .portfolio-risk-name {
-  font-weight: 700;
-  font-size: 0.92em;
-  color: #0a4d8c;
+  font-weight: 700 !important;
+  font-size: 0.9em !important;
+  color: #0a4d8c !important;
+  -webkit-text-fill-color: #0a4d8c !important;
+  display: block;
+  line-height: 1.25;
 }
 .portfolio-risk-tag {
-  font-size: 0.75em;
-  color: #5b6b82;
-  font-weight: 500;
+  font-size: 0.75em !important;
+  color: #5b6b82 !important;
+  -webkit-text-fill-color: #5b6b82 !important;
+  font-weight: 500 !important;
+  display: block;
+  line-height: 1.25;
 }
 .portfolio-profile-blurb {
   margin: 0 0 12px;
@@ -4602,18 +4657,23 @@ body.goal-modal-open { overflow: hidden; }
   flex: 0 0 auto;
 }
 .portfolio-alloc-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.portfolio-alloc-list > li {
+  list-style: none !important;
+  margin: 0 !important;
 }
 .portfolio-alloc-row {
   background: #fafbfd;
   border: 1px solid #e6edf7;
   border-radius: 12px;
   padding: 10px 12px;
+  display: block;
 }
 .portfolio-alloc-top {
   display: flex;
@@ -4700,12 +4760,10 @@ body.goal-modal-open { overflow: hidden; }
   gap: 10px;
   padding: 14px 18px 16px;
   border-top: 1px solid var(--border-soft, #e2e8f0);
-  margin-top: 8px;
+  margin-top: 0;
   background: #f8fafc;
   border-radius: 0 0 18px 18px;
   flex: 0 0 auto;
-  position: sticky;
-  bottom: 0;
 }
 .goal-modal-actions .btn {
   min-width: 120px;
@@ -4740,17 +4798,34 @@ body.dark-mode .goal-modal-x {
   border-color: #3a4252 !important;
   color: #e7ecfa !important;
 }
+body.dark-mode button.portfolio-risk-card,
 body.dark-mode .portfolio-risk-card {
   background: #151a22 !important;
+  background-image: none !important;
   border-color: #343b4a !important;
   color: #e7ecfa !important;
+  -webkit-text-fill-color: #e7ecfa !important;
 }
+body.dark-mode button.portfolio-risk-card.is-selected,
 body.dark-mode .portfolio-risk-card.is-selected {
   background: #1a2a40 !important;
   border-color: #2b7de9 !important;
 }
-body.dark-mode .portfolio-risk-name { color: #8abaff !important; }
-body.dark-mode .portfolio-risk-tag { color: #9aa8bc !important; }
+body.dark-mode .portfolio-risk-name {
+  color: #8abaff !important;
+  -webkit-text-fill-color: #8abaff !important;
+}
+body.dark-mode .portfolio-risk-tag {
+  color: #9aa8bc !important;
+  -webkit-text-fill-color: #9aa8bc !important;
+}
+body.dark-mode button.goal-modal-x,
+body.dark-mode .goal-modal-x {
+  background: #151a22 !important;
+  border-color: #3a4252 !important;
+  color: #e7ecfa !important;
+  -webkit-text-fill-color: #e7ecfa !important;
+}
 body.dark-mode .portfolio-profile-blurb {
   background: #151a22 !important;
   border-color: #2c3340 !important;
@@ -4776,15 +4851,17 @@ body.dark-mode .goal-modal-actions {
 }
 body.dark-mode .portfolio-rate-opt { color: #b4bccb !important; }
 
-@media (max-width: 520px) {
+@media (max-width: 560px) {
   .portfolio-risk-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
+  button.portfolio-risk-card,
   .portfolio-risk-card {
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    min-height: 48px;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-height: 52px !important;
+    padding: 10px 12px !important;
   }
   .portfolio-risk-tag { margin-left: auto; }
   .goal-modal-actions {
