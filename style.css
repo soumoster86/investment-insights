@@ -5440,3 +5440,170 @@ main table,
   transform: translateY(0);
   visibility: visible;
 }
+
+/* ============================================================
+   Contact Page Revamp
+   ============================================================ */
+.contact-hero {
+  padding: 60px 20px 40px;
+  text-align: center;
+}
+.contact-hero h2 {
+  font-size: 2.4em;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.dark-mode .contact-hero h2 {
+  background: linear-gradient(135deg, #fff, #9fb4d6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.contact-hero p {
+  color: var(--text-muted);
+  font-size: 1.1em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+  align-items: center;
+}
+
+/* Left Panel: Info & Illustration */
+.contact-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.contact-illustration {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  border: 1px solid var(--border-soft);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.contact-illustration:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(10, 40, 90, 0.15);
+}
+body.dark-mode .contact-illustration:hover {
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+.contact-link-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-size: 1.1em;
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.contact-link-item:hover {
+  color: var(--brand-accent);
+}
+.contact-link-item .ii-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--brand);
+}
+
+/* Right Panel: Glassmorphism Form */
+.contact-form-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+}
+body.dark-mode .contact-form-card {
+  background: rgba(26, 35, 50, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+.floating-input {
+  width: 100%;
+  padding: 16px 14px 4px;
+  background: var(--surface);
+  border: 1.5px solid var(--border-soft);
+  border-radius: 12px;
+  font-size: 1em;
+  color: var(--text);
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+body.dark-mode .floating-input {
+  background: #12161d;
+  border-color: #3a4252;
+}
+.floating-input:focus {
+  outline: none;
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 4px var(--brand-glow);
+  background: var(--surface);
+}
+.floating-label {
+  position: absolute;
+  top: 16px;
+  left: 14px;
+  font-size: 1em;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: 0.2s var(--ease);
+  transform-origin: left top;
+}
+/* When input is focused OR has value, float the label */
+.floating-input:focus ~ .floating-label,
+.floating-input:not(:placeholder-shown) ~ .floating-label {
+  transform: translateY(-10px) scale(0.75);
+  color: var(--brand-accent);
+}
+textarea.floating-input {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 0 16px;
+  }
+  .contact-form-card {
+    padding: 24px;
+  }
+}

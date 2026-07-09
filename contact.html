@@ -105,23 +105,65 @@
 </header>
 <!-- END SITE HEADER -->
 
-  <main    id="main-content" tabindex="-1">
-    <h2>Contact Us</h2>
-    <p>If you have questions or feedback about the educational content, please reach out.</p>
+  <main id="main-content" tabindex="-1">
+    <section class="contact-hero fade-in-section">
+      <h2>Get in Touch</h2>
+      <p>Have questions or feedback about our educational content? We’d love to hear from you. Drop us a message or connect on social media.</p>
+    </section>
 
-    <form id="contact-form" action="https://formspree.io/f/myzjoaaq" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required autocomplete="name" />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required autocomplete="email" />
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-      <!-- Honeypot spam trap (hidden from users) -->
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true" />
-      <button type="submit" id="contact-submit">Send</button>
-    </form>
+    <section class="contact-grid fade-in-section">
+      <!-- Left Panel -->
+      <div class="contact-info-panel">
+        <img src="contact-illustration.jpg" alt="Abstract glowing spheres and geometric shapes" class="contact-illustration" />
+        
+        <div class="contact-links">
+          <a href="https://x.com/soumo4ru" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+            <span class="ii-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+              </svg>
+            </span>
+            Follow on X (@soumo4ru)
+          </a>
+        </div>
+      </div>
 
-    <p id="form-response" role="status" aria-live="polite" style="display:none;"></p>
+      <!-- Right Panel: Glassmorphism Form -->
+      <div class="contact-form-card">
+        <form id="contact-form" action="https://formspree.io/f/myzjoaaq" method="POST">
+          
+          <div class="form-group">
+            <input type="text" id="name" name="name" required autocomplete="name" class="floating-input" placeholder=" " />
+            <label for="name" class="floating-label">Your Name</label>
+          </div>
+
+          <div class="form-group">
+            <input type="email" id="email" name="email" required autocomplete="email" class="floating-input" placeholder=" " />
+            <label for="email" class="floating-label">Email Address</label>
+          </div>
+
+          <div class="form-group">
+            <textarea id="message" name="message" required class="floating-input" placeholder=" "></textarea>
+            <label for="message" class="floating-label">How can we help?</label>
+          </div>
+
+          <!-- Honeypot spam trap (hidden from users) -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true" style="display:none;" />
+          
+          <button type="submit" id="contact-submit" class="btn primary-btn contact-submit-btn">
+            Send Message
+            <span class="ii-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </span>
+          </button>
+        </form>
+        <p id="form-response" role="status" aria-live="polite" style="display:none; margin-top: 16px; font-weight: 500;"></p>
+      </div>
+    </section>
   </main>
 
 <!-- BEGIN SITE FOOTER -->
@@ -220,6 +262,7 @@
     });
   })();
   </script>
+  <script src="js/util.js"></script>
   <script src="js/site-config.js"></script>
   <script src="js/analytics.js" defer></script>
 
