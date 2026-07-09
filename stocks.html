@@ -131,30 +131,19 @@
       </p>
     </section>
 
-    <!-- NSE & BSE live ticker (TradingView — no API keys) -->
-    <div id="live-ticker" class="live-ticker-wrap" aria-label="Live market ticker">
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-        {
-          "symbols": [
-            { "proName": "BSE:SENSEX", "title": "Sensex" },
-            { "proName": "NSE:NIFTY", "title": "Nifty 50" },
-            { "proName": "NSE:BANKNIFTY", "title": "Nifty Bank" },
-            { "proName": "BSE:BANK", "title": "Bankex" },
-            { "proName": "NSE:RELIANCE", "title": "Reliance" },
-            { "proName": "NSE:TCS", "title": "TCS" },
-            { "proName": "NSE:HDFCBANK", "title": "HDFC Bank" },
-            { "proName": "NSE:INFY", "title": "Infosys" }
-          ],
-          "colorTheme": "dark",
-          "isTransparent": false,
-          "displayMode": "adaptive",
-          "locale": "en"
-        }
-        </script>
+    <!-- NSE stock ticker via free India Stock Market API (proxied; see netlify/functions/india-stocks.js) -->
+    <div id="live-ticker" class="live-ticker-wrap india-ticker is-loading" aria-label="NSE stock ticker" aria-live="polite">
+      <div class="india-ticker-bar">
+        <div class="india-ticker-label">
+          <span class="india-ticker-badge">NSE</span>
+          <span class="india-ticker-label-text">Market tape</span>
+          <button type="button" class="india-ticker-refresh" data-ticker-refresh aria-label="Refresh quotes">↻</button>
+        </div>
+        <div class="india-ticker-viewport">
+          <div class="india-ticker-track" role="list"></div>
+        </div>
       </div>
-      <p class="ticker-note">Live tape via TradingView (may be delayed). Educational use only.</p>
+      <p class="ticker-note">Loading quotes… Educational use only — not for trading decisions.</p>
     </div>
 
     <section id="about-stocks">
@@ -478,6 +467,7 @@
   <script src="recommendations.js" defer></script>
   <script src="js/stocks-page.js" defer></script>
   <script src="js/site-config.js"></script>
+  <script src="js/india-ticker.js" defer></script>
   <script src="js/analytics.js" defer></script>
   <script src="nav.js" defer></script>
 

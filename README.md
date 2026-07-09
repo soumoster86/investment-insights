@@ -62,7 +62,7 @@ https://investment-insight.netlify.app
 
 **`js/util.js`** exposes `window.IIUtil` (`escapeHtml`, `formatINR`, `formatPct`) — the single copy of the HTML escaper and number formatters. It must be included (plain `<script>`, no defer) before `recommendations.js`, `js/dashboard.js`, the `js/*-page.js` scripts, and `js/tools-calcs.js`.
 
-**`js/calc-core.js`** holds pure math used by the calculators and unit tests (`window.IICalc` / `require`). **`js/storage.js`** writes `lastCalculator` and `investmentGoal` snapshots. **`js/dashboard.js`** hydrates the home dashboard and fetches metals via the Netlify function. **`js/site-config.js`** holds public runtime config (analytics opt-in, endpoints). **`js/analytics.js`** loads Plausible only when enabled and when DNT/GPC is off.
+**`js/calc-core.js`** holds pure math used by the calculators and unit tests (`window.IICalc` / `require`). **`js/storage.js`** writes `lastCalculator` and `investmentGoal` snapshots. **`js/dashboard.js`** hydrates the home dashboard and fetches metals via the Netlify function. **`js/site-config.js`** holds public runtime config (analytics opt-in, endpoints). **`js/analytics.js`** loads Plausible only when enabled and when DNT/GPC is off. **`js/india-ticker.js`** powers the stocks-page NSE tape via `/.netlify/functions/india-stocks` (proxy for [Indian Stock Market API](https://github.com/0xramm/Indian-Stock-Market-API); demo fallback if upstream is down).
 
 **`partials/header.html` / `partials/footer.html`** are the single source of truth for the site chrome. Primary nav is **Home · Learn ▾ · Calculators ▾ · Contact** (topic pages live under Learn; tools under Calculators). After editing either file, run:
 

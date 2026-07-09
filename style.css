@@ -356,7 +356,7 @@ main a:not(.btn):not(.learn-more):hover {
 .learn-more,
 .primary-btn,
 button[type="submit"],
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):not(.nav-search-btn):not(.search-close) {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):not(.nav-search-btn):not(.search-close):not(.india-ticker-refresh) {
   background: #0a4d8c;
   color: #fff !important;
   border: 1.5px solid #0a4d8c;
@@ -375,7 +375,7 @@ button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.seco
 .learn-more:hover,
 .primary-btn:hover,
 button[type="submit"]:hover,
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):not(.nav-search-btn):not(.search-close):hover {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):not(.portfolio-risk-card):not(.goal-modal-x):not(.swp-tab-btn):not(.nav-search-btn):not(.search-close):not(.india-ticker-refresh):hover {
   background: #063566;
   border-color: #063566;
   transform: translateY(-2px);
@@ -2084,7 +2084,7 @@ body.dark-mode .rec-controls-wrap .rec-search-label { color: #b8c9ec !important;
   outline-offset: 4px;
 }
 
-/* Stocks page live ticker tape */
+/* Stocks page live ticker tape (India Stock Market API) */
 .live-ticker-wrap {
   margin: 0 0 22px;
   border-radius: 12px;
@@ -2095,12 +2095,145 @@ body.dark-mode .rec-controls-wrap .rec-search-label { color: #b8c9ec !important;
 .live-ticker-wrap .ticker-note {
   margin: 0;
   padding: 6px 12px 8px;
-  font-size: 0.9em;
+  font-size: 0.86em;
   color: #9aa4b5;
   background: #0f141f;
+  line-height: 1.4;
 }
 body.dark-mode .live-ticker-wrap {
   border-color: #2d3752;
+}
+
+.india-ticker-bar {
+  display: flex;
+  align-items: stretch;
+  min-height: 48px;
+  background: linear-gradient(180deg, #1a2332 0%, #131722 100%);
+}
+.india-ticker-label {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.india-ticker-badge {
+  font-size: 0.68em;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0a4d8c;
+  background: #e8f1fc;
+  border-radius: 4px;
+  padding: 3px 6px;
+}
+.india-ticker-label-text {
+  font-size: 0.82em;
+  font-weight: 600;
+  color: #c5d0e0;
+  white-space: nowrap;
+}
+.india-ticker-refresh {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #c5d0e0 !important;
+  -webkit-text-fill-color: #c5d0e0 !important;
+  cursor: pointer;
+  font-size: 1em !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.india-ticker-refresh:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  transform: none !important;
+}
+.india-ticker-viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+}
+.india-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: india-ticker-scroll 40s linear infinite;
+}
+.india-ticker:hover .india-ticker-track,
+.india-ticker:focus-within .india-ticker-track {
+  animation-play-state: paused;
+}
+.india-ticker.is-loading .india-ticker-track {
+  animation: none;
+  width: 100%;
+  justify-content: center;
+}
+.india-ticker-seq {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 0 0 auto;
+}
+.india-ticker-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 18px;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.92em;
+  color: #e7ecfa;
+}
+.india-ticker-sym {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+.india-ticker-px {
+  font-variant-numeric: tabular-nums;
+  color: #d0d7e4;
+}
+.india-ticker-chg {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+.india-ticker-up .india-ticker-chg { color: #34d399; }
+.india-ticker-down .india-ticker-chg { color: #f87171; }
+.india-ticker-flat .india-ticker-chg { color: #94a3b8; }
+.india-ticker-muted {
+  color: #94a3b8;
+  border: none;
+}
+.india-ticker.is-demo .india-ticker-badge {
+  background: #422006;
+  color: #fbbf24;
+}
+@keyframes india-ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .india-ticker-track {
+    animation: none;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .india-ticker-seq:last-child { display: none; }
+}
+@media (max-width: 560px) {
+  .india-ticker-label-text { display: none; }
+  .india-ticker-item { padding: 12px 14px; font-size: 0.86em; }
 }
 
 /* Phase 4 — content freshness footer line */

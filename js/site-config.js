@@ -11,6 +11,18 @@
   global.IIConfig = {
     siteUrl: "https://investment-insight.netlify.app",
     metalsEndpoint: "/.netlify/functions/metals",
+    /** Proxied free NSE/BSE API — https://github.com/0xramm/Indian-Stock-Market-API */
+    stocksEndpoint: "/.netlify/functions/india-stocks",
+    stocksSymbols: [
+      "RELIANCE",
+      "TCS",
+      "HDFCBANK",
+      "INFY",
+      "ICICIBANK",
+      "SBIN",
+      "BHARTIARTL",
+      "ITC"
+    ],
     analytics: {
       // "none" | "plausible"
       provider: "none",
