@@ -490,6 +490,154 @@
     };
   }
 
+  /**
+   * Home purchase sketch: day-one cash + EMI on the loan portion.
+   * price, downPct (0-100), stampPct, regPct, otherCosts, ratePct, years, monthlyIncome optional.
+   */
+  function homeBuy(price, downPct, stampPct, regPct, otherCosts, ratePct, years, monthlyIncome) {
+    price = Number(price);
+    downPct = Number(downPct);
+    stampPct = Number(stampPct) || 0;
+    regPct = Number(regPct) || 0;
+    otherCosts = Number(otherCosts) || 0;
+    ratePct = Number(ratePct);
+    years = parseInt(years, 10);
+    monthlyIncome = Number(monthlyIncome) || 0;
+    if (
+      !(price > 0) ||
+      isNaN(downPct) ||
+      downPct < 0 ||
+      downPct >= 100 ||
+      isNaN(ratePct) ||
+      ratePct < 0 ||
+      !(years > 0)
+    ) {
+      return { error: "Please enter a valid property price, down payment %, rate, and years." };
+    }
+    var downPayment = (price * downPct) / 100;
+    var loan = price - downPayment;
+    var stampDuty = (price * stampPct) / 100;
+    var registration = (price * regPct) / 100;
+    var closingCosts = stampDuty + registration + otherCosts;
+    var dayOneCash = downPayment + closingCosts;
+    var loanCalc = emi(loan, ratePct, years, 0);
+    if (loanCalc.error) return loanCalc;
+    var emiShare =
+      monthlyIncome > 0 ? (loanCalc.monthlyEmi / monthlyIncome) * 100 : null;
+    return {
+      price: price,
+      downPayment: downPayment,
+      loan: loan,
+      stampDuty: stampDuty,
+      registration: registration,
+      otherCosts: otherCosts,
+      closingCosts: closingCosts,
+      dayOneCash: dayOneCash,
+      monthlyEmi: loanCalc.monthlyEmi,
+      totalInterest: loanCalc.totalInterest,
+      totalPayment: loanCalc.totalPayment,
+      months: loanCalc.months,
+      emiSharePct: emiShare,
+      schedule: loanCalc.schedule
+    };
+  }
+
+  /**
+   * Option P&amp;L at expiry (per lot * lots). Educational; ignores margin and greeks.
+   * optionType: "call"|"put", side: "buy"|"sell"
+   */
+  function optionExpiryPnL(optionType, side, strike, premium, spot, lotSize, lots) {
+    optionType = String(optionType || "call").toLowerCase();
+    side = String(side || "buy").toLowerCase();
+    strike = Number(strike);
+    premium = Number(premium);
+    spot = Number(spot);
+    lotSize = Number(lotSize);
+    lots = Number(lots) || 1;
+    if (
+      (optionType !== "call" && optionType !== "put") ||
+      (side !== "buy" && side !== "sell") ||
+      !(strike > 0) ||
+      !(premium >= 0) ||
+      !(spot > 0) ||
+      !(lotSize > 0) ||
+      !(lots > 0)
+    ) {
+      return { error: "Please enter valid option type, strike, premium, spot, and lot size." };
+    }
+    var intrinsic =
+      optionType === "call" ? Math.max(spot - strike, 0) : Math.max(strike - spot, 0);
+    var perUnitBuyer = intrinsic - premium;
+    var perUnit = side === "buy" ? perUnitBuyer : -perUnitBuyer;
+    var units = lotSize * lots;
+    var pnl = perUnit * units;
+    var premiumPaid = premium * units;
+    var breakeven =
+      optionType === "call"
+        ? side === "buy"
+          ? strike + premium
+          : strike + premium
+        : side === "buy"
+          ? strike - premium
+          : strike - premium;
+    var maxLossBuyer = premiumPaid;
+    return {
+      optionType: optionType,
+      side: side,
+      strike: strike,
+      premium: premium,
+      spot: spot,
+      lotSize: lotSize,
+      lots: lots,
+      units: units,
+      intrinsic: intrinsic,
+      pnl: pnl,
+      premiumCash: premiumPaid,
+      breakeven: breakeven,
+      maxLossIfBuyer: maxLossBuyer,
+      isProfit: pnl > 0
+    };
+  }
+
+  /**
+   * Futures-style P&amp;L (educational). pointValue = ₹ per point (often 1 for stock futures).
+   * side: "long"|"short"
+   */
+  function futuresPnL(side, entry, exitPrice, lotSize, lots, pointValue) {
+    side = String(side || "long").toLowerCase();
+    entry = Number(entry);
+    exitPrice = Number(exitPrice);
+    lotSize = Number(lotSize);
+    lots = Number(lots) || 1;
+    pointValue = Number(pointValue);
+    if (isNaN(pointValue) || pointValue <= 0) pointValue = 1;
+    if (
+      (side !== "long" && side !== "short") ||
+      !(entry > 0) ||
+      !(exitPrice > 0) ||
+      !(lotSize > 0) ||
+      !(lots > 0)
+    ) {
+      return { error: "Please enter valid side, entry, exit, and lot size." };
+    }
+    var points = exitPrice - entry;
+    if (side === "short") points = -points;
+    var units = lotSize * lots;
+    var pnl = points * units * pointValue;
+    return {
+      side: side,
+      entry: entry,
+      exit: exitPrice,
+      lotSize: lotSize,
+      lots: lots,
+      pointValue: pointValue,
+      points: points,
+      units: units,
+      pnl: pnl,
+      isProfit: pnl > 0
+    };
+  }
+
   var IICalc = {
     round: round,
     sip: sip,
@@ -508,7 +656,10 @@
     ppf: ppf,
     rd: rd,
     sipForGoal: sipForGoal,
-    stockPnL: stockPnL
+    stockPnL: stockPnL,
+    homeBuy: homeBuy,
+    optionExpiryPnL: optionExpiryPnL,
+    futuresPnL: futuresPnL
   };
 
   if (typeof module !== "undefined" && module.exports) {

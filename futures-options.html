@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Futures &amp; Options (F&amp;O) Guide | Investment Insights" />
   <meta name="twitter:description" content="Plain-English guide to futures and options in India: how they work, calls and puts, risks, margins, and a simple payoff sketch. For learning only, not trading advice." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710b" />
+  <link rel="stylesheet" href="style.css?v=20260710e" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -97,6 +97,8 @@
         <a href="bonds.html#bond-yield-calculator" role="menuitem">Bond yield</a>
         <a href="bonds.html#bond-ladder-tool" role="menuitem">Bond ladder</a>
         <a href="stocks.html#stock-pnl" role="menuitem">Stock P&amp;L</a>
+        <a href="realestate.html#re-buy-calc" role="menuitem">Home buy cost</a>
+        <a href="futures-options.html#fo-calc" role="menuitem">F&amp;O P&amp;L</a>
         <a href="tools.html" role="menuitem">EMI · PPF · RD · more</a>
       </div>
     </div>
@@ -130,6 +132,7 @@
     <li><a href="#compare-fo">Futures vs options</a></li>
     <li><a href="#how-futures">How futures work</a></li>
     <li><a href="#how-options">How options work</a></li>
+    <li><a href="#fo-calc">P&amp;L calculator</a></li>
     <li><a href="#payoff-sketch">Payoff sketch</a></li>
     <li><a href="#glossary-fo">Key terms</a></li>
     <li><a href="#risks-fo">Risks</a></li>
@@ -267,6 +270,125 @@
     </ul>
   </section>
 
+  <section id="fo-calc" class="tool-section">
+    <h2>F&amp;O P&amp;L calculator</h2>
+    <p class="tool-intro">
+      Estimate futures P&amp;L between entry and exit, or option P&amp;L at expiry for a call or put.
+      Lot sizes and margins are simplified. Not a trading signal and not a full broker bill.
+    </p>
+    <div id="fo-calc-tabs" class="swp-tabs-bar" role="tablist" aria-label="F&amp;O calculator modes">
+      <button type="button" class="swp-tab-btn active" id="fo-tab-fut-btn" role="tab" aria-selected="true">Futures</button>
+      <button type="button" class="swp-tab-btn" id="fo-tab-opt-btn" role="tab" aria-selected="false">Options at expiry</button>
+    </div>
+
+    <div id="fo-tab-fut" class="swp-tab-content" style="display:block;">
+      <form id="fo-fut-form" class="tool-form">
+        <div class="tool-fields">
+          <label for="fo-fut-side">Side
+            <select id="fo-fut-side">
+              <option value="long" selected>Long (buy first)</option>
+              <option value="short">Short (sell first)</option>
+            </select>
+          </label>
+          <label for="fo-fut-entry">Entry price
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price or index level when you enter.</span></span>
+            <input type="number" id="fo-fut-entry" min="0.01" step="any" required placeholder="e.g. 22000" value="22000" />
+          </label>
+          <label for="fo-fut-exit">Exit / spot
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price or index level when you exit (or at mark).</span></span>
+            <input type="number" id="fo-fut-exit" min="0.01" step="any" required placeholder="e.g. 22250" value="22250" />
+          </label>
+          <label for="fo-fut-lot">Lot size
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Units per contract (exchange lot). Example teaching value only.</span></span>
+            <input type="number" id="fo-fut-lot" min="1" step="1" required placeholder="e.g. 25" value="25" />
+          </label>
+          <label for="fo-fut-lots">Number of lots
+            <input type="number" id="fo-fut-lots" min="1" step="1" required value="1" />
+          </label>
+          <label for="fo-fut-pv">₹ per point
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Often 1 for stock futures. Index contracts can use a different value; check product specs.</span></span>
+            <input type="number" id="fo-fut-pv" min="0.01" step="any" required value="1" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate futures P&amp;L</button>
+          <button type="button" class="btn secondary" id="fo-fut-reset">Reset</button>
+        </div>
+      </form>
+      <div id="fo-fut-result" class="calc-result-panel" hidden></div>
+    </div>
+
+    <div id="fo-tab-opt" class="swp-tab-content" style="display:none;">
+      <form id="fo-opt-form" class="tool-form">
+        <div class="tool-fields">
+          <label for="fo-opt-type">Option
+            <select id="fo-opt-type">
+              <option value="call" selected>Call</option>
+              <option value="put">Put</option>
+            </select>
+          </label>
+          <label for="fo-opt-side">Side
+            <select id="fo-opt-side">
+              <option value="buy" selected>Buy</option>
+              <option value="sell">Sell (write)</option>
+            </select>
+          </label>
+          <label for="fo-opt-strike">Strike
+            <input type="number" id="fo-opt-strike" min="0.01" step="any" required placeholder="e.g. 22000" value="22000" />
+          </label>
+          <label for="fo-opt-premium">Premium (per unit)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price of the option contract per unit, not the full lot premium.</span></span>
+            <input type="number" id="fo-opt-premium" min="0" step="any" required placeholder="e.g. 180" value="180" />
+          </label>
+          <label for="fo-opt-spot">Spot at expiry
+            <input type="number" id="fo-opt-spot" min="0.01" step="any" required placeholder="e.g. 22400" value="22400" />
+          </label>
+          <label for="fo-opt-lot">Lot size
+            <input type="number" id="fo-opt-lot" min="1" step="1" required value="25" />
+          </label>
+          <label for="fo-opt-lots">Number of lots
+            <input type="number" id="fo-opt-lots" min="1" step="1" required value="1" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate option P&amp;L</button>
+          <button type="button" class="btn secondary" id="fo-opt-reset">Reset</button>
+        </div>
+      </form>
+      <div id="fo-opt-result" class="calc-result-panel" hidden></div>
+      <section id="fo-opt-visual" class="illust-panel tool-section swp-visual-panel" hidden>
+        <div class="illust-top">
+          <div class="illust-header-text">
+            <p class="illust-eyebrow">Illustrative · from your inputs</p>
+            <h3 class="illust-chart-title" style="margin:0 0 6px;">Payoff at expiry</h3>
+            <p class="tool-intro">P&amp;L across a range of spot levels using your strike, premium, side, and lot size.</p>
+          </div>
+        </div>
+        <div class="illust-stats cols-3" id="fo-opt-stats" aria-live="polite"></div>
+        <div class="illust-chart-card">
+          <div class="illust-chart-head">
+            <div>
+              <h3 class="illust-chart-title">P&amp;L vs spot</h3>
+              <p class="illust-chart-sub">At expiry · fees and margin ignored</p>
+            </div>
+          </div>
+          <div class="illust-chart-wrap goal-corpus-chart-wrap">
+            <canvas id="foOptPayoffChart" aria-label="Option payoff at expiry chart"></canvas>
+          </div>
+        </div>
+        <div class="illust-notes">
+          <strong>How to read this</strong>
+          <ul>
+            <li>Long options: loss is limited near the premium paid; gains depend on how far spot moves past the strike</li>
+            <li>Short options: premium is income if spot stays favourable; losses can grow large the other way</li>
+            <li>Real trading adds bid–ask, taxes, and margin calls this sketch does not model</li>
+          </ul>
+          <p class="illust-disclaimer">For learning only. Not a recommendation to buy or sell any contract.</p>
+        </div>
+      </section>
+    </div>
+  </section>
+
   <section id="payoff-sketch" class="illust-panel tool-section">
     <div class="illust-top">
       <div class="illust-header-text">
@@ -369,6 +491,7 @@
   <section id="related-fo" class="related-tools">
     <h2>Related tools &amp; guides</h2>
     <div class="calc-grid">
+      <a class="calc-chip" href="#fo-calc">F&amp;O P&amp;L calculator</a>
       <a class="calc-chip" href="stocks.html">Stocks (long-term)</a>
       <a class="calc-chip" href="stocks.html#stock-pnl">Stock P&amp;L tool</a>
       <a class="calc-chip" href="intraday.html">Intraday overview</a>
@@ -605,6 +728,7 @@ document.querySelectorAll(".stock-float-menu a").forEach(function (link) {
     "compare-fo",
     "how-futures",
     "how-options",
+    "fo-calc",
     "payoff-sketch",
     "glossary-fo",
     "risks-fo",
@@ -637,6 +761,277 @@ document.querySelectorAll(".stock-float-menu a").forEach(function (link) {
 })();
 </script>
 
+<script src="js/calc-core.js"></script>
+<script>
+(function () {
+  "use strict";
+  function $(id) { return document.getElementById(id); }
+  function inr(n) {
+    var v = Math.round(Number(n) || 0);
+    var sign = v < 0 ? "-" : "";
+    return sign + "₹" + Math.abs(v).toLocaleString("en-IN");
+  }
+  function hide(el) {
+    if (!el) return;
+    el.hidden = true;
+    el.setAttribute("hidden", "");
+  }
+  function show(el) {
+    if (!el) return;
+    el.hidden = false;
+    el.removeAttribute("hidden");
+  }
+  var optChart;
+
+  function showFoTab(which) {
+    var fut = which === "fut";
+    $("fo-tab-fut").style.display = fut ? "block" : "none";
+    $("fo-tab-opt").style.display = fut ? "none" : "block";
+    $("fo-tab-fut-btn").classList.toggle("active", fut);
+    $("fo-tab-opt-btn").classList.toggle("active", !fut);
+    $("fo-tab-fut-btn").setAttribute("aria-selected", fut ? "true" : "false");
+    $("fo-tab-opt-btn").setAttribute("aria-selected", fut ? "false" : "true");
+  }
+
+  function runFutures(e) {
+    if (e) e.preventDefault();
+    if (!window.IICalc) return;
+    var r = window.IICalc.futuresPnL(
+      $("fo-fut-side").value,
+      $("fo-fut-entry").value,
+      $("fo-fut-exit").value,
+      $("fo-fut-lot").value,
+      $("fo-fut-lots").value,
+      $("fo-fut-pv").value
+    );
+    if (r.error) {
+      alert(r.error);
+      return;
+    }
+    var panel = $("fo-fut-result");
+    panel.innerHTML =
+      '<div class="calc-result-grid">' +
+      '<div class="calc-result-item is-hero"><span class="calc-result-label">Estimated P&amp;L</span><strong class="calc-result-value">' +
+      inr(r.pnl) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Side</span><strong class="calc-result-value">' +
+      (r.side === "long" ? "Long" : "Short") +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Point move</span><strong class="calc-result-value">' +
+      (r.points > 0 ? "+" : "") +
+      r.points.toFixed(2) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Units (lot × lots)</span><strong class="calc-result-value">' +
+      r.units.toLocaleString("en-IN") +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Entry → exit</span><strong class="calc-result-value">' +
+      r.entry +
+      " → " +
+      r.exit +
+      "</strong></div>" +
+      "</div>" +
+      '<p class="calc-result-note">P&amp;L = point move × lot size × lots × ₹ per point. Margins, brokerage, taxes, and slippage are not included.</p>' +
+      (r.isProfit
+        ? '<p class="goal-insight goal-insight-ok">Model shows a profit before costs. Real fills and charges can wipe a thin edge.</p>'
+        : '<p class="goal-insight goal-insight-warn">Model shows a loss before costs. Leverage can make this larger relative to the cash you posted as margin.</p>');
+    show(panel);
+    if (window.IIStorage) {
+      window.IIStorage.rememberCalculator("F&O futures P&L", "futures-options.html#fo-calc");
+    }
+  }
+
+  function resetFutures() {
+    $("fo-fut-form").reset();
+    $("fo-fut-entry").value = "22000";
+    $("fo-fut-exit").value = "22250";
+    $("fo-fut-lot").value = "25";
+    $("fo-fut-lots").value = "1";
+    $("fo-fut-pv").value = "1";
+    $("fo-fut-result").innerHTML = "";
+    hide($("fo-fut-result"));
+  }
+
+  function optionCurve(type, side, strike, premium, lot, lots) {
+    var spots = [];
+    var pnls = [];
+    var lo = strike * 0.9;
+    var hi = strike * 1.1;
+    var step = (hi - lo) / 40;
+    for (var i = 0; i <= 40; i++) {
+      var s = lo + step * i;
+      var r = window.IICalc.optionExpiryPnL(type, side, strike, premium, s, lot, lots);
+      spots.push(Math.round(s));
+      pnls.push(r.pnl);
+    }
+    return { spots: spots, pnls: pnls };
+  }
+
+  function runOptions(e) {
+    if (e) e.preventDefault();
+    if (!window.IICalc) return;
+    var type = $("fo-opt-type").value;
+    var side = $("fo-opt-side").value;
+    var strike = $("fo-opt-strike").value;
+    var premium = $("fo-opt-premium").value;
+    var spot = $("fo-opt-spot").value;
+    var lot = $("fo-opt-lot").value;
+    var lots = $("fo-opt-lots").value;
+    var r = window.IICalc.optionExpiryPnL(type, side, strike, premium, spot, lot, lots);
+    if (r.error) {
+      alert(r.error);
+      return;
+    }
+    var panel = $("fo-opt-result");
+    panel.innerHTML =
+      '<div class="calc-result-grid">' +
+      '<div class="calc-result-item is-hero"><span class="calc-result-label">P&amp;L at expiry (this spot)</span><strong class="calc-result-value">' +
+      inr(r.pnl) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Position</span><strong class="calc-result-value">' +
+      (side === "buy" ? "Long " : "Short ") +
+      type +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Intrinsic value</span><strong class="calc-result-value">' +
+      inr(r.intrinsic * r.units) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Premium (full size)</span><strong class="calc-result-value">' +
+      inr(r.premiumCash) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Breakeven (approx)</span><strong class="calc-result-value">' +
+      Math.round(r.breakeven).toLocaleString("en-IN") +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Units</span><strong class="calc-result-value">' +
+      r.units.toLocaleString("en-IN") +
+      "</strong></div>" +
+      "</div>" +
+      '<p class="calc-result-note">At-expiry model only. Before expiry, time value and volatility change the premium. Short options can lose far more than the premium received.</p>' +
+      (side === "sell"
+        ? '<p class="goal-insight goal-insight-warn">Selling options can mean large losses if the market runs hard against you. Margin and assignment risk are real.</p>'
+        : '<p class="goal-insight goal-insight-ok">As a buyer, the most you can lose in this simple model is about the premium paid (before costs).</p>');
+    show(panel);
+
+    var stats = $("fo-opt-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><div class="illust-stat-label">Strike</div><div class="illust-stat-value">' +
+        Number(strike).toLocaleString("en-IN") +
+        '</div><div class="illust-stat-hint">Contract level</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Premium / unit</div><div class="illust-stat-value is-purple">' +
+        inr(premium) +
+        '</div><div class="illust-stat-hint">Before lot multiply</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">P&amp;L @ spot</div><div class="illust-stat-value ' +
+        (r.isProfit ? "is-up" : "is-down") +
+        '">' +
+        inr(r.pnl) +
+        '</div><div class="illust-stat-hint">Full size</div></div>';
+    }
+
+    var curve = optionCurve(type, side, Number(strike), Number(premium), Number(lot), Number(lots));
+    var canvas = $("foOptPayoffChart");
+    if (canvas && typeof Chart !== "undefined") {
+      if (optChart) optChart.destroy();
+      optChart = new Chart(canvas.getContext("2d"), {
+        type: "line",
+        data: {
+          labels: curve.spots,
+          datasets: [
+            {
+              label: "P&L",
+              data: curve.pnls,
+              borderColor: "#7c3aed",
+              backgroundColor: "rgba(124, 58, 237, 0.1)",
+              borderWidth: 2.5,
+              tension: 0,
+              fill: true,
+              pointRadius: 0
+            },
+            {
+              label: "Zero",
+              data: curve.spots.map(function () {
+                return 0;
+              }),
+              borderColor: "#94a3b8",
+              borderDash: [5, 5],
+              borderWidth: 1.5,
+              pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: function (items) {
+                  return "Spot " + items[0].label;
+                },
+                label: function (ctx) {
+                  if (ctx.dataset.label === "Zero") return null;
+                  return "P&L: " + inr(ctx.parsed.y);
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: "rgba(148,163,184,0.12)" },
+              ticks: { color: "#64748b", maxTicksLimit: 8, font: { size: 11 } }
+            },
+            y: {
+              grid: { color: "rgba(148,163,184,0.15)" },
+              ticks: {
+                color: "#64748b",
+                callback: function (v) {
+                  if (Math.abs(v) >= 1e5) return "₹" + (v / 1e5).toFixed(1) + "L";
+                  return "₹" + v;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+    show($("fo-opt-visual"));
+    if (window.IIStorage) {
+      window.IIStorage.rememberCalculator("F&O options P&L", "futures-options.html#fo-calc");
+    }
+  }
+
+  function resetOptions() {
+    $("fo-opt-form").reset();
+    $("fo-opt-strike").value = "22000";
+    $("fo-opt-premium").value = "180";
+    $("fo-opt-spot").value = "22400";
+    $("fo-opt-lot").value = "25";
+    $("fo-opt-lots").value = "1";
+    $("fo-opt-result").innerHTML = "";
+    hide($("fo-opt-result"));
+    hide($("fo-opt-visual"));
+    if ($("fo-opt-stats")) $("fo-opt-stats").innerHTML = "";
+    if (optChart) {
+      optChart.destroy();
+      optChart = null;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var futBtn = $("fo-tab-fut-btn");
+    var optBtn = $("fo-tab-opt-btn");
+    if (futBtn) futBtn.addEventListener("click", function () { showFoTab("fut"); });
+    if (optBtn) optBtn.addEventListener("click", function () { showFoTab("opt"); });
+    var ff = $("fo-fut-form");
+    if (ff) ff.addEventListener("submit", runFutures);
+    var of = $("fo-opt-form");
+    if (of) of.addEventListener("submit", runOptions);
+    var fr = $("fo-fut-reset");
+    if (fr) fr.addEventListener("click", resetFutures);
+    var or = $("fo-opt-reset");
+    if (or) or.addEventListener("click", resetOptions);
+  });
+})();
+</script>
 <script src="js/site-config.js"></script>
 <script src="js/analytics.js" defer></script>
 <script src="nav.js" defer></script>

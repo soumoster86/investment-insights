@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Real Estate Investing in India | Investment Insights" />
   <meta name="twitter:description" content="Educational guide to real estate in India: primary vs secondary, costs, EMI sketch, REITs, risks, and portfolio role. Not property advice." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710b" />
+  <link rel="stylesheet" href="style.css?v=20260710e" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -80,6 +80,8 @@
         <a href="bonds.html#bond-yield-calculator" role="menuitem">Bond yield</a>
         <a href="bonds.html#bond-ladder-tool" role="menuitem">Bond ladder</a>
         <a href="stocks.html#stock-pnl" role="menuitem">Stock P&amp;L</a>
+        <a href="realestate.html#re-buy-calc" role="menuitem">Home buy cost</a>
+        <a href="futures-options.html#fo-calc" role="menuitem">F&amp;O P&amp;L</a>
         <a href="tools.html" role="menuitem">EMI · PPF · RD · more</a>
       </div>
     </div>
@@ -104,6 +106,7 @@
       <li><a href="#costs">True costs</a></li>
       <li><a href="#re-cost-chart">Cost sketch</a></li>
       <li><a href="#loan">Home loans &amp; EMI</a></li>
+      <li><a href="#re-buy-calc">Buy cost calculator</a></li>
       <li><a href="#reits">REITs</a></li>
       <li><a href="#risks">Risks</a></li>
       <li><a href="#mistakes">Mistakes</a></li>
@@ -256,12 +259,95 @@
     <li><span class="tip-emoji" aria-hidden="true">🏠</span><span class="tip-text">Most buyers use a <strong>floating-rate</strong> home loan linked to a benchmark. EMIs can change when rates move.</span></li>
     <li><span class="tip-emoji" aria-hidden="true">📅</span><span class="tip-text"><strong>EMI</strong> is the monthly instalment. On long tenures, early years pay more interest than principal.</span></li>
     <li><span class="tip-emoji" aria-hidden="true">💼</span><span class="tip-text">Eligibility depends on income, credit score, existing EMIs, and lender policy, not just the property price.</span></li>
-    <li><span class="tip-emoji" aria-hidden="true">🏠</span><span class="tip-text">Try rough numbers with our <a href="tools.html#emi">EMI calculator</a> before talking to a bank.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">🏠</span><span class="tip-text">Try rough numbers with the <a href="#re-buy-calc">home buy cost calculator</a> below, or the standalone <a href="tools.html#emi">EMI tool</a>.</span></li>
   </ul>
       <div class="callout callout-tip">
         <strong>Stress test:</strong> Ask whether you can still pay if rates rise 1–2% or income is interrupted for a few months.
         Keep an emergency fund separate from the down payment. See <a href="insurance-emergency.html">Emergency &amp; insurance</a>.
       </div>
+    </section>
+
+    <section id="re-buy-calc" class="tool-section">
+      <h2>Home buy cost &amp; EMI calculator</h2>
+      <p class="tool-intro">
+        Estimate day-one cash (down payment + stamp + registration + other) and the monthly EMI on the loan.
+        Stamp and registration rates differ by state. This is a planning sketch, not a bank quote.
+      </p>
+      <form id="re-buy-form" class="tool-form">
+        <div class="tool-fields">
+          <label for="re-price">Agreement value (₹)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price in the sale agreement (before many extras).</span></span>
+            <input type="number" id="re-price" min="100000" step="any" required placeholder="e.g. 1,00,00,000" value="10000000" />
+          </label>
+          <label for="re-down">Down payment (%)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Share you pay in cash. Lenders often need at least 10–20%.</span></span>
+            <input type="number" id="re-down" min="0" max="99" step="any" required placeholder="e.g. 20" value="20" />
+          </label>
+          <label for="re-stamp">Stamp duty (%)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">State stamp duty on the agreement value. Check your state.</span></span>
+            <input type="number" id="re-stamp" min="0" max="20" step="any" required placeholder="e.g. 5" value="5" />
+          </label>
+          <label for="re-reg">Registration (%)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Registration charge as a % of value (simplified).</span></span>
+            <input type="number" id="re-reg" min="0" max="5" step="any" required placeholder="e.g. 1" value="1" />
+          </label>
+          <label for="re-other">Other day-one costs (₹)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Brokerage, interiors deposit, society fees, GST on under-construction extras, etc.</span></span>
+            <input type="number" id="re-other" min="0" step="any" placeholder="e.g. 2,00,000" value="200000" />
+          </label>
+          <label for="re-rate">Home loan rate (% p.a.)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Assumed floating rate. Real rates change over time.</span></span>
+            <input type="number" id="re-rate" min="0" step="any" required placeholder="e.g. 8.5" value="8.5" />
+          </label>
+          <label for="re-years">Loan tenure (years)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many years you plan to repay the loan.</span></span>
+            <input type="number" id="re-years" min="1" max="30" step="1" required placeholder="e.g. 20" value="20" />
+          </label>
+          <label for="re-income">Monthly take-home (₹, optional)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Used only to show EMI as a share of income. Leave blank to skip.</span></span>
+            <input type="number" id="re-income" min="0" step="any" placeholder="e.g. 1,50,000" />
+          </label>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn">Calculate</button>
+          <button type="button" class="btn secondary" id="re-buy-reset">Reset</button>
+        </div>
+      </form>
+      <div id="re-buy-result" class="calc-result-panel" hidden></div>
+      <section id="re-buy-visual" class="illust-panel tool-section swp-visual-panel" hidden>
+        <div class="illust-top">
+          <div class="illust-header-text">
+            <p class="illust-eyebrow">Illustrative · from your inputs</p>
+            <h3 class="illust-chart-title" style="margin:0 0 6px;">Loan balance over time</h3>
+            <p class="tool-intro">Outstanding principal at the end of each year under a fixed EMI and constant rate. Floating rates will differ.</p>
+          </div>
+          <p class="sample-freshness illust-freshness">
+            <span class="sample-freshness-label">Model</span>
+            Reducing-balance EMI · educational only
+          </p>
+        </div>
+        <div class="illust-stats cols-3" id="re-buy-stats" aria-live="polite"></div>
+        <div class="illust-chart-card">
+          <div class="illust-chart-head">
+            <div>
+              <h3 class="illust-chart-title">Outstanding loan path</h3>
+              <p class="illust-chart-sub">Principal left at year-end</p>
+            </div>
+          </div>
+          <div class="illust-chart-wrap goal-corpus-chart-wrap">
+            <canvas id="reBuyLoanChart" aria-label="Home loan outstanding path"></canvas>
+          </div>
+        </div>
+        <div class="illust-notes">
+          <strong>How to read this</strong>
+          <ul>
+            <li>Day-one cash is separate from the EMI path</li>
+            <li>Early years pay more interest; the principal falls slowly at first</li>
+            <li>Banks use their own fees, insurance, and rate resets</li>
+          </ul>
+          <p class="illust-disclaimer">For learning only. Not a loan offer or property recommendation.</p>
+        </div>
+      </section>
     </section>
 
     <section id="reits">
@@ -310,6 +396,7 @@
     <section id="related" class="related-tools">
       <h2>Related guides &amp; tools</h2>
       <div class="calc-grid">
+        <a class="calc-chip" href="#re-buy-calc">Home buy calculator</a>
         <a class="calc-chip" href="tools.html#emi">EMI calculator</a>
         <a class="calc-chip" href="risk-allocation.html">Risk &amp; allocation</a>
         <a class="calc-chip" href="insurance-emergency.html">Emergency fund</a>
@@ -593,6 +680,213 @@ document.querySelectorAll(".floating-toc a").forEach(function (link) {
   });
 });
 </script>
+  <script src="js/calc-core.js"></script>
+  <script>
+(function () {
+  "use strict";
+  function $(id) { return document.getElementById(id); }
+  function inr(n) {
+    return "₹" + Math.round(Number(n) || 0).toLocaleString("en-IN");
+  }
+  function hide(el) {
+    if (!el) return;
+    el.hidden = true;
+    el.setAttribute("hidden", "");
+  }
+  function show(el) {
+    if (!el) return;
+    el.hidden = false;
+    el.removeAttribute("hidden");
+  }
+  var buyChart;
+
+  function resetBuy() {
+    $("re-buy-form").reset();
+    $("re-price").value = "10000000";
+    $("re-down").value = "20";
+    $("re-stamp").value = "5";
+    $("re-reg").value = "1";
+    $("re-other").value = "200000";
+    $("re-rate").value = "8.5";
+    $("re-years").value = "20";
+    $("re-income").value = "";
+    $("re-buy-result").innerHTML = "";
+    hide($("re-buy-result"));
+    hide($("re-buy-visual"));
+    if ($("re-buy-stats")) $("re-buy-stats").innerHTML = "";
+    if (buyChart) {
+      buyChart.destroy();
+      buyChart = null;
+    }
+  }
+
+  function runBuy(e) {
+    if (e) e.preventDefault();
+    if (!window.IICalc) {
+      alert("Calculator failed to load. Please refresh.");
+      return;
+    }
+    var r = window.IICalc.homeBuy(
+      $("re-price").value,
+      $("re-down").value,
+      $("re-stamp").value,
+      $("re-reg").value,
+      $("re-other").value,
+      $("re-rate").value,
+      $("re-years").value,
+      $("re-income").value
+    );
+    if (r.error) {
+      alert(r.error);
+      return;
+    }
+    var shareHtml = "";
+    if (r.emiSharePct != null) {
+      var share = r.emiSharePct;
+      var ok = share <= 40;
+      shareHtml =
+        '<p class="goal-insight ' +
+        (ok ? "goal-insight-ok" : "goal-insight-warn") +
+        '">EMI is about <b>' +
+        share.toFixed(0) +
+        "%</b> of the take-home you entered" +
+        (ok
+          ? ". Many households try to keep this comfortable under ~40%."
+          : ". That is a heavy load for many households — stress-test a rate rise.") +
+        "</p>";
+    }
+    var panel = $("re-buy-result");
+    panel.innerHTML =
+      '<div class="calc-result-grid">' +
+      '<div class="calc-result-item is-hero"><span class="calc-result-label">Day-one cash needed</span><strong class="calc-result-value">' +
+      inr(r.dayOneCash) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Monthly EMI</span><strong class="calc-result-value">' +
+      inr(r.monthlyEmi) +
+      '<span class="goal-per-mo"> / month</span></strong></div>' +
+      '<div class="calc-result-item"><span class="calc-result-label">Down payment</span><strong class="calc-result-value">' +
+      inr(r.downPayment) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Loan amount</span><strong class="calc-result-value">' +
+      inr(r.loan) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Stamp + registration</span><strong class="calc-result-value">' +
+      inr(r.stampDuty + r.registration) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Other costs</span><strong class="calc-result-value">' +
+      inr(r.otherCosts) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Total interest (model)</span><strong class="calc-result-value">' +
+      inr(r.totalInterest) +
+      "</strong></div>" +
+      '<div class="calc-result-item"><span class="calc-result-label">Total paid to bank</span><strong class="calc-result-value">' +
+      inr(r.totalPayment) +
+      "</strong></div>" +
+      "</div>" +
+      '<p class="calc-result-note">Day-one cash = down payment + stamp + registration + other. EMI assumes a fixed rate for the full tenure.</p>' +
+      shareHtml;
+    show(panel);
+
+    var stats = $("re-buy-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><div class="illust-stat-label">Day-one cash</div><div class="illust-stat-value">' +
+        inr(r.dayOneCash) +
+        '</div><div class="illust-stat-hint">Before first EMI</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">EMI</div><div class="illust-stat-value is-up">' +
+        inr(r.monthlyEmi) +
+        '</div><div class="illust-stat-hint">' +
+        r.months +
+        " months</div></div>" +
+        '<div class="illust-stat"><div class="illust-stat-label">Interest total</div><div class="illust-stat-value is-amber">' +
+        inr(r.totalInterest) +
+        '</div><div class="illust-stat-hint">If rate never changes</div></div>';
+    }
+
+    var labels = [];
+    var balances = [];
+    var years = parseInt($("re-years").value, 10) || 20;
+    var rate = parseFloat($("re-rate").value) / 100 / 12;
+    var emiAmt = r.monthlyEmi;
+    var bal = r.loan;
+    for (var y = 0; y <= years; y++) {
+      labels.push(y === 0 ? "Start" : "Y" + y);
+      balances.push(Math.round(bal));
+      if (y < years) {
+        for (var m = 0; m < 12; m++) {
+          var interest = bal * rate;
+          bal = Math.max(0, bal - (emiAmt - interest));
+        }
+      }
+    }
+    var canvas = $("reBuyLoanChart");
+    if (canvas && typeof Chart !== "undefined") {
+      if (buyChart) buyChart.destroy();
+      buyChart = new Chart(canvas.getContext("2d"), {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Outstanding",
+              data: balances,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.12)",
+              borderWidth: 2.6,
+              tension: 0.25,
+              fill: true,
+              pointRadius: years > 20 ? 0 : 2.5
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function (ctx) {
+                  return "Outstanding: " + inr(ctx.parsed.y);
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: "rgba(148,163,184,0.12)" },
+              ticks: { color: "#64748b", maxTicksLimit: 12, font: { size: 11, weight: "600" } }
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: "rgba(148,163,184,0.15)" },
+              ticks: {
+                color: "#64748b",
+                callback: function (v) {
+                  if (v >= 1e7) return "₹" + (v / 1e7).toFixed(1) + "Cr";
+                  if (v >= 1e5) return "₹" + (v / 1e5).toFixed(1) + "L";
+                  return "₹" + v;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+    show($("re-buy-visual"));
+    if (window.IIStorage) {
+      window.IIStorage.rememberCalculator("Home buy cost calculator", "realestate.html#re-buy-calc");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = $("re-buy-form");
+    if (form) form.addEventListener("submit", runBuy);
+    var reset = $("re-buy-reset");
+    if (reset) reset.addEventListener("click", resetBuy);
+  });
+})();
+  </script>
   <script src="js/site-config.js"></script>
   <script src="js/analytics.js" defer></script>
   <script src="nav.js" defer></script>

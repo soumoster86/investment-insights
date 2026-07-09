@@ -145,6 +145,22 @@
       blurb: "Cap the day’s risk capital (educational)."
     },
     {
+      url: "realestate.html#re-buy-calc",
+      title: "Home buy cost & EMI calculator",
+      type: "Calculator",
+      keywords:
+        "real estate home buy calculator down payment stamp duty registration emi home loan day one cash property",
+      blurb: "Day-one cash, loan EMI, and interest for a home purchase sketch."
+    },
+    {
+      url: "futures-options.html#fo-calc",
+      title: "F&O P&L calculator",
+      type: "Calculator",
+      keywords:
+        "futures options f&o pnl p&l calculator call put premium strike lot size expiry payoff leverage derivatives",
+      blurb: "Futures P&L and option expiry P&L with lot size."
+    },
+    {
       url: "calculators.html",
       title: "All calculators",
       type: "Hub",
