@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Investment Insights — Learn Investing in India" />
   <meta name="twitter:description" content="Plain-English investing guides and free calculators for India: SIPs, goals, home loans, F&amp;O, FDs, NPS, bonds, and more. For learning only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710u" />
+  <link rel="stylesheet" href="style.css?v=20260710v" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -288,8 +288,8 @@
       </p>
     </section>
 
-    <!-- B: KPI strip — goal, last calc, metals, currency -->
-    <section id="kpi" class="kpi-strip kpi-strip-4 fade-in-section" aria-label="Your tools snapshot">
+    <!-- B: KPI strip — goal, last calc, metals, crude, currency -->
+    <section id="kpi" class="kpi-strip kpi-strip-5 fade-in-section" aria-label="Your tools snapshot">
       <article class="kpi-card" id="goal-summary-card">
         <header class="kpi-head">
           <span class="ii-icon" aria-hidden="true">
@@ -335,6 +335,29 @@
         </div>
         <p id="metal-rate-update" class="kpi-meta"></p>
         <button type="button" class="btn btn-sm secondary" onclick="fetchMetalRates()">Refresh</button>
+      </article>
+
+      <article class="kpi-card" id="crude-oil-card">
+        <header class="kpi-head">
+          <span class="ii-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c-2 4-5 6.5-5 10a5 5 0 0010 0c0-3.5-3-6-5-10z"/><path d="M9.5 16.5c.5 1 1.4 1.5 2.5 1.5s2-.5 2.5-1.5"/></svg>
+          </span>
+          <h2>Crude oil</h2>
+        </header>
+        <div id="crude-rate-content" class="kpi-crude">
+          <div>
+            <span>WTI / barrel</span>
+            <strong id="crude-wti-price">—</strong>
+            <em id="crude-wti-change" class="kpi-change is-flat">—</em>
+          </div>
+          <div>
+            <span>Brent / barrel</span>
+            <strong id="crude-brent-price">—</strong>
+            <em id="crude-brent-change" class="kpi-change is-flat">—</em>
+          </div>
+        </div>
+        <p id="crude-rate-update" class="kpi-meta">Futures-style quotes · educational snapshot</p>
+        <button type="button" class="btn btn-sm secondary" onclick="fetchCrudePrices()">Refresh</button>
       </article>
 
       <article class="kpi-card kpi-currency" id="currency-card">

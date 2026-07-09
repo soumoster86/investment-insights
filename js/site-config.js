@@ -11,6 +11,8 @@
   global.IIConfig = {
     siteUrl: "https://investment-insight.netlify.app",
     metalsEndpoint: "/.netlify/functions/metals",
+    /** Crude oil via Netlify proxy → API Ninjas (API_NINJAS_KEY server-side) */
+    crudeEndpoint: "/.netlify/functions/crude",
     /** Proxied free NSE/BSE API — https://github.com/0xramm/Indian-Stock-Market-API */
     stocksEndpoint: "/.netlify/functions/india-stocks",
     stocksSymbols: [

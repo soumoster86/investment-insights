@@ -265,14 +265,145 @@
       });
   }
 
+  function formatUsd(n, digits) {
+    if (!(typeof n === "number") || isNaN(n)) return "—";
+    var d = digits == null ? 2 : digits;
+    try {
+      return (
+        "$" +
+        n.toLocaleString("en-US", {
+          minimumFractionDigits: d,
+          maximumFractionDigits: d
+        })
+      );
+    } catch (e) {
+      return "$" + n.toFixed(d);
+    }
+  }
+
+  function formatChange(change, changePct) {
+    if (change == null && changePct == null) return { text: "—", cls: "is-flat" };
+    var parts = [];
+    if (typeof change === "number" && !isNaN(change)) {
+      parts.push((change > 0 ? "+" : "") + change.toFixed(2));
+    }
+    if (typeof changePct === "number" && !isNaN(changePct)) {
+      parts.push((changePct > 0 ? "+" : "") + changePct.toFixed(2) + "%");
+    }
+    var cls = "is-flat";
+    var ref = typeof changePct === "number" ? changePct : change;
+    if (typeof ref === "number") {
+      if (ref > 0) cls = "is-up";
+      else if (ref < 0) cls = "is-down";
+    }
+    return { text: parts.join(" · ") || "—", cls: cls };
+  }
+
+  function applyCrudeDemo(reason) {
+    var wtiEl = document.getElementById("crude-wti-price");
+    var brentEl = document.getElementById("crude-brent-price");
+    var wtiCh = document.getElementById("crude-wti-change");
+    var brentCh = document.getElementById("crude-brent-change");
+    var updateEl = document.getElementById("crude-rate-update");
+    if (!wtiEl) return;
+    wtiEl.textContent = "$67.82";
+    brentEl.textContent = "$71.40";
+    if (wtiCh) {
+      wtiCh.textContent = "+0.37 · +0.55%";
+      wtiCh.className = "kpi-change is-up";
+    }
+    if (brentCh) {
+      brentCh.textContent = "+0.22 · +0.31%";
+      brentCh.className = "kpi-change is-up";
+    }
+    if (updateEl) {
+      updateEl.textContent =
+        reason ||
+        "Demo prices (educational). Set API_NINJAS_KEY on Netlify for live data.";
+    }
+  }
+
+  /**
+   * Live crude via Netlify Function (/.netlify/functions/crude).
+   * Proxies API Ninjas commodityprice (WTI + Brent). Key stays server-side.
+   */
+  function fetchCrudePrices() {
+    var wtiEl = document.getElementById("crude-wti-price");
+    var brentEl = document.getElementById("crude-brent-price");
+    var wtiCh = document.getElementById("crude-wti-change");
+    var brentCh = document.getElementById("crude-brent-change");
+    var updateEl = document.getElementById("crude-rate-update");
+    if (!wtiEl) return;
+
+    wtiEl.textContent = "Loading…";
+    if (brentEl) brentEl.textContent = "Loading…";
+    if (wtiCh) {
+      wtiCh.textContent = "…";
+      wtiCh.className = "kpi-change is-flat";
+    }
+    if (brentCh) {
+      brentCh.textContent = "…";
+      brentCh.className = "kpi-change is-flat";
+    }
+
+    var endpoint =
+      (window.IIConfig && window.IIConfig.crudeEndpoint) ||
+      "/.netlify/functions/crude";
+
+    fetch(endpoint, { headers: { Accept: "application/json" } })
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var wti = data.wti || {};
+        var brent = data.brent || {};
+        if (!(Number(wti.price) > 0)) throw new Error("invalid payload");
+
+        wtiEl.textContent = formatUsd(Number(wti.price), 2);
+        if (brentEl) brentEl.textContent = formatUsd(Number(brent.price), 2);
+
+        var wCh = formatChange(wti.change, wti.changePct);
+        var bCh = formatChange(brent.change, brent.changePct);
+        if (wtiCh) {
+          wtiCh.textContent = wCh.text;
+          wtiCh.className = "kpi-change " + wCh.cls;
+        }
+        if (brentCh) {
+          brentCh.textContent = bCh.text;
+          brentCh.className = "kpi-change " + bCh.cls;
+        }
+
+        if (updateEl) {
+          var when = data.updatedAt
+            ? new Date(data.updatedAt).toLocaleString()
+            : new Date().toLocaleString();
+          if (data.demo) {
+            updateEl.textContent =
+              (data.note || "Demo prices (educational).") + " · " + when;
+          } else {
+            updateEl.textContent =
+              "WTI & Brent · USD/barrel · Live (API Ninjas proxy) · " + when;
+          }
+        }
+      })
+      .catch(function () {
+        applyCrudeDemo(
+          "Could not reach crude proxy — showing educational demo prices."
+        );
+      });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     fillLastCalculator();
     fillGoalCard();
     fillTopPicks();
     if (document.getElementById("gold1g")) fetchMetalRates();
+    if (document.getElementById("crude-wti-price")) fetchCrudePrices();
   });
 
   // Expose for onclick handlers still used on the dashboard
   window.convertCurrency = convertCurrency;
   window.fetchMetalRates = fetchMetalRates;
+  window.fetchCrudePrices = fetchCrudePrices;
 })();
