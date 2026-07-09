@@ -6981,12 +6981,22 @@ body.dark-mode .related-tools {
 }
 
 /* ---------- Financial term of the day (home) ---------- */
+/* Always visible — do not use .fade-in-section here (stays opacity:0 until observed). */
+#term-of-day.tod-section,
 .tod-section {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
   margin: 0 0 28px !important;
   padding: 0 !important;
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
+  min-height: 0;
+}
+body.page-home #term-of-day.tod-section {
+  background: transparent !important;
 }
 .tod-section:hover {
   transform: none !important;
@@ -6995,13 +7005,15 @@ body.dark-mode .related-tools {
 }
 .tod-card {
   position: relative;
+  display: block;
   overflow: hidden;
   border-radius: 18px;
   border: 1.5px solid var(--border-soft, #d5e2f5);
   background:
     linear-gradient(135deg, rgba(232, 241, 252, 0.95) 0%, rgba(255, 255, 255, 0.98) 48%, rgba(238, 246, 255, 0.95) 100%);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md, 0 6px 20px rgba(10, 50, 110, 0.08));
   padding: 20px 22px 18px;
+  min-height: 160px;
 }
 .tod-card::before {
   content: "";

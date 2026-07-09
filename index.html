@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Investment Insights — Learn Investing in India" />
   <meta name="twitter:description" content="Plain-English investing guides and free calculators for India: SIPs, goals, home loans, F&amp;O, FDs, NPS, bonds, and more. For learning only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710w" />
+  <link rel="stylesheet" href="style.css?v=20260710x" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -398,6 +398,26 @@
       </article>
     </section>
 
+    <!-- Financial term of the day (deterministic daily rotation). Not fade-in: must stay visible for TOC jumps. -->
+    <section id="term-of-day" class="tod-section home-section" aria-labelledby="tod-heading">
+      <div class="tod-card">
+        <header class="tod-head">
+          <div class="tod-head-text">
+            <p class="tod-eyebrow">Learn a little each day</p>
+            <h2 id="tod-heading">Financial term of the day</h2>
+          </div>
+          <p class="tod-date" id="tod-date">—</p>
+        </header>
+        <p class="tod-term" id="tod-term">Loading today’s term…</p>
+        <p class="tod-definition" id="tod-definition">A short definition will appear here.</p>
+        <p class="tod-why" id="tod-why"><strong>Why it matters:</strong> Practical context for Indian investors.</p>
+        <div class="tod-actions">
+          <a class="btn btn-sm" id="tod-link" href="learn.html">Learn more</a>
+          <p class="tod-meta" id="tod-meta">Rotates daily</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Highlight recent product & tool upgrades -->
     <section id="whats-new" class="home-section fade-in-section">
       <div class="section-heading">
@@ -772,7 +792,7 @@
     });
   });
   window.addEventListener('scroll', function () {
-    var sections = ['hero', 'learn-path', 'kpi', 'whats-new', 'explore', 'calculators', 'learn'];
+    var sections = ['hero', 'learn-path', 'kpi', 'term-of-day', 'whats-new', 'explore', 'calculators', 'learn'];
     var current = '';
     for (var i = 0; i < sections.length; i++) {
       var sec = document.getElementById(sections[i]);
@@ -794,7 +814,8 @@
   <script src="js/calc-core.js"></script>
   <script src="js/storage.js"></script>
   <script src="recommendations.js" defer></script>
-  <script src="js/dashboard.js" defer></script>
+  <script src="js/dashboard.js?v=20260710x" defer></script>
+  <script src="js/term-of-day.js?v=20260710x" defer></script>
   <script src="js/analytics.js" defer></script>
   <script src="nav.js?v=20260710s" defer></script>
 
