@@ -88,6 +88,9 @@
       </div>
     </div>
     <a href="contact.html">Contact</a>
+    <button type="button" class="nav-search-btn" id="nav-search-btn" aria-label="Search" title="Search (Ctrl+K)">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+    </button>
   </nav>
 </header>
 <!-- END SITE HEADER -->
@@ -645,5 +648,20 @@ document.querySelectorAll('.etf-float-menu a').forEach(function(link) {
 </script>
 
 <script src="nav.js" defer></script>
+
+<!-- Search Modal -->
+<div id="search-modal" class="search-modal" aria-hidden="true">
+  <div class="search-modal-backdrop" id="search-backdrop"></div>
+  <div class="search-modal-content">
+    <div class="search-header">
+      <input type="text" id="search-input" placeholder="Search guides, tools, calculators..." autocomplete="off" />
+      <button type="button" class="search-close" id="search-close" aria-label="Close search">×</button>
+    </div>
+    <div id="search-results" class="search-results">
+      <div class="search-placeholder">Type to search...</div>
+    </div>
+  </div>
+</div>
+<script src="js/search.js" defer></script>
 </body>
 </html>
