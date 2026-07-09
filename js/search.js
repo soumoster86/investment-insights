@@ -159,12 +159,55 @@
       blurb: "Standalone tools page with jump chips."
     },
 
+    // —— Home dashboard tools (KPI strip) ——
+    {
+      url: "index.html#currency-card",
+      title: "Currency converter",
+      type: "Tool",
+      keywords:
+        "currency converter fx foreign exchange usd inr eur gbp jpy sgd chf convert money rate home dashboard kpi",
+      blurb: "Convert amounts between INR and major currencies on the home page."
+    },
+    {
+      url: "index.html#gold-silver-card",
+      title: "Metals (gold & silver rates)",
+      type: "Tool",
+      keywords:
+        "metals metal gold silver rate price per gram 10g bullion bullion rates refresh home dashboard kpi",
+      blurb: "Indicative gold and silver rates in INR on the home page."
+    },
+    {
+      url: "index.html#kpi",
+      title: "Last calculator",
+      type: "Tool",
+      keywords:
+        "last calculator recent calculator reopen last used tool history home dashboard kpi resume",
+      blurb: "Reopen the calculator you used most recently (saved in this browser)."
+    },
+    {
+      url: "index.html#goal-summary-card",
+      title: "Your goal snapshot",
+      type: "Tool",
+      keywords:
+        "your goal goal summary saved goal dashboard home snapshot sip corpus plan kpi",
+      blurb: "Saved goal plan from the goal planner, shown on the home dashboard."
+    },
+    {
+      url: "index.html#kpi",
+      title: "Home tools snapshot",
+      type: "Hub",
+      keywords:
+        "home tools snapshot kpi dashboard metals currency last calculator your goal strip",
+      blurb: "Goal, last calculator, metals, and currency on the home page."
+    },
+
     // —— Guides & pages ——
     {
       url: "index.html",
       title: "Home",
       type: "Page",
-      keywords: "home start overview explore dashboard goal metals currency"
+      keywords:
+        "home start overview explore dashboard goal metals currency gold silver last calculator fx convert"
     },
     {
       url: "learn.html",
@@ -329,17 +372,18 @@
       if (blurb.indexOf(t) !== -1) score += 4;
     }
 
-    // Prefer calculators when query looks tool-oriented
+    // Prefer calculators / home tools when query looks tool-oriented
     var toolish =
-      /\b(calc|calculator|emi|sip|swp|fd|nps|ppf|rd|ytm|pnl|p&l|lumpsum|ladder|cagr|inflation|goal)\b/.test(
+      /\b(calc|calculator|emi|sip|swp|fd|nps|ppf|rd|ytm|pnl|p&l|lumpsum|ladder|cagr|inflation|goal|currency|converter|fx|metal|metals|gold|silver|last calculator)\b/.test(
         nq
       );
     if (toolish && item.type === "Calculator") score += 25;
+    if (toolish && item.type === "Tool") score += 28;
     if (toolish && item.type === "Hub") score += 8;
     if (!toolish && item.type === "Guide") score += 6;
 
-    // Slight boost for shorter, more specific calculator titles
-    if (item.type === "Calculator") score += 5;
+    // Slight boost for shorter, more specific calculator/tool titles
+    if (item.type === "Calculator" || item.type === "Tool") score += 5;
 
     return score;
   }
@@ -371,6 +415,7 @@
 
   function typeClass(type) {
     if (type === "Calculator") return "search-type-calc";
+    if (type === "Tool") return "search-type-tool";
     if (type === "Guide") return "search-type-guide";
     if (type === "Hub") return "search-type-hub";
     return "search-type-page";
@@ -401,7 +446,7 @@
       document.body.style.overflow = "";
       searchInput.value = "";
       searchResults.innerHTML =
-        '<div class="search-placeholder">Type to search guides or calculators (e.g. SIP, EMI, FD ladder)…</div>';
+        '<div class="search-placeholder">Type to search — e.g. SIP, EMI, metals, currency, last calculator…</div>';
     }
 
     searchBtns.forEach(function (btn) {
@@ -424,14 +469,14 @@
     function renderResults(results, query) {
       if (!query) {
         searchResults.innerHTML =
-          '<div class="search-placeholder">Type to search guides or calculators (e.g. SIP, EMI, FD ladder)…</div>';
+          '<div class="search-placeholder">Type to search — e.g. SIP, EMI, metals, currency, last calculator…</div>';
         return;
       }
       if (!results.length) {
         searchResults.innerHTML =
           '<div class="search-placeholder">No matches for “' +
           escapeHtml(query) +
-          '”. Try SIP, EMI, FD, NPS, goal, or a topic name.</div>';
+          '”. Try SIP, EMI, FD, metals, currency, or a topic name.</div>';
         return;
       }
 
