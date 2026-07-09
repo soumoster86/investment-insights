@@ -595,7 +595,7 @@ form textarea:focus,
    (body ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ specificity beats the per-page inline <style>.)
    ============================================================ */
 
-/* Shared shell for both kinds of floating box */
+/* Shared shell for floating side panels */
 body .floating-toc,
 body .home-float-menu,
 body .stock-float-menu,
@@ -603,19 +603,38 @@ body .etf-float-menu,
 body .ipo-float-menu,
 body .intraday-float-menu {
   position: fixed;
-  width: 210px;
-  max-width: 220px;
-  overflow-y: auto;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(220, 230, 245, 0.95);
-  box-shadow: var(--shadow-md);
-  border-radius: 14px;
-  padding: 14px 14px 12px;
-  font-size: 0.96em;
+  width: 228px;
+  max-width: min(240px, calc(100vw - 48px));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 255, 0.96) 100%);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(180, 200, 230, 0.55);
+  box-shadow:
+    0 4px 6px rgba(10, 40, 90, 0.04),
+    0 12px 28px rgba(10, 40, 90, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 0;
+  font-size: 0.94em;
   z-index: 900;
+}
+/* Accent bar on top of each panel */
+body .floating-toc::before,
+body .home-float-menu::before,
+body .stock-float-menu::before,
+body .etf-float-menu::before,
+body .ipo-float-menu::before,
+body .intraday-float-menu::before {
+  content: "";
   display: block;
+  height: 3px;
+  flex: 0 0 auto;
+  background: linear-gradient(90deg, #0a4d8c 0%, #2b7de9 55%, #6ec8ff 100%);
+  border-radius: 16px 16px 0 0;
 }
 
 /* Quick Access — docked bottom-left (product pages) */
@@ -623,79 +642,153 @@ body .stock-float-menu,
 body .etf-float-menu,
 body .ipo-float-menu,
 body .intraday-float-menu {
-  left: 24px;
+  left: 20px;
   right: auto;
   top: auto;
   bottom: 24px;
   max-height: calc(100vh - 48px);
 }
 
-/* Home left rail — top-left, mirrors On this page on the right */
+/* Home left rail — top-left */
 body .home-float-menu {
-  left: 24px;
+  left: 20px;
   right: auto;
   bottom: auto;
-  top: calc(var(--header-h) + 24px);
-  max-height: calc(100vh - var(--header-h) - 48px);
+  top: calc(var(--header-h) + 20px);
+  max-height: calc(100vh - var(--header-h) - 40px);
 }
 
 /* On this page — top-right */
 body .floating-toc {
-  right: 24px;
+  right: 20px;
   left: auto;
   bottom: auto;
-  top: calc(var(--header-h) + 24px);
-  max-height: calc(100vh - var(--header-h) - 48px);
+  top: calc(var(--header-h) + 20px);
+  max-height: calc(100vh - var(--header-h) - 40px);
 }
 
-/* Titles */
+/* Titles / headers */
 body .floating-toc .toc-title,
 body .home-float-menu .float-title,
 body .stock-float-menu .float-title,
 body .etf-float-menu .float-title,
 body .ipo-float-menu .float-title,
 body .intraday-float-menu .float-title {
-   font-weight: 600; 
-  color: var(--brand);
-  font-size: 1.05em;
-  margin: 0 0 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--border-soft);
+  flex: 0 0 auto;
+  font-weight: 700;
+  color: #0a4d8c;
+  font-size: 0.72em;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid rgba(200, 215, 235, 0.85);
+  background: linear-gradient(180deg, #f4f8ff 0%, rgba(255, 255, 255, 0.4) 100%);
+  line-height: 1.3;
 }
 body .home-float-menu .float-subtitle {
-  font-size: 0.72em;
+  font-size: 0.68em;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #5b6b82;
-  margin: 4px 0 6px;
+  color: #6b7c93;
+  margin: 8px 12px 4px;
 }
 body .home-float-menu .float-divider {
   height: 1px;
-  background: var(--border-soft, #d5deeb);
-  margin: 10px 0 8px;
+  background: linear-gradient(90deg, transparent, #d5e2f5 15%, #d5e2f5 85%, transparent);
+  margin: 8px 12px;
 }
 
-/* Reset list styling for the TOC so it reads cleanly */
-body .floating-toc ul { margin: 0; padding: 0; list-style: none; }
-body .floating-toc li { margin: 0; }
+/* TOC list + numbering */
+body .floating-toc ul {
+  margin: 0;
+  padding: 8px 8px 10px;
+  list-style: none;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  counter-reset: toc-item;
+  scrollbar-width: thin;
+  scrollbar-color: #c5d4ea transparent;
+}
+body .floating-toc ul::-webkit-scrollbar { width: 5px; }
+body .floating-toc ul::-webkit-scrollbar-thumb {
+  background: #c5d4ea;
+  border-radius: 999px;
+}
+body .floating-toc li {
+  margin: 0;
+  counter-increment: toc-item;
+}
 
-/* Links — consistent spacing */
+/* Scrollable body for left rails with many links */
+body .home-float-menu,
+body .stock-float-menu,
+body .etf-float-menu,
+body .ipo-float-menu,
+body .intraday-float-menu {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #c5d4ea transparent;
+}
+body .home-float-menu > a,
+body .stock-float-menu > a,
+body .etf-float-menu > a,
+body .ipo-float-menu > a,
+body .intraday-float-menu > a {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+body .home-float-menu > a:first-of-type,
+body .stock-float-menu > a:first-of-type,
+body .etf-float-menu > a:first-of-type,
+body .ipo-float-menu > a:first-of-type,
+body .intraday-float-menu > a:first-of-type {
+  margin-top: 8px;
+}
+body .home-float-menu > a:last-of-type,
+body .stock-float-menu > a:last-of-type,
+body .etf-float-menu > a:last-of-type,
+body .ipo-float-menu > a:last-of-type,
+body .intraday-float-menu > a:last-of-type {
+  margin-bottom: 10px;
+}
+
+/* Links */
 body .floating-toc a,
 body .home-float-menu a,
 body .stock-float-menu a,
 body .etf-float-menu a,
 body .ipo-float-menu a,
 body .intraday-float-menu a {
-  display: block;
-  color: #204a80;
-  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #1e3a5f !important;
+  text-decoration: none !important;
   font-style: normal;
   font-weight: 500;
+  font-size: 0.9em;
+  line-height: 1.35;
   padding: 8px 10px;
   margin: 2px 0;
-  border-radius: 7px;
-  transition: background 0.16s, color 0.16s;
+  border-radius: 10px;
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+/* Numbered steps on TOC only */
+body .floating-toc a::before {
+  content: counter(toc-item, decimal-leading-zero);
+  flex: 0 0 auto;
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #7a94b5;
+  min-width: 1.35em;
+  margin-top: 0.15em;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.15s ease;
 }
 body .floating-toc a:hover,
 body .floating-toc a.active,
@@ -705,8 +798,19 @@ body .etf-float-menu a:hover,
 body .ipo-float-menu a:hover,
 body .ipo-float-menu a.active,
 body .intraday-float-menu a:hover {
-  background: #eaf1fb;
-  color: var(--brand);
+  background: linear-gradient(90deg, #e8f1fc 0%, #f4f8ff 100%);
+  color: #0a4d8c !important;
+  border-left-color: #2b7de9;
+  box-shadow: inset 0 0 0 1px rgba(43, 125, 233, 0.12);
+}
+body .floating-toc a.active {
+  background: linear-gradient(90deg, #dcecfc 0%, #eef5ff 100%);
+  border-left-color: #0a4d8c;
+  font-weight: 600;
+}
+body .floating-toc a.active::before,
+body .floating-toc a:hover::before {
+  color: #0a4d8c;
 }
 
 /* Dark mode */
@@ -716,33 +820,66 @@ body.dark-mode .stock-float-menu,
 body.dark-mode .etf-float-menu,
 body.dark-mode .ipo-float-menu,
 body.dark-mode .intraday-float-menu {
-  background: #1a2030;
-  border-color: #273a5a;
+  background: linear-gradient(180deg, rgba(28, 34, 48, 0.97) 0%, rgba(20, 26, 36, 0.96) 100%) !important;
+  border-color: #2c3a52 !important;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+body.dark-mode .floating-toc::before,
+body.dark-mode .home-float-menu::before,
+body.dark-mode .stock-float-menu::before,
+body.dark-mode .etf-float-menu::before,
+body.dark-mode .ipo-float-menu::before,
+body.dark-mode .intraday-float-menu::before {
+  background: linear-gradient(90deg, #1d4f91 0%, #2b7de9 55%, #5eb0ff 100%);
 }
 body.dark-mode .floating-toc .toc-title,
-body.dark-mode .floating-toc a,
 body.dark-mode .home-float-menu .float-title,
-body.dark-mode .home-float-menu a,
 body.dark-mode .stock-float-menu .float-title,
-body.dark-mode .stock-float-menu a,
 body.dark-mode .etf-float-menu .float-title,
-body.dark-mode .etf-float-menu a,
 body.dark-mode .ipo-float-menu .float-title,
+body.dark-mode .intraday-float-menu .float-title {
+  color: #9ec9ff !important;
+  border-bottom-color: #2c3a52 !important;
+  background: linear-gradient(180deg, rgba(30, 42, 64, 0.9) 0%, rgba(22, 28, 40, 0.3) 100%) !important;
+}
+body.dark-mode .floating-toc a,
+body.dark-mode .home-float-menu a,
+body.dark-mode .stock-float-menu a,
+body.dark-mode .etf-float-menu a,
 body.dark-mode .ipo-float-menu a,
-body.dark-mode .intraday-float-menu .float-title,
-body.dark-mode .intraday-float-menu a { color: #8abaff; }
+body.dark-mode .intraday-float-menu a {
+  color: #c8d6ea !important;
+}
+body.dark-mode .floating-toc a::before {
+  color: #6b82a3 !important;
+}
 body.dark-mode .home-float-menu .float-subtitle {
   color: #9aa8bc !important;
 }
 body.dark-mode .home-float-menu .float-divider {
-  background: #2c3340 !important;
+  background: linear-gradient(90deg, transparent, #2c3a52 15%, #2c3a52 85%, transparent) !important;
 }
 body.dark-mode .floating-toc a:hover,
+body.dark-mode .floating-toc a.active,
 body.dark-mode .home-float-menu a:hover,
 body.dark-mode .stock-float-menu a:hover,
 body.dark-mode .etf-float-menu a:hover,
 body.dark-mode .ipo-float-menu a:hover,
-body.dark-mode .intraday-float-menu a:hover { background: #253458; color: #fff; }
+body.dark-mode .intraday-float-menu a:hover {
+  background: linear-gradient(90deg, rgba(43, 125, 233, 0.22) 0%, rgba(43, 125, 233, 0.08) 100%) !important;
+  color: #e8f1ff !important;
+  border-left-color: #5eb0ff !important;
+  box-shadow: none !important;
+}
+body.dark-mode .floating-toc a.active::before,
+body.dark-mode .floating-toc a:hover::before {
+  color: #8abaff !important;
+}
+body.dark-mode .floating-toc ul {
+  scrollbar-color: #3a4a62 transparent;
+}
 
 /* On laptops/tablets the side boxes crowd the main column — hide them.
    Mobile/tablet get .page-jump chips injected into main (see nav.js). */
