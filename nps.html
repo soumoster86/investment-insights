@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="NPS (National Pension System) Calculator | Investment Insights" />
   <meta name="twitter:description" content="NPS guide: Tier I/II, asset classes, careful tax notes, exit/annuity concepts, and corpus/pension calculator. Educational only — not advice." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260709b" />
+  <link rel="stylesheet" href="style.css?v=20260709g" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -146,69 +146,101 @@
 
 <section id="nps-accounts">
   <h2>Tier I vs Tier II</h2>
-  <div class="table-wrap table-scroll">
-    <table class="compare-table table-cards product-table">
-      <thead>
-        <tr>
-          <th>Account</th>
-          <th>Role</th>
-          <th>Liquidity</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-label="Account">Tier I</td>
-          <td data-label="Role">Core retirement account</td>
-          <td data-label="Liquidity">Restricted until exit age / rules</td>
-          <td data-label="Notes">Main tax discussions usually attach here</td>
-        </tr>
-        <tr>
-          <td data-label="Account">Tier II</td>
-          <td data-label="Role">Optional flexible account</td>
-          <td data-label="Liquidity">Generally more flexible withdrawals</td>
-          <td data-label="Notes">Tax treatment differs — verify current law</td>
-        </tr>
-      </tbody>
-    </table>
+  <p class="tool-intro">Two account sleeves under one PRAN — different jobs, liquidity, and tax conversations.</p>
+  <div class="fund-map nps-tier-map" role="list">
+    <article class="fund-map-card fund-map--tier1" role="listitem">
+      <header class="fund-map-head">
+        <span class="fund-map-icon" aria-hidden="true">🔒</span>
+        <h3>Tier I</h3>
+      </header>
+      <dl class="fund-map-meta">
+        <div>
+          <dt>Role</dt>
+          <dd>Core retirement account</dd>
+        </div>
+        <div>
+          <dt>Liquidity</dt>
+          <dd>Restricted until exit age / rules</dd>
+        </div>
+      </dl>
+      <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Main tax discussions usually attach here</p>
+    </article>
+    <article class="fund-map-card fund-map--tier2" role="listitem">
+      <header class="fund-map-head">
+        <span class="fund-map-icon" aria-hidden="true">🔓</span>
+        <h3>Tier II</h3>
+      </header>
+      <dl class="fund-map-meta">
+        <div>
+          <dt>Role</dt>
+          <dd>Optional flexible account</dd>
+        </div>
+        <div>
+          <dt>Liquidity</dt>
+          <dd>Generally more flexible withdrawals</dd>
+        </div>
+      </dl>
+      <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Tax treatment differs — verify current law</p>
+    </article>
   </div>
 </section>
 
 <section id="nps-assets">
   <h2>Asset classes (idea)</h2>
   <p class="tool-intro">Exact limits and auto-choice / active choice rules are set by PFRDA and can change. Treat this as a map.</p>
-  <div class="table-wrap table-scroll">
-    <table class="compare-table table-cards product-table">
-      <thead>
-        <tr>
-          <th>Class</th>
-          <th>Typical holdings</th>
-          <th>Risk tone</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-label="Class">Equity (E)</td>
-          <td data-label="Holdings">Equity-oriented instruments</td>
-          <td data-label="Risk">Higher volatility; growth engine</td>
-        </tr>
-        <tr>
-          <td data-label="Class">Corporate debt (C)</td>
-          <td data-label="Holdings">Corporate bonds / debt</td>
-          <td data-label="Risk">Credit &amp; rate risk</td>
-        </tr>
-        <tr>
-          <td data-label="Class">Government securities (G)</td>
-          <td data-label="Holdings">G-Secs / similar</td>
-          <td data-label="Risk">Rate risk; high credit quality</td>
-        </tr>
-        <tr>
-          <td data-label="Class">Alternatives (A)</td>
-          <td data-label="Holdings">As permitted under scheme</td>
-          <td data-label="Risk">Varies; usually limited allocation</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="fund-map nps-asset-map" role="list">
+    <article class="fund-map-card fund-map--nps-e" role="listitem">
+      <header class="fund-map-head">
+        <span class="fund-map-icon" aria-hidden="true">📈</span>
+        <h3>Equity (E)</h3>
+      </header>
+      <dl class="fund-map-meta">
+        <div>
+          <dt>Typical holdings</dt>
+          <dd>Equity-oriented instruments</dd>
+        </div>
+      </dl>
+      <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Higher volatility · growth engine</p>
+    </article>
+    <article class="fund-map-card fund-map--nps-c" role="listitem">
+      <header class="fund-map-head">
+        <span class="fund-map-icon" aria-hidden="true">🏢</span>
+        <h3>Corporate debt (C)</h3>
+      </header>
+      <dl class="fund-map-meta">
+        <div>
+          <dt>Typical holdings</dt>
+          <dd>Corporate bonds / debt</dd>
+        </div>
+      </dl>
+      <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Credit &amp; rate risk</p>
+    </article>
+    <article class="fund-map-card fund-map--nps-g" role="listitem">
+      <header class="fund-map-head">
+        <span class="fund-map-icon" aria-hidden="true">🏛️</span>
+        <h3>Government securities (G)</h3>
+      </header>
+      <dl class="fund-map-meta">
+        <div>
+          <dt>Typical holdings</dt>
+          <dd>G-Secs / similar</dd>
+        </div>
+      </dl>
+      <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Rate risk · high credit quality</p>
+    </article>
+    <article class="fund-map-card fund-map--nps-a" role="listitem">
+      <header class="fund-map-head">
+        <span class="fund-map-icon" aria-hidden="true">🧩</span>
+        <h3>Alternatives (A)</h3>
+      </header>
+      <dl class="fund-map-meta">
+        <div>
+          <dt>Typical holdings</dt>
+          <dd>As permitted under scheme</dd>
+        </div>
+      </dl>
+      <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Varies · usually limited allocation</p>
+    </article>
   </div>
   <p class="table-note">Equity caps and lifecycle auto-rebalancing depend on your choice mode and age rules — check the official NPS / CRA materials.</p>
 </section>
@@ -273,12 +305,12 @@
 
 <section id="invest-nps">
   <h2>How to open &amp; contribute</h2>
-  <ol class="steps-list">
-    <li>Register for a Permanent Retirement Account Number (PRAN) via a Point of Presence (bank / broker) or eNPS portals.</li>
-    <li>Complete KYC and choose Tier I (and Tier II if desired).</li>
-    <li>Select pension fund manager(s) and Active or Auto choice allocation.</li>
-    <li>Contribute regularly (monthly SIP-style habits help).</li>
-    <li>Review allocation as you age; rebalance only with a plan.</li>
+  <ol class="tips-list">
+    <li><span class="tip-emoji" aria-hidden="true">🪪</span><span class="tip-text"><strong>Get a PRAN</strong> — register via a Point of Presence (bank / broker) or eNPS portals.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">✍️</span><span class="tip-text"><strong>Complete KYC</strong> and choose Tier I (and Tier II if desired).</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">🧭</span><span class="tip-text"><strong>Pick fund manager(s)</strong> and Active or Auto choice allocation.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">💸</span><span class="tip-text"><strong>Contribute regularly</strong> — monthly SIP-style habits help.</span></li>
+    <li><span class="tip-emoji" aria-hidden="true">📅</span><span class="tip-text"><strong>Review as you age</strong> — rebalance only with a plan.</span></li>
   </ol>
   <ul class="tips-list">
     <li><span class="tip-emoji" aria-hidden="true">🛟</span><span class="tip-text">Build an emergency fund first — <a href="insurance-emergency.html">Emergency &amp; insurance</a></span></li>
