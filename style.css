@@ -6986,11 +6986,8 @@ body.dark-mode .related-tools {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin: 0 0 28px;
+  margin: 0 0 16px;
   align-items: stretch;
-}
-.daily-learn-trio {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 #term-of-day.tod-section,
 #quote-of-day.tod-section,
@@ -7006,7 +7003,13 @@ body.dark-mode .related-tools {
   background: transparent !important;
   box-shadow: none !important;
   min-height: 0;
-  height: 100%;
+  height: auto;
+}
+/* Fact sits full-width under the term/quote pair so it cannot be clipped in a 3-col grid */
+#fact-of-day.tod-section {
+  margin: 0 0 28px !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 body.page-home #term-of-day.tod-section,
 body.page-home #quote-of-day.tod-section,
@@ -7113,6 +7116,55 @@ body.dark-mode .qod-card .tod-why {
   color: #fde68a !important;
 }
 body.dark-mode .qod-card .tod-why strong { color: #fbbf24 !important; }
+/* Fact card — teal/green accent */
+.fod-card {
+  background:
+    linear-gradient(135deg, rgba(236, 253, 245, 0.98) 0%, rgba(255, 255, 255, 0.98) 50%, rgba(240, 253, 250, 0.95) 100%);
+  border-color: #a7f3d0;
+}
+.fod-card::before {
+  background: linear-gradient(180deg, #047857 0%, #10b981 55%, #34d399 100%);
+}
+.fod-fact {
+  margin: 0 0 12px;
+  padding-left: 8px;
+  font-size: clamp(1.05rem, 1.7vw, 1.18rem);
+  font-weight: 700;
+  line-height: 1.45;
+  color: #064e3b;
+  letter-spacing: -0.01em;
+}
+.fod-fact::before {
+  content: "💡 ";
+  font-weight: 400;
+}
+.fod-card .tod-eyebrow { color: #047857; }
+.fod-card .tod-head h2 { color: #065f46; }
+.fod-card .tod-why {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+.fod-card .tod-why strong { color: #047857; }
+.fod-card .tod-actions { margin-top: auto; }
+body.dark-mode .fod-card {
+  background: linear-gradient(135deg, #0c1f1a 0%, #0f1714 50%, #12201a 100%) !important;
+  border-color: #065f46 !important;
+}
+body.dark-mode .fod-fact { color: #a7f3d0 !important; }
+body.dark-mode .fod-card .tod-eyebrow { color: #6ee7b7 !important; }
+body.dark-mode .fod-card .tod-head h2 { color: #a7f3d0 !important; }
+body.dark-mode .fod-card .tod-why {
+  background: rgba(6, 40, 30, 0.9) !important;
+  border-color: #065f46 !important;
+  color: #a7f3d0 !important;
+}
+body.dark-mode .fod-card .tod-why strong { color: #6ee7b7 !important; }
+@media (max-width: 1100px) {
+  .daily-learn-trio {
+    grid-template-columns: 1fr;
+  }
+}
 @media (max-width: 900px) {
   .daily-learn-pair {
     grid-template-columns: 1fr;
