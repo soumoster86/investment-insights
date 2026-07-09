@@ -335,12 +335,35 @@
     document.documentElement.style.setProperty("--header-h", h + "px");
   }
 
+  /* ---------- Content review stamps (sample-data badges + footer) ---------- */
+  function initContentReviewed() {
+    var d =
+      (window.IIConfig && window.IIConfig.contentReviewed) ||
+      "";
+    if (!d) {
+      var footerTime = document.querySelector(".footer-reviewed time");
+      if (footerTime) d = footerTime.getAttribute("datetime") || footerTime.textContent || "";
+      d = (d || "").trim();
+    }
+    if (!d) return;
+    document.querySelectorAll("[data-content-reviewed]").forEach(function (el) {
+      el.setAttribute("datetime", d);
+      el.textContent = d;
+    });
+    // Keep footer time in sync if config is newer
+    document.querySelectorAll(".footer-reviewed time").forEach(function (el) {
+      el.setAttribute("datetime", d);
+      el.textContent = d;
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initDarkMode();
     initNav();
     initActiveLink();
     initBackToTop();
     initMobilePageJump();
+    initContentReviewed();
     syncHeaderHeight();
     window.addEventListener("resize", syncHeaderHeight);
     // Re-measure once fonts/emoji settle, which can change wrap height.

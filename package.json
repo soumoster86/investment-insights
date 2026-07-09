@@ -10,6 +10,7 @@
     "apply-a11y": "node scripts/apply-a11y-main.js",
     "apply-jsonld": "node scripts/apply-jsonld.js",
     "bump-freshness": "node scripts/bump-freshness.js",
+    "verify-freshness": "node scripts/verify-freshness.js",
     "inject-runtime": "node scripts/inject-runtime-scripts.js",
     "verify-phase3": "node scripts/verify-phase3.js",
     "verify-phase4": "node scripts/verify-phase4.js"

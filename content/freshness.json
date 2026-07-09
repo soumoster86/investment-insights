@@ -1,20 +1,95 @@
 {
   "lastReviewed": "2026-07-09",
   "reviewedBy": "site-maintainer",
-  "scope": "Educational copy, recommendation lists, and calculator assumptions",
-  "nextReviewHint": "Re-check recommendation narratives and sample figures quarterly",
+  "scope": "Educational copy, recommendation lists, sample tables, and calculator assumptions",
+  "nextReviewHint": "Re-check sample data and recommendation narratives quarterly",
+  "nextReviewDue": "2026-10-07",
+  "reviewCadenceDays": 90,
+  "checklist": [
+    {
+      "id": "ipo-sample",
+      "label": "Sample IPO table (dates, bands, sizes, status)",
+      "page": "ipo.html#recent-ipo",
+      "lastChecked": "2026-07-09",
+      "how": "Cross-check NSE/BSE or broker IPO calendar; mark snapshot date in intro."
+    },
+    {
+      "id": "bonds-sample",
+      "label": "Sample bond products table",
+      "page": "bonds.html#sample-bonds",
+      "lastChecked": "2026-07-09",
+      "how": "Confirm rows are still educational examples; yields change — keep disclaimer."
+    },
+    {
+      "id": "fd-rates",
+      "label": "Sample FD rate bands",
+      "page": "fixeddeposit.html#rates-fd",
+      "lastChecked": "2026-07-09",
+      "how": "Replace with generic bands if bank rates shift; never claim live bank offers."
+    },
+    {
+      "id": "rec-stocks",
+      "label": "Stocks sample / recommendation cards",
+      "page": "stocks.html#top-stocks",
+      "lastChecked": "2026-07-09",
+      "how": "Edit STOCKS array in recommendations.js; ratings are site labels only."
+    },
+    {
+      "id": "rec-funds",
+      "label": "Mutual fund sample cards",
+      "page": "mutualfunds.html#top-mutual",
+      "lastChecked": "2026-07-09",
+      "how": "Edit FUNDS array in recommendations.js; not a buy list."
+    },
+    {
+      "id": "rec-crypto",
+      "label": "Crypto sample cards",
+      "page": "cryptocurrencies.html#top-crypto",
+      "lastChecked": "2026-07-09",
+      "how": "Edit CRYPTOS array; stress India tax/risk disclaimers."
+    },
+    {
+      "id": "etf-sample",
+      "label": "Sample ETF tickers",
+      "page": "etf.html#popular-etf",
+      "lastChecked": "2026-07-09",
+      "how": "Verify tickers still list; expense ratios drift — keep educational wording."
+    },
+    {
+      "id": "calc-assumptions",
+      "label": "Calculator defaults & goal portfolio models",
+      "page": "calculators.html",
+      "lastChecked": "2026-07-09",
+      "how": "Spot-check SIP/FD/goal defaults and portfolio model rates (educational only)."
+    },
+    {
+      "id": "metals-fx",
+      "label": "Home metals proxy & currency converter",
+      "page": "index.html#kpi",
+      "lastChecked": "2026-07-09",
+      "how": "Confirm metals function demo/live behaviour; FX is browser/API estimate."
+    }
+  ],
   "changelog": [
     {
-      "date": "2026-07-08",
-      "note": "Phase 4 initial review baseline"
+      "date": "2026-07-09",
+      "note": "Freshness checklist + sample badges; calc hub stamp"
+    },
+    {
+      "date": "2026-07-09",
+      "note": "Freshness checklist + sample-data badges; calculators hub parity"
+    },
+    {
+      "date": "2026-07-09",
+      "note": "Learn hub priorities 4–6: emergency/insurance, tax overview, gold, index vs active"
     },
     {
       "date": "2026-07-08",
       "note": "Phase 4: metals proxy, freshness workflow, analytics opt-in, structured data"
     },
     {
-      "date": "2026-07-09",
-      "note": "Learn hub priorities 4–6: emergency/insurance, tax overview, gold, index vs active"
+      "date": "2026-07-08",
+      "note": "Phase 4 initial review baseline"
     }
   ]
 }

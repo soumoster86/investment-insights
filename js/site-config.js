@@ -19,7 +19,8 @@
       // Optional self-hosted / proxy script URL
       scriptUrl: "https://plausible.io/js/script.js"
     },
-    /** Shown in footer; synced from content/freshness.json via npm run bump-freshness */
-    contentReviewed: "2026-07-08"
+    /** Shown in footer + sample-data badges; synced via npm run bump-freshness */
+    contentReviewed: "2026-07-09",
+    nextReviewDue: "2026-10-07"
   };
 })(typeof window !== "undefined" ? window : globalThis);

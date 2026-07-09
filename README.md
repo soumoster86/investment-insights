@@ -67,6 +67,22 @@ https://investment-insight.netlify.app
 npm run sync-shell
 ```
 
+### Content freshness (sample data)
+
+Sample IPO rows, rate bands, and recommendation cards go stale. Source of truth:
+
+- `content/freshness.json` — last review, next due, per-item checklist  
+- `content/REVIEW-CHECKLIST.md` — human quarterly process  
+
+```bash
+npm run bump-freshness -- --note "Q3 IPO + rec lists"
+npm run bump-freshness -- --item ipo-sample --note "IPO table refresh"
+npm run sync-shell
+npm run verify-freshness
+```
+
+Sample blocks use a `.sample-freshness` stamp; dates fill from `IIConfig.contentReviewed` via `nav.js`.
+
 Pages mark the injected regions with `<!-- BEGIN SITE HEADER -->` / `<!-- END SITE HEADER -->` (and the footer equivalents) so re-runs replace only those blocks.
 
 ## Editing the recommendation lists

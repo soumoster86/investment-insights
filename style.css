@@ -2068,7 +2068,7 @@ body.dark-mode .live-ticker-wrap {
   border-color: #2d3752;
 }
 
-/* Phase 4 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â content freshness footer line */
+/* Phase 4 — content freshness footer line */
 footer .footer-reviewed {
   margin: 8px 0 0;
   font-size: 0.88em;
@@ -2076,6 +2076,48 @@ footer .footer-reviewed {
 }
 body.dark-mode footer .footer-reviewed {
   color: #8a9bb8 !important;
+}
+
+/* Sample / illustrative data stamp (IPO tables, rec lists, rate bands) */
+.sample-freshness {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin: 8px 0 12px;
+  padding: 8px 12px;
+  font-size: 0.88em;
+  line-height: 1.45;
+  color: #4a5568;
+  background: #f4f7fb;
+  border: 1px solid #dce6f4;
+  border-radius: 10px;
+}
+.sample-freshness-label {
+  font-weight: 700;
+  font-size: 0.78em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0a4d8c;
+  background: #e8f1fc;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.sample-freshness time {
+  font-weight: 600;
+  color: #1a2332;
+}
+body.dark-mode .sample-freshness {
+  background: #151a22 !important;
+  border-color: #2c3340 !important;
+  color: #9aa8bc !important;
+}
+body.dark-mode .sample-freshness-label {
+  background: #1a2a40 !important;
+  color: #8abaff !important;
+}
+body.dark-mode .sample-freshness time {
+  color: #e7ecfa !important;
 }
 
 /* Subtle badge on recommendation toolbars */
