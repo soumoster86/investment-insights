@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Fixed Deposit Guide & FD Calculator | Investment Insights" />
   <meta name="twitter:description" content="FD guide for India: types, DICGC safety notes, maturity calculator, FD ladder planner, tax notes, and comparisons. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260709b" />
+  <link rel="stylesheet" href="style.css?v=20260709e" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -326,47 +326,80 @@
 </section>
 
     <section id="comparison">
-  <h2>FD vs other parking options (idea)</h2>
-  <div class="table-wrap table-scroll">
-    <table class="product-table table-cards compare-table">
-      <thead>
-        <tr>
-          <th>Instrument</th>
-          <th>Return style</th>
-          <th>Liquidity</th>
-          <th>Risk tone</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-label="Instrument">Bank FD</td>
-          <td data-label="Return">Fixed for tenure (bank quote)</td>
-          <td data-label="Liquidity">Breakable with conditions</td>
-          <td data-label="Risk">Low (DICGC for insured banks up to limit)</td>
-        </tr>
-        <tr>
-          <td data-label="Instrument">Recurring deposit</td>
-          <td data-label="Return">Similar rate bands to FDs</td>
-          <td data-label="Liquidity">Monthly contribution style</td>
-          <td data-label="Risk">Low</td>
-        </tr>
-        <tr>
-          <td data-label="Instrument">Liquid / overnight funds</td>
-          <td data-label="Return">Market-linked (usually low vol)</td>
-          <td data-label="Liquidity">High (T+ rules apply)</td>
-          <td data-label="Risk">Low–moderate market risk</td>
-        </tr>
-        <tr>
-          <td data-label="Instrument">G-Secs / high-grade bonds</td>
-          <td data-label="Return">Yield varies; price can move</td>
-          <td data-label="Liquidity">Varies</td>
-          <td data-label="Risk">Rate risk; credit risk if corporate</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="table-note">Rates change daily. Compare live bank / post-office quotes; see also <a href="bonds.html">Bonds</a> and <a href="tools.html#rd">RD calculator</a>.</p>
-</section>
+      <h2>FD vs other parking options (idea)</h2>
+      <p class="tool-intro">Same job, different trade-offs — fixed quote vs market-linked parking. Educational map only.</p>
+      <div class="park-map" role="list">
+        <article class="park-map-card park-map--fd" role="listitem">
+          <header class="park-map-head">
+            <span class="park-map-icon" aria-hidden="true">🏦</span>
+            <h3>Bank FD</h3>
+          </header>
+          <dl class="park-map-meta">
+            <div>
+              <dt>Return style</dt>
+              <dd>Fixed for tenure (bank quote)</dd>
+            </div>
+            <div>
+              <dt>Liquidity</dt>
+              <dd>Breakable with conditions</dd>
+            </div>
+          </dl>
+          <p class="park-map-risk"><span class="park-risk-dot" aria-hidden="true"></span> Low · DICGC for insured banks up to limit</p>
+        </article>
+        <article class="park-map-card park-map--rd" role="listitem">
+          <header class="park-map-head">
+            <span class="park-map-icon" aria-hidden="true">📅</span>
+            <h3>Recurring deposit</h3>
+          </header>
+          <dl class="park-map-meta">
+            <div>
+              <dt>Return style</dt>
+              <dd>Similar rate bands to FDs</dd>
+            </div>
+            <div>
+              <dt>Liquidity</dt>
+              <dd>Monthly contribution style</dd>
+            </div>
+          </dl>
+          <p class="park-map-risk"><span class="park-risk-dot" aria-hidden="true"></span> Low</p>
+        </article>
+        <article class="park-map-card park-map--liquid" role="listitem">
+          <header class="park-map-head">
+            <span class="park-map-icon" aria-hidden="true">💧</span>
+            <h3>Liquid / overnight funds</h3>
+          </header>
+          <dl class="park-map-meta">
+            <div>
+              <dt>Return style</dt>
+              <dd>Market-linked (usually low vol)</dd>
+            </div>
+            <div>
+              <dt>Liquidity</dt>
+              <dd>High (T+ rules apply)</dd>
+            </div>
+          </dl>
+          <p class="park-map-risk"><span class="park-risk-dot" aria-hidden="true"></span> Low–moderate market risk</p>
+        </article>
+        <article class="park-map-card park-map--bonds" role="listitem">
+          <header class="park-map-head">
+            <span class="park-map-icon" aria-hidden="true">📜</span>
+            <h3>G-Secs / high-grade bonds</h3>
+          </header>
+          <dl class="park-map-meta">
+            <div>
+              <dt>Return style</dt>
+              <dd>Yield varies; price can move</dd>
+            </div>
+            <div>
+              <dt>Liquidity</dt>
+              <dd>Varies</dd>
+            </div>
+          </dl>
+          <p class="park-map-risk"><span class="park-risk-dot" aria-hidden="true"></span> Rate risk · credit risk if corporate</p>
+        </article>
+      </div>
+      <p class="table-note">Rates change daily. Compare live bank / post-office quotes; see also <a href="bonds.html">Bonds</a> and <a href="tools.html#rd">RD calculator</a>.</p>
+    </section>
 
     <section id="rates-fd">
   <h2>Illustrative bank rate ranges</h2>
