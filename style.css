@@ -301,6 +301,27 @@ main {
   min-height: 70vh;
   border: 1px solid rgba(255, 255, 255, 0.7);
   animation: fadeIn 0.55s var(--ease);
+  box-sizing: border-box;
+}
+/*
+  Desktop with both side rails (Explore left ~260px, On this page right ~250px):
+  grow the middle column into the empty gutters without overlapping floats.
+  560px ≈ left edge+panel+gap + right gap+panel+edge.
+*/
+@media (min-width: 1181px) {
+  main:not(.layout-wide) {
+    max-width: min(1080px, calc(100vw - 560px));
+  }
+}
+@media (min-width: 1400px) {
+  main:not(.layout-wide) {
+    max-width: min(1180px, calc(100vw - 560px));
+  }
+}
+@media (min-width: 1600px) {
+  main:not(.layout-wide) {
+    max-width: min(1240px, calc(100vw - 580px));
+  }
 }
 /* Wider shell for product-style home / dashboards */
 body.page-home main,
@@ -1156,14 +1177,16 @@ body.dark-mode .floating-toc ul {
 }
 
 /* On laptops/tablets the side boxes crowd the main column — hide them.
-   Mobile/tablet get .page-jump chips injected into main (see nav.js). */
+   Mobile/tablet get .page-jump chips injected into main (see nav.js).
+   Explore rail hides here too so main can use full width. */
 @media (max-width: 1180px) {
   body .floating-toc,
   body .home-float-menu,
   body .stock-float-menu,
   body .etf-float-menu,
   body .ipo-float-menu,
-  body .intraday-float-menu { display: none; }
+  body .intraday-float-menu,
+  body .site-explore { display: none !important; }
 }
 
 /* ---------- In-page jump chips (mobile / tablet) ---------- */
