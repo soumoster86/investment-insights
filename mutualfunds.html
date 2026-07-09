@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Mutual Funds, SIP & SWP Calculators | Investment Insights" />
   <meta name="twitter:description" content="India mutual funds guide: categories, SIP vs lumpsum, key terms, SIP & SWP calculators, browser shortlist, and sample schemes. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710g" />
+  <link rel="stylesheet" href="style.css?v=20260710h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -412,20 +412,20 @@
     <div class="tool-fields">
     <label for="sip-amount">Monthly Investment (₹)
       <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Amount you plan to invest every month via SIP.</span></span>
+      <input type="number" id="sip-amount" min="1" step="any" required placeholder="e.g. 5,000">
     </label>
-    <input type="number" id="sip-amount" min="1" step="any" required placeholder="e.g. 5,000">
     <label for="sip-rate">Expected Return (% p.a.)
       <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Assumed annual return. Markets vary; not a guarantee.</span></span>
+      <input type="number" id="sip-rate" step="any" min="0" required placeholder="e.g. 12">
     </label>
-    <input type="number" id="sip-rate" step="any" min="0" required placeholder="e.g. 12">
     <label for="sip-years">Investment Duration (years)
       <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many years you will continue the SIP.</span></span>
+      <input type="number" id="sip-years" min="1" step="any" required placeholder="e.g. 15">
     </label>
-    <input type="number" id="sip-years" min="1" step="any" required placeholder="e.g. 15">
     <label for="sip-stepup">Annual SIP Increase (%)
       <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional yearly step-up in SIP amount (e.g. 10 = +10% each year). Use 0 for flat SIP.</span></span>
+      <input type="number" id="sip-stepup" min="0" step="any" placeholder="e.g. 0 or 10">
     </label>
-    <input type="number" id="sip-stepup" min="0" step="any" placeholder="e.g. 0 or 10">
     </div>
     <div class="btn-group">
     <button class="btn" type="submit">Calculate</button>

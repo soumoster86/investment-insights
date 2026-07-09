@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Futures &amp; Options (F&amp;O) Guide | Investment Insights" />
   <meta name="twitter:description" content="Plain-English guide to futures and options in India: how they work, calls and puts, risks, margins, and a simple payoff sketch. For learning only, not trading advice." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710g" />
+  <link rel="stylesheet" href="style.css?v=20260710h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -287,6 +287,7 @@
       <form id="fo-fut-form" class="tool-form">
         <div class="tool-fields">
           <label for="fo-fut-side">Side
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Long = buy first, then sell. Short = sell first, then buy back.</span></span>
             <select id="fo-fut-side">
               <option value="long" selected>Long (buy first)</option>
               <option value="short">Short (sell first)</option>
@@ -305,6 +306,7 @@
             <input type="number" id="fo-fut-lot" min="1" step="1" required placeholder="e.g. 25" value="25" />
           </label>
           <label for="fo-fut-lots">Number of lots
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many contracts (lots) in this trade.</span></span>
             <input type="number" id="fo-fut-lots" min="1" step="1" required value="1" />
           </label>
           <label for="fo-fut-pv">₹ per point
@@ -324,18 +326,21 @@
       <form id="fo-opt-form" class="tool-form">
         <div class="tool-fields">
           <label for="fo-opt-type">Option
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Call gains if spot rises above strike. Put gains if spot falls below strike (for buyers).</span></span>
             <select id="fo-opt-type">
               <option value="call" selected>Call</option>
               <option value="put">Put</option>
             </select>
           </label>
           <label for="fo-opt-side">Side
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Buy pays premium; risk is limited near premium paid. Sell (write) receives premium; losses can be large.</span></span>
             <select id="fo-opt-side">
               <option value="buy" selected>Buy</option>
               <option value="sell">Sell (write)</option>
             </select>
           </label>
           <label for="fo-opt-strike">Strike
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Exercise price of the option. Payoff is measured against this level at expiry.</span></span>
             <input type="number" id="fo-opt-strike" min="0.01" step="any" required placeholder="e.g. 22000" value="22000" />
           </label>
           <label for="fo-opt-premium">Premium (per unit)
@@ -343,12 +348,15 @@
             <input type="number" id="fo-opt-premium" min="0" step="any" required placeholder="e.g. 180" value="180" />
           </label>
           <label for="fo-opt-spot">Spot at expiry
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Underlying price (or index) at expiry used for the payoff sketch.</span></span>
             <input type="number" id="fo-opt-spot" min="0.01" step="any" required placeholder="e.g. 22400" value="22400" />
           </label>
           <label for="fo-opt-lot">Lot size
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Units per contract (exchange lot). Example teaching value only.</span></span>
             <input type="number" id="fo-opt-lot" min="1" step="1" required value="25" />
           </label>
           <label for="fo-opt-lots">Number of lots
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many option contracts (lots) in this trade.</span></span>
             <input type="number" id="fo-opt-lots" min="1" step="1" required value="1" />
           </label>
         </div>

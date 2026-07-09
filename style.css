@@ -7875,6 +7875,17 @@ body.dark-mode .ladder-rung span {
   background: #14352a !important;
   color: #86efac !important;
 }
+/* Tenure sits inside a label: caption+ⓘ row, then full-width row of year/month/day inputs */
+.tool-form label.fd-tenure-label {
+  grid-column: 1 / -1;
+}
+.tool-form label.fd-tenure-label > .fd-tenure-row {
+  flex: 1 0 100%;
+  order: 2;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
 .fd-tenure-row {
   display: flex;
   flex-wrap: wrap;
@@ -7884,7 +7895,9 @@ body.dark-mode .ladder-rung span {
 .fd-tenure-row input {
   flex: 1 1 90px;
   min-width: 80px;
-  max-width: 140px;
+  max-width: none;
+  min-height: 42px;
+  box-sizing: border-box;
 }
 .platform-cards-grid .platform-card {
   padding: 16px;

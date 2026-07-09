@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Post Office Savings Schemes Guide &amp; Calculator | Investment Insights" />
   <meta name="twitter:description" content="India Post Office savings schemes in plain English plus a simple deposit calculator. For learning only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710g" />
+  <link rel="stylesheet" href="style.css?v=20260710h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -278,6 +278,7 @@
     <form id="po-form" class="tool-form">
       <div class="tool-fields">
         <label for="po-scheme">Scheme style
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">RD = monthly deposits. TD/NSC/KVP = lump sum. MIS = principal with monthly interest payout.</span></span>
           <select id="po-scheme" required>
             <option value="rd" selected>Recurring Deposit (monthly deposits)</option>
             <option value="td">Time Deposit (lump sum)</option>
@@ -295,9 +296,11 @@
           <input type="number" id="po-rate" min="0" step="any" required placeholder="e.g. 6.7" value="6.7" />
         </label>
         <label for="po-years">Years
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Full years in the tenure. Add extra months in the next field if needed.</span></span>
           <input type="number" id="po-years" min="0" max="30" step="1" required value="5" />
         </label>
         <label for="po-months">Extra months
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Additional months beyond full years (0–11). Total tenure = years + months.</span></span>
           <input type="number" id="po-months" min="0" max="11" step="1" value="0" />
         </label>
       </div>

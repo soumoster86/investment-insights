@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Cryptocurrency Overview | Investment Insights" />
   <meta name="twitter:description" content="High-risk crypto guide for Indian learners: categories, risks, India tax notes, sizing & P&L tools, watchlist, sample assets. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710g" />
+  <link rel="stylesheet" href="style.css?v=20260710h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -334,15 +334,19 @@
   <form id="crypto-pnl-form" class="tool-form">
     <div class="tool-fields">
       <label>Buy price (₹)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price per unit when you bought (or plan to buy).</span></span>
         <input name="buy" type="number" min="0.0001" step="any" required placeholder="e.g. 50,00,000" />
       </label>
       <label>Quantity
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many units of the asset in this round trip.</span></span>
         <input name="qty" type="number" min="0.00000001" step="any" required placeholder="e.g. 0.01" />
       </label>
       <label>Sell price (₹)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price per unit when you sold (or plan to sell).</span></span>
         <input name="sell" type="number" min="0.0001" step="any" required placeholder="e.g. 55,00,000" />
       </label>
       <label>Fees total (₹)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional combined trading fees for buy + sell. Leave 0 to ignore. Tax is separate.</span></span>
         <input name="fees" type="number" min="0" step="any" placeholder="e.g. 500" />
       </label>
     </div>

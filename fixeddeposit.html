@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Fixed Deposit Guide & FD Calculator | Investment Insights" />
   <meta name="twitter:description" content="FD guide for India: types, DICGC safety notes, maturity calculator, FD ladder planner, tax notes, and comparisons. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710g" />
+  <link rel="stylesheet" href="style.css?v=20260710h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -259,14 +259,14 @@
         <option value="12">Monthly</option>
       </select>
     </label>
-    </div>
-    <label>Tenure
+    <label class="fd-tenure-label">Tenure
       <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Enter any mix of years, months, and days (at least one positive).</span></span>
+      <div class="fd-tenure-row">
+        <input type="number" id="fd-years" min="0" placeholder="Years" aria-label="Years" />
+        <input type="number" id="fd-months" min="0" max="11" placeholder="Months" aria-label="Months" />
+        <input type="number" id="fd-days" min="0" max="31" placeholder="Days" aria-label="Days" />
+      </div>
     </label>
-    <div class="fd-tenure-row">
-     <input type="number" id="fd-years" min="0" placeholder="Years" />
-     <input type="number" id="fd-months" min="0" max="11" placeholder="Months" />
-     <input type="number" id="fd-days" min="0" max="31" placeholder="Days" />
     </div>
     <div class="btn-group">
     <button class="btn" type="submit">Calculate</button>
@@ -302,15 +302,19 @@
   <form id="fd-ladder-form" class="tool-form">
     <div class="tool-fields">
       <label>Total amount (₹)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Total money to split across all rungs of the ladder.</span></span>
         <input name="total" type="number" min="1000" step="any" required placeholder="e.g. 3,00,000" />
       </label>
       <label>Number of FDs (rungs)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many separate FDs to create. Amount is split evenly across them.</span></span>
         <input name="rungs" type="number" min="2" max="12" step="1" required placeholder="e.g. 3" />
       </label>
       <label>First maturity (months)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Months until the first FD matures.</span></span>
         <input name="start" type="number" min="1" max="120" step="1" required placeholder="e.g. 12" />
       </label>
       <label>Gap between FDs (months)
+        <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Months between each successive maturity (e.g. 12 = yearly steps).</span></span>
         <input name="step" type="number" min="1" max="60" step="1" required placeholder="e.g. 12" />
       </label>
     </div>

@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Intraday Trading Overview | Investment Insights" />
   <meta name="twitter:description" content="Intraday concepts, leverage risk, glossary, risk-capital sketch, and why long-term investing is often safer. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710g" />
+  <link rel="stylesheet" href="style.css?v=20260710h" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -234,9 +234,11 @@
       <form id="intraday-risk-form" class="tool-form">
         <div class="tool-fields">
           <label>Trading capital (₹)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Money set aside for trading (not money you need for bills or goals).</span></span>
             <input name="capital" type="number" min="1" step="any" required placeholder="e.g. 1,00,000" />
           </label>
           <label>Max loss % per day
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Hard cap on how much of that capital you allow to lose in one day (e.g. 1 = 1%).</span></span>
             <input name="pct" type="number" min="0.1" max="20" step="any" required placeholder="e.g. 1" />
           </label>
         </div>
