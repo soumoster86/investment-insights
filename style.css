@@ -312,7 +312,7 @@ main a:not(.btn):not(.learn-more):hover {
 .learn-more,
 .primary-btn,
 button[type="submit"],
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn) {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn) {
   background: #0a4d8c;
   color: #fff !important;
   border: 1.5px solid #0a4d8c;
@@ -331,7 +331,7 @@ button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.seco
 .learn-more:hover,
 .primary-btn:hover,
 button[type="submit"]:hover,
-button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):hover {
+button[type="button"]:not(.nav-close):not(.nav-toggle):not(.secondary):not(.secondary-btn):not(.outline-btn):not(.goal-template-card):not(.goal-mode-tab):not(.goal-action-btn):hover {
   background: #063566;
   border-color: #063566;
   transform: translateY(-2px);
@@ -3651,41 +3651,62 @@ body.dark-mode main a.learn-path-card {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
 }
+button.goal-template-card,
 .goal-template-card {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
   text-align: left;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1.5px solid var(--border-soft);
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
+  padding: 14px 16px !important;
+  border-radius: 14px !important;
+  border: 1.5px solid #c5d0e0 !important;
+  background: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 2px 8px rgba(10, 40, 90, 0.06) !important;
   cursor: pointer;
   font: inherit;
-  color: inherit;
+  color: #1a2332 !important;
+  -webkit-text-fill-color: #1a2332 !important;
+  text-shadow: none !important;
   transition: transform 0.15s ease, border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  max-width: none;
 }
+button.goal-template-card:hover,
 .goal-template-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(43, 125, 233, 0.4);
-  box-shadow: var(--shadow-md);
+  border-color: #2b7de9 !important;
+  box-shadow: 0 6px 16px rgba(43, 125, 233, 0.15) !important;
+  background: #f7faff !important;
+  color: #1a2332 !important;
+  -webkit-text-fill-color: #1a2332 !important;
 }
+button.goal-template-card.is-selected,
 .goal-template-card.is-selected {
-  border-color: #0a4d8c;
-  box-shadow: 0 0 0 2px rgba(10, 77, 140, 0.15);
+  border-color: #0a4d8c !important;
+  background: #eef5ff !important;
+  box-shadow: 0 0 0 2px rgba(10, 77, 140, 0.18) !important;
 }
 .goal-template-card strong {
-  color: var(--brand);
-  font-size: 1.02em;
+  color: #0a4d8c !important;
+  -webkit-text-fill-color: #0a4d8c !important;
+  font-size: 1.05em;
+  font-weight: 700;
 }
 .goal-template-card span:last-child {
   font-size: 0.88em;
-  color: var(--text-muted);
-  line-height: 1.35;
+  color: #3d4f66 !important;
+  -webkit-text-fill-color: #3d4f66 !important;
+  line-height: 1.4;
+  font-weight: 500;
 }
-.goal-template-icon { font-size: 1.25em; line-height: 1; }
+.goal-template-icon {
+  font-size: 1.25em;
+  line-height: 1;
+  color: inherit !important;
+  -webkit-text-fill-color: initial !important;
+}
 
 .goal-mode-tabs {
   display: flex;
@@ -3693,21 +3714,27 @@ body.dark-mode main a.learn-path-card {
   gap: 8px;
   margin-bottom: 18px;
 }
+button.goal-mode-tab,
 .goal-mode-tab {
   flex: 1 1 160px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  border: 1.5px solid var(--border-soft);
-  background: #f4f7fc;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #c5d0e0 !important;
+  background: #f0f4fa !important;
+  background-image: none !important;
   font: inherit;
   font-weight: 700;
-  color: var(--text-muted);
+  color: #3d4f66 !important;
+  -webkit-text-fill-color: #3d4f66 !important;
   cursor: pointer;
+  box-shadow: none !important;
 }
+button.goal-mode-tab.is-active,
 .goal-mode-tab.is-active {
-  background: linear-gradient(135deg, #0a4d8c, #2b7de9);
-  color: #fff;
-  border-color: transparent;
+  background: linear-gradient(135deg, #0a4d8c, #2b7de9) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: transparent !important;
 }
 body.dark-mode .goal-mode-tab {
   background: #1c212b !important;
@@ -3892,14 +3919,32 @@ body.dark-mode .goal-routes {
   background: #171b22 !important;
   border-color: #2c3340 !important;
 }
+body.dark-mode button.goal-template-card,
 body.dark-mode .goal-template-card {
   background: #1c212b !important;
   border-color: #2c3340 !important;
   color: #e7ecfa !important;
+  -webkit-text-fill-color: #e7ecfa !important;
+}
+body.dark-mode .goal-template-card strong {
+  color: #8abaff !important;
+  -webkit-text-fill-color: #8abaff !important;
+}
+body.dark-mode .goal-template-card span:last-child {
+  color: #b4bccb !important;
+  -webkit-text-fill-color: #b4bccb !important;
+}
+body.dark-mode button.goal-template-card:hover,
+body.dark-mode .goal-template-card:hover {
+  background: #222833 !important;
+  border-color: #4a8fd9 !important;
+  color: #e7ecfa !important;
+  -webkit-text-fill-color: #e7ecfa !important;
 }
 body.dark-mode .goal-action-btn {
   background: #1c212b !important;
   color: #e7ecfa !important;
+  -webkit-text-fill-color: #e7ecfa !important;
 }
 
 .goal-modal {
