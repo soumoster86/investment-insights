@@ -290,6 +290,12 @@
       keywords: "gold sgb sovereign bonds etf physical jewellery"
     },
     {
+      url: "commodities.html",
+      title: "Commodities guide",
+      type: "Guide",
+      keywords: "commodities crude oil energy metals copper agri mcx futures commodity etf"
+    },
+    {
       url: "realestate.html",
       title: "Real estate investing",
       type: "Guide",
