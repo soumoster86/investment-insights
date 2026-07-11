@@ -726,7 +726,16 @@
     if (base.error) return base;
     fxRate = Number(fxRate);
     if (!(fxRate > 0) || isNaN(fxRate)) {
-      return Object.assign({ fxRate: 1, currency: "native" }, base);
+      return {
+        currency: "native",
+        fxRate: 1,
+        invested: base.invested,
+        proceeds: base.proceeds,
+        grossPnL: base.grossPnL,
+        fees: base.fees,
+        netPnL: base.netPnL,
+        returnPct: base.returnPct
+      };
     }
     return {
       currency: "fx",

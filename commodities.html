@@ -339,7 +339,7 @@
       Enter a buy and sell price in the same unit (for example ₹ per 10g, or USD per barrel).
       Optional USD→INR conversion if prices are in dollars.
     </p>
-    <form id="commodity-pnl-form" class="tool-form">
+    <form id="commodity-pnl-form" class="tool-form" action="javascript:void(0)" method="post">
       <div class="tool-fields">
         <label>Example preset
           <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Fills sample prices only so you can explore the form. Change them freely.</span></span>
@@ -384,7 +384,7 @@
       Shows how much of a jewellery invoice is roughly metal value versus making charges, GST sketch, and extras.
       Real GST rules and hallmarks differ — check current law and your invoice.
     </p>
-    <form id="jewellery-gold-form" class="tool-form">
+    <form id="jewellery-gold-form" class="tool-form" action="javascript:void(0)" method="post">
       <div class="tool-fields">
         <label>Gold rate (₹ per 10g)
           <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Retail gold rate you would use for 10 grams of the purity on the bill.</span></span>
@@ -699,26 +699,68 @@
 })();
 </script>
 
-<script src="js/util.js"></script>
-<script src="js/calc-core.js"></script>
-<script src="js/storage.js"></script>
+<script src="js/util.js?v=20260711c"></script>
+<script src="js/calc-core.js?v=20260711c"></script>
+<script src="js/storage.js?v=20260711c"></script>
 <script>
 (function () {
   "use strict";
-  var inr = window.IIUtil && window.IIUtil.formatINR
-    ? window.IIUtil.formatINR
-    : function (n) {
-        return "₹" + Number(n).toLocaleString("en-IN", { maximumFractionDigits: 0 });
-      };
 
-  function money(n, prefix) {
-    prefix = prefix || "₹";
+  function formatInr(n) {
+    if (window.IIUtil && window.IIUtil.formatINR) return window.IIUtil.formatINR(n);
+    if (n == null || isNaN(n)) return "—";
+    return (
+      "₹" +
+      Number(n).toLocaleString("en-IN", { maximumFractionDigits: 0 })
+    );
+  }
+
+  function money(n) {
+    if (n == null || isNaN(n)) return "—";
+    var sign = n < 0 ? "−" : "";
     var abs = Math.abs(n);
     var formatted =
       abs >= 100
         ? abs.toLocaleString("en-IN", { maximumFractionDigits: 0 })
         : abs.toLocaleString("en-IN", { maximumFractionDigits: 2 });
-    return (n < 0 ? "−" : "") + prefix + formatted;
+    return sign + "₹" + formatted;
+  }
+
+  function field(form, name) {
+    if (!form) return null;
+    if (form.elements && form.elements.namedItem) {
+      return form.elements.namedItem(name);
+    }
+    return form.querySelector('[name="' + name + '"]');
+  }
+
+  function val(form, name) {
+    var el = field(form, name);
+    return el ? el.value : "";
+  }
+
+  function setVal(form, name, value) {
+    var el = field(form, name);
+    if (el) el.value = value;
+  }
+
+  function showPanel(id, html) {
+    var out = document.getElementById(id);
+    if (!out) return;
+    out.hidden = false;
+    out.removeAttribute("hidden");
+    out.innerHTML = html;
+    try {
+      out.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } catch (e) { /* ignore */ }
+  }
+
+  function clearPanel(id) {
+    var out = document.getElementById(id);
+    if (!out) return;
+    out.innerHTML = "";
+    out.hidden = true;
+    out.setAttribute("hidden", "");
   }
 
   var PRESETS = {
@@ -728,166 +770,211 @@
     copper: { buy: 4.2, sell: 4.5, qty: 100, fees: 2, fx: 84 }
   };
 
-  document.addEventListener("DOMContentLoaded", function () {
+  function runCommodityPnL(form) {
+    var outId = "commodity-pnl-result";
+    if (!window.IICalc) {
+      showPanel(outId, '<p class="calc-error">Calculator library failed to load. Refresh the page and try again.</p>');
+      return;
+    }
+    var buy = val(form, "buy");
+    var sell = val(form, "sell");
+    var qty = val(form, "qty");
+    var fees = val(form, "fees") || 0;
+    var fxRaw = val(form, "fx");
+    var fx = fxRaw === "" || fxRaw == null ? null : Number(fxRaw);
+
+    var r;
+    if (typeof window.IICalc.commodityPnL === "function") {
+      r = window.IICalc.commodityPnL(buy, qty, sell, fees, fx > 0 ? fx : null);
+    } else if (typeof window.IICalc.stockPnL === "function") {
+      r = window.IICalc.stockPnL(buy, qty, sell, fees);
+      r.currency = "native";
+    } else {
+      showPanel(outId, '<p class="calc-error">P&amp;L function unavailable. Hard-refresh the page (Ctrl+F5).</p>');
+      return;
+    }
+
+    if (r.error) {
+      showPanel(outId, '<p class="calc-error">' + r.error + "</p>");
+      return;
+    }
+
+    var useFx = r.currency === "fx";
+    var net = useFx ? r.netPnLInr : r.netPnL;
+    var invested = useFx ? r.investedInr : r.invested;
+    var proceeds = useFx ? r.proceedsInr : r.proceeds;
+    var feeOut = useFx ? r.feesInr : r.fees;
+    var cls = net >= 0 ? "pnl-pos" : "pnl-neg";
+    var unitNote = useFx
+      ? "Shown in ₹ using USD→INR " +
+        r.fxRate +
+        ". Underlying P&amp;L in price currency: " +
+        money(r.netPnL) +
+        " (" +
+        r.returnPct.toFixed(2) +
+        "%)."
+      : "Prices treated as rupees (or any single currency without FX conversion).";
+
+    showPanel(
+      outId,
+      '<div class="calc-result-grid">' +
+        '<div class="calc-result-item is-hero"><span class="calc-result-label">Net P&amp;L' +
+        (useFx ? " (₹)" : "") +
+        '</span><strong class="calc-result-value ' +
+        cls +
+        '">' +
+        formatInr(net) +
+        " (" +
+        r.returnPct.toFixed(2) +
+        "%)</strong></div>" +
+        '<div class="calc-result-item"><span class="calc-result-label">Cost basis</span><strong class="calc-result-value">' +
+        formatInr(invested) +
+        "</strong></div>" +
+        '<div class="calc-result-item"><span class="calc-result-label">Proceeds</span><strong class="calc-result-value">' +
+        formatInr(proceeds) +
+        "</strong></div>" +
+        '<div class="calc-result-item"><span class="calc-result-label">Fees (est.)</span><strong class="calc-result-value">' +
+        formatInr(feeOut) +
+        "</strong></div>" +
+        "</div>" +
+        '<p class="calc-result-note">' +
+        unitNote +
+        " Educational only — not a trading signal or tax calculation.</p>"
+    );
+
+    if (window.IIStorage && window.IIStorage.rememberCalculator) {
+      window.IIStorage.rememberCalculator(
+        "Commodity P&L",
+        "commodities.html#commodity-calc"
+      );
+    }
+  }
+
+  function runJewellery(form) {
+    var outId = "jewellery-gold-result";
+    if (!window.IICalc || typeof window.IICalc.jewelleryGold !== "function") {
+      showPanel(outId, '<p class="calc-error">Jewellery calculator failed to load. Hard-refresh the page (Ctrl+F5).</p>');
+      return;
+    }
+    var r = window.IICalc.jewelleryGold(
+      val(form, "rate"),
+      val(form, "weight"),
+      val(form, "making"),
+      val(form, "gst"),
+      val(form, "other")
+    );
+    if (r.error) {
+      showPanel(outId, '<p class="calc-error">' + r.error + "</p>");
+      return;
+    }
+    showPanel(
+      outId,
+      '<div class="calc-result-grid">' +
+        '<div class="calc-result-item is-hero"><span class="calc-result-label">Estimated total bill</span><strong class="calc-result-value">' +
+        formatInr(r.totalBill) +
+        "</strong></div>" +
+        '<div class="calc-result-item"><span class="calc-result-label">Pure metal value</span><strong class="calc-result-value">' +
+        formatInr(r.metalValue) +
+        "</strong></div>" +
+        '<div class="calc-result-item"><span class="calc-result-label">Making charges</span><strong class="calc-result-value">' +
+        formatInr(r.making) +
+        "</strong></div>" +
+        '<div class="calc-result-item"><span class="calc-result-label">GST sketch</span><strong class="calc-result-value">' +
+        formatInr(r.gst) +
+        "</strong></div>" +
+        '<div class="calc-result-item"><span class="calc-result-label">Other costs</span><strong class="calc-result-value">' +
+        formatInr(r.otherCosts) +
+        "</strong></div>" +
+        '<div class="calc-result-item"><span class="calc-result-label">Metal share of bill</span><strong class="calc-result-value">' +
+        r.metalSharePct.toFixed(1) +
+        "%</strong></div>" +
+        "</div>" +
+        '<p class="calc-result-note">About <strong>' +
+        formatInr(r.nonMetal) +
+        "</strong> of the bill is not pure metal value (making + GST sketch + other). " +
+        "Jewellery is often a lifestyle purchase first. For investment-style gold exposure, compare ETF / SGB notes on the gold guide. Not a shop quote.</p>"
+    );
+    if (window.IIStorage && window.IIStorage.rememberCalculator) {
+      window.IIStorage.rememberCalculator(
+        "Jewellery vs metal",
+        "commodities.html#commodity-calc"
+      );
+    }
+  }
+
+  function bindForms() {
     var pnlForm = document.getElementById("commodity-pnl-form");
     var preset = document.getElementById("commodity-pnl-preset");
     if (preset && pnlForm) {
       preset.addEventListener("change", function () {
         var p = PRESETS[preset.value];
         if (!p) return;
-        pnlForm.buy.value = p.buy;
-        pnlForm.sell.value = p.sell;
-        pnlForm.qty.value = p.qty;
-        pnlForm.fees.value = p.fees;
-        pnlForm.fx.value = p.fx;
+        setVal(pnlForm, "buy", p.buy);
+        setVal(pnlForm, "sell", p.sell);
+        setVal(pnlForm, "qty", p.qty);
+        setVal(pnlForm, "fees", p.fees);
+        setVal(pnlForm, "fx", p.fx);
       });
     }
 
-    if (pnlForm && window.IICalc && window.IICalc.commodityPnL) {
+    if (pnlForm) {
       pnlForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        var fxRaw = pnlForm.fx.value;
-        var fx = fxRaw === "" || fxRaw == null ? null : Number(fxRaw);
-        var r = window.IICalc.commodityPnL(
-          pnlForm.buy.value,
-          pnlForm.qty.value,
-          pnlForm.sell.value,
-          pnlForm.fees.value,
-          fx > 0 ? fx : null
-        );
-        var out = document.getElementById("commodity-pnl-result");
-        if (!out) return;
-        if (r.error) {
-          out.hidden = false;
-          out.innerHTML = '<p class="calc-error">' + r.error + "</p>";
-          return;
-        }
-        var useFx = r.currency === "fx";
-        var net = useFx ? r.netPnLInr : r.netPnL;
-        var invested = useFx ? r.investedInr : r.invested;
-        var proceeds = useFx ? r.proceedsInr : r.proceeds;
-        var fees = useFx ? r.feesInr : r.fees;
-        var cls = net >= 0 ? "pnl-pos" : "pnl-neg";
-        var unitNote = useFx
-          ? "Shown in ₹ using USD→INR " + r.fxRate + ". Underlying P&amp;L in price currency: " +
-            money(r.netPnL, "") +
-            " (" +
-            r.returnPct.toFixed(2) +
-            "%)."
-          : "Prices treated as rupees (or any single currency without FX conversion).";
-        out.hidden = false;
-        out.innerHTML =
-          '<div class="calc-result-grid">' +
-          '<div class="calc-result-item is-hero"><span class="calc-result-label">Net P&amp;L' +
-          (useFx ? " (₹)" : "") +
-          '</span><strong class="calc-result-value ' +
-          cls +
-          '">' +
-          (useFx ? inr(net) : money(net, "₹")) +
-          " (" +
-          r.returnPct.toFixed(2) +
-          "%)</strong></div>" +
-          '<div class="calc-result-item"><span class="calc-result-label">Cost basis</span><strong class="calc-result-value">' +
-          (useFx ? inr(invested) : money(invested, "₹")) +
-          "</strong></div>" +
-          '<div class="calc-result-item"><span class="calc-result-label">Proceeds</span><strong class="calc-result-value">' +
-          (useFx ? inr(proceeds) : money(proceeds, "₹")) +
-          "</strong></div>" +
-          '<div class="calc-result-item"><span class="calc-result-label">Fees (est.)</span><strong class="calc-result-value">' +
-          (useFx ? inr(fees) : money(fees, "₹")) +
-          "</strong></div>" +
-          "</div>" +
-          '<p class="calc-result-note">' +
-          unitNote +
-          " Educational only — not a trading signal or tax calculation.</p>";
-        if (window.IIStorage) {
-          window.IIStorage.rememberCalculator(
-            "Commodity P&L",
-            "commodities.html#commodity-calc"
+        e.stopPropagation();
+        try {
+          runCommodityPnL(pnlForm);
+        } catch (err) {
+          showPanel(
+            "commodity-pnl-result",
+            '<p class="calc-error">Could not calculate. Check inputs and try again.</p>'
           );
         }
+        return false;
       });
       var resetPnl = pnlForm.querySelector("[data-reset]");
       if (resetPnl) {
         resetPnl.addEventListener("click", function () {
           pnlForm.reset();
           if (preset) preset.value = "";
-          var out = document.getElementById("commodity-pnl-result");
-          if (out) {
-            out.innerHTML = "";
-            out.hidden = true;
-          }
+          clearPanel("commodity-pnl-result");
         });
       }
     }
 
     var jewForm = document.getElementById("jewellery-gold-form");
-    if (jewForm && window.IICalc && window.IICalc.jewelleryGold) {
+    if (jewForm) {
       jewForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        var r = window.IICalc.jewelleryGold(
-          jewForm.rate.value,
-          jewForm.weight.value,
-          jewForm.making.value,
-          jewForm.gst.value,
-          jewForm.other.value
-        );
-        var out = document.getElementById("jewellery-gold-result");
-        if (!out) return;
-        if (r.error) {
-          out.hidden = false;
-          out.innerHTML = '<p class="calc-error">' + r.error + "</p>";
-          return;
-        }
-        out.hidden = false;
-        out.innerHTML =
-          '<div class="calc-result-grid">' +
-          '<div class="calc-result-item is-hero"><span class="calc-result-label">Estimated total bill</span><strong class="calc-result-value">' +
-          inr(r.totalBill) +
-          "</strong></div>" +
-          '<div class="calc-result-item"><span class="calc-result-label">Pure metal value</span><strong class="calc-result-value">' +
-          inr(r.metalValue) +
-          "</strong></div>" +
-          '<div class="calc-result-item"><span class="calc-result-label">Making charges</span><strong class="calc-result-value">' +
-          inr(r.making) +
-          "</strong></div>" +
-          '<div class="calc-result-item"><span class="calc-result-label">GST sketch</span><strong class="calc-result-value">' +
-          inr(r.gst) +
-          "</strong></div>" +
-          '<div class="calc-result-item"><span class="calc-result-label">Other costs</span><strong class="calc-result-value">' +
-          inr(r.otherCosts) +
-          "</strong></div>" +
-          '<div class="calc-result-item"><span class="calc-result-label">Metal share of bill</span><strong class="calc-result-value">' +
-          r.metalSharePct.toFixed(1) +
-          "%</strong></div>" +
-          "</div>" +
-          '<p class="calc-result-note">About <strong>' +
-          inr(r.nonMetal) +
-          "</strong> of the bill is not pure metal value (making + GST sketch + other). " +
-          "Jewellery is often a lifestyle purchase first. For investment-style gold exposure, compare ETF / SGB notes on the gold guide. Not a shop quote.</p>";
-        if (window.IIStorage) {
-          window.IIStorage.rememberCalculator(
-            "Jewellery vs metal",
-            "commodities.html#commodity-calc"
+        e.stopPropagation();
+        try {
+          runJewellery(jewForm);
+        } catch (err) {
+          showPanel(
+            "jewellery-gold-result",
+            '<p class="calc-error">Could not estimate the bill. Check inputs and try again.</p>'
           );
         }
+        return false;
       });
       var resetJew = jewForm.querySelector("[data-reset]");
       if (resetJew) {
         resetJew.addEventListener("click", function () {
           jewForm.reset();
-          jewForm.making.value = "12";
-          jewForm.gst.value = "3";
-          jewForm.other.value = "0";
-          var out = document.getElementById("jewellery-gold-result");
-          if (out) {
-            out.innerHTML = "";
-            out.hidden = true;
-          }
+          setVal(jewForm, "making", "12");
+          setVal(jewForm, "gst", "3");
+          setVal(jewForm, "other", "0");
+          clearPanel("jewellery-gold-result");
         });
       }
     }
-  });
+  }
+
+  // Bind immediately if DOM is ready (avoids missed DOMContentLoaded)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindForms);
+  } else {
+    bindForms();
+  }
 })();
 </script>
 
