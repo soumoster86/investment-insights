@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Mutual Funds, SIP & SWP Calculators | Investment Insights" />
   <meta name="twitter:description" content="India mutual funds guide: categories, SIP vs lumpsum, key terms, SIP & SWP calculators, browser shortlist, and sample schemes. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260710t" />
+  <link rel="stylesheet" href="style.css?v=20260711c" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -432,22 +432,46 @@
 	<button class="btn secondary" type="button" onclick="resetSIP()">Reset</button>
     </div>
    </form>
-  <div id="sip-result" class="calc-result-panel" style="margin-top:18px;"></div>
-  <div id="sip-disclaimer" class="callout callout-warn" style="display:none; margin-top:14px;">
-  <strong>Disclaimer:</strong> Estimate based on your assumed rate. Actual returns vary. Not financial advice.
-</div>
- 
-  <div id="sipChart-container" class="calc-chart-card" style="display:none;">
-    <div class="illust-chart-head">
-      <div>
-        <h3 class="illust-chart-title">Your SIP projection</h3>
-        <p class="illust-chart-sub">From calculator inputs</p>
+  <div id="sip-result" class="calc-result-panel" hidden></div>
+  <section id="sip-visual" class="illust-panel tool-section swp-visual-panel" hidden>
+    <div class="illust-top">
+      <div class="illust-header-text">
+        <p class="illust-eyebrow">Illustrative · from your inputs</p>
+        <h3 class="illust-chart-title" style="margin:0 0 6px;">How your SIP may grow</h3>
+        <p class="tool-intro">Year-end corpus vs amount invested under a constant return. Not a forecast.</p>
+      </div>
+      <p class="sample-freshness illust-freshness">
+        <span class="sample-freshness-label">Model</span>
+        Constant return · educational only
+      </p>
+    </div>
+    <div class="illust-stats cols-3" id="sip-chart-stats" aria-live="polite"></div>
+    <div class="illust-chart-card">
+      <div class="illust-chart-head">
+        <div>
+          <h3 class="illust-chart-title">Corpus path</h3>
+          <p class="illust-chart-sub">Invested vs projected value at year end</p>
+        </div>
+      </div>
+      <div class="illust-chart-wrap goal-corpus-chart-wrap" id="sipChart-container">
+        <canvas id="sipChart" aria-label="SIP calculator projection chart"></canvas>
       </div>
     </div>
-    <div class="illust-chart-wrap is-sm">
-      <canvas id="sipChart" aria-label="SIP calculator projection chart"></canvas>
+    <h3 class="swp-year-heading">Yearly snapshot</h3>
+    <div id="sip-year-cards" class="goal-year-map" role="list"></div>
+    <div class="illust-notes">
+      <strong>How to read this</strong>
+      <ul>
+        <li>Invested is the sum of SIP contributions so far (with any step-up)</li>
+        <li>Corpus is the model value if returns arrive evenly each month</li>
+        <li>Markets, fees, and taxes are left out of this sketch</li>
+      </ul>
+      <p class="illust-disclaimer">For learning only. Not a guarantee of returns or advice to invest.</p>
     </div>
-   </div>
+  </section>
+  <div id="sip-disclaimer" class="callout callout-warn" style="display:none; margin-top:14px;">
+    <strong>Disclaimer:</strong> Estimate based on your assumed rate. Actual returns vary. Not financial advice.
+  </div>
 </section>
 
    <section id="swpcalc-mutual" class="tool-section">
@@ -774,94 +798,227 @@ const swpMaxFAQ = `
 </script>
 
 <script>
-/* --- Chart.js: SIP Calculator --- */
-function calculateSIP(event) {
-  event.preventDefault();
-  const P = parseFloat(document.getElementById('sip-amount').value);
-  const annualRate = parseFloat(document.getElementById('sip-rate').value);
-  const years = parseInt(document.getElementById('sip-years').value);
-  const stepup = parseFloat(document.getElementById('sip-stepup').value || 0);
-  const result = window.IICalc.sip(P, annualRate, years, stepup);
-  if (result.error) { alert(result.error); return; }
-  const totalInvested = result.totalInvested, corpus = result.corpus, gain = result.gain;
-  const yearlyData = result.yearlyData, labels = result.labels;
+/* --- Chart.js: SIP Calculator (card-style results) --- */
+function sipInr(n) {
+  return "₹" + Math.round(Number(n) || 0).toLocaleString("en-IN");
+}
 
-  document.getElementById('sip-result').innerHTML = `
-    <strong>Total Invested:</strong> ₹${Math.round(totalInvested).toLocaleString('en-IN')}<br>
-    <strong>Final Corpus:</strong> ₹${Math.round(corpus).toLocaleString('en-IN')}<br>
-    <strong>Total Gain:</strong> ₹${Math.round(gain).toLocaleString('en-IN')}<br>
-    <strong>Total return:</strong> ${result.absoluteReturnPct.toFixed(1)}% &nbsp;·&nbsp;
-    <strong>XIRR (annualised):</strong> ${result.xirr.toFixed(2)}%
-    <br>
-    <details style="margin-top:10px;"><summary>See yearly projection</summary>
-      <div class="table-wrap table-scroll"><table class="product-table" style="width:100%;margin-top:7px;">
-        <thead>
-          <tr><th>Year</th><th>Corpus (₹)</th></tr>
-        </thead>
-        <tbody>
-          ${yearlyData.map((amt, i) => `<tr><td data-label="Year">${labels[i]}</td><td data-label="Corpus (₹)">₹${Math.round(amt).toLocaleString('en-IN')}</td></tr>`).join('')}
-        </tbody>
-      </table></div>
-    </details>
-	
-	
-  `;
-  document.getElementById('sip-disclaimer').style.display = 'block';
-  document.getElementById('sipChart-container').style.display = 'block';
+function sipHideEl(el) {
+  if (!el) return;
+  el.hidden = true;
+  el.setAttribute("hidden", "");
+}
 
-  if (window.sipChartInstance) window.sipChartInstance.destroy();
-  const ctx = document.getElementById('sipChart').getContext('2d');
-  window.sipChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: { labels, datasets: [{
-      label: "Corpus Value (₹)",
-      data: yearlyData,
-      borderWidth: 2.5,
-      borderColor: "#1e7bbf",
-      backgroundColor: "rgba(30,123,191,0.11)",
-      tension: 0.18,
-      pointRadius: 2,
-      fill: true,
-    }]},
-    options: {
-      plugins: {
-        legend: { display: true, position: 'bottom' },
-        tooltip: {
-          callbacks: {
-            title: ctx => ctx[0].label,
-            label: ctx => "Corpus: ₹" + Math.round(ctx.parsed.y).toLocaleString('en-IN')
+function sipShowEl(el) {
+  if (!el) return;
+  el.hidden = false;
+  el.removeAttribute("hidden");
+}
+
+function renderSipYearCards(yearlyData, yearlyInvested, labels) {
+  var el = document.getElementById("sip-year-cards");
+  if (!el) return;
+  var html = "";
+  for (var i = 0; i < yearlyData.length; i++) {
+    var corpus = yearlyData[i];
+    var invested = yearlyInvested && yearlyInvested[i] != null ? yearlyInvested[i] : null;
+    var gain = invested != null ? corpus - invested : null;
+    var isFinal = i === yearlyData.length - 1;
+    html +=
+      '<article class="goal-year-card' +
+      (isFinal ? " is-final" : "") +
+      '" role="listitem">' +
+      '<span class="goal-year-badge" aria-hidden="true">' +
+      (labels[i] || "Y" + (i + 1)) +
+      "</span>" +
+      '<div class="goal-year-body">' +
+      (invested != null
+        ? '<div class="goal-year-row"><span class="goal-year-label">Invested</span><strong>' +
+          sipInr(invested) +
+          "</strong></div>"
+        : "") +
+      '<div class="goal-year-row"><span class="goal-year-label">Corpus</span><strong' +
+      (isFinal ? ' class="goal-year-real"' : "") +
+      ">" +
+      sipInr(corpus) +
+      "</strong></div>" +
+      (gain != null
+        ? '<div class="goal-year-row"><span class="goal-year-label">Gain</span><strong' +
+          (gain >= 0 ? "" : ' class="goal-year-real"') +
+          ">" +
+          sipInr(gain) +
+          "</strong></div>"
+        : "") +
+      "</div></article>";
+  }
+  el.innerHTML = html;
+}
+
+function sipChartOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: { display: true, position: "bottom" },
+      tooltip: {
+        callbacks: {
+          title: function (ctx) {
+            return ctx[0].label;
+          },
+          label: function (ctx) {
+            return (
+              ctx.dataset.label +
+              ": ₹" +
+              Math.round(ctx.parsed.y).toLocaleString("en-IN")
+            );
           }
         }
-      },
-      scales: {
-        x: { title: { display: true, text: "Year" } },
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: v => '₹' + (v / 100000 >= 1 ? (v / 100000).toFixed(1) + 'L' : v.toLocaleString('en-IN'))
+      }
+    },
+    scales: {
+      x: { title: { display: true, text: "Year" }, grid: { display: false } },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function (v) {
+            return (
+              "₹" +
+              (v / 100000 >= 1
+                ? (v / 100000).toFixed(1) + "L"
+                : Number(v).toLocaleString("en-IN"))
+            );
           }
         }
       }
     }
-  });
+  };
+}
 
-  // Save last calculator
+function calculateSIP(event) {
+  event.preventDefault();
+  var P = parseFloat(document.getElementById("sip-amount").value);
+  var annualRate = parseFloat(document.getElementById("sip-rate").value);
+  var years = parseInt(document.getElementById("sip-years").value, 10);
+  var stepup = parseFloat(document.getElementById("sip-stepup").value || 0);
+  var result = window.IICalc.sip(P, annualRate, years, stepup);
+  if (result.error) {
+    alert(result.error);
+    return;
+  }
+  var totalInvested = result.totalInvested;
+  var corpus = result.corpus;
+  var gain = result.gain;
+  var yearlyData = result.yearlyData;
+  var yearlyInvested = result.yearlyInvested || [];
+  var labels = result.labels;
+
+  var panel = document.getElementById("sip-result");
+  panel.innerHTML =
+    '<div class="calc-result-grid">' +
+    '<div class="calc-result-item is-hero"><span class="calc-result-label">Final corpus</span><strong class="calc-result-value">' +
+    sipInr(corpus) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Total invested</span><strong class="calc-result-value">' +
+    sipInr(totalInvested) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Total gain</span><strong class="calc-result-value">' +
+    sipInr(gain) +
+    "</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Total return</span><strong class="calc-result-value">' +
+    result.absoluteReturnPct.toFixed(1) +
+    "%</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">XIRR (annualised)</span><strong class="calc-result-value">' +
+    result.xirr.toFixed(2) +
+    "%</strong></div>" +
+    '<div class="calc-result-item"><span class="calc-result-label">Monthly SIP (start)</span><strong class="calc-result-value">' +
+    sipInr(P) +
+    "</strong></div>" +
+    "</div>" +
+    '<p class="calc-result-note">Constant monthly return model' +
+    (stepup > 0 ? " with " + stepup + "% annual SIP step-up" : "") +
+    ". Fees, tax, and uneven markets are left out.</p>";
+  sipShowEl(panel);
+
+  var stats = document.getElementById("sip-chart-stats");
+  if (stats) {
+    stats.innerHTML =
+      '<div class="illust-stat"><div class="illust-stat-label">Invested</div><div class="illust-stat-value">' +
+      sipInr(totalInvested) +
+      '</div><div class="illust-stat-hint">All contributions</div></div>' +
+      '<div class="illust-stat"><div class="illust-stat-label">Corpus</div><div class="illust-stat-value is-up">' +
+      sipInr(corpus) +
+      '</div><div class="illust-stat-hint">End of year ' +
+      years +
+      "</div></div>" +
+      '<div class="illust-stat"><div class="illust-stat-label">Gain</div><div class="illust-stat-value is-purple">' +
+      sipInr(gain) +
+      '</div><div class="illust-stat-hint">' +
+      result.absoluteReturnPct.toFixed(1) +
+      "% total</div></div>";
+  }
+  renderSipYearCards(yearlyData, yearlyInvested, labels);
+  sipShowEl(document.getElementById("sip-visual"));
+  document.getElementById("sip-disclaimer").style.display = "block";
+
+  if (window.sipChartInstance) window.sipChartInstance.destroy();
+  var canvas = document.getElementById("sipChart");
+  if (canvas && typeof Chart !== "undefined") {
+    window.sipChartInstance = new Chart(canvas.getContext("2d"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Corpus",
+            data: yearlyData,
+            borderWidth: 2.6,
+            borderColor: "#1e7bbf",
+            backgroundColor: "rgba(30, 123, 191, 0.12)",
+            tension: 0.22,
+            pointRadius: yearlyData.length > 20 ? 0 : 3,
+            pointHoverRadius: 5,
+            fill: true
+          },
+          {
+            label: "Invested",
+            data: yearlyInvested,
+            borderWidth: 2,
+            borderColor: "#64748b",
+            backgroundColor: "transparent",
+            borderDash: [6, 4],
+            tension: 0.15,
+            pointRadius: yearlyInvested.length > 20 ? 0 : 2,
+            fill: false
+          }
+        ]
+      },
+      options: sipChartOptions()
+    });
+  }
+
   if (window.IIStorage) {
     window.IIStorage.rememberCalculator("SIP Calculator", "mutualfunds.html#sipcalc-mutual");
   }
-
 }
 
 function resetSIP() {
-  document.getElementById('sip-form').reset();
-  document.getElementById('sip-result').innerHTML = '';
+  document.getElementById("sip-form").reset();
+  var panel = document.getElementById("sip-result");
+  if (panel) {
+    panel.innerHTML = "";
+    sipHideEl(panel);
+  }
+  sipHideEl(document.getElementById("sip-visual"));
+  var cards = document.getElementById("sip-year-cards");
+  if (cards) cards.innerHTML = "";
+  var stats = document.getElementById("sip-chart-stats");
+  if (stats) stats.innerHTML = "";
   if (window.sipChartInstance) {
     window.sipChartInstance.destroy();
     window.sipChartInstance = null;
   }
-  document.getElementById('sip-disclaimer').style.display = 'none';
-
-  document.getElementById('sipChart-container').style.display = 'none';
+  document.getElementById("sip-disclaimer").style.display = "none";
 }
 
 /* --- Chart.js: SWP Tabbed Calculators --- */
@@ -1330,7 +1487,7 @@ window.addEventListener('scroll', () => {
 });
 </script>
   <script src="js/util.js"></script>
-  <script src="js/calc-core.js"></script>
+  <script src="js/calc-core.js?v=20260711c"></script>
   <script src="js/storage.js"></script>
   <script src="recommendations.js" defer></script>
   <script src="js/mf-page.js" defer></script>

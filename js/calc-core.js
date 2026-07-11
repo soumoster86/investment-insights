@@ -23,6 +23,7 @@
     var corpus = 0;
     var currP = monthly;
     var yearlyData = [];
+    var yearlyInvested = [];
     var labels = [];
     var y, m;
     for (y = 1; y <= years; y++) {
@@ -31,6 +32,7 @@
         totalInvested += currP;
       }
       yearlyData.push(corpus);
+      yearlyInvested.push(totalInvested);
       labels.push("Year " + y);
       currP *= 1 + stepupPct / 100;
     }
@@ -48,6 +50,7 @@
       xirr: xirr,
       absoluteReturnPct: absoluteReturnPct,
       yearlyData: yearlyData,
+      yearlyInvested: yearlyInvested,
       labels: labels
     };
   }
