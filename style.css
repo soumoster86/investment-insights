@@ -5509,6 +5509,16 @@ body.dark-mode #fd-result,
 body.dark-mode #goal-result,
 body.dark-mode #nps-result,
 body.dark-mode #bondYieldResult,
+body.dark-mode #stock-pnl-result,
+body.dark-mode #crypto-pnl-result,
+body.dark-mode #crypto-risk-result,
+body.dark-mode #commodity-pnl-result,
+body.dark-mode #jewellery-gold-result,
+body.dark-mode #bond-ladder-result,
+body.dark-mode #fd-ladder-result,
+body.dark-mode #fo-fut-result,
+body.dark-mode #fo-opt-result,
+body.dark-mode #re-buy-result,
 body.dark-mode .calc-result-panel {
   background: linear-gradient(165deg, #1a2438 0%, #151d2c 100%) !important;
   border-color: #2d3b58 !important;
@@ -6310,18 +6320,34 @@ body.dark-mode #swp-max-result,
 body.dark-mode #fd-result,
 body.dark-mode #goal-result,
 body.dark-mode #nps-result,
-body.dark-mode #bondYieldResult {
+body.dark-mode #bondYieldResult,
+body.dark-mode #stock-pnl-result,
+body.dark-mode #crypto-pnl-result,
+body.dark-mode #crypto-risk-result,
+body.dark-mode #commodity-pnl-result,
+body.dark-mode #jewellery-gold-result,
+body.dark-mode .calc-result-panel {
   background: #1a1f28 !important;
   border-color: #343b4a !important;
-  color: var(--dm-text) !important;
+  color: var(--dm-text, #e7ecfa) !important;
 }
 body.dark-mode #sip-result strong,
 body.dark-mode #swp-result strong,
 body.dark-mode #fd-result strong,
 body.dark-mode #goal-result strong,
 body.dark-mode #nps-result strong,
-body.dark-mode #bondYieldResult b {
+body.dark-mode #bondYieldResult b,
+body.dark-mode #stock-pnl-result .calc-result-value,
+body.dark-mode .calc-result-panel .calc-result-value {
   color: #9ec9ff !important;
+}
+body.dark-mode #stock-pnl-result .pnl-pos,
+body.dark-mode .calc-result-panel .pnl-pos {
+  color: #86efac !important;
+}
+body.dark-mode #stock-pnl-result .pnl-neg,
+body.dark-mode .calc-result-panel .pnl-neg {
+  color: #fca5a5 !important;
 }
 
 body.dark-mode .home-hero {
