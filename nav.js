@@ -44,6 +44,11 @@
 
   /* ---------- Mobile navigation drawer ---------- */
   function initNav() {
+    // Guard: many pages accidentally included nav.js twice; double handlers
+    // open then immediately close the drawer (looks like a broken hamburger).
+    if (window.__iiNavInited) return;
+    window.__iiNavInited = true;
+
     var nav = document.getElementById("main-nav");
     var openBtn = document.getElementById("nav-toggle");
     var closeBtn = document.getElementById("nav-close");
@@ -69,12 +74,19 @@
 
     if (openBtn) {
       openBtn.addEventListener("click", function (e) {
+        e.preventDefault();
         e.stopPropagation();
         if (nav.classList.contains("open")) closeNav();
         else openNav();
       });
     }
-    if (closeBtn) closeBtn.addEventListener("click", closeNav);
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeNav();
+      });
+    }
 
     // Tapping a normal link closes the drawer.
     nav.querySelectorAll("a").forEach(function (link) {
@@ -683,6 +695,10 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    // Whole boot once only (pages historically included nav.js twice).
+    if (window.__iiBooted) return;
+    window.__iiBooted = true;
+
     initDarkMode();
     initNav();
     initActiveLink();
