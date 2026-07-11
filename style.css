@@ -7672,6 +7672,38 @@ body.dark-mode .path-optional-note strong { color: #f0f3f8 !important; }
 .hub-path-branch {
   margin-top: 16px;
 }
+.learn-path-branch-links-single {
+  grid-template-columns: 1fr;
+}
+.learn-path-branch-markets {
+  border-style: dashed;
+  border-color: rgba(16, 185, 129, 0.45);
+  background: linear-gradient(180deg, #f3faf7 0%, #eef8f4 100%);
+}
+.learn-path-branch-markets .learn-path-branch-kicker {
+  color: #047857;
+}
+.learn-path-branch-commodities {
+  border-color: rgba(202, 138, 4, 0.45);
+  background: linear-gradient(180deg, #fffbeb 0%, #fef9c3 12%, #fff 100%);
+}
+.learn-path-branch-commodities .learn-path-branch-kicker {
+  color: #a16207;
+}
+body.dark-mode .learn-path-branch-markets {
+  background: linear-gradient(180deg, #14241e 0%, #151b24 100%) !important;
+  border-color: #2f6b55 !important;
+}
+body.dark-mode .learn-path-branch-markets .learn-path-branch-kicker {
+  color: #6ee7b7 !important;
+}
+body.dark-mode .learn-path-branch-commodities {
+  background: linear-gradient(180deg, #2a2410 0%, #1c212b 100%) !important;
+  border-color: #8a6d1d !important;
+}
+body.dark-mode .learn-path-branch-commodities .learn-path-branch-kicker {
+  color: #fbbf24 !important;
+}
 .learn-path-branch {
   margin: 14px 0 4px;
   padding: 16px 18px;
