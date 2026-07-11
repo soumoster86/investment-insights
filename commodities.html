@@ -341,8 +341,10 @@
     </p>
     <form id="commodity-pnl-form" class="tool-form" action="javascript:void(0)" method="post">
       <div class="tool-fields">
-        <label>Example preset
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Fills sample prices only so you can explore the form. Change them freely.</span></span>
+        <label>
+          <span class="field-caption">Example preset
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Fills sample prices only so you can explore the form. Change them freely.</span></span>
+          </span>
           <select name="preset" id="commodity-pnl-preset">
             <option value="">Custom / blank</option>
             <option value="gold">Gold (₹ / 10g style)</option>
@@ -351,24 +353,34 @@
             <option value="copper">Copper (USD / unit)</option>
           </select>
         </label>
-        <label>Buy price
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price per unit when you “bought” (or plan to buy).</span></span>
+        <label>
+          <span class="field-caption">Buy price
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price per unit when you “bought” (or plan to buy).</span></span>
+          </span>
           <input name="buy" type="number" min="0.0001" step="any" required placeholder="e.g. 72,000" />
         </label>
-        <label>Sell price
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price per unit when you “sold” (or plan to sell).</span></span>
+        <label>
+          <span class="field-caption">Sell price
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price per unit when you “sold” (or plan to sell).</span></span>
+          </span>
           <input name="sell" type="number" min="0.0001" step="any" required placeholder="e.g. 78,000" />
         </label>
-        <label>Quantity (units)
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many units in the round trip (e.g. 1 lot of 10g, or 10 barrels).</span></span>
+        <label>
+          <span class="field-caption">Quantity (units)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many units in the round trip (e.g. 1 lot of 10g, or 10 barrels).</span></span>
+          </span>
           <input name="qty" type="number" min="0.0001" step="any" required placeholder="e.g. 1" />
         </label>
-        <label>Fees total (same currency as prices)
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional combined trading / platform costs. Leave 0 to ignore. Tax is separate.</span></span>
+        <label>
+          <span class="field-caption">Fees total
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional combined trading / platform costs in the same currency as the prices. Leave 0 to ignore. Tax is separate.</span></span>
+          </span>
           <input name="fees" type="number" min="0" step="any" placeholder="e.g. 200" value="0" />
         </label>
-        <label>USD→INR rate (optional)
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">If prices are in USD, enter INR per 1 USD to also show rupee P&amp;L. Leave blank for prices already in ₹.</span></span>
+        <label>
+          <span class="field-caption">USD→INR rate
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional. If prices are in USD, enter INR per 1 USD to also show rupee P&amp;L. Leave blank for prices already in ₹.</span></span>
+          </span>
           <input name="fx" type="number" min="0" step="any" placeholder="e.g. 84 (only if prices in USD)" />
         </label>
       </div>
@@ -386,24 +398,34 @@
     </p>
     <form id="jewellery-gold-form" class="tool-form" action="javascript:void(0)" method="post">
       <div class="tool-fields">
-        <label>Gold rate (₹ per 10g)
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Retail gold rate you would use for 10 grams of the purity on the bill.</span></span>
+        <label>
+          <span class="field-caption">Gold rate (₹ per 10g)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Retail gold rate you would use for 10 grams of the purity on the bill.</span></span>
+          </span>
           <input name="rate" type="number" min="1" step="any" required placeholder="e.g. 72,000" />
         </label>
-        <label>Jewellery weight (grams)
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Net gold weight of the piece in grams.</span></span>
+        <label>
+          <span class="field-caption">Jewellery weight (grams)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Net gold weight of the piece in grams.</span></span>
+          </span>
           <input name="weight" type="number" min="0.01" step="any" required placeholder="e.g. 10" />
         </label>
-        <label>Making charges (%)
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Making as a % of metal value (common shop quote). Some shops quote ₹/g instead — convert first.</span></span>
+        <label>
+          <span class="field-caption">Making charges (%)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Making as a % of metal value (common shop quote). Some shops quote ₹/g instead — convert first.</span></span>
+          </span>
           <input name="making" type="number" min="0" step="any" required placeholder="e.g. 12" value="12" />
         </label>
-        <label>GST sketch (%)
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Simplified GST % on (metal + making). Real invoices may split GST lines — this is educational only.</span></span>
+        <label>
+          <span class="field-caption">GST sketch (%)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Simplified GST % on (metal + making). Real invoices may split GST lines — this is educational only.</span></span>
+          </span>
           <input name="gst" type="number" min="0" step="any" placeholder="e.g. 3" value="3" />
         </label>
-        <label>Other costs (₹)
-          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional stone charges, wastage add-ons, or other line items as one total.</span></span>
+        <label>
+          <span class="field-caption">Other costs (₹)
+            <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional stone charges, wastage add-ons, or other line items as one total.</span></span>
+          </span>
           <input name="other" type="number" min="0" step="any" placeholder="e.g. 0" value="0" />
         </label>
       </div>
