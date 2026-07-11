@@ -1484,35 +1484,54 @@ body.dark-mode .page-jump-chip-related {
     display: block;
   }
 
-  /* Left slide-out drawer — starts BELOW sticky header so "Menu" isn't under ☰ */
-  .site-header .main-nav {
+  /* Left slide-out drawer — full viewport height under the sticky header */
+  .site-header .main-nav,
+  #main-nav {
     order: 10;
-    position: fixed;
-    top: var(--header-h, 56px);
-    left: 0;
-    right: auto;
-    bottom: 0;
-    flex: none;
-    width: min(86vw, 320px);
-    justify-content: flex-start;
-    height: auto;
-    max-height: calc(100dvh - var(--header-h, 56px));
-    max-height: calc(100vh - var(--header-h, 56px));
-    margin: 0;
-    padding: 14px 14px calc(28px + env(safe-area-inset-bottom, 0px));
-    background: var(--brand);
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    gap: 2px;
-    overflow-y: auto;
+    position: fixed !important;
+    top: var(--header-h, 56px) !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: 0 !important;
+    flex: none !important;
+    display: flex !important;
+    width: min(86vw, 320px) !important;
+    justify-content: flex-start !important;
+    /* Prefer explicit height so links always have room to scroll */
+    height: calc(100dvh - var(--header-h, 56px)) !important;
+    height: calc(100vh - var(--header-h, 56px)) !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 14px 14px calc(28px + env(safe-area-inset-bottom, 0px)) !important;
+    background: var(--brand) !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    gap: 2px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
-    transform: translateX(-100%);
-    transition: transform 0.28s ease;
-    box-shadow: 6px 0 28px rgba(0, 0, 0, 0.32);
-    z-index: 1001;
+    transform: translate3d(-105%, 0, 0) !important;
+    transition: transform 0.28s ease !important;
+    box-shadow: 6px 0 28px rgba(0, 0, 0, 0.32) !important;
+    z-index: 1001 !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
-  .main-nav.open { transform: translateX(0); }
+  .site-header .main-nav.open,
+  #main-nav.open {
+    transform: translate3d(0, 0, 0) !important;
+  }
+  /* Keep nav links visible and tappable inside the drawer */
+  .site-header .main-nav > a,
+  .site-header .main-nav > .dropdown,
+  #main-nav > a,
+  #main-nav > .dropdown {
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 44px;
+  }
 
   .nav-drawer-head {
     display: flex;
@@ -9334,16 +9353,23 @@ body.dark-mode .platform-cards-grid .platform-card {
   border-color: #2c3340 !important;
 }
 
-/* Mobile Learn menu: keep curriculum + hub link; hide long product list */
+/* Mobile Learn menu: show full topic list in the hamburger drawer */
 .nav-learn-mobile-more { display: none; }
 @media (max-width: 820px) {
-  .main-nav .nav-learn-extra { display: none !important; }
+  /* Full product/topic list (was hidden to shorten the menu) */
+  .main-nav .nav-learn-extra {
+    display: flex !important;
+    align-items: center;
+  }
+  /* Hub shortcut at the end is redundant when every topic is listed */
   .main-nav .nav-learn-mobile-more {
+    display: none !important;
+  }
+  /* Long Learn list must scroll inside the open dropdown */
+  .main-nav .dropdown.open .dropdown-menu {
     display: block !important;
-    font-weight: 700 !important;
-    margin-top: 4px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-top: 12px !important;
+    max-height: none;
+    overflow: visible;
   }
 }
 
