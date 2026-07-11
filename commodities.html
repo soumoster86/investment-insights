@@ -33,6 +33,7 @@
     <li><a href="#india-access">How India gets exposure</a></li>
     <li><a href="#crude-india">Crude and India</a></li>
     <li><a href="#commodity-path-chart">Price-path sketch</a></li>
+    <li><a href="#commodity-calc">Calculators</a></li>
     <li><a href="#portfolio">In a portfolio</a></li>
     <li><a href="#risks">Risks</a></li>
     <li><a href="#mistakes">Mistakes</a></li>
@@ -101,6 +102,7 @@
         <a href="stocks.html#stock-pnl" role="menuitem">Stock P&amp;L</a>
         <a href="realestate.html#re-buy-calc" role="menuitem">Home buy cost</a>
         <a href="futures-options.html#fo-calc" role="menuitem">F&amp;O P&amp;L</a>
+        <a href="commodities.html#commodity-calc" role="menuitem">Commodity P&amp;L</a>
         <a href="tools.html" role="menuitem">EMI · PPF · RD · more</a>
       </div>
     </div>
@@ -325,6 +327,99 @@
     </div>
   </section>
 
+  <section id="commodity-calc" class="tool-section">
+    <h2>Commodity calculators</h2>
+    <p class="tool-intro">
+      Two educational sketches: a generic price move / round-trip P&amp;L (gold, crude, copper, etc.),
+      and a jewellery bill vs pure metal value. Not live prices, brokerage quotes, or tax advice.
+    </p>
+
+    <h3 class="us-map-subhead">1. Commodity price P&amp;L sketch</h3>
+    <p class="tool-intro">
+      Enter a buy and sell price in the same unit (for example ₹ per 10g, or USD per barrel).
+      Optional USD→INR conversion if prices are in dollars.
+    </p>
+    <form id="commodity-pnl-form" class="tool-form">
+      <div class="tool-fields">
+        <label>Example preset
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Fills sample prices only so you can explore the form. Change them freely.</span></span>
+          <select name="preset" id="commodity-pnl-preset">
+            <option value="">Custom / blank</option>
+            <option value="gold">Gold (₹ / 10g style)</option>
+            <option value="crude">Crude oil (USD / barrel)</option>
+            <option value="silver">Silver (₹ / kg style)</option>
+            <option value="copper">Copper (USD / unit)</option>
+          </select>
+        </label>
+        <label>Buy price
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price per unit when you “bought” (or plan to buy).</span></span>
+          <input name="buy" type="number" min="0.0001" step="any" required placeholder="e.g. 72,000" />
+        </label>
+        <label>Sell price
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Price per unit when you “sold” (or plan to sell).</span></span>
+          <input name="sell" type="number" min="0.0001" step="any" required placeholder="e.g. 78,000" />
+        </label>
+        <label>Quantity (units)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">How many units in the round trip (e.g. 1 lot of 10g, or 10 barrels).</span></span>
+          <input name="qty" type="number" min="0.0001" step="any" required placeholder="e.g. 1" />
+        </label>
+        <label>Fees total (same currency as prices)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional combined trading / platform costs. Leave 0 to ignore. Tax is separate.</span></span>
+          <input name="fees" type="number" min="0" step="any" placeholder="e.g. 200" value="0" />
+        </label>
+        <label>USD→INR rate (optional)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">If prices are in USD, enter INR per 1 USD to also show rupee P&amp;L. Leave blank for prices already in ₹.</span></span>
+          <input name="fx" type="number" min="0" step="any" placeholder="e.g. 84 (only if prices in USD)" />
+        </label>
+      </div>
+      <div class="btn-group">
+        <button type="submit" class="btn">Calculate P&amp;L</button>
+        <button type="button" class="btn secondary" data-reset>Reset</button>
+      </div>
+    </form>
+    <div id="commodity-pnl-result" class="calc-result-panel" hidden></div>
+
+    <h3 class="us-map-subhead" style="margin-top:1.75rem;">2. Jewellery bill vs pure metal</h3>
+    <p class="tool-intro">
+      Shows how much of a jewellery invoice is roughly metal value versus making charges, GST sketch, and extras.
+      Real GST rules and hallmarks differ — check current law and your invoice.
+    </p>
+    <form id="jewellery-gold-form" class="tool-form">
+      <div class="tool-fields">
+        <label>Gold rate (₹ per 10g)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Retail gold rate you would use for 10 grams of the purity on the bill.</span></span>
+          <input name="rate" type="number" min="1" step="any" required placeholder="e.g. 72,000" />
+        </label>
+        <label>Jewellery weight (grams)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Net gold weight of the piece in grams.</span></span>
+          <input name="weight" type="number" min="0.01" step="any" required placeholder="e.g. 10" />
+        </label>
+        <label>Making charges (%)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Making as a % of metal value (common shop quote). Some shops quote ₹/g instead — convert first.</span></span>
+          <input name="making" type="number" min="0" step="any" required placeholder="e.g. 12" value="12" />
+        </label>
+        <label>GST sketch (%)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Simplified GST % on (metal + making). Real invoices may split GST lines — this is educational only.</span></span>
+          <input name="gst" type="number" min="0" step="any" placeholder="e.g. 3" value="3" />
+        </label>
+        <label>Other costs (₹)
+          <span class="tooltip" tabindex="0">ⓘ<span class="tooltip-text">Optional stone charges, wastage add-ons, or other line items as one total.</span></span>
+          <input name="other" type="number" min="0" step="any" placeholder="e.g. 0" value="0" />
+        </label>
+      </div>
+      <div class="btn-group">
+        <button type="submit" class="btn">Estimate bill split</button>
+        <button type="button" class="btn secondary" data-reset>Reset</button>
+      </div>
+    </form>
+    <div id="jewellery-gold-result" class="calc-result-panel" hidden></div>
+    <p class="table-note" style="margin-top:12px;">
+      Futures leverage and lot sizes are different — see the
+      <a href="futures-options.html#fo-calc">F&amp;O P&amp;L tool</a>.
+      For gold products (ETF, SGB), see the <a href="gold.html">gold guide</a>.
+    </p>
+  </section>
+
   <section id="portfolio">
     <h2>Where commodities fit in a portfolio (high level)</h2>
     <p>
@@ -368,6 +463,7 @@
   <section id="related" class="related-tools">
     <h2>Related guides and tools</h2>
     <div class="calc-grid">
+      <a class="calc-chip" href="#commodity-calc">Commodity calculators</a>
       <a class="calc-chip" href="gold.html">Gold guide</a>
       <a class="calc-chip" href="index.html#kpi">Gold &amp; crude snapshots</a>
       <a class="calc-chip" href="etf.html">ETFs</a>
@@ -603,6 +699,198 @@
 })();
 </script>
 
+<script src="js/util.js"></script>
+<script src="js/calc-core.js"></script>
+<script src="js/storage.js"></script>
+<script>
+(function () {
+  "use strict";
+  var inr = window.IIUtil && window.IIUtil.formatINR
+    ? window.IIUtil.formatINR
+    : function (n) {
+        return "₹" + Number(n).toLocaleString("en-IN", { maximumFractionDigits: 0 });
+      };
+
+  function money(n, prefix) {
+    prefix = prefix || "₹";
+    var abs = Math.abs(n);
+    var formatted =
+      abs >= 100
+        ? abs.toLocaleString("en-IN", { maximumFractionDigits: 0 })
+        : abs.toLocaleString("en-IN", { maximumFractionDigits: 2 });
+    return (n < 0 ? "−" : "") + prefix + formatted;
+  }
+
+  var PRESETS = {
+    gold: { buy: 72000, sell: 78000, qty: 1, fees: 200, fx: "" },
+    crude: { buy: 75, sell: 82, qty: 10, fees: 5, fx: 84 },
+    silver: { buy: 85000, sell: 90000, qty: 1, fees: 150, fx: "" },
+    copper: { buy: 4.2, sell: 4.5, qty: 100, fees: 2, fx: 84 }
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var pnlForm = document.getElementById("commodity-pnl-form");
+    var preset = document.getElementById("commodity-pnl-preset");
+    if (preset && pnlForm) {
+      preset.addEventListener("change", function () {
+        var p = PRESETS[preset.value];
+        if (!p) return;
+        pnlForm.buy.value = p.buy;
+        pnlForm.sell.value = p.sell;
+        pnlForm.qty.value = p.qty;
+        pnlForm.fees.value = p.fees;
+        pnlForm.fx.value = p.fx;
+      });
+    }
+
+    if (pnlForm && window.IICalc && window.IICalc.commodityPnL) {
+      pnlForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var fxRaw = pnlForm.fx.value;
+        var fx = fxRaw === "" || fxRaw == null ? null : Number(fxRaw);
+        var r = window.IICalc.commodityPnL(
+          pnlForm.buy.value,
+          pnlForm.qty.value,
+          pnlForm.sell.value,
+          pnlForm.fees.value,
+          fx > 0 ? fx : null
+        );
+        var out = document.getElementById("commodity-pnl-result");
+        if (!out) return;
+        if (r.error) {
+          out.hidden = false;
+          out.innerHTML = '<p class="calc-error">' + r.error + "</p>";
+          return;
+        }
+        var useFx = r.currency === "fx";
+        var net = useFx ? r.netPnLInr : r.netPnL;
+        var invested = useFx ? r.investedInr : r.invested;
+        var proceeds = useFx ? r.proceedsInr : r.proceeds;
+        var fees = useFx ? r.feesInr : r.fees;
+        var cls = net >= 0 ? "pnl-pos" : "pnl-neg";
+        var unitNote = useFx
+          ? "Shown in ₹ using USD→INR " + r.fxRate + ". Underlying P&amp;L in price currency: " +
+            money(r.netPnL, "") +
+            " (" +
+            r.returnPct.toFixed(2) +
+            "%)."
+          : "Prices treated as rupees (or any single currency without FX conversion).";
+        out.hidden = false;
+        out.innerHTML =
+          '<div class="calc-result-grid">' +
+          '<div class="calc-result-item is-hero"><span class="calc-result-label">Net P&amp;L' +
+          (useFx ? " (₹)" : "") +
+          '</span><strong class="calc-result-value ' +
+          cls +
+          '">' +
+          (useFx ? inr(net) : money(net, "₹")) +
+          " (" +
+          r.returnPct.toFixed(2) +
+          "%)</strong></div>" +
+          '<div class="calc-result-item"><span class="calc-result-label">Cost basis</span><strong class="calc-result-value">' +
+          (useFx ? inr(invested) : money(invested, "₹")) +
+          "</strong></div>" +
+          '<div class="calc-result-item"><span class="calc-result-label">Proceeds</span><strong class="calc-result-value">' +
+          (useFx ? inr(proceeds) : money(proceeds, "₹")) +
+          "</strong></div>" +
+          '<div class="calc-result-item"><span class="calc-result-label">Fees (est.)</span><strong class="calc-result-value">' +
+          (useFx ? inr(fees) : money(fees, "₹")) +
+          "</strong></div>" +
+          "</div>" +
+          '<p class="calc-result-note">' +
+          unitNote +
+          " Educational only — not a trading signal or tax calculation.</p>";
+        if (window.IIStorage) {
+          window.IIStorage.rememberCalculator(
+            "Commodity P&L",
+            "commodities.html#commodity-calc"
+          );
+        }
+      });
+      var resetPnl = pnlForm.querySelector("[data-reset]");
+      if (resetPnl) {
+        resetPnl.addEventListener("click", function () {
+          pnlForm.reset();
+          if (preset) preset.value = "";
+          var out = document.getElementById("commodity-pnl-result");
+          if (out) {
+            out.innerHTML = "";
+            out.hidden = true;
+          }
+        });
+      }
+    }
+
+    var jewForm = document.getElementById("jewellery-gold-form");
+    if (jewForm && window.IICalc && window.IICalc.jewelleryGold) {
+      jewForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var r = window.IICalc.jewelleryGold(
+          jewForm.rate.value,
+          jewForm.weight.value,
+          jewForm.making.value,
+          jewForm.gst.value,
+          jewForm.other.value
+        );
+        var out = document.getElementById("jewellery-gold-result");
+        if (!out) return;
+        if (r.error) {
+          out.hidden = false;
+          out.innerHTML = '<p class="calc-error">' + r.error + "</p>";
+          return;
+        }
+        out.hidden = false;
+        out.innerHTML =
+          '<div class="calc-result-grid">' +
+          '<div class="calc-result-item is-hero"><span class="calc-result-label">Estimated total bill</span><strong class="calc-result-value">' +
+          inr(r.totalBill) +
+          "</strong></div>" +
+          '<div class="calc-result-item"><span class="calc-result-label">Pure metal value</span><strong class="calc-result-value">' +
+          inr(r.metalValue) +
+          "</strong></div>" +
+          '<div class="calc-result-item"><span class="calc-result-label">Making charges</span><strong class="calc-result-value">' +
+          inr(r.making) +
+          "</strong></div>" +
+          '<div class="calc-result-item"><span class="calc-result-label">GST sketch</span><strong class="calc-result-value">' +
+          inr(r.gst) +
+          "</strong></div>" +
+          '<div class="calc-result-item"><span class="calc-result-label">Other costs</span><strong class="calc-result-value">' +
+          inr(r.otherCosts) +
+          "</strong></div>" +
+          '<div class="calc-result-item"><span class="calc-result-label">Metal share of bill</span><strong class="calc-result-value">' +
+          r.metalSharePct.toFixed(1) +
+          "%</strong></div>" +
+          "</div>" +
+          '<p class="calc-result-note">About <strong>' +
+          inr(r.nonMetal) +
+          "</strong> of the bill is not pure metal value (making + GST sketch + other). " +
+          "Jewellery is often a lifestyle purchase first. For investment-style gold exposure, compare ETF / SGB notes on the gold guide. Not a shop quote.</p>";
+        if (window.IIStorage) {
+          window.IIStorage.rememberCalculator(
+            "Jewellery vs metal",
+            "commodities.html#commodity-calc"
+          );
+        }
+      });
+      var resetJew = jewForm.querySelector("[data-reset]");
+      if (resetJew) {
+        resetJew.addEventListener("click", function () {
+          jewForm.reset();
+          jewForm.making.value = "12";
+          jewForm.gst.value = "3";
+          jewForm.other.value = "0";
+          var out = document.getElementById("jewellery-gold-result");
+          if (out) {
+            out.innerHTML = "";
+            out.hidden = true;
+          }
+        });
+      }
+    }
+  });
+})();
+</script>
+
 <script>
   document.querySelectorAll(".floating-toc a").forEach(function (link) {
     link.addEventListener("click", function (e) {
@@ -620,6 +908,7 @@
       "india-access",
       "crude-india",
       "commodity-path-chart",
+      "commodity-calc",
       "portfolio",
       "risks",
       "mistakes",

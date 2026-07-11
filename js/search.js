@@ -293,7 +293,13 @@
       url: "commodities.html",
       title: "Commodities guide",
       type: "Guide",
-      keywords: "commodities crude oil energy metals copper agri mcx futures commodity etf"
+      keywords: "commodities crude oil energy metals copper agri mcx futures commodity etf calculator pnl jewellery"
+    },
+    {
+      url: "commodities.html#commodity-calc",
+      title: "Commodity P&L calculator",
+      type: "Calculator",
+      keywords: "commodity calculator pnl gold crude oil silver copper jewellery making charges gst metal value"
     },
     {
       url: "realestate.html",

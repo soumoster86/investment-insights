@@ -716,6 +716,78 @@
     return { error: "Unknown scheme type." };
   }
 
+  /**
+   * Commodity round-trip P&amp;L (educational). Same core math as stockPnL.
+   * Optional fxRate (INR per 1 unit of price currency) converts results to INR
+   * when prices are entered in USD (or another foreign unit).
+   */
+  function commodityPnL(buyPrice, qty, sellPrice, fees, fxRate) {
+    var base = stockPnL(buyPrice, qty, sellPrice, fees);
+    if (base.error) return base;
+    fxRate = Number(fxRate);
+    if (!(fxRate > 0) || isNaN(fxRate)) {
+      return Object.assign({ fxRate: 1, currency: "native" }, base);
+    }
+    return {
+      currency: "fx",
+      fxRate: fxRate,
+      invested: base.invested,
+      proceeds: base.proceeds,
+      grossPnL: base.grossPnL,
+      fees: base.fees,
+      netPnL: base.netPnL,
+      returnPct: base.returnPct,
+      investedInr: base.invested * fxRate,
+      proceedsInr: base.proceeds * fxRate,
+      grossPnLInr: base.grossPnL * fxRate,
+      feesInr: base.fees * fxRate,
+      netPnLInr: base.netPnL * fxRate
+    };
+  }
+
+  /**
+   * Gold jewellery bill vs pure metal value (educational India sketch).
+   * ratePer10g: gold rate for 10 grams; weightG: jewellery weight in grams;
+   * makingPct: making charges as % of metal value; gstPct: simplified GST %
+   * applied on (metal + making). Other costs optional flat amount.
+   */
+  function jewelleryGold(ratePer10g, weightG, makingPct, gstPct, otherCosts) {
+    ratePer10g = Number(ratePer10g);
+    weightG = Number(weightG);
+    makingPct = Number(makingPct);
+    gstPct = Number(gstPct) || 0;
+    otherCosts = Number(otherCosts) || 0;
+    if (
+      !(ratePer10g > 0) ||
+      !(weightG > 0) ||
+      isNaN(makingPct) ||
+      makingPct < 0 ||
+      isNaN(gstPct) ||
+      gstPct < 0 ||
+      otherCosts < 0
+    ) {
+      return {
+        error: "Enter a valid gold rate, weight, making charges %, and costs."
+      };
+    }
+    var metalValue = ratePer10g * (weightG / 10);
+    var making = (metalValue * makingPct) / 100;
+    var taxable = metalValue + making;
+    var gst = (taxable * gstPct) / 100;
+    var totalBill = metalValue + making + gst + otherCosts;
+    var metalSharePct = totalBill > 0 ? (metalValue / totalBill) * 100 : 0;
+    var nonMetal = totalBill - metalValue;
+    return {
+      metalValue: metalValue,
+      making: making,
+      gst: gst,
+      otherCosts: otherCosts,
+      totalBill: totalBill,
+      nonMetal: nonMetal,
+      metalSharePct: metalSharePct
+    };
+  }
+
   var IICalc = {
     round: round,
     sip: sip,
@@ -735,6 +807,8 @@
     rd: rd,
     sipForGoal: sipForGoal,
     stockPnL: stockPnL,
+    commodityPnL: commodityPnL,
+    jewelleryGold: jewelleryGold,
     homeBuy: homeBuy,
     optionExpiryPnL: optionExpiryPnL,
     futuresPnL: futuresPnL,
