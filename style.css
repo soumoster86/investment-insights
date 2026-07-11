@@ -1378,22 +1378,25 @@ body.dark-mode .page-jump-chip-related {
   /* Mobile: [ ☰ ] [ brand ] [ search ] [ theme ] — search outside the drawer */
   .site-header {
     flex-wrap: nowrap;
-    gap: 6px;
-    padding: 10px 10px;
+    gap: 8px;
+    padding: 10px 12px;
     min-height: 56px;
+    z-index: 1002; /* keep header + hamburger above drawer/scrim */
   }
   .site-header h1 {
     font-size: 0.98em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: min(42vw, 180px);
+    max-width: min(38vw, 160px);
   }
   .site-header .brand {
     flex: 1 1 auto;
     order: 2;
     min-width: 0;
     justify-content: flex-start;
+    margin: 0;
+    padding-left: 0;
   }
   .site-header .brand img {
     height: 38px;
@@ -1405,19 +1408,27 @@ body.dark-mode .page-jump-chip-related {
     min-width: 0;
   }
 
-  /* Hamburger — left edge */
+  /* Hamburger — left edge, never under brand text */
   .nav-toggle {
     display: inline-flex;
     order: 1;
     margin: 0;
+    flex: 0 0 44px;
     width: 44px;
     height: 44px;
     border-radius: 12px;
     border-color: rgba(255, 255, 255, 0.55);
     background: rgba(255, 255, 255, 0.08);
+    z-index: 1;
+    position: relative;
   }
   .nav-toggle:active {
     background: rgba(255, 255, 255, 0.16);
+  }
+  /* While drawer is open, hide header hamburger so it doesn't sit on "Menu" */
+  body.nav-open .nav-toggle {
+    visibility: hidden;
+    pointer-events: none;
   }
 
   /* Search + theme — right cluster, same size */
@@ -1463,18 +1474,22 @@ body.dark-mode .page-jump-chip-related {
     display: block;
   }
 
-  /* Left slide-out drawer (matches left hamburger); out of header flex flow */
+  /* Left slide-out drawer — starts BELOW sticky header so "Menu" isn't under ☰ */
   .site-header .main-nav {
     order: 10;
     position: fixed;
-    inset: 0 auto 0 0;
+    top: var(--header-h, 56px);
+    left: 0;
+    right: auto;
+    bottom: 0;
     flex: none;
     width: min(86vw, 320px);
     justify-content: flex-start;
-    height: 100dvh;
-    height: 100vh;
+    height: auto;
+    max-height: calc(100dvh - var(--header-h, 56px));
+    max-height: calc(100vh - var(--header-h, 56px));
     margin: 0;
-    padding: 12px 12px calc(28px + env(safe-area-inset-bottom, 0px));
+    padding: 14px 14px calc(28px + env(safe-area-inset-bottom, 0px));
     background: var(--brand);
     flex-direction: column;
     flex-wrap: nowrap;
@@ -1493,17 +1508,20 @@ body.dark-mode .page-jump-chip-related {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    padding: 4px 4px 12px;
-    margin-bottom: 6px;
+    gap: 10px;
+    padding: 6px 4px 14px;
+    margin: 0 0 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    flex: 0 0 auto;
   }
   .nav-drawer-title {
     font-weight: 700;
-    font-size: 0.92em;
-    letter-spacing: 0.04em;
+    font-size: 0.95em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.2;
+    min-width: 0;
   }
   .nav-close,
   button.nav-close,
