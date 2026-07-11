@@ -5508,10 +5508,12 @@ body.dark-mode #swp-max-result,
 body.dark-mode #fd-result,
 body.dark-mode #goal-result,
 body.dark-mode #nps-result,
-body.dark-mode #bondYieldResult {
+body.dark-mode #bondYieldResult,
+body.dark-mode .calc-result-panel {
   background: linear-gradient(165deg, #1a2438 0%, #151d2c 100%) !important;
   border-color: #2d3b58 !important;
   color: #e7ecfa !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28) !important;
 }
 
 /* ----- Home layout ----- */
@@ -6651,14 +6653,23 @@ form.goal-form textarea {
 }
 body.dark-mode .tool-form label { color: #c5cddc !important; }
 body.dark-mode .calc-result-item {
-  background: #151a22 !important;
+  background: #121820 !important;
   border-color: #2c3340 !important;
 }
 body.dark-mode .calc-result-item.is-hero {
-  background: #1a2434 !important;
+  background: linear-gradient(135deg, #1a2a40 0%, #152030 100%) !important;
+  border-color: #334866 !important;
+}
+body.dark-mode .calc-result-label {
+  color: #9aa8bc !important;
 }
 body.dark-mode .calc-result-value { color: #9ec9ff !important; }
+body.dark-mode .calc-result-note {
+  color: #b4bccb !important;
+}
 body.dark-mode .calc-error { color: #ff8e8e !important; }
+body.dark-mode .calc-result-item .pnl-pos { color: #86efac !important; }
+body.dark-mode .calc-result-item .pnl-neg { color: #fca5a5 !important; }
 
 /* Learn-1 article pages */
 .article-hero {
