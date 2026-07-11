@@ -20,7 +20,8 @@
     { name: "Tata Motors", sector: "Auto", desc: "Leading auto player, strong EV and CV portfolio", rating: 4, url: "https://finance.yahoo.com/quote/TATAMOTORS.NS" },
     { name: "Larsen & Toubro", sector: "Infra", desc: "Engineering and infra conglomerate, diversified order book", rating: 4, url: "https://finance.yahoo.com/quote/LT.NS" },
     { name: "Bharti Airtel", sector: "Telecom", desc: "Top telecom operator, growing data market share", rating: 4, url: "https://finance.yahoo.com/quote/BHARTIARTL.NS" },
-    { name: "Reliance Industries", sector: "Conglomerate", desc: "Diversified energy, retail, digital, telecom businesses", rating: 5, url: "https://finance.yahoo.com/quote/RELIANCE.NS" }
+    { name: "Reliance Industries", sector: "Conglomerate", desc: "Diversified energy, retail, digital, telecom businesses", rating: 5, url: "https://finance.yahoo.com/quote/RELIANCE.NS" },
+    { name: "Sun Pharmaceutical", sector: "Pharma", desc: "India’s largest pharma company by market cap; broad specialty and generic portfolio", rating: 4, url: "https://finance.yahoo.com/quote/SUNPHARMA.NS" }
   ];
 
   var FUNDS = [
