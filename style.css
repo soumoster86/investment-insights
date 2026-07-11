@@ -7557,7 +7557,7 @@ body.dark-mode .feature-badge {
   color: #fff !important;
 }
 
-/* Home learn path continuity */
+/* Home learn path — compact continuous grid */
 .learn-path-section {
   margin-bottom: 8px;
 }
@@ -7566,12 +7566,19 @@ body.dark-mode .feature-badge {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  /* 5 cols → row1 = steps 1–5, row2 = 6–9b (no orphan empty cells) */
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
   align-items: stretch;
 }
-@media (max-width: 1000px) {
-  .learn-path { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1100px) {
+  .learn-path { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 820px) {
+  .learn-path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .learn-path { grid-template-columns: 1fr; }
 }
 .learn-path-step {
   margin: 0;
@@ -7582,31 +7589,30 @@ body.dark-mode .feature-badge {
 .learn-path-card {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 14px;
-  border-radius: 16px;
+  gap: 10px;
+  padding: 12px 12px;
+  border-radius: 14px;
   border: 1px solid var(--border-soft);
   background: var(--surface);
   box-shadow: var(--shadow-sm);
   text-decoration: none !important;
   color: inherit !important;
-  /* Equal card height across the grid (2-line titles stay even) */
-  min-height: 112px;
+  min-height: 84px;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
   transition: transform 0.18s var(--ease), box-shadow 0.18s, border-color 0.18s;
 }
 .learn-path-card:hover {
-  transform: translateY(-4px) scale(1.015);
-  box-shadow: 0 16px 32px rgba(43, 125, 233, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(43, 125, 233, 0.12);
   border-color: rgba(43, 125, 233, 0.5);
   color: inherit !important;
 }
 .learn-path-num {
   flex: 0 0 auto;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: #0a4d8c;
   color: #fff;
@@ -7614,18 +7620,18 @@ body.dark-mode .feature-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.95em;
+  font-size: 0.9em;
   letter-spacing: 0;
 }
 .learn-path-num-wide {
-  font-size: 0.82em;
+  font-size: 0.78em;
   letter-spacing: -0.02em;
 }
 .learn-path-min {
-  margin: 10px 0 0;
-  font-size: 0.95em;
+  margin: 8px 0 0;
+  font-size: 0.9em;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.4;
 }
 .learn-path-min strong {
   color: var(--text);
@@ -7642,10 +7648,143 @@ body.dark-mode .learn-path-card-tool {
 body.dark-mode .learn-path-min { color: #b4bccb !important; }
 body.dark-mode .learn-path-min strong { color: #f0f3f8 !important; }
 
-/* Optional path branch (Park cash) between step blocks */
-.learn-path-continued {
-  margin-top: 12px;
+/* Compact optional detours strip (same path rules, less vertical bulk) */
+.learn-path-detours {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(43, 125, 233, 0.35);
+  background: #f8fafc;
 }
+.learn-path-detours-label {
+  margin: 0 0 8px;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0a4d8c;
+}
+.learn-path-detours-label span {
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+.learn-path-detours-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: stretch;
+}
+.learn-path-detour {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid #d8e2f0;
+  background: #fff;
+  min-width: 0;
+  flex: 1 1 180px;
+}
+.learn-path-detour-when {
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0a4d8c;
+  background: rgba(43, 125, 233, 0.1);
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.learn-path-detour-title {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+.learn-path-detour-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+.learn-path-detour-links a {
+  font-size: 0.82em;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid #c5d4ea;
+  background: #f4f8ff;
+  color: #0a4d8c !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.learn-path-detour-links a:hover {
+  background: #e8f1ff;
+  border-color: #2b7de9;
+}
+.learn-path-detour-markets .learn-path-detour-when {
+  color: #047857;
+  background: rgba(16, 185, 129, 0.12);
+}
+.learn-path-detour-markets .learn-path-detour-links a {
+  color: #047857 !important;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+.learn-path-detour-commodities .learn-path-detour-when {
+  color: #a16207;
+  background: rgba(202, 138, 4, 0.14);
+}
+.learn-path-detour-commodities .learn-path-detour-links a {
+  color: #a16207 !important;
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+body.dark-mode .learn-path-detours {
+  background: #1a2230 !important;
+  border-color: #3d5a80 !important;
+}
+body.dark-mode .learn-path-detours-label { color: #8abaff !important; }
+body.dark-mode .learn-path-detours-label span { color: #9aa8bc !important; }
+body.dark-mode .learn-path-detour {
+  background: #1c212b !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .learn-path-detour-title { color: #f0f3f8 !important; }
+body.dark-mode .learn-path-detour-when {
+  color: #8abaff !important;
+  background: rgba(43, 125, 233, 0.18) !important;
+}
+body.dark-mode .learn-path-detour-links a {
+  background: #243247 !important;
+  border-color: #3d4d66 !important;
+  color: #8abaff !important;
+}
+body.dark-mode .learn-path-detour-markets .learn-path-detour-when {
+  color: #6ee7b7 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+}
+body.dark-mode .learn-path-detour-markets .learn-path-detour-links a {
+  color: #6ee7b7 !important;
+  background: #14241e !important;
+  border-color: #2f6b55 !important;
+}
+body.dark-mode .learn-path-detour-commodities .learn-path-detour-when {
+  color: #fbbf24 !important;
+  background: rgba(202, 138, 4, 0.16) !important;
+}
+body.dark-mode .learn-path-detour-commodities .learn-path-detour-links a {
+  color: #fbbf24 !important;
+  background: #2a2410 !important;
+  border-color: #8a6d1d !important;
+}
+
+/* Page-level optional notes (MF, gold, index vs active) stay as callouts */
 .path-optional-note {
   margin: 12px 0 16px;
   padding: 12px 14px;
@@ -7669,6 +7808,8 @@ body.dark-mode .path-optional-note {
   color: #b4bccb !important;
 }
 body.dark-mode .path-optional-note strong { color: #f0f3f8 !important; }
+
+/* Learn hub still uses the older branch blocks */
 .hub-path-branch {
   margin-top: 16px;
 }
@@ -7807,20 +7948,20 @@ body.dark-mode .learn-path-branch-card span span { color: #b4bccb !important; }
 .learn-path-body {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   min-width: 0;
   flex: 1 1 auto;
   justify-content: center;
 }
 .learn-path-body strong {
-  font-size: 1.02em;
+  font-size: 0.95em;
   color: var(--text);
-  line-height: 1.3;
+  line-height: 1.25;
 }
 .learn-path-body span {
-  font-size: 0.9em;
+  font-size: 0.82em;
   color: var(--text-muted);
-  line-height: 1.35;
+  line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -7829,13 +7970,14 @@ body.dark-mode .learn-path-branch-card span span { color: #b4bccb !important; }
 .learn-path-go {
   color: var(--brand-accent);
   font-weight: 700;
-  font-size: 1.1em;
+  font-size: 1em;
+  flex: 0 0 auto;
 }
 .learn-path-footer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 16px 0 0;
+  margin: 12px 0 0;
 }
 body.dark-mode .learn-path-card {
   background: #1c212b !important;
@@ -7845,9 +7987,6 @@ body.dark-mode .learn-path-body strong { color: #f0f3f8 !important; }
 body.dark-mode .learn-path-body span { color: #b4bccb !important; }
 body.dark-mode main a.learn-path-card {
   color: inherit !important;
-}
-@media (max-width: 900px) {
-  .learn-path { grid-template-columns: 1fr; }
 }
 
 /* ========== Goal planner (revamp) ========== */
