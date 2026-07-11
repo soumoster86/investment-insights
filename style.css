@@ -7615,17 +7615,11 @@ body.dark-mode .feature-badge {
   align-items: center;
   justify-content: center;
   font-size: 0.95em;
+  letter-spacing: 0;
 }
-/* 8a / 8b badges need a touch more room */
-.learn-path-num:is([class]),
-.learn-path-card .learn-path-num {
+.learn-path-num-wide {
   font-size: 0.82em;
   letter-spacing: -0.02em;
-}
-/* Single-digit steps 1–8; 9a/9b stay slightly smaller */
-.learn-path-step:nth-child(-n+8) .learn-path-num {
-  font-size: 0.95em;
-  letter-spacing: 0;
 }
 .learn-path-min {
   margin: 10px 0 0;
@@ -7647,6 +7641,137 @@ body.dark-mode .learn-path-card-tool {
 }
 body.dark-mode .learn-path-min { color: #b4bccb !important; }
 body.dark-mode .learn-path-min strong { color: #f0f3f8 !important; }
+
+/* Optional path branch (Park cash) between step blocks */
+.learn-path-continued {
+  margin-top: 12px;
+}
+.path-optional-note {
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px dashed rgba(43, 125, 233, 0.35);
+  background: #f8fafc;
+  font-size: 0.92em;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+.path-optional-note strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.path-optional-note a {
+  font-weight: 600;
+}
+body.dark-mode .path-optional-note {
+  background: #1a2230 !important;
+  border-color: #3d5a80 !important;
+  color: #b4bccb !important;
+}
+body.dark-mode .path-optional-note strong { color: #f0f3f8 !important; }
+.hub-path-branch {
+  margin-top: 16px;
+}
+.learn-path-branch {
+  margin: 14px 0 4px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px dashed rgba(43, 125, 233, 0.4);
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: 14px 18px;
+  align-items: center;
+}
+.learn-path-branch-head {
+  min-width: 0;
+}
+.learn-path-branch-kicker {
+  display: inline-block;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0a4d8c;
+  margin-bottom: 4px;
+}
+.learn-path-branch-title {
+  display: block;
+  font-size: 1.05em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.learn-path-branch-text {
+  margin: 0;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.learn-path-branch-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.learn-path-branch-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #d8e2f0;
+  background: #fff;
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  min-height: 100%;
+}
+.learn-path-branch-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(43, 125, 233, 0.5);
+  box-shadow: 0 8px 18px rgba(43, 125, 233, 0.1);
+}
+.learn-path-branch-icon {
+  font-size: 1.35em;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+.learn-path-branch-card span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.learn-path-branch-card strong {
+  font-size: 0.95em;
+  color: var(--text);
+  line-height: 1.25;
+}
+.learn-path-branch-card span span {
+  font-size: 0.82em;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+body.dark-mode .learn-path-branch {
+  background: linear-gradient(180deg, #1a2230 0%, #151b24 100%) !important;
+  border-color: #3d5a80 !important;
+}
+body.dark-mode .learn-path-branch-kicker { color: #8abaff !important; }
+body.dark-mode .learn-path-branch-title { color: #f0f3f8 !important; }
+body.dark-mode .learn-path-branch-text { color: #b4bccb !important; }
+body.dark-mode .learn-path-branch-card {
+  background: #1c212b !important;
+  border-color: #2c3340 !important;
+}
+body.dark-mode .learn-path-branch-card strong { color: #f0f3f8 !important; }
+body.dark-mode .learn-path-branch-card span span { color: #b4bccb !important; }
+@media (max-width: 820px) {
+  .learn-path-branch {
+    grid-template-columns: 1fr;
+  }
+  .learn-path-branch-links {
+    grid-template-columns: 1fr;
+  }
+}
 .learn-path-body {
   display: flex;
   flex-direction: column;
