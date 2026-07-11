@@ -308,7 +308,6 @@
             <label class="route-chip"><input type="checkbox" name="route" value="Stocks" /> Stocks</label>
             <label class="route-chip"><input type="checkbox" name="route" value="Bonds" /> Bonds</label>
             <label class="route-chip"><input type="checkbox" name="route" value="Fixed Deposits" /> Fixed deposits</label>
-            <label class="route-chip"><input type="checkbox" name="route" value="Cryptocurrencies" /> Crypto</label>
             <label class="route-chip"><input type="checkbox" name="route" value="Gold" /> Gold</label>
           </div>
         </fieldset>
@@ -706,7 +705,6 @@
     "Stocks": { short: "Stocks", color: "#0a4d8c" },
     "Bonds": { short: "Bonds", color: "#0d9488" },
     "Fixed Deposits": { short: "FD", color: "#64748b" },
-    "Cryptocurrencies": { short: "Crypto", color: "#c026d3" },
     "Gold": { short: "Gold", color: "#ca8a04" }
   };
 
@@ -725,9 +723,9 @@
     },
     aggressive: {
       label: "Aggressive (growth)",
-      blurb: "Heavy on equity, with a small crypto slice only to show high risk. Expect bigger swings. Not for money you need soon.",
+      blurb: "Heavy on equity (mutual funds and stocks), with a small bond buffer. Expect bigger swings. Not for money you need soon.",
       suggestedRate: 12,
-      allocation: { "Mutual Funds": 30, "Stocks": 50, "Bonds": 10, "Cryptocurrencies": 10 }
+      allocation: { "Mutual Funds": 30, "Stocks": 60, "Bonds": 10 }
     }
   };
 
