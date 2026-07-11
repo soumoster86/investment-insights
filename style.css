@@ -8413,6 +8413,34 @@ body.dark-mode .goal-insight-warn {
   border-color: rgba(43, 125, 233, 0.45);
   box-shadow: 0 0 0 2px rgba(43, 125, 233, 0.08);
 }
+body.dark-mode .scenario-card {
+  background: #1c212b !important;
+  border-color: #2c3340 !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
+}
+body.dark-mode .scenario-card h3 {
+  color: #f0f3f8 !important;
+}
+body.dark-mode .scenario-kicker,
+body.dark-mode .scenario-meta,
+body.dark-mode .scenario-value span {
+  color: #9aa8bc !important;
+}
+body.dark-mode .scenario-value {
+  color: #9ec9ff !important;
+}
+body.dark-mode .scenario-base,
+body.dark-mode .scenario-card.scenario-base {
+  border-color: #3d5a80 !important;
+  box-shadow: 0 0 0 2px rgba(43, 125, 233, 0.18) !important;
+  background: linear-gradient(165deg, #1a2435 0%, #1c212b 100%) !important;
+}
+body.dark-mode .scenario-card.scenario-low {
+  border-color: #3d4a3a !important;
+}
+body.dark-mode .scenario-card.scenario-high {
+  border-color: #3d4a66 !important;
+}
 .goal-chart-wrap {
   background: #fff;
   border-radius: 14px;
