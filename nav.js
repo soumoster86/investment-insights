@@ -450,7 +450,7 @@
 
     // Optional quick-access strip (stocks family) as secondary chips
     var quick = document.querySelector(
-      ".home-float-menu, .stock-float-menu, .etf-float-menu, .ipo-float-menu, .intraday-float-menu"
+      ".home-float-menu, .stock-float-menu, .etf-float-menu, .ipo-float-menu, .intraday-float-menu, .fund-float-menu"
     );
     if (quick) {
       var qLinks = quick.querySelectorAll('a[href]');

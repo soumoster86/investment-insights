@@ -916,7 +916,7 @@ body.dark-mode .site-explore-open {
    Two kinds exist, each under several class names:
      1. "On this page" section index ... .floating-toc
      2. "Quick Access" stocks sub-nav ... .stock-float-menu,
-        .etf-float-menu, .ipo-float-menu, .intraday-float-menu
+        .etf-float-menu, .ipo-float-menu, .intraday-float-menu, .fund-float-menu
    All previously used position:fixed with stale top offsets that
    left them stranded over the page top, and the five Quick Access
    classes were styled inconsistently per page. They are unified
@@ -931,7 +931,8 @@ body .home-float-menu,
 body .stock-float-menu,
 body .etf-float-menu,
 body .ipo-float-menu,
-body .intraday-float-menu {
+body .intraday-float-menu,
+body .fund-float-menu {
   position: fixed;
   width: 228px;
   max-width: min(240px, calc(100vw - 48px));
@@ -958,7 +959,8 @@ body .home-float-menu::before,
 body .stock-float-menu::before,
 body .etf-float-menu::before,
 body .ipo-float-menu::before,
-body .intraday-float-menu::before {
+body .intraday-float-menu::before,
+body .fund-float-menu::before {
   content: "";
   display: block;
   height: 3px;
@@ -971,7 +973,8 @@ body .intraday-float-menu::before {
 body .stock-float-menu,
 body .etf-float-menu,
 body .ipo-float-menu,
-body .intraday-float-menu {
+body .intraday-float-menu,
+body .fund-float-menu {
   left: 20px;
   right: auto;
   top: auto;
@@ -1003,7 +1006,8 @@ body .home-float-menu .float-title,
 body .stock-float-menu .float-title,
 body .etf-float-menu .float-title,
 body .ipo-float-menu .float-title,
-body .intraday-float-menu .float-title {
+body .intraday-float-menu .float-title,
+body .fund-float-menu .float-title {
   flex: 0 0 auto;
   font-weight: 700;
   color: #0a4d8c;
@@ -1057,7 +1061,8 @@ body .home-float-menu,
 body .stock-float-menu,
 body .etf-float-menu,
 body .ipo-float-menu,
-body .intraday-float-menu {
+body .intraday-float-menu,
+body .fund-float-menu {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #c5d4ea transparent;
@@ -1066,7 +1071,8 @@ body .home-float-menu > a,
 body .stock-float-menu > a,
 body .etf-float-menu > a,
 body .ipo-float-menu > a,
-body .intraday-float-menu > a {
+body .intraday-float-menu > a,
+body .fund-float-menu > a {
   margin-left: 8px;
   margin-right: 8px;
 }
@@ -1074,14 +1080,16 @@ body .home-float-menu > a:first-of-type,
 body .stock-float-menu > a:first-of-type,
 body .etf-float-menu > a:first-of-type,
 body .ipo-float-menu > a:first-of-type,
-body .intraday-float-menu > a:first-of-type {
+body .intraday-float-menu > a:first-of-type,
+body .fund-float-menu > a:first-of-type {
   margin-top: 8px;
 }
 body .home-float-menu > a:last-of-type,
 body .stock-float-menu > a:last-of-type,
 body .etf-float-menu > a:last-of-type,
 body .ipo-float-menu > a:last-of-type,
-body .intraday-float-menu > a:last-of-type {
+body .intraday-float-menu > a:last-of-type,
+body .fund-float-menu > a:last-of-type {
   margin-bottom: 10px;
 }
 
@@ -1091,7 +1099,8 @@ body .home-float-menu a,
 body .stock-float-menu a,
 body .etf-float-menu a,
 body .ipo-float-menu a,
-body .intraday-float-menu a {
+body .intraday-float-menu a,
+body .fund-float-menu a {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -1127,7 +1136,9 @@ body .stock-float-menu a:hover,
 body .etf-float-menu a:hover,
 body .ipo-float-menu a:hover,
 body .ipo-float-menu a.active,
-body .intraday-float-menu a:hover {
+body .intraday-float-menu a:hover,
+body .fund-float-menu a:hover,
+body .fund-float-menu a.active {
   background: linear-gradient(90deg, #e8f1fc 0%, #f4f8ff 100%);
   color: #0a4d8c !important;
   border-left-color: #2b7de9;
@@ -1149,7 +1160,8 @@ body.dark-mode .home-float-menu,
 body.dark-mode .stock-float-menu,
 body.dark-mode .etf-float-menu,
 body.dark-mode .ipo-float-menu,
-body.dark-mode .intraday-float-menu {
+body.dark-mode .intraday-float-menu,
+body.dark-mode .fund-float-menu {
   background: linear-gradient(180deg, rgba(28, 34, 48, 0.97) 0%, rgba(20, 26, 36, 0.96) 100%) !important;
   border-color: #2c3a52 !important;
   box-shadow:
@@ -1161,7 +1173,8 @@ body.dark-mode .home-float-menu::before,
 body.dark-mode .stock-float-menu::before,
 body.dark-mode .etf-float-menu::before,
 body.dark-mode .ipo-float-menu::before,
-body.dark-mode .intraday-float-menu::before {
+body.dark-mode .intraday-float-menu::before,
+body.dark-mode .fund-float-menu::before {
   background: linear-gradient(90deg, #1d4f91 0%, #2b7de9 55%, #5eb0ff 100%);
 }
 body.dark-mode .floating-toc .toc-title,
@@ -1169,7 +1182,8 @@ body.dark-mode .home-float-menu .float-title,
 body.dark-mode .stock-float-menu .float-title,
 body.dark-mode .etf-float-menu .float-title,
 body.dark-mode .ipo-float-menu .float-title,
-body.dark-mode .intraday-float-menu .float-title {
+body.dark-mode .intraday-float-menu .float-title,
+body.dark-mode .fund-float-menu .float-title {
   color: #9ec9ff !important;
   border-bottom-color: #2c3a52 !important;
   background: linear-gradient(180deg, rgba(30, 42, 64, 0.9) 0%, rgba(22, 28, 40, 0.3) 100%) !important;
@@ -1179,7 +1193,8 @@ body.dark-mode .home-float-menu a,
 body.dark-mode .stock-float-menu a,
 body.dark-mode .etf-float-menu a,
 body.dark-mode .ipo-float-menu a,
-body.dark-mode .intraday-float-menu a {
+body.dark-mode .intraday-float-menu a,
+body.dark-mode .fund-float-menu a {
   color: #c8d6ea !important;
 }
 body.dark-mode .floating-toc a::before {
@@ -1197,7 +1212,9 @@ body.dark-mode .home-float-menu a:hover,
 body.dark-mode .stock-float-menu a:hover,
 body.dark-mode .etf-float-menu a:hover,
 body.dark-mode .ipo-float-menu a:hover,
-body.dark-mode .intraday-float-menu a:hover {
+body.dark-mode .intraday-float-menu a:hover,
+body.dark-mode .fund-float-menu a:hover,
+body.dark-mode .fund-float-menu a.active {
   background: linear-gradient(90deg, rgba(43, 125, 233, 0.22) 0%, rgba(43, 125, 233, 0.08) 100%) !important;
   color: #e8f1ff !important;
   border-left-color: #5eb0ff !important;
@@ -1221,6 +1238,7 @@ body.dark-mode .floating-toc ul {
   body .etf-float-menu,
   body .ipo-float-menu,
   body .intraday-float-menu,
+  body .fund-float-menu,
   body .site-explore { display: none !important; }
 }
 
@@ -5075,7 +5093,8 @@ body.dark-mode .home-float-menu,
 body.dark-mode .stock-float-menu,
 body.dark-mode .etf-float-menu,
 body.dark-mode .ipo-float-menu,
-body.dark-mode .intraday-float-menu {
+body.dark-mode .intraday-float-menu,
+body.dark-mode .fund-float-menu {
   background: rgba(22, 30, 46, 0.92) !important;
   border-color: #2d3b58 !important;
   backdrop-filter: blur(12px);
@@ -6201,7 +6220,8 @@ body.dark-mode .home-float-menu,
 body.dark-mode .stock-float-menu,
 body.dark-mode .etf-float-menu,
 body.dark-mode .ipo-float-menu,
-body.dark-mode .intraday-float-menu {
+body.dark-mode .intraday-float-menu,
+body.dark-mode .fund-float-menu {
   background: rgba(22, 26, 34, 0.94) !important;
   border-color: #2c3340 !important;
   color: var(--dm-text) !important;
@@ -6211,7 +6231,8 @@ body.dark-mode .home-float-menu a,
 body.dark-mode .stock-float-menu a,
 body.dark-mode .etf-float-menu a,
 body.dark-mode .ipo-float-menu a,
-body.dark-mode .intraday-float-menu a {
+body.dark-mode .intraday-float-menu a,
+body.dark-mode .fund-float-menu a {
   color: #d5deec !important;
 }
 body.dark-mode .floating-toc .toc-title,
@@ -6219,7 +6240,8 @@ body.dark-mode .home-float-menu .float-title,
 body.dark-mode .stock-float-menu .float-title,
 body.dark-mode .etf-float-menu .float-title,
 body.dark-mode .ipo-float-menu .float-title,
-body.dark-mode .intraday-float-menu .float-title {
+body.dark-mode .intraday-float-menu .float-title,
+body.dark-mode .fund-float-menu .float-title {
   color: #f0f3f8 !important;
 }
 
