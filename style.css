@@ -7622,10 +7622,31 @@ body.dark-mode .feature-badge {
   font-size: 0.82em;
   letter-spacing: -0.02em;
 }
-.learn-path-step:nth-child(-n+7) .learn-path-num {
+/* Single-digit steps 1–8; 9a/9b stay slightly smaller */
+.learn-path-step:nth-child(-n+8) .learn-path-num {
   font-size: 0.95em;
   letter-spacing: 0;
 }
+.learn-path-min {
+  margin: 10px 0 0;
+  font-size: 0.95em;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+.learn-path-min strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.learn-path-card-tool {
+  border-color: rgba(43, 125, 233, 0.35);
+  background: linear-gradient(180deg, #f4f8ff 0%, #fff 70%);
+}
+body.dark-mode .learn-path-card-tool {
+  background: linear-gradient(180deg, #1a2435 0%, #1c212b 70%) !important;
+  border-color: #3d5a80 !important;
+}
+body.dark-mode .learn-path-min { color: #b4bccb !important; }
+body.dark-mode .learn-path-min strong { color: #f0f3f8 !important; }
 .learn-path-body {
   display: flex;
   flex-direction: column;
