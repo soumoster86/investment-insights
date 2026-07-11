@@ -17,10 +17,11 @@
   <meta name="twitter:title" content="Commodities for Indian Investors | Investment Insights" />
   <meta name="twitter:description" content="Commodities in plain English: energy, metals, and agri for Indian investors. How people get exposure, portfolio role, and risks. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260711f" />
+  <link rel="stylesheet" href="style.css?v=20260711g" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -31,6 +32,7 @@
     <li><a href="#buckets">Main buckets</a></li>
     <li><a href="#india-access">How India gets exposure</a></li>
     <li><a href="#crude-india">Crude and India</a></li>
+    <li><a href="#commodity-path-chart">Price-path sketch</a></li>
     <li><a href="#portfolio">In a portfolio</a></li>
     <li><a href="#risks">Risks</a></li>
     <li><a href="#mistakes">Mistakes</a></li>
@@ -279,6 +281,50 @@
     </div>
   </section>
 
+  <section id="commodity-path-chart" class="illust-panel tool-section">
+    <div class="illust-top">
+      <div class="illust-header-text">
+        <p class="illust-eyebrow">Illustrative · educational only</p>
+        <h2>How different commodities can wander</h2>
+        <p class="tool-intro">
+          Growth of <strong>100</strong> on three simplified year-end style paths: gold (INR-flavoured sketch),
+          crude oil (USD), and copper (USD). Made for teaching — not live prices, not futures P&amp;L, and not a forecast.
+        </p>
+      </div>
+      <p class="sample-freshness illust-freshness">
+        <span class="sample-freshness-label">Illustrative</span>
+        Last reviewed <time data-content-reviewed datetime="2026-07-10">2026-07-10</time>
+      </p>
+    </div>
+    <div class="illust-stats cols-3" id="commodity-path-stats" aria-live="polite"></div>
+    <div class="illust-chart-card">
+      <div class="illust-chart-head">
+        <div>
+          <h3 class="illust-chart-title">Growth of 100 (three paths)</h3>
+          <p class="illust-chart-sub">Indexed sketch · ignores futures roll costs, ETF fees, and jewellery charges</p>
+        </div>
+        <div class="illust-legend" aria-hidden="true">
+          <span><i class="illust-swatch" style="background:#ca8a04"></i> Gold (INR path)</span>
+          <span><i class="illust-swatch" style="background:#0f766e"></i> Crude (USD)</span>
+          <span><i class="illust-swatch" style="background:#b45309"></i> Copper (USD)</span>
+        </div>
+      </div>
+      <div class="illust-chart-wrap">
+        <canvas id="commodityPathChart" aria-label="Illustrative gold crude and copper price path chart"></canvas>
+      </div>
+    </div>
+    <div class="illust-notes">
+      <strong>How to read this</strong>
+      <ul>
+        <li>Paths start at 100 so shapes are comparable — they are not the same currency story in real life</li>
+        <li>Crude can spike and crash hard; gold can grind higher or stall for years; industrial metals track cycles</li>
+        <li>Owning futures or ETFs can look different from these spot-style sketches after costs and rolls</li>
+        <li>Use this for intuition only. Live tools on the home page are separate snapshots.</li>
+      </ul>
+      <p class="illust-disclaimer">For learning only. Made-up simplified levels for teaching. Past commodity moves do not guarantee future prices.</p>
+    </div>
+  </section>
+
   <section id="portfolio">
     <h2>Where commodities fit in a portfolio (high level)</h2>
     <p>
@@ -409,6 +455,155 @@
 <!-- END SITE FOOTER -->
 
 <script>
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("commodityPathChart");
+    if (!canvas || typeof Chart === "undefined") return;
+
+    // Teaching paths only — not live quotes or investable indices
+    var labels = ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"];
+    var gold = [100, 112, 108, 118, 145, 185, 175, 195, 220, 260, 310];
+    var crude = [100, 85, 95, 110, 95, 55, 120, 165, 130, 125, 115];
+    var copper = [100, 95, 105, 100, 95, 110, 145, 130, 125, 140, 150];
+
+    function pathTotal(arr) {
+      return ((arr[arr.length - 1] / arr[0]) - 1) * 100;
+    }
+    function pathMaxDraw(arr) {
+      var peak = arr[0];
+      var maxDd = 0;
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] > peak) peak = arr[i];
+        var dd = (arr[i] / peak - 1) * 100;
+        if (dd < maxDd) maxDd = dd;
+      }
+      return maxDd;
+    }
+
+    var stats = document.getElementById("commodity-path-stats");
+    if (stats) {
+      stats.innerHTML =
+        '<div class="illust-stat"><div class="illust-stat-label">Gold path</div><div class="illust-stat-value is-amber">+' +
+        pathTotal(gold).toFixed(0) +
+        '%</div><div class="illust-stat-hint">End vs start (sketch)</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Crude path</div><div class="illust-stat-value' +
+        (pathTotal(crude) >= 0 ? " is-up" : " is-down") +
+        '">' +
+        (pathTotal(crude) >= 0 ? "+" : "") +
+        pathTotal(crude).toFixed(0) +
+        '%</div><div class="illust-stat-hint">End vs start (sketch)</div></div>' +
+        '<div class="illust-stat"><div class="illust-stat-label">Crude worst dip</div><div class="illust-stat-value is-down">' +
+        pathMaxDraw(crude).toFixed(0) +
+        '%</div><div class="illust-stat-hint">From prior peak on path</div></div>';
+    }
+
+    var ctx = canvas.getContext("2d");
+    var gGold = ctx.createLinearGradient(0, 0, 0, 280);
+    gGold.addColorStop(0, "rgba(202,138,4,0.22)");
+    gGold.addColorStop(1, "rgba(202,138,4,0.02)");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Gold (INR path)",
+            data: gold,
+            borderColor: "#ca8a04",
+            backgroundColor: gGold,
+            borderWidth: 2.6,
+            tension: 0.3,
+            fill: true,
+            pointRadius: 3,
+            pointBackgroundColor: "#ca8a04",
+            pointBorderColor: "#fff",
+            pointBorderWidth: 1.5
+          },
+          {
+            label: "Crude (USD path)",
+            data: crude,
+            borderColor: "#0f766e",
+            backgroundColor: "transparent",
+            borderWidth: 2.4,
+            tension: 0.28,
+            fill: false,
+            pointRadius: 3,
+            pointBackgroundColor: "#0f766e",
+            pointBorderColor: "#fff",
+            pointBorderWidth: 1.5
+          },
+          {
+            label: "Copper (USD path)",
+            data: copper,
+            borderColor: "#b45309",
+            backgroundColor: "transparent",
+            borderWidth: 2.2,
+            borderDash: [6, 4],
+            tension: 0.28,
+            fill: false,
+            pointRadius: 2.5,
+            pointBackgroundColor: "#b45309",
+            pointBorderColor: "#fff",
+            pointBorderWidth: 1.5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: {
+            display: true,
+            position: "bottom",
+            labels: { boxWidth: 12, usePointStyle: true, padding: 14 }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.94)",
+            padding: 12,
+            callbacks: {
+              label: function (c) {
+                var v = c.parsed.y;
+                return (
+                  " " +
+                  c.dataset.label +
+                  ": " +
+                  v.toFixed(0) +
+                  "  (" +
+                  (v - 100 >= 0 ? "+" : "") +
+                  (v - 100).toFixed(0) +
+                  "% vs start)"
+                );
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: "#64748b", font: { weight: "600" } }
+          },
+          y: {
+            beginAtZero: false,
+            grid: { color: "rgba(148,163,184,0.2)" },
+            ticks: { color: "#64748b" },
+            title: {
+              display: true,
+              text: "Growth of 100",
+              color: "#64748b",
+              font: { size: 11, weight: "600" }
+            }
+          }
+        }
+      }
+    });
+  });
+})();
+</script>
+
+<script>
   document.querySelectorAll(".floating-toc a").forEach(function (link) {
     link.addEventListener("click", function (e) {
       var t = document.querySelector(this.getAttribute("href"));
@@ -419,7 +614,17 @@
     });
   });
   window.addEventListener("scroll", function () {
-    var sections = ["what", "buckets", "india-access", "crude-india", "portfolio", "risks", "mistakes", "related"];
+    var sections = [
+      "what",
+      "buckets",
+      "india-access",
+      "crude-india",
+      "commodity-path-chart",
+      "portfolio",
+      "risks",
+      "mistakes",
+      "related"
+    ];
     var current = "";
     for (var i = 0; i < sections.length; i++) {
       var sec = document.getElementById(sections[i]);
