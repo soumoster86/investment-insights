@@ -6471,19 +6471,20 @@ form.goal-form .tool-fields > label,
   margin: 0;
   flex: 0 0 auto;
 }
-form.tool-form label > input,
+/* Textboxes/radios must NOT use the full-width control row rules */
+form.tool-form label > input:not([type="checkbox"]):not([type="radio"]),
 form.tool-form label > select,
 form.tool-form label > textarea,
-form.goal-form label > input,
+form.goal-form label > input:not([type="checkbox"]):not([type="radio"]),
 form.goal-form label > select,
 form.goal-form label > textarea,
-.tool-form label > input,
+.tool-form label > input:not([type="checkbox"]):not([type="radio"]),
 .tool-form label > select,
 .tool-form label > textarea,
-.goal-form label > input,
+.goal-form label > input:not([type="checkbox"]):not([type="radio"]),
 .goal-form label > select,
 .goal-form label > textarea,
-.calculator-box label > input,
+.calculator-box label > input:not([type="checkbox"]):not([type="radio"]),
 .calculator-box label > select,
 .calculator-box label > textarea {
   grid-column: 1 / -1;
@@ -7812,21 +7813,54 @@ label.goal-check-label > input[type="checkbox"],
   gap: 8px;
   margin-top: 8px;
 }
-.route-chip {
+/* Chip labels: override tool/goal-form grid so boxes stay small */
+.goal-form label.route-chip,
+.tool-form label.route-chip,
+label.route-chip {
   display: inline-flex !important;
   flex-direction: row !important;
-  align-items: center;
-  gap: 6px;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  align-content: center;
+  gap: 6px !important;
   margin: 0 !important;
-  padding: 8px 12px;
+  padding: 7px 12px 7px 10px !important;
   border-radius: 999px;
   border: 1.5px solid var(--border-soft);
   background: #fff;
   font-size: 0.92em;
+  font-weight: 500;
   cursor: pointer;
   width: auto !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  box-sizing: border-box;
 }
-.route-chip input { width: auto; margin: 0; accent-color: #0a4d8c; }
+.goal-form label.route-chip > input[type="checkbox"],
+.tool-form label.route-chip > input[type="checkbox"],
+label.route-chip > input[type="checkbox"],
+.route-chip input[type="checkbox"] {
+  appearance: auto !important;
+  -webkit-appearance: checkbox !important;
+  flex: 0 0 14px !important;
+  order: 0 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  max-width: 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  accent-color: #0a4d8c;
+  cursor: pointer;
+  vertical-align: middle;
+}
 .route-chip:has(input:checked) {
   border-color: #0a4d8c;
   background: #eaf2ff;
