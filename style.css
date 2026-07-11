@@ -1382,6 +1382,16 @@ body.dark-mode .page-jump-chip-related {
     padding: 10px 12px;
     min-height: 56px;
     z-index: 1002; /* keep header + hamburger above drawer/scrim */
+    /* Critical: backdrop-filter/filter create a containing block for position:fixed
+       descendants, so the drawer was clipped to header height (only "Menu" visible).
+       Disable on mobile so .main-nav fixed coords use the viewport. */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+    transform: none !important;
+    perspective: none !important;
+    contain: none !important;
+    overflow: visible !important;
   }
   .site-header h1 {
     font-size: 0.98em;
@@ -1576,14 +1586,17 @@ body.dark-mode .page-jump-chip-related {
     min-height: 42px;
   }
 
-  /* Scrim behind the drawer — tap to close (wired in nav.js) */
+  /* Scrim behind the drawer — starts under header; tap to close (nav.js) */
   body.nav-open {
     overflow: hidden;
   }
   body.nav-open::before {
     content: "";
     position: fixed;
-    inset: 0;
+    top: var(--header-h, 56px);
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.48);
     z-index: 1000;
   }

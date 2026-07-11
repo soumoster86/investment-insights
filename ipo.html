@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="IPO Guide | Investment Insights" />
   <meta name="twitter:description" content="How IPOs work in India, apply flow, checklist, risks, and illustrative listing-gains chart. Educational only." />
 <!-- END SEO -->
-  <link rel="stylesheet" href="style.css?v=20260711menu" />
+  <link rel="stylesheet" href="style.css?v=20260711drawer" />
   <link rel="icon" href="favicon.ico?v=20260711i" sizes="any" />
   <link rel="icon" href="favicon-32.png?v=20260711i" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260711i" />
@@ -612,7 +612,7 @@
   }
 
   /**
-   * Dark mode can be applied by nav.js?v=20260711e after this script's DOMContentLoaded
+   * Dark mode can be applied by nav.js?v=20260711drawer after this script's DOMContentLoaded
    * runs. Detect via class, checkbox, localStorage, or chart-card luminance.
    */
   function isDarkMode() {
@@ -817,7 +817,7 @@
       listingChart.update();
     }
 
-    // nav.js?v=20260711e also uses DOMContentLoaded and may apply dark-mode *after* this chart
+    // nav.js?v=20260711drawer also uses DOMContentLoaded and may apply dark-mode *after* this chart
     [0, 50, 150, 400].forEach(function (ms) {
       setTimeout(applyListingChartTheme, ms);
     });
@@ -879,7 +879,7 @@ document.querySelectorAll('.ipo-float-menu a').forEach(function(link) {
 })();
 </script>
 
-  <script src="nav.js?v=20260711nav" defer></script>
+  <script src="nav.js?v=20260711drawer" defer></script>
 <!-- Search Modal -->
 <div id="search-modal" class="search-modal" aria-hidden="true">
   <div class="search-modal-backdrop" id="search-backdrop"></div>

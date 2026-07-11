@@ -576,7 +576,10 @@
   function syncHeaderHeight() {
     var header = document.querySelector(".site-header");
     if (!header) return;
+    // Measure only the sticky bar row (exclude any fixed drawer still in the tree)
     var h = Math.round(header.getBoundingClientRect().height);
+    // Guard against absurd values if layout is mid-transition
+    if (!(h > 0) || h > 200) h = 56;
     document.documentElement.style.setProperty("--header-h", h + "px");
   }
 
