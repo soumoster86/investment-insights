@@ -3817,6 +3817,51 @@ body.dark-mode .ipo-table td:nth-child(1) {
   letter-spacing: -0.01em;
 }
 body.dark-mode .us-map-subhead { color: #8abaff !important; }
+
+/* External resource cards (clickable fund-map cards) */
+a.resource-map-card {
+  text-decoration: none !important;
+  color: inherit !important;
+  cursor: pointer;
+}
+a.resource-map-card:focus-visible {
+  outline: 3px solid rgba(43, 125, 233, 0.35);
+  outline-offset: 2px;
+}
+.resource-map-desc {
+  margin: 0;
+  font-size: 0.92em;
+  line-height: 1.45;
+  color: var(--text-muted, #5b6b82);
+  flex: 1;
+}
+.resource-map-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.84em;
+  font-weight: 700;
+  color: var(--fund-accent, #0a4d8c);
+  background: color-mix(in srgb, var(--fund-accent, #2b7de9) 12%, #fff);
+  border: 1px solid color-mix(in srgb, var(--fund-accent, #2b7de9) 28%, #d5e0f0);
+  width: fit-content;
+}
+a.resource-map-card:hover .resource-map-go {
+  background: color-mix(in srgb, var(--fund-accent, #2b7de9) 18%, #fff);
+}
+body.dark-mode .resource-map-desc { color: #b4bccb !important; }
+body.dark-mode .resource-map-go {
+  background: color-mix(in srgb, var(--fund-accent, #2b7de9) 16%, #151a22) !important;
+  border-color: color-mix(in srgb, var(--fund-accent, #2b7de9) 35%, #2c3340) !important;
+  color: #e2e8f0 !important;
+}
+body.dark-mode main a.resource-map-card,
+body.dark-mode section a.resource-map-card {
+  color: inherit !important;
+}
 .us-stock-card {
   background: #f9faff;
   border-radius: 11px;
