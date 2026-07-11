@@ -3808,6 +3808,15 @@ body.dark-mode .ipo-table td:nth-child(1) {
 @media (max-width: 800px) {
   .us-stocks-grid { grid-template-columns: 1fr; }
 }
+/* US stocks page — section subheads above fund-map grids */
+.us-map-subhead {
+  margin: 18px 0 4px;
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--text, #1a2332);
+  letter-spacing: -0.01em;
+}
+body.dark-mode .us-map-subhead { color: #8abaff !important; }
 .us-stock-card {
   background: #f9faff;
   border-radius: 11px;

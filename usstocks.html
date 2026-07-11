@@ -587,61 +587,100 @@
 </script>
 
     <section id="us-indices-etfs">
-  <h3>Major US indices and popular ETFs</h3>
-  <div class="table-wrap table-scroll">
-  <table class="product-table table-cards" style="width:100%;background:#f9faff;border-radius:10px;margin-top:12px;">
-    <thead>
-      <tr style="background:#eaf2ff;">
-        <th>Index/ETF</th>
-        <th>Symbol</th>
-        <th>Description</th>
-        <th>5Y CAGR*</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Index/ETF">S&P 500</td>
-        <td data-label="Symbol">^GSPC</td>
-        <td data-label="Description">500 largest US companies</td>
-        <td data-label="5Y CAGR*">13.7%</td>
-      </tr>
-      <tr>
-        <td data-label="Index/ETF">Nasdaq 100</td>
-        <td data-label="Symbol">^NDX</td>
-        <td data-label="Description">Top 100 non-financial tech-heavy stocks</td>
-        <td data-label="5Y CAGR*">18.2%</td>
-      </tr>
-      <tr>
-        <td data-label="Index/ETF">Dow Jones</td>
-        <td data-label="Symbol">^DJI</td>
-        <td data-label="Description">30 blue-chip US companies</td>
-        <td data-label="5Y CAGR*">9.6%</td>
-      </tr>
-      <tr>
-        <td data-label="Index/ETF">Vanguard S&P 500 ETF</td>
-        <td data-label="Symbol">VOO</td>
-        <td data-label="Description">Low-cost S&P 500 index fund</td>
-        <td data-label="5Y CAGR*">13.6%</td>
-      </tr>
-      <tr>
-        <td data-label="Index/ETF">Invesco QQQ ETF</td>
-        <td data-label="Symbol">QQQ</td>
-        <td data-label="Description">Tracks Nasdaq 100</td>
-        <td data-label="5Y CAGR*">18.1%</td>
-      </tr>
-      <tr>
-        <td data-label="Index/ETF">iShares Core S&P 500 ETF</td>
-        <td data-label="Symbol">IVV</td>
-        <td data-label="Description">Another S&P 500 option</td>
-        <td data-label="5Y CAGR*">13.6%</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-  <div style="font-size:0.97em;color:#888;margin-top:5px;">
-    *5Y CAGR as of June 2025 (USD, before taxes). Source: Yahoo Finance.
-  </div>
-</section>
+      <h2>Major US indices and popular ETFs</h2>
+      <p class="tool-intro">
+        Indices are benchmarks; ETFs are products you can buy that aim to track them.
+        Figures below are sample educational snapshots only — not live prices or forecasts.
+      </p>
+      <p class="sample-freshness">
+        <span class="sample-freshness-label">Sample data</span>
+        5Y CAGR as of June 2025 (USD, before taxes). Source: Yahoo Finance. Always verify live data.
+      </p>
+
+      <h3 class="us-map-subhead">Major indices</h3>
+      <div class="fund-map cols-3" role="list">
+        <article class="fund-map-card fund-map--index" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">📊</span>
+            <h3>S&amp;P 500</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>^GSPC</dd></div>
+            <div><dt>What it is</dt><dd>About 500 of the largest US companies</dd></div>
+            <div><dt>Sample 5Y CAGR</dt><dd>~13.7% USD</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Broad US large-cap benchmark</p>
+        </article>
+        <article class="fund-map-card fund-map--equity" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">💻</span>
+            <h3>Nasdaq 100</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>^NDX</dd></div>
+            <div><dt>What it is</dt><dd>Top 100 non-financial, often tech-heavy names</dd></div>
+            <div><dt>Sample 5Y CAGR</dt><dd>~18.2% USD</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Higher growth / concentration risk than S&amp;P 500</p>
+        </article>
+        <article class="fund-map-card fund-map--slate" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">🏛️</span>
+            <h3>Dow Jones</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>^DJI</dd></div>
+            <div><dt>What it is</dt><dd>30 blue-chip US companies (price-weighted)</dd></div>
+            <div><dt>Sample 5Y CAGR</dt><dd>~9.6% USD</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Narrower basket than the S&amp;P 500</p>
+        </article>
+      </div>
+
+      <h3 class="us-map-subhead">Popular ETFs that track them</h3>
+      <div class="fund-map cols-3" role="list">
+        <article class="fund-map-card fund-map--blue" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">📦</span>
+            <h3>Vanguard S&amp;P 500</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Ticker</dt><dd>VOO</dd></div>
+            <div><dt>Tracks</dt><dd>S&amp;P 500 — low-cost index ETF</dd></div>
+            <div><dt>Sample 5Y CAGR</dt><dd>~13.6% USD</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Common core US equity holding</p>
+        </article>
+        <article class="fund-map-card fund-map--indigo" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">🚀</span>
+            <h3>Invesco QQQ</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Ticker</dt><dd>QQQ</dd></div>
+            <div><dt>Tracks</dt><dd>Nasdaq 100</dd></div>
+            <div><dt>Sample 5Y CAGR</dt><dd>~18.1% USD</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Tech-tilted; swings can be large</p>
+        </article>
+        <article class="fund-map-card fund-map--teal" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">📦</span>
+            <h3>iShares Core S&amp;P 500</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Ticker</dt><dd>IVV</dd></div>
+            <div><dt>Tracks</dt><dd>S&amp;P 500 — another large, liquid option</dd></div>
+            <div><dt>Sample 5Y CAGR</dt><dd>~13.6% USD</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Similar job to VOO; compare fees and spreads</p>
+        </article>
+      </div>
+      <p class="table-note">
+        Past returns do not predict the future. Indian access routes, fees, and tax differ — see LRS notes above and
+        <a href="etf.html">ETFs</a>.
+      </p>
+    </section>
 
 	
     <section id="top-us-stocks">
@@ -753,75 +792,119 @@
   </div>
 </section>
 
-     <section id="us-dividend-stocks">
-  <h2>Dividend-style names (examples)</h2>
-  <p class="tool-intro">Yields change daily. This table is for learning only. Check live data before any decision.</p>
-  <div class="table-wrap table-scroll">
-  <table class="product-table table-cards" style="width:100%;background:#f9faff;border-radius:10px;margin-top:12px;">
-    <thead>
-      <tr style="background:#eaf2ff;">
-        <th>Company</th>
-        <th>Symbol</th>
-        <th>Dividend Yield</th>
-        <th>Sector</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Company">Johnson &amp; Johnson</td>
-        <td data-label="Symbol">JNJ</td>
-        <td data-label="Dividend Yield">3.4%</td>
-        <td data-label="Sector">Healthcare</td>
-      </tr>
-      <tr>
-        <td data-label="Company">Procter &amp; Gamble</td>
-        <td data-label="Symbol">PG</td>
-        <td data-label="Dividend Yield">2.5%</td>
-        <td data-label="Sector">Consumer</td>
-      </tr>
-      <tr>
-        <td data-label="Company">Coca-Cola</td>
-        <td data-label="Symbol">KO</td>
-        <td data-label="Dividend Yield">3.1%</td>
-        <td data-label="Sector">Beverages</td>
-      </tr>
-      <tr>
-        <td data-label="Company">PepsiCo</td>
-        <td data-label="Symbol">PEP</td>
-        <td data-label="Dividend Yield">2.9%</td>
-        <td data-label="Sector">Beverages</td>
-      </tr>
-      <tr>
-        <td data-label="Company">Exxon Mobil</td>
-        <td data-label="Symbol">XOM</td>
-        <td data-label="Dividend Yield">3.6%</td>
-        <td data-label="Sector">Energy</td>
-      </tr>
-      <tr>
-        <td data-label="Company">3M Company</td>
-        <td data-label="Symbol">MMM</td>
-        <td data-label="Dividend Yield">5.6%</td>
-        <td data-label="Sector">Industrials</td>
-      </tr>
-      <tr>
-        <td data-label="Company">Chevron</td>
-        <td data-label="Symbol">CVX</td>
-        <td data-label="Dividend Yield">4.2%</td>
-        <td data-label="Sector">Energy</td>
-      </tr>
-      <tr>
-        <td data-label="Company">IBM</td>
-        <td data-label="Symbol">IBM</td>
-        <td data-label="Dividend Yield">4.1%</td>
-        <td data-label="Sector">Tech</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-  <div style="font-size:0.97em;color:#888;margin-top:5px;">
-    Yield figures go stale quickly. Treat them as placeholders only.
-  </div>
-</section>
+    <section id="us-dividend-stocks">
+      <h2>Dividend-style names (examples)</h2>
+      <p class="tool-intro">
+        <strong>Not a buy list.</strong> These are well-known names people study for dividends.
+        Yields change daily — treat figures as placeholders only.
+      </p>
+      <p class="sample-freshness">
+        <span class="sample-freshness-label">Sample data</span>
+        Illustrative yields only. Confirm live quotes and tax rules before any decision.
+      </p>
+      <div class="fund-map cols-4" role="list">
+        <article class="fund-map-card fund-map--green" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">💊</span>
+            <h3>Johnson &amp; Johnson</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>JNJ</dd></div>
+            <div><dt>Sector</dt><dd>Healthcare</dd></div>
+            <div><dt>Sample yield</dt><dd>~3.4%</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Healthcare consumer / pharma mix</p>
+        </article>
+        <article class="fund-map-card fund-map--blue" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">🏠</span>
+            <h3>Procter &amp; Gamble</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>PG</dd></div>
+            <div><dt>Sector</dt><dd>Consumer</dd></div>
+            <div><dt>Sample yield</dt><dd>~2.5%</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Household brands portfolio</p>
+        </article>
+        <article class="fund-map-card fund-map--rose" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">🥤</span>
+            <h3>Coca-Cola</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>KO</dd></div>
+            <div><dt>Sector</dt><dd>Beverages</dd></div>
+            <div><dt>Sample yield</dt><dd>~3.1%</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Global beverage franchise</p>
+        </article>
+        <article class="fund-map-card fund-map--amber" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">🧃</span>
+            <h3>PepsiCo</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>PEP</dd></div>
+            <div><dt>Sector</dt><dd>Beverages</dd></div>
+            <div><dt>Sample yield</dt><dd>~2.9%</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Drinks and snacks mix</p>
+        </article>
+        <article class="fund-map-card fund-map--orange" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">⛽</span>
+            <h3>Exxon Mobil</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>XOM</dd></div>
+            <div><dt>Sector</dt><dd>Energy</dd></div>
+            <div><dt>Sample yield</dt><dd>~3.6%</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Oil &amp; gas; commodity-linked</p>
+        </article>
+        <article class="fund-map-card fund-map--slate" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">🏭</span>
+            <h3>3M Company</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>MMM</dd></div>
+            <div><dt>Sector</dt><dd>Industrials</dd></div>
+            <div><dt>Sample yield</dt><dd>~5.6%</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> High yield can mean higher risk</p>
+        </article>
+        <article class="fund-map-card fund-map--elss" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">🛢️</span>
+            <h3>Chevron</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>CVX</dd></div>
+            <div><dt>Sector</dt><dd>Energy</dd></div>
+            <div><dt>Sample yield</dt><dd>~4.2%</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Integrated energy name</p>
+        </article>
+        <article class="fund-map-card fund-map--indigo" role="listitem">
+          <header class="fund-map-head">
+            <span class="fund-map-icon" aria-hidden="true">💻</span>
+            <h3>IBM</h3>
+          </header>
+          <dl class="fund-map-meta">
+            <div><dt>Symbol</dt><dd>IBM</dd></div>
+            <div><dt>Sector</dt><dd>Tech</dd></div>
+            <div><dt>Sample yield</dt><dd>~4.1%</dd></div>
+          </dl>
+          <p class="fund-map-risk"><span class="fund-risk-dot" aria-hidden="true"></span> Enterprise software &amp; services</p>
+        </article>
+      </div>
+      <p class="table-note">
+        Higher yield is not automatically “better.” Dividends can be cut, and US withholding may apply for Indian residents.
+        See <a href="#us-tax-risk">tax &amp; risks</a>.
+      </p>
+    </section>
 
     <section id="us-tax-risk">
   <h2>Risks &amp; tax notes (high level)</h2>
