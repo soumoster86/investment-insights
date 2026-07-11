@@ -298,8 +298,8 @@
     closeBtn.className = "site-explore-close";
     closeBtn.setAttribute("aria-label", "Close explore panel");
     closeBtn.innerHTML =
-      '<svg class="site-explore-close-icon" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false">' +
-      '<path d="M3 3l8 8M11 3L3 11" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>' +
+      '<svg class="site-explore-close-icon" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">' +
+      '<path d="M2.5 2.5l7 7M9.5 2.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
       "</svg>";
     head.appendChild(closeBtn);
     panel.appendChild(head);
