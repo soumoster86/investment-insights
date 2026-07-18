@@ -1059,16 +1059,16 @@
     }
   }
 
-  function escapeHtml(s) {
-    if (window.IIUtil && window.IIUtil.escapeHtml) {
-      return window.IIUtil.escapeHtml(s);
-    }
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
+  var escapeHtml =
+    (window.IIUtil && window.IIUtil.escapeHtml) ||
+    function (s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    };
 
   function render() {
     var root = document.getElementById("term-of-day");

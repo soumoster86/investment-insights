@@ -6,13 +6,14 @@
 (function (global) {
   "use strict";
 
-  /** Escape text for safe interpolation into HTML strings. */
+  /** Escape text for safe interpolation into HTML strings (incl. attributes). */
   function escapeHtml(s) {
     return String(s)
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
   /**

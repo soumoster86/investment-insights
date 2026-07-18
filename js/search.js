@@ -463,13 +463,16 @@
     });
   }
 
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
+  var escapeHtml =
+    (window.IIUtil && window.IIUtil.escapeHtml) ||
+    function (s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    };
 
   function typeClass(type) {
     if (type === "Calculator") return "search-type-calc";
